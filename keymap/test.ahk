@@ -8,9 +8,10 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #include functions.ahk
 
 f8::
-SwitchWindows()
 return
 
+f9::
+return
 
 SwitchWindows()
 {
@@ -22,4 +23,26 @@ SwitchWindows()
 
     MyGroupActivate(to_check)
     return
+}
+
+loopWindows() {
+    DetectHiddenWindows, off
+    WinGet, id, list,,, ahk_exe Listary.exe
+    Loop, %id%
+    {
+        this_id := id%A_Index%
+        WinShow, ahk_id %this_id%
+        WinActivate, ahk_id %this_id%
+        WinGetClass, this_class, ahk_id %this_id%
+        WinGetTitle, this_title, ahk_id %this_id%
+        MsgBox, 4, , Visiting All Windows`n%a_index% of %id%`nahk_id %this_id%`nahk_class %this_class%`n%this_title%`n`nContinue?
+        IfMsgBox, NO, break
+    }
+}
+
+getWindow() {
+    WinGet, id, ID, A
+    sleep 2000
+    WinShow, ahk_id %id%
+    WinActivate, ahk_id %id%
 }
