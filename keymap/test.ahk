@@ -8,6 +8,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #include functions.ahk
 
 f8::
+MsgBox,% A_Programs . "\Visual Studio Code\Visual Studio Code.lnk"
 return
 
 f9::

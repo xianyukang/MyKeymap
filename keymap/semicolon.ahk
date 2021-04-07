@@ -284,7 +284,7 @@ return
 ::ex::quit(true)        ; 退出程序
 
 ; ------ 常用文件夹及文件 ------
-::fa::ActivateOrRun(, "data")                                          ; 本程序的 data 文件夹
+::fa::ActivateOrRun(, ".\")                                          ; 本程序的 data 文件夹
 ::fp::ActivateOrRun(, "explorer.exe", "shell:my pictures")             ; shell:xxx 代表了某个特殊路径,
 ::fd::ActivateOrRun(, "explorer.exe", "shell:downloads")               ; 完整列表在这 https://ss64.com/nt/shell.html
 ::fu::ActivateOrRun(, "explorer.exe", "shell:Profile")
