@@ -7,6 +7,8 @@ SendMode Input
 SetBatchLines -1
 ListLines Off
 
+currentWindowId := ""
+
 init_menu()
 return
 
@@ -34,6 +36,9 @@ check:
 
 show_menu()
 {
+    global currentWindowId
+    currentWindowId := ""
+    WinGet, currentWindowId, ID, A
     Menu, menuMain, show
 }
 
@@ -89,12 +94,15 @@ close_tooltip:
 
 get_text()
 {
+    global currentWindowId
+    ; WinActivate, ahk_id %currentWindowId%
+    WinWaitActive, ahk_id %currentWindowId%,,0.3
     clipboard =
     send ^c
     send ^{insert}
     clipwait, 0.5, 1
-    if (errorlevel)
-        msgbox miss
+    ; if (errorlevel)
+    ;     msgbox miss
     r := rtrim(clipboard, "`n")
     return r
 }
