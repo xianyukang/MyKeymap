@@ -24,6 +24,10 @@ https://autohotkey.com/boards/viewtopic.php?t=4334
 
 
 */
+
+CoordMode, Mouse, Screen
+
+
 ShellRun(prms*)
 {
     ;shellWindows := ComObjCreate("{9BA05972-F6A8-11CF-A442-00A0C90A8F39}")
@@ -397,4 +401,10 @@ SmartCloseWindow()
         else
             PostMessage, 0x112, 0xF060,,, A
     }
+}
+
+dllMouseMove(offsetX, offsetY) {
+    ; 需要在文件开头 CoordMode, Mouse, Screen
+    MouseGetPos, xpos, ypos
+    DllCall("SetCursorPos", "int", xpos + offsetX, "int", ypos + offsetY)
 }

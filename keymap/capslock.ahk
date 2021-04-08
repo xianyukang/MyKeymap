@@ -125,11 +125,11 @@ j::
 
 
     SLOWMODE := true
-    mousemove,  -%fast_one%, 0, 0,  R
+    dllMouseMove(-fast_one, 0)
     keywait, j,  %time_enter_repeat%
     while (errorlevel != 0)
     {
-        mousemove,  -%fast_repeat%, 0, 0,  R
+        dllMouseMove(-fast_repeat, 0)
         keywait,  j,  %delay_before_repeat%
     }
     return
@@ -148,11 +148,11 @@ k::
 
 
     SLOWMODE := true
-    mousemove,  0, %fast_one%, 0,  R
+    dllMouseMove(0, fast_one)
     keywait, k,  %time_enter_repeat%
     while (errorlevel != 0)
     {
-        mousemove,  0, %fast_repeat%, 0,  R
+        dllMouseMove(0, fast_repeat)
         keywait,  k,  %delay_before_repeat%
     }
     return
@@ -172,11 +172,11 @@ l::
 
 
     SLOWMODE := true
-    mousemove,  %fast_one%, 0, 0,  R
+    dllMouseMove(fast_one, 0)
     keywait, l,  %time_enter_repeat%
     while (errorlevel != 0)
     {
-        mousemove,  %fast_repeat%, 0, 0,  R
+        dllMouseMove(fast_repeat, 0)
         keywait,  l,  %delay_before_repeat%
     }
     return
@@ -196,11 +196,11 @@ i::
 
 
     SLOWMODE := true
-    mousemove,  0, -%fast_one%, 0,  R
+    dllMouseMove(0, -fast_one)
     keywait, i,  %time_enter_repeat%
     while (errorlevel != 0)
     {
-        mousemove,  0, -%fast_repeat%, 0,  R
+        dllMouseMove(0, -fast_repeat)
         keywait,  i,  %delay_before_repeat%
     }
     return
@@ -330,41 +330,41 @@ space::
     
 
 j::
-    mousemove,  -%slow_one%, 0, 0,  R
+    dllMouseMove(-slow_one, 0)
     keywait, j,  %time_enter_repeat%
     while (errorlevel != 0)
     {
-        mousemove,  -%slow_repeat%, 0, 0,  R
+        dllMouseMove(-slow_repeat, 0)
         keywait,  j,  %delay_before_repeat%
     }
     return
 
 k::
-    mousemove,  0, %slow_one%, 0,  R
+    dllMouseMove(0, slow_one)
     keywait, k,  %time_enter_repeat%
     while (errorlevel != 0)
     {
-        mousemove,  0, %slow_repeat%, 0,  R
+        dllMouseMove(0, slow_repeat)
         keywait,  k,  %delay_before_repeat%
     }
     return
 
 l::
-    mousemove,  %slow_one%, 0, 0,  R
+    dllMouseMove(slow_one, 0)
     keywait, l,  %time_enter_repeat%
     while (errorlevel != 0)
     {
-        mousemove,  %slow_repeat%, 0, 0,  R
+        dllMouseMove(slow_repeat, 0)
         keywait,  l,  %delay_before_repeat%
     }
     return
 
 i::
-    mousemove,  0, -%slow_one%, 0,  R
+    dllMouseMove(0, -slow_one)
     keywait, i,  %time_enter_repeat%
     while (errorlevel != 0)
     {
-        mousemove,  0, -%slow_repeat%, 0,  R
+        dllMouseMove(0, -slow_repeat)
         keywait,  i,  %delay_before_repeat%
     }
     return
