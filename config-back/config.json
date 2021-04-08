@@ -1,0 +1,12 @@
+[
+    {
+        "key": ";&aaaaaa",
+        "type:": "remapTo",
+        "data": ";"
+    },
+    {
+        "key": ";fd",
+        "type:": "runCode",
+        "data": "run, shell:downloads"
+    }
+]
