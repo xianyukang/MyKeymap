@@ -26,6 +26,8 @@ https://autohotkey.com/boards/viewtopic.php?t=4334
 */
 
 CoordMode, Mouse, Screen
+; 多显示器不同缩放比例导致的问题,  https://www.autohotkey.com/boards/viewtopic.php?f=14&t=13810
+DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 
 ShellRun(prms*)
@@ -405,6 +407,8 @@ SmartCloseWindow()
 
 dllMouseMove(offsetX, offsetY) {
     ; 需要在文件开头 CoordMode, Mouse, Screen
-    MouseGetPos, xpos, ypos
-    DllCall("SetCursorPos", "int", xpos + offsetX, "int", ypos + offsetY)
+    ; MouseGetPos, xpos, ypos
+    ; DllCall("SetCursorPos", "int", xpos + offsetX, "int", ypos + offsetY)    
+
+    mousemove, %offsetX%, %offsetY%, 0, R
 }
