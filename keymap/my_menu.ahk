@@ -36,6 +36,7 @@ check:
 
 show_menu()
 {
+    sleep 50
     global currentWindowId
     currentWindowId := ""
     WinGet, currentWindowId, ID, A
