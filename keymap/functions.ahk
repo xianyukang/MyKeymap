@@ -412,3 +412,10 @@ dllMouseMove(offsetX, offsetY) {
 
     mousemove, %offsetX%, %offsetY%, 0, R
 }
+
+showMenu(window_id) {
+    Prev_DetectHiddenWindows := A_DetectHiddenWindows
+    DetectHiddenWindows On
+    PostMessage, 0x5555,,,, ahk_id %window_id%
+    DetectHiddenWindows %Prev_DetectHiddenWindows%
+}

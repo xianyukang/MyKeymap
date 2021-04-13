@@ -7,9 +7,11 @@ SendMode Input
 SetBatchLines -1
 ListLines Off
 
-currentWindowId := ""
+currentWindowId := A_ScriptHwnd
 
 init_menu()
+OnMessage(0x5555, "MsgMonitor")
+OnMessage(0x5556, "MsgMonitor")
 return
 
 
@@ -360,7 +362,7 @@ init_menu()
 
 
 
-    Menu, menuMain, Icon, (&S)  Window, exe.ico,,21
+    ; Menu, menuMain, Icon, (&S)  Window, exe.ico,,21
     ;Menu, menuMain, Icon, (&2)  Item2, D:\MyFiles\shuaihua\图标\mychangeicon\some_icons\shell.ico,,21
 
 }
@@ -521,3 +523,11 @@ return
 
 
 
+
+MsgMonitor(wParam, lParam, msg)
+{
+    if (msg == 0x5555) {
+        show_menu()
+    }
+    ; ToolTip Message %msg% arrived:`nWPARAM: %wParam%`nLPARAM: %lParam%
+}

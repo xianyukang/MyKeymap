@@ -7,11 +7,19 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance Force
 #include functions.ahk
 
+thread0 := AhkThread()
+thread0.ahkdll("my_menu.ahk")
+menuWindowId := thread0.ahkgetvar.currentWindowId
+
 f8::
 MsgBox,% A_Programs . "\Visual Studio Code\Visual Studio Code.lnk"
 return
 
 f9::
+DetectHiddenWindows, on
+SendMessage, 0x5555, 0x1, 0x2,, ahk_id %menuWindowId%
+; WinGetTitle, title, ahk_id %menuWindowId%
+; tooltip, %title%
 return
 
 SwitchWindows()

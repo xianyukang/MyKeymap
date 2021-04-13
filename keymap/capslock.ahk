@@ -31,6 +31,7 @@ init()
 
 thread0 := AhkThread()
 thread0.ahkdll("keymap\my_menu.ahk")
+menuWindowId := thread0.ahkgetvar.currentWindowId
 return
 
 
@@ -40,8 +41,8 @@ return
     CapslockMode := true
     keywait capslock
     CapslockMode := false
-    if (A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450){
-        thread0.addScript("show_menu()" , 2)
+    if (A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450) {
+        showMenu(menuWindowId)
         return
     }
     return
