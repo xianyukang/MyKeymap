@@ -217,7 +217,7 @@ o::ActivateOrRun("OneNote for Windows 10", "shortcuts\OneNote for Windows 10.lnk
 ; 显示 Evenote
 e::ShowEvernote()
 ; 文件管理器
-;*a::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "explorer.exe")
+z::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\")
 ; Windows 下颜值最高的命令行工具,  设置好了能让 linux 子系统更易用
 ; a::ActivateOrRun("ahk_class VirtualConsoleClass", "tools\cmder\cmder.exe")
 a::ActivateOrRun("ahk_exe WindowsTerminal.exe", "shortcuts\Windows Terminal Preview.lnk")
