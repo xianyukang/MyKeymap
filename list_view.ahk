@@ -3,10 +3,11 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance, force
+; #WinActivateForce
+
 ; 如果需要获取窗口的 icon,  可以参考 https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-geticon
 
-
-
+DetectHiddenWindows, 1
 OnMessage(0x0100, "wm_keydown_handler")
 
 ; Create the ListView with two columns, Name and Size:
@@ -16,7 +17,7 @@ Gui, Add, ListView, r20 w700 vMyList gMyListView, Window Title|Process Name
 
 ; Gather a list of file names from a folder and put them into the ListView:
 
-windowList := getWindowList()
+windowList := getOpenWindows()
 renderList(windowList)
 
 
@@ -50,7 +51,8 @@ ExitApp
 renderList(windowList) {
     LV_Delete()
     for index,value in windowList {
-        LV_Add("", value, "xxx.exe")
+        WinGetTitle, title, ahk_id %value%
+        LV_Add("", title, "xxx.exe")
     }
 
     LV_ModifyCol(1, "AutoHdr")  ; Auto-size each column to fit its contents.
@@ -93,13 +95,45 @@ wm_keydown_handler(wParam, lParam)
     }
     if (key == "Enter") {
         focused_row_numer := LV_GetNext()
-        focus_row_text := windowList[focused_row_numer-1]
-        SetTitleMatchMode, 2
-        winactivate, %focus_row_text%
-        ; tooltip,% focus_row_text
+        focused_row_text := windowList[focused_row_numer]
+        winactivate, % "ahk_id " windowList[focused_row_numer]
+        ExitApp
+        ; tooltip,% focused_row_text
     }
     ; if (key == "NumpadDown") {
     ;     tooltip, down
     ;     GuiControl, Focus, MyList
     ; }
+}
+
+
+
+getOpenWindows(detectAllVirtualDesktop:=true) {
+    windwBlackList := "计算器,MainWindow,Groove 音乐,"
+    if (detectAllVirtualDesktop) {
+        DetectHiddenWindows, 1
+    }
+    WinGet windows, List
+    r := []
+    Loop %windows%
+    {
+        id := windows%A_Index%
+        WinGet, style, style, ahk_id %id%
+        if !(style & 0x10000000) {  ; visible
+            continue
+        }
+        ; if !(style & 0x80000) {  ; sys menu
+        ;     continue
+        ; }
+        if !(style & 0x40000) {  ; has taskbar icon
+            continue
+        }
+        WinGetTitle title, ahk_id %id%
+        if (trim(title) == "" || InStr(windwBlackList, title)) { 
+            continue
+        }
+
+        r.push(id)
+    }
+    return r
 }

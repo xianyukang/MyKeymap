@@ -54,6 +54,7 @@ e::send ^!{tab}
 w::send !{tab}
 x::SmartCloseWindow()
 r::SwitchWindows()
+t::run, list_view.ahk
 ; y::MoveWindow()
 
 
