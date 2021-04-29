@@ -91,7 +91,7 @@ wm_keydown_handler(wParam, lParam)
     global windowList
     key := GetKeyName("VK" SubStr(Format("0x{:#x}", wParam), 3)) 
     if (key == "Escape") {
-        tooltip, esc
+        ExitApp
     }
     if (key == "Enter") {
         focused_row_numer := LV_GetNext()
@@ -109,7 +109,8 @@ wm_keydown_handler(wParam, lParam)
 
 
 getOpenWindows(detectAllVirtualDesktop:=true) {
-    windwBlackList := "计算器,MainWindow,Groove 音乐,"
+    windwBlackList := "计算器,MainWindow,Groove 音乐,Microsoft Text Input Application,Program Manager"
+    processBlcakList := "Rainmeter.exe"
     if (detectAllVirtualDesktop) {
         DetectHiddenWindows, 1
     }
@@ -125,11 +126,15 @@ getOpenWindows(detectAllVirtualDesktop:=true) {
         ; if !(style & 0x80000) {  ; sys menu
         ;     continue
         ; }
-        if !(style & 0x40000) {  ; has taskbar icon
-            continue
-        }
+        ; if !(style & 0x40000) {  ; has taskbar icon
+        ;     continue
+        ; }
         WinGetTitle title, ahk_id %id%
         if (trim(title) == "" || InStr(windwBlackList, title)) { 
+            continue
+        }
+        WinGet, pname, ProcessName, ahk_id %id%
+        if (InStr(processBlcakList, pname)) { 
             continue
         }
 
