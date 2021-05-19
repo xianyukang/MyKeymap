@@ -32,6 +32,12 @@ init()
 thread0 := AhkThread()
 thread0.ahkdll("keymap\my_menu.ahk")
 menuWindowId := thread0.ahkgetvar.currentWindowId
+
+
+CoordMode, Mouse, Screen
+; 多显示器不同缩放比例导致的问题,  https://www.autohotkey.com/boards/viewtopic.php?f=14&t=13810
+DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
+
 return
 
 
