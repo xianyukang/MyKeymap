@@ -109,7 +109,7 @@ wm_keydown_handler(wParam, lParam)
 
 
 getOpenWindows(detectAllVirtualDesktop:=true) {
-    windwBlackList := "计算器,MainWindow,Groove 音乐,Microsoft Text Input Application,Program Manager"
+    windwBlackList := "计算器,MainWindow,Groove 音乐,Microsoft Text Input Application,Program Manager,dummyLayeredWnd,设置"
     processBlcakList := "Rainmeter.exe"
     if (detectAllVirtualDesktop) {
         DetectHiddenWindows, 1
