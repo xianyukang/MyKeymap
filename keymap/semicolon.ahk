@@ -244,7 +244,7 @@ w::lalt
 ::xk::send (){left 1}
 ::ss::send ""{left}
 ::sk::send 「  」{left 2}
-::sl::send 〖  〗{left 2}
+::sl::send 【】{left 1}
 ::zk::send []{left}
 ::dk::send {{}{}}{left}
 ::dh::send 、
