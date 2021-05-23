@@ -232,7 +232,7 @@ a::ActivateOrRun("ahk_exe WindowsTerminal.exe", "shortcuts\Windows Terminal Prev
 w::ActivateOrRun("ahk_exe chrome.exe", A_ProgramsCommon . "\Google Chrome.lnk")
 d::ActivateOrRun("ahk_exe msedge.exe", A_ProgramsCommon . "\Microsoft Edge.lnk")
 ;*f::ActivateOrRun("ahk_exe firefox.exe", "C:\Program Files\Mozilla Firefox\firefox.exe")
-r::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\Download\zip\FoxiReader\Foxit Reader\FoxitReader.exe")
+r::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe")
 ; Kindle 桌面客户端
 ;*k::ActivateOrRun("ahk_exe Kindle.exe", A_Programs . "\Amazon\Amazon Kindle\Kindle.lnk")
 ; Webstorm 写 前端 
