@@ -249,6 +249,7 @@ w::lalt
 ::dk::send {{}{}}{left}
 ::dh::send 、
 ::jt::send   ➤{space 1}
+::gt::send 🐶
 ::sm::send 《》{left}
 ::zh::send % text("site:zhihu.com")
 ::dy::send % text("pan.baidu.com") . "{enter}"
