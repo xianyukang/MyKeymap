@@ -329,7 +329,7 @@ return
 
 
 ; ------- 系统控制 ------
-::sd::shutdown, 1
+;::sd::shutdown, 1
 ::rb::shutdown, 2
 
 
