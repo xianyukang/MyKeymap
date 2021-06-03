@@ -475,30 +475,37 @@ handler_for_menu_style:
 
     if (selected_item == "P") {
         style := "color:#b309bb; font-family: Iosevka;"
+        mdTemplate := "<font color='#b309bb'>{{text}}</font>"
         html := set_color(text, style)
     }
     if (selected_item == "O") {
         style := "color:#FF00FF; font-family: Iosevka;"
+        mdTemplate := "<font color='#FF00FF'>{{text}}</font>"
         html := set_color(text, style)
     }
     if (selected_item == "K") {
         style := "color:#7B68EE; font-family: Iosevka;"
+        mdTemplate := "<font color='#7B68EE'>{{text}}</font>"
         html := set_color(text, style)
     }
     else if (selected_item == "R") {
-        style := "color:rgb(225, 44, 44); font-family: Iosevka;"
+        style := "color:#b309bb; font-family: Iosevka;"
+        mdTemplate := "<font color='#b309bb'>{{text}}</font>"
         html := set_color(text, style)
     }
     else if (selected_item == "G") {
         style :="color:#080; font-family: Iosevka;"
+        mdTemplate := "<font color='#080'>{{text}}</font>"
         html := set_color(text, style)
     }
     else if (selected_item == "B") {
         style := "color:#2E66FF; font-family: Iosevka;"
+        mdTemplate := "<font color='#2E66FF'>{{text}}</font>"
         html := set_color(text, style)
     }
     else if (selected_item == "I") {
         style := "color:#D05; font-family: Iosevka;"
+        mdTemplate := "<font color='#D05'>{{text}}</font>"
         html := set_color(text, style)
     }
     else if (selected_item == "F") {
@@ -513,10 +520,14 @@ handler_for_menu_style:
         html := strReplace(htmlTemplate, "{{text}}", text)
     }
 
+    if (WinActive(" - Typora")) {
+        clipboard := strReplace(mdTemplate, "{{text}}", text)
+    } else {
+        sleep 200
+        setHtml( html )
+        sleep 300
+    }
 
-    sleep 200
-    setHtml( html )
-    sleep 300
 
     send {LShift down}{Insert down}{Insert up}{LShift up}
 return
