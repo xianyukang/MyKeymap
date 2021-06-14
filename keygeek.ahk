@@ -31,6 +31,7 @@ until !ErrorLevel or (prev = ErrorLevel)
 
 run, "ahk.exe" "keymap\semicolon.ahk"
 run, "tools\wgestures\WGestures.exe"
+run, "D:\project\win\command_bar\bin\Debug\KeyboardGeek.exe"
 sleep 50
 run, "ahk.exe" "keymap\capslock.ahk"
 
