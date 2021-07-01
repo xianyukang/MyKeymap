@@ -180,9 +180,6 @@ translate(url)
 
 
 
-close_tooltip:
-    tooltip
-    return
 
 
 get_text()
@@ -457,6 +454,11 @@ init_menu()
 
 }
 
+
+close_tooltip:
+    tooltip
+    return
+
 handler_for_menu_OCR:
     run, E:\projects\apps\web-api\target\ocr.lnk
 return
@@ -637,10 +639,13 @@ copySelectedText()
 {
     ; old_clipboard := clipboardall
     clipboard =
+    WinWaitNotActive, ahk_id %parentWindowHwnd%,, 0.5
     send ^c
     clipwait, 0.5, 1
-    if (errorlevel)
-        msgbox miss
+    if (errorlevel) {
+        ToolTip, copy text failed
+        SetTimer, close_tooltip, -700
+    }
     r := rtrim(clipboard, "`n")
 
 ;    clipboardall := old_clipboard

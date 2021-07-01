@@ -416,3 +416,13 @@ showMenu(window_id) {
     PostMessage, 0x5555,,,, ahk_id %window_id%
     DetectHiddenWindows %Prev_DetectHiddenWindows%
 }
+
+
+showXianyukangWindow() {
+    Prev_DetectHiddenWindows := A_DetectHiddenWindows
+    DetectHiddenWindows 1
+    id := WinExist("ahk_class xianyukang_window")
+    WinActivate, ahk_id %id%
+    WinShow, ahk_id %id%
+    DetectHiddenWindows %Prev_DetectHiddenWindows%
+}
