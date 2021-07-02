@@ -1,14 +1,24 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Capslock from '../views/Capslock.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
+    redirect: { name: 'Capslock' },
+  },
+  {
+    path: '/home',
     name: 'Home',
-    component: Home
+    component: Home,
+  },
+  {
+    path: '/capslock',
+    name: 'Capslock',
+    component: Capslock
   },
   {
     path: '/about',

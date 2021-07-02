@@ -10,8 +10,8 @@
 
       <v-divider></v-divider>
 
-      <v-list dense nav>
-        <v-list-item v-for="item in items" :key="item.title" link :to="{name: item.to}">
+      <v-list nav>
+        <v-list-item v-for="item in items" :key="item.title" :to="{name: item.to}">
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -37,8 +37,8 @@ export default {
   data: () => ({
     drawer: true,
     items: [
-      { title: 'Capslock', icon: 'mdi-view-dashboard', to: 'Home' },
-      { title: 'Photos', icon: 'mdi-image', to: 'About' },
+      { title: 'Capslock', icon: 'mdi-view-dashboard', to: 'Capslock' },
+      { title: 'Home', icon: 'mdi-image', to: 'Home' },
       { title: 'About', icon: 'mdi-help-box', to: 'About' },
     ],
   }),
