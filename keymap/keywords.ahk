@@ -29,6 +29,7 @@ setParentWindowHwnd(id) {
 
 
 exec(keyword) {
+    WinWaitNotActive, ahk_id %parentWindowHwnd%,, 0.3
     if (keyword == "sq") {
         send ^+{esc}
     }
@@ -370,7 +371,9 @@ center_window_to_current_monitor()
     ; Get source and destination work areas (excludes taskbar-reserved space.)
     SysGet, ms, MonitorWorkArea, %ms%
     msw := msRight - msLeft, msh := msBottom - msTop
-    win_w := msw * 0.67,      win_h := msh * 0.7
+    win_w := msw * 0.67
+    win_h := msh * 0.7
+    win_w := Min(win_w, win_h * 1.54)
     win_x := msLeft + (msw - win_w) / 2
     win_y := msTop + (msh - win_h) / 2
     winmove,,, %win_x%, %win_y%, %win_w%, %win_h%
