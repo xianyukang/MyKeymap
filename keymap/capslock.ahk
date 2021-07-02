@@ -216,6 +216,10 @@ i::
 
 #if FMode
 
+; 配合 shit 键,  有可以多一倍的按键
+; 剩余按键 p、k、y、u、n、b、,、.、/、x
+; 由于指法无法利用的按键 t、g、c
+
 f::return
 ;x::SmartCloseWindow()
 ;space::send  {enter}
@@ -225,27 +229,22 @@ o::ActivateOrRun("OneNote for Windows 10", "shortcuts\OneNote for Windows 10.lnk
 e::ShowEvernote()
 ; 文件管理器
 z::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\")
-; Windows 下颜值最高的命令行工具,  设置好了能让 linux 子系统更易用
-; a::ActivateOrRun("ahk_class VirtualConsoleClass", "tools\cmder\cmder.exe")
 a::ActivateOrRun("ahk_exe WindowsTerminal.exe", "shortcuts\Windows Terminal Preview.lnk")
-; 世界上最受欢迎的 Chrome 浏览器
 w::ActivateOrRun("ahk_exe chrome.exe", A_ProgramsCommon . "\Google Chrome.lnk")
 d::ActivateOrRun("ahk_exe msedge.exe", A_ProgramsCommon . "\Microsoft Edge.lnk")
-;*f::ActivateOrRun("ahk_exe firefox.exe", "C:\Program Files\Mozilla Firefox\firefox.exe")
 r::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe")
-; Kindle 桌面客户端
+
+;*f::ActivateOrRun("ahk_exe firefox.exe", "C:\Program Files\Mozilla Firefox\firefox.exe")
 ;*k::ActivateOrRun("ahk_exe Kindle.exe", A_Programs . "\Amazon\Amazon Kindle\Kindle.lnk")
-; Webstorm 写 前端 
 ;*w::ActivateOrRun("ahk_exe webstorm64.exe", A_Programs . "\JetBrains Toolbox\WebStorm.lnk") 
-; Pycharm 写 Python 
 ;*p::ActivateOrRun("ahk_exe pycharm64.exe", A_Programs . "\JetBrains Toolbox\PyCharm Professional.lnk") 
 p::ActivateOrRun("ahk_exe PaintDotNet.exe", "C:\ProgramMicrosoft\Windows\Start Menu\Programs\paint.net.lnk") 
 
 ; IDE、编辑器相关
 j::ActivateOrRun("ahk_exe idea64.exe", A_Programs . "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk") 
+h::ActivateOrRun("ahk_exe devenv.exe", A_Programs . "\Visual Studio 2019.lnk") 
 u::ActivateOrRun("ahk_exe datagrip64.exe", A_Programs . "\JetBrains Toolbox\DataGrip.lnk") 
 s::ActivateOrRun("ahk_exe Code.exe", A_Programs . "\Visual Studio Code\Visual Studio Code.lnk")
-; i::ActivateOrRun("ahk_class Vim", "gvim.exe")
 i::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe") 
 
 ; 好看的 MindManager 思维导图工具, m 按键容易误触
@@ -261,11 +260,7 @@ l::ActivateOrRun("ahk_class PotPlayer64", A_ProgramFiles . "\DAUM\PotPlayer\PotP
 
 
 
-; ; 显示 Evenote
-; *e::ShowEvernote()
 
-; ; Gvim 
-; *i::ActivateOrRun("ahk_class Vim", "gvim.exe")
 
 ; ; VScode 
 ; *v::ActivateOrRun("ahk_exe Code.exe", "shortcuts\Visual Studio Code.lnk")
