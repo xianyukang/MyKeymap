@@ -10,7 +10,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in config.capslock" :key="item.name">
+          <tr v-for="item in config.capslockf" :key="item.name">
             <td
               ><v-chip dark color="green" label
                 ><span class="key">{{ item.key }}</span></v-chip
@@ -28,7 +28,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  name: 'Capslock',
+  name: 'CapslockF',
   watch: {
     config: {
       handler (value) {
@@ -56,6 +56,7 @@ export default {
 .v-chip {
   /* x偏移量 | y偏移量 | 阴影模糊半径 | 阴影扩散半径 | 阴影颜色 */
   box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
+
 }
 .v-chip span {
   font-size: 1.3em;

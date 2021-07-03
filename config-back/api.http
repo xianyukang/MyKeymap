@@ -1,8 +1,8 @@
 ### 获取配置
-GET http://localhost:5000/config
+GET http://localhost:8000/config
 
 ### 保存配置
-PUT http://localhost:5000/config
+PUT http://localhost:8000/config
 Content-Type: application/json
 
 [
