@@ -6,7 +6,7 @@
 #include keymap/functions.ahk
 
 SetBatchLines -1
-;ListLines Off
+ListLines Off
 process, Priority,, A
 SetWorkingDir %A_ScriptDir%  
 SendMode Input
@@ -16,8 +16,6 @@ SetDefaultMouseSpeed, 0
 coordmode, mouse, screen
 settitlematchmode, 2
 
-
-
 time_enter_repeat = T0.2
 delay_before_repeat = T0.01
 fast_one := 110     ;90
@@ -25,23 +23,18 @@ fast_repeat := 70
 slow_one :=  10     ; 10
 slow_repeat := 13
 
-
-
 init()
 
-thread0 := AhkThread()
-thread0.ahkdll("keymap\my_menu.ahk")
-menuWindowId := thread0.ahkgetvar.currentWindowId
+; 新建 ahk 线程
+; thread0 := AhkThread()
+; thread0.ahkdll("keymap\my_menu.ahk")
+; menuWindowId := thread0.ahkgetvar.currentWindowId
 
 
 CoordMode, Mouse, Screen
 ; 多显示器不同缩放比例导致的问题,  https://www.autohotkey.com/boards/viewtopic.php?f=14&t=13810
 DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
-
 return
-
-
-
 
 ~capslock::
     CapslockMode := true
@@ -64,21 +57,18 @@ t::run, list_view.ahk
 ; y::MoveWindow()
 
 
-
 d::
-    ShowDimmer()
+    ; ShowDimmer()
     send ^!{f11}
     return
 space::
-    ShowDimmer()
+    ; ShowDimmer()
     ShowCommandBar()
     return
 b::
     WingetPos x, y, width, height, A
     mousemove % x + width/2, y + height/2, 0
     return
-
-
 
 f::
     FMode := true
@@ -88,17 +78,16 @@ f::
     FMode := false
     return
 
-
-
-;鼠标
+; 鼠标
 u::MouseClick, WheelUp, , , 1
 o::MouseClick, WheelDown, , , 1
-h::MouseClick, WheelLeft, , , 2
-`;::MouseClick, WheelRight, , , 2
+h::MouseClick, WheelLeft, , , 1
+`;::MouseClick, WheelRight, , , 1
 
-
-;h::send  {blind}{WheelLeft}
-;`;::send {blind}{WheelRight}
+j::fastMoveMouse("j", -1, 0)
+k::fastMoveMouse("k", 0, 1)
+l::fastMoveMouse("l", 1, 0)
+i::fastMoveMouse("i", 0, -1)
 
 y::send  {LControl down}{LWin down}{Left}{LWin up}{LControl up}
 p::send {LControl down}{LWin down}{Right}{LWin up}{LControl up}
@@ -119,101 +108,6 @@ m::
 ,::send {Lbutton down}
 
 
-j::
-    ;SLOWMODE := true
-    ;mousemove,  -%fast_one%, 0, 0,  R
-    ;sleep 220
-    ;while (getkeystate(A_thishotkey,"P"))
-    ;{
-    ;    mousemove,  -%fast_repeat%, 0, 0,  R
-    ;    sleep 10
-    ;}
-    ;return
-
-
-
-    SLOWMODE := true
-    dllMouseMove(-fast_one, 0)
-    keywait, j,  %time_enter_repeat%
-    while (errorlevel != 0)
-    {
-        dllMouseMove(-fast_repeat, 0)
-        keywait,  j,  %delay_before_repeat%
-    }
-    return
-
-k::
-    ;SLOWMODE := true
-    ;mousemove,  0, %fast_one%, 0,  R
-    ;sleep 220
-    ;while (getkeystate(A_thishotkey,"P"))
-    ;{
-    ;    mousemove,  0, %fast_repeat%, 0,  R
-    ;    sleep 10
-    ;}
-    ;return
-
-
-
-    SLOWMODE := true
-    dllMouseMove(0, fast_one)
-    keywait, k,  %time_enter_repeat%
-    while (errorlevel != 0)
-    {
-        dllMouseMove(0, fast_repeat)
-        keywait,  k,  %delay_before_repeat%
-    }
-    return
-
-
-l::
-    ;SLOWMODE := true
-    ;mousemove,  %fast_one%, 0, 0,  R
-    ;sleep 220
-    ;while (getkeystate(A_thishotkey,"P"))
-    ;{
-    ;    mousemove,  %fast_repeat%, 0, 0,  R
-    ;    sleep 10
-    ;}
-    ;return
-
-
-
-    SLOWMODE := true
-    dllMouseMove(fast_one, 0)
-    keywait, l,  %time_enter_repeat%
-    while (errorlevel != 0)
-    {
-        dllMouseMove(fast_repeat, 0)
-        keywait,  l,  %delay_before_repeat%
-    }
-    return
-
-
-i::
-    ;SLOWMODE := true
-    ;mousemove,  0, -%fast_one%, 0,  R
-    ;sleep 220
-    ;while (getkeystate(A_thishotkey,"P"))
-    ;{
-    ;    mousemove,  0, -%fast_repeat%, 0,  R
-    ;    sleep 10
-    ;}
-    ;return
-
-
-
-    SLOWMODE := true
-    dllMouseMove(0, -fast_one)
-    keywait, i,  %time_enter_repeat%
-    while (errorlevel != 0)
-    {
-        dllMouseMove(0, -fast_repeat)
-        keywait,  i,  %delay_before_repeat%
-    }
-    return
-
-
 #if FMode
 
 ; 配合 shit 键,  有可以多一倍的按键
@@ -221,93 +115,31 @@ i::
 ; 由于指法无法利用的按键 t、g、c
 
 f::return
-;x::SmartCloseWindow()
-;space::send  {enter}
-; 最酷的笔记软件, OneNote
-o::ActivateOrRun("OneNote for Windows 10", "shortcuts\OneNote for Windows 10.lnk")
-; 显示 Evenote
-e::ShowEvernote()
-; 文件管理器
+
+; 常用软件
 z::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\")
 a::ActivateOrRun("ahk_exe WindowsTerminal.exe", "shortcuts\Windows Terminal Preview.lnk")
 w::ActivateOrRun("ahk_exe chrome.exe", A_ProgramsCommon . "\Google Chrome.lnk")
 d::ActivateOrRun("ahk_exe msedge.exe", A_ProgramsCommon . "\Microsoft Edge.lnk")
 r::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe")
-
-;*f::ActivateOrRun("ahk_exe firefox.exe", "C:\Program Files\Mozilla Firefox\firefox.exe")
-;*k::ActivateOrRun("ahk_exe Kindle.exe", A_Programs . "\Amazon\Amazon Kindle\Kindle.lnk")
-;*w::ActivateOrRun("ahk_exe webstorm64.exe", A_Programs . "\JetBrains Toolbox\WebStorm.lnk") 
-;*p::ActivateOrRun("ahk_exe pycharm64.exe", A_Programs . "\JetBrains Toolbox\PyCharm Professional.lnk") 
 p::ActivateOrRun("ahk_exe PaintDotNet.exe", "C:\ProgramMicrosoft\Windows\Start Menu\Programs\paint.net.lnk") 
 
-; IDE、编辑器相关
+; IDE、编辑器、笔记软件相关
+e::ActivateOrRun("ahk_class YXMainFrame", A_Programs . "\印象笔记\印象笔记.lnk")
+o::ActivateOrRun("OneNote for Windows 10", "shortcuts\OneNote for Windows 10.lnk")
 j::ActivateOrRun("ahk_exe idea64.exe", A_Programs . "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk") 
-h::ActivateOrRun("ahk_exe devenv.exe", A_Programs . "\Visual Studio 2019.lnk") 
+h::ActivateOrRun("- Microsoft Visual Studio", A_ProgramsCommon . "\Visual Studio 2019.lnk") 
 u::ActivateOrRun("ahk_exe datagrip64.exe", A_Programs . "\JetBrains Toolbox\DataGrip.lnk") 
 s::ActivateOrRun("ahk_exe Code.exe", A_Programs . "\Visual Studio Code\Visual Studio Code.lnk")
 i::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe") 
 
-; 好看的 MindManager 思维导图工具, m 按键容易误触
 m::ActivateOrRun("ahk_exe MindManager.exe", "C:\Program Files\Mindjet\MindManager 19\MindManager.exe")
-; Everything
 q::ActivateOrRun("ahk_class EVERYTHING", A_ProgramFiles . "\Everything\Everything.exe")
-; Excel or PotPlayer
 l::ActivateOrRun("ahk_class PotPlayer64", A_ProgramFiles . "\DAUM\PotPlayer\PotPlayerMini64.exe")
+
 ; 多按一个 shift 键,  于是按键数就多了一倍
 +w::ActivateOrRun("ahk_exe WINWORD.EXE", A_ProgramsCommon . "\Word.lnk")
 +p::ActivateOrRun("ahk_exe POWERPNT.EXE", A_ProgramsCommon . "\PowerPoint.lnk")
-
-
-
-
-
-
-; ; VScode 
-; *v::ActivateOrRun("ahk_exe Code.exe", "shortcuts\Visual Studio Code.lnk")
-
-
-; ; 文件管理器
-; *a::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "explorer.exe")
-
-; ; Windows 下颜值最高的命令行工具,  设置好了能让 linux 子系统更易用
-; *o::ActivateOrRun("ahk_class VirtualConsoleClass", "tools\cmder\cmder.exe")
-
-; ; 世界上最受欢迎的 Chrome 浏览器
-; *c::ActivateOrRun("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
-; *f::ActivateOrRun("ahk_exe firefox.exe", "C:\Program Files\Mozilla Firefox\firefox.exe")
-; *r::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\Download\zip\FoxiReader\Foxit Reader\FoxitReader.exe")
-
-; ; Kindle 桌面客户端
-; *k::ActivateOrRun("ahk_exe Kindle.exe", A_Programs . "\Amazon\Amazon Kindle\Kindle.lnk")
-
-
-; ; Webstorm 写 前端 
-; *w::ActivateOrRun("ahk_exe webstorm64.exe", A_Programs . "\JetBrains Toolbox\WebStorm.lnk") 
-
-; ; Pycharm 写 Python 
-; *p::ActivateOrRun("ahk_exe pycharm64.exe", A_Programs . "\JetBrains Toolbox\PyCharm Professional.lnk") 
- 
-; ; IDEA 写 Java 
-; *j::ActivateOrRun("ahk_exe idea64.exe", A_Programs . "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk") 
-
-
-; ; 好看的 MindManager 思维导图工具
-; *m::ActivateOrRun("ahk_exe MindManager.exe", "C:\Program Files\Mindjet\MindManager 19\MindManager.exe")
-
-; ; Everything
-; *s::ActivateOrRun("ahk_class EVERYTHING", "tools\Everything\Everything.exe")
-
-; ; Excel
-; *l::ActivateOrRun("ahk_exe PotPlayerMini.exe", "D:\MyFiles\dz\PotPlayer\PotPlayerMini.exe")
-
-
-; ; 多按一个 shift 键,  于是按键数就多了一倍
-; *+w::ActivateOrRun("ahk_exe WINWORD.EXE", A_ProgramsCommon . "\Word.lnk")
-; *+p::ActivateOrRun("ahk_exe POWERPNT.EXE", A_ProgramsCommon . "\PowerPoint.lnk")
-
-
-
-
 
 
 ;鼠标的慢速model
@@ -333,45 +165,10 @@ space::
 
     
 
-j::
-    dllMouseMove(-slow_one, 0)
-    keywait, j,  %time_enter_repeat%
-    while (errorlevel != 0)
-    {
-        dllMouseMove(-slow_repeat, 0)
-        keywait,  j,  %delay_before_repeat%
-    }
-    return
-
-k::
-    dllMouseMove(0, slow_one)
-    keywait, k,  %time_enter_repeat%
-    while (errorlevel != 0)
-    {
-        dllMouseMove(0, slow_repeat)
-        keywait,  k,  %delay_before_repeat%
-    }
-    return
-
-l::
-    dllMouseMove(slow_one, 0)
-    keywait, l,  %time_enter_repeat%
-    while (errorlevel != 0)
-    {
-        dllMouseMove(slow_repeat, 0)
-        keywait,  l,  %delay_before_repeat%
-    }
-    return
-
-i::
-    dllMouseMove(0, -slow_one)
-    keywait, i,  %time_enter_repeat%
-    while (errorlevel != 0)
-    {
-        dllMouseMove(0, -slow_repeat)
-        keywait,  i,  %delay_before_repeat%
-    }
-    return
+j::slowMoveMouse("j", -1, 0)
+k::slowMoveMouse("k", 0, 1)
+l::slowMoveMouse("l", 1, 0)
+i::slowMoveMouse("i", 0, -1)
 
 
 #IfWinActive, ahk_group  taskswitch
@@ -380,12 +177,6 @@ d::down
 e::up
 s::Left
 f::Right
-q::
-    send {tab down}
-    sleep 30
-    send {tab up}
-    send {tab}
-    return
 *x::
     if GetKeyState("`j", "P")  
         send {Esc}
@@ -402,143 +193,14 @@ QUIT:
     quit(true)
     return
 
-
-
-
-
-
-
-
-
-
-
-
-
-WaitThenCloseDimmer:
-    settimer ,, 150
-    winget, pname, ProcessName, A
-    if pname not in  KeyboardGeek.exe,Listary.exe
-    {
-        Gui, G_Dimmer:Default
-        gui, +LastFound
-            While ( Trans > 0) ;这样做是增加淡出效果;
-            { 		
-                    Trans -= 6
-                    WinSet, Transparent, %Trans% ;,  ahk_id %H_DImmer%
-                    Sleep, 4
-            }
-        Gui, hide
-        settimer ,,off
-    }
-    return
-
-
-    
-ShowDimmer()
-{
-    global H_DImmer
-    global DimmerInitiialized
-    global Trans
-    Trans := 55
-    if (DimmerInitiialized == "")
-    {
-        SysGet,monitorcount,MonitorCount
-        l:=0, t:=0, r:=0, b:=0
-        Loop,%monitorcount%
-        {
-            SysGet,monitor,Monitor,%A_Index%
-            If (monitorLeft<l)
-            l:=monitorLeft
-            If (monitorTop<t)
-            t:=monitorTop
-            If (monitorRight>r)
-            r:=monitorRight
-            If (monitorBottom>b)
-            b:=monitorBottom
-        }
-        resolutionRight:=r+Abs(l)
-        resolutionBottom:=b+Abs(t)
-
-        Gui,G_Dimmer:New, +HwndH_DImmer +ToolWindow +Disabled -SysMenu -Caption +E0x20 +AlwaysOnTop 
-        Gui,Margin,0,0
-        Gui,Color,000000
-        Gui,G_Dimmer:Show, X0 Y9999 W1 H1, _____
-        Gui,G_Dimmer:Show, X%l% Y%t% W%resolutionRight% H%resolutionBottom%, _____
-
-        gui, G_Dimmer:show, NoActivate
-        WinSet,Transparent,%Trans%, ahk_id %H_DImmer%
-        DimmerInitiialized := true
-        settimer, WaitThenCloseDimmer, -400
-        }
-    else
-    {
-
-        IfWinActive, __KeyboardGeekCommandBar
-            return
-        Gui, G_Dimmer:Default,  
-        Gui, +AlwaysOnTop 
-        Gui,  show, NoActivate
-        ;Gui,G_Dimmer:New, +HwndH_DImmer +ToolWindow +Disabled -SysMenu -Caption +E0x20 
-        WinSet,Transparent,%Trans%, ahk_id %H_DImmer%
-        settimer, WaitThenCloseDimmer, -400
-    }
-}
-
-
-send_pipe_message(pipe_message, pipe_name:="\\.\pipe\KeyboardGeekGUI_IPC_API" )
-{
-    ptr := A_PtrSize ? "Ptr" : "UInt"
-    char_size := A_IsUnicode ? 2 : 1
-    pipe := __get_pipe_handle(pipe_name)
-
-    If pipe = -1
-        return false
-
-    DllCall("ConnectNamedPipe", ptr, pipe, ptr, 0)
-
-    pipe_message := (A_IsUnicode ? chr(0xfeff) : chr(239) chr(187) chr(191)) . pipe_message
-    If !DllCall("WriteFile", ptr, pipe, "str", pipe_message, "uint", (StrLen(pipe_message)+1)*char_size, "uint*", 0, ptr, 0)
-        ExitAPP
-        ;MsgBox WriteFile failed: %ErrorLevel%/%A_LastError%
-
-    DllCall("CloseHandle", ptr, pipe)
-    return true
-
-}
-
-__get_pipe_handle(name) {
-    GENERIC_WRITE := 0x40000000  
-    GENERIC_READ  := 0x80000000  
-    access := GENERIC_READ | GENERIC_WRITE
-
-    return DllCall("CreateFile"
-        ,"Str" , name
-        ,"UInt", access
-        ,"UInt", 3 ; share read / write
-        ,"UInt", 0
-        ,"UInt", 3 ; open existing file
-        ,"UInt", 0
-        ,"UInt", 0)			
-}
-
-
-
 ShowCommandBar()
 {
-    ;global desktopid
-    ;winactivate, ahk_class WorkerW ahk_exe Explorer.EXE
-    ;desktopid := winexist("Program Manager ahk_exe explorer.exe")
-
-    PipeMsg := "ShowCommandBar"
-    r :=  send_pipe_message(PipeMsg)
-    if (r)
-    {
-        winshow, __KeyboardGeekCommandBar
-        winactivate, __KeyboardGeekCommandBar
-    }
-    else
-        ShowTip("KeyboardGeek.exe is not running !")
-    return
+    old := A_DetectHiddenWindows
+    DetectHiddenWindows, 1
+    PostMessage, 0x8003, 0, 0, , __KeyboardGeekInvisibleWindow
+    DetectHiddenWindows, %old%
+    ; winshow, __KeyboardGeekCommandBar
+    ; winactivate, __KeyboardGeekCommandBar
 }
 
 SwitchWindows()
@@ -572,31 +234,16 @@ MoveWindow()
 }
 
 
-
 init()
 {
     global
-
-
     Menu, Tray, Icon, exe.ico
-
-    DetectHiddenWindows, on
-    winget, exeFullPath, ProcessPath, ahk_id %A_ScriptHwnd%
-    winget, pid, PID, ahk_id %A_ScriptHwnd%
-    pos := InStr(exeFullPath, "\",, 0)
-    parentPath := substr(exeFullPath, 1, pos)
+    parentPath := getProcessPath()
     SetWorkingDir, %parentPath%
-    DetectHiddenWindows, off
 
     ;Menu, Tray, NoStandard
     ;Menu, Tray, DeleteAll
     ;Menu, Tray, Add, E&xit, QUIT
-
-
-    Menu, Tray, Icon 
-    if (fileexist(A_Temp . "\processkeymap.ico"))
-        Menu, Tray, Icon, % A_Temp  "\processkeymap.ico", 1, 1
-
 
     groupadd, taskswitch, ahk_exe  explorer.exe ahk_class TaskSwitcherWnd
     groupadd, taskswitch, ahk_exe  explorer.exe ahk_class MultitaskingViewFrame

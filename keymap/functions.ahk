@@ -175,6 +175,7 @@ GetVisibleWindows(winFilter)
 ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:=false) 
 {
     to_activate := Trim(to_activate)
+    WinShow, %to_activate%
     if (winexist(to_activate))
         MyGroupActivate(to_activate)
     else if (target != "")
@@ -361,20 +362,6 @@ quit(ShowExitTip:=false)
     exitapp
 }
 
-ShowEvernote()
-{
-    DetectHiddenWindows, on
-    array := ["ahk_class YXMainFrame", "ahk_class ENMainFrame"]
-    for index,element in array
-    {
-        if (winexist(element)) {
-            winshow
-            winactivate
-        }
-    }
-    DetectHiddenWindows, off
-}
-
 
 IsBrowser(pname)
 {
@@ -425,4 +412,122 @@ showXianyukangWindow() {
     WinActivate, ahk_id %id%
     WinShow, ahk_id %id%
     DetectHiddenWindows %Prev_DetectHiddenWindows%
+}
+
+
+
+slowMoveMouse(key, direction_x, direction_y) {
+    global slow_one, slow_repeat, time_enter_repeat, delay_before_repeat
+    one_x := direction_x * slow_one
+    one_y := direction_y * slow_one
+    repeat_x := direction_x * slow_repeat
+    repeat_y := direction_y * slow_repeat
+    mousemove, %one_x% , %one_y%, 0, R
+    keywait, %key%, %time_enter_repeat%
+    while (errorlevel != 0)
+    {
+        mousemove, %repeat_x%, %repeat_y%, 0, R
+        keywait,  %key%,  %delay_before_repeat%
+    }
+}
+
+fastMoveMouse(key, direction_x, direction_y) {
+    global fast_one, fast_repeat, time_enter_repeat, delay_before_repeat, SLOWMODE
+    SLOWMODE := true
+    one_x := direction_x * fast_one
+    one_y := direction_y * fast_one
+    repeat_x := direction_x * fast_repeat
+    repeat_y := direction_y * fast_repeat
+    mousemove, %one_x% , %one_y%, 0, R
+    keywait, %key%, %time_enter_repeat%
+    while (errorlevel != 0)
+    {
+        mousemove, %repeat_x%, %repeat_y%, 0, R
+        keywait,  %key%,  %delay_before_repeat%
+    }
+}
+
+
+ShowDimmer()
+{
+    global H_DImmer
+    global DimmerInitiialized
+    global Trans
+    Trans := 55
+    if (DimmerInitiialized == "")
+    {
+        SysGet,monitorcount,MonitorCount
+        l:=0, t:=0, r:=0, b:=0
+        Loop,%monitorcount%
+        {
+            SysGet,monitor,Monitor,%A_Index%
+            If (monitorLeft<l)
+            l:=monitorLeft
+            If (monitorTop<t)
+            t:=monitorTop
+            If (monitorRight>r)
+            r:=monitorRight
+            If (monitorBottom>b)
+            b:=monitorBottom
+        }
+        resolutionRight:=r+Abs(l)
+        resolutionBottom:=b+Abs(t)
+
+        Gui,G_Dimmer:New, +HwndH_DImmer +ToolWindow +Disabled -SysMenu -Caption +E0x20 +AlwaysOnTop 
+        Gui,Margin,0,0
+        Gui,Color,000000
+        Gui,G_Dimmer:Show, X0 Y9999 W1 H1, _____
+        Gui,G_Dimmer:Show, X%l% Y%t% W%resolutionRight% H%resolutionBottom%, _____
+
+        gui, G_Dimmer:show, NoActivate
+        WinSet,Transparent,%Trans%, ahk_id %H_DImmer%
+        DimmerInitiialized := true
+        settimer, WaitThenCloseDimmer, -400
+        }
+    else
+    {
+
+        IfWinActive, __KeyboardGeekCommandBar
+            return
+        Gui, G_Dimmer:Default,  
+        Gui, +AlwaysOnTop 
+        Gui,  show, NoActivate
+        ;Gui,G_Dimmer:New, +HwndH_DImmer +ToolWindow +Disabled -SysMenu -Caption +E0x20 
+        WinSet,Transparent,%Trans%, ahk_id %H_DImmer%
+        settimer, WaitThenCloseDimmer, -400
+    }
+}
+
+
+WaitThenCloseDimmer() {
+    settimer , WaitThenCloseDimmer, 150
+    winget, pname, ProcessName, A
+    if pname not in  KeyboardGeek.exe,Listary.exe
+    {
+        Gui, G_Dimmer:Default
+        gui, +LastFound
+            While ( Trans > 0) ;这样做是增加淡出效果;
+            { 		
+                    Trans -= 6
+                    WinSet, Transparent, %Trans% ;,  ahk_id %H_DImmer%
+                    Sleep, 4
+            }
+        Gui, hide
+        settimer ,WaitThenCloseDimmer,off
+    }
+}
+
+
+
+
+getProcessPath() {
+    old := A_DetectHiddenWindows
+    DetectHiddenWindows, 1
+    winget, exeFullPath, ProcessPath, ahk_id %A_ScriptHwnd%
+    winget, pid, PID, ahk_id %A_ScriptHwnd%
+    DetectHiddenWindows, %old%
+
+    pos := InStr(exeFullPath, "\",, 0)
+    parentPath := substr(exeFullPath, 1, pos)
+    return parentPath
 }

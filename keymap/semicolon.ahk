@@ -349,8 +349,6 @@ return
 ;space::send  {enter}
 ; 最酷的笔记软件, OneNote
 d::ActivateOrRun("ahk_exe ONENOTE.EXE", "onenote.exe")
-; 显示 Evenote
-e::ShowEvernote()
 ; Gvim 
 i::ActivateOrRun("ahk_class Vim", "gvim.exe")
 ; VScode 
