@@ -29,7 +29,6 @@ setParentWindowHwnd(id) {
 
 
 exec(keyword) {
-    WinWaitNotActive, ahk_id %parentWindowHwnd%,, 0.3
     if (keyword == "sq") {
         send ^+{esc}
     }
@@ -139,7 +138,6 @@ exec(keyword) {
 ; func := Func("exec_keyword").Bind(keyword)
 ; SetTimer, % func, -50
 exec_keyword(keyword) {
-    WinWaitNotActive, ahk_id %parentWindowHwnd%,, 0.5
     WinGetTitle, title, A
     ToolTip, %title%
 }
@@ -185,9 +183,6 @@ translate(url)
 
 get_text()
 {
-    global currentWindowId
-    ; WinActivate, ahk_id %currentWindowId%
-    WinWaitActive, ahk_id %currentWindowId%,,0.3
     clipboard =
     send ^c
     send ^{insert}
@@ -197,23 +192,6 @@ get_text()
     r := rtrim(clipboard, "`n")
     return r
 }
-
-;get_text()
-;{
-;    ;sleep 10
-;    old_clipboard := clipboardall
-;    clipboard =
-;    send ^c
-;    send ^{insert}
-;    clipwait, 0.5, 1
-;    if (errorlevel)
-;        msgbox miss
-;    r := rtrim(clipboard, "`n")
-;    clipboard := old_clipboard
-;    tooltip % r
-;    settimer, close_tooltip, -2000
-;    return r
-;}
 
 htmlEscape(text)
 {
@@ -645,7 +623,6 @@ copySelectedText()
 {
     ; old_clipboard := clipboardall
     clipboard =
-    WinWaitNotActive, ahk_id %parentWindowHwnd%,, 0.5
     send ^c
     clipwait, 0.5, 1
     if (errorlevel) {
@@ -654,6 +631,5 @@ copySelectedText()
     }
     r := rtrim(clipboard, "`n")
 
-;    clipboardall := old_clipboard
     return r
 }

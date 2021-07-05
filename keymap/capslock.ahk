@@ -47,7 +47,7 @@ return
     keywait capslock
     CapslockMode := false
     if (A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450) {
-        showXianyukangWindow()
+        enterHotString()
     }
     return
 
