@@ -588,6 +588,7 @@ moveActiveWindow()
 
 exitMouseMode() 
 {
+    global SLOWMODE
     SLOWMODE := false
     send {Lbutton up}
 }
