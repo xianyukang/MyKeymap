@@ -289,7 +289,8 @@ SwitchWindows()
 {
     wingetclass, class, A
     if (class == "ApplicationFrameWindow") {
-        WinGetTitle, to_check, A
+        WinGetTitle, title, A
+        to_check := title . " ahk_class ApplicationFrameWindow"
     }
     else
         to_check := "ahk_exe " . GetProcessName()
