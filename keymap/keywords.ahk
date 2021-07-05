@@ -353,8 +353,8 @@ center_window_to_current_monitor()
     win_w := msw * 0.67
     win_h := (msw * 10 / 16) * 0.7
     win_w := Min(win_w, win_h * 1.54)
-    win_w := 1270
-    win_h := 830
+    win_w := 1300
+    win_h := 900
     win_x := msLeft + (msw - win_w) / 2
     win_y := msTop + (msh - win_h) / 2
     winmove,,, %win_x%, %win_y%, %win_w%, %win_h%
