@@ -1,8 +1,8 @@
 ﻿#NoEnv
-#notrayicon
 #SingleInstance Force
 #UseHook
 #MaxHotkeysPerInterval 200
+#WinActivateForce               ; 解决「 winactivate 最小化的窗口时不会把窗口放到顶层(被其他窗口遮住) 」
 #include keymap/functions.ahk
 
 SetBatchLines -1
@@ -18,12 +18,18 @@ settitlematchmode, 2
 
 time_enter_repeat = T0.2
 delay_before_repeat = T0.01
-fast_one := 110     ;90
+fast_one := 110     
 fast_repeat := 70
-slow_one :=  10     ; 10
+slow_one :=  10     
 slow_repeat := 13
 
-init()
+Menu, Tray, Icon, exe.ico
+processPath := getProcessPath()
+SetWorkingDir, %processPath%
+
+;Menu, Tray, NoStandard
+;Menu, Tray, DeleteAll
+;Menu, Tray, Add, E&xit, QUIT
 
 ; 新建 ahk 线程
 ; thread0 := AhkThread()
@@ -42,7 +48,6 @@ return
     CapslockMode := false
     if (A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450) {
         showXianyukangWindow()
-        return
     }
     return
 
@@ -54,7 +59,7 @@ w::send !{tab}
 x::SmartCloseWindow()
 r::SwitchWindows()
 t::run, list_view.ahk
-; y::MoveWindow()
+; g::moveActiveWindow()
 
 
 d::
@@ -64,10 +69,6 @@ d::
 space::
     ; ShowDimmer()
     ShowCommandBar()
-    return
-b::
-    WingetPos x, y, width, height, A
-    mousemove % x + width/2, y + height/2, 0
     return
 
 f::
@@ -79,6 +80,7 @@ f::
     return
 
 ; 鼠标
+/::centerMouse()
 u::MouseClick, WheelUp, , , 1
 o::MouseClick, WheelDown, , , 1
 h::MouseClick, WheelLeft, , , 1
@@ -92,21 +94,24 @@ i::fastMoveMouse("i", 0, -1)
 y::send  {LControl down}{LWin down}{Left}{LWin up}{LControl up}
 p::send {LControl down}{LWin down}{Right}{LWin up}{LControl up}
 
-n::
-    send,  {blind}{Lbutton down}
-    sleep 50
-    send {Lbutton up}
-    SLOWMODE := false
-    return
-m::
-    send,  {blind}{Rbutton down}
-    sleep 50
-    send {Rbutton up}
-    SLOWMODE := false
-    return
+n::leftClick()
+m::rightClick()
+,::middleDown()
 
-,::send {Lbutton down}
+#if SLOWMODE
+u::send {blind}{wheelup}
+o::send {blind}{wheeldown}
+n::leftClick()
+m::rightClick()
+,::middleDown()
 
+esc::exitMouseMode()
+space::exitMouseMode()
+
+j::slowMoveMouse("j", -1, 0)
+k::slowMoveMouse("k", 0, 1)
+l::slowMoveMouse("l", 1, 0)
+i::slowMoveMouse("i", 0, -1)
 
 #if FMode
 
@@ -124,6 +129,10 @@ d::ActivateOrRun("ahk_exe msedge.exe", A_ProgramsCommon . "\Microsoft Edge.lnk")
 r::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe")
 p::ActivateOrRun("ahk_exe PaintDotNet.exe", "C:\ProgramMicrosoft\Windows\Start Menu\Programs\paint.net.lnk") 
 
+m::ActivateOrRun("ahk_exe MindManager.exe", "C:\Program Files\Mindjet\MindManager 19\MindManager.exe")
+q::ActivateOrRun("ahk_class EVERYTHING", A_ProgramFiles . "\Everything\Everything.exe")
+l::ActivateOrRun("ahk_class PotPlayer64", A_ProgramFiles . "\DAUM\PotPlayer\PotPlayerMini64.exe")
+
 ; IDE、编辑器、笔记软件相关
 e::ActivateOrRun("ahk_class YXMainFrame", A_Programs . "\印象笔记\印象笔记.lnk")
 o::ActivateOrRun("OneNote for Windows 10", "shortcuts\OneNote for Windows 10.lnk")
@@ -133,45 +142,13 @@ u::ActivateOrRun("ahk_exe datagrip64.exe", A_Programs . "\JetBrains Toolbox\Data
 s::ActivateOrRun("ahk_exe Code.exe", A_Programs . "\Visual Studio Code\Visual Studio Code.lnk")
 i::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe") 
 
-m::ActivateOrRun("ahk_exe MindManager.exe", "C:\Program Files\Mindjet\MindManager 19\MindManager.exe")
-q::ActivateOrRun("ahk_class EVERYTHING", A_ProgramFiles . "\Everything\Everything.exe")
-l::ActivateOrRun("ahk_class PotPlayer64", A_ProgramFiles . "\DAUM\PotPlayer\PotPlayerMini64.exe")
-
 ; 多按一个 shift 键,  于是按键数就多了一倍
 +w::ActivateOrRun("ahk_exe WINWORD.EXE", A_ProgramsCommon . "\Word.lnk")
 +p::ActivateOrRun("ahk_exe POWERPNT.EXE", A_ProgramsCommon . "\PowerPoint.lnk")
 
 
-;鼠标的慢速model
-#if SLOWMODE
-u::send {blind}{wheelup}
-o::send {blind}{wheeldown}
-n::
-    send, {blind}{Lbutton}
-    SLOWMODE := false
-    return
-m::
-    send, {blind}{Rbutton}
-    SLOWMODE := false
-    return
 
-esc::
-space::
-    SLOWMODE := false
-    send {Lbutton up}
-    return
-
-,::send {Lbutton down}
-
-    
-
-j::slowMoveMouse("j", -1, 0)
-k::slowMoveMouse("k", 0, 1)
-l::slowMoveMouse("l", 1, 0)
-i::slowMoveMouse("i", 0, -1)
-
-
-#IfWinActive, ahk_group  taskswitch
+#IfWinActive, ahk_exe explorer.exe ahk_class MultitaskingViewFrame
 r::tab
 d::down
 e::up
@@ -186,68 +163,5 @@ f::Right
 space::enter
 
 
-
 #IfWinActive
-
-QUIT:
-    quit(true)
-    return
-
-ShowCommandBar()
-{
-    old := A_DetectHiddenWindows
-    DetectHiddenWindows, 1
-    PostMessage, 0x8003, 0, 0, , __KeyboardGeekInvisibleWindow
-    DetectHiddenWindows, %old%
-    ; winshow, __KeyboardGeekCommandBar
-    ; winactivate, __KeyboardGeekCommandBar
-}
-
-SwitchWindows()
-{
-    wingetclass, class, A
-    if (class == "ApplicationFrameWindow")
-        to_check := "ahk_class "  class  "ahk_exe "  GetProcessName()
-    else
-        to_check := "ahk_exe "  GetProcessName()
-
-    MyGroupActivate(to_check)
-    return
-}
-
-MoveWindow()
-{
-    wingetclass, class, A
-    if (class == "ApplicationFrameWindow")
-        {
-            sendevent {lalt down}{space down}
-            sleep 10
-            sendevent {space up}{lalt up}
-            sleep 10
-            sendevent m{left}
-        }
-    else 
-    {
-        postmessage 0x0112, 0xF010, 0,, A
-        send {left}
-    }
-}
-
-
-init()
-{
-    global
-    Menu, Tray, Icon, exe.ico
-    parentPath := getProcessPath()
-    SetWorkingDir, %parentPath%
-
-    ;Menu, Tray, NoStandard
-    ;Menu, Tray, DeleteAll
-    ;Menu, Tray, Add, E&xit, QUIT
-
-    groupadd, taskswitch, ahk_exe  explorer.exe ahk_class TaskSwitcherWnd
-    groupadd, taskswitch, ahk_exe  explorer.exe ahk_class MultitaskingViewFrame
-
-}
-
 

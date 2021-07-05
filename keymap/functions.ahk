@@ -243,13 +243,13 @@ GroupAdd(ByRef GroupName, p1:="", p2:="", p3:="", p4:="", p5:="")
      GroupAdd %GroupName%, %p1%, %p2%, %p3%, %p4%, %p5%
 }
 
-MyGroupActivate(winFilter)
+MyGroupActivate(winFilter) 
 {
 
     winFilter := Trim(winFilter)
     if (!winactive(winFilter))
     {
-        winactivate, %winFilter%
+        activateFirstVisible(winFilter)
         return
     }
 
@@ -281,11 +281,45 @@ MyGroupActivate(winFilter)
     }
 
 
-    showtip( "total:"  win_group_array_form.length())
+    ; showtip( "total:"  win_group_array_form.length())
     GroupActivate, %win_group%, R
 }
 
+SwitchWindows()
+{
+    wingetclass, class, A
+    if (class == "ApplicationFrameWindow") {
+        WinGetTitle, to_check, A
+    }
+    else
+        to_check := "ahk_exe " . GetProcessName()
 
+    MyGroupActivate(to_check)
+    return
+}
+
+
+activateFirstVisible(windowSelector)
+{
+    id := firstVisibleWindow(windowSelector)
+    ; WinGet, State, MinMax, ahk_id %id%
+    ; if (State = -1)
+    ;     WinRestore, ahk_id %id%
+    WinActivate, ahk_id %id%
+}
+
+firstVisibleWindow(windowSelector)
+{
+    WinGet, winList, List, %windowSelector%
+    loop %winList%
+    {
+        item := winList%A_Index%
+        WinGetTitle, title, ahk_id %item%
+        if (Trim(title) != "") {
+            return item
+        }
+    }
+}
 
 current_monitor_index()
 {
@@ -520,7 +554,8 @@ WaitThenCloseDimmer() {
 
 
 
-getProcessPath() {
+getProcessPath() 
+{
     old := A_DetectHiddenWindows
     DetectHiddenWindows, 1
     winget, exeFullPath, ProcessPath, ahk_id %A_ScriptHwnd%
@@ -531,3 +566,67 @@ getProcessPath() {
     parentPath := substr(exeFullPath, 1, pos)
     return parentPath
 }
+
+moveActiveWindow()
+{
+    wingetclass, class, A
+    if (class == "ApplicationFrameWindow")
+        {
+            sendevent {lalt down}{space down}
+            sleep 10
+            sendevent {space up}{lalt up}
+            sleep 10
+            sendevent m{left}
+        }
+    else 
+    {
+        postmessage 0x0112, 0xF010, 0,, A
+        send {left}
+    }
+}
+
+exitMouseMode() 
+{
+    SLOWMODE := false
+    send {Lbutton up}
+}
+
+centerMouse() 
+{
+    WingetPos x, y, width, height, A
+    mousemove % x + width/2, y + height/2, 0
+}
+
+middleDown() 
+{
+    send {Lbutton down}
+}
+
+leftClick() 
+{
+    global SLOWMODE
+    send,  {blind}{Lbutton down}
+    sleep 50
+    send {Lbutton up}
+    SLOWMODE := false
+}
+
+rightClick() 
+{
+    global SLOWMODE
+    send,  {blind}{Rbutton down}
+    sleep 50
+    send {Rbutton up}
+    SLOWMODE := false
+}
+
+ShowCommandBar()
+{
+    old := A_DetectHiddenWindows
+    DetectHiddenWindows, 1
+    PostMessage, 0x8003, 0, 0, , __KeyboardGeekInvisibleWindow
+    DetectHiddenWindows, %old%
+    ; winshow, __KeyboardGeekCommandBar
+    ; winactivate, __KeyboardGeekCommandBar
+}
+

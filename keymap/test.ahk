@@ -7,32 +7,24 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance Force
 #include functions.ahk
 
-thread0 := AhkThread()
-thread0.ahkdll("my_menu.ahk")
-menuWindowId := thread0.ahkgetvar.currentWindowId
+WinGet, winList, List, ahk_exe Code.exe
+result := ""
+loop %winList%
+{
+    item := winList%A_Index%
+    WinGetTitle, title, ahk_id %item%
+    result := result . item . "-> " . title . "`n"
+}
+
+MsgBox, %result%
+return
 
 f8::
-MsgBox,% A_Programs . "\Visual Studio Code\Visual Studio Code.lnk"
 return
+
 
 f9::
-DetectHiddenWindows, on
-SendMessage, 0x5555, 0x1, 0x2,, ahk_id %menuWindowId%
-; WinGetTitle, title, ahk_id %menuWindowId%
-; tooltip, %title%
 return
-
-SwitchWindows()
-{
-    wingetclass, class, A
-    if (class == "ApplicationFrameWindow")
-        to_check := "ahk_class "  class  "ahk_exe "  GetProcessName()
-    else
-        to_check := "ahk_exe "  GetProcessName()
-
-    MyGroupActivate(to_check)
-    return
-}
 
 loopWindows() {
     DetectHiddenWindows, off
@@ -47,11 +39,4 @@ loopWindows() {
         MsgBox, 4, , Visiting All Windows`n%a_index% of %id%`nahk_id %this_id%`nahk_class %this_class%`n%this_title%`n`nContinue?
         IfMsgBox, NO, break
     }
-}
-
-getWindow() {
-    WinGet, id, ID, A
-    sleep 2000
-    WinShow, ahk_id %id%
-    WinActivate, ahk_id %id%
 }
