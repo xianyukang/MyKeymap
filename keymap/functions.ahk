@@ -647,6 +647,7 @@ matchHotString(typo) {
     arr := [ "sq", "sz", "sv"
             ,"sc", "se", "sd", "sr", "ss", "sf", "sa", "sg"
             ,"sx", "st"
+            ,"dd", "dp", "da", "dr"
             ,"fb", "fp", "fo", "fk", "fr", "fg", "fi", "ff", "fh"]
 
     return arrayContains(arr, typo)
@@ -699,4 +700,21 @@ enterHotString()
         }
         ; ToolTip, %typo%
     }
+}
+
+ReloadProgram()
+{
+    global exeFullPath
+    global pid
+    Menu, Tray, NoIcon 
+    tooltip, Reload !
+    run, "keygeek.ahk"
+    ;run, "%exeFullPath%" Reload
+    ;process, close, %pid%
+    ;process, close, ahk.exe
+}
+
+slideToShutdown()
+{
+
 }

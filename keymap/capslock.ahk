@@ -33,7 +33,9 @@ CoordMode, Mouse, Screen
 DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 return
 
-~capslock::
+RAlt::LCtrl
+
+capslock::
     CapslockMode := true
     keywait capslock
     CapslockMode := false
@@ -41,6 +43,97 @@ return
         enterHotString()
     }
     return
+
+
+
+
+*j::
+    JMode := true
+    keywait `j
+    JMode := false
+    if (A_PriorKey == "j" && A_TimeSinceThisHotkey < 350)
+            send  {blind}`j
+    return
+
+
+
++`;::send {blind}{:}
+*`;::
+    hotstring("Reset")
+    PunctuationMode := true
+    keywait `; 
+    PunctuationMode := false
+    if (A_PriorKey == ";" && A_TimeSinceThisHotkey < 350)
+        EnterHotstringMode()
+    return
+
+#if JMode
+; #inputlevel 5
+; 关闭 capslock 模式,  避免以外开启大写
+*capslock::return
+*capslock up::return
+    ^l::return
+    +k::return
+
+
+    *k::
+        send {blind}{Rshift down}
+        keywait k
+        send {Rshift up}
+        return
+    *l::
+        send {blind}{Lctrl down}
+        keywait l
+        send {Lctrl up}
+        return
+
+    *e::send  {blind}{up}
+    *d::send  {blind}{down}
+    *s::send  {blind}{left}
+    *f::send  {blind}{right}
+    *c::send  {blind}{bs}
+    *v::send  {blind}{delete}
+    *a::send  {blind}{home}
+    *g::send  {blind}{end}
+    *x::send  {blind}{esc}
+    *z::send  {blind}{appskey}
+    *t::send  {blind}{pgdn}
+    *q::send  {blind}{pgup}
+    *r::send  {blind}{tab}
+    *i::send  {blind}{insert}
+    *space::send  {blind}{enter}
+
+    *w::send  {blind}+{tab}
+
+; #inputlevel 0
+
+
+#if PunctuationMode
+*s::send {blind}<
+*e::send {blind}{^}
+*f::send {blind}>
+*j::send {blind}{+}
+*c::send {blind}.
+; *n::send {blind}/
+*r::send {blind}&
+*v::send {blind}|
+*g::send {blind}{!}
+*z::send {blind}\
+*b::send {blind}`%
+*a::send {blind}`@
+*h::send {blind}`;
+*q::send {blind}{(}
+*w::send {blind}{#}
+*t::send {blind}~
+*u::send {blind}$
+*x::send {blind}_
+;*q::send {blind}?
+o::send {space 4}
+*y::send {blind}@
+*k::send {blind}``
+*i::send {blind}*
+*d::send {blind}=
+*m::send {blind}-
 
 
 #if CapslockMode
@@ -138,6 +231,26 @@ i::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe")
 +p::ActivateOrRun("ahk_exe POWERPNT.EXE", A_ProgramsCommon . "\PowerPoint.lnk")
 
 
+#if HotsringMode
+#Hotstring *  B0 X
+
+;空格 退出模式
+:?*B0: ::
+    ExitHotstringMode()
+    ShowTip("Canceled !", 900)
+    return
+::xk::send (){left 1}
+::ss::send ""{left}
+::sk::send 「  」{left 2}
+::sl::send 【】{left 1}
+::zk::send []{left}
+::dk::send {{}{}}{left}
+::dh::send 、
+::jt::send   ➤{space 1}
+::gt::send 🐶
+::sm::send 《》{left}
+::rr::ReloadProgram()
+::ex::quit(true)        ; 退出程序
 
 #IfWinActive, ahk_exe explorer.exe ahk_class MultitaskingViewFrame
 r::tab
@@ -156,3 +269,30 @@ space::enter
 
 #IfWinActive
 
+
+EnterHotstringMode()
+{
+    global HotsringMode
+    HotsringMode := true
+    hotkey, IfWinActive
+    hotkey, *j, off
+    blockinput on
+    click up ; 重置热字串状态
+    settimer, timer_HotstringMode, 50
+}
+ExitHotstringMode()
+{
+    global HotsringMode
+    HotsringMode := false
+    hotkey, IfWinActive
+    hotkey, *j, on
+    blockinput off
+    settimer, timer_HotstringMode, off
+}
+
+timer_HotstringMode()
+{
+    if (A_thishotkey != "*;")
+        ExitHotstringMode()
+    return
+}
