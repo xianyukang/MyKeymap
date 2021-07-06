@@ -43,15 +43,6 @@ capslock up::
     hotkey, if
     hotkey, *j, on
     return
-        
-
-; space::
-;     FMode := true
-;     keywait space
-;     FMode := false
-;     if (A_PriorKey == "Space" && A_TimeSinceThisHotkey < 350)
-;             send  {blind}{space}
-;     return
 
 *j::
     JMode := true
@@ -340,76 +331,6 @@ return
     ExitHotstringMode()
     ShowTip("Canceled !", 900)
     return
-
-
-
-#if FMode
-;x::SmartCloseWindow()
-;space::send  {enter}
-; 最酷的笔记软件, OneNote
-d::ActivateOrRun("ahk_exe ONENOTE.EXE", "onenote.exe")
-; Gvim 
-i::ActivateOrRun("ahk_class Vim", "gvim.exe")
-; VScode 
-s::ActivateOrRun("ahk_exe Code.exe", "shortcuts\Visual Studio Code.lnk")
-; 文件管理器
-;*a::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "explorer.exe")
-; Windows 下颜值最高的命令行工具,  设置好了能让 linux 子系统更易用
-o::ActivateOrRun("ahk_class VirtualConsoleClass", "tools\cmder\cmder.exe")
-; 世界上最受欢迎的 Chrome 浏览器
-w::ActivateOrRun("ahk_exe chrome.exe", "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
-;*f::ActivateOrRun("ahk_exe firefox.exe", "C:\Program Files\Mozilla Firefox\firefox.exe")
-r::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\Download\zip\FoxiReader\Foxit Reader\FoxitReader.exe")
-; Kindle 桌面客户端
-;*k::ActivateOrRun("ahk_exe Kindle.exe", A_Programs . "\Amazon\Amazon Kindle\Kindle.lnk")
-; Webstorm 写 前端 
-;*w::ActivateOrRun("ahk_exe webstorm64.exe", A_Programs . "\JetBrains Toolbox\WebStorm.lnk") 
-; Pycharm 写 Python 
-;*p::ActivateOrRun("ahk_exe pycharm64.exe", A_Programs . "\JetBrains Toolbox\PyCharm Professional.lnk") 
-; IDEA 写 Java 
-*j::ActivateOrRun("ahk_exe idea64.exe", A_Programs . "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk") 
-; 好看的 MindManager 思维导图工具, m 按键容易误触
-m::ActivateOrRun("ahk_exe MindManager.exe", "C:\Program Files\Mindjet\MindManager 19\MindManager.exe")
-; Everything
-a::ActivateOrRun("ahk_class EVERYTHING", "tools\Everything\Everything.exe")
-; Excel or PotPlayer
-l::ActivateOrRun("ahk_exe PotPlayerMini.exe", "D:\MyFiles\dz\PotPlayer\PotPlayerMini.exe")
-; 多按一个 shift 键,  于是按键数就多了一倍
-+w::ActivateOrRun("ahk_exe WINWORD.EXE", A_ProgramsCommon . "\Word.lnk")
-+p::ActivateOrRun("ahk_exe POWERPNT.EXE", A_ProgramsCommon . "\PowerPoint.lnk")
-
-
-
-
-
-
-
-; 为一些程序设定一些热键
-#ifwinactive DevTools - ahk_exe chrome.exe
-*!left::send ^[
-*!right::send ^]
-
-
-#ifwinactive ahk_exe evernote.exe
-^e::
-    controlfocus, ENAutoCompleteEditCtrl1, A
-    send % "^a" text("intitle:`"`"`"`"") "{left}"
-    return
-^l::
-    send {f2}+{tab}
-    return
-
-
-
-#ifwinactive ahk_exe ONENOTE.EXE
-^=::send {lalt down}{lshift down}{=}{lshift up}{lalt up}
-^-::send {lalt down}{lshift down}{-}{lshift up}{lalt up}
-
-
-
-
-
-
 
 
 ReloadProgram()

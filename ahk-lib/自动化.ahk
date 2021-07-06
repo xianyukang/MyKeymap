@@ -5,13 +5,12 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 
 
-; 新建 ahk 线程
-thread0 := AhkThread()
-thread0.ahkdll("keymap\my_menu.ahk")
-menuWindowId := thread0.ahkgetvar.currentWindowId
+; 设置焦点
+controlfocus, ENAutoCompleteEditCtrl1, A
 
+; 发送按键或字符串
+send % "^a" text("intitle:`"`"`"`"") "{left}"
 
-; 托盘图标
-Menu, Tray, NoStandard
-Menu, Tray, DeleteAll
-Menu, Tray, Add, E&xit, QUIT
+send {f2}+{tab}
+send {lalt down}{lshift down}{=}{lshift up}{lalt up}
+send {lalt down}{lshift down}{-}{lshift up}{lalt up}
