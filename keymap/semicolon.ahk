@@ -79,8 +79,6 @@ init()
 w::lalt
 
 
-;::sd::shutdown, 1
-::rb::shutdown, 2
 
 
 init()

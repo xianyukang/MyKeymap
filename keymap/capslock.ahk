@@ -251,6 +251,8 @@ i::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe")
 ::sm::send 《》{left}
 ::rr::ReloadProgram()
 ::ex::quit(true)        ; 退出程序
+::sd::slideToShutdown()
+::rb::shutdown, 2
 
 #IfWinActive, ahk_exe explorer.exe ahk_class MultitaskingViewFrame
 r::tab
