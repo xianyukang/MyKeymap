@@ -24,7 +24,6 @@ init()
 #if
 
 RAlt::LCtrl
-;/::LWin
 
 
 *3::
