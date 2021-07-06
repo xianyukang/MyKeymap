@@ -717,6 +717,6 @@ ReloadProgram()
 slideToShutdown()
 {
     run, SlideToShutDown
-    sleep, 1400
+    sleep, 1200
     send, {Enter}
 }
