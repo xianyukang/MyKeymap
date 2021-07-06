@@ -46,10 +46,8 @@ capslock up::
 
 *j::
     JMode := true
-    ; hotkey, space, off
     keywait `j
     JMode := false
-    ; hotkey, space, on
     if (A_PriorKey == "j" && A_TimeSinceThisHotkey < 350)
             send  {blind}`j
     return
@@ -107,8 +105,8 @@ capslock up::
 *g::send {blind}{!}
 *z::send {blind}\
 *b::send {blind}`%
-*a::send {blind}`;
-*h::send {blind}:
+*a::send {blind}`@
+*h::send {blind}`;
 *q::send {blind}{(}
 *w::send {blind}{#}
 *t::send {blind}~
@@ -288,26 +286,6 @@ return
 ::ano::ActivateOrRun(, "tools\cmder\cmder.exe",,, true)    ; 管理员执行 cmder, true 参数表示以管理员执行
 ::rex::ActivateOrRun(, "tools\Rexplorer_x64.exe")          ; 重启资源管理器
 ::pd::ActivateOrRun("ahk_exe FoxitReader.exe")                      ; 福昕阅读器
-
-
-
-::ti::
-    if (ProcessExist("TIM.exe"))
-        send ^!z
-    else
-        ActivateOrRun(, A_ProgramsCommon "\腾讯软件\TIM\TIM.lnk")
-    return
-
-; ------ 多开一个窗口 ------
-::nw::ActivateOrRun(, A_ProgramFiles . "\Google\Chrome\Application\chrome.exe")
-::nf::ActivateOrRun(, "C:\Program Files\Mozilla Firefox\firefox.exe")
-::no::ActivateOrRun(, "tools\cmder\cmder.exe")
-
-
-
-; ------ 开发工具 -----
-
-::vs::ActivateOrRun("- Microsoft Visual Studio",  A_ProgramsCommon . "\Visual Studio 2017.lnk")
 
 
 
