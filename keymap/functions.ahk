@@ -175,7 +175,7 @@ GetVisibleWindows(winFilter)
 ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:=false) 
 {
     to_activate := Trim(to_activate)
-    WinShow, %to_activate%
+    ; WinShow, %to_activate%
     if (winexist(to_activate))
         MyGroupActivate(to_activate)
     else if (target != "")

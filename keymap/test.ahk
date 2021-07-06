@@ -6,14 +6,15 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #UseHook
 #SingleInstance Force
 #include functions.ahk
+DetectHiddenWindows, 1
 
-WinGet, winList, List, ahk_exe Code.exe
+WinGet, winList, List, ahk_exe idea64.exe
 result := ""
 loop %winList%
 {
     item := winList%A_Index%
     WinGetTitle, title, ahk_id %item%
-    result := result . item . "-> " . title . "`n"
+    result := result . item . "-> " . "'"  . title . "'" . "`n"
 }
 
 MsgBox, %result%
