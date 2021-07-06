@@ -50,7 +50,7 @@ exec(keyword) {
     else if (keyword == "ss") {
         send, {LWin down}{left}{Lwin up}
     }
-    else if (keyword == "sf") {
+    else if (keyword == "sg") {
         send, {LWin down}{right}{Lwin up}
     }
     else if (keyword == "sc") {
@@ -59,7 +59,7 @@ exec(keyword) {
     else if (keyword == "sa") {
         send #+{left}
     }
-    else if (keyword == "sg") {
+    else if (keyword == "sf") {
         send #+{right}
     }
     else if (keyword == "sx") {
