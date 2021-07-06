@@ -54,7 +54,7 @@ exec(keyword) {
         send, {LWin down}{right}{Lwin up}
     }
     else if (keyword == "sc") {
-        center_window_to_current_monitor()
+        center_window_to_current_monitor(1300, 900)
     }
     else if (keyword == "sa") {
         send #+{left}
@@ -335,7 +335,7 @@ wp_GetMonitorAt(x, y, default=1)
 }
 
 
-center_window_to_current_monitor()
+center_window_to_current_monitor(width, height)
 {
     ; WinExist win will set "A" to default window
     WinExist("A")
@@ -353,8 +353,8 @@ center_window_to_current_monitor()
     win_w := msw * 0.67
     win_h := (msw * 10 / 16) * 0.7
     win_w := Min(win_w, win_h * 1.54)
-    win_w := 1300
-    win_h := 900
+    win_w := width
+    win_h := height
     win_x := msLeft + (msw - win_w) / 2
     win_y := msTop + (msh - win_h) / 2
     winmove,,, %win_x%, %win_y%, %win_w%, %win_h%
@@ -414,16 +414,6 @@ init_menu()
     Menu, menuWindow, Add, (&Z)  打开本 App 目录, handler_for_menu_window
     Menu, menuWindow, Add, (&V)  打开音量控制器, handler_for_menu_window
 
-
-    Menu, menuX, Add, (&C)  让窗口居中, handler_for_menu_X
-    Menu, menuX, Add, (&T)  让窗口置顶, handler_for_menu_X
-    Menu, menuX, Add, (&X)  关闭同类窗口, handler_for_menu_X
-    Menu, menuX, Add, (&Q)  打开任务管理器, handler_for_menu_X
-    Menu, menuX, Add, (&Z)  打开本 App 目录, handler_for_menu_X
-    Menu, menuX, Add, (&V)  打开音量控制器, handler_for_menu_X
-
-
-
     ; 把子菜单添加到主菜单
     Menu, menuMain, Add, (&S)  Window, :menuWindow
     Menu, menuMain, Add, (&F)  Style,  :menuStyle
@@ -445,13 +435,6 @@ close_tooltip:
 
 handler_for_menu_OCR:
     run, E:\projects\apps\web-api\target\ocr.lnk
-return
-
-handler_for_menu_X:
-    selected_item := RegExReplace(A_ThisMenuItem,"\(&(.*)\)\s*(.*)","$1")
-    if (selected_item == "C") {
-        center_window_to_current_monitor()
-    }
 return
 
 
@@ -489,9 +472,6 @@ handler_for_menu_window:
     }
     else if (selected_item == "F") {
         send, {LWin down}{right}{Lwin up}
-    }
-    else if (selected_item == "C") {
-        center_window_to_current_monitor()
     }
     else if (selected_item == "A") {
         send #+{left}
