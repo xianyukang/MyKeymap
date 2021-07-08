@@ -123,7 +123,7 @@ capslock::
 *f::send {blind}>
 *j::send {blind}{+}
 *c::send {blind}.
-; *n::send {blind}/
+*n::send {blind}/
 *r::send {blind}&
 *v::send {blind}|
 *g::send {blind}{!}
