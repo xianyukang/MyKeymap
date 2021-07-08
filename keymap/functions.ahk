@@ -34,7 +34,7 @@ ShellRun(prms*)
     try {
 
         if (shell) {
-            tip("使用缓存了的 shell 对象")
+            ; tip("使用缓存了的 shell 对象")
             shell.ShellExecute(prms*)
             return
         }
