@@ -41,6 +41,8 @@ exec(keyword) {
         run, shell:downloads
     else if (keyword == "dp") 
         run, shell:my pictures
+    else if (keyword == "dv") 
+        run, run, shell:My Video
     else if (keyword == "da") 
         run, %A_WorkingDir%
     else if (keyword == "dr") 

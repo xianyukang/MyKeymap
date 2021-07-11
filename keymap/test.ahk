@@ -16,8 +16,9 @@ loop %winList%
     WinGetTitle, title, ahk_id %item%
     result := result . item . "-> " . "'"  . title . "'" . "`n"
 }
-
-MsgBox, %result%
+; str = 1j        %A_ProgramsCommon%\Google Chrome.lnk      k
+; tooltip, % str
+; MsgBox, %result%
 return
 
 f8::
@@ -26,6 +27,7 @@ return
 
 f9::
 return
+0::Reload
 
 loopWindows() {
     DetectHiddenWindows, off

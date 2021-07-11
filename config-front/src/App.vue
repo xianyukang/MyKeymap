@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer permanent app>
+    <v-navigation-drawer permanent app   id="drawer">
       <v-list-item>
         <v-list-item-avatar rounded="0" class="logo">
           <v-img alt="img" :src="require('./assets/logo.png')"></v-img>
@@ -29,8 +29,8 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-main>
-      <router-view />
+    <v-main id="main">
+      <router-view v-if="config" />
     </v-main>
   </v-app>
 </template>
@@ -59,5 +59,12 @@ export default {
 .v-avatar.logo {
   height: 60px !important;
   width: 60px !important;
+}
+#drawer {
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+}
+#main {
+  background: #f2f3f6;
+  background: #FAFAFA;
 }
 </style>

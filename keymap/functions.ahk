@@ -33,10 +33,14 @@ ShellRun(prms*)
 
     try {
 
-        if (shell) {
-            ; tip("使用缓存了的 shell 对象")
-            shell.ShellExecute(prms*)
-            return
+        try {
+            if (shell) {
+                ; tip("使用缓存了的 shell 对象")
+                shell.ShellExecute(prms*)
+                return
+            }
+        } catch {
+            tip("refresh object")
         }
 
         shellWindows := ComObjCreate("Shell.Application").Windows
@@ -733,6 +737,34 @@ ReloadProgram()
 slideToShutdown()
 {
     run, SlideToShutDown
-    sleep, 1200
+    sleep, 1300
     send, {Enter}
+}
+
+
+EnterHotstringMode()
+{
+    global HotsringMode
+    HotsringMode := true
+    hotkey, IfWinActive
+    hotkey, *j, off
+    blockinput on
+    click up ; 重置热字串状态
+    settimer, timer_HotstringMode, 50
+}
+ExitHotstringMode()
+{
+    global HotsringMode
+    HotsringMode := false
+    hotkey, IfWinActive
+    hotkey, *j, on
+    blockinput off
+    settimer, timer_HotstringMode, off
+}
+
+timer_HotstringMode()
+{
+    if (A_thishotkey != "*;")
+        ExitHotstringMode()
+    return
 }

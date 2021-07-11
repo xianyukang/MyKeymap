@@ -7,10 +7,12 @@ Vue.use(Vuex)
 
 const s = new Vuex.Store({
   state: {
-    config: {},
+    config: null,
+    currentConfig: 'capslockf',
   },
   mutations: {
     SET_CONFIG(state, value) {
+      console.log('update config', value)
       state.config = value
     }
   },

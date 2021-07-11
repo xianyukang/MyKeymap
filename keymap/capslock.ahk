@@ -34,8 +34,9 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 return
 
 RAlt::LCtrl
++capslock::SetCapsLockState % !GetKeyState("CapsLock", "T")
 
-capslock::
+*capslock::
     CapslockMode := true
     keywait capslock
     CapslockMode := false
@@ -318,30 +319,3 @@ space::enter
 
 #IfWinActive
 
-
-EnterHotstringMode()
-{
-    global HotsringMode
-    HotsringMode := true
-    hotkey, IfWinActive
-    hotkey, *j, off
-    blockinput on
-    click up ; 重置热字串状态
-    settimer, timer_HotstringMode, 50
-}
-ExitHotstringMode()
-{
-    global HotsringMode
-    HotsringMode := false
-    hotkey, IfWinActive
-    hotkey, *j, on
-    blockinput off
-    settimer, timer_HotstringMode, off
-}
-
-timer_HotstringMode()
-{
-    if (A_thishotkey != "*;")
-        ExitHotstringMode()
-    return
-}

@@ -5,10 +5,16 @@ from jinja2 import Environment, FileSystemLoader
 class AhkScript:
     def __init__(self):
         super().__init__()
-        self.env = Environment(loader=FileSystemLoader("templates"))
+        self.env = Environment(
+            loader=FileSystemLoader("templates"), 
+            variable_start_string='{{{', 
+            variable_end_string='}}}',
+            comment_start_string= '{##',
+            comment_end_string= '##}',
+            )
 
     def makeCapslock(self, data):
-        with open("caps.ahk", "w+", encoding="utf-8-sig") as f:
+        with open("../keymap/caps.ahk", "w+", encoding="utf-8-sig") as f:
             template = self.env.get_template("script.ahk")
             print(template.render(data), file=f)
 

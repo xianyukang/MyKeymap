@@ -26,22 +26,10 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 export default {
   name: 'Capslock',
-  watch: {
-    config: {
-      handler (value) {
-        this.$store.commit('SET_CONFIG', value)
-      },
-      deep: true
-    }
-  },
   created() { },
   methods: { },
-  computed: {
-    ...mapState(['config']),
-  },
   data() {
     return {
       keys: 'abcdefghijklmnopqrstuvwxyz,./',
@@ -62,10 +50,6 @@ export default {
 }
 .v-text-field {
   font-size: 0.75em;
-}
-.fuck {
-  margin-top: 5px;
-  color: white;
 }
 
 table * {

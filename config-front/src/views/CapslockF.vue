@@ -1,76 +1,48 @@
 <template>
-  <v-container id="app" fluid>
-    <v-simple-table dense>
-      <template v-slot:default>
-        <thead>
-          <tr>
-            <th class="text-left" style="width: 4%"> </th>
-            <th class="text-left" style="width: 13%"> </th>
-            <th class="text-left"> </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in config.capslockf" :key="item.name">
-            <td
-              ><v-chip dark color="green" label
-                ><span class="key">{{ item.key }}</span></v-chip
-              ></td
-            >
-            <td><v-select class="fuck" dense :items="items" v-model="item.type"></v-select></td>
-            <td><v-text-field v-model="item.value"></v-text-field></td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
+  <v-container id="app">
+    
+    <!-- <v-row v-for="item in config.capslockf" :key="item.name" dense>
+      <v-col cols="1">
+        <v-chip dark color="green" label><span class="key">{{ item.key }}</span></v-chip>
+      </v-col>
+      <v-col cols="2">
+        <v-chip dark color="green" label ><span class="key">{{ item.key }}</span></v-chip>
+        <v-select class="fuck" :items="items" v-model="item.type" label="操作类型"></v-select>
+      </v-col>
+      <v-col><v-text-field label="激活" v-model="item.value"></v-text-field></v-col>
+      <v-col><v-text-field label="或运行" v-model="item.value"></v-text-field></v-col>
+    </v-row> -->
+    <keyboard @clickKey="keyChanged" :currentKey="currentKey" />
+    <action :currentKey="currentKey" :currentConfig="currentConfig"/>
   </v-container>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import Action from '@/components/Action.vue'
+import Keyboard from '../components/Keyboard.vue'
 export default {
   name: 'CapslockF',
-  watch: {
-    config: {
-      handler (value) {
-        this.$store.commit('SET_CONFIG', value)
-      },
-      deep: true
+  created() {},
+  methods: {
+    keyChanged(key) {
+      this.currentKey = key
+    },
+    firstMappedKey(config) {
+      return 'Q'
     }
-  },
-  created() { },
-  methods: { },
-  computed: {
-    ...mapState(['config']),
   },
   data() {
     return {
+      currentKey: this.firstMappedKey(this.config),
+      currentConfig: 'capslockf',
       keys: 'abcdefghijklmnopqrstuvwxyz,./',
       items: ['启动程序或激活窗口', '按键重映射为', '鼠标操作', '窗口操作', '执行 ahk 函数'],
     }
   },
-  components: {},
+  components: { Action, Keyboard },
 }
 </script>
 
 <style scoped>
-.v-chip {
-  /* x偏移量 | y偏移量 | 阴影模糊半径 | 阴影扩散半径 | 阴影颜色 */
-  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
 
-}
-.v-chip span {
-  font-size: 1.3em;
-}
-.v-text-field {
-  font-size: 0.75em;
-}
-.fuck {
-  margin-top: 5px;
-  color: white;
-}
-
-table * {
-  margin-top: -9px;
-  margin-bottom: -9px;
-}
 </style>
