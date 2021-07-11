@@ -6,8 +6,8 @@
           <v-card
             @click="clickKey(k.key)"
             class="key"
-            :height="hover ? 50 : 50"
-            :width="hover ? 51 : 50"
+            :height="hover ? 53 : 53"
+            :width="hover ? 54 : 53"
             :elevation="hover ? 13 : 4"
             :color="keyColor(k, hover).color"
             :dark="keyColor(k, hover).dark"
@@ -33,7 +33,8 @@ export default {
     keyColor(keyObj, hover) {
       // if (hover) return { color: '#f3448f', dark: true }
       if (keyObj.key === this.currentKey) return { color: 'blue', dark: true }
-      if (this.currConfig()[keyObj.key]?.type != '什么也不做') return { color: '#98FB98', dark: false }
+      const action=this.currConfig()[keyObj.key]
+      if (action.type != '什么也不做' && action.value) return { color: '#98FB98', dark: false }
       return {}
     },
   },

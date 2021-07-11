@@ -2,27 +2,60 @@
   <v-container>
     <v-card height="600" width="720" elevation="5">
       <v-card-title>
-        <!-- <h1>{{$store.state.currentKey}}</h1> -->
-        <v-row>
-          <v-col><v-select :items="actionTypes" v-model="currKey().type" outlined></v-select></v-col>
-        </v-row>
+        <v-select :items="actionTypes" v-model="currKey().type" outlined></v-select>
       </v-card-title>
       <v-card-text>
-        <v-divider></v-divider>
-        <v-row>
-          <v-col><v-text-field label="要激活的窗口" outlined dense v-model="ActivateOrRun.arg1"></v-text-field></v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-text-field label="窗口不存在时要启动的程序" outlined dense v-model="ActivateOrRun.arg2"> </v-text-field>
-          </v-col>
-        </v-row>
+        <template v-if="currKey().type === '启动程序或激活窗口'">
+          <v-text-field label="要激活的窗口" outlined v-model="currKey().toActivate" @input="activateOrRun"></v-text-field>
+          <v-text-field label="窗口不存在时要启动的程序" outlined v-model="currKey().toRun" @input="activateOrRun">
+          </v-text-field>
+        </template>
+
+        <template v-if="currKey().type === '鼠标操作'">
+          <v-radio-group v-model="currKey().value">
+            <v-row>
+              <v-col>
+                <v-radio
+                  v-for="action in mouseActions"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+              </v-col>
+              <v-col>
+                <v-radio
+                  v-for="action in scrollActions"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+              </v-col>
+            </v-row>
+
+            <br />
+            <v-divider></v-divider>
+            <br />
+
+            <v-row>
+              <v-col>
+                <v-radio
+                  v-for="action in clickActions"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+              </v-col>
+              <v-col> </v-col>
+            </v-row>
+          </v-radio-group>
+        </template>
       </v-card-text>
     </v-card>
   </v-container>
 </template>
 
 <script>
+import { escapeFuncString } from '../util'
 export default {
   props: {
     currentKey: { type: String },
@@ -31,13 +64,34 @@ export default {
   data() {
     return {
       actionTypes: ['启动程序或激活窗口', '按键重映射为', '鼠标操作', '窗口操作', '执行 ahk 函数', '什么也不做'],
-      ActivateOrRun: {
-        arg1: '',
-        arg2: '',
-      },
+      mouseActions: [
+        { label: '鼠标上移', value: '鼠标上移' },
+        { label: '鼠标下移', value: '鼠标下移' },
+        { label: '鼠标左移', value: '鼠标左移' },
+        { label: '鼠标右移', value: '鼠标右移' },
+      ],
+      scrollActions: [
+        { label: '滚轮上滑', value: '滚轮上滑' },
+        { label: '滚轮下滑', value: '滚轮下滑' },
+        { label: '滚轮左滑', value: '滚轮左滑' },
+        { label: '滚轮右滑', value: '滚轮右滑' },
+      ],
+      clickActions: [
+        { label: '鼠标左键', value: '鼠标左键' },
+        { label: '鼠标右键', value: '鼠标右键' },
+        { label: '鼠标左键按下', value: '鼠标左键按下' },
+        { label: '移动鼠标到窗口中心', value: '移动鼠标到窗口中心' },
+      ],
     }
   },
   methods: {
+    activateOrRun() {
+      const toActivate = escapeFuncString(this.currKey().toActivate)
+      const toRun = escapeFuncString(this.currKey().toRun)
+      // console.log(toActivate, toRun)
+      this.currKey().value = `ActivateOrRun("${toActivate}", "${toRun}")`
+    },
+    // note 当选项发生改变时,  是否要清空掉 value ?
   },
   computed: {},
 }
@@ -48,5 +102,12 @@ export default {
 label.v-label.v-label--active {
   font-size: 1.2em;
   color: darkmagenta;
+}
+div.v-radio label.v-label {
+  color: black;
+}
+div.v-radio.v-item--active label.v-label {
+  color: red;
+  font-size: 1.1em;
 }
 </style>
