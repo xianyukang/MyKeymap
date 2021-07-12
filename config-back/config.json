@@ -148,8 +148,8 @@
     ],
     "capslockf": {
         "Q": {
-            "type": "启动程序或激活窗口",
-            "value": "ActivateOrRun(\"记事本\", \"notepad.exe\")",
+            "type": "窗口操作",
+            "value": "移动鼠标到窗口中心",
             "toActivate": "记事本",
             "toRun": "notepad.exe"
         },
@@ -236,8 +236,8 @@
             "value": ""
         },
         "X": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "窗口操作",
+            "value": "SmartCloseWindow()"
         },
         "C": {
             "type": "什么也不做",

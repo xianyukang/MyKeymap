@@ -768,3 +768,43 @@ timer_HotstringMode()
         ExitHotstringMode()
     return
 }
+
+
+wp_GetMonitorAt(x, y, default=1)
+{
+    SysGet, m, MonitorCount
+    ; Iterate through all monitors.
+    Loop, %m%
+    {   ; Check if the window is on this monitor.
+        SysGet, Mon, Monitor, %A_Index%
+        if (x >= MonLeft && x <= MonRight && y >= MonTop && y <= MonBottom)
+            return A_Index
+    }
+
+    return default
+}
+
+center_window_to_current_monitor(width, height)
+{
+    ; WinExist win will set "A" to default window
+    WinExist("A")
+    SetWinDelay, 0
+    WinGet, state, MinMax
+    if state
+        WinRestore
+    WinGetPos, x, y, w, h
+    ; Determine which monitor contains the center of the window.
+    ms := wp_GetMonitorAt(x+w/2, y+h/2)
+    ; Get source and destination work areas (excludes taskbar-reserved space.)
+    SysGet, ms, MonitorWorkArea, %ms%
+    msw := msRight - msLeft
+    msh := msBottom - msTop
+    ; win_w := msw * 0.67
+    ; win_h := (msw * 10 / 16) * 0.7
+    ; win_w := Min(win_w, win_h * 1.54)
+    win_w := width
+    win_h := height
+    win_x := msLeft + (msw - win_w) / 2
+    win_y := msTop + (msh - win_h) / 2
+    winmove,,, %win_x%, %win_y%, %win_w%, %win_h%
+}

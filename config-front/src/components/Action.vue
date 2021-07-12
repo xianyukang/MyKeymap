@@ -49,6 +49,46 @@
             </v-row>
           </v-radio-group>
         </template>
+
+
+        <template v-if="currKey().type === '窗口操作'">
+          <v-radio-group v-model="currKey().value">
+            <v-row>
+              <v-col>
+                <v-radio
+                  v-for="action in windowActions1"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+              </v-col>
+              <v-col>
+                <v-radio
+                  v-for="action in windowActions2"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+              </v-col>
+            </v-row>
+
+            <br />
+            <v-divider></v-divider>
+            <br />
+
+            <v-row>
+              <v-col>
+                <v-radio
+                  v-for="action in clickActions"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+              </v-col>
+              <v-col> </v-col>
+            </v-row>
+          </v-radio-group>
+        </template>
       </v-card-text>
     </v-card>
   </v-container>
@@ -81,6 +121,21 @@ export default {
         { label: '鼠标右键', value: '鼠标右键' },
         { label: '鼠标左键按下', value: '鼠标左键按下' },
         { label: '移动鼠标到窗口中心', value: '移动鼠标到窗口中心' },
+      ],
+      windowActions1: [
+        { label: '关闭窗口', value: 'SmartCloseWindow()' },
+        { label: '切换到上一个窗口', value: 'send !{tab}' },
+        { label: '在当前程序的窗口间切换', value: 'SwitchWindows()' },
+        { label: '窗口管理器(EDSF切换、X关闭、空格选择)', value: 'send ^!{tab}' },
+        { label: '上一个虚拟桌面', value: 'send  {LControl down}{LWin down}{Left}{LWin up}{LControl up}' },
+        { label: '下一个虚拟桌面', value: 'send {LControl down}{LWin down}{Right}{LWin up}{LControl up}' },
+        { label: '移动窗口到下一个显示器', value: 'send #+{right}' },
+      ],
+      windowActions2: [
+        { label: '窗口最大化', value: 'winmaximize, A' },
+        { label: '窗口最小化', value: 'winminimize, A' },
+        { label: '窗口居中(1200x800)', value: 'center_window_to_current_monitor(1200, 800)' },
+        { label: '窗口居中(1370x930)', value: 'center_window_to_current_monitor(1370, 930)' },
       ],
     }
   },
