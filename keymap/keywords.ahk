@@ -66,6 +66,9 @@ exec(keyword) {
     else if (keyword == "sc") {
         center_window_to_current_monitor(1300, 900)
     }
+    else if (keyword == "sC") {
+        center_window_to_current_monitor(1125, 780)
+    }
     else if (keyword == "sa") {
         send #+{left}
     }

@@ -666,7 +666,7 @@ matchHotString(typo) {
     
     arr := [ "sq", "sz", "sv"
             ,"sc", "se", "sd", "sr", "ss", "sf", "sa", "sg"
-            ,"sx", "st"
+            ,"sx", "st", "sC"
             ,"dd", "dp", "da", "dr"
             ,"fb", "fp", "fo", "fk", "fr", "fg", "fi", "ff", "fh"]
 
