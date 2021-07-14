@@ -45,6 +45,7 @@ export default {
     items: [
       { title: 'Capslock', icon: 'mdi-view-dashboard', to: 'Capslock', color: 'green' },
       { title: 'Capslock + F', icon: 'mdi-view-dashboard', to: 'CapslockF', color: 'green' },
+      { title: 'Capslock 缩写', icon: 'mdi-view-dashboard', to: 'CapslockAbbr', color: 'green' },
       { title: 'Home', icon: 'mdi-image', to: 'Home', color: 'red' },
       { title: '3', icon: 'mdi-numeric-3-box', to: 'Home', color: 'red' },
       { title: '9', icon: 'mdi-numeric-9-box', to: 'Home', color: 'red' },

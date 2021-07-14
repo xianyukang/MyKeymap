@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Capslock from '../views/Capslock.vue'
 import CapslockF from '../views/CapslockF.vue'
+import CapslockAbbr from '../views/CapslockAbbr.vue'
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,11 @@ const routes = [
     path: '/capslock-f',
     name: 'CapslockF',
     component: CapslockF
+  },
+  {
+    path: '/capslock-abbr',
+    name: 'CapslockAbbr',
+    component: CapslockAbbr
   },
   {
     path: '/about',
