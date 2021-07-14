@@ -187,17 +187,21 @@ o::send {space 4}
 #if CapslockMode
 ; ------ 窗口管理 ------
 e::send ^!{tab}
-w::send !{tab}
+q::send !{tab}
 x::SmartCloseWindow()
 r::SwitchWindows()
-; t::run, list_view.ahk
+w::WinMaximize, A
+c::myWinMinimize()
+s::center_window_to_current_monitor(1200, 800)
+a::center_window_to_current_monitor(1370, 930)
+d::send #+{right}
 ; g::moveActiveWindow()
 
 
-d::
-    ; ShowDimmer()
-    send ^!{f11}
-    return
+; d::
+;     ; ShowDimmer()
+;     send ^!{f11}
+;     return
 space::
     ; ShowDimmer()
     ShowCommandBar()

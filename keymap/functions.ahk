@@ -808,3 +808,18 @@ center_window_to_current_monitor(width, height)
     win_y := msTop + (msh - win_h) / 2
     winmove,,, %win_x%, %win_y%, %win_w%, %win_h%
 }
+
+myWinMinimize() {
+    IfWinActive, ahk_exe explorer.exe
+    {
+        WinGetClass, activeClass, A
+        if (activeClass != "CabinetWClass") {
+            return
+        }
+    }
+    IfWinActive, ahk_exe Rainmeter.exe
+    {
+        return
+    }
+    WinMinimize, A
+}
