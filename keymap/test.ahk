@@ -8,6 +8,14 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #include functions.ahk
 DetectHiddenWindows, 1
 
+
+time_enter_repeat = T0.2
+delay_before_repeat = T0.01
+fast_one := 110     
+fast_repeat := 70
+slow_one :=  10     
+slow_repeat := 13
+
 WinGet, winList, List, ahk_exe idea64.exe
 result := ""
 loop %winList%
@@ -22,8 +30,9 @@ loop %winList%
 return
 
 8::
-tip(A_ScreenDPI)
+horizontalScroll("8", 1, 1)
 return
+
 
 
 f9::

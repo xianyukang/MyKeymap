@@ -828,3 +828,24 @@ myWinMinimize() {
     }
     WinMinimize, A
 }
+
+
+horizontalScroll(key, direction, step) {
+    global time_enter_repeat, delay_before_repeat
+    if (direction > 0) {
+        MouseClick, WheelRight, , , 1
+    } else {
+        MouseClick, WheelLeft, , , 1
+    }
+
+    keywait, %key%, %time_enter_repeat%
+    while (errorlevel != 0)
+    {
+        if (direction > 0) {
+            MouseClick, WheelRight, , , 1
+        } else {
+            MouseClick, WheelLeft, , , 1
+        }
+        keywait,  %key%,  %delay_before_repeat%
+    }
+}

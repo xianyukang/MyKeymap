@@ -217,10 +217,12 @@ f::
 
 ; 鼠标
 /::centerMouse()
-u::MouseClick, WheelUp, , , 1
-o::MouseClick, WheelDown, , , 1
-h::MouseClick, WheelLeft, , , 1
-`;::MouseClick, WheelRight, , , 1
+*u::MouseClick, WheelUp, , , 1
+*o::MouseClick, WheelDown, , , 1
+; h::MouseClick, WheelLeft, , , 1
+; `;::MouseClick, WheelRight, , , 1
+h::horizontalScroll("h", -1, 2)
+`;::horizontalScroll(";", 1, 2)
 
 j::fastMoveMouse("j", -1, 0)
 k::fastMoveMouse("k", 0, 1)
@@ -230,14 +232,14 @@ i::fastMoveMouse("i", 0, -1)
 y::send  {LControl down}{LWin down}{Left}{LWin up}{LControl up}
 p::send {LControl down}{LWin down}{Right}{LWin up}{LControl up}
 
-n::leftClick()
+*n::leftClick()
 m::rightClick()
 ,::middleDown()
 
 #if SLOWMODE
-u::send {blind}{wheelup}
-o::send {blind}{wheeldown}
-n::leftClick()
+*u::send {blind}{wheelup}
+*o::send {blind}{wheeldown}
+*n::leftClick()
 m::rightClick()
 ,::middleDown()
 
