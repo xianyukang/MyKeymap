@@ -786,6 +786,10 @@ wp_GetMonitorAt(x, y, default=1)
 
 center_window_to_current_monitor(width, height)
 {
+    ; 在 mousemove 时需要 PER_MONITOR_AWARE (-3), 否则当两个显示器有不同的缩放比例时,  mousemove 会有诡异的漂移
+    ; 在 winmove   时需要 UNAWARE (-1),           这样即使写死了窗口大小为 1200x800,  系统会帮你缩放到合适的大小
+    DllCall("SetThreadDpiAwarenessContext", "ptr", -1, "ptr")
+
     ; WinExist win will set "A" to default window
     WinExist("A")
     SetWinDelay, 0
@@ -807,6 +811,7 @@ center_window_to_current_monitor(width, height)
     win_x := msLeft + (msw - win_w) / 2
     win_y := msTop + (msh - win_h) / 2
     winmove,,, %win_x%, %win_y%, %win_w%, %win_h%
+    DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }
 
 myWinMinimize() {

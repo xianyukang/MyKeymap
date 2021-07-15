@@ -191,7 +191,7 @@ q::send !{tab}
 x::SmartCloseWindow()
 r::SwitchWindows()
 w::WinMaximize, A
-c::myWinMinimize()
+b::myWinMinimize()
 s::center_window_to_current_monitor(1200, 800)
 a::center_window_to_current_monitor(1370, 930)
 d::send #+{right}

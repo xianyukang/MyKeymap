@@ -21,7 +21,8 @@ loop %winList%
 ; MsgBox, %result%
 return
 
-f8::
+8::
+tip(A_ScreenDPI)
 return
 
 
