@@ -148,8 +148,8 @@
     ],
     "CapslockF": {
         "Q": {
-            "type": "窗口操作",
-            "value": "移动鼠标到窗口中心",
+            "type": "启动程序或激活窗口",
+            "value": "",
             "toActivate": "记事本",
             "toRun": "notepad.exe"
         },
@@ -275,7 +275,7 @@
     "Mode3": {
         "Q": {
             "type": "窗口操作",
-            "value": "移动鼠标到窗口中心",
+            "value": "send #+{right}",
             "toActivate": "记事本",
             "toRun": "notepad.exe"
         },

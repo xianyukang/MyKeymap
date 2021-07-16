@@ -2,7 +2,7 @@
   <v-container>
     <v-card height="600" width="720" elevation="5">
       <v-card-title>
-        <v-select :items="actionTypes" v-model="currKey().type" outlined></v-select>
+        <v-select :items="actionTypes" v-model="currKey().type" outlined @change="clearValue"></v-select>
       </v-card-title>
       <v-card-text>
         <template v-if="currKey().type === '启动程序或激活窗口'">
@@ -49,7 +49,6 @@
             </v-row>
           </v-radio-group>
         </template>
-
 
         <template v-if="currKey().type === '窗口操作'">
           <v-radio-group v-model="currKey().value">
@@ -147,6 +146,9 @@ export default {
       this.currKey().value = `ActivateOrRun("${toActivate}", "${toRun}")`
     },
     // note 当选项发生改变时,  是否要清空掉 value ?
+    clearValue() {
+      this.currKey().value = ''
+    },
   },
   computed: {},
 }

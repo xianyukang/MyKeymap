@@ -11,12 +11,20 @@ class AhkScript:
             variable_end_string='}}}',
             comment_start_string= '{##',
             comment_end_string= '##}',
+            lstrip_blocks=True,
+            trim_blocks=True,
             )
+    
+    @staticmethod
+    def escapeAhkHotkey(key):
+        if (key == ';'): 
+            return '`;'
+        return key
 
     def makeCapslock(self, data):
         with open("../keymap/caps.ahk", "w+", encoding="utf-8-sig") as f:
             template = self.env.get_template("script.ahk")
-            print(template.render(data), file=f)
+            print(template.render(escapeAhkHotkey=self.escapeAhkHotkey, **data), file=f)
 
 
 if __name__ == "__main__":

@@ -219,8 +219,6 @@ f::
 /::centerMouse()
 *u::MouseClick, WheelUp, , , 1
 *o::MouseClick, WheelDown, , , 1
-; h::MouseClick, WheelLeft, , , 1
-; `;::MouseClick, WheelRight, , , 1
 h::horizontalScroll("h", -1)
 `;::horizontalScroll(";", 1)
 
@@ -239,6 +237,8 @@ m::rightClick()
 #if SLOWMODE
 *u::send {blind}{wheelup}
 *o::send {blind}{wheeldown}
+h::horizontalScroll("h", -1)
+`;::horizontalScroll(";", 1)
 *n::leftClick()
 m::rightClick()
 ,::middleDown()

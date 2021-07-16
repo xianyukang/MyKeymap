@@ -1,6 +1,4 @@
-﻿
-
-#NoEnv
+﻿#NoEnv
 #SingleInstance Force
 #UseHook
 #MaxHotkeysPerInterval 200
@@ -36,8 +34,9 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 return
 
 RAlt::LCtrl
++capslock::SetCapsLockState % !GetKeyState("CapsLock", "T")
 
-capslock::
+*capslock::
     CapslockMode := true
     keywait capslock
     CapslockMode := false
@@ -191,14 +190,13 @@ e::send ^!{tab}
 w::send !{tab}
 x::SmartCloseWindow()
 r::SwitchWindows()
-t::run, list_view.ahk
+q::WinMaximize, A
+b::myWinMinimize()
+s::center_window_to_current_monitor(1200, 800)
+a::center_window_to_current_monitor(1370, 930)
+d::send #+{right}
 ; g::moveActiveWindow()
 
-
-d::
-    ; ShowDimmer()
-    send ^!{f11}
-    return
 space::
     ; ShowDimmer()
     ShowCommandBar()
@@ -214,10 +212,10 @@ f::
 
 ; 鼠标
 /::centerMouse()
-u::MouseClick, WheelUp, , , 1
-o::MouseClick, WheelDown, , , 1
-h::MouseClick, WheelLeft, , , 1
-`;::MouseClick, WheelRight, , , 1
+*u::MouseClick, WheelUp, , , 1
+*o::MouseClick, WheelDown, , , 1
+h::horizontalScroll("h", -1)
+`;::horizontalScroll(";", 1)
 
 j::fastMoveMouse("j", -1, 0)
 k::fastMoveMouse("k", 0, 1)
@@ -227,14 +225,16 @@ i::fastMoveMouse("i", 0, -1)
 y::send  {LControl down}{LWin down}{Left}{LWin up}{LControl up}
 p::send {LControl down}{LWin down}{Right}{LWin up}{LControl up}
 
-n::leftClick()
+*n::leftClick()
 m::rightClick()
 ,::middleDown()
 
 #if SLOWMODE
-u::send {blind}{wheelup}
-o::send {blind}{wheeldown}
-n::leftClick()
+*u::send {blind}{wheelup}
+*o::send {blind}{wheeldown}
+h::horizontalScroll("h", -1)
+`;::horizontalScroll(";", 1)
+*n::leftClick()
 m::rightClick()
 ,::middleDown()
 
@@ -247,16 +247,44 @@ l::slowMoveMouse("l", 1, 0)
 i::slowMoveMouse("i", 0, -1)
 
 #if FMode
+
+; 配合 shit 键,  有可以多一倍的按键
+; 剩余按键 p、k、y、u、n、b、,、.、/、x
+; 由于指法无法利用的按键 t、g、c
+
 f::return
+
+
+
+R::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe")
+U::滚轮上滑
+I::鼠标上移
+O::滚轮下滑
+G::鼠标左键
+H::滚轮左滑
+J::鼠标左移
+K::鼠标下移
+L::鼠标上移
+`;::滚轮右滑
+X::SmartCloseWindow()
+N::鼠标左键
+M::鼠标右键
+,::鼠标左键按下
+/::移动鼠标到窗口中心
+
+; 常用软件
 z::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\")
 a::ActivateOrRun("ahk_exe WindowsTerminal.exe", "shortcuts\Windows Terminal Preview.lnk")
 w::ActivateOrRun("ahk_exe chrome.exe", A_ProgramsCommon . "\Google Chrome.lnk")
 d::ActivateOrRun("ahk_exe msedge.exe", A_ProgramsCommon . "\Microsoft Edge.lnk")
 r::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe")
 p::ActivateOrRun("ahk_exe PaintDotNet.exe", "C:\ProgramMicrosoft\Windows\Start Menu\Programs\paint.net.lnk") 
+
 m::ActivateOrRun("ahk_exe MindManager.exe", "C:\Program Files\Mindjet\MindManager 19\MindManager.exe")
 q::ActivateOrRun("ahk_class EVERYTHING", A_ProgramFiles . "\Everything\Everything.exe")
 l::ActivateOrRun("ahk_class PotPlayer64", A_ProgramFiles . "\DAUM\PotPlayer\PotPlayerMini64.exe")
+
+; IDE、编辑器、笔记软件相关
 e::ActivateOrRun("ahk_class YXMainFrame", A_Programs . "\印象笔记\印象笔记.lnk")
 o::ActivateOrRun("OneNote for Windows 10", "shortcuts\OneNote for Windows 10.lnk")
 j::ActivateOrRun("ahk_exe idea64.exe", A_Programs . "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk") 
@@ -264,8 +292,11 @@ h::ActivateOrRun("- Microsoft Visual Studio", A_ProgramsCommon . "\Visual Studio
 u::ActivateOrRun("ahk_exe datagrip64.exe", A_Programs . "\JetBrains Toolbox\DataGrip.lnk") 
 s::ActivateOrRun("ahk_exe Code.exe", A_Programs . "\Visual Studio Code\Visual Studio Code.lnk")
 i::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe") 
+
+; 多按一个 shift 键,  于是按键数就多了一倍
 +w::ActivateOrRun("ahk_exe WINWORD.EXE", A_ProgramsCommon . "\Word.lnk")
 +p::ActivateOrRun("ahk_exe POWERPNT.EXE", A_ProgramsCommon . "\PowerPoint.lnk")
+
 
 #if HotsringMode
 #Hotstring *  B0 X

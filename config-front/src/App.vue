@@ -1,6 +1,6 @@
 <template>
-  <v-app id="inspire">
-    <v-navigation-drawer permanent app   id="drawer">
+  <v-app id="inspire" v-hotkey="keymap">
+    <v-navigation-drawer permanent app id="drawer">
       <v-list-item>
         <v-list-item-avatar rounded="0" class="logo">
           <v-img alt="img" :src="require('./assets/logo.png')"></v-img>
@@ -23,7 +23,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
-        <v-btn width="100%" elevation="2" color="primary" @click="$store.dispatch('saveConfig')">
+        <v-btn width="100%" elevation="2" color="primary" @click="saveConfig">
           <v-icon left> mdi-content-save </v-icon> 保存配置</v-btn
         >
       </v-list>
@@ -32,6 +32,13 @@
     <v-main id="main">
       <router-view v-if="config" />
     </v-main>
+
+    <v-snackbar v-model="snackbar" color="green">
+      {{ snackbarText }}
+      <template v-slot:action="{ attrs }">
+        <v-btn color="black" text v-bind="attrs" @click="snackbar = false"> Close </v-btn>
+      </template>
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -42,6 +49,8 @@ export default {
 
   data: () => ({
     drawer: true,
+    snackbar: false,
+    snackbarText: `保存成功`,
     items: [
       { title: 'Capslock', icon: 'mdi-view-dashboard', to: 'Capslock', color: 'green' },
       { title: 'Capslock + F', icon: 'mdi-view-dashboard', to: 'CapslockF', color: 'green' },
@@ -52,6 +61,25 @@ export default {
       { title: '关于作者', icon: 'mdi-exclamation-thick', to: 'About', color: 'purple' },
     ],
   }),
+  methods: {
+    saveConfig() {
+      this.$store.dispatch('saveConfig')
+      this.snackbar = true
+    },
+  },
+
+  computed: {
+    keymap() {
+      return {
+        // 'esc+ctrl' is OK.
+        'ctrl+s': this.saveConfig,
+        // enter: {
+        //   keydown: this.hide,
+        //   keyup: this.show,
+        // },
+      }
+    },
+  },
 }
 </script>
 
@@ -65,6 +93,6 @@ export default {
 }
 #main {
   background: #f2f3f6;
-  background: #FAFAFA;
+  background: #fafafa;
 }
 </style>
