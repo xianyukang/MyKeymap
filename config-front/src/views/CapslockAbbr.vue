@@ -12,8 +12,8 @@
       <v-col><v-text-field label="激活" v-model="item.value"></v-text-field></v-col>
       <v-col><v-text-field label="或运行" v-model="item.value"></v-text-field></v-col>
     </v-row> -->
-    <Abbr @clickKey="keyChanged" :currentKey="currentKey" :currentConfig="currentConfig"/>
-    <Action :currentKey="currentKey" :currentConfig="currentConfig"/>
+    <Abbr @clickKey="keyChanged" :currentKey="currentKey" />
+    <Action :currentKey="currentKey" />
   </v-container>
 </template>
 
@@ -34,7 +34,6 @@ export default {
   data() {
     return {
       currentKey: this.firstMappedKey(this.config),
-      currentConfig: 'capslockabbr',
     }
   },
   components: { Action, Abbr },

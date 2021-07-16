@@ -13,7 +13,7 @@
       <v-col><v-text-field label="或运行" v-model="item.value"></v-text-field></v-col>
     </v-row> -->
     <keyboard @clickKey="keyChanged" :currentKey="currentKey" />
-    <action :currentKey="currentKey" :currentConfig="currentConfig"/>
+    <action :currentKey="currentKey"/>
   </v-container>
 </template>
 
@@ -34,7 +34,6 @@ export default {
   data() {
     return {
       currentKey: this.firstMappedKey(this.config),
-      currentConfig: 'capslockf',
       keys: 'abcdefghijklmnopqrstuvwxyz,./',
       items: ['启动程序或激活窗口', '按键重映射为', '鼠标操作', '窗口操作', '执行 ahk 函数'],
     }

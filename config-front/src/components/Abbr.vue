@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row justify="start" >
-      <v-col cols="auto" v-for="(value, key) in config.capslockabbr" :key="key">
+      <v-col cols="auto" v-for="(value, key) in currConfig()" :key="key">
         <v-hover v-slot="{ hover }">
           <v-card
             @click="clickKey(key)"

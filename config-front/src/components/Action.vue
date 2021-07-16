@@ -97,9 +97,9 @@
 <script>
 import { escapeFuncString } from '../util'
 export default {
+  created () {},
   props: {
     currentKey: { type: String },
-    currentConfig: { type: String },
   },
   data() {
     return {

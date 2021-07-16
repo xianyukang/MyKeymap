@@ -33,7 +33,7 @@ export default {
     keyColor(keyObj, hover) {
       // if (hover) return { color: '#f3448f', dark: true }
       if (keyObj.key === this.currentKey) return { color: 'blue', dark: true }
-      const action=this.currConfig()[keyObj.key]
+      const action = this.currConfig()[keyObj.key]
       if (action.type != '什么也不做' && action.value) return { color: '#98FB98', dark: false }
       return {}
     },

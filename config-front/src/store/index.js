@@ -8,7 +8,6 @@ Vue.use(Vuex)
 const s = new Vuex.Store({
   state: {
     config: null,
-    currentConfig: 'capslockabbr',
   },
   mutations: {
     SET_CONFIG(state, value) {

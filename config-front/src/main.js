@@ -8,10 +8,10 @@ Vue.config.productionTip = false
 Vue.mixin({
   methods: {
     currKey() {
-      return this.config[this.$store.state.currentConfig][this.currentKey]
+      return this.currConfig()[this.currentKey]
     },
     currConfig() {
-      return this.config[this.$store.state.currentConfig]
+      return this.config[this.$route.name]
     },
   },
   computed: {

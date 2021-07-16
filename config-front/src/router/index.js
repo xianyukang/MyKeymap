@@ -20,17 +20,23 @@ const routes = [
   {
     path: '/capslock',
     name: 'Capslock',
-    component: Capslock
+    component: Capslock,
+    props: route => ({
+    })
   },
   {
-    path: '/capslock-f',
+    path: '/capslockf',
     name: 'CapslockF',
-    component: CapslockF
+    component: CapslockF,
+    props: route => ({
+    })
   },
   {
-    path: '/capslock-abbr',
+    path: '/capslockabbr',
     name: 'CapslockAbbr',
-    component: CapslockAbbr
+    component: CapslockAbbr,
+    props: route => ({
+    })
   },
   {
     path: '/about',

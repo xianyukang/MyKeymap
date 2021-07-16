@@ -10,7 +10,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in config.capslock" :key="item.name">
+          <tr v-for="item in currConfig()" :key="item.name">
             <td
               ><v-chip dark color="green" label
                 ><span class="key">{{ item.key }}</span></v-chip

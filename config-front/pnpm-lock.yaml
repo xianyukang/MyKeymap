@@ -6,6 +6,7 @@ specifiers:
   '@vue/cli-plugin-router': ~4.5.0
   '@vue/cli-plugin-vuex': ~4.5.0
   '@vue/cli-service': ~4.5.0
+  axios: ^0.21.1
   babel-eslint: ^10.1.0
   core-js: ^3.6.5
   eslint: ^6.7.2
@@ -21,6 +22,7 @@ specifiers:
   vuex: ^3.4.0
 
 dependencies:
+  axios: 0.21.1
   core-js: 3.10.0
   vue: 2.6.12
   vue-router: 3.5.1
@@ -121,6 +123,8 @@ packages:
       '@babel/helper-optimise-call-expression': 7.12.13
       '@babel/helper-replace-supers': 7.13.12
       '@babel/helper-split-export-declaration': 7.12.13
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@babel/helper-create-regexp-features-plugin/7.12.17_@babel+core@7.13.14:
@@ -176,6 +180,8 @@ packages:
     dependencies:
       '@babel/traverse': 7.13.13
       '@babel/types': 7.13.14
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@babel/helper-member-expression-to-functions/7.13.12:
@@ -201,6 +207,8 @@ packages:
       '@babel/template': 7.12.13
       '@babel/traverse': 7.13.13
       '@babel/types': 7.13.14
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@babel/helper-optimise-call-expression/7.12.13:
@@ -228,6 +236,8 @@ packages:
       '@babel/helper-optimise-call-expression': 7.12.13
       '@babel/traverse': 7.13.13
       '@babel/types': 7.13.14
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@babel/helper-simple-access/7.13.12:
@@ -271,6 +281,8 @@ packages:
       '@babel/template': 7.12.13
       '@babel/traverse': 7.13.13
       '@babel/types': 7.13.14
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@babel/highlight/7.13.10:
@@ -317,6 +329,8 @@ packages:
       '@babel/core': 7.13.14
       '@babel/helper-create-class-features-plugin': 7.13.11_@babel+core@7.13.14
       '@babel/helper-plugin-utils': 7.13.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@babel/plugin-proposal-decorators/7.13.5_@babel+core@7.13.14:
@@ -328,6 +342,8 @@ packages:
       '@babel/helper-create-class-features-plugin': 7.13.11_@babel+core@7.13.14
       '@babel/helper-plugin-utils': 7.13.0
       '@babel/plugin-syntax-decorators': 7.12.13_@babel+core@7.13.14
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@babel/plugin-proposal-dynamic-import/7.13.8_@babel+core@7.13.14:
@@ -432,6 +448,8 @@ packages:
       '@babel/core': 7.13.14
       '@babel/helper-create-class-features-plugin': 7.13.11_@babel+core@7.13.14
       '@babel/helper-plugin-utils': 7.13.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@babel/plugin-proposal-unicode-property-regex/7.12.13_@babel+core@7.13.14:
@@ -622,6 +640,8 @@ packages:
       '@babel/helper-replace-supers': 7.13.12
       '@babel/helper-split-export-declaration': 7.12.13
       globals: 11.12.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@babel/plugin-transform-computed-properties/7.13.0_@babel+core@7.13.14:
@@ -717,6 +737,8 @@ packages:
       '@babel/helper-module-transforms': 7.13.14
       '@babel/helper-plugin-utils': 7.13.0
       babel-plugin-dynamic-import-node: 2.3.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@babel/plugin-transform-modules-commonjs/7.13.8_@babel+core@7.13.14:
@@ -729,6 +751,8 @@ packages:
       '@babel/helper-plugin-utils': 7.13.0
       '@babel/helper-simple-access': 7.13.12
       babel-plugin-dynamic-import-node: 2.3.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@babel/plugin-transform-modules-systemjs/7.13.8_@babel+core@7.13.14:
@@ -742,6 +766,8 @@ packages:
       '@babel/helper-plugin-utils': 7.13.0
       '@babel/helper-validator-identifier': 7.12.11
       babel-plugin-dynamic-import-node: 2.3.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@babel/plugin-transform-modules-umd/7.13.0_@babel+core@7.13.14:
@@ -752,6 +778,8 @@ packages:
       '@babel/core': 7.13.14
       '@babel/helper-module-transforms': 7.13.14
       '@babel/helper-plugin-utils': 7.13.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@babel/plugin-transform-named-capturing-groups-regex/7.12.13_@babel+core@7.13.14:
@@ -780,6 +808,8 @@ packages:
       '@babel/core': 7.13.14
       '@babel/helper-plugin-utils': 7.13.0
       '@babel/helper-replace-supers': 7.13.12
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@babel/plugin-transform-parameters/7.13.0_@babel+core@7.13.14:
@@ -2005,6 +2035,12 @@ packages:
   /aws4/1.11.0:
     resolution: {integrity: sha1-1h9G2DslGSUOJ4Ta9bCUeai0HFk=, tarball: aws4/download/aws4-1.11.0.tgz}
     dev: true
+
+  /axios/0.21.1:
+    resolution: {integrity: sha1-IlY0gZYvTWvemnbVFu8OXTwJsrg=, tarball: axios/download/axios-0.21.1.tgz}
+    dependencies:
+      follow-redirects: registry.nlark.com/follow-redirects/1.14.1
+    dev: false
 
   /babel-eslint/10.1.0_eslint@6.8.0:
     resolution: {integrity: sha1-aWjlaKkQt4+zd5zdi2rC9HmUMjI=, tarball: babel-eslint/download/babel-eslint-10.1.0.tgz}
@@ -5222,6 +5258,16 @@ packages:
       emojis-list: 3.0.0
       json5: 1.0.1
     dev: true
+
+  /loader-utils/2.0.0:
+    resolution: {integrity: sha1-5MrOW4FtQloWa18JfhDNErNgZLA=, tarball: loader-utils/download/loader-utils-2.0.0.tgz}
+    engines: {node: '>=8.9.0'}
+    dependencies:
+      big.js: registry.nlark.com/big.js/5.2.2
+      emojis-list: 3.0.0
+      json5: 2.2.0
+    dev: true
+    optional: true
 
   /locate-path/3.0.0:
     resolution: {integrity: sha1-2+w7OrdZdYBxtY/ln8QYca8hQA4=, tarball: locate-path/download/locate-path-3.0.0.tgz}
@@ -8540,12 +8586,12 @@ packages:
     dev: true
 
   registry.nlark.com/ansi-styles/4.3.0:
-    resolution: {integrity: sha1-7dgDYornHATIWuegkG7a00tkiTc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/ansi-styles/download/ansi-styles-4.3.0.tgz}
+    resolution: {integrity: sha1-7dgDYornHATIWuegkG7a00tkiTc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/ansi-styles/download/ansi-styles-4.3.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fansi-styles%2Fdownload%2Fansi-styles-4.3.0.tgz}
     name: ansi-styles
     version: 4.3.0
     engines: {node: '>=8'}
     dependencies:
-      color-convert: registry.nlark.com/color-convert/2.0.1
+      color-convert: 2.0.1
     dev: true
     optional: true
 
@@ -8603,7 +8649,7 @@ packages:
     dev: true
 
   registry.nlark.com/chalk/4.1.1:
-    resolution: {integrity: sha1-yAs/qyi/Y3HmhjMl7uZ+YYt35q0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/chalk/download/chalk-4.1.1.tgz?cache=0&sync_timestamp=1622697197415&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fchalk%2Fdownload%2Fchalk-4.1.1.tgz}
+    resolution: {integrity: sha1-yAs/qyi/Y3HmhjMl7uZ+YYt35q0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/chalk/download/chalk-4.1.1.tgz?cache=0&sync_timestamp=1618995518928&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fchalk%2Fdownload%2Fchalk-4.1.1.tgz}
     name: chalk
     version: 4.1.1
     engines: {node: '>=10'}
@@ -8629,23 +8675,6 @@ packages:
     optionalDependencies:
       fsevents: registry.nlark.com/fsevents/2.3.2
     dev: true
-
-  registry.nlark.com/color-convert/2.0.1:
-    resolution: {integrity: sha1-ctOmjVmMm9s68q0ehPIdiWq9TeM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/color-convert/download/color-convert-2.0.1.tgz}
-    name: color-convert
-    version: 2.0.1
-    engines: {node: '>=7.0.0'}
-    dependencies:
-      color-name: registry.nlark.com/color-name/1.1.4
-    dev: true
-    optional: true
-
-  registry.nlark.com/color-name/1.1.4:
-    resolution: {integrity: sha1-wqCah6y95pVD3m9j+jmVyCbFNqI=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/color-name/download/color-name-1.1.4.tgz}
-    name: color-name
-    version: 1.1.4
-    dev: true
-    optional: true
 
   registry.nlark.com/decache/4.6.0:
     resolution: {integrity: sha1-hwJrxuaWdZ6C1Xo4QcTiUaMDVug=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/decache/download/decache-4.6.0.tgz}
@@ -8695,6 +8724,13 @@ packages:
       to-regex-range: registry.nlark.com/to-regex-range/5.0.1
     dev: true
 
+  registry.nlark.com/follow-redirects/1.14.1:
+    resolution: {integrity: sha1-2RFN7Qoc/dM04WTmZirQK/2R/0M=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/follow-redirects/download/follow-redirects-1.14.1.tgz}
+    name: follow-redirects
+    version: 1.14.1
+    engines: {node: '>=4.0'}
+    dev: false
+
   registry.nlark.com/fs.realpath/1.0.0:
     resolution: {integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/fs.realpath/download/fs.realpath-1.0.0.tgz}
     name: fs.realpath
@@ -8737,14 +8773,6 @@ packages:
       path-is-absolute: registry.nlark.com/path-is-absolute/1.0.1
     dev: true
 
-  registry.nlark.com/has-flag/4.0.0:
-    resolution: {integrity: sha1-lEdx/ZyByBJlxNaUGGDaBrtZR5s=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/has-flag/download/has-flag-4.0.0.tgz}
-    name: has-flag
-    version: 4.0.0
-    engines: {node: '>=8'}
-    dev: true
-    optional: true
-
   registry.nlark.com/has/1.0.3:
     resolution: {integrity: sha1-ci18v8H2qoJB8W3YFOAR4fQeh5Y=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/has/download/has-1.0.3.tgz}
     name: has
@@ -8753,13 +8781,6 @@ packages:
     dependencies:
       function-bind: registry.nlark.com/function-bind/1.1.1
     dev: true
-
-  registry.nlark.com/hash-sum/2.0.0:
-    resolution: {integrity: sha1-gdAbtd6OpKIUrV1urRtSNGCwtFo=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/hash-sum/download/hash-sum-2.0.0.tgz}
-    name: hash-sum
-    version: 2.0.0
-    dev: true
-    optional: true
 
   registry.nlark.com/inflight/1.0.6:
     resolution: {integrity: sha1-Sb1jMdfQLQwJvJEKEHW6gWW1bfk=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/inflight/download/inflight-1.0.6.tgz}
@@ -8992,6 +9013,13 @@ packages:
       node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0
       sass: ^1.3.0
       webpack: ^4.36.0 || ^5.0.0
+    peerDependenciesMeta:
+      fibers:
+        optional: true
+      node-sass:
+        optional: true
+      sass:
+        optional: true
     dependencies:
       klona: registry.nlark.com/klona/2.0.4
       loader-utils: registry.nlark.com/loader-utils/2.0.0
@@ -9061,7 +9089,7 @@ packages:
     version: 7.2.0
     engines: {node: '>=8'}
     dependencies:
-      has-flag: registry.nlark.com/has-flag/4.0.0
+      has-flag: 4.0.0
     dev: true
     optional: true
 
@@ -9111,8 +9139,8 @@ packages:
     version: 16.3.0
     dependencies:
       chalk: registry.nlark.com/chalk/4.1.1
-      hash-sum: registry.nlark.com/hash-sum/2.0.0
-      loader-utils: registry.nlark.com/loader-utils/2.0.0
+      hash-sum: 2.0.0
+      loader-utils: 2.0.0
     dev: true
     optional: true
 

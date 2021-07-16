@@ -1,5 +1,5 @@
 {
-    "capslock": [
+    "Capslock": [
         {
             "key": "a",
             "type": "启动程序或激活窗口",
@@ -146,7 +146,7 @@
             "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
         }
     ],
-    "capslockf": {
+    "CapslockF": {
         "Q": {
             "type": "窗口操作",
             "value": "移动鼠标到窗口中心",
@@ -272,7 +272,7 @@
             "value": "移动鼠标到窗口中心"
         }
     },
-    "capslockabbr": {
+    "CapslockAbbr": {
         "sd": {
             "type": "鼠标操作",
             "value": "鼠标左移"
