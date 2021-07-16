@@ -221,8 +221,8 @@ f::
 *o::MouseClick, WheelDown, , , 1
 ; h::MouseClick, WheelLeft, , , 1
 ; `;::MouseClick, WheelRight, , , 1
-h::horizontalScroll("h", -1, 2)
-`;::horizontalScroll(";", 1, 2)
+h::horizontalScroll("h", -1)
+`;::horizontalScroll(";", 1)
 
 j::fastMoveMouse("j", -1, 0)
 k::fastMoveMouse("k", 0, 1)

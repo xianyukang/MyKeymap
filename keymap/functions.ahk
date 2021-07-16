@@ -830,7 +830,7 @@ myWinMinimize() {
 }
 
 
-horizontalScroll(key, direction, step) {
+horizontalScroll(key, direction) {
     global time_enter_repeat, delay_before_repeat
     if (direction > 0) {
         MouseClick, WheelRight, , , 1
