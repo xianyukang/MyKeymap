@@ -32,6 +32,20 @@ const routes = [
     })
   },
   {
+    path: '/Mode3',
+    name: 'Mode3',
+    component: CapslockF,
+    props: route => ({
+    })
+  },
+  {
+    path: '/Mode9',
+    name: 'Mode9',
+    component: CapslockF,
+    props: route => ({
+    })
+  },
+  {
     path: '/capslockabbr',
     name: 'CapslockAbbr',
     component: CapslockAbbr,

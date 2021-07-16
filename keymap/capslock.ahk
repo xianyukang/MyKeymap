@@ -187,10 +187,10 @@ o::send {space 4}
 #if CapslockMode
 ; ------ 窗口管理 ------
 e::send ^!{tab}
-q::send !{tab}
+w::send !{tab}
 x::SmartCloseWindow()
 r::SwitchWindows()
-w::WinMaximize, A
+q::WinMaximize, A
 b::myWinMinimize()
 s::center_window_to_current_monitor(1200, 800)
 a::center_window_to_current_monitor(1370, 930)
