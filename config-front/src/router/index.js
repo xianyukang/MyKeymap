@@ -18,14 +18,14 @@ const routes = [
     component: Home,
   },
   {
-    path: '/capslock',
+    path: '/Capslock',
     name: 'Capslock',
-    component: Capslock,
+    component: CapslockF,
     props: route => ({
     })
   },
   {
-    path: '/capslockf',
+    path: '/CapslockF',
     name: 'CapslockF',
     component: CapslockF,
     props: route => ({
@@ -46,7 +46,7 @@ const routes = [
     })
   },
   {
-    path: '/capslockabbr',
+    path: '/CapslockAbbr',
     name: 'CapslockAbbr',
     component: CapslockAbbr,
     props: route => ({

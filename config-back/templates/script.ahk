@@ -185,6 +185,13 @@ o::send {space 4}
 *p::send  {blind}{f7}
 
 #if CapslockMode
+
+{% for key,value in Capslock.items()|sort(attribute="1.value") %}
+    {% if value.value %}
+{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
+    {% endif %}
+{% endfor %}
+
 ; ------ 窗口管理 ------
 e::send ^!{tab}
 w::send !{tab}
@@ -230,6 +237,13 @@ m::rightClick()
 ,::middleDown()
 
 #if SLOWMODE
+
+{% for key,value in Capslock.items()|sort(attribute="1.value") %}
+    {% if value.value and value.type == "鼠标操作" %}
+{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value | replace("fast", "slow") }}}
+    {% endif %}
+{% endfor %}
+
 *u::send {blind}{wheelup}
 *o::send {blind}{wheeldown}
 h::horizontalScroll("h", -1)
@@ -256,7 +270,7 @@ f::return
 
 
 
-{% for key,value in CapslockF.items() %}
+{% for key,value in CapslockF.items()|sort(attribute="1.value") %}
     {% if value.value %}
 {{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
     {% endif %}

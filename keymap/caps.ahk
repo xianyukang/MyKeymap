@@ -185,6 +185,20 @@ o::send {space 4}
 *p::send  {blind}{f7}
 
 #if CapslockMode
+
+/::centerMouse()
+I::fastMoveMouse("I", 0, -1)
+J::fastMoveMouse("J", -1, 0)
+K::fastMoveMouse("K", 0, 1)
+L::fastMoveMouse("L", 1, 0)
+`;::horizontalScroll(";", 1)
+H::horizontalScroll("H", -1)
+,::lbuttonDown()
+*N::leftClick()
+*O::MouseClick, WheelDown, , , 1
+*U::MouseClick, WheelUp, , , 1
+M::rightClick()
+
 ; ------ 窗口管理 ------
 e::send ^!{tab}
 w::send !{tab}
@@ -230,6 +244,20 @@ m::rightClick()
 ,::middleDown()
 
 #if SLOWMODE
+
+/::centerMouse()
+I::slowMoveMouse("I", 0, -1)
+J::slowMoveMouse("J", -1, 0)
+K::slowMoveMouse("K", 0, 1)
+L::slowMoveMouse("L", 1, 0)
+`;::horizontalScroll(";", 1)
+H::horizontalScroll("H", -1)
+,::lbuttonDown()
+*N::leftClick()
+*O::MouseClick, WheelDown, , , 1
+*U::MouseClick, WheelUp, , , 1
+M::rightClick()
+
 *u::send {blind}{wheelup}
 *o::send {blind}{wheeldown}
 h::horizontalScroll("h", -1)
@@ -256,18 +284,18 @@ f::return
 
 
 
-*U::MouseClick, WheelUp, , , 1
+/::centerMouse()
 I::fastMoveMouse("I", 0, -1)
-*O::MouseClick, WheelDown, , , 1
-H::horizontalScroll("H", -1)
 J::fastMoveMouse("J", -1, 0)
 K::fastMoveMouse("K", 0, 1)
 L::fastMoveMouse("L", 1, 0)
 `;::horizontalScroll(";", 1)
-*N::leftClick()
-M::rightClick()
+H::horizontalScroll("H", -1)
 ,::lbuttonDown()
-/::centerMouse()
+*N::leftClick()
+*O::MouseClick, WheelDown, , , 1
+*U::MouseClick, WheelUp, , , 1
+*M::rightClick()
 
 ; 常用软件
 z::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\")

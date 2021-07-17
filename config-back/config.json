@@ -1,151 +1,144 @@
 {
-    "Capslock": [
-        {
-            "key": "a",
-            "type": "启动程序或激活窗口",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+    "Capslock": {
+        "Q": {
+            "type": "什么也不做",
+            "value": ""
         },
-        {
-            "key": "b",
-            "type": "按键重映射为",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "W": {
+            "type": "什么也不做",
+            "value": "",
+            "prefix": "*"
         },
-        {
-            "key": "c",
+        "E": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "R": {
+            "type": "什么也不做",
+            "value": "",
+            "toActivate": "ahk_exe FoxitReader.exe",
+            "toRun": "D:\\install\\Foxit Reader\\FoxitReader.exe"
+        },
+        "T": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "Y": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "U": {
             "type": "鼠标操作",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+            "value": "MouseClick, WheelUp, , , 1",
+            "label": "滚轮上滑",
+            "prefix": "*"
         },
-        {
-            "key": "d",
-            "type": "窗口操作",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "I": {
+            "type": "鼠标操作",
+            "value": "fastMoveMouse(\"I\", 0, -1)",
+            "label": "鼠标上移"
         },
-        {
-            "key": "e",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "O": {
+            "type": "鼠标操作",
+            "value": "MouseClick, WheelDown, , , 1",
+            "label": "滚轮下滑",
+            "prefix": "*"
         },
-        {
-            "key": "f",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "P": {
+            "type": "什么也不做",
+            "value": ""
         },
-        {
-            "key": "g",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "A": {
+            "type": "什么也不做",
+            "value": ""
         },
-        {
-            "key": "h",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "S": {
+            "type": "什么也不做",
+            "value": ""
         },
-        {
-            "key": "i",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "D": {
+            "type": "什么也不做",
+            "value": ""
         },
-        {
-            "key": "j",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "F": {
+            "type": "什么也不做",
+            "value": ""
         },
-        {
-            "key": "k",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "G": {
+            "type": "什么也不做",
+            "value": ""
         },
-        {
-            "key": "l",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "H": {
+            "type": "鼠标操作",
+            "value": "horizontalScroll(\"H\", -1)",
+            "label": "滚轮左滑"
         },
-        {
-            "key": "m",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "J": {
+            "type": "鼠标操作",
+            "value": "fastMoveMouse(\"J\", -1, 0)",
+            "label": "鼠标左移"
         },
-        {
-            "key": "n",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "K": {
+            "type": "鼠标操作",
+            "value": "fastMoveMouse(\"K\", 0, 1)",
+            "label": "鼠标下移"
         },
-        {
-            "key": "o",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "L": {
+            "type": "鼠标操作",
+            "value": "fastMoveMouse(\"L\", 1, 0)",
+            "label": "鼠标右移"
         },
-        {
-            "key": "p",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        ";": {
+            "type": "鼠标操作",
+            "value": "horizontalScroll(\";\", 1)",
+            "label": "滚轮右滑"
         },
-        {
-            "key": "q",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "Z": {
+            "type": "什么也不做",
+            "value": ""
         },
-        {
-            "key": "r",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "X": {
+            "type": "什么也不做",
+            "value": ""
         },
-        {
-            "key": "s",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "C": {
+            "type": "什么也不做",
+            "value": ""
         },
-        {
-            "key": "t",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "V": {
+            "type": "什么也不做",
+            "value": ""
         },
-        {
-            "key": "u",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "B": {
+            "type": "什么也不做",
+            "value": ""
         },
-        {
-            "key": "v",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "N": {
+            "type": "鼠标操作",
+            "value": "leftClick()",
+            "label": "鼠标左键",
+            "prefix": "*"
         },
-        {
-            "key": "w",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "M": {
+            "type": "鼠标操作",
+            "value": "rightClick()",
+            "label": "鼠标右键"
         },
-        {
-            "key": "x",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        ",": {
+            "type": "鼠标操作",
+            "value": "lbuttonDown()",
+            "label": "鼠标左键按下"
         },
-        {
-            "key": "y",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        ".": {
+            "type": "什么也不做",
+            "value": ""
         },
-        {
-            "key": "z",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
-        },
-        {
-            "key": ",",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
-        },
-        {
-            "key": ".",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
-        },
-        {
-            "key": "/",
-            "type": "执行 ahk 函数",
-            "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\")"
+        "/": {
+            "type": "鼠标操作",
+            "value": "centerMouse()",
+            "label": "移动鼠标到窗口中心"
         }
-    ],
+    },
     "CapslockF": {
         "Q": {
             "type": "启动程序或激活窗口",
@@ -271,7 +264,8 @@
         "M": {
             "type": "鼠标操作",
             "value": "rightClick()",
-            "label": "鼠标右键"
+            "label": "鼠标右键",
+            "prefix": "*"
         },
         ",": {
             "type": "鼠标操作",

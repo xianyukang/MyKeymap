@@ -102,7 +102,6 @@ export default {
   },
   data() {
     return {
-      actionTypes: ['启动程序或激活窗口', '按键重映射为', '鼠标操作', '窗口操作', '执行 ahk 函数', '什么也不做'],
       mouseActions: [
         { label: '鼠标上移', value: '鼠标上移' },
         { label: '鼠标下移', value: '鼠标下移' },
@@ -148,6 +147,12 @@ export default {
     // note 当选项发生改变时,  是否要清空掉 value ?
     clearValue() {
       this.currKey().value = ''
+      for (const key of Object.keys(this.currKey())) {
+        if (!['type', 'value'].includes(key)) {
+          delete this.currKey()[key]
+        }
+      }
+      console.log(Object.entries(this.currKey()))
     },
     mouseActionChanged(newValue) {
       console.log('mouseActionChanged')
@@ -176,7 +181,14 @@ export default {
       this.currKey().value = map[newValue] || ''
     },
   },
-  computed: {},
+  computed: {
+    actionTypes() {
+      if (this.$route.name === 'Capslock')
+        return ['启动程序或激活窗口', '按键重映射为', '鼠标操作', '窗口操作', '执行 ahk 函数', '什么也不做']
+      else
+        return ['启动程序或激活窗口', '按键重映射为', '窗口操作', '执行 ahk 函数', '什么也不做']
+    }
+  },
 }
 </script>
 
