@@ -258,7 +258,7 @@ f::return
 
 {% for key,value in CapslockF.items() %}
     {% if value.value %}
-{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
+{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
     {% endif %}
 {% endfor %}
 

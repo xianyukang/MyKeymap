@@ -619,7 +619,7 @@ centerMouse()
     mousemove % x + width/2, y + height/2, 0
 }
 
-middleDown() 
+lbuttonDown() 
 {
     send {Lbutton down}
 }

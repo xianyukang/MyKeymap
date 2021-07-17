@@ -219,20 +219,29 @@ f::
 /::centerMouse()
 *u::MouseClick, WheelUp, , , 1
 *o::MouseClick, WheelDown, , , 1
-h::horizontalScroll("h", -1)
-`;::horizontalScroll(";", 1)
 
-j::fastMoveMouse("j", -1, 0)
-k::fastMoveMouse("k", 0, 1)
-l::fastMoveMouse("l", 1, 0)
-i::fastMoveMouse("i", 0, -1)
+; h::horizontalScroll("h", -1)
+; `;::horizontalScroll(";", 1)
+
+; j::fastMoveMouse("j", -1, 0)
+; k::fastMoveMouse("k", 0, 1)
+; l::fastMoveMouse("l", 1, 0)
+; i::fastMoveMouse("i", 0, -1)
+
+
+I::fastMoveMouse("I", 0, -1)
+H::horizontalScroll("H", -1)
+J::fastMoveMouse("J", -1, 0)
+K::fastMoveMouse("K", 0, 1)
+L::fastMoveMouse("L", 1, 0)
+`;::horizontalScroll(";", 1)
 
 y::send  {LControl down}{LWin down}{Left}{LWin up}{LControl up}
 p::send {LControl down}{LWin down}{Right}{LWin up}{LControl up}
 
 *n::leftClick()
 m::rightClick()
-,::middleDown()
+,::lbuttonDown()
 
 #if SLOWMODE
 *u::send {blind}{wheelup}
@@ -241,7 +250,7 @@ h::horizontalScroll("h", -1)
 `;::horizontalScroll(";", 1)
 *n::leftClick()
 m::rightClick()
-,::middleDown()
+,::lbuttonDown()
 
 esc::exitMouseMode()
 space::exitMouseMode()

@@ -155,15 +155,16 @@
         },
         "W": {
             "type": "什么也不做",
-            "value": ""
+            "value": "",
+            "prefix": "*"
         },
         "E": {
             "type": "什么也不做",
             "value": ""
         },
         "R": {
-            "type": "启动程序或激活窗口",
-            "value": "ActivateOrRun(\"ahk_exe FoxitReader.exe\", \"D:\\install\\Foxit Reader\\FoxitReader.exe\")",
+            "type": "什么也不做",
+            "value": "",
             "toActivate": "ahk_exe FoxitReader.exe",
             "toRun": "D:\\install\\Foxit Reader\\FoxitReader.exe"
         },
@@ -177,15 +178,20 @@
         },
         "U": {
             "type": "鼠标操作",
-            "value": "滚轮上滑"
+            "value": "MouseClick, WheelUp, , , 1",
+            "label": "滚轮上滑",
+            "prefix": "*"
         },
         "I": {
             "type": "鼠标操作",
-            "value": "鼠标上移"
+            "value": "fastMoveMouse(\"I\", 0, -1)",
+            "label": "鼠标上移"
         },
         "O": {
             "type": "鼠标操作",
-            "value": "滚轮下滑"
+            "value": "MouseClick, WheelDown, , , 1",
+            "label": "滚轮下滑",
+            "prefix": "*"
         },
         "P": {
             "type": "什么也不做",
@@ -208,36 +214,41 @@
             "value": ""
         },
         "G": {
-            "type": "鼠标操作",
-            "value": "鼠标左键"
+            "type": "什么也不做",
+            "value": ""
         },
         "H": {
             "type": "鼠标操作",
-            "value": "滚轮左滑"
+            "value": "horizontalScroll(\"H\", -1)",
+            "label": "滚轮左滑"
         },
         "J": {
             "type": "鼠标操作",
-            "value": "鼠标左移"
+            "value": "fastMoveMouse(\"J\", -1, 0)",
+            "label": "鼠标左移"
         },
         "K": {
             "type": "鼠标操作",
-            "value": "鼠标下移"
+            "value": "fastMoveMouse(\"K\", 0, 1)",
+            "label": "鼠标下移"
         },
         "L": {
             "type": "鼠标操作",
-            "value": "鼠标上移"
+            "value": "fastMoveMouse(\"L\", 1, 0)",
+            "label": "鼠标右移"
         },
         ";": {
             "type": "鼠标操作",
-            "value": "滚轮右滑"
+            "value": "horizontalScroll(\";\", 1)",
+            "label": "滚轮右滑"
         },
         "Z": {
             "type": "什么也不做",
             "value": ""
         },
         "X": {
-            "type": "窗口操作",
-            "value": "SmartCloseWindow()"
+            "type": "什么也不做",
+            "value": ""
         },
         "C": {
             "type": "什么也不做",
@@ -253,15 +264,19 @@
         },
         "N": {
             "type": "鼠标操作",
-            "value": "鼠标左键"
+            "value": "leftClick()",
+            "label": "鼠标左键",
+            "prefix": "*"
         },
         "M": {
             "type": "鼠标操作",
-            "value": "鼠标右键"
+            "value": "rightClick()",
+            "label": "鼠标右键"
         },
         ",": {
             "type": "鼠标操作",
-            "value": "鼠标左键按下"
+            "value": "lbuttonDown()",
+            "label": "鼠标左键按下"
         },
         ".": {
             "type": "什么也不做",
@@ -269,7 +284,8 @@
         },
         "/": {
             "type": "鼠标操作",
-            "value": "移动鼠标到窗口中心"
+            "value": "centerMouse()",
+            "label": "移动鼠标到窗口中心"
         }
     },
     "Mode3": {
@@ -652,8 +668,8 @@
     },
     "CapslockAbbr": {
         "sd": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+            "type": "窗口操作",
+            "value": "winmaximize, A"
         },
         "se": {
             "type": "鼠标操作",

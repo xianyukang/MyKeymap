@@ -256,21 +256,18 @@ f::return
 
 
 
-R::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe")
-U::滚轮上滑
-I::鼠标上移
-O::滚轮下滑
-G::鼠标左键
-H::滚轮左滑
-J::鼠标左移
-K::鼠标下移
-L::鼠标上移
-`;::滚轮右滑
-X::SmartCloseWindow()
-N::鼠标左键
-M::鼠标右键
-,::鼠标左键按下
-/::移动鼠标到窗口中心
+*U::MouseClick, WheelUp, , , 1
+I::fastMoveMouse("I", 0, -1)
+*O::MouseClick, WheelDown, , , 1
+H::horizontalScroll("H", -1)
+J::fastMoveMouse("J", -1, 0)
+K::fastMoveMouse("K", 0, 1)
+L::fastMoveMouse("L", 1, 0)
+`;::horizontalScroll(";", 1)
+*N::leftClick()
+M::rightClick()
+,::lbuttonDown()
+/::centerMouse()
 
 ; 常用软件
 z::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\")

@@ -12,14 +12,14 @@
         </template>
 
         <template v-if="currKey().type === '鼠标操作'">
-          <v-radio-group v-model="currKey().value">
+          <v-radio-group v-model="currKey().label" @change="mouseActionChanged">
             <v-row>
               <v-col>
                 <v-radio
                   v-for="action in mouseActions"
                   :key="action.label"
                   :label="`${action.label}`"
-                  :value="action.value"
+                  :value="action.label"
                 ></v-radio>
               </v-col>
               <v-col>
@@ -27,7 +27,7 @@
                   v-for="action in scrollActions"
                   :key="action.label"
                   :label="`${action.label}`"
-                  :value="action.value"
+                  :value="action.label"
                 ></v-radio>
               </v-col>
             </v-row>
@@ -42,7 +42,7 @@
                   v-for="action in clickActions"
                   :key="action.label"
                   :label="`${action.label}`"
-                  :value="action.value"
+                  :value="action.label"
                 ></v-radio>
               </v-col>
               <v-col> </v-col>
@@ -96,7 +96,7 @@
 <script>
 import { escapeFuncString } from '../util'
 export default {
-  created () {},
+  created() {},
   props: {
     currentKey: { type: String },
   },
@@ -148,6 +148,32 @@ export default {
     // note 当选项发生改变时,  是否要清空掉 value ?
     clearValue() {
       this.currKey().value = ''
+    },
+    mouseActionChanged(newValue) {
+      console.log('mouseActionChanged')
+      let map = {}
+      map['鼠标上移'] = ``
+      let key = this.currentKey
+
+      map['滚轮上滑'] = `MouseClick, WheelUp, , , 1`
+      map['滚轮下滑'] = `MouseClick, WheelDown, , , 1`
+      map['滚轮左滑'] = `horizontalScroll("${key}", -1)`
+      map['滚轮右滑'] = `horizontalScroll("${key}", 1)`
+
+      map['鼠标上移'] = `fastMoveMouse("${key}", 0, -1)`
+      map['鼠标下移'] = `fastMoveMouse("${key}", 0, 1)`
+      map['鼠标左移'] = `fastMoveMouse("${key}", -1, 0)`
+      map['鼠标右移'] = `fastMoveMouse("${key}", 1, 0)`
+
+      map['鼠标左键'] = `leftClick()`
+      map['鼠标右键'] = `rightClick()`
+      map['鼠标左键按下'] = `lbuttonDown()`
+      map['移动鼠标到窗口中心'] = `centerMouse()`
+
+      if (newValue === '滚轮上滑') this.currKey().prefix = '*'
+      if (newValue === '滚轮下滑') this.currKey().prefix = '*'
+      if (newValue === '鼠标左键') this.currKey().prefix = '*'
+      this.currKey().value = map[newValue] || ''
     },
   },
   computed: {},
