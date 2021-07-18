@@ -35,7 +35,7 @@
     <key>PathTrackerPreferCursorWindow</key>
     <false />
     <key>GestureParserDisableInFullScreenMode</key>
-    <true />
+    <false />
     <key>PauseResumeHotKey</key>
     <data>NgAAAAcAAAA=</data>
     <key>PathTrackerInitialStayTimeout</key>
