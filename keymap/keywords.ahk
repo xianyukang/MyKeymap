@@ -14,7 +14,6 @@ currentWindowId := A_ScriptHwnd
 ;ToolTip, ininted
 return
 
-$9::
 oldValue := A_DetectHiddenWindows
 DetectHiddenWindows, 1                      ; 先激活窗口, 否则标题栏会有闪烁: 失去焦点->获得焦点
 WinActivate, ahk_id %parentWindowHwnd%

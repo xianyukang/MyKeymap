@@ -13,8 +13,7 @@ try{
    ExitApp
    }
 catch{
-    msgbox 没有权限 ,  我无法运行`n`n           ╮(╯_╰)╭
-    ExitApp
+    msgbox 程序能以正常权限运行 ,  但程序会在高权限窗口中完全失效
     }
 }
 

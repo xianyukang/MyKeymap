@@ -289,7 +289,17 @@ u::ActivateOrRun("ahk_exe datagrip64.exe", A_Programs . "\JetBrains Toolbox\Data
 s::ActivateOrRun("ahk_exe Code.exe", A_Programs . "\Visual Studio Code\Visual Studio Code.lnk")
 i::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe") 
 
+
 ; 多按一个 shift 键,  于是按键数就多了一倍
+
++e::ActivateOrRun("ahk_class YXMainFrame", A_Programs . "\印象笔记\印象笔记.lnk")
++o::ActivateOrRun("OneNote for Windows 10", "shortcuts\OneNote for Windows 10.lnk")
++j::ActivateOrRun("ahk_exe idea64.exe", A_Programs . "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk") 
++h::ActivateOrRun("- Microsoft Visual Studio", A_ProgramsCommon . "\Visual Studio 2019.lnk") 
++u::ActivateOrRun("ahk_exe datagrip64.exe", A_Programs . "\JetBrains Toolbox\DataGrip.lnk") 
++s::ActivateOrRun("ahk_exe Code.exe", A_Programs . "\Visual Studio Code\Visual Studio Code.lnk")
++i::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe") 
++n::ActivateOrRun("网易云音乐", "shortcuts\网易云音乐.lnk") 
 +w::ActivateOrRun("ahk_exe WINWORD.EXE", A_ProgramsCommon . "\Word.lnk")
 +p::ActivateOrRun("ahk_exe POWERPNT.EXE", A_ProgramsCommon . "\PowerPoint.lnk")
 
@@ -311,6 +321,7 @@ i::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe")
 ::dh::send 、
 ::jt::send   ➤{space 1}
 ::gt::send 🐶
+::lx::send 💚
 ::sm::send 《》{left}
 ::rr::ReloadProgram()
 ::ex::quit(true)        ; 退出程序
