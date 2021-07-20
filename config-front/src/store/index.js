@@ -5,6 +5,11 @@ import axios from 'axios';
 
 Vue.use(Vuex)
 
+function processConfig(config) {
+  config['CapslockAbbrKeys'] = Object.keys(config.CapslockAbbr)
+  return config
+}
+
 const s = new Vuex.Store({
   state: {
     config: null,
@@ -18,7 +23,7 @@ const s = new Vuex.Store({
   actions: {
     saveConfig(store) {
       axios
-        .put('http://localhost:8000/config', store.state.config)
+        .put('http://localhost:8000/config', processConfig(store.state.config))
         .then(resp => console.log(resp.data))
     },
     fetchConfig(store) {

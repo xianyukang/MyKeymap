@@ -772,6 +772,111 @@
         "fuck": {
             "type": "什么也不做",
             "value": "鼠标左移"
+        },
+        "fi": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "fa": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "ff": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "fo": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "fp": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "sC": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "dd": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "dp": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "da": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "dr": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "fb": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "fk": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "fr": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "fg": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "fh": {
+            "type": "什么也不做",
+            "value": ""
         }
-    }
+    },
+    "CapslockAbbrKeys": [
+        "sd",
+        "se",
+        "ss",
+        "sf",
+        "sa",
+        "sq",
+        "sw",
+        "sr",
+        "st",
+        "sy",
+        "su",
+        "si",
+        "so",
+        "sp",
+        "sg",
+        "sh",
+        "sj",
+        "sk",
+        "sl",
+        "sz",
+        "sx",
+        "sc",
+        "sv",
+        "sb",
+        "sn",
+        "sm",
+        "shit",
+        "fuck",
+        "fi",
+        "fa",
+        "ff",
+        "fo",
+        "fp",
+        "sC",
+        "dd",
+        "dp",
+        "da",
+        "dr",
+        "fb",
+        "fk",
+        "fr",
+        "fg",
+        "fh"
+    ]
 }
