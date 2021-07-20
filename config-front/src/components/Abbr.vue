@@ -19,7 +19,7 @@
         </v-hover>
       </v-col>
       <v-col cols="auto">
-        <v-card height="76" width="300" elevation="5">
+        <v-card height="76" width="340" elevation="5">
           <v-card-title>
             <v-row>
               <v-col cols="12">
@@ -28,7 +28,7 @@
                   dense
                   v-model="abbr"
                   @keyup.enter="addAbbr"
-                  label="输入后按回车添加"
+                  label="输入后按回车添加, 输入del ab删除ab"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -40,8 +40,14 @@
 </template>
 
 <script>
+function anyKeyExcept(obj, toExclude) {
+  for (const [key, value] of Object.entries(obj)) {
+    if (key != toExclude) return key
+  }
+}
+
 export default {
-  emits: ['clickKey'],
+  emits: ['clickKey', 'delKey'],
   props: {
     currentKey: { type: String },
   },
@@ -57,14 +63,30 @@ export default {
       return {}
     },
     addAbbr() {
-      if (!this.abbr) return
+      if (!this.abbr || !this.abbr.trim()) return
 
-      if (!this.currConfig()[this.abbr]) {
-        console.log('添加', this.abbr)
-        this.currConfig()[this.abbr] = {
+      // 删除逻辑
+      if (this.abbr.length > 4 && this.abbr.startsWith('del ')) {
+        if (Object.keys(this.currConfig()).length > 1) {
+          let toDel = this.abbr.substring(4)
+          let toFocus = toDel === this.currentKey ? anyKeyExcept(this.currConfig(), this.currentKey) : this.currentKey
+          this.$emit('delKey', toDel, toFocus)
+        }
+        this.abbr = ''
+        return
+      } 
+      
+      else if (!this.currConfig()[this.abbr]) {
+        let k = this.abbr.replaceAll(' ', '')
+        if (!k) return
+        console.log('添加', k)
+        this.currConfig()[k] = {
           type: '什么也不做',
           value: '',
         }
+        this.clickKey(k)
+        this.abbr = ''
+        return
       }
 
       this.clickKey(this.abbr)
@@ -76,8 +98,7 @@ export default {
       abbr: '',
     }
   },
-  computed: {
-  },
+  computed: {},
 }
 </script>
 

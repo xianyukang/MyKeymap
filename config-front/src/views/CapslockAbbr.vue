@@ -12,7 +12,7 @@
       <v-col><v-text-field label="激活" v-model="item.value"></v-text-field></v-col>
       <v-col><v-text-field label="或运行" v-model="item.value"></v-text-field></v-col>
     </v-row> -->
-    <Abbr @clickKey="keyChanged" :currentKey="currentKey" />
+    <Abbr @clickKey="keyChanged" @delKey="deleteKey" :currentKey="currentKey" />
     <Action :currentKey="currentKey" />
   </v-container>
 </template>
@@ -29,6 +29,11 @@ export default {
     },
     firstMappedKey(config) {
       return 'sd'
+    },
+    deleteKey(toDel, toFocus) {
+      console.log(toDel, toFocus)
+      this.keyChanged(toFocus)
+      delete this.currConfig()[toDel]
     }
   },
   data() {

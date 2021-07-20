@@ -765,10 +765,6 @@
             "type": "窗口操作",
             "value": "SmartCloseWindow()"
         },
-        "shit": {
-            "type": "什么也不做",
-            "value": "鼠标左移"
-        },
         "fuck": {
             "type": "什么也不做",
             "value": "鼠标左移"
@@ -861,7 +857,6 @@
         "sb",
         "sn",
         "sm",
-        "shit",
         "fuck",
         "fi",
         "fa",
