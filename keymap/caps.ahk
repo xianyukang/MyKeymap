@@ -363,3 +363,41 @@ space::enter
 
 #IfWinActive
 
+
+enterHotString() 
+{
+    WM_USER := 0x0400
+    SHOW_TIP := WM_USER + 0x0001
+    HIDE_TIP := WM_USER + 0x0002
+
+    postMessageToTipWidnow(SHOW_TIP)
+    Loop {
+        Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
+
+        If InStr(ErrorLevel, "EndKey:") {
+            typo := ""
+            ; ToolTip, You terminated the input with %ErrorLevel%.
+            postMessageToTipWidnow(HIDE_TIP)
+            break
+        }
+        if (ErrorLevel == "NewInput") {
+            MsgBox, NewInput
+        }
+            
+        typo := typo . key
+        postCharToTipWidnow(key)
+        if matchHotString(typo) {
+            typo := ""
+            ; ToolTip, You matched a hotstring
+            break
+        }
+        ; ToolTip, %typo%
+    }
+}
+
+matchHotString(typo) {
+    
+    arr := [ "sd","se","ss","sf","sa","sq","sw","sr","st","sy","su","si","so","sp","sg","sh","sj","sk","sl","sz","sx","sc","sv","sb","sn","sm","fi","fa","ff","fo","fp","sC","dd","dp","da","dr","fb","fk","fr","fg","fh","kk" ]
+
+    return arrayContains(arr, typo)
+}

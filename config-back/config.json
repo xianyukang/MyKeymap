@@ -824,6 +824,10 @@
         "fh": {
             "type": "什么也不做",
             "value": ""
+        },
+        "kk": {
+            "type": "什么也不做",
+            "value": ""
         }
     },
     "CapslockAbbrKeys": [
@@ -867,6 +871,7 @@
         "fk",
         "fr",
         "fg",
-        "fh"
+        "fh",
+        "kk"
     ]
 }

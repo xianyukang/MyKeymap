@@ -662,16 +662,6 @@ arrayContains(arr, target)
     return false
 }
 
-matchHotString(typo) {
-    
-    arr := [ "sq", "sz", "sv"
-            ,"sc", "se", "sd", "sr", "ss", "sf", "sa", "sg"
-            ,"sx", "st", "sC"
-            ,"dd", "dp", "da", "dr"
-            ,"fb", "fp", "fo", "fk", "fr", "fg", "fi", "ff", "fh"]
-
-    return arrayContains(arr, typo)
-}
 
 postCharToTipWidnow(char) {
     oldValue := A_DetectHiddenWindows
@@ -691,36 +681,6 @@ postMessageToTipWidnow(messageType) {
 }
 
 
-enterHotString() 
-{
-    WM_USER := 0x0400
-    SHOW_TIP := WM_USER + 0x0001
-    HIDE_TIP := WM_USER + 0x0002
-
-    postMessageToTipWidnow(SHOW_TIP)
-    Loop {
-        Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
-
-        If InStr(ErrorLevel, "EndKey:") {
-            typo := ""
-            ; ToolTip, You terminated the input with %ErrorLevel%.
-            postMessageToTipWidnow(HIDE_TIP)
-            break
-        }
-        if (ErrorLevel == "NewInput") {
-            MsgBox, NewInput
-        }
-            
-        typo := typo . key
-        postCharToTipWidnow(key)
-        if matchHotString(typo) {
-            typo := ""
-            ; ToolTip, You matched a hotstring
-            break
-        }
-        ; ToolTip, %typo%
-    }
-}
 
 ReloadProgram()
 {

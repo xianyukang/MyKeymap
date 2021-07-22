@@ -14,6 +14,7 @@ class AhkScript:
             lstrip_blocks=True,
             trim_blocks=True,
             )
+        self.env.filters['ahkString'] = self.ahkString
     
     @staticmethod
     def escapeAhkHotkey(key):
@@ -21,10 +22,17 @@ class AhkScript:
             return '`;'
         return key
 
+    @staticmethod
+    def ahkString(s):
+        return '"' + s + '"'
+
     def makeCapslock(self, data):
         with open("../keymap/caps.ahk", "w+", encoding="utf-8-sig") as f:
             template = self.env.get_template("script.ahk")
-            print(template.render(escapeAhkHotkey=self.escapeAhkHotkey, **data), file=f)
+            print(template.render(
+                escapeAhkHotkey=self.escapeAhkHotkey,
+                **data
+                ), file=f)
 
 
 if __name__ == "__main__":
