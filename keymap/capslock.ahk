@@ -58,7 +58,6 @@ RAlt::LCtrl
 
 
 
-+`;::send {blind}{:}
 *`;::
     hotstring("Reset")
     PunctuationMode := true
@@ -130,7 +129,7 @@ RAlt::LCtrl
 *g::send {blind}{!}
 *z::send {blind}\
 *b::send {blind}`%
-*a::send {blind}`@
+*a::send {blind}`:
 *h::send {blind}`;
 *q::send {blind}{(}
 *w::send {blind}{#}
