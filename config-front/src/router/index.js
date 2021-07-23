@@ -46,6 +46,27 @@ const routes = [
     })
   },
   {
+    path: '/JMode',
+    name: 'JMode',
+    component: CapslockF,
+    props: route => ({
+    })
+  },
+  {
+    path: '/Semicolon',
+    name: 'Semicolon',
+    component: CapslockF,
+    props: route => ({
+    })
+  },
+  {
+    path: '/SemicolonAbbr',
+    name: 'SemicolonAbbr',
+    component: CapslockAbbr,
+    props: route => ({
+    })
+  },
+  {
     path: '/CapslockAbbr',
     name: 'CapslockAbbr',
     component: CapslockAbbr,

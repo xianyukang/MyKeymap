@@ -34,7 +34,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 return
 
 RAlt::LCtrl
-+capslock::SetCapsLockState % !GetKeyState("CapsLock", "T")
++capslock::toggleCapslock()
 
 *capslock::
     CapslockMode := true
@@ -58,7 +58,6 @@ RAlt::LCtrl
 
 
 
-+`;::send {blind}{:}
 *`;::
     hotstring("Reset")
     PunctuationMode := true

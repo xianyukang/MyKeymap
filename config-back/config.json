@@ -534,6 +534,132 @@
             "value": "移动鼠标到窗口中心"
         }
     },
+    "JMode": {
+        "Q": {
+            "type": "窗口操作",
+            "value": "移动鼠标到窗口中心",
+            "toActivate": "记事本",
+            "toRun": "notepad.exe"
+        },
+        "W": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "E": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "R": {
+            "type": "启动程序或激活窗口",
+            "value": "ActivateOrRun(\"ahk_exe FoxitReader.exe\", \"D:\\install\\Foxit Reader\\FoxitReader.exe\")",
+            "toActivate": "ahk_exe FoxitReader.exe",
+            "toRun": "D:\\install\\Foxit Reader\\FoxitReader.exe"
+        },
+        "T": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "Y": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "U": {
+            "type": "鼠标操作",
+            "value": "滚轮上滑"
+        },
+        "I": {
+            "type": "鼠标操作",
+            "value": "鼠标上移"
+        },
+        "O": {
+            "type": "鼠标操作",
+            "value": "滚轮下滑"
+        },
+        "P": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "A": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "S": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "D": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "F": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "G": {
+            "type": "鼠标操作",
+            "value": "鼠标左键"
+        },
+        "H": {
+            "type": "鼠标操作",
+            "value": "滚轮左滑"
+        },
+        "J": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "K": {
+            "type": "鼠标操作",
+            "value": "鼠标下移"
+        },
+        "L": {
+            "type": "鼠标操作",
+            "value": "鼠标上移"
+        },
+        ";": {
+            "type": "鼠标操作",
+            "value": "滚轮右滑"
+        },
+        "Z": {
+            "type": "窗口操作",
+            "value": "winmaximize, A"
+        },
+        "X": {
+            "type": "窗口操作",
+            "value": "SmartCloseWindow()"
+        },
+        "C": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "V": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "B": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "N": {
+            "type": "鼠标操作",
+            "value": "鼠标左键"
+        },
+        "M": {
+            "type": "鼠标操作",
+            "value": "鼠标右键"
+        },
+        ",": {
+            "type": "鼠标操作",
+            "value": "鼠标左键按下"
+        },
+        ".": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "/": {
+            "type": "鼠标操作",
+            "value": "移动鼠标到窗口中心"
+        }
+    },
     "Semicolon": {
         "Q": {
             "type": "窗口操作",
@@ -658,6 +784,176 @@
         "/": {
             "type": "鼠标操作",
             "value": "移动鼠标到窗口中心"
+        }
+    },
+    "SemicolonAbbr": {
+        "sd": {
+            "type": "窗口操作",
+            "value": "winmaximize, A"
+        },
+        "se": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "ss": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sf": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sa": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sq": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sw": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sr": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "st": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sy": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "su": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "si": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "so": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sp": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sg": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sh": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sj": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sk": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sl": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sz": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sx": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sc": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sv": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sb": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sn": {
+            "type": "鼠标操作",
+            "value": "鼠标左移"
+        },
+        "sm": {
+            "type": "窗口操作",
+            "value": "SmartCloseWindow()"
+        },
+        "fi": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "fa": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "ff": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "fo": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "fp": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "sC": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "dd": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "dp": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "da": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "dr": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "fb": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "fk": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "fr": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "fg": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "fh": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "kk": {
+            "type": "什么也不做",
+            "value": ""
         }
     },
     "CapslockAbbr": {

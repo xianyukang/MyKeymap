@@ -15,7 +15,7 @@
       <v-list nav>
         <v-list-item v-for="item in items" :key="item.title" :to="{ name: item.to }">
           <v-list-item-icon>
-            <v-icon :color="item.color">{{ item.icon }}</v-icon>
+            <v-icon class="nav-tab-icon" :color="item.color">{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
@@ -52,11 +52,14 @@ export default {
     snackbar: false,
     snackbarText: `保存成功`,
     items: [
-      { title: 'Capslock', icon: 'mdi-view-dashboard', to: 'Capslock', color: 'green' },
-      { title: 'Capslock + F', icon: 'mdi-view-dashboard', to: 'CapslockF', color: 'green' },
-      { title: 'Capslock 缩写', icon: 'mdi-view-dashboard', to: 'CapslockAbbr', color: 'green' },
-      { title: '3', icon: 'mdi-numeric-3-box', to: 'Mode3', color: 'red' },
-      { title: '9', icon: 'mdi-numeric-9-box', to: 'Mode9', color: 'red' },
+      { title: 'Capslock', icon: 'mdi-triangle', to: 'Capslock', color: 'green' },
+      { title: 'Capslock + F', icon: 'mdi-triangle', to: 'CapslockF', color: 'green' },
+      { title: 'Capslock 缩写', icon: 'mdi-triangle', to: 'CapslockAbbr', color: 'green' },
+      { title: 'J 模式', icon: 'mdi-circle', to: 'JMode', color: 'blue' },
+      { title: '; 分号模式', icon: 'mdi-circle', to: 'Semicolon', color: 'blue' },
+      { title: '; 分号缩写', icon: 'mdi-circle', to: 'SemicolonAbbr', color: 'blue' },
+      { title: '3 模式', icon: 'mdi-numeric-3-box', to: 'Mode3', color: 'red' },
+      { title: '9 模式', icon: 'mdi-numeric-9-box', to: 'Mode9', color: 'red' },
       { title: '使用说明', icon: 'mdi-help-box', to: 'About', color: 'purple' },
       { title: '关于作者', icon: 'mdi-exclamation-thick', to: 'About', color: 'purple' },
     ],
@@ -83,7 +86,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .v-avatar.logo {
   height: 60px !important;
   width: 60px !important;
@@ -94,5 +97,9 @@ export default {
 #main {
   background: #f2f3f6;
   background: #fafafa;
+}
+
+.nav-tab-icon {
+  font-size: 26px !important;
 }
 </style>
