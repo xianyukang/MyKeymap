@@ -809,3 +809,12 @@ horizontalScroll(key, direction) {
         keywait,  %key%,  %delay_before_repeat%
     }
 }
+
+toggleCapslock() {
+    newState := !GetKeyState("CapsLock", "T")
+    SetCapsLockState %newState%
+    if (newState)
+        tip("CapsLock 开启", -700)
+    else
+        tip("CapsLock 关闭", -700)
+}
