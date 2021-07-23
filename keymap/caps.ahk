@@ -197,6 +197,8 @@ H::horizontalScroll("H", -1)
 *O::MouseClick, WheelDown, , , 1
 *U::MouseClick, WheelUp, , , 1
 M::rightClick()
+*Q::send []{left 1}
+*W::send 🐶
 
 ; ------ 窗口管理 ------
 e::send ^!{tab}

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card height="600" width="720" elevation="5">
+    <v-card height="630" width="760" elevation="5">
       <v-card-title>
         <v-select :items="actionTypes" v-model="currKey().type" outlined @change="clearValue"></v-select>
       </v-card-title>
@@ -9,6 +9,12 @@
           <v-text-field label="要激活的窗口" outlined v-model="currKey().toActivate" @input="activateOrRun"></v-text-field>
           <v-text-field label="窗口不存在时要启动的程序" outlined v-model="currKey().toRun" @input="activateOrRun">
           </v-text-field>
+        </template>
+
+        <template v-if="currKey().type === '发送按键或文本'">
+          <v-text-field label="要发送的按键或文本" outlined v-model="currKey().keysToSend" @input="sendKeys"></v-text-field>
+          
+          <img alt="img" :src="require('../assets/send-keys.png')"><img>
         </template>
 
         <template v-if="currKey().type === '鼠标操作'">
@@ -138,6 +144,10 @@ export default {
     }
   },
   methods: {
+    sendKeys() {
+      this.currKey().prefix = '*'
+      this.currKey().value = 'send ' + this.currKey().keysToSend
+    },
     activateOrRun() {
       const toActivate = escapeFuncString(this.currKey().toActivate)
       const toRun = escapeFuncString(this.currKey().toRun)
@@ -184,9 +194,9 @@ export default {
   computed: {
     actionTypes() {
       if (this.$route.name === 'Capslock')
-        return ['启动程序或激活窗口', '按键重映射为', '鼠标操作', '窗口操作', '执行 ahk 函数', '什么也不做']
+        return ['什么也不做', '启动程序或激活窗口', '发送按键或文本', '鼠标操作', '窗口操作', '执行 ahk 函数']
       else
-        return ['启动程序或激活窗口', '按键重映射为', '窗口操作', '执行 ahk 函数', '什么也不做']
+        return ['什么也不做', '启动程序或激活窗口', '发送按键或文本', '窗口操作', '执行 ahk 函数']
     }
   },
 }

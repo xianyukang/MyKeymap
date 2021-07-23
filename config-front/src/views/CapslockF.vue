@@ -35,7 +35,7 @@ export default {
     return {
       currentKey: this.firstMappedKey(this.config),
       keys: 'abcdefghijklmnopqrstuvwxyz,./',
-      items: ['启动程序或激活窗口', '按键重映射为', '鼠标操作', '窗口操作', '执行 ahk 函数'],
+      items: ['启动程序或激活窗口', '发送按键或文本', '鼠标操作', '窗口操作', '执行 ahk 函数'],
     }
   },
   components: { Action, Keyboard },
