@@ -701,6 +701,15 @@ slideToShutdown()
     send, {Enter}
 }
 
+slideToReboot()
+{
+    run, SlideToShutDown
+    sleep, 1300
+    send, {Enter}
+    sleep, 250
+    shutdown, 2
+}
+
 
 EnterHotstringMode()
 {
