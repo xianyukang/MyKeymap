@@ -146,7 +146,7 @@ export default {
   methods: {
     sendKeys() {
       this.currKey().prefix = '*'
-      this.currKey().value = 'send ' + this.currKey().keysToSend
+      this.currKey().value = 'send {blind}' + this.currKey().keysToSend
     },
     activateOrRun() {
       const toActivate = escapeFuncString(this.currKey().toActivate)

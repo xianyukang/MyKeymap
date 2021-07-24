@@ -2,7 +2,7 @@
     "Capslock": {
         "Q": {
             "type": "发送按键或文本",
-            "value": "send []{left 1}",
+            "value": "send {blind}[]{left 1}",
             "keysToSend": "[]{left 1}",
             "prefix": "*"
         },
