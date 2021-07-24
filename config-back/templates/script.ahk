@@ -77,14 +77,10 @@ RAlt::LCtrl
     return
 
 #if JMode
-; #inputlevel 5
-; 关闭 capslock 模式,  避免以外开启大写
 *capslock::return
 *capslock up::return
     ^l::return
     +k::return
-
-
     *k::
         send {blind}{Rshift down}
         keywait k
@@ -96,66 +92,31 @@ RAlt::LCtrl
         send {Lctrl up}
         return
 
-    *e::send  {blind}{up}
-    *d::send  {blind}{down}
-    *s::send  {blind}{left}
-    *f::send  {blind}{right}
-    *c::send  {blind}{bs}
-    *v::send  {blind}{delete}
-    *a::send  {blind}{home}
-    *g::send  {blind}{end}
-    *x::send  {blind}{esc}
-    *z::send  {blind}{appskey}
-    *t::send  {blind}{pgdn}
-    *q::send  {blind}{pgup}
-    *r::send  {blind}{tab}
-    *i::send  {blind}{insert}
-    *space::send  {blind}{enter}
+{% for key,value in JMode.items()|sort(attribute="1.value") %}
+    {% if value.value %}
+{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
+    {% endif %}
+{% endfor %}
 
-    *w::send  {blind}+{tab}
-
-; #inputlevel 0
+*space::send  {blind}{enter}
+    
 
 
 #if PunctuationMode
-*s::send {blind}<
-*e::send {blind}{^}
-*f::send {blind}>
-*j::send {blind}{+}
-*c::send {blind}.
-*n::send {blind}/
-*r::send {blind}&
-*v::send {blind}|
-*g::send {blind}{!}
-*z::send {blind}\
-*b::send {blind}`%
-*a::send {blind}`@
-*h::send {blind}`;
-*q::send {blind}{(}
-*w::send {blind}{#}
-*t::send {blind}~
-*u::send {blind}$
-*x::send {blind}_
-;*q::send {blind}?
-o::send {space 4}
-*y::send {blind}@
-*k::send {blind}``
-*i::send {blind}*
-*d::send {blind}=
-*m::send {blind}-
+{% for key,value in Semicolon.items()|sort(attribute="1.value") %}
+    {% if value.value %}
+{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
+    {% endif %}
+{% endfor %}
 
 
 #if DigitMode
-*h::send  {blind}0
-*j::send  {blind}1
-*k::send  {blind}2
-*l::send  {blind}3
-*p::send  {blind}7
-*u::send  {blind}4
-*i::send  {blind}5
-*o::send  {blind}6
-*n::send  {blind}8
-*m::send  {blind}9
+
+{% for key,value in Mode3.items()|sort(attribute="1.value") %}
+    {% if value.value %}
+{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
+    {% endif %}
+{% endfor %}
 
 *r::
     DigitMode := false
@@ -170,18 +131,13 @@ o::send {space 4}
 
 #if FnMode
 *r::return
-*j::send   {blind}{f1}
-*k::send   {blind}{f2}
-*l::send   {blind}{f3}
-*u::send   {blind}{f4}
-*i::send   {blind}{f5}
-*o::send   {blind}{f6}
-*n::send   {blind}{f8}
-*m::send   {blind}{f9}
-*h::send   {blind}{f10}
-*,::send   {blind}{f11}
-*/::send   {blind}{f12}
-*p::send  {blind}{f7}
+
+{% for key,value in Mode3R.items()|sort(attribute="1.value") %}
+    {% if value.value %}
+{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
+    {% endif %}
+{% endfor %}
+
 
 #if CapslockMode
 

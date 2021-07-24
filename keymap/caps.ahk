@@ -77,14 +77,10 @@ RAlt::LCtrl
     return
 
 #if JMode
-; #inputlevel 5
-; 关闭 capslock 模式,  避免以外开启大写
 *capslock::return
 *capslock up::return
     ^l::return
     +k::return
-
-
     *k::
         send {blind}{Rshift down}
         keywait k
@@ -96,66 +92,65 @@ RAlt::LCtrl
         send {Lctrl up}
         return
 
-    *e::send  {blind}{up}
-    *d::send  {blind}{down}
-    *s::send  {blind}{left}
-    *f::send  {blind}{right}
-    *c::send  {blind}{bs}
-    *v::send  {blind}{delete}
-    *a::send  {blind}{home}
-    *g::send  {blind}{end}
-    *x::send  {blind}{esc}
-    *z::send  {blind}{appskey}
-    *t::send  {blind}{pgdn}
-    *q::send  {blind}{pgup}
-    *r::send  {blind}{tab}
-    *i::send  {blind}{insert}
-    *space::send  {blind}{enter}
+*W::send {blind}+{tab}
+*Z::send {blind}{appskey}
+*C::send {blind}{backspace}
+*V::send {blind}{delete}
+*D::send {blind}{down}
+*G::send {blind}{end}
+*X::send {blind}{esc}
+*A::send {blind}{home}
+*I::send {blind}{insert}
+*S::send {blind}{left}
+*T::send {blind}{pgdn}
+*Q::send {blind}{pgup}
+*F::send {blind}{right}
+*R::send {blind}{tab}
+*E::send {blind}{up}
 
-    *w::send  {blind}+{tab}
-
-; #inputlevel 0
+*space::send  {blind}{enter}
+    
 
 
 #if PunctuationMode
-*s::send {blind}<
-*e::send {blind}{^}
-*f::send {blind}>
-*j::send {blind}{+}
-*c::send {blind}.
-*n::send {blind}/
-*r::send {blind}&
-*v::send {blind}|
-*g::send {blind}{!}
-*z::send {blind}\
-*b::send {blind}`%
-*a::send {blind}`@
-*h::send {blind}`;
-*q::send {blind}{(}
-*w::send {blind}{#}
-*t::send {blind}~
-*u::send {blind}$
-*x::send {blind}_
-;*q::send {blind}?
-o::send {space 4}
-*y::send {blind}@
-*k::send {blind}``
-*i::send {blind}*
-*d::send {blind}=
-*m::send {blind}-
+*U::send {blind}$
+*R::send {blind}&
+*Q::send {blind}(
+*I::send {blind}*
+*M::send {blind}-
+*C::send {blind}.
+*N::send {blind}/
+*A::send {blind}:
+*S::send {blind}<
+*D::send {blind}=
+*F::send {blind}>
+*Y::send {blind}@
+*Z::send {blind}\
+*X::send {blind}_
+*B::send {blind}`%
+*H::send {blind}`;
+*K::send {blind}``
+*G::send {blind}{!}
+*W::send {blind}{#}
+*J::send {blind}{+}
+*E::send {blind}{^}
+*O::send {blind}{space 4}
+*V::send {blind}|
+*T::send {blind}~
 
 
 #if DigitMode
-*h::send  {blind}0
-*j::send  {blind}1
-*k::send  {blind}2
-*l::send  {blind}3
-*p::send  {blind}7
-*u::send  {blind}4
-*i::send  {blind}5
-*o::send  {blind}6
-*n::send  {blind}8
-*m::send  {blind}9
+
+*H::send {blind}0
+*J::send {blind}1
+*K::send {blind}2
+*L::send {blind}3
+*U::send {blind}4
+*I::send {blind}5
+*O::send {blind}6
+*P::send {blind}7
+*N::send {blind}8
+*M::send {blind}9
 
 *r::
     DigitMode := false
@@ -170,18 +165,20 @@ o::send {space 4}
 
 #if FnMode
 *r::return
-*j::send   {blind}{f1}
-*k::send   {blind}{f2}
-*l::send   {blind}{f3}
-*u::send   {blind}{f4}
-*i::send   {blind}{f5}
-*o::send   {blind}{f6}
-*n::send   {blind}{f8}
-*m::send   {blind}{f9}
-*h::send   {blind}{f10}
-*,::send   {blind}{f11}
-*/::send   {blind}{f12}
-*p::send  {blind}{f7}
+
+*H::send {blind}{f10}
+*,::send {blind}{f11}
+*/::send {blind}{f12}
+*J::send {blind}{f1}
+*K::send {blind}{f2}
+*L::send {blind}{f3}
+*U::send {blind}{f4}
+*I::send {blind}{f5}
+*O::send {blind}{f6}
+*P::send {blind}{f7}
+*N::send {blind}{f8}
+*M::send {blind}{f9}
+
 
 #if CapslockMode
 

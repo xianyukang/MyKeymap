@@ -109,10 +109,10 @@ RAlt::LCtrl
     *t::send  {blind}{pgdn}
     *q::send  {blind}{pgup}
     *r::send  {blind}{tab}
+    *w::send  {blind}+{tab}
     *i::send  {blind}{insert}
     *space::send  {blind}{enter}
 
-    *w::send  {blind}+{tab}
 
 ; #inputlevel 0
 
@@ -129,14 +129,13 @@ RAlt::LCtrl
 *g::send {blind}{!}
 *z::send {blind}\
 *b::send {blind}`%
-*a::send {blind}`:
+*a::send {blind}:
 *h::send {blind}`;
-*q::send {blind}{(}
+*q::send {blind}(
 *w::send {blind}{#}
 *t::send {blind}~
 *u::send {blind}$
 *x::send {blind}_
-;*q::send {blind}?
 o::send {space 4}
 *y::send {blind}@
 *k::send {blind}``

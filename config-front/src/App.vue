@@ -59,6 +59,7 @@ export default {
       { title: '; 分号模式', icon: 'mdi-circle', to: 'Semicolon', color: 'blue' },
       { title: '; 分号缩写', icon: 'mdi-circle', to: 'SemicolonAbbr', color: 'blue' },
       { title: '3 模式', icon: 'mdi-numeric-3-box', to: 'Mode3', color: 'red' },
+      { title: '3 + R 模式', icon: 'mdi-numeric-3-box', to: 'Mode3R', color: 'red' },
       { title: '9 模式', icon: 'mdi-numeric-9-box', to: 'Mode9', color: 'red' },
       { title: '使用说明', icon: 'mdi-help-box', to: 'About', color: 'purple' },
       { title: '关于作者', icon: 'mdi-exclamation-thick', to: 'About', color: 'purple' },

@@ -287,10 +287,8 @@
     },
     "Mode3": {
         "Q": {
-            "type": "窗口操作",
-            "value": "send #+{right}",
-            "toActivate": "记事本",
-            "toRun": "notepad.exe"
+            "type": "什么也不做",
+            "value": ""
         },
         "W": {
             "type": "什么也不做",
@@ -301,10 +299,8 @@
             "value": ""
         },
         "R": {
-            "type": "启动程序或激活窗口",
-            "value": "ActivateOrRun(\"ahk_exe FoxitReader.exe\", \"D:\\install\\Foxit Reader\\FoxitReader.exe\")",
-            "toActivate": "ahk_exe FoxitReader.exe",
-            "toRun": "D:\\install\\Foxit Reader\\FoxitReader.exe"
+            "type": "什么也不做",
+            "value": ""
         },
         "T": {
             "type": "什么也不做",
@@ -315,24 +311,32 @@
             "value": ""
         },
         "U": {
-            "type": "鼠标操作",
-            "value": "滚轮上滑"
+            "type": "发送按键或文本",
+            "value": "send {blind}4",
+            "keysToSend": "4",
+            "prefix": "*"
         },
         "I": {
-            "type": "鼠标操作",
-            "value": "鼠标上移"
+            "type": "发送按键或文本",
+            "value": "send {blind}5",
+            "keysToSend": "5",
+            "prefix": "*"
         },
         "O": {
-            "type": "鼠标操作",
-            "value": "滚轮下滑"
+            "type": "发送按键或文本",
+            "value": "send {blind}6",
+            "keysToSend": "6",
+            "prefix": "*"
         },
         "P": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}7",
+            "keysToSend": "7",
+            "prefix": "*"
         },
         "A": {
-            "type": "窗口操作",
-            "value": "SmartCloseWindow()"
+            "type": "什么也不做",
+            "value": ""
         },
         "S": {
             "type": "什么也不做",
@@ -347,36 +351,44 @@
             "value": ""
         },
         "G": {
-            "type": "鼠标操作",
-            "value": "鼠标左键"
+            "type": "什么也不做",
+            "value": ""
         },
         "H": {
-            "type": "鼠标操作",
-            "value": "滚轮左滑"
+            "type": "发送按键或文本",
+            "value": "send {blind}0",
+            "keysToSend": "0",
+            "prefix": "*"
         },
         "J": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+            "type": "发送按键或文本",
+            "value": "send {blind}1",
+            "keysToSend": "1",
+            "prefix": "*"
         },
         "K": {
-            "type": "鼠标操作",
-            "value": "鼠标下移"
+            "type": "发送按键或文本",
+            "value": "send {blind}2",
+            "keysToSend": "2",
+            "prefix": "*"
         },
         "L": {
-            "type": "鼠标操作",
-            "value": "鼠标上移"
+            "type": "发送按键或文本",
+            "value": "send {blind}3",
+            "keysToSend": "3",
+            "prefix": "*"
         },
         ";": {
-            "type": "鼠标操作",
-            "value": "滚轮右滑"
+            "type": "什么也不做",
+            "value": ""
         },
         "Z": {
             "type": "什么也不做",
             "value": ""
         },
         "X": {
-            "type": "窗口操作",
-            "value": "SmartCloseWindow()"
+            "type": "什么也不做",
+            "value": ""
         },
         "C": {
             "type": "什么也不做",
@@ -391,24 +403,174 @@
             "value": ""
         },
         "N": {
-            "type": "鼠标操作",
-            "value": "鼠标左键"
+            "type": "发送按键或文本",
+            "value": "send {blind}8",
+            "keysToSend": "8",
+            "prefix": "*"
         },
         "M": {
-            "type": "鼠标操作",
-            "value": "鼠标右键"
+            "type": "发送按键或文本",
+            "value": "send {blind}9",
+            "keysToSend": "9",
+            "prefix": "*"
         },
         ",": {
-            "type": "鼠标操作",
-            "value": "鼠标左键按下"
+            "type": "什么也不做",
+            "value": ""
         },
         ".": {
             "type": "什么也不做",
             "value": ""
         },
         "/": {
-            "type": "鼠标操作",
-            "value": "移动鼠标到窗口中心"
+            "type": "什么也不做",
+            "value": ""
+        }
+    },
+    "Mode3R": {
+        "Q": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "W": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "E": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "R": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "T": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "Y": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "U": {
+            "type": "发送按键或文本",
+            "value": "send {blind}{f4}",
+            "keysToSend": "{f4}",
+            "prefix": "*"
+        },
+        "I": {
+            "type": "发送按键或文本",
+            "value": "send {blind}{f5}",
+            "keysToSend": "{f5}",
+            "prefix": "*"
+        },
+        "O": {
+            "type": "发送按键或文本",
+            "value": "send {blind}{f6}",
+            "keysToSend": "{f6}",
+            "prefix": "*"
+        },
+        "P": {
+            "type": "发送按键或文本",
+            "value": "send {blind}{f7}",
+            "keysToSend": "{f7}",
+            "prefix": "*"
+        },
+        "A": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "S": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "D": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "F": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "G": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "H": {
+            "type": "发送按键或文本",
+            "value": "send {blind}{f10}",
+            "keysToSend": "{f10}",
+            "prefix": "*"
+        },
+        "J": {
+            "type": "发送按键或文本",
+            "value": "send {blind}{f1}",
+            "keysToSend": "{f1}",
+            "prefix": "*"
+        },
+        "K": {
+            "type": "发送按键或文本",
+            "value": "send {blind}{f2}",
+            "keysToSend": "{f2}",
+            "prefix": "*"
+        },
+        "L": {
+            "type": "发送按键或文本",
+            "value": "send {blind}{f3}",
+            "keysToSend": "{f3}",
+            "prefix": "*"
+        },
+        ";": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "Z": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "X": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "C": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "V": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "B": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "N": {
+            "type": "发送按键或文本",
+            "value": "send {blind}{f8}",
+            "keysToSend": "{f8}",
+            "prefix": "*"
+        },
+        "M": {
+            "type": "发送按键或文本",
+            "value": "send {blind}{f9}",
+            "keysToSend": "{f9}",
+            "prefix": "*"
+        },
+        ",": {
+            "type": "发送按键或文本",
+            "value": "send {blind}{f11}",
+            "keysToSend": "{f11}",
+            "prefix": "*"
+        },
+        ".": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "/": {
+            "type": "发送按键或文本",
+            "value": "send {blind}{f12}",
+            "keysToSend": "{f12}",
+            "prefix": "*"
         }
     },
     "Mode9": {
@@ -540,254 +702,323 @@
     "JMode": {
         "Q": {
             "type": "发送按键或文本",
-            "value": "🐶",
-            "prefix": "*"
+            "value": "send {blind}{pgup}",
+            "prefix": "*",
+            "keysToSend": "{pgup}"
         },
         "W": {
             "type": "发送按键或文本",
-            "value": "🐶",
-            "prefix": "*"
+            "value": "send {blind}+{tab}",
+            "prefix": "*",
+            "keysToSend": "+{tab}"
         },
         "E": {
             "type": "发送按键或文本",
-            "value": "🐶",
-            "prefix": "*"
+            "value": "send {blind}{up}",
+            "prefix": "*",
+            "keysToSend": "{up}"
         },
         "R": {
-            "type": "启动程序或激活窗口",
-            "value": "ActivateOrRun(\"ahk_exe FoxitReader.exe\", \"D:\\install\\Foxit Reader\\FoxitReader.exe\")",
-            "toActivate": "ahk_exe FoxitReader.exe",
-            "toRun": "D:\\install\\Foxit Reader\\FoxitReader.exe"
+            "type": "发送按键或文本",
+            "value": "send {blind}{tab}",
+            "keysToSend": "{tab}",
+            "prefix": "*"
         },
         "T": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}{pgdn}",
+            "keysToSend": "{pgdn}",
+            "prefix": "*"
         },
         "Y": {
             "type": "什么也不做",
             "value": ""
         },
         "U": {
-            "type": "鼠标操作",
-            "value": "滚轮上滑"
+            "type": "什么也不做",
+            "value": ""
         },
         "I": {
-            "type": "鼠标操作",
-            "value": "鼠标上移"
+            "type": "发送按键或文本",
+            "value": "send {blind}{insert}",
+            "keysToSend": "{insert}",
+            "prefix": "*"
         },
         "O": {
-            "type": "鼠标操作",
-            "value": "滚轮下滑"
+            "type": "什么也不做",
+            "value": ""
         },
         "P": {
             "type": "什么也不做",
             "value": ""
         },
         "A": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}{home}",
+            "keysToSend": "{home}",
+            "prefix": "*"
         },
         "S": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}{left}",
+            "keysToSend": "{left}",
+            "prefix": "*"
         },
         "D": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}{down}",
+            "keysToSend": "{down}",
+            "prefix": "*"
         },
         "F": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}{right}",
+            "keysToSend": "{right}",
+            "prefix": "*"
         },
         "G": {
-            "type": "鼠标操作",
-            "value": "鼠标左键"
+            "type": "发送按键或文本",
+            "value": "send {blind}{end}",
+            "keysToSend": "{end}",
+            "prefix": "*"
         },
         "H": {
-            "type": "鼠标操作",
-            "value": "滚轮左滑"
+            "type": "什么也不做",
+            "value": ""
         },
         "J": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+            "type": "什么也不做",
+            "value": ""
         },
         "K": {
-            "type": "鼠标操作",
-            "value": "鼠标下移"
+            "type": "什么也不做",
+            "value": ""
         },
         "L": {
-            "type": "鼠标操作",
-            "value": "鼠标上移"
+            "type": "什么也不做",
+            "value": ""
         },
         ";": {
-            "type": "鼠标操作",
-            "value": "滚轮右滑"
+            "type": "什么也不做",
+            "value": ""
         },
         "Z": {
-            "type": "窗口操作",
-            "value": "winmaximize, A"
+            "type": "发送按键或文本",
+            "value": "send {blind}{appskey}",
+            "keysToSend": "{appskey}",
+            "prefix": "*"
         },
         "X": {
-            "type": "窗口操作",
-            "value": "SmartCloseWindow()"
+            "type": "发送按键或文本",
+            "value": "send {blind}{esc}",
+            "keysToSend": "{esc}",
+            "prefix": "*"
         },
         "C": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}{backspace}",
+            "keysToSend": "{backspace}",
+            "prefix": "*"
         },
         "V": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}{delete}",
+            "keysToSend": "{delete}",
+            "prefix": "*"
         },
         "B": {
             "type": "什么也不做",
             "value": ""
         },
         "N": {
-            "type": "鼠标操作",
-            "value": "鼠标左键"
+            "type": "什么也不做",
+            "value": ""
         },
         "M": {
-            "type": "鼠标操作",
-            "value": "鼠标右键"
+            "type": "什么也不做",
+            "value": ""
         },
         ",": {
-            "type": "鼠标操作",
-            "value": "鼠标左键按下"
+            "type": "什么也不做",
+            "value": ""
         },
         ".": {
             "type": "什么也不做",
             "value": ""
         },
         "/": {
-            "type": "鼠标操作",
-            "value": "移动鼠标到窗口中心"
+            "type": "什么也不做",
+            "value": ""
         }
     },
     "Semicolon": {
         "Q": {
-            "type": "窗口操作",
-            "value": "移动鼠标到窗口中心",
-            "toActivate": "记事本",
-            "toRun": "notepad.exe"
+            "type": "发送按键或文本",
+            "value": "send {blind}(",
+            "prefix": "*",
+            "keysToSend": "("
         },
         "W": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}{#}",
+            "prefix": "*",
+            "keysToSend": "{#}"
         },
         "E": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}{^}",
+            "prefix": "*",
+            "keysToSend": "{^}"
         },
         "R": {
-            "type": "启动程序或激活窗口",
-            "value": "ActivateOrRun(\"ahk_exe FoxitReader.exe\", \"D:\\install\\Foxit Reader\\FoxitReader.exe\")",
-            "toActivate": "ahk_exe FoxitReader.exe",
-            "toRun": "D:\\install\\Foxit Reader\\FoxitReader.exe"
+            "type": "发送按键或文本",
+            "value": "send {blind}&",
+            "keysToSend": "&",
+            "prefix": "*"
         },
         "T": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}~",
+            "keysToSend": "~",
+            "prefix": "*"
         },
         "Y": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}@",
+            "keysToSend": "@",
+            "prefix": "*"
         },
         "U": {
-            "type": "鼠标操作",
-            "value": "滚轮上滑"
+            "type": "发送按键或文本",
+            "value": "send {blind}$",
+            "keysToSend": "$",
+            "prefix": "*"
         },
         "I": {
-            "type": "鼠标操作",
-            "value": "鼠标上移"
+            "type": "发送按键或文本",
+            "value": "send {blind}*",
+            "keysToSend": "*",
+            "prefix": "*"
         },
         "O": {
-            "type": "鼠标操作",
-            "value": "滚轮下滑"
+            "type": "发送按键或文本",
+            "value": "send {blind}{space 4}",
+            "keysToSend": "{space 4}",
+            "prefix": "*"
         },
         "P": {
             "type": "什么也不做",
             "value": ""
         },
         "A": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}:",
+            "keysToSend": ":",
+            "prefix": "*"
         },
         "S": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}<",
+            "keysToSend": "<",
+            "prefix": "*"
         },
         "D": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}=",
+            "keysToSend": "=",
+            "prefix": "*"
         },
         "F": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}>",
+            "keysToSend": ">",
+            "prefix": "*"
         },
         "G": {
-            "type": "鼠标操作",
-            "value": "鼠标左键"
+            "type": "发送按键或文本",
+            "value": "send {blind}{!}",
+            "keysToSend": "{!}",
+            "prefix": "*"
         },
         "H": {
-            "type": "鼠标操作",
-            "value": "滚轮左滑"
+            "type": "发送按键或文本",
+            "value": "send {blind}`;",
+            "keysToSend": "`;",
+            "prefix": "*"
         },
         "J": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+            "type": "发送按键或文本",
+            "value": "send {blind}{+}",
+            "keysToSend": "{+}",
+            "prefix": "*"
         },
         "K": {
-            "type": "鼠标操作",
-            "value": "鼠标下移"
+            "type": "发送按键或文本",
+            "value": "send {blind}``",
+            "keysToSend": "``",
+            "prefix": "*"
         },
         "L": {
-            "type": "鼠标操作",
-            "value": "鼠标上移"
+            "type": "什么也不做",
+            "value": ""
         },
         ";": {
-            "type": "鼠标操作",
-            "value": "滚轮右滑"
+            "type": "什么也不做",
+            "value": ""
         },
         "Z": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}\\",
+            "keysToSend": "\\",
+            "prefix": "*"
         },
         "X": {
-            "type": "窗口操作",
-            "value": "SmartCloseWindow()"
+            "type": "发送按键或文本",
+            "value": "send {blind}_",
+            "keysToSend": "_",
+            "prefix": "*"
         },
         "C": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}.",
+            "keysToSend": ".",
+            "prefix": "*"
         },
         "V": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}|",
+            "keysToSend": "|",
+            "prefix": "*"
         },
         "B": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "发送按键或文本",
+            "value": "send {blind}`%",
+            "keysToSend": "`%",
+            "prefix": "*"
         },
         "N": {
-            "type": "鼠标操作",
-            "value": "鼠标左键"
+            "type": "发送按键或文本",
+            "value": "send {blind}/",
+            "keysToSend": "/",
+            "prefix": "*"
         },
         "M": {
-            "type": "鼠标操作",
-            "value": "鼠标右键"
+            "type": "发送按键或文本",
+            "value": "send {blind}-",
+            "keysToSend": "-",
+            "prefix": "*"
         },
         ",": {
-            "type": "鼠标操作",
-            "value": "鼠标左键按下"
+            "type": "什么也不做",
+            "value": ""
         },
         ".": {
             "type": "什么也不做",
             "value": ""
         },
         "/": {
-            "type": "鼠标操作",
-            "value": "移动鼠标到窗口中心"
+            "type": "什么也不做",
+            "value": ""
         }
     },
     "SemicolonAbbr": {

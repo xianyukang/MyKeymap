@@ -38,6 +38,13 @@ const routes = [
     })
   },
   {
+    path: '/Mode3R',
+    name: 'Mode3R',
+    component: CapslockF,
+    props: route => ({
+    })
+  },
+  {
     path: '/Mode9',
     name: 'Mode9',
     component: CapslockF,
