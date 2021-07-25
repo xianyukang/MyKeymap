@@ -289,8 +289,10 @@ ToggleTopMost()
 
 close_same_class_window()
 {
-    wingetclass, class, A
-    GroupAdd(temp_group, "ahk_class " . class)
+    WinExist("A" )
+    wingetclass, class
+    WinGet, pname, ProcessName
+    GroupAdd(temp_group, "ahk_class " . class . " ahk_exe " . pname)
     groupclose, %temp_group%, A
 }
 
