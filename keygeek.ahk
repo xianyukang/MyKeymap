@@ -29,6 +29,6 @@ Loop
 until !ErrorLevel or (prev = ErrorLevel)
 
 run, "D:\project\win\command_bar\bin\Debug\KeyboardGeek.exe"
-run, "ahk.exe" "keymap\capslock.ahk"
+run, "ahk.exe" "keymap\caps.ahk"
 run, "tools\wgestures\WGestures.exe"
 run, D:\project\win\x64\Debug\window.bat, D:\project\win\x64\Debug\

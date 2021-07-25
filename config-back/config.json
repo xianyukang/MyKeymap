@@ -1,34 +1,28 @@
 {
     "Capslock": {
         "Q": {
-            "type": "发送按键或文本",
-            "value": "send {blind}[]{left 1}",
-            "keysToSend": "[]{left 1}",
-            "prefix": "*"
+            "type": "窗口操作",
+            "value": "winmaximize, A"
         },
         "W": {
-            "type": "发送按键或文本",
-            "value": "send 🐶",
-            "keysToSend": "🐶",
-            "prefix": "*"
+            "type": "窗口操作",
+            "value": "send !{tab}"
         },
         "E": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "窗口操作",
+            "value": "send ^!{tab}"
         },
         "R": {
-            "type": "什么也不做",
-            "value": "",
-            "toActivate": "ahk_exe FoxitReader.exe",
-            "toRun": "D:\\install\\Foxit Reader\\FoxitReader.exe"
+            "type": "窗口操作",
+            "value": "SwitchWindows()"
         },
         "T": {
             "type": "什么也不做",
             "value": ""
         },
         "Y": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "窗口操作",
+            "value": "send {LControl down}{LWin down}{Left}{LWin up}{LControl up}"
         },
         "U": {
             "type": "鼠标操作",
@@ -48,20 +42,20 @@
             "prefix": "*"
         },
         "P": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "窗口操作",
+            "value": "send {LControl down}{LWin down}{Right}{LWin up}{LControl up}"
         },
         "A": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "窗口操作",
+            "value": "center_window_to_current_monitor(1370, 930)"
         },
         "S": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "窗口操作",
+            "value": "center_window_to_current_monitor(1200, 800)"
         },
         "D": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "窗口操作",
+            "value": "send #+{right}"
         },
         "F": {
             "type": "什么也不做",
@@ -101,8 +95,8 @@
             "value": ""
         },
         "X": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "窗口操作",
+            "value": "SmartCloseWindow()"
         },
         "C": {
             "type": "什么也不做",
@@ -113,8 +107,8 @@
             "value": ""
         },
         "B": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "窗口操作",
+            "value": "winminimize, A"
         },
         "N": {
             "type": "鼠标操作",
@@ -145,22 +139,25 @@
     "CapslockF": {
         "Q": {
             "type": "启动程序或激活窗口",
-            "value": "",
-            "toActivate": "记事本",
-            "toRun": "notepad.exe"
+            "value": "\n    path = %A_ProgramFiles%\\Everything\\Everything.exe\n    ActivateOrRun(\"ahk_class EVERYTHING\", path)\n    return",
+            "toActivate": "ahk_class EVERYTHING",
+            "toRun": "%A_ProgramFiles%\\Everything\\Everything.exe"
         },
         "W": {
-            "type": "什么也不做",
-            "value": "",
-            "prefix": "*"
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = %A_ProgramsCommon%\\Google Chrome.lnk\n    ActivateOrRun(\"ahk_exe chrome.exe\", path)\n    return",
+            "toActivate": "ahk_exe chrome.exe",
+            "toRun": "%A_ProgramsCommon%\\Google Chrome.lnk"
         },
         "E": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = %A_Programs%\\印象笔记\\印象笔记.lnk\n    ActivateOrRun(\"ahk_class YXMainFrame\", path)\n    return",
+            "toActivate": "ahk_class YXMainFrame",
+            "toRun": "%A_Programs%\\印象笔记\\印象笔记.lnk"
         },
         "R": {
-            "type": "什么也不做",
-            "value": "",
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = D:\\install\\Foxit Reader\\FoxitReader.exe\n    ActivateOrRun(\"ahk_exe FoxitReader.exe\", path)\n    return",
             "toActivate": "ahk_exe FoxitReader.exe",
             "toRun": "D:\\install\\Foxit Reader\\FoxitReader.exe"
         },
@@ -173,37 +170,46 @@
             "value": ""
         },
         "U": {
-            "type": "鼠标操作",
-            "value": "MouseClick, WheelUp, , , 1",
-            "label": "滚轮上滑",
-            "prefix": "*"
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = %A_Programs%\\JetBrains Toolbox\\DataGrip.lnk\n    ActivateOrRun(\"ahk_exe datagrip64.exe\", path)\n    return",
+            "toActivate": "ahk_exe datagrip64.exe",
+            "toRun": "%A_Programs%\\JetBrains Toolbox\\DataGrip.lnk"
         },
         "I": {
-            "type": "鼠标操作",
-            "value": "fastMoveMouse(\"I\", 0, -1)",
-            "label": "鼠标上移"
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = C:\\Program Files\\Typora\\Typora.exe\n    ActivateOrRun(\"ahk_exe Typora.exe\", path)\n    return",
+            "toActivate": "ahk_exe Typora.exe",
+            "toRun": "C:\\Program Files\\Typora\\Typora.exe"
         },
         "O": {
-            "type": "鼠标操作",
-            "value": "MouseClick, WheelDown, , , 1",
-            "label": "滚轮下滑",
-            "prefix": "*"
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = shortcuts\\OneNote for Windows 10.lnk\n    ActivateOrRun(\"OneNote for Windows 10\", path)\n    return",
+            "toActivate": "OneNote for Windows 10",
+            "toRun": "shortcuts\\OneNote for Windows 10.lnk"
         },
         "P": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = C:\\ProgramMicrosoft\\Windows\\Start Menu\\Programs\\paint.net.lnk\n    ActivateOrRun(\"ahk_exe PaintDotNet.exe\", path)\n    return",
+            "toActivate": "ahk_exe PaintDotNet.exe",
+            "toRun": "C:\\ProgramMicrosoft\\Windows\\Start Menu\\Programs\\paint.net.lnk"
         },
         "A": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = shortcuts\\Windows Terminal Preview.lnk\n    ActivateOrRun(\"ahk_exe WindowsTerminal.exe\", path)\n    return",
+            "toRun": "shortcuts\\Windows Terminal Preview.lnk",
+            "toActivate": "ahk_exe WindowsTerminal.exe"
         },
         "S": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = %A_Programs%\\Visual Studio Code\\Visual Studio Code.lnk\n    ActivateOrRun(\"ahk_exe Code.exe\", path)\n    return",
+            "toActivate": "ahk_exe Code.exe",
+            "toRun": "%A_Programs%\\Visual Studio Code\\Visual Studio Code.lnk"
         },
         "D": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = %A_ProgramsCommon%\\Microsoft Edge.lnk\n    ActivateOrRun(\"ahk_exe msedge.exe\", path)\n    return",
+            "toActivate": "ahk_exe msedge.exe",
+            "toRun": "%A_ProgramsCommon%\\Microsoft Edge.lnk"
         },
         "F": {
             "type": "什么也不做",
@@ -214,33 +220,36 @@
             "value": ""
         },
         "H": {
-            "type": "鼠标操作",
-            "value": "horizontalScroll(\"H\", -1)",
-            "label": "滚轮左滑"
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = %A_ProgramsCommon%\\Visual Studio 2019.lnk\n    ActivateOrRun(\"- Microsoft Visual Studio\", path)\n    return",
+            "toActivate": "- Microsoft Visual Studio",
+            "toRun": "%A_ProgramsCommon%\\Visual Studio 2019.lnk"
         },
         "J": {
-            "type": "鼠标操作",
-            "value": "fastMoveMouse(\"J\", -1, 0)",
-            "label": "鼠标左移"
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = %A_Programs%\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk\n    ActivateOrRun(\"ahk_exe idea64.exe\", path)\n    return",
+            "toActivate": "ahk_exe idea64.exe",
+            "toRun": "%A_Programs%\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk"
         },
         "K": {
-            "type": "鼠标操作",
-            "value": "fastMoveMouse(\"K\", 0, 1)",
-            "label": "鼠标下移"
-        },
-        "L": {
-            "type": "鼠标操作",
-            "value": "fastMoveMouse(\"L\", 1, 0)",
-            "label": "鼠标右移"
-        },
-        ";": {
-            "type": "鼠标操作",
-            "value": "horizontalScroll(\";\", 1)",
-            "label": "滚轮右滑"
-        },
-        "Z": {
             "type": "什么也不做",
             "value": ""
+        },
+        "L": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = %A_ProgramFiles%\\DAUM\\PotPlayer\\PotPlayerMini64.exe\n    ActivateOrRun(\"ahk_class PotPlayer64\", path)\n    return",
+            "toActivate": "ahk_class PotPlayer64",
+            "toRun": "%A_ProgramFiles%\\DAUM\\PotPlayer\\PotPlayerMini64.exe"
+        },
+        ";": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "Z": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = D:\\\n    ActivateOrRun(\"ahk_class CabinetWClass ahk_exe Explorer.EXE\", path)\n    return",
+            "toRun": "D:\\",
+            "toActivate": "ahk_class CabinetWClass ahk_exe Explorer.EXE"
         },
         "X": {
             "type": "什么也不做",
@@ -259,30 +268,24 @@
             "value": ""
         },
         "N": {
-            "type": "鼠标操作",
-            "value": "leftClick()",
-            "label": "鼠标左键",
-            "prefix": "*"
+            "type": "什么也不做",
+            "value": ""
         },
         "M": {
-            "type": "鼠标操作",
-            "value": "rightClick()",
-            "label": "鼠标右键",
-            "prefix": "*"
+            "type": "什么也不做",
+            "value": ""
         },
         ",": {
-            "type": "鼠标操作",
-            "value": "lbuttonDown()",
-            "label": "鼠标左键按下"
+            "type": "什么也不做",
+            "value": ""
         },
         ".": {
             "type": "什么也不做",
             "value": ""
         },
         "/": {
-            "type": "鼠标操作",
-            "value": "centerMouse()",
-            "label": "移动鼠标到窗口中心"
+            "type": "什么也不做",
+            "value": ""
         }
     },
     "Mode3": {
@@ -1318,5 +1321,7 @@
         "fg",
         "fh",
         "kk"
-    ]
+    ],
+    "snackbar": true,
+    "snackbarText": "保存成功"
 }

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card height="630" width="760" elevation="5">
+    <v-card height="630" width="790" elevation="5">
       <v-card-title>
         <v-select :items="actionTypes" v-model="currKey().type" outlined @change="clearValue"></v-select>
       </v-card-title>
@@ -136,7 +136,7 @@ export default {
         { label: '切换到上一个窗口', value: 'send !{tab}' },
         { label: '在当前程序的窗口间切换', value: 'SwitchWindows()' },
         { label: '窗口管理器(EDSF切换、X关闭、空格选择)', value: 'send ^!{tab}' },
-        { label: '上一个虚拟桌面', value: 'send  {LControl down}{LWin down}{Left}{LWin up}{LControl up}' },
+        { label: '上一个虚拟桌面', value: 'send {LControl down}{LWin down}{Left}{LWin up}{LControl up}' },
         { label: '下一个虚拟桌面', value: 'send {LControl down}{LWin down}{Right}{LWin up}{LControl up}' },
         { label: '移动窗口到下一个显示器', value: 'send #+{right}' },
       ],
@@ -157,7 +157,10 @@ export default {
       const toActivate = escapeFuncString(this.currKey().toActivate)
       const toRun = escapeFuncString(this.currKey().toRun)
       // console.log(toActivate, toRun)
-      this.currKey().value = `ActivateOrRun("${toActivate}", "${toRun}")`
+      this.currKey().value = `
+    path = ${toRun}
+    ActivateOrRun("${toActivate}", path)
+    return`
     },
     // note 当选项发生改变时,  是否要清空掉 value ?
     clearValue() {

@@ -13,18 +13,31 @@ function processConfig(config) {
 const s = new Vuex.Store({
   state: {
     config: null,
+    snackbar: false,
+    snackbarText: '',
   },
   mutations: {
     SET_CONFIG(state, value) {
       console.log('update config', value)
       state.config = value
-    }
+    },
+    SET_SNACKBAR(state, {snackbar, snackbarText}) {
+      state.snackbar = snackbar
+      state.snackbarText = snackbarText
+    },
   },
   actions: {
     saveConfig(store) {
       axios
         .put('http://localhost:8000/config', processConfig(store.state.config))
-        .then(resp => console.log(resp.data))
+        .then(resp => {
+          console.log(resp.data)
+          store.commit('SET_SNACKBAR', {snackbar: true, snackbarText: `保存成功`})
+        })
+        .catch(error => {
+          store.commit('SET_SNACKBAR', {snackbar: true, snackbarText: `保存失败`})
+          throw error
+        })
     },
     fetchConfig(store) {
       return axios.get('http://localhost:8000/config')

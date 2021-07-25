@@ -400,3 +400,68 @@ matchSemicolonAbbr(typo) {
 
 
 }
+
+enterSemicolonAbbr() 
+{
+    global SemicolonAbbrTip
+    if (SemicolonAbbrTip)
+        ToolTip, % surroundWithSpace("   ") 
+    Loop 
+    {
+        Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
+
+        if InStr(ErrorLevel, "EndKey:") {
+            break
+        }
+        if (ErrorLevel == "NewInput") {
+            ; ToolTip, NewInput
+            break
+        }
+            
+        typo := typo . key
+        if (SemicolonAbbrTip)
+            ToolTip, % surroundWithSpace(typo) 
+        if matchSemicolonAbbr(typo) {
+            break
+        }
+    }
+
+    typo := ""
+    if (SemicolonAbbrTip)
+        ToolTip,
+}
+
+
+enterCapslockAbbr() 
+{
+    WM_USER := 0x0400
+    SHOW_TIP := WM_USER + 0x0001
+    HIDE_TIP := WM_USER + 0x0002
+
+    postMessageToTipWidnow(SHOW_TIP)
+    Loop {
+        Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
+
+        if InStr(ErrorLevel, "EndKey:") {
+            typo := ""
+            ; ToolTip, You terminated the input with %ErrorLevel%.
+            postMessageToTipWidnow(HIDE_TIP)
+            break
+        }
+        if (ErrorLevel == "NewInput") {
+            ToolTip, NewInput
+            typo := ""
+            postMessageToTipWidnow(HIDE_TIP)
+            break
+        }
+            
+        typo := typo . key
+        postCharToTipWidnow(key)
+        if matchCapslockAbbr(typo) {
+            typo := ""
+            ; ToolTip, You matched a hotstring
+            break
+        }
+        ; ToolTip, %typo%
+    }
+}

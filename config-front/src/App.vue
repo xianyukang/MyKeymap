@@ -33,8 +33,8 @@
       <router-view v-if="config" />
     </v-main>
 
-    <v-snackbar v-model="snackbar" color="green">
-      {{ snackbarText }}
+    <v-snackbar v-model="$store.state.snackbar" color="green" timeout="1500">
+      {{ $store.state.snackbarText }}
       <template v-slot:action="{ attrs }">
         <v-btn color="black" text v-bind="attrs" @click="snackbar = false"> Close </v-btn>
       </template>
@@ -49,8 +49,6 @@ export default {
 
   data: () => ({
     drawer: true,
-    snackbar: false,
-    snackbarText: `保存成功`,
     items: [
       { title: 'Capslock', icon: 'mdi-triangle', to: 'Capslock', color: 'green' },
       { title: 'Capslock + F', icon: 'mdi-triangle', to: 'CapslockF', color: 'green' },
@@ -68,7 +66,6 @@ export default {
   methods: {
     saveConfig() {
       this.$store.dispatch('saveConfig')
-      this.snackbar = true
     },
   },
 

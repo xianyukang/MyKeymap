@@ -16,6 +16,7 @@ SetDefaultMouseSpeed, 0
 coordmode, mouse, screen
 settitlematchmode, 2
 
+SemicolonAbbrTip := true
 time_enter_repeat = T0.2
 delay_before_repeat = T0.01
 fast_one := 110     
@@ -146,17 +147,6 @@ RAlt::LCtrl
     {% endif %}
 {% endfor %}
 
-; ------ 窗口管理 ------
-e::send ^!{tab}
-w::send !{tab}
-x::SmartCloseWindow()
-r::SwitchWindows()
-q::WinMaximize, A
-b::myWinMinimize()
-s::center_window_to_current_monitor(1200, 800)
-a::center_window_to_current_monitor(1370, 930)
-d::send #+{right}
-; g::moveActiveWindow()
 
 space::
     ; ShowDimmer()
@@ -164,31 +154,17 @@ space::
     return
 
 f::
+    hotkey, *`;, off
     FMode := true
     CapslockMode := false
     SLOWMODE := false
     keywait f
     FMode := false
+    hotkey, *`;, on
     return
 
-; 鼠标
-/::centerMouse()
-*u::MouseClick, WheelUp, , , 1
-*o::MouseClick, WheelDown, , , 1
-h::horizontalScroll("h", -1)
-`;::horizontalScroll(";", 1)
 
-j::fastMoveMouse("j", -1, 0)
-k::fastMoveMouse("k", 0, 1)
-l::fastMoveMouse("l", 1, 0)
-i::fastMoveMouse("i", 0, -1)
 
-y::send  {LControl down}{LWin down}{Left}{LWin up}{LControl up}
-p::send {LControl down}{LWin down}{Right}{LWin up}{LControl up}
-
-*n::leftClick()
-m::rightClick()
-,::middleDown()
 
 #if SLOWMODE
 
@@ -198,86 +174,19 @@ m::rightClick()
     {% endif %}
 {% endfor %}
 
-*u::send {blind}{wheelup}
-*o::send {blind}{wheeldown}
-h::horizontalScroll("h", -1)
-`;::horizontalScroll(";", 1)
-*n::leftClick()
-m::rightClick()
-,::middleDown()
 
 esc::exitMouseMode()
 space::exitMouseMode()
 
-j::slowMoveMouse("j", -1, 0)
-k::slowMoveMouse("k", 0, 1)
-l::slowMoveMouse("l", 1, 0)
-i::slowMoveMouse("i", 0, -1)
 
 #if FMode
-
-; 配合 shit 键,  有可以多一倍的按键
-; 剩余按键 p、k、y、u、n、b、,、.、/、x
-; 由于指法无法利用的按键 t、g、c
-
 f::return
-
-
 
 {% for key,value in CapslockF.items()|sort(attribute="1.value") %}
     {% if value.value %}
 {{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
     {% endif %}
 {% endfor %}
-
-; 常用软件
-z::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\")
-a::ActivateOrRun("ahk_exe WindowsTerminal.exe", "shortcuts\Windows Terminal Preview.lnk")
-w::ActivateOrRun("ahk_exe chrome.exe", A_ProgramsCommon . "\Google Chrome.lnk")
-d::ActivateOrRun("ahk_exe msedge.exe", A_ProgramsCommon . "\Microsoft Edge.lnk")
-r::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe")
-p::ActivateOrRun("ahk_exe PaintDotNet.exe", "C:\ProgramMicrosoft\Windows\Start Menu\Programs\paint.net.lnk") 
-
-m::ActivateOrRun("ahk_exe MindManager.exe", "C:\Program Files\Mindjet\MindManager 19\MindManager.exe")
-q::ActivateOrRun("ahk_class EVERYTHING", A_ProgramFiles . "\Everything\Everything.exe")
-l::ActivateOrRun("ahk_class PotPlayer64", A_ProgramFiles . "\DAUM\PotPlayer\PotPlayerMini64.exe")
-
-; IDE、编辑器、笔记软件相关
-e::ActivateOrRun("ahk_class YXMainFrame", A_Programs . "\印象笔记\印象笔记.lnk")
-o::ActivateOrRun("OneNote for Windows 10", "shortcuts\OneNote for Windows 10.lnk")
-j::ActivateOrRun("ahk_exe idea64.exe", A_Programs . "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk") 
-h::ActivateOrRun("- Microsoft Visual Studio", A_ProgramsCommon . "\Visual Studio 2019.lnk") 
-u::ActivateOrRun("ahk_exe datagrip64.exe", A_Programs . "\JetBrains Toolbox\DataGrip.lnk") 
-s::ActivateOrRun("ahk_exe Code.exe", A_Programs . "\Visual Studio Code\Visual Studio Code.lnk")
-i::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe") 
-
-; 多按一个 shift 键,  于是按键数就多了一倍
-+w::ActivateOrRun("ahk_exe WINWORD.EXE", A_ProgramsCommon . "\Word.lnk")
-+p::ActivateOrRun("ahk_exe POWERPNT.EXE", A_ProgramsCommon . "\PowerPoint.lnk")
-
-
-#if HotsringMode
-#Hotstring *  B0 X
-
-;空格 退出模式
-:?*B0: ::
-    ExitHotstringMode()
-    ShowTip("Canceled !", 900)
-    return
-::xk::send (){left 1}
-::ss::send ""{left}
-::sk::send 「  」{left 2}
-::sl::send 【】{left 1}
-::zk::send []{left}
-::dk::send {{}{}}{left}
-::dh::send 、
-::jt::send   ➤{space 1}
-::gt::send 🐶
-::sm::send 《》{left}
-::rr::ReloadProgram()
-::ex::quit(true)        ; 退出程序
-::sd::slideToShutdown()
-::rb::shutdown, 2
 
 #IfWinActive, ahk_exe explorer.exe ahk_class MultitaskingViewFrame
 r::tab
@@ -319,4 +228,69 @@ matchSemicolonAbbr(typo) {
             return false
     }
     return true
+}
+
+enterSemicolonAbbr() 
+{
+    global SemicolonAbbrTip
+    if (SemicolonAbbrTip)
+        ToolTip, % surroundWithSpace("   ") 
+    Loop 
+    {
+        Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
+
+        if InStr(ErrorLevel, "EndKey:") {
+            break
+        }
+        if (ErrorLevel == "NewInput") {
+            ; ToolTip, NewInput
+            break
+        }
+            
+        typo := typo . key
+        if (SemicolonAbbrTip)
+            ToolTip, % surroundWithSpace(typo) 
+        if matchSemicolonAbbr(typo) {
+            break
+        }
+    }
+
+    typo := ""
+    if (SemicolonAbbrTip)
+        ToolTip,
+}
+
+
+enterCapslockAbbr() 
+{
+    WM_USER := 0x0400
+    SHOW_TIP := WM_USER + 0x0001
+    HIDE_TIP := WM_USER + 0x0002
+
+    postMessageToTipWidnow(SHOW_TIP)
+    Loop {
+        Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
+
+        if InStr(ErrorLevel, "EndKey:") {
+            typo := ""
+            ; ToolTip, You terminated the input with %ErrorLevel%.
+            postMessageToTipWidnow(HIDE_TIP)
+            break
+        }
+        if (ErrorLevel == "NewInput") {
+            ToolTip, NewInput
+            typo := ""
+            postMessageToTipWidnow(HIDE_TIP)
+            break
+        }
+            
+        typo := typo . key
+        postCharToTipWidnow(key)
+        if matchCapslockAbbr(typo) {
+            typo := ""
+            ; ToolTip, You matched a hotstring
+            break
+        }
+        ; ToolTip, %typo%
+    }
 }

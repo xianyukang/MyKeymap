@@ -31,7 +31,7 @@ def save_config():
         json.dump(data, f, indent=4, ensure_ascii=False)
         f.truncate()
     script.makeCapslock(data)
-    return 'ok'
+    return 'save config ok!'
 
 if __name__ == '__main__':
     app.run(port=8000, debug=True)
