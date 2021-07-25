@@ -337,6 +337,13 @@ matchCapslockAbbr(typo) {
 
 
 matchSemicolonAbbr(typo) {
+    
+    arr := [ "xk","ss","sk","rr","sl","zk","dk","dh","jt","gt","lx","sm","ex","sd","rb" ]
+
+    return arrayContains(arr, typo)
+}
+
+execSemicolonAbbr(typo) {
     switch typo 
     {
         case "ex":
@@ -400,9 +407,10 @@ enterSemicolonAbbr()
         }
     }
 
-    typo := ""
     if (SemicolonAbbrTip)
         ToolTip,
+
+    execSemicolonAbbr(typo)
 }
 
 

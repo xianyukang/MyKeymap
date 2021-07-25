@@ -216,6 +216,13 @@ matchCapslockAbbr(typo) {
 
 
 matchSemicolonAbbr(typo) {
+    
+    arr := [ {{{ SemicolonAbbrKeys|map('ahkString')|join(',') }}} ]
+
+    return arrayContains(arr, typo)
+}
+
+execSemicolonAbbr(typo) {
     switch typo 
     {
 {% for key,value in SemicolonAbbr.items()|sort(attribute="1.value") %}
@@ -255,9 +262,10 @@ enterSemicolonAbbr()
         }
     }
 
-    typo := ""
     if (SemicolonAbbrTip)
         ToolTip,
+
+    execSemicolonAbbr(typo)
 }
 
 

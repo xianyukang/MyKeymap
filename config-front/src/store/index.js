@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 function processConfig(config) {
   config['CapslockAbbrKeys'] = Object.keys(config.CapslockAbbr)
+  config['SemicolonAbbrKeys'] = Object.keys(config.SemicolonAbbr)
   return config
 }
 

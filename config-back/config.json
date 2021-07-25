@@ -1323,5 +1323,22 @@
         "kk"
     ],
     "snackbar": true,
-    "snackbarText": "保存成功"
+    "snackbarText": "保存成功",
+    "SemicolonAbbrKeys": [
+        "xk",
+        "ss",
+        "sk",
+        "rr",
+        "sl",
+        "zk",
+        "dk",
+        "dh",
+        "jt",
+        "gt",
+        "lx",
+        "sm",
+        "ex",
+        "sd",
+        "rb"
+    ]
 }
