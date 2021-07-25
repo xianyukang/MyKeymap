@@ -27,15 +27,12 @@ export default {
     keyChanged(key) {
       this.currentKey = key
     },
-    firstMappedKey(config) {
-      return 'Q'
-    }
   },
   data() {
     return {
-      currentKey: this.firstMappedKey(this.config),
+      currentKey: Object.keys(this.$store.state.config[this.$route.name])[0],
       keys: 'abcdefghijklmnopqrstuvwxyz,./',
-      items: ['启动程序或激活窗口', '发送按键或文本', '鼠标操作', '窗口操作', '执行 ahk 函数'],
+      items: ['启动程序或激活窗口', '发送按键或文本', '鼠标操作', '窗口操作', '执行单行 ahk 代码'],
     }
   },
   components: { Action, Keyboard },

@@ -1,6 +1,5 @@
 <template>
   <v-container id="app">
-    
     <!-- <v-row v-for="item in config.capslockf" :key="item.name" dense>
       <v-col cols="1">
         <v-chip dark color="green" label><span class="key">{{ item.key }}</span></v-chip>
@@ -27,18 +26,15 @@ export default {
     keyChanged(key) {
       this.currentKey = key
     },
-    firstMappedKey(config) {
-      return 'sd'
-    },
     deleteKey(toDel, toFocus) {
       console.log(toDel, toFocus)
       this.keyChanged(toFocus)
       delete this.currConfig()[toDel]
-    }
+    },
   },
   data() {
     return {
-      currentKey: this.firstMappedKey(this.config),
+      currentKey: Object.keys(this.$store.state.config[this.$route.name])[0],
     }
   },
   components: { Action, Abbr },
@@ -46,5 +42,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

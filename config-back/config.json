@@ -1022,173 +1022,87 @@
         }
     },
     "SemicolonAbbr": {
-        "sd": {
-            "type": "窗口操作",
-            "value": "winmaximize, A"
-        },
-        "se": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+        "xk": {
+            "type": "发送按键或文本",
+            "value": "send {blind}(){left 1}",
+            "keysToSend": "(){left 1}",
+            "prefix": "*"
         },
         "ss": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sf": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sa": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sq": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sw": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sr": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "st": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sy": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "su": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "si": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "so": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sp": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sg": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sh": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sj": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+            "type": "发送按键或文本",
+            "value": "send {blind}\"\"{left}",
+            "keysToSend": "\"\"{left}",
+            "prefix": "*"
         },
         "sk": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+            "type": "发送按键或文本",
+            "value": "send {blind}「  」{left 2}",
+            "keysToSend": "「  」{left 2}",
+            "prefix": "*"
+        },
+        "rr": {
+            "type": "执行单行 ahk 代码",
+            "value": "ReloadProgram()"
         },
         "sl": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+            "type": "发送按键或文本",
+            "value": "send {blind}【】{left 1}",
+            "keysToSend": "【】{left 1}",
+            "prefix": "*"
         },
-        "sz": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+        "zk": {
+            "type": "发送按键或文本",
+            "value": "send {blind}[]{left}",
+            "keysToSend": "[]{left}",
+            "prefix": "*"
         },
-        "sx": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+        "dk": {
+            "type": "发送按键或文本",
+            "value": "send {blind}{{}{}}{left}",
+            "keysToSend": "{{}{}}{left}",
+            "prefix": "*"
         },
-        "sc": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+        "dh": {
+            "type": "发送按键或文本",
+            "value": "send {blind}、",
+            "keysToSend": "、",
+            "prefix": "*"
         },
-        "sv": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+        "jt": {
+            "type": "发送按键或文本",
+            "value": "send {blind}➤{space 1}",
+            "keysToSend": "➤{space 1}",
+            "prefix": "*"
         },
-        "sb": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+        "gt": {
+            "type": "发送按键或文本",
+            "value": "send {blind}🐶",
+            "keysToSend": "🐶",
+            "prefix": "*"
         },
-        "sn": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+        "lx": {
+            "type": "发送按键或文本",
+            "value": "send {blind}💚",
+            "keysToSend": "💚",
+            "prefix": "*"
         },
         "sm": {
-            "type": "窗口操作",
-            "value": "SmartCloseWindow()"
+            "type": "发送按键或文本",
+            "value": "send {blind}《》{left}",
+            "keysToSend": "《》{left}",
+            "prefix": "*"
         },
-        "fi": {
-            "type": "什么也不做",
-            "value": ""
+        "ex": {
+            "type": "执行单行 ahk 代码",
+            "value": "quit(true)"
         },
-        "fa": {
-            "type": "什么也不做",
-            "value": ""
+        "sd": {
+            "type": "执行单行 ahk 代码",
+            "value": "slideToShutdown()"
         },
-        "ff": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "fo": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "fp": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "sC": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "dd": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "dp": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "da": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "dr": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "fb": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "fk": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "fr": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "fg": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "fh": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "kk": {
-            "type": "什么也不做",
-            "value": ""
+        "rb": {
+            "type": "执行单行 ahk 代码",
+            "value": "slideToReboot()"
         }
     },
     "CapslockAbbr": {

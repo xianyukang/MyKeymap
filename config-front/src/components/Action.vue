@@ -13,7 +13,12 @@
 
         <template v-if="currKey().type === '发送按键或文本'">
           <v-text-field label="要发送的按键或文本" outlined v-model="currKey().keysToSend" @input="sendKeys"></v-text-field>
-          
+          <img alt="img" :src="require('../assets/send-keys.png')"><img>
+        </template>
+
+        <template v-if="currKey().type === '执行单行 ahk 代码'">
+          <p id="single-line-code-hint">自定义的函数可以放到 data/custom_functions.ahk:</p>
+          <v-text-field label="单行代码" outlined v-model="currKey().value"></v-text-field>
           <img alt="img" :src="require('../assets/send-keys.png')"><img>
         </template>
 
@@ -194,9 +199,9 @@ export default {
   computed: {
     actionTypes() {
       if (this.$route.name === 'Capslock')
-        return ['什么也不做', '启动程序或激活窗口', '发送按键或文本', '鼠标操作', '窗口操作', '执行 ahk 函数']
+        return ['什么也不做', '启动程序或激活窗口', '发送按键或文本', '鼠标操作', '窗口操作', '执行单行 ahk 代码']
       else
-        return ['什么也不做', '启动程序或激活窗口', '发送按键或文本', '窗口操作', '执行 ahk 函数']
+        return ['什么也不做', '启动程序或激活窗口', '发送按键或文本', '窗口操作', '执行单行 ahk 代码']
     }
   },
 }
@@ -214,5 +219,9 @@ div.v-radio label.v-label {
 div.v-radio.v-item--active label.v-label {
   color: red;
   font-size: 1.1em;
+}
+#single-line-code-hint {
+  margin-top: -20px;
+  color: orangered;
 }
 </style>

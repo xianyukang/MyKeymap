@@ -8,7 +8,7 @@
 
 
 
-7::enterHotString()
+7::enterCapslockAbbr()
 
 8::
 BlockInput, off

@@ -41,7 +41,7 @@ RAlt::LCtrl
     keywait capslock
     CapslockMode := false
     if (A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450) {
-        enterHotString()
+        enterCapslockAbbr()
     }
     return
 
@@ -59,12 +59,11 @@ RAlt::LCtrl
 
 
 *`;::
-    hotstring("Reset")
     PunctuationMode := true
     keywait `; 
     PunctuationMode := false
     if (A_PriorKey == ";" && A_TimeSinceThisHotkey < 350)
-        EnterHotstringMode()
+        enterSemicolonAbbr()
     return
 
 
@@ -362,40 +361,50 @@ space::enter
 #IfWinActive
 
 
-enterHotString() 
-{
-    WM_USER := 0x0400
-    SHOW_TIP := WM_USER + 0x0001
-    HIDE_TIP := WM_USER + 0x0002
 
-    postMessageToTipWidnow(SHOW_TIP)
-    Loop {
-        Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
-
-        If InStr(ErrorLevel, "EndKey:") {
-            typo := ""
-            ; ToolTip, You terminated the input with %ErrorLevel%.
-            postMessageToTipWidnow(HIDE_TIP)
-            break
-        }
-        if (ErrorLevel == "NewInput") {
-            MsgBox, NewInput
-        }
-            
-        typo := typo . key
-        postCharToTipWidnow(key)
-        if matchHotString(typo) {
-            typo := ""
-            ; ToolTip, You matched a hotstring
-            break
-        }
-        ; ToolTip, %typo%
-    }
-}
-
-matchHotString(typo) {
+matchCapslockAbbr(typo) {
     
     arr := [ "sd","se","ss","sf","sa","sq","sw","sr","st","sy","su","si","so","sp","sg","sh","sj","sk","sl","sz","sx","sc","sv","sb","sn","sm","fi","fa","ff","fo","fp","sC","dd","dp","da","dr","fb","fk","fr","fg","fh","kk" ]
 
     return arrayContains(arr, typo)
+}
+
+
+matchSemicolonAbbr(typo) {
+    switch typo 
+    {
+        case "ex":
+            quit(true)
+        case "rr":
+            ReloadProgram()
+        case "ss":
+            send {blind}""{left}
+        case "xk":
+            send {blind}(){left 1}
+        case "zk":
+            send {blind}[]{left}
+        case "dk":
+            send {blind}{{}{}}{left}
+        case "jt":
+            send {blind}➤{space 1}
+        case "dh":
+            send {blind}、
+        case "sm":
+            send {blind}《》{left}
+        case "sk":
+            send {blind}「  」{left 2}
+        case "sl":
+            send {blind}【】{left 1}
+        case "gt":
+            send {blind}🐶
+        case "lx":
+            send {blind}💚
+        case "rb":
+            slideToReboot()
+        case "sd":
+            slideToShutdown()
+        default: 
+            return false
+    }
+    return true
 }

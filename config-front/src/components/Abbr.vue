@@ -80,10 +80,20 @@ export default {
         let k = this.abbr.replaceAll(' ', '')
         if (!k) return
         console.log('添加', k)
-        this.currConfig()[k] = {
+
+        // note 这里有 bug,  是非响应式属性
+        // note Vue 无法检测 property 的添加或移除。由于 Vue 会在初始化实例时对 property 执行 getter/setter 转化，所以 property 必须在 data 对象上存在才能让 Vue 将它转换为响应式的
+        // this.currConfig()[k] = {
+        //   type: '什么也不做',
+        //   value: '',
+        // }
+        
+        // 这样写,  才是响应式属性
+        this.$set(this.currConfig(), k, {
           type: '什么也不做',
           value: '',
-        }
+        })
+
         this.clickKey(k)
         this.abbr = ''
         return

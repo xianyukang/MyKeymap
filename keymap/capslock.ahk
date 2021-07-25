@@ -16,6 +16,7 @@ SetDefaultMouseSpeed, 0
 coordmode, mouse, screen
 settitlematchmode, 2
 
+SemicolonAbbrTip := true
 time_enter_repeat = T0.2
 delay_before_repeat = T0.01
 fast_one := 110     
@@ -37,12 +38,14 @@ RAlt::LCtrl
 +capslock::toggleCapslock()
 
 *capslock::
+    ; hotkey, *`;, off
     CapslockMode := true
     keywait capslock
     CapslockMode := false
     if (A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450) {
-        enterHotString()
+        enterCapslockAbbr()
     }
+    ; hotkey, *`;, on
     return
 
 
@@ -59,12 +62,11 @@ RAlt::LCtrl
 
 
 *`;::
-    hotstring("Reset")
     PunctuationMode := true
     keywait `; 
     PunctuationMode := false
     if (A_PriorKey == ";" && A_TimeSinceThisHotkey < 350)
-        EnterHotstringMode()
+        enterSemicolonAbbr()
     return
 
 
@@ -345,38 +347,8 @@ space::enter
 #IfWinActive
 
 
-enterHotString() 
-{
-    WM_USER := 0x0400
-    SHOW_TIP := WM_USER + 0x0001
-    HIDE_TIP := WM_USER + 0x0002
 
-    postMessageToTipWidnow(SHOW_TIP)
-    Loop {
-        Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
-
-        If InStr(ErrorLevel, "EndKey:") {
-            typo := ""
-            ; ToolTip, You terminated the input with %ErrorLevel%.
-            postMessageToTipWidnow(HIDE_TIP)
-            break
-        }
-        if (ErrorLevel == "NewInput") {
-            MsgBox, NewInput
-        }
-            
-        typo := typo . key
-        postCharToTipWidnow(key)
-        if matchHotString(typo) {
-            typo := ""
-            ; ToolTip, You matched a hotstring
-            break
-        }
-        ; ToolTip, %typo%
-    }
-}
-
-matchHotString(typo) {
+matchCapslockAbbr(typo) {
     
     arr := [ "sq", "sz", "sv"
             ,"sc", "se", "sd", "sr", "ss", "sf", "sa", "sg"
@@ -385,4 +357,46 @@ matchHotString(typo) {
             ,"fb", "fp", "fo", "fk", "fr", "fg", "fi", "ff", "fh"]
 
     return arrayContains(arr, typo)
+}
+
+
+matchSemicolonAbbr(typo) {
+    switch typo 
+    {
+        case "xk":
+            send (){left 1}
+        case "ss":
+            send ""{left}
+        case "sk":
+            send 「  」{left 2}
+        case "sl":
+            send 【】{left 1}
+        case "zk":
+            send []{left}
+        case "dk":
+            send {{}{}}{left}
+        case "dh":
+            send 、
+        case "jt":
+            send   ➤{space 1}
+        case "gt":
+            send 🐶
+        case "lx":
+            send 💚
+        case "sm":
+            send 《》{left}
+        case "rr":
+            ReloadProgram()
+        case "ex":
+            quit(true)        ; 退出程序
+        case "sd":
+            slideToShutdown()
+        case "rb":
+            slideToReboot()
+        default: 
+            return false
+    }
+    return true
+
+
 }
