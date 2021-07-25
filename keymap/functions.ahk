@@ -706,7 +706,7 @@ slideToReboot()
     run, SlideToShutDown
     sleep, 1300
     send, {Enter}
-    sleep, 250
+    sleep, 350
     shutdown, 2
 }
 
