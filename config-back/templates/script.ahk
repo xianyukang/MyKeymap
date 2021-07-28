@@ -6,8 +6,8 @@
 #include keymap/functions.ahk
 
 SetBatchLines -1
-ListLines Off
-process, Priority,, A
+; ListLines Off
+; process, Priority,, A
 SetWorkingDir %A_ScriptDir%  
 SendMode Input
 

@@ -24,6 +24,7 @@ class AhkScript:
 
     @staticmethod
     def ahkString(s):
+        s = s.replace('"',  '""')
         return '"' + s + '"'
 
     def makeCapslock(self, data):
