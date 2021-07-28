@@ -698,16 +698,14 @@ slideToShutdown()
 {
     run, SlideToShutDown
     sleep, 1300
-    send, {blind}{Enter}
-    send, {blind}{Enter}
+    MouseClick, Left, 100, 100
 }
 
 slideToReboot()
 {
     run, SlideToShutDown
     sleep, 1300
-    send, {blind}{Enter}
-    send, {blind}{Enter}
+    MouseClick, Left, 100, 100
     sleep, 450
     shutdown, 2
 }
