@@ -6,7 +6,7 @@
       </v-card-title>
       <v-card-text>
         <template v-if="currKey().type === '启动程序或激活窗口'">
-          <v-text-field label="要激活的窗口" outlined v-model="currKey().toActivate" @input="activateOrRun"></v-text-field>
+          <v-text-field label="要激活的窗口 (选填)" outlined v-model="currKey().toActivate" @input="activateOrRun"></v-text-field>
           <v-text-field label="窗口不存在时要启动的程序" outlined v-model="currKey().toRun" @input="activateOrRun">
           </v-text-field>
         </template>
@@ -86,7 +86,7 @@
             <v-divider></v-divider>
             <br />
 
-            <v-row>
+            <!-- <v-row>
               <v-col>
                 <v-radio
                   v-for="action in clickActions"
@@ -96,9 +96,50 @@
                 ></v-radio>
               </v-col>
               <v-col> </v-col>
-            </v-row>
+            </v-row> -->
+
           </v-radio-group>
         </template>
+
+        <template v-if="currKey().type === '其他功能'">
+          <v-radio-group v-model="currKey().value">
+            <v-row>
+              <v-col>
+                <v-radio
+                  v-for="action in otherFeatures1"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+              </v-col>
+              <v-col>
+                <v-radio
+                  v-for="action in otherFeatures2"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+              </v-col>
+            </v-row>
+
+            <br />
+            <v-divider></v-divider>
+            <br />
+
+            <!-- <v-row>
+              <v-col>
+                <v-radio
+                  v-for="action in clickActions"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+              </v-col>
+              <v-col> </v-col>
+            </v-row> -->
+          </v-radio-group>
+        </template>
+
       </v-card-text>
     </v-card>
   </v-container>
@@ -142,9 +183,21 @@ export default {
       ],
       windowActions2: [
         { label: '窗口最大化', value: 'winmaximize, A' },
-        { label: '窗口最小化', value: 'winminimize, A' },
+        { label: '窗口最小化', value: 'winMinimizeIgnoreDesktop()' },
         { label: '窗口居中(1200x800)', value: 'center_window_to_current_monitor(1200, 800)' },
         { label: '窗口居中(1370x930)', value: 'center_window_to_current_monitor(1370, 930)' },
+      ],
+      otherFeatures1: [
+        { label: '设置字体为红色', value: 'setColor("#D05")' },
+        { label: '设置字体为紫色', value: 'setColor("#b309bb")' },
+        { label: '设置字体为粉色', value: 'setColor("#FF00FF")' },
+        { label: '设置字体为蓝色', value: 'setColor("#2E66FF")' },
+        { label: '设置字体为绿色', value: 'setColor("#080")' },
+      ],
+      otherFeatures2: [
+        { label: '滑动关机', value: 'slideToShutdown()' },
+        { label: '滑动重启', value: 'slideToReboot()' },
+        { label: '窗口居中(1200x800)', value: 'center_window_to_current_monitor(1200, 800)' },
       ],
     }
   },
@@ -157,6 +210,11 @@ export default {
       const toActivate = escapeFuncString(this.currKey().toActivate)
       const toRun = escapeFuncString(this.currKey().toRun)
       // console.log(toActivate, toRun)
+
+      if (!toActivate) {
+          this.currKey().toActivate = ''
+      }
+
       this.currKey().value = `
     path = ${toRun}
     ActivateOrRun("${toActivate}", path)
@@ -202,9 +260,9 @@ export default {
   computed: {
     actionTypes() {
       if (this.$route.name === 'Capslock')
-        return ['什么也不做', '启动程序或激活窗口', '发送按键或文本', '鼠标操作', '窗口操作', '执行单行 ahk 代码']
+        return ['什么也不做', '启动程序或激活窗口', '发送按键或文本', '鼠标操作', '窗口操作', '其他功能', '执行单行 ahk 代码']
       else
-        return ['什么也不做', '启动程序或激活窗口', '发送按键或文本', '窗口操作', '执行单行 ahk 代码']
+        return ['什么也不做', '启动程序或激活窗口', '发送按键或文本', '窗口操作', '其他功能', '执行单行 ahk 代码']
     }
   },
 }

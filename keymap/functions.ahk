@@ -196,7 +196,7 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
 {
     to_activate := Trim(to_activate)
     ; WinShow, %to_activate%
-    if (winexist(to_activate))
+    if (to_activate && winexist(to_activate))
         MyGroupActivate(to_activate)
     else if (target != "")
     {
@@ -210,6 +210,7 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
 
         else
         {
+            oldTarget := target
             target := WhereIs(target)
             if (target)
             {
@@ -222,6 +223,8 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
                     ShellRun(target, args, workingdir)
                 }
 
+            } else {
+                run, %oldTarget%
             }
         }
 
@@ -783,18 +786,16 @@ center_window_to_current_monitor(width, height)
     DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }
 
-myWinMinimize() {
-    IfWinActive, ahk_exe explorer.exe
-    {
-        WinGetClass, activeClass, A
-        if (activeClass != "CabinetWClass") {
-            return
-        }
-    }
-    IfWinActive, ahk_exe Rainmeter.exe
-    {
+winMinimizeIgnoreDesktop() 
+{
+    ; 如果是这个窗口是桌面就返回
+    if (winactive("ahk_class WorkerW ahk_exe explorer.exe"))
         return
-    }
+    if (winactive("ahk_class CabinetWClass ahk_exe explorer.exe"))
+        return
+    if (winactive("ahk_exe Rainmeter.exe"))
+        return
+
     WinMinimize, A
 }
 
@@ -831,4 +832,120 @@ toggleCapslock() {
 
 surroundWithSpace(message) {
     return "  " . message . "  "
+}
+
+
+copySelectedText()
+{
+    ; old_clipboard := clipboardall
+    clipboard =
+    send ^c
+    send ^{insert}
+    clipwait, 0.5, 1
+
+    if (errorlevel) {
+        tip("copy text failed", -700)
+        return ""
+    }
+
+    r := rtrim(clipboard, "`n")
+    return r
+}
+
+addHtmlStyle(text, style )
+{
+    text := htmlEscape(text)
+
+    if (instr(text, "`n")) 
+        html = <span style="%style%"><pre>%text%</pre></span>
+    else 
+        html = <span style="%style%">%text%</span>
+
+    return html
+}
+
+
+; modified from jackieku's code (http://www.autohotkey.com/forum/post-310959.html#310959)
+UriEncode(Uri, Enc = "UTF-8")
+{
+	StrPutVar(Uri, Var, Enc)
+	f := A_FormatInteger
+	SetFormat, IntegerFast, H
+	Loop
+	{
+		Code := NumGet(Var, A_Index - 1, "UChar")
+		If (!Code)
+			Break
+		If (Code >= 0x30 && Code <= 0x39 ; 0-9
+			|| Code >= 0x41 && Code <= 0x5A ; A-Z
+			|| Code >= 0x61 && Code <= 0x7A) ; a-z
+			Res .= Chr(Code)
+		Else
+			Res .= "%" . SubStr(Code + 0x100, -1)
+	}
+	SetFormat, IntegerFast, %f%
+	Return, Res
+}
+
+StrPutVar(Str, ByRef Var, Enc = "")
+{
+	Len := StrPut(Str, Enc) * (Enc = "UTF-16" || Enc = "CP1200" ? 2 : 1)
+	VarSetCapacity(Var, Len, 0)
+	Return, StrPut(Str, &Var, Enc)
+}
+
+ToggleTopMost()
+{
+    winexist("A")
+    WinGet, ExStyle, ExStyle
+    If (ExStyle & 0x8) {
+         ExStyle = AlwaysOnTop Off
+         winset, alwaysontop, off
+    }
+    Else {
+         ExStyle = AlwaysOnTop On
+         winset, alwaysontop, on
+    }
+    ShowTip(ExStyle, 800)
+}
+
+htmlEscape(text) 
+{
+    text := strReplace(text, "&", "&amp;")
+    text := strReplace(text, "<", "&lt;")
+    text := strReplace(text, ">", "&gt;")
+    text := strReplace(text, """", "&quot;")
+    text := strReplace(text, " ", "&nbsp;")
+    return text
+}
+
+setHtml(html)
+{
+    s := "<HTML> <head><meta http-equiv='Content-type' content='text/html;charset=UTF-8'></head> <body> <!--StartFragment-->"
+    s .= html
+    s .= "<!--EndFragment--></body></HTML> "
+    dllcall("clip_dll.dll\setHtml", "Str", s)
+}
+
+setColor(color := "#000000", fontFamily:= "Iosevka") 
+{
+    text := copySelectedText()
+    if (!text) {
+        return
+    }
+
+    style := "color: " color "; font-family: " fontFamily ";"
+    html := addHtmlStyle(text, style)
+    mdTemplate := "<font color='#D05'>{{text}}</font>"
+
+    if (WinActive(" - Typora")) {
+        clipboard := strReplace(mdTemplate, "{{text}}", text)
+    } else {
+        ; sleep 200
+        setHtml( html )
+        ; sleep 300
+        Sleep, 100
+    }
+
+    send {LShift down}{Insert down}{Insert up}{LShift up}
 }

@@ -139,7 +139,7 @@ htmlEscape(text)
 }
 
 
-set_color(text, style )
+addHtmlStyle(text, style )
 {
     text := htmlEscape(text)
 
@@ -476,41 +476,41 @@ handler_for_menu_style:
     if (selected_item == "P") {
         style := "color:#b309bb; font-family: Iosevka;"
         mdTemplate := "<font color='#b309bb'>{{text}}</font>"
-        html := set_color(text, style)
+        html := addHtmlStyle(text, style)
     }
     if (selected_item == "O") {
         style := "color:#FF00FF; font-family: Iosevka;"
         mdTemplate := "<font color='#FF00FF'>{{text}}</font>"
-        html := set_color(text, style)
+        html := addHtmlStyle(text, style)
     }
     if (selected_item == "K") {
         style := "color:#7B68EE; font-family: Iosevka;"
         mdTemplate := "<font color='#7B68EE'>{{text}}</font>"
-        html := set_color(text, style)
+        html := addHtmlStyle(text, style)
     }
     else if (selected_item == "R") {
         style := "color:#b309bb; font-family: Iosevka;"
         mdTemplate := "<font color='#b309bb'>{{text}}</font>"
-        html := set_color(text, style)
+        html := addHtmlStyle(text, style)
     }
     else if (selected_item == "G") {
         style :="color:#080; font-family: Iosevka;"
         mdTemplate := "<font color='#080'>{{text}}</font>"
-        html := set_color(text, style)
+        html := addHtmlStyle(text, style)
     }
     else if (selected_item == "B") {
         style := "color:#2E66FF; font-family: Iosevka;"
         mdTemplate := "<font color='#2E66FF'>{{text}}</font>"
-        html := set_color(text, style)
+        html := addHtmlStyle(text, style)
     }
     else if (selected_item == "I") {
         style := "color:#D05; font-family: Iosevka;"
         mdTemplate := "<font color='#D05'>{{text}}</font>"
-        html := set_color(text, style)
+        html := addHtmlStyle(text, style)
     }
     else if (selected_item == "F") {
         style := "font-family: Iosevka;"
-        html := set_color(text, style)
+        html := addHtmlStyle(text, style)
     }
     else if (selected_item == "H") {
         text := htmlEscape(text)

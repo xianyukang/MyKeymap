@@ -108,7 +108,7 @@
         },
         "B": {
             "type": "窗口操作",
-            "value": "winminimize, A"
+            "value": "winMinimizeIgnoreDesktop()"
         },
         "N": {
             "type": "鼠标操作",
@@ -1100,12 +1100,66 @@
             "value": "quit(true)"
         },
         "sd": {
-            "type": "执行单行 ahk 代码",
+            "type": "其他功能",
             "value": "slideToShutdown()"
         },
         "rb": {
-            "type": "执行单行 ahk 代码",
+            "type": "其他功能",
             "value": "slideToReboot()"
+        },
+        "fi": {
+            "type": "其他功能",
+            "value": "setColor(\"#D05\")"
+        },
+        "fp": {
+            "type": "其他功能",
+            "value": "setColor(\"#b309bb\")"
+        },
+        "fo": {
+            "type": "其他功能",
+            "value": "setColor(\"#FF00FF\")"
+        },
+        "fb": {
+            "type": "其他功能",
+            "value": "setColor(\"#2E66FF\")"
+        },
+        "fg": {
+            "type": "其他功能",
+            "value": "setColor(\"#080\")"
+        },
+        "fk": {
+            "type": "其他功能",
+            "value": "setColor(\"#7B68EE\")"
+        },
+        "dd": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = shell:downloads\n    ActivateOrRun(\"\", path)\n    return",
+            "toRun": "shell:downloads",
+            "toActivate": ""
+        },
+        "dp": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = shell:my pictures\n    ActivateOrRun(\"\", path)\n    return",
+            "toRun": "shell:my pictures",
+            "toActivate": ""
+        },
+        "dv": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = shell:My Video\n    ActivateOrRun(\"\", path)\n    return",
+            "toRun": "shell:My Video",
+            "toActivate": ""
+        },
+        "da": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = %A_WorkingDir%\n    ActivateOrRun(\"\", path)\n    return",
+            "toRun": "%A_WorkingDir%",
+            "toActivate": ""
+        },
+        "dr": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = shell:RecycleBinFolder\n    ActivateOrRun(\"\", path)\n    return",
+            "toRun": "shell:RecycleBinFolder",
+            "toActivate": ""
         }
     },
     "CapslockAbbr": {
@@ -1339,6 +1393,17 @@
         "sm",
         "ex",
         "sd",
-        "rb"
+        "rb",
+        "fi",
+        "fp",
+        "fo",
+        "fb",
+        "fg",
+        "fk",
+        "dd",
+        "dp",
+        "dv",
+        "da",
+        "dr"
     ]
 }

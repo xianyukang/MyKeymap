@@ -19,7 +19,7 @@
         </v-hover>
       </v-col>
       <v-col cols="auto">
-        <v-card height="76" width="340" elevation="5">
+        <v-card height="76" width="550" elevation="5">
           <v-card-title>
             <v-row>
               <v-col cols="12">
@@ -28,7 +28,7 @@
                   dense
                   v-model="abbr"
                   @keyup.enter="addAbbr"
-                  label="输入后按回车添加, 输入del ab删除ab"
+                  label="输入ab按回车添加ab, 输入del ab删除ab, 输入rn cd重命名为cd"
                 ></v-text-field>
               </v-col>
             </v-row>

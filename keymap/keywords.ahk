@@ -9,19 +9,8 @@ settitlematchmode, 2
 ListLines Off
 
 #Include, D:\MyFiles\MyKeymap\keymap\functions.ahk
-
 currentWindowId := A_ScriptHwnd
-;ToolTip, ininted
 return
-
-oldValue := A_DetectHiddenWindows
-DetectHiddenWindows, 1                      ; 先激活窗口, 否则标题栏会有闪烁: 失去焦点->获得焦点
-WinActivate, ahk_id %parentWindowHwnd%
-WinShow, ahk_id %parentWindowHwnd%
-
-DetectHiddenWindows, %oldValue%
-return
-
 
 setParentWindowHwnd(id) {
     global parentWindowHwnd
@@ -86,41 +75,41 @@ exec(keyword) {
         if (keyword == "fp") {
             style := "color:#b309bb; font-family: Iosevka;"
             mdTemplate := "<font color='#b309bb'>{{text}}</font>"
-            html := set_color(text, style)
+            html := addHtmlStyle(text, style)
         }
         else if (keyword == "fo") {
             style := "color:#FF00FF; font-family: Iosevka;"
             mdTemplate := "<font color='#FF00FF'>{{text}}</font>"
-            html := set_color(text, style)
+            html := addHtmlStyle(text, style)
         }
         else if (keyword == "fk") {
             style := "color:#7B68EE; font-family: Iosevka;"
             mdTemplate := "<font color='#7B68EE'>{{text}}</font>"
-            html := set_color(text, style)
+            html := addHtmlStyle(text, style)
         }
         else if (keyword == "fr") {
             style := "color:#b309bb; font-family: Iosevka;"
             mdTemplate := "<font color='#b309bb'>{{text}}</font>"
-            html := set_color(text, style)
+            html := addHtmlStyle(text, style)
         }
         else if (keyword == "fg") {
             style :="color:#080; font-family: Iosevka;"
             mdTemplate := "<font color='#080'>{{text}}</font>"
-            html := set_color(text, style)
+            html := addHtmlStyle(text, style)
         }
         else if (keyword == "fb") {
             style := "color:#2E66FF; font-family: Iosevka;"
             mdTemplate := "<font color='#2E66FF'>{{text}}</font>"
-            html := set_color(text, style)
+            html := addHtmlStyle(text, style)
         }
         else if (keyword == "fi") {
             style := "color:#D05; font-family: Iosevka;"
             mdTemplate := "<font color='#D05'>{{text}}</font>"
-            html := set_color(text, style)
+            html := addHtmlStyle(text, style)
         }
         else if (keyword == "ff") {
             style := "font-family: Iosevka;"
-            html := set_color(text, style)
+            html := addHtmlStyle(text, style)
         }
         else if (keyword == "fh") {
             text := htmlEscape(text)
@@ -154,26 +143,11 @@ exec_keyword(keyword) {
     ToolTip, %title%
 }
 
-; 需要等一定延迟后才能最大化、最小化、隐藏主窗口
-hide_parent_window:
-WinHide, ahk_id %parentWindowHwnd%
-return
-
-
-setHtml(html)
-{
-    s := "<HTML> <head><meta http-equiv='Content-type' content='text/html;charset=UTF-8'></head> <body> <!--StartFragment-->"
-    s .= html
-    s .= "<!--EndFragment--></body></HTML> "
-    dllcall("clip_dll.dll\setHtml", "Str", s)
-}
-
-
 
 
 translate(url)
 {
-    to_translate := get_text()
+    to_translate := copySelectedText()
     if (!to_translate)
         return
     exePath = C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
@@ -187,103 +161,6 @@ translate(url)
     arg := format(arg, UriEncode(to_translate))
     run, %exePath% %arg%
 }
-
-
-
-
-
-
-get_text()
-{
-    clipboard =
-    send ^c
-    send ^{insert}
-    clipwait, 0.5, 1
-    ; if (errorlevel)
-    ;     msgbox miss
-    r := rtrim(clipboard, "`n")
-    return r
-}
-
-htmlEscape(text)
-{
-    text := strReplace(text, "&", "&amp;")
-    text := strReplace(text, "<", "&lt;")
-    text := strReplace(text, ">", "&gt;")
-    text := strReplace(text, """", "&quot;")
-    text := strReplace(text, " ", "&nbsp;")
-    return text
-    
-}
-
-
-set_color(text, style )
-{
-    text := htmlEscape(text)
-
-    if (instr(text, "`n")) 
-        html = <span style="%style%"><pre>%text%</pre></span>
-    else 
-        html = <span style="%style%">%text%</span>
-
-    return html
-}
-
-
-
-; modified from jackieku's code (http://www.autohotkey.com/forum/post-310959.html#310959)
-UriEncode(Uri, Enc = "UTF-8")
-{
-	StrPutVar(Uri, Var, Enc)
-	f := A_FormatInteger
-	SetFormat, IntegerFast, H
-	Loop
-	{
-		Code := NumGet(Var, A_Index - 1, "UChar")
-		If (!Code)
-			Break
-		If (Code >= 0x30 && Code <= 0x39 ; 0-9
-			|| Code >= 0x41 && Code <= 0x5A ; A-Z
-			|| Code >= 0x61 && Code <= 0x7A) ; a-z
-			Res .= Chr(Code)
-		Else
-			Res .= "%" . SubStr(Code + 0x100, -1)
-	}
-	SetFormat, IntegerFast, %f%
-	Return, Res
-}
-
-
-StrPutVar(Str, ByRef Var, Enc = "")
-{
-	Len := StrPut(Str, Enc) * (Enc = "UTF-16" || Enc = "CP1200" ? 2 : 1)
-	VarSetCapacity(Var, Len, 0)
-	Return, StrPut(Str, &Var, Enc)
-}
-
-
-
-
-
-
-ToggleTopMost()
-{
-    winexist("A")
-    WinGet, ExStyle, ExStyle
-    If (ExStyle & 0x8) {
-         ExStyle = AlwaysOnTop Off
-         winset, alwaysontop, off
-    }
-    Else {
-         ExStyle = AlwaysOnTop On
-         winset, alwaysontop, on
-    }
-    ShowTip(ExStyle, 800)
-}
-
-
-
-
 
 
 
@@ -316,24 +193,6 @@ init_menu()
     Menu, menuStyle, Add, (&H)  Hightlight, handler_for_menu_style
     Menu, menuStyle, Add, (&F)  Font, handler_for_menu_style
 
-
-    Menu, menuWindow, Add, (&E)  最大化, handler_for_menu_window
-    Menu, menuWindow, Add, (&D)  最小化, handler_for_menu_window
-    Menu, menuWindow, Add, (&R)  还原, handler_for_menu_window
-    Menu, menuWindow, Add, (&S)  移到左边, handler_for_menu_window
-    Menu, menuWindow, Add, (&F)  移到右边, handler_for_menu_window
-    Menu, menuWindow, Add, (&A)  移到左边显示器, handler_for_menu_window
-    Menu, menuWindow, Add, (&G)  移到右边显示器, handler_for_menu_window
-
-
-    Menu, menuWindow, Add
-    Menu, menuWindow, Add, (&C)  让窗口居中, handler_for_menu_window
-    Menu, menuWindow, Add, (&T)  让窗口置顶, handler_for_menu_window
-    Menu, menuWindow, Add, (&X)  关闭同类窗口, handler_for_menu_window
-    Menu, menuWindow, Add, (&Q)  打开任务管理器, handler_for_menu_window
-    Menu, menuWindow, Add, (&Z)  打开本 App 目录, handler_for_menu_window
-    Menu, menuWindow, Add, (&V)  打开音量控制器, handler_for_menu_window
-
     ; 把子菜单添加到主菜单
     Menu, menuMain, Add, (&S)  Window, :menuWindow
     Menu, menuMain, Add, (&F)  Style,  :menuStyle
@@ -348,64 +207,8 @@ init_menu()
 
 }
 
-
-close_tooltip:
-    tooltip
-    return
-
 handler_for_menu_OCR:
     run, E:\projects\apps\web-api\target\ocr.lnk
-return
-
-
-
-handler_for_menu_window:
-    selected_item := RegExReplace(A_ThisMenuItem,"\(&(.*)\)\s*(.*)","$1")
-    
-
-    if (selected_item == "Q") {
-        send ^+{esc}
-    }
-    else if (selected_item == "Z") {
-        run, %A_workingdir%
-    }
-    else if (selected_item == "V") {
-        run, sndvol.exe -f
-    }
-
-    ; 如果是这个窗口是桌面就返回
-    if (winactive("ahk_class WorkerW ahk_exe explorer.exe"))
-        return
-
-
-    if (selected_item == "E") {
-        winmaximize, A
-    }
-    else if (selected_item == "D") {
-        winminimize, A
-    }
-    else if (selected_item == "R") {
-        winrestore, A
-    }
-    else if (selected_item == "S") {
-        send, {LWin down}{left}{Lwin up}
-    }
-    else if (selected_item == "F") {
-        send, {LWin down}{right}{Lwin up}
-    }
-    else if (selected_item == "A") {
-        send #+{left}
-    }
-    else if (selected_item == "G") {
-        send #+{right}
-    }
-    else if (selected_item == "X") {
-        close_same_class_window()
-    }
-    else if (selected_item == "T") {
-        ; 这里直接调用函数会有问题,  所以用 timer 去调用,  fuck bug
-        settimer, ToggleTopMost, -100
-    }
 return
 
 
@@ -426,7 +229,7 @@ return
 handler_for_menu_style:
     selected_item := RegExReplace(A_ThisMenuItem,"\(&(.*)\)\s*(.*)","$1")
 
-    text := get_text()
+    text := copySelectedText()
 
     if (!text)
         return
@@ -452,41 +255,41 @@ handler_for_menu_style:
     if (selected_item == "P") {
         style := "color:#b309bb; font-family: Iosevka;"
         mdTemplate := "<font color='#b309bb'>{{text}}</font>"
-        html := set_color(text, style)
+        html := addHtmlStyle(text, style)
     }
     if (selected_item == "O") {
         style := "color:#FF00FF; font-family: Iosevka;"
         mdTemplate := "<font color='#FF00FF'>{{text}}</font>"
-        html := set_color(text, style)
+        html := addHtmlStyle(text, style)
     }
     if (selected_item == "K") {
         style := "color:#7B68EE; font-family: Iosevka;"
         mdTemplate := "<font color='#7B68EE'>{{text}}</font>"
-        html := set_color(text, style)
+        html := addHtmlStyle(text, style)
     }
     else if (selected_item == "R") {
         style := "color:#b309bb; font-family: Iosevka;"
         mdTemplate := "<font color='#b309bb'>{{text}}</font>"
-        html := set_color(text, style)
+        html := addHtmlStyle(text, style)
     }
     else if (selected_item == "G") {
         style :="color:#080; font-family: Iosevka;"
         mdTemplate := "<font color='#080'>{{text}}</font>"
-        html := set_color(text, style)
+        html := addHtmlStyle(text, style)
     }
     else if (selected_item == "B") {
         style := "color:#2E66FF; font-family: Iosevka;"
         mdTemplate := "<font color='#2E66FF'>{{text}}</font>"
-        html := set_color(text, style)
+        html := addHtmlStyle(text, style)
     }
     else if (selected_item == "I") {
         style := "color:#D05; font-family: Iosevka;"
         mdTemplate := "<font color='#D05'>{{text}}</font>"
-        html := set_color(text, style)
+        html := addHtmlStyle(text, style)
     }
     else if (selected_item == "F") {
         style := "font-family: Iosevka;"
-        html := set_color(text, style)
+        html := addHtmlStyle(text, style)
     }
     else if (selected_item == "H") {
         text := htmlEscape(text)
@@ -517,19 +320,4 @@ MsgMonitor(wParam, lParam, msg)
         ; show_menu()
     }
     ; ToolTip Message %msg% arrived:`nWPARAM: %wParam%`nLPARAM: %lParam%
-}
-
-copySelectedText()
-{
-    ; old_clipboard := clipboardall
-    clipboard =
-    send ^c
-    clipwait, 0.5, 1
-    if (errorlevel) {
-        ToolTip, copy text failed
-        SetTimer, close_tooltip, -700
-    }
-    r := rtrim(clipboard, "`n")
-
-    return r
 }

@@ -204,7 +204,7 @@ P::send {LControl down}{LWin down}{Right}{LWin up}{LControl up}
 X::SmartCloseWindow()
 R::SwitchWindows()
 Q::winmaximize, A
-B::winminimize, A
+B::winMinimizeIgnoreDesktop()
 
 
 space::
@@ -338,7 +338,7 @@ matchCapslockAbbr(typo) {
 
 matchSemicolonAbbr(typo) {
     
-    arr := [ "xk","ss","sk","rr","sl","zk","dk","dh","jt","gt","lx","sm","ex","sd","rb" ]
+    arr := [ "xk","ss","sk","rr","sl","zk","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr" ]
 
     return arrayContains(arr, typo)
 }
@@ -346,6 +346,31 @@ matchSemicolonAbbr(typo) {
 execSemicolonAbbr(typo) {
     switch typo 
     {
+        case "da":
+            
+    path = %A_WorkingDir%
+    ActivateOrRun("", path)
+    return
+        case "dd":
+            
+    path = shell:downloads
+    ActivateOrRun("", path)
+    return
+        case "dp":
+            
+    path = shell:my pictures
+    ActivateOrRun("", path)
+    return
+        case "dv":
+            
+    path = shell:My Video
+    ActivateOrRun("", path)
+    return
+        case "dr":
+            
+    path = shell:RecycleBinFolder
+    ActivateOrRun("", path)
+    return
         case "ex":
             quit(true)
         case "rr":
@@ -372,6 +397,18 @@ execSemicolonAbbr(typo) {
             send {blind}🐶
         case "lx":
             send {blind}💚
+        case "fg":
+            setColor("#080")
+        case "fb":
+            setColor("#2E66FF")
+        case "fk":
+            setColor("#7B68EE")
+        case "fp":
+            setColor("#b309bb")
+        case "fi":
+            setColor("#D05")
+        case "fo":
+            setColor("#FF00FF")
         case "rb":
             slideToReboot()
         case "sd":
