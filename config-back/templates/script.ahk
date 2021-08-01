@@ -24,7 +24,8 @@ fast_repeat := 70
 slow_one :=  10     
 slow_repeat := 13
 
-Menu, Tray, Icon, exe.ico
+Menu, Tray, Icon, resource\logo.ico
+Menu, Tray, Tip, MyKeymap 1.0 by 咸鱼康2333
 processPath := getProcessPath()
 SetWorkingDir, %processPath%
 
@@ -237,6 +238,21 @@ execSemicolonAbbr(typo) {
     return true
 }
 
+execCapslockAbbr(typo) {
+    switch typo 
+    {
+{% for key,value in CapslockAbbr.items()|sort(attribute="1.value") %}
+    {% if value.value %}
+        case {{{ key|ahkString }}}:
+            {{{ value.value }}}
+    {% endif %}
+{% endfor %}
+        default: 
+            return false
+    }
+    return true
+}
+
 enterSemicolonAbbr() 
 {
     global SemicolonAbbrTip
@@ -272,33 +288,34 @@ enterSemicolonAbbr()
 enterCapslockAbbr() 
 {
     WM_USER := 0x0400
-    SHOW_TIP := WM_USER + 0x0001
-    HIDE_TIP := WM_USER + 0x0002
+    SHOW_TYPO_WINDOW := WM_USER + 0x0001
+    HIDE_TYPO_WINDOW := WM_USER + 0x0002
 
-    postMessageToTipWidnow(SHOW_TIP)
-    Loop {
+    postMessageToTipWidnow(SHOW_TYPO_WINDOW)
+    result := ""
+
+    Loop 
+    {
         Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
 
         if InStr(ErrorLevel, "EndKey:") {
-            typo := ""
-            ; ToolTip, You terminated the input with %ErrorLevel%.
-            postMessageToTipWidnow(HIDE_TIP)
             break
         }
         if (ErrorLevel == "NewInput") {
-            ToolTip, NewInput
-            typo := ""
-            postMessageToTipWidnow(HIDE_TIP)
             break
         }
             
         typo := typo . key
         postCharToTipWidnow(key)
+
         if matchCapslockAbbr(typo) {
-            typo := ""
-            ; ToolTip, You matched a hotstring
+            result := typo
             break
         }
-        ; ToolTip, %typo%
     }
+
+    typo := ""
+    postMessageToTipWidnow(HIDE_TYPO_WINDOW)
+    if (result)
+        execCapslockAbbr(result)
 }

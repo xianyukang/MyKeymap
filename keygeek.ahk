@@ -18,18 +18,17 @@ catch{
 }
 
 
-pname := "ahk.exe"
+pname := "MyKeymap.exe"
 Loop
 {
    prev := ErrorLevel
-   Process, Close, %pname%
    Process, Close, %pname%
    Process, Exist, %pname%
 }
 until !ErrorLevel or (prev = ErrorLevel)
 
 ; run, "D:\project\win\command_bar\bin\Debug\KeyboardGeek.exe"
-run, "ahk.exe" "keymap\caps.ahk"
-; run, window.exe
+; run, "ahk.exe" "keymap\caps.ahk"
+run, MyKeymap.exe
 ; run, "tools\wgestures\WGestures.exe"
 ; run, D:\project\win\x64\Debug\window.bat, D:\project\win\x64\Debug\

@@ -1163,218 +1163,170 @@
         }
     },
     "CapslockAbbr": {
-        "sd": {
-            "type": "窗口操作",
-            "value": "winmaximize, A"
-        },
-        "se": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+        "xk": {
+            "type": "发送按键或文本",
+            "value": "send {blind}(){left 1}",
+            "keysToSend": "(){left 1}",
+            "prefix": "*"
         },
         "ss": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sf": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sa": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sq": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sw": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sr": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "st": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sy": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "su": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "si": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "so": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sp": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sg": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sh": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
-        },
-        "sj": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+            "type": "发送按键或文本",
+            "value": "send {blind}\"\"{left}",
+            "keysToSend": "\"\"{left}",
+            "prefix": "*"
         },
         "sk": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+            "type": "发送按键或文本",
+            "value": "send {blind}「  」{left 2}",
+            "keysToSend": "「  」{left 2}",
+            "prefix": "*"
+        },
+        "rr": {
+            "type": "执行单行 ahk 代码",
+            "value": "ReloadProgram()"
         },
         "sl": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+            "type": "发送按键或文本",
+            "value": "send {blind}【】{left 1}",
+            "keysToSend": "【】{left 1}",
+            "prefix": "*"
         },
-        "sz": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+        "zk": {
+            "type": "发送按键或文本",
+            "value": "send {blind}[]{left}",
+            "keysToSend": "[]{left}",
+            "prefix": "*"
         },
-        "sx": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+        "dk": {
+            "type": "发送按键或文本",
+            "value": "send {blind}{{}{}}{left}",
+            "keysToSend": "{{}{}}{left}",
+            "prefix": "*"
         },
-        "sc": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+        "dh": {
+            "type": "发送按键或文本",
+            "value": "send {blind}、",
+            "keysToSend": "、",
+            "prefix": "*"
         },
-        "sv": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+        "jt": {
+            "type": "发送按键或文本",
+            "value": "send {blind}➤{space 1}",
+            "keysToSend": "➤{space 1}",
+            "prefix": "*"
         },
-        "sb": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+        "gt": {
+            "type": "发送按键或文本",
+            "value": "send {blind}🐶",
+            "keysToSend": "🐶",
+            "prefix": "*"
         },
-        "sn": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+        "lx": {
+            "type": "发送按键或文本",
+            "value": "send {blind}💚",
+            "keysToSend": "💚",
+            "prefix": "*"
         },
         "sm": {
-            "type": "窗口操作",
-            "value": "SmartCloseWindow()"
+            "type": "发送按键或文本",
+            "value": "send {blind}《》{left}",
+            "keysToSend": "《》{left}",
+            "prefix": "*"
+        },
+        "ex": {
+            "type": "执行单行 ahk 代码",
+            "value": "quit(true)"
+        },
+        "sd": {
+            "type": "其他功能",
+            "value": "slideToShutdown()"
+        },
+        "rb": {
+            "type": "其他功能",
+            "value": "slideToReboot()"
         },
         "fi": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "fa": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "ff": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "fo": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "其他功能",
+            "value": "setColor(\"#D05\")"
         },
         "fp": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "其他功能",
+            "value": "setColor(\"#b309bb\")"
         },
-        "sC": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "dd": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "dp": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "da": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "dr": {
-            "type": "什么也不做",
-            "value": ""
+        "fo": {
+            "type": "其他功能",
+            "value": "setColor(\"#FF00FF\")"
         },
         "fb": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "fk": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "fr": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "其他功能",
+            "value": "setColor(\"#2E66FF\")"
         },
         "fg": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "其他功能",
+            "value": "setColor(\"#080\")"
         },
-        "fh": {
-            "type": "什么也不做",
-            "value": ""
+        "fk": {
+            "type": "其他功能",
+            "value": "setColor(\"#7B68EE\")"
         },
-        "kk": {
-            "type": "什么也不做",
-            "value": ""
+        "dd": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = shell:downloads\n    ActivateOrRun(\"\", path)\n    return",
+            "toRun": "shell:downloads",
+            "toActivate": ""
+        },
+        "dp": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = shell:my pictures\n    ActivateOrRun(\"\", path)\n    return",
+            "toRun": "shell:my pictures",
+            "toActivate": ""
+        },
+        "dv": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = shell:My Video\n    ActivateOrRun(\"\", path)\n    return",
+            "toRun": "shell:My Video",
+            "toActivate": ""
+        },
+        "da": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = %A_WorkingDir%\n    ActivateOrRun(\"\", path)\n    return",
+            "toRun": "%A_WorkingDir%",
+            "toActivate": ""
+        },
+        "dr": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = shell:RecycleBinFolder\n    ActivateOrRun(\"\", path)\n    return",
+            "toRun": "shell:RecycleBinFolder",
+            "toActivate": ""
         }
     },
     "CapslockAbbrKeys": [
-        "sd",
-        "se",
+        "xk",
         "ss",
-        "sf",
-        "sa",
-        "sq",
-        "sw",
-        "sr",
-        "st",
-        "sy",
-        "su",
-        "si",
-        "so",
-        "sp",
-        "sg",
-        "sh",
-        "sj",
         "sk",
+        "rr",
         "sl",
-        "sz",
-        "sx",
-        "sc",
-        "sv",
-        "sb",
-        "sn",
+        "zk",
+        "dk",
+        "dh",
+        "jt",
+        "gt",
+        "lx",
         "sm",
+        "ex",
+        "sd",
+        "rb",
         "fi",
-        "fa",
-        "ff",
-        "fo",
         "fp",
-        "sC",
+        "fo",
+        "fb",
+        "fg",
+        "fk",
         "dd",
         "dp",
+        "dv",
         "da",
-        "dr",
-        "fb",
-        "fk",
-        "fr",
-        "fg",
-        "fh",
-        "kk"
+        "dr"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",

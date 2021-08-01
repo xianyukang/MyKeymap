@@ -669,8 +669,8 @@ arrayContains(arr, target)
 postCharToTipWidnow(char) {
     oldValue := A_DetectHiddenWindows
     DetectHiddenWindows, 1
-    tipWindowId := WinExist("ahk_class xianyukang_window")
-    PostMessage, 0x0102, Ord(char), 0, , ahk_id %tipWindowId%
+    if WinExist("ahk_class MyKeymap_Typo_Window")
+        PostMessage, 0x0102, Ord(char), 0
     DetectHiddenWindows, %oldValue%
 }
 
@@ -678,8 +678,8 @@ postCharToTipWidnow(char) {
 postMessageToTipWidnow(messageType) {
     oldValue := A_DetectHiddenWindows
     DetectHiddenWindows, 1
-    tipWindowId := WinExist("ahk_class xianyukang_window")
-    PostMessage, %messageType%, 0, 0, , ahk_id %tipWindowId%
+    if WinExist("ahk_class MyKeymap_Typo_Window")
+        PostMessage, %messageType%, 0, 0
     DetectHiddenWindows, %oldValue%
 }
 

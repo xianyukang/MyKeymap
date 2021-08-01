@@ -24,7 +24,8 @@ fast_repeat := 70
 slow_one :=  10     
 slow_repeat := 13
 
-Menu, Tray, Icon, exe.ico
+Menu, Tray, Icon, resource\logo.ico
+Menu, Tray, Tip, MyKeymap 1.0 by 咸鱼康2333
 processPath := getProcessPath()
 SetWorkingDir, %processPath%
 
@@ -330,7 +331,7 @@ space::enter
 
 matchCapslockAbbr(typo) {
     
-    arr := [ "sd","se","ss","sf","sa","sq","sw","sr","st","sy","su","si","so","sp","sg","sh","sj","sk","sl","sz","sx","sc","sv","sb","sn","sm","fi","fa","ff","fo","fp","sC","dd","dp","da","dr","fb","fk","fr","fg","fh","kk" ]
+    arr := [ "xk","ss","sk","rr","sl","zk","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr" ]
 
     return arrayContains(arr, typo)
 }
@@ -344,6 +345,82 @@ matchSemicolonAbbr(typo) {
 }
 
 execSemicolonAbbr(typo) {
+    switch typo 
+    {
+        case "da":
+            
+    path = %A_WorkingDir%
+    ActivateOrRun("", path)
+    return
+        case "dd":
+            
+    path = shell:downloads
+    ActivateOrRun("", path)
+    return
+        case "dp":
+            
+    path = shell:my pictures
+    ActivateOrRun("", path)
+    return
+        case "dv":
+            
+    path = shell:My Video
+    ActivateOrRun("", path)
+    return
+        case "dr":
+            
+    path = shell:RecycleBinFolder
+    ActivateOrRun("", path)
+    return
+        case "ex":
+            quit(true)
+        case "rr":
+            ReloadProgram()
+        case "ss":
+            send {blind}""{left}
+        case "xk":
+            send {blind}(){left 1}
+        case "zk":
+            send {blind}[]{left}
+        case "dk":
+            send {blind}{{}{}}{left}
+        case "jt":
+            send {blind}➤{space 1}
+        case "dh":
+            send {blind}、
+        case "sm":
+            send {blind}《》{left}
+        case "sk":
+            send {blind}「  」{left 2}
+        case "sl":
+            send {blind}【】{left 1}
+        case "gt":
+            send {blind}🐶
+        case "lx":
+            send {blind}💚
+        case "fg":
+            setColor("#080")
+        case "fb":
+            setColor("#2E66FF")
+        case "fk":
+            setColor("#7B68EE")
+        case "fp":
+            setColor("#b309bb")
+        case "fi":
+            setColor("#D05")
+        case "fo":
+            setColor("#FF00FF")
+        case "rb":
+            slideToReboot()
+        case "sd":
+            slideToShutdown()
+        default: 
+            return false
+    }
+    return true
+}
+
+execCapslockAbbr(typo) {
     switch typo 
     {
         case "da":
@@ -454,33 +531,34 @@ enterSemicolonAbbr()
 enterCapslockAbbr() 
 {
     WM_USER := 0x0400
-    SHOW_TIP := WM_USER + 0x0001
-    HIDE_TIP := WM_USER + 0x0002
+    SHOW_TYPO_WINDOW := WM_USER + 0x0001
+    HIDE_TYPO_WINDOW := WM_USER + 0x0002
 
-    postMessageToTipWidnow(SHOW_TIP)
-    Loop {
+    postMessageToTipWidnow(SHOW_TYPO_WINDOW)
+    result := ""
+
+    Loop 
+    {
         Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
 
         if InStr(ErrorLevel, "EndKey:") {
-            typo := ""
-            ; ToolTip, You terminated the input with %ErrorLevel%.
-            postMessageToTipWidnow(HIDE_TIP)
             break
         }
         if (ErrorLevel == "NewInput") {
-            ToolTip, NewInput
-            typo := ""
-            postMessageToTipWidnow(HIDE_TIP)
             break
         }
             
         typo := typo . key
         postCharToTipWidnow(key)
+
         if matchCapslockAbbr(typo) {
-            typo := ""
-            ; ToolTip, You matched a hotstring
+            result := typo
             break
         }
-        ; ToolTip, %typo%
     }
+
+    typo := ""
+    postMessageToTipWidnow(HIDE_TYPO_WINDOW)
+    if (result)
+        execCapslockAbbr(result)
 }
