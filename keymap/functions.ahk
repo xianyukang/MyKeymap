@@ -709,7 +709,7 @@ slideToReboot()
     run, SlideToShutDown
     sleep, 1300
     MouseClick, Left, 100, 100
-    sleep, 450
+    sleep, 350
     shutdown, 2
 }
 
