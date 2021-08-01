@@ -501,6 +501,8 @@ enterSemicolonAbbr()
     global SemicolonAbbrTip
     if (SemicolonAbbrTip)
         ToolTip, % surroundWithSpace("   ") 
+
+    hotkey, *`j, off
     Loop 
     {
         Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
@@ -520,6 +522,7 @@ enterSemicolonAbbr()
             break
         }
     }
+    hotkey, *`j, on
 
     if (SemicolonAbbrTip)
         ToolTip,
@@ -537,6 +540,7 @@ enterCapslockAbbr()
     postMessageToTipWidnow(SHOW_TYPO_WINDOW)
     result := ""
 
+    hotkey, *`j, off
     Loop 
     {
         Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
@@ -556,6 +560,7 @@ enterCapslockAbbr()
             break
         }
     }
+    hotkey, *`j, on
 
     typo := ""
     postMessageToTipWidnow(HIDE_TYPO_WINDOW)
