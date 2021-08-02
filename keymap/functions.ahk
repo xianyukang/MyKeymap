@@ -936,10 +936,12 @@ setColor(color := "#000000", fontFamily:= "Iosevka")
 
     style := "color: " color "; font-family: " fontFamily ";"
     html := addHtmlStyle(text, style)
-    mdTemplate := "<font color='#D05'>{{text}}</font>"
+    md := "<font color='{{color}}'>{{text}}</font>"
 
     if (WinActive(" - Typora")) {
-        clipboard := strReplace(mdTemplate, "{{text}}", text)
+        md := strReplace(md, "{{text}}", text)
+        md := strReplace(md, "{{color}}", color)
+        clipboard := md
     } else {
         ; sleep 200
         setHtml( html )
