@@ -498,9 +498,9 @@ execCapslockAbbr(typo) {
 
 enterSemicolonAbbr() 
 {
-    global SemicolonAbbrTip
-    if (SemicolonAbbrTip)
-        ToolTip, % surroundWithSpace("   ") 
+    key := ""
+    typo := ""
+    ToolTip, % surroundWithSpace("   ") 
 
     hotkey, *`j, off
     Loop 
@@ -516,16 +516,14 @@ enterSemicolonAbbr()
         }
             
         typo := typo . key
-        if (SemicolonAbbrTip)
-            ToolTip, % surroundWithSpace(typo) 
+        ToolTip, % surroundWithSpace(typo) 
         if matchSemicolonAbbr(typo) {
             break
         }
     }
     hotkey, *`j, on
 
-    if (SemicolonAbbrTip)
-        ToolTip,
+    ToolTip,
 
     execSemicolonAbbr(typo)
 }
