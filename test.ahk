@@ -53,3 +53,34 @@ loopWindows() {
         IfMsgBox, NO, break
     }
 }
+
+
+onTypoChar(ih, char) {
+    ToolTip, % surroundWithSpace(ih.Input),,,17
+}
+
+onTypoEnd(ih) {
+    ToolTip, % surroundWithSpace(ih.Input),,,17
+}
+
+
+
+inputHookTest() {
+
+    ih := InputHook("C", "{Space}", "xk,sk,af")
+    ih.OnChar := Func("onTypoChar")
+    ih.OnEnd := Func("onTypoEnd")
+
+    ToolTip, % surroundWithSpace("   ") 
+    hotkey, *`j, off
+    ih.Start()
+    ih.Wait()
+    ih.Stop()
+    hotkey, *`j, on
+    ToolTip, ` , , , 17
+    WinHide, ahk_class tooltips_class32 ahk_exe MyKeymap.exe
+    if (ih.Match)
+        execSemicolonAbbr(ih.Match)
+}
+
+

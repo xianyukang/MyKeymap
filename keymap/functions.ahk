@@ -831,7 +831,7 @@ toggleCapslock() {
 
 
 surroundWithSpace(message) {
-    return "  " . message . "  "
+    return "   " . message . "   "
 }
 
 
