@@ -33,6 +33,10 @@ SetWorkingDir, %processPath%
 CoordMode, Mouse, Screen
 ; 多显示器不同缩放比例导致的问题,  https://www.autohotkey.com/boards/viewtopic.php?f=14&t=13810
 DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
+
+
+global typoTip := new TypoTipWindow()
+
 return
 
 RAlt::LCtrl
@@ -500,7 +504,7 @@ enterSemicolonAbbr()
 {
     key := ""
     typo := ""
-    ToolTip, % surroundWithSpace("   ") 
+    typoTip.show("    ") 
 
     hotkey, *`j, off
     Loop 
@@ -511,19 +515,18 @@ enterSemicolonAbbr()
             break
         }
         if (ErrorLevel == "NewInput") {
-            ; ToolTip, NewInput
             break
         }
             
         typo := typo . key
-        ToolTip, % surroundWithSpace(typo) 
+        typoTip.show(typo)
         if matchSemicolonAbbr(typo) {
             break
         }
     }
     hotkey, *`j, on
 
-    ToolTip,
+    typoTip.hide()
 
     execSemicolonAbbr(typo)
 }
