@@ -37,6 +37,10 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
+semiHook := InputHook("C", "{Space}", "xk,ss,sk,rr,sl,zk,dk,dh,jt,gt,lx,sm,ex,sd,rb,fi,fp,fo,fb,fg,fk,dd,dp,dv,da,dr,wy")
+semiHook.OnChar := Func("onTypoChar")
+semiHook.OnEnd := Func("onTypoEnd")
+
 return
 
 RAlt::LCtrl
@@ -52,8 +56,6 @@ RAlt::LCtrl
     return
 
 
-
-
 *j::
     JMode := true
     keywait `j
@@ -63,13 +65,12 @@ RAlt::LCtrl
     return
 
 
-
 *`;::
     PunctuationMode := true
     keywait `; 
     PunctuationMode := false
     if (A_PriorKey == ";" && A_TimeSinceThisHotkey < 350)
-        enterSemicolonAbbr()
+        enterSemicolonAbbr(semiHook)
     return
 
 
@@ -343,7 +344,7 @@ matchCapslockAbbr(typo) {
 
 matchSemicolonAbbr(typo) {
     
-    arr := [ "xk","ss","sk","rr","sl","zk","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr" ]
+    arr := [ "xk","ss","sk","rr","sl","zk","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr","wy" ]
 
     return arrayContains(arr, typo)
 }
@@ -380,6 +381,8 @@ execSemicolonAbbr(typo) {
             quit(true)
         case "rr":
             ReloadProgram()
+        case "wy":
+            send {blind}"
         case "ss":
             send {blind}""{left}
         case "xk":
@@ -500,37 +503,26 @@ execCapslockAbbr(typo) {
     return true
 }
 
-enterSemicolonAbbr() 
+enterSemicolonAbbr(ih) 
 {
-    key := ""
-    typo := ""
     typoTip.show("    ") 
-
     hotkey, *`j, off
-    Loop 
-    {
-        Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
-
-        if InStr(ErrorLevel, "EndKey:") {
-            break
-        }
-        if (ErrorLevel == "NewInput") {
-            break
-        }
-            
-        typo := typo . key
-        typoTip.show(typo)
-        if matchSemicolonAbbr(typo) {
-            break
-        }
-    }
+    ih.Start()
+    ih.Wait()
+    ih.Stop()
     hotkey, *`j, on
-
     typoTip.hide()
-
-    execSemicolonAbbr(typo)
+    if (ih.Match)
+        execSemicolonAbbr(ih.Match)
 }
 
+onTypoChar(ih, char) {
+    typoTip.show(ih.Input)
+}
+
+onTypoEnd(ih) {
+    ; typoTip.show(ih.Input)
+}
 
 enterCapslockAbbr() 
 {

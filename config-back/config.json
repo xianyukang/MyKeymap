@@ -1160,6 +1160,12 @@
             "value": "\n    path = shell:RecycleBinFolder\n    ActivateOrRun(\"\", path)\n    return",
             "toRun": "shell:RecycleBinFolder",
             "toActivate": ""
+        },
+        "wy": {
+            "type": "发送按键或文本",
+            "value": "send {blind}\"",
+            "keysToSend": "\"",
+            "prefix": "*"
         }
     },
     "CapslockAbbr": {
@@ -1356,6 +1362,7 @@
         "dp",
         "dv",
         "da",
-        "dr"
+        "dr",
+        "wy"
     ]
 }
