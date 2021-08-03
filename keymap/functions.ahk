@@ -224,7 +224,14 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
                 }
 
             } else {
-                run, %oldTarget%
+                try 
+                {
+                    run, %oldTarget%
+                }
+                catch e 
+                {
+                    tip(e.message)
+                } 
             }
         }
 
