@@ -37,7 +37,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{Space}", "xk,ss,sk,rr,sl,zk,dk,dh,jt,gt,lx,sm,ex,sd,rb,fi,fp,fo,fb,fg,fk,dd,dp,dv,da,dr,wy")
+semiHook := InputHook("C", "{Space}", "xk,ss,sk,rr,sl,zk,dk,dh,jt,gt,lx,sm,ex,sd,rb,fi,fp,fo,fb,fg,fk,dd,dp,dv,da,dr,wy,cout")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
 
@@ -344,7 +344,7 @@ matchCapslockAbbr(typo) {
 
 matchSemicolonAbbr(typo) {
     
-    arr := [ "xk","ss","sk","rr","sl","zk","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr","wy" ]
+    arr := [ "xk","ss","sk","rr","sl","zk","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr","wy","cout" ]
 
     return arrayContains(arr, typo)
 }
@@ -389,6 +389,8 @@ execSemicolonAbbr(typo) {
             send {blind}(){left 1}
         case "zk":
             send {blind}[]{left}
+        case "cout":
+            send {blind}cout <<  << endl;{left 9}
         case "dk":
             send {blind}{{}{}}{left}
         case "jt":

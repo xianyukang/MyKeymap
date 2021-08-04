@@ -1166,6 +1166,12 @@
             "value": "send {blind}\"",
             "keysToSend": "\"",
             "prefix": "*"
+        },
+        "cout": {
+            "type": "发送按键或文本",
+            "value": "send {blind}cout <<  << endl;{left 9}",
+            "keysToSend": "cout <<  << endl;{left 9}",
+            "prefix": "*"
         }
     },
     "CapslockAbbr": {
@@ -1363,6 +1369,7 @@
         "dv",
         "da",
         "dr",
-        "wy"
+        "wy",
+        "cout"
     ]
 }
