@@ -27,12 +27,20 @@ loop %winList%
 ; str = 1j        %A_ProgramsCommon%\Google Chrome.lnk      k
 ; tooltip, % str
 ; MsgBox, %result%
+SetTimer, toggleHook, 1000
+
 return
+
+toggleHook()
+{
+    Hotkey, *f21, Toggle
+}
 
 8::
 setColor("#D05")
 return
 
+*f21::return
 
 
 f9::
@@ -80,7 +88,7 @@ inputHookTest() {
     ToolTip, ` , , , 17
     WinHide, ahk_class tooltips_class32 ahk_exe MyKeymap.exe
     if (ih.Match)
-        execSemicolonAbbr(ih.Match)
+    return
 }
 
 
