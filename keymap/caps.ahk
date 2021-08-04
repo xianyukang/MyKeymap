@@ -6,7 +6,7 @@
 
 SetBatchLines -1
 ; ListLines Off
-process, Priority,, R
+process, Priority,, H
 SetWorkingDir %A_ScriptDir%  
 SendMode Input
 
