@@ -1,13 +1,12 @@
 #NoEnv
 #SingleInstance Force
-#UseHook
 #MaxHotkeysPerInterval 200
 #WinActivateForce               ; 解决「 winactivate 最小化的窗口时不会把窗口放到顶层(被其他窗口遮住) 」
 #include keymap/functions.ahk
 
 SetBatchLines -1
 ; ListLines Off
-; process, Priority,, A
+process, Priority,, R
 SetWorkingDir %A_ScriptDir%  
 SendMode Input
 
