@@ -27,7 +27,7 @@ Loop
 }
 until !ErrorLevel or (prev = ErrorLevel)
 
-; run, "D:\project\win\command_bar\bin\Debug\KeyboardGeek.exe"
+run, "D:\project\win\command_bar\bin\Debug\KeyboardGeek.exe"
 ; run, "ahk.exe" "keymap\caps.ahk"
 run, MyKeymap.exe
 run, "tools\wgestures\WGestures.exe"

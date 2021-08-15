@@ -36,13 +36,14 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{Space}", "xk,ss,sk,rr,sl,zk,dk,dh,jt,gt,lx,sm,ex,sd,rb,fi,fp,fo,fb,fg,fk,dd,dp,dv,da,dr,wy,cout")
+semiHook := InputHook("C", "{Space}", "xk,ss,sk,rr,sl,zk,dk,dh,jt,gt,lx,sm,ex,sd,rb,fi,fp,fo,fb,fg,fk,wy,cout")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
 
 return
 
 RAlt::LCtrl
+!'::ReloadProgram()
 +capslock::toggleCapslock()
 
 *capslock::
@@ -335,7 +336,7 @@ space::enter
 
 matchCapslockAbbr(typo) {
     
-    arr := [ "xk","ss","sk","rr","sl","zk","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr" ]
+    arr := [ "xk","ss","sk","sl","zk","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr","ne","vo" ]
 
     return arrayContains(arr, typo)
 }
@@ -343,7 +344,7 @@ matchCapslockAbbr(typo) {
 
 matchSemicolonAbbr(typo) {
     
-    arr := [ "xk","ss","sk","rr","sl","zk","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr","wy","cout" ]
+    arr := [ "xk","ss","sk","rr","sl","zk","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","wy","cout" ]
 
     return arrayContains(arr, typo)
 }
@@ -351,31 +352,6 @@ matchSemicolonAbbr(typo) {
 execSemicolonAbbr(typo) {
     switch typo 
     {
-        case "da":
-            
-    path = %A_WorkingDir%
-    ActivateOrRun("", path)
-    return
-        case "dd":
-            
-    path = shell:downloads
-    ActivateOrRun("", path)
-    return
-        case "dp":
-            
-    path = shell:my pictures
-    ActivateOrRun("", path)
-    return
-        case "dv":
-            
-    path = shell:My Video
-    ActivateOrRun("", path)
-    return
-        case "dr":
-            
-    path = shell:RecycleBinFolder
-    ActivateOrRun("", path)
-    return
         case "ex":
             quit(true)
         case "rr":
@@ -432,72 +408,65 @@ execCapslockAbbr(typo) {
     switch typo 
     {
         case "da":
-            
-    path = %A_WorkingDir%
-    ActivateOrRun("", path)
-    return
+            path = %A_WorkingDir%
+            ActivateOrRun("", path)
         case "dd":
-            
-    path = shell:downloads
-    ActivateOrRun("", path)
-    return
+            path = shell:downloads
+            ActivateOrRun("", path)
         case "dp":
-            
-    path = shell:my pictures
-    ActivateOrRun("", path)
-    return
+            path = shell:my pictures
+            ActivateOrRun("", path)
         case "dv":
-            
-    path = shell:My Video
-    ActivateOrRun("", path)
-    return
+            path = shell:My Video
+            ActivateOrRun("", path)
         case "dr":
-            
-    path = shell:RecycleBinFolder
-    ActivateOrRun("", path)
-    return
+            path = shell:RecycleBinFolder
+            ActivateOrRun("", path)
+        case "ne":
+            path = shortcuts\网易云音乐.lnk
+            ActivateOrRun("网易云音乐", path)
         case "ex":
-            quit(true)
-        case "rr":
-            ReloadProgram()
+           quit(true)
         case "ss":
-            send {blind}""{left}
+           send {blind}""{left}
+        case "vo":
+           send {blind}#b{sleep 300}#b{sleep 10}{left 4}{sleep 10}{space}
         case "xk":
-            send {blind}(){left 1}
+           send {blind}(){left 1}
         case "zk":
-            send {blind}[]{left}
+           send {blind}[]{left}
         case "dk":
-            send {blind}{{}{}}{left}
+           send {blind}{{}{}}{left}
         case "jt":
-            send {blind}➤{space 1}
+           send {blind}➤{space 1}
         case "dh":
-            send {blind}、
+           send {blind}、
         case "sm":
-            send {blind}《》{left}
+           send {blind}《》{left}
         case "sk":
-            send {blind}「  」{left 2}
+           send {blind}「  」{left 2}
         case "sl":
-            send {blind}【】{left 1}
+           send {blind}【】{left 1}
         case "gt":
-            send {blind}🐶
+           send {blind}🐶
         case "lx":
-            send {blind}💚
+           send {blind}💚
         case "fg":
-            setColor("#080")
+           setColor("#080")
         case "fb":
-            setColor("#2E66FF")
+           setColor("#2E66FF")
         case "fk":
-            setColor("#7B68EE")
+           setColor("#7B68EE")
         case "fp":
-            setColor("#b309bb")
+           setColor("#b309bb")
         case "fi":
-            setColor("#D05")
+           setColor("#D05")
         case "fo":
-            setColor("#FF00FF")
+           setColor("#FF00FF")
         case "rb":
-            slideToReboot()
+           slideToReboot()
         case "sd":
-            slideToShutdown()
+           slideToShutdown()
         default: 
             return false
     }

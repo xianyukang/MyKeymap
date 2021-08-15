@@ -43,6 +43,7 @@ semiHook.OnEnd := Func("onTypoEnd")
 return
 
 RAlt::LCtrl
+!'::ReloadProgram()
 +capslock::toggleCapslock()
 
 *capslock::
@@ -248,7 +249,7 @@ execCapslockAbbr(typo) {
 {% for key,value in CapslockAbbr.items()|sort(attribute="1.value") %}
     {% if value.value %}
         case {{{ key|ahkString }}}:
-            {{{ value.value }}}
+           {{{ value.value }}}
     {% endif %}
 {% endfor %}
         default: 

@@ -37,7 +37,10 @@ toggleHook()
 }
 
 8::
-setColor("#D05")
+activateNetwork()
+return
+9::
+activateVolumne()
 return
 
 *f21::return
@@ -46,6 +49,19 @@ return
 f9::
 return
 0::Reload
+
+; 打开特定设置页面
+; https://docs.microsoft.com/en-us/windows/uwp/launch-resume/launch-settings-app
+
+activateNetwork()
+{
+    send #b{sleep 200}#b{sleep 10}{left 5}{sleep 10}{space}
+}
+
+activateVolumne()
+{
+    send #b{sleep 200}#b{sleep 10}{left 4}{sleep 10}{space}
+}
 
 loopWindows() {
     DetectHiddenWindows, off
