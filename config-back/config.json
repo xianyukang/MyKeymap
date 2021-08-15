@@ -17,8 +17,10 @@
             "value": "SwitchWindows()"
         },
         "T": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "输入文本或按键",
+            "value": "send {blind}#{left}",
+            "keysToSend": "#{left}",
+            "prefix": "*"
         },
         "Y": {
             "type": "窗口操作",

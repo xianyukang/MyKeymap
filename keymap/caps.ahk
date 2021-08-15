@@ -205,6 +205,7 @@ M::rightClick()
 W::send !{tab}
 D::send #+{right}
 E::send ^!{tab}
+*T::send {blind}#{left}
 Y::send {LControl down}{LWin down}{Left}{LWin up}{LControl up}
 P::send {LControl down}{LWin down}{Right}{LWin up}{LControl up}
 X::SmartCloseWindow()

@@ -798,8 +798,8 @@ winMinimizeIgnoreDesktop()
     ; 如果是这个窗口是桌面就返回
     if (winactive("ahk_class WorkerW ahk_exe explorer.exe"))
         return
-    if (winactive("ahk_class CabinetWClass ahk_exe explorer.exe"))
-        return
+    ; if (winactive("ahk_class CabinetWClass ahk_exe explorer.exe"))
+    ;     return
     if (winactive("ahk_exe Rainmeter.exe"))
         return
 
