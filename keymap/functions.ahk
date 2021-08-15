@@ -697,7 +697,7 @@ ReloadProgram()
     global exeFullPath
     global pid
     Menu, Tray, NoIcon 
-    tooltip, Reload !
+    tooltip, ` ` Reload !` ` 
     run, "keygeek.ahk"
     ;run, "%exeFullPath%" Reload
     ;process, close, %pid%

@@ -1,25 +1,45 @@
 <template>
   <v-container>
-    <v-card height="630" width="790" elevation="5">
+    <v-card min-height="630" width="790" elevation="5">
       <v-card-title>
-        <v-select :items="actionTypes" v-model="currKey().type" outlined @change="clearValue"></v-select>
+        <v-select
+          class="action-select"
+          :items="actionTypes"
+          v-model="currKey().type"
+          outlined
+          @change="clearValue"
+          :menu-props="{ maxHeight: 900 }"
+        ></v-select>
       </v-card-title>
       <v-card-text>
         <template v-if="currKey().type === '启动程序或激活窗口'">
-          <v-text-field label="要激活的窗口 (选填)" outlined v-model="currKey().toActivate" @input="activateOrRun"></v-text-field>
+          <v-text-field
+            label="要激活的窗口 (选填)"
+            outlined
+            v-model="currKey().toActivate"
+            @input="activateOrRun"
+          ></v-text-field>
           <v-text-field label="窗口不存在时要启动的程序" outlined v-model="currKey().toRun" @input="activateOrRun">
           </v-text-field>
         </template>
 
-        <template v-if="currKey().type === '发送按键或文本'">
-          <v-text-field label="要发送的按键或文本" outlined v-model="currKey().keysToSend" @input="sendKeys"></v-text-field>
-          <img alt="img" :src="require('../assets/send-keys.png')"><img>
+        <template v-if="currKey().type === '输入文本或按键'">
+          <v-textarea
+            outlined
+            auto-grow
+            rows="2"
+            label="要输入的文本"
+            v-model="currKey().textToSend"
+            @input="sendKeys"
+          ></v-textarea>
+          <v-text-field label="然后要输入的按键" outlined v-model="currKey().keysToSend" @input="sendKeys"></v-text-field>
+          <img alt="img" :src="require('../assets/send-keys.png')" /><img />
         </template>
 
         <template v-if="currKey().type === '执行单行 ahk 代码'">
           <p id="single-line-code-hint">自定义的函数可以放到 data/custom_functions.ahk:</p>
           <v-text-field label="单行代码" outlined v-model="currKey().value"></v-text-field>
-          <img alt="img" :src="require('../assets/send-keys.png')"><img>
+          <img alt="img" :src="require('../assets/send-keys.png')" /><img />
         </template>
 
         <template v-if="currKey().type === '鼠标操作'">
@@ -97,7 +117,6 @@
               </v-col>
               <v-col> </v-col>
             </v-row> -->
-
           </v-radio-group>
         </template>
 
@@ -139,7 +158,6 @@
             </v-row> -->
           </v-radio-group>
         </template>
-
       </v-card-text>
     </v-card>
   </v-container>
@@ -147,6 +165,11 @@
 
 <script>
 import { escapeFuncString } from '../util'
+
+function toAhkString(s) {
+  return s.replaceAll('"', '""')
+}
+
 export default {
   created() {},
   props: {
@@ -204,7 +227,16 @@ export default {
   methods: {
     sendKeys() {
       this.currKey().prefix = '*'
-      this.currKey().value = 'send {blind}' + this.currKey().keysToSend
+      const lines = []
+      if (this.currKey().textToSend) {
+        const list = toAhkString(this.currKey().textToSend).split('\n')
+        const result = list.map(item => `send % text("${item}")`).join(' "{enter}"\n')
+        lines.push(result)
+      }
+      if (this.currKey().keysToSend) {
+        lines.push('send {blind}' + this.currKey().keysToSend)
+      }
+      this.currKey().value = lines.join('\n')
     },
     activateOrRun() {
       const toActivate = escapeFuncString(this.currKey().toActivate)
@@ -212,7 +244,7 @@ export default {
       // console.log(toActivate, toRun)
 
       if (!toActivate) {
-          this.currKey().toActivate = ''
+        this.currKey().toActivate = ''
       }
 
       this.currKey().value = ` path = ${toRun}
@@ -258,10 +290,17 @@ export default {
   computed: {
     actionTypes() {
       if (this.$route.name === 'Capslock')
-        return ['什么也不做', '启动程序或激活窗口', '发送按键或文本', '鼠标操作', '窗口操作', '其他功能', '执行单行 ahk 代码']
-      else
-        return ['什么也不做', '启动程序或激活窗口', '发送按键或文本', '窗口操作', '其他功能', '执行单行 ahk 代码']
-    }
+        return [
+          '什么也不做',
+          '启动程序或激活窗口',
+          '输入文本或按键',
+          '鼠标操作',
+          '窗口操作',
+          '其他功能',
+          '执行单行 ahk 代码',
+        ]
+      else return ['什么也不做', '启动程序或激活窗口', '输入文本或按键', '窗口操作', '其他功能', '执行单行 ahk 代码']
+    },
   },
 }
 </script>
@@ -282,5 +321,9 @@ div.v-radio.v-item--active label.v-label {
 #single-line-code-hint {
   margin-top: -20px;
   color: orangered;
+}
+.action-select .v-select__selection {
+  color: black;
+  font-size: 1.1em;
 }
 </style>

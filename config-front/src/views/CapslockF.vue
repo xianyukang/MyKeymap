@@ -32,7 +32,7 @@ export default {
     return {
       currentKey: Object.keys(this.$store.state.config[this.$route.name])[0],
       keys: 'abcdefghijklmnopqrstuvwxyz,./',
-      items: ['启动程序或激活窗口', '发送按键或文本', '鼠标操作', '窗口操作', '执行单行 ahk 代码'],
+      items: ['启动程序或激活窗口', '输入文本或按键', '鼠标操作', '窗口操作', '执行单行 ahk 代码'],
     }
   },
   components: { Action, Keyboard },

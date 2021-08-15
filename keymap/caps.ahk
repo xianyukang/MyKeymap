@@ -36,7 +36,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{Space}", "xk,ss,sk,rr,sl,zk,dk,dh,jt,gt,lx,sm,ex,sd,rb,fi,fp,fo,fb,fg,fk,wy,cout")
+semiHook := InputHook("C", "{Space}", "xk,ss,sk,rr,sl,zk,dk,dh,jt,gt,lx,sm,ex,sd,rb,fi,fp,fo,fb,fg,fk,wy,cout,zh,gg")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
 
@@ -344,7 +344,7 @@ matchCapslockAbbr(typo) {
 
 matchSemicolonAbbr(typo) {
     
-    arr := [ "xk","ss","sk","rr","sl","zk","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","wy","cout" ]
+    arr := [ "xk","ss","sk","rr","sl","zk","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","wy","cout","zh","gg" ]
 
     return arrayContains(arr, typo)
 }
@@ -356,6 +356,12 @@ execSemicolonAbbr(typo) {
             quit(true)
         case "rr":
             ReloadProgram()
+        case "zh":
+            send % text(" site:zhihu.com")
+send {blind}{enter}
+        case "gg":
+            send % text("git add -A; git commit -a -m """"; git push origin (git branch --show-current);")
+send {blind}{left 47}
         case "wy":
             send {blind}"
         case "ss":

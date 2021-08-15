@@ -314,25 +314,25 @@
             "value": ""
         },
         "U": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}4",
             "keysToSend": "4",
             "prefix": "*"
         },
         "I": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}5",
             "keysToSend": "5",
             "prefix": "*"
         },
         "O": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}6",
             "keysToSend": "6",
             "prefix": "*"
         },
         "P": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}7",
             "keysToSend": "7",
             "prefix": "*"
@@ -358,25 +358,25 @@
             "value": ""
         },
         "H": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}0",
             "keysToSend": "0",
             "prefix": "*"
         },
         "J": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}1",
             "keysToSend": "1",
             "prefix": "*"
         },
         "K": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}2",
             "keysToSend": "2",
             "prefix": "*"
         },
         "L": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}3",
             "keysToSend": "3",
             "prefix": "*"
@@ -406,13 +406,13 @@
             "value": ""
         },
         "N": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}8",
             "keysToSend": "8",
             "prefix": "*"
         },
         "M": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}9",
             "keysToSend": "9",
             "prefix": "*"
@@ -456,25 +456,25 @@
             "value": ""
         },
         "U": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{f4}",
             "keysToSend": "{f4}",
             "prefix": "*"
         },
         "I": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{f5}",
             "keysToSend": "{f5}",
             "prefix": "*"
         },
         "O": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{f6}",
             "keysToSend": "{f6}",
             "prefix": "*"
         },
         "P": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{f7}",
             "keysToSend": "{f7}",
             "prefix": "*"
@@ -500,25 +500,25 @@
             "value": ""
         },
         "H": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{f10}",
             "keysToSend": "{f10}",
             "prefix": "*"
         },
         "J": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{f1}",
             "keysToSend": "{f1}",
             "prefix": "*"
         },
         "K": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{f2}",
             "keysToSend": "{f2}",
             "prefix": "*"
         },
         "L": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{f3}",
             "keysToSend": "{f3}",
             "prefix": "*"
@@ -548,19 +548,19 @@
             "value": ""
         },
         "N": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{f8}",
             "keysToSend": "{f8}",
             "prefix": "*"
         },
         "M": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{f9}",
             "keysToSend": "{f9}",
             "prefix": "*"
         },
         ",": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{f11}",
             "keysToSend": "{f11}",
             "prefix": "*"
@@ -570,7 +570,7 @@
             "value": ""
         },
         "/": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{f12}",
             "keysToSend": "{f12}",
             "prefix": "*"
@@ -704,31 +704,31 @@
     },
     "JMode": {
         "Q": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{pgup}",
             "prefix": "*",
             "keysToSend": "{pgup}"
         },
         "W": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}+{tab}",
             "prefix": "*",
             "keysToSend": "+{tab}"
         },
         "E": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{up}",
             "prefix": "*",
             "keysToSend": "{up}"
         },
         "R": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{tab}",
             "keysToSend": "{tab}",
             "prefix": "*"
         },
         "T": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{pgdn}",
             "keysToSend": "{pgdn}",
             "prefix": "*"
@@ -742,7 +742,7 @@
             "value": ""
         },
         "I": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{insert}",
             "keysToSend": "{insert}",
             "prefix": "*"
@@ -756,31 +756,31 @@
             "value": ""
         },
         "A": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{home}",
             "keysToSend": "{home}",
             "prefix": "*"
         },
         "S": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{left}",
             "keysToSend": "{left}",
             "prefix": "*"
         },
         "D": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{down}",
             "keysToSend": "{down}",
             "prefix": "*"
         },
         "F": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{right}",
             "keysToSend": "{right}",
             "prefix": "*"
         },
         "G": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{end}",
             "keysToSend": "{end}",
             "prefix": "*"
@@ -806,25 +806,25 @@
             "value": ""
         },
         "Z": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{appskey}",
             "keysToSend": "{appskey}",
             "prefix": "*"
         },
         "X": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{esc}",
             "keysToSend": "{esc}",
             "prefix": "*"
         },
         "C": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{backspace}",
             "keysToSend": "{backspace}",
             "prefix": "*"
         },
         "V": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{delete}",
             "keysToSend": "{delete}",
             "prefix": "*"
@@ -856,55 +856,55 @@
     },
     "Semicolon": {
         "Q": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}(",
             "prefix": "*",
             "keysToSend": "("
         },
         "W": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{#}",
             "prefix": "*",
             "keysToSend": "{#}"
         },
         "E": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{^}",
             "prefix": "*",
             "keysToSend": "{^}"
         },
         "R": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}&",
             "keysToSend": "&",
             "prefix": "*"
         },
         "T": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}~",
             "keysToSend": "~",
             "prefix": "*"
         },
         "Y": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}@",
             "keysToSend": "@",
             "prefix": "*"
         },
         "U": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}$",
             "keysToSend": "$",
             "prefix": "*"
         },
         "I": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}*",
             "keysToSend": "*",
             "prefix": "*"
         },
         "O": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{space 4}",
             "keysToSend": "{space 4}",
             "prefix": "*"
@@ -914,49 +914,49 @@
             "value": ""
         },
         "A": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}:",
             "keysToSend": ":",
             "prefix": "*"
         },
         "S": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}<",
             "keysToSend": "<",
             "prefix": "*"
         },
         "D": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}=",
             "keysToSend": "=",
             "prefix": "*"
         },
         "F": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}>",
             "keysToSend": ">",
             "prefix": "*"
         },
         "G": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{!}",
             "keysToSend": "{!}",
             "prefix": "*"
         },
         "H": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}`;",
             "keysToSend": "`;",
             "prefix": "*"
         },
         "J": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{+}",
             "keysToSend": "{+}",
             "prefix": "*"
         },
         "K": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}``",
             "keysToSend": "``",
             "prefix": "*"
@@ -970,43 +970,43 @@
             "value": ""
         },
         "Z": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}\\",
             "keysToSend": "\\",
             "prefix": "*"
         },
         "X": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}_",
             "keysToSend": "_",
             "prefix": "*"
         },
         "C": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}.",
             "keysToSend": ".",
             "prefix": "*"
         },
         "V": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}|",
             "keysToSend": "|",
             "prefix": "*"
         },
         "B": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}`%",
             "keysToSend": "`%",
             "prefix": "*"
         },
         "N": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}/",
             "keysToSend": "/",
             "prefix": "*"
         },
         "M": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}-",
             "keysToSend": "-",
             "prefix": "*"
@@ -1026,19 +1026,19 @@
     },
     "SemicolonAbbr": {
         "xk": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}(){left 1}",
             "keysToSend": "(){left 1}",
             "prefix": "*"
         },
         "ss": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}\"\"{left}",
             "keysToSend": "\"\"{left}",
             "prefix": "*"
         },
         "sk": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}「  」{left 2}",
             "keysToSend": "「  」{left 2}",
             "prefix": "*"
@@ -1048,49 +1048,50 @@
             "value": "ReloadProgram()"
         },
         "sl": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}【】{left 1}",
             "keysToSend": "【】{left 1}",
             "prefix": "*"
         },
         "zk": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}[]{left}",
             "keysToSend": "[]{left}",
-            "prefix": "*"
+            "prefix": "*",
+            "textToSend": ""
         },
         "dk": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{{}{}}{left}",
             "keysToSend": "{{}{}}{left}",
             "prefix": "*"
         },
         "dh": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}、",
             "keysToSend": "、",
             "prefix": "*"
         },
         "jt": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}➤{space 1}",
             "keysToSend": "➤{space 1}",
             "prefix": "*"
         },
         "gt": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}🐶",
             "keysToSend": "🐶",
             "prefix": "*"
         },
         "lx": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}💚",
             "keysToSend": "💚",
             "prefix": "*"
         },
         "sm": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}《》{left}",
             "keysToSend": "《》{left}",
             "prefix": "*"
@@ -1132,81 +1133,95 @@
             "value": "setColor(\"#7B68EE\")"
         },
         "wy": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}\"",
             "keysToSend": "\"",
             "prefix": "*"
         },
         "cout": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}cout <<  << endl;{left 9}",
             "keysToSend": "cout <<  << endl;{left 9}",
             "prefix": "*"
+        },
+        "zh": {
+            "type": "输入文本或按键",
+            "value": "send % text(\" site:zhihu.com\")\nsend {blind}{enter}",
+            "textToSend": " site:zhihu.com",
+            "prefix": "*",
+            "keysToSend": "{enter}"
+        },
+        "gg": {
+            "type": "输入文本或按键",
+            "value": "send % text(\"git add -A; git commit -a -m \"\"\"\"; git push origin (git branch --show-current);\")\nsend {blind}{left 47}",
+            "textToSend": "git add -A; git commit -a -m \"\"; git push origin (git branch --show-current);",
+            "prefix": "*",
+            "keysToSend": "{left 47}"
         }
     },
     "CapslockAbbr": {
         "xk": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}(){left 1}",
             "keysToSend": "(){left 1}",
             "prefix": "*"
         },
         "ss": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}\"\"{left}",
             "keysToSend": "\"\"{left}",
             "prefix": "*"
         },
         "sk": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}「  」{left 2}",
             "keysToSend": "「  」{left 2}",
             "prefix": "*"
         },
         "sl": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}【】{left 1}",
             "keysToSend": "【】{left 1}",
             "prefix": "*"
         },
         "zk": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}[]{left}",
             "keysToSend": "[]{left}",
             "prefix": "*"
         },
         "dk": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}{{}{}}{left}",
             "keysToSend": "{{}{}}{left}",
             "prefix": "*"
         },
         "dh": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}、",
             "keysToSend": "、",
             "prefix": "*"
         },
         "jt": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}➤{space 1}",
             "keysToSend": "➤{space 1}",
             "prefix": "*"
         },
         "gt": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}🐶",
             "keysToSend": "🐶",
             "prefix": "*"
         },
         "lx": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}💚",
             "keysToSend": "💚",
             "prefix": "*"
         },
         "sm": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}《》{left}",
             "keysToSend": "《》{left}",
             "prefix": "*"
@@ -1284,7 +1299,7 @@
             "toRun": "shortcuts\\网易云音乐.lnk"
         },
         "vo": {
-            "type": "发送按键或文本",
+            "type": "输入文本或按键",
             "value": "send {blind}#b{sleep 300}#b{sleep 10}{left 4}{sleep 10}{space}",
             "keysToSend": "#b{sleep 300}#b{sleep 10}{left 4}{sleep 10}{space}",
             "prefix": "*"
@@ -1344,6 +1359,8 @@
         "fg",
         "fk",
         "wy",
-        "cout"
+        "cout",
+        "zh",
+        "gg"
     ]
 }

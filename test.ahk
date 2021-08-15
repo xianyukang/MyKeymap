@@ -37,7 +37,8 @@ toggleHook()
 }
 
 8::
-activateNetwork()
+send % text("")
+send {blind} a b c
 return
 9::
 activateVolumne()
