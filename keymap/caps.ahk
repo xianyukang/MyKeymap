@@ -426,7 +426,7 @@ execCapslockAbbr(typo) {
     return
         case "vo":
            
-send {blind}#b{sleep 300}#b{sleep 10}{left 4}{sleep 10}{space}
+send {blind}#b{sleep 600}#b{sleep 10}{left 4}{sleep 10}{space}
 return
         case "da":
             path = %A_WorkingDir%
