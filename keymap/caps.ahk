@@ -8,7 +8,10 @@ SetBatchLines -1
 ; ListLines Off
 process, Priority,, H
 SetWorkingDir %A_ScriptDir%  
+; 使用 sendinput 时,  通过 alt+3+j 输入 alt+1 时,  会发送 ctrl+alt
 SendMode Input
+; SetKeyDelay, 0
+; SetMouseDelay, 0
 
 SetMouseDelay, 0  ; 发送完一个鼠标后不会 sleep
 SetDefaultMouseSpeed, 0
@@ -353,6 +356,11 @@ matchSemicolonAbbr(typo) {
 execSemicolonAbbr(typo) {
     switch typo 
     {
+        case "gg":
+            
+send % text("git add -A; git commit -a -m """"; git push origin (git branch --show-current);")
+send {blind}{left 47}
+return
         case "ex":
             quit(true)
         case "rr":
@@ -360,9 +368,6 @@ execSemicolonAbbr(typo) {
         case "zh":
             send % text(" site:zhihu.com")
 send {blind}{enter}
-        case "gg":
-            send % text("git add -A; git commit -a -m """"; git push origin (git branch --show-current);")
-send {blind}{left 47}
         case "wy":
             send {blind}"
         case "ss":
@@ -419,6 +424,10 @@ execCapslockAbbr(typo) {
     path = shortcuts\网易云音乐.lnk
     ActivateOrRun("网易云音乐", path)
     return
+        case "vo":
+           
+send {blind}#b{sleep 300}#b{sleep 10}{left 4}{sleep 10}{space}
+return
         case "da":
             path = %A_WorkingDir%
             ActivateOrRun("", path)
@@ -438,8 +447,6 @@ execCapslockAbbr(typo) {
            quit(true)
         case "ss":
            send {blind}""{left}
-        case "vo":
-           send {blind}#b{sleep 300}#b{sleep 10}{left 4}{sleep 10}{space}
         case "xk":
            send {blind}(){left 1}
         case "zk":

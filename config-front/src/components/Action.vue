@@ -227,7 +227,7 @@ export default {
   methods: {
     sendKeys() {
       this.currKey().prefix = '*'
-      const lines = []
+      const lines = ['']
       if (this.currKey().textToSend) {
         const list = toAhkString(this.currKey().textToSend).split('\n')
         const result = list.map(item => `send % text("${item}")`).join(' "{enter}"\n')
@@ -236,6 +236,7 @@ export default {
       if (this.currKey().keysToSend) {
         lines.push('send {blind}' + this.currKey().keysToSend)
       }
+      lines.push('return')
       this.currKey().value = lines.join('\n')
     },
     activateOrRun() {

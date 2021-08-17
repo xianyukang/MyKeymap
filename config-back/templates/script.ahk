@@ -8,7 +8,10 @@ SetBatchLines -1
 ; ListLines Off
 process, Priority,, H
 SetWorkingDir %A_ScriptDir%  
+; 使用 sendinput 时,  通过 alt+3+j 输入 alt+1 时,  会发送 ctrl+alt
 SendMode Input
+; SetKeyDelay, 0
+; SetMouseDelay, 0
 
 SetMouseDelay, 0  ; 发送完一个鼠标后不会 sleep
 SetDefaultMouseSpeed, 0

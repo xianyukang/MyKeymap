@@ -1155,7 +1155,7 @@
         },
         "gg": {
             "type": "输入文本或按键",
-            "value": "send % text(\"git add -A; git commit -a -m \"\"\"\"; git push origin (git branch --show-current);\")\nsend {blind}{left 47}",
+            "value": "\nsend % text(\"git add -A; git commit -a -m \"\"\"\"; git push origin (git branch --show-current);\")\nsend {blind}{left 47}\nreturn",
             "textToSend": "git add -A; git commit -a -m \"\"; git push origin (git branch --show-current);",
             "prefix": "*",
             "keysToSend": "{left 47}"
@@ -1302,7 +1302,7 @@
         },
         "vo": {
             "type": "输入文本或按键",
-            "value": "send {blind}#b{sleep 300}#b{sleep 10}{left 4}{sleep 10}{space}",
+            "value": "\nsend {blind}#b{sleep 300}#b{sleep 10}{left 4}{sleep 10}{space}\nreturn",
             "keysToSend": "#b{sleep 300}#b{sleep 10}{left 4}{sleep 10}{space}",
             "prefix": "*"
         }
