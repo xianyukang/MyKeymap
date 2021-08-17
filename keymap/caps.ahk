@@ -275,10 +275,6 @@ S::
     path = %A_Programs%\Visual Studio Code\Visual Studio Code.lnk
     ActivateOrRun("ahk_exe Code.exe", path)
     return
-E::
-    path = %A_Programs%\印象笔记\印象笔记.lnk
-    ActivateOrRun("ahk_class YXMainFrame", path)
-    return
 W::
     path = %A_ProgramsCommon%\Google Chrome.lnk
     ActivateOrRun("ahk_exe chrome.exe", path)
@@ -290,6 +286,10 @@ D::
 H::
     path = %A_ProgramsCommon%\Visual Studio 2019.lnk
     ActivateOrRun("- Microsoft Visual Studio", path)
+    return
+E::
+    path = C:\Program Files (x86)\Yinxiang Biji\印象笔记\Evernote.exe
+    ActivateOrRun("ahk_class YXMainFrame", path)
     return
 I::
     path = C:\Program Files\Typora\Typora.exe
@@ -414,6 +414,11 @@ send {blind}{left 47}
 execCapslockAbbr(typo) {
     switch typo 
     {
+        case "ne":
+           
+    path = shortcuts\网易云音乐.lnk
+    ActivateOrRun("网易云音乐", path)
+    return
         case "da":
             path = %A_WorkingDir%
             ActivateOrRun("", path)
@@ -429,9 +434,6 @@ execCapslockAbbr(typo) {
         case "dr":
             path = shell:RecycleBinFolder
             ActivateOrRun("", path)
-        case "ne":
-            path = shortcuts\网易云音乐.lnk
-            ActivateOrRun("网易云音乐", path)
         case "ex":
            quit(true)
         case "ss":
@@ -508,6 +510,7 @@ enterCapslockAbbr()
     HIDE_TYPO_WINDOW := WM_USER + 0x0002
 
     postMessageToTipWidnow(SHOW_TYPO_WINDOW)
+    SoundPlay, D:\Downloads\QQ炫舞 音效\sound\bingo.wav
     result := ""
 
     hotkey, *`j, off
@@ -516,6 +519,7 @@ enterCapslockAbbr()
         Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
 
         if InStr(ErrorLevel, "EndKey:") {
+            SoundPlay, D:\Downloads\QQ炫舞 音效\sound\beatmiss.wav
             break
         }
         if (ErrorLevel == "NewInput") {
@@ -524,6 +528,7 @@ enterCapslockAbbr()
             
         typo := typo . key
         postCharToTipWidnow(key)
+        SoundPlay, D:\Downloads\QQ炫舞 音效\sound\bingo.wav
 
         if matchCapslockAbbr(typo) {
             result := typo
@@ -534,6 +539,12 @@ enterCapslockAbbr()
 
     typo := ""
     postMessageToTipWidnow(HIDE_TYPO_WINDOW)
-    if (result)
+    if (result) {
+        if (StrLen(result) < 4) {
+        } else {
+            SoundPlay, D:\Downloads\QQ炫舞 音效\sound\cool.wav
+            ; SoundPlay, D:\Downloads\QQ炫舞 音效\sound\perfect.wav
+        }
         execCapslockAbbr(result)
+    }
 }

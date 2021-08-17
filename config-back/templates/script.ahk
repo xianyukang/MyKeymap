@@ -286,6 +286,7 @@ enterCapslockAbbr()
     HIDE_TYPO_WINDOW := WM_USER + 0x0002
 
     postMessageToTipWidnow(SHOW_TYPO_WINDOW)
+    SoundPlay, D:\Downloads\QQ炫舞 音效\sound\bingo.wav
     result := ""
 
     hotkey, *`j, off
@@ -294,6 +295,7 @@ enterCapslockAbbr()
         Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
 
         if InStr(ErrorLevel, "EndKey:") {
+            SoundPlay, D:\Downloads\QQ炫舞 音效\sound\beatmiss.wav
             break
         }
         if (ErrorLevel == "NewInput") {
@@ -302,6 +304,7 @@ enterCapslockAbbr()
             
         typo := typo . key
         postCharToTipWidnow(key)
+        SoundPlay, D:\Downloads\QQ炫舞 音效\sound\bingo.wav
 
         if matchCapslockAbbr(typo) {
             result := typo
@@ -312,6 +315,12 @@ enterCapslockAbbr()
 
     typo := ""
     postMessageToTipWidnow(HIDE_TYPO_WINDOW)
-    if (result)
+    if (result) {
+        if (StrLen(result) < 4) {
+        } else {
+            SoundPlay, D:\Downloads\QQ炫舞 音效\sound\cool.wav
+            ; SoundPlay, D:\Downloads\QQ炫舞 音效\sound\perfect.wav
+        }
         execCapslockAbbr(result)
+    }
 }

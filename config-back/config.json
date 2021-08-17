@@ -153,9 +153,9 @@
         },
         "E": {
             "type": "启动程序或激活窗口",
-            "value": "\n    path = %A_Programs%\\印象笔记\\印象笔记.lnk\n    ActivateOrRun(\"ahk_class YXMainFrame\", path)\n    return",
+            "value": "\n    path = C:\\Program Files (x86)\\Yinxiang Biji\\印象笔记\\Evernote.exe\n    ActivateOrRun(\"ahk_class YXMainFrame\", path)\n    return",
             "toActivate": "ahk_class YXMainFrame",
-            "toRun": "%A_Programs%\\印象笔记\\印象笔记.lnk"
+            "toRun": "C:\\Program Files (x86)\\Yinxiang Biji\\印象笔记\\Evernote.exe"
         },
         "R": {
             "type": "启动程序或激活窗口",
@@ -1296,7 +1296,7 @@
         },
         "ne": {
             "type": "启动程序或激活窗口",
-            "value": " path = shortcuts\\网易云音乐.lnk\n            ActivateOrRun(\"网易云音乐\", path)",
+            "value": "\n    path = shortcuts\\网易云音乐.lnk\n    ActivateOrRun(\"网易云音乐\", path)\n    return",
             "toActivate": "网易云音乐",
             "toRun": "shortcuts\\网易云音乐.lnk"
         },

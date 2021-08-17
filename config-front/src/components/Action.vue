@@ -247,8 +247,10 @@ export default {
         this.currKey().toActivate = ''
       }
 
-      this.currKey().value = ` path = ${toRun}
-            ActivateOrRun("${toActivate}", path)`
+      this.currKey().value = `
+    path = ${toRun}
+    ActivateOrRun("${toActivate}", path)
+    return`
     },
     // note 当选项发生改变时,  是否要清空掉 value ?
     clearValue() {
