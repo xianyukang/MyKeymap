@@ -18,8 +18,8 @@
         },
         "T": {
             "type": "输入文本或按键",
-            "value": "send {blind}#{left}",
-            "keysToSend": "#{left}",
+            "value": "\nsend {blind}#{right}\nreturn",
+            "keysToSend": "#{right}",
             "prefix": "*"
         },
         "Y": {
@@ -101,8 +101,10 @@
             "value": "SmartCloseWindow()"
         },
         "C": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "输入文本或按键",
+            "value": "\nsend {blind}#{left}\nreturn",
+            "keysToSend": "#{left}",
+            "prefix": "*"
         },
         "V": {
             "type": "什么也不做",
