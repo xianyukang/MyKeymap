@@ -1183,10 +1183,12 @@
             "prefix": "*"
         },
         "sl": {
-            "type": "输入文本或按键",
-            "value": "send {blind}【】{left 1}",
-            "keysToSend": "【】{left 1}",
-            "prefix": "*"
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = rundll32.exe\n    ActivateOrRun(\"\", path, \"powrprof.dll, SetSuspendState Sleep\", \"\")\n    return",
+            "toRun": "rundll32.exe",
+            "toActivate": "",
+            "cmdArgs": "powrprof.dll, SetSuspendState Sleep",
+            "workingDir": ""
         },
         "zk": {
             "type": "输入文本或按键",

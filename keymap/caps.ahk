@@ -426,6 +426,11 @@ send {blind}{enter}
 execCapslockAbbr(typo) {
     switch typo 
     {
+        case "sl":
+           
+    path = rundll32.exe
+    ActivateOrRun("", path, "powrprof.dll, SetSuspendState Sleep", "")
+    return
         case "ne":
            
     path = shortcuts\网易云音乐.lnk
@@ -468,8 +473,6 @@ return
            send {blind}《》{left}
         case "sk":
            send {blind}「  」{left 2}
-        case "sl":
-           send {blind}【】{left 1}
         case "gt":
            send {blind}🐶
         case "lx":

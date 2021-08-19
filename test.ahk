@@ -31,6 +31,10 @@ SetTimer, toggleHook, 1000
 
 return
 
+getActiveWindow() {
+    ToolTip, % WinExist("A")
+}
+
 toggleHook()
 {
     Hotkey, *f21, Toggle
@@ -61,7 +65,12 @@ activateNetwork()
 
 activateVolumne()
 {
-    send #b{sleep 200}#b{sleep 10}{left 4}{sleep 10}{space}
+    ; send #b{sleep 200}#b{sleep 10}{left 4}{sleep 10}{space}
+    send #b
+    WinExist("ahk_class Shell_TrayWnd ahk_exe Explorer.EXE")
+    WinActivate
+    WinWaitActive, , , 1
+    send #b{left 4}{sleep 10}{space}
 }
 
 loopWindows() {

@@ -19,8 +19,9 @@
             v-model="currKey().toActivate"
             @input="activateOrRun"
           ></v-text-field>
-          <v-text-field label="窗口不存在时要启动的程序" outlined v-model="currKey().toRun" @input="activateOrRun">
-          </v-text-field>
+          <v-text-field label="窗口不存在时要启动的程序" outlined v-model="currKey().toRun" @input="activateOrRun"></v-text-field>
+          <v-text-field label="启动程序的命令行参数 (选填)" outlined v-model="currKey().cmdArgs" @input="activateOrRun"></v-text-field>
+          <v-text-field label="启动程序的工作目录 (选填)" outlined v-model="currKey().workingDir" @input="activateOrRun"></v-text-field>
         </template>
 
         <template v-if="currKey().type === '输入文本或按键'">
@@ -242,6 +243,8 @@ export default {
     activateOrRun() {
       const toActivate = escapeFuncString(this.currKey().toActivate)
       const toRun = escapeFuncString(this.currKey().toRun)
+      const cmdArgs = escapeFuncString(this.currKey().cmdArgs)
+      const workingDir = escapeFuncString(this.currKey().workingDir)
       // console.log(toActivate, toRun)
 
       if (!toActivate) {
@@ -250,7 +253,7 @@ export default {
 
       this.currKey().value = `
     path = ${toRun}
-    ActivateOrRun("${toActivate}", path)
+    ActivateOrRun("${toActivate}", path, "${cmdArgs}", "${workingDir}")
     return`
     },
     // note 当选项发生改变时,  是否要清空掉 value ?

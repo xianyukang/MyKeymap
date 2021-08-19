@@ -226,7 +226,7 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
             } else {
                 try 
                 {
-                    run, %oldTarget%
+                    run, %oldTarget% %args%, %workingdir%
                 }
                 catch e 
                 {
