@@ -11,6 +11,7 @@ specifiers:
   core-js: ^3.6.5
   eslint: ^6.7.2
   eslint-plugin-vue: ^6.2.2
+  hotkeys-js: ^3.8.7
   sass: ~1.32.0
   sass-loader: ^10.0.0
   vue: ^2.6.11
@@ -24,6 +25,7 @@ specifiers:
 dependencies:
   axios: 0.21.1
   core-js: 3.10.0
+  hotkeys-js: registry.nlark.com/hotkeys-js/3.8.7
   vue: 2.6.12
   vue-router: 3.5.1
   vuetify: registry.nlark.com/vuetify/2.5.6_vue@2.6.12
@@ -8826,6 +8828,12 @@ packages:
     dependencies:
       function-bind: registry.nlark.com/function-bind/1.1.1
     dev: true
+
+  registry.nlark.com/hotkeys-js/3.8.7:
+    resolution: {integrity: sha1-wWyrl4tT1yQvhgyjky6Xa5I5mYE=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/hotkeys-js/download/hotkeys-js-3.8.7.tgz}
+    name: hotkeys-js
+    version: 3.8.7
+    dev: false
 
   registry.nlark.com/inflight/1.0.6:
     resolution: {integrity: sha1-Sb1jMdfQLQwJvJEKEHW6gWW1bfk=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/inflight/download/inflight-1.0.6.tgz}

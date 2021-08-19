@@ -1,6 +1,5 @@
 {
 	"dependencies": {
-		"axios": "^0.21.1",
-		"hotkeys-js": "^3.8.7"
+		"axios": "^0.21.1"
 	}
 }
