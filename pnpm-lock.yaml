@@ -2,9 +2,11 @@ lockfileVersion: 5.3
 
 specifiers:
   axios: ^0.21.1
+  hotkeys-js: ^3.8.7
 
 dependencies:
   axios: 0.21.1
+  hotkeys-js: registry.nlark.com/hotkeys-js/3.8.7
 
 packages:
 
@@ -19,4 +21,10 @@ packages:
     name: follow-redirects
     version: 1.14.1
     engines: {node: '>=4.0'}
+    dev: false
+
+  registry.nlark.com/hotkeys-js/3.8.7:
+    resolution: {integrity: sha1-wWyrl4tT1yQvhgyjky6Xa5I5mYE=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/hotkeys-js/download/hotkeys-js-3.8.7.tgz}
+    name: hotkeys-js
+    version: 3.8.7
     dev: false

@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire" v-hotkey="keymap">
+  <v-app id="inspire">
     <v-navigation-drawer app id="drawer">
       <v-list-item>
         <v-list-item-avatar rounded="0" class="logo">
@@ -33,7 +33,7 @@
       <router-view v-if="config" />
     </v-main>
 
-    <v-snackbar v-model="$store.state.snackbar" color="green" timeout="1500">
+    <v-snackbar v-model="$store.state.snackbar" color="green" timeout="1000">
       {{ $store.state.snackbarText }}
       <template v-slot:action="{ attrs }">
         <v-btn color="black" text v-bind="attrs" @click="snackbar = false"> Close </v-btn>
@@ -43,9 +43,21 @@
 </template>
 
 <script>
+import hotkeys from 'hotkeys-js'
+
+// By default hotkeys are not enabled for INPUT SELECT TEXTAREA elements.
+hotkeys.filter = function (event) {
+  return true
+}
+
 export default {
   name: 'App',
-  created() {},
+  created() {
+    hotkeys('ctrl+s', (event, handler) => {
+      event.preventDefault() // Prevent the default refresh event under WINDOWS system
+      this.saveConfig()
+    })
+  },
 
   data: () => ({
     drawer: true,
@@ -69,18 +81,7 @@ export default {
     },
   },
 
-  computed: {
-    keymap() {
-      return {
-        // 'esc+ctrl' is OK.
-        'ctrl+s': this.saveConfig,
-        // enter: {
-        //   keydown: this.hide,
-        //   keyup: this.show,
-        // },
-      }
-    },
-  },
+  computed: {},
 }
 </script>
 
