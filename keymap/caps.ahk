@@ -60,11 +60,13 @@ RAlt::LCtrl
 
 
 *j::
+    ; hotkey, *capslock, off
     JMode := true
     keywait `j
     JMode := false
     if (A_PriorKey == "j" && A_TimeSinceThisHotkey < 350)
             send  {blind}`j
+    ; hotkey, *capslock, on
     return
 
 
