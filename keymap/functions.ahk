@@ -431,10 +431,11 @@ quit(ShowExitTip:=false)
         sleep 400
     }
     Menu, Tray, NoIcon 
-    process, exist, KeyboardGeek.exe
-    if (errorlevel > 0)
-        process, close, %errorlevel%
-    process, close, ahk.exe
+    ; process, exist, KeyboardGeek.exe
+    ; if (errorlevel > 0)
+    ;     process, close, %errorlevel%
+    ; process, close, ahk.exe
+    myExit()
     exitapp
 }
 
@@ -1008,6 +1009,11 @@ class TypoTipWindow
     }
 }
 
+myExit()
+{
+    thisPid := DllCall("GetCurrentProcessId")
+    Process, Close, %thisPid%
+}
 
 rqeruireAdmin()
 {
@@ -1015,8 +1021,7 @@ rqeruireAdmin()
    {
       try {
          Run *RunAs "MyKeymap.exe" ; 需要 v1.0.92.01+
-         thisPid := DllCall("GetCurrentProcessId")
-         Process, Close, %thisPid%
+         myExit()
       }
       catch {
         tip("MyKeymap 当前以普通权限运行 `n在一些高权限窗口中会失效 (比如任务管理器)", -2400)

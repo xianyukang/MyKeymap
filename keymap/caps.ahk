@@ -30,7 +30,7 @@ fast_repeat := 70
 slow_one :=  10     
 slow_repeat := 13
 
-Menu, Tray, Icon, resource\logo.ico
+Menu, Tray, Icon, bin\logo.ico
 Menu, Tray, Tip, MyKeymap 1.0 by 咸鱼康2333
 processPath := getProcessPath()
 SetWorkingDir, %processPath%
@@ -128,14 +128,18 @@ RAlt::LCtrl
 
 
 #if PunctuationMode
+*A::
+send {blind}*
+return
+*I::
+send {blind}:
+return
 *U::send {blind}$
 *R::send {blind}&
 *Q::send {blind}(
-*I::send {blind}*
 *M::send {blind}-
 *C::send {blind}.
 *N::send {blind}/
-*A::send {blind}:
 *S::send {blind}<
 *D::send {blind}=
 *F::send {blind}>

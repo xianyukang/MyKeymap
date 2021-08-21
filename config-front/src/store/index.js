@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios';
+import { host } from '../util';
 
 
 Vue.use(Vuex)
@@ -30,7 +31,7 @@ const s = new Vuex.Store({
   actions: {
     saveConfig(store) {
       axios
-        .put('http://localhost:8000/config', processConfig(store.state.config))
+        .put(`${host}/config`, processConfig(store.state.config))
         .then(resp => {
           console.log(resp.data)
           store.commit('SET_SNACKBAR', {snackbar: true, snackbarText: `保存成功`})
@@ -41,7 +42,7 @@ const s = new Vuex.Store({
         })
     },
     fetchConfig(store) {
-      return axios.get('http://localhost:8000/config')
+      return axios.get(`${host}/config`)
         .then(resp => store.commit('SET_CONFIG', resp.data))
         .catch(error => {
           throw error // 方便后面看堆栈定位问题

@@ -903,8 +903,8 @@
         },
         "I": {
             "type": "输入文本或按键",
-            "value": "send {blind}*",
-            "keysToSend": "*",
+            "value": "\nsend {blind}:\nreturn",
+            "keysToSend": ":",
             "prefix": "*"
         },
         "O": {
@@ -919,8 +919,8 @@
         },
         "A": {
             "type": "输入文本或按键",
-            "value": "send {blind}:",
-            "keysToSend": ":",
+            "value": "\nsend {blind}*\nreturn",
+            "keysToSend": "*",
             "prefix": "*"
         },
         "S": {

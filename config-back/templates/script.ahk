@@ -30,7 +30,7 @@ fast_repeat := 70
 slow_one :=  10     
 slow_repeat := 13
 
-Menu, Tray, Icon, resource\logo.ico
+Menu, Tray, Icon, bin\logo.ico
 Menu, Tray, Tip, MyKeymap 1.0 by 咸鱼康2333
 processPath := getProcessPath()
 SetWorkingDir, %processPath%

@@ -17,3 +17,5 @@ export function escapeFuncString(arg) {
 export function notEmptyAction(action) {
     return action.type != '什么也不做' && action.value
 }
+
+export const host = process.env.NODE_ENV === 'production' ? 'http://localhost:12333' : 'http://localhost:12333'
