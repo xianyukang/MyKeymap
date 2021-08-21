@@ -1190,12 +1190,6 @@
             "cmdArgs": "powrprof.dll, SetSuspendState Sleep",
             "workingDir": ""
         },
-        "zk": {
-            "type": "输入文本或按键",
-            "value": "send {blind}[]{left}",
-            "keysToSend": "[]{left}",
-            "prefix": "*"
-        },
         "dk": {
             "type": "输入文本或按键",
             "value": "send {blind}{{}{}}{left}",
@@ -1316,7 +1310,6 @@
         "ss",
         "sk",
         "sl",
-        "zk",
         "dk",
         "dh",
         "jt",

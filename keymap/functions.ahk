@@ -226,7 +226,18 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
             } else {
                 try 
                 {
-                    run, %oldTarget% %args%, %workingdir%
+                    if (workingdir && args) {
+                        run, %oldTarget% %args%, %workingdir%
+                    } 
+                    else if (workingdir) {
+                        run, %oldTarget%, %workingdir%
+                    } 
+                    else if (args) {
+                        run, %oldTarget% %args%
+                    }
+                    else {
+                        run, %oldTarget%
+                    }
                 }
                 catch e 
                 {

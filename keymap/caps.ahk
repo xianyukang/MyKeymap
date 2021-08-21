@@ -351,7 +351,7 @@ space::enter
 
 matchCapslockAbbr(typo) {
     
-    arr := [ "xk","ss","sk","sl","zk","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr","ne","vo" ]
+    arr := [ "xk","ss","sk","sl","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr","ne","vo" ]
 
     return arrayContains(arr, typo)
 }
@@ -465,8 +465,6 @@ return
            send {blind}""{left}
         case "xk":
            send {blind}(){left 1}
-        case "zk":
-           send {blind}[]{left}
         case "dk":
            send {blind}{{}{}}{left}
         case "jt":
