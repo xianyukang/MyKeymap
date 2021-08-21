@@ -694,11 +694,9 @@ postMessageToTipWidnow(messageType) {
 
 ReloadProgram()
 {
-    global exeFullPath
-    global pid
     Menu, Tray, NoIcon 
     tooltip, ` ` Reload !` ` 
-    run, "keygeek.ahk"
+    run, MyKeymap.exe
     ;run, "%exeFullPath%" Reload
     ;process, close, %pid%
     ;process, close, ahk.exe
@@ -997,4 +995,40 @@ class TypoTipWindow
     hide() {
         Gui, TYPO_TIP_WINDOW:Show, Hide
     }
+}
+
+
+rqeruireAdmin()
+{
+   if not A_IsAdmin
+   {
+      try {
+         Run *RunAs "MyKeymap.exe" ; 需要 v1.0.92.01+
+         thisPid := DllCall("GetCurrentProcessId")
+         Process, Close, %thisPid%
+      }
+      catch {
+        tip("MyKeymap 当前以普通权限运行 `n在一些高权限窗口中会失效 (比如任务管理器)", -2400)
+      }
+   }
+}
+
+getProcessList(pname)
+{
+   result := []
+   for proc in ComObjGet("winmgmts:").ExecQuery("SELECT Name,Handle FROM Win32_Process WHERE Name='MyKeymap.exe'")
+      result.push(proc.Handle)
+   return result
+}
+
+closeOldInstance()
+{
+
+   thisPid := DllCall("GetCurrentProcessId")
+   for index,pid in getProcessList("MyKeymap.exe")
+   {
+      if (pid != thisPid) {
+         Process, Close, %pid%
+      }
+   }
 }
