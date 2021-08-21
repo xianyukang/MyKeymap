@@ -91,6 +91,14 @@ RAlt::LCtrl
         send {blind}3 
     return
 
+*9::
+    Mode9 := true
+    keywait 9 
+    Mode9 := false
+    if (A_PriorKey == "9" && A_TimeSinceThisHotkey < 350)
+        send {blind}9 
+    return
+
 #if JMode
 *capslock::return
 *capslock up::return
@@ -113,7 +121,6 @@ RAlt::LCtrl
     {% endif %}
 {% endfor %}
 
-*space::send  {blind}{enter}
     
 
 
@@ -140,9 +147,14 @@ RAlt::LCtrl
     FnMode := false
     return
 
-*space::f1
 *2::backspace
 
+#if Mode9
+{% for key,value in Mode9.items()|sort(attribute="1.value") %}
+    {% if value.value %}
+{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
+    {% endif %}
+{% endfor %}
 
 #if FnMode
 *r::return
@@ -162,11 +174,6 @@ RAlt::LCtrl
     {% endif %}
 {% endfor %}
 
-
-space::
-    ; ShowDimmer()
-    ShowCommandBar()
-    return
 
 f::
     hotkey, *`;, off

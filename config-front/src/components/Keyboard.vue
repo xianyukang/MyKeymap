@@ -7,10 +7,11 @@
             @click="clickKey(k.key)"
             class="key"
             :height="hover ? 53 : 53"
-            :width="hover ? 54 : 53"
+            :width="keyWidth(k, hover)"
             :elevation="hover ? 13 : 4"
             :color="keyColor(k, hover).color"
             :dark="keyColor(k, hover).dark"
+            :disabled="keyDisabled(k)"
           >
             <v-row class="fill-height" align="center" justify="center" v-text="k.key"></v-row>
           </v-card>
@@ -30,11 +31,25 @@ export default {
     clickKey(key) {
       this.$emit('clickKey', key)
     },
+
+    keyDisabled(key) {
+      const result = key.disableAt?.includes(this.$route.name)
+      return !!result
+    },
+    keyWidth(key, hover) {
+      if (key.key === 'Space') {
+        return 150
+      }
+      return hover ? 54 : 53
+    },
     keyColor(keyObj, hover) {
       // if (hover) return { color: '#f3448f', dark: true }
+      if (keyObj.disableAt?.includes(this.$route.name)) return { color: '#AAA', dark: true }
       if (keyObj.key === this.currentKey) return { color: 'blue', dark: true }
       const action = this.currConfig()[keyObj.key]
-      if (action.type != '什么也不做' && action.value) return { color: '#98FB98', dark: false }
+      if (action) {
+        if (action.type != '什么也不做' && action.value) return { color: '#98FB98', dark: false }
+      }
       return {}
     },
   },
@@ -45,7 +60,7 @@ export default {
           { key: 'Q', disabled: false, used: false },
           { key: 'W', disabled: false, used: true, activated: true },
           { key: 'E', disabled: false, used: true },
-          { key: 'R', disabled: false, used: true },
+          { key: 'R', disabled: false, used: true, disableAt: ['Mode3', 'Mode3R']},
           { key: 'T', disabled: false, used: true },
           { key: 'Y', disabled: false, used: true },
           { key: 'U', disabled: false, used: true },
@@ -57,12 +72,12 @@ export default {
           { key: 'A', disabled: false, used: false },
           { key: 'S', disabled: false, used: true },
           { key: 'D', disabled: false, used: true },
-          { key: 'F', disabled: false, used: true },
+          { key: 'F', disabled: false, used: true, disableAt: ['Capslock', 'CapslockF']},
           { key: 'G', disabled: false, used: true },
           { key: 'H', disabled: false, used: true },
-          { key: 'J', disabled: false, used: true },
-          { key: 'K', disabled: false, used: true },
-          { key: 'L', disabled: false, used: true },
+          { key: 'J', disabled: false, used: true, disableAt: ['JMode']},
+          { key: 'K', disabled: false, used: true, disableAt: ['JMode'] },
+          { key: 'L', disabled: false, used: true, disableAt: ['JMode'] },
           { key: ';', disabled: false, used: true },
         ],
         [
@@ -76,6 +91,9 @@ export default {
           { key: ',', disabled: false, used: true },
           { key: '.', disabled: false, used: true },
           { key: '/', disabled: false, used: true },
+        ],
+        [
+          { key: 'Space', disabled: false, used: false },
         ],
       ],
     }

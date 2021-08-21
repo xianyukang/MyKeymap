@@ -24,7 +24,7 @@
         </v-list-item>
         <v-divider></v-divider>
         <v-btn width="100%" elevation="2" color="primary" @click="saveConfig">
-          <v-icon left> mdi-content-save </v-icon> 保存配置</v-btn
+          <v-icon left> mdi-content-save </v-icon> 保存配置 (ctrl+s)</v-btn
         >
       </v-list>
     </v-navigation-drawer>

@@ -1,5 +1,9 @@
 {
     "Capslock": {
+        "Space": {
+            "type": "执行单行 ahk 代码",
+            "value": "ShowCommandBar()"
+        },
         "Q": {
             "type": "窗口操作",
             "value": "winmaximize, A"
@@ -141,6 +145,10 @@
         }
     },
     "CapslockF": {
+        "Space": {
+            "type": "什么也不做",
+            "value": ""
+        },
         "Q": {
             "type": "启动程序或激活窗口",
             "value": "\n    path = %A_ProgramFiles%\\Everything\\Everything.exe\n    ActivateOrRun(\"ahk_class EVERYTHING\", path)\n    return",
@@ -293,6 +301,12 @@
         }
     },
     "Mode3": {
+        "Space": {
+            "type": "输入文本或按键",
+            "value": "\nsend {blind}{f1}\nreturn",
+            "keysToSend": "{f1}",
+            "prefix": "*"
+        },
         "Q": {
             "type": "什么也不做",
             "value": ""
@@ -435,6 +449,10 @@
         }
     },
     "Mode3R": {
+        "Space": {
+            "type": "什么也不做",
+            "value": ""
+        },
         "Q": {
             "type": "什么也不做",
             "value": ""
@@ -581,25 +599,27 @@
         }
     },
     "Mode9": {
-        "Q": {
-            "type": "窗口操作",
-            "value": "移动鼠标到窗口中心",
-            "toActivate": "记事本",
-            "toRun": "notepad.exe"
-        },
-        "W": {
+        "Space": {
             "type": "什么也不做",
             "value": ""
+        },
+        "Q": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "W": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = shortcuts\\网易云音乐.lnk\n    ActivateOrRun(\"网易云音乐\", path, \"\", \"\")\n    return",
+            "toActivate": "网易云音乐",
+            "toRun": "shortcuts\\网易云音乐.lnk"
         },
         "E": {
             "type": "什么也不做",
             "value": ""
         },
         "R": {
-            "type": "启动程序或激活窗口",
-            "value": "ActivateOrRun(\"ahk_exe FoxitReader.exe\", \"D:\\install\\Foxit Reader\\FoxitReader.exe\")",
-            "toActivate": "ahk_exe FoxitReader.exe",
-            "toRun": "D:\\install\\Foxit Reader\\FoxitReader.exe"
+            "type": "什么也不做",
+            "value": ""
         },
         "T": {
             "type": "什么也不做",
@@ -610,16 +630,16 @@
             "value": ""
         },
         "U": {
-            "type": "鼠标操作",
-            "value": "滚轮上滑"
+            "type": "什么也不做",
+            "value": ""
         },
         "I": {
-            "type": "鼠标操作",
-            "value": "鼠标上移"
+            "type": "什么也不做",
+            "value": ""
         },
         "O": {
-            "type": "鼠标操作",
-            "value": "滚轮下滑"
+            "type": "什么也不做",
+            "value": ""
         },
         "P": {
             "type": "什么也不做",
@@ -642,36 +662,38 @@
             "value": ""
         },
         "G": {
-            "type": "鼠标操作",
-            "value": "鼠标左键"
+            "type": "什么也不做",
+            "value": ""
         },
         "H": {
-            "type": "鼠标操作",
-            "value": "滚轮左滑"
+            "type": "什么也不做",
+            "value": ""
         },
         "J": {
-            "type": "鼠标操作",
-            "value": "鼠标左移"
+            "type": "什么也不做",
+            "value": ""
         },
         "K": {
-            "type": "鼠标操作",
-            "value": "鼠标下移"
+            "type": "什么也不做",
+            "value": ""
         },
         "L": {
-            "type": "鼠标操作",
-            "value": "鼠标上移"
+            "type": "什么也不做",
+            "value": ""
         },
         ";": {
-            "type": "鼠标操作",
-            "value": "滚轮右滑"
+            "type": "什么也不做",
+            "value": ""
         },
         "Z": {
-            "type": "窗口操作",
-            "value": "winmaximize, A"
+            "type": "什么也不做",
+            "value": ""
         },
         "X": {
-            "type": "窗口操作",
-            "value": "SmartCloseWindow()"
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE\n    ActivateOrRun(\"ahk_exe EXCEL.EXE\", path, \"\", \"\")\n    return",
+            "toRun": "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE",
+            "toActivate": "ahk_exe EXCEL.EXE"
         },
         "C": {
             "type": "什么也不做",
@@ -686,27 +708,33 @@
             "value": ""
         },
         "N": {
-            "type": "鼠标操作",
-            "value": "鼠标左键"
+            "type": "什么也不做",
+            "value": ""
         },
         "M": {
-            "type": "鼠标操作",
-            "value": "鼠标右键"
+            "type": "什么也不做",
+            "value": ""
         },
         ",": {
-            "type": "鼠标操作",
-            "value": "鼠标左键按下"
+            "type": "什么也不做",
+            "value": ""
         },
         ".": {
             "type": "什么也不做",
             "value": ""
         },
         "/": {
-            "type": "鼠标操作",
-            "value": "移动鼠标到窗口中心"
+            "type": "什么也不做",
+            "value": ""
         }
     },
     "JMode": {
+        "Space": {
+            "type": "输入文本或按键",
+            "value": "\nsend {blind}{enter}\nreturn",
+            "keysToSend": "{enter}",
+            "prefix": "*"
+        },
         "Q": {
             "type": "输入文本或按键",
             "value": "send {blind}{pgup}",
@@ -859,6 +887,10 @@
         }
     },
     "Semicolon": {
+        "Space": {
+            "type": "什么也不做",
+            "value": ""
+        },
         "Q": {
             "type": "输入文本或按键",
             "value": "send {blind}(",

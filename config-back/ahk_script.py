@@ -1,3 +1,4 @@
+import subprocess
 from codecs import BOM_UTF8
 from jinja2 import Environment, FileSystemLoader
 
@@ -34,7 +35,7 @@ class AhkScript:
                 escapeAhkHotkey=self.escapeAhkHotkey,
                 **data
                 ), file=f)
-
+            subprocess.Popen(['./MyKeymap.exe'], cwd='../')
 
 if __name__ == "__main__":
     script = AhkScript()

@@ -91,6 +91,14 @@ RAlt::LCtrl
         send {blind}3 
     return
 
+*9::
+    Mode9 := true
+    keywait 9 
+    Mode9 := false
+    if (A_PriorKey == "9" && A_TimeSinceThisHotkey < 350)
+        send {blind}9 
+    return
+
 #if JMode
 *capslock::return
 *capslock up::return
@@ -107,6 +115,9 @@ RAlt::LCtrl
         send {Lctrl up}
         return
 
+*Space::
+send {blind}{enter}
+return
 *W::send {blind}+{tab}
 *Z::send {blind}{appskey}
 *C::send {blind}{backspace}
@@ -123,7 +134,6 @@ RAlt::LCtrl
 *R::send {blind}{tab}
 *E::send {blind}{up}
 
-*space::send  {blind}{enter}
     
 
 
@@ -160,6 +170,9 @@ return
 
 #if DigitMode
 
+*Space::
+send {blind}{f1}
+return
 *H::send {blind}0
 *J::send {blind}1
 *K::send {blind}2
@@ -178,9 +191,17 @@ return
     FnMode := false
     return
 
-*space::f1
 *2::backspace
 
+#if Mode9
+X::
+    path = C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE
+    ActivateOrRun("ahk_exe EXCEL.EXE", path, "", "")
+    return
+W::
+    path = shortcuts\网易云音乐.lnk
+    ActivateOrRun("网易云音乐", path, "", "")
+    return
 
 #if FnMode
 *r::return
@@ -226,16 +247,12 @@ D::send #+{right}
 E::send ^!{tab}
 Y::send {LControl down}{LWin down}{Left}{LWin up}{LControl up}
 P::send {LControl down}{LWin down}{Right}{LWin up}{LControl up}
+Space::ShowCommandBar()
 X::SmartCloseWindow()
 R::SwitchWindows()
 Q::winmaximize, A
 B::winMinimizeIgnoreDesktop()
 
-
-space::
-    ; ShowDimmer()
-    ShowCommandBar()
-    return
 
 f::
     hotkey, *`;, off
