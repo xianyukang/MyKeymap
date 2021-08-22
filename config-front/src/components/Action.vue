@@ -221,7 +221,7 @@ export default {
       otherFeatures2: [
         { label: '滑动关机', value: 'slideToShutdown()' },
         { label: '滑动重启', value: 'slideToReboot()' },
-        { label: '窗口居中(1200x800)', value: 'center_window_to_current_monitor(1200, 800)' },
+        { label: '打开 MyKeymap 设置', value: 'openSettings()' },
       ],
     }
   },

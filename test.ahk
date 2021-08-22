@@ -96,19 +96,6 @@ onTypoEnd(ih) {
     ToolTip, % surroundWithSpace(ih.Input),,,17
 }
 
-openSettings()
-{
-    old := A_WorkingDir
-    SetWorkingDir, %A_WorkingDir%\bin
-    if not WinExist("mykeymap-settings-server.exe")
-        run, mykeymap-settings-server.exe
-    sleep 300
-    if WinExist("MyKeymap Settings")
-        WinActivate
-    else
-        run, http://localhost:12333
-    SetWorkingDir, %old%
-}
 
 
 inputHookTest() {

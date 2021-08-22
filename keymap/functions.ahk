@@ -1049,3 +1049,20 @@ closeOldInstance()
       }
    }
 }
+
+
+openSettings()
+{
+    old := A_WorkingDir
+    SetWorkingDir, %A_WorkingDir%\bin
+    if not WinExist("mykeymap-settings-server.exe")
+    {
+        run, mykeymap-settings-server.exe
+        sleep 400
+    }
+    if WinExist("MyKeymap Settings")
+        WinActivate
+    else
+        run, http://localhost:12333
+    SetWorkingDir, %old%
+}

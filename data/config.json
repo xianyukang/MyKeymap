@@ -1335,6 +1335,10 @@
             "value": "\nsend {blind}#b{sleep 600}#b{sleep 10}{left 4}{sleep 10}{space}\nreturn",
             "keysToSend": "#b{sleep 600}#b{sleep 10}{left 4}{sleep 10}{space}",
             "prefix": "*"
+        },
+        "se": {
+            "type": "其他功能",
+            "value": "openSettings()"
         }
     },
     "CapslockAbbrKeys": [
@@ -1363,7 +1367,8 @@
         "da",
         "dr",
         "ne",
-        "vo"
+        "vo",
+        "se"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",

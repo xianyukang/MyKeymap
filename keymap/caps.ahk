@@ -375,7 +375,7 @@ space::send, {blind}{enter}
 
 matchCapslockAbbr(typo) {
     
-    arr := [ "xk","ss","sk","sl","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr","ne","vo" ]
+    arr := [ "xk","ss","sk","sl","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr","ne","vo","se" ]
 
     return arrayContains(arr, typo)
 }
@@ -483,6 +483,8 @@ return
         case "dr":
             path = shell:RecycleBinFolder
             ActivateOrRun("", path)
+        case "se":
+           openSettings()
         case "ex":
            quit(true)
         case "ss":
