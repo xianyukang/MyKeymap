@@ -11,9 +11,9 @@ os.mkdir('MyKeymap/bin/')
 
 # 构建后端项目
 os.chdir('config-back')
-os.system('pyinstaller.exe api.py --onefile --icon icon.ico')
+os.system('pyinstaller.exe api.py -n mykeymap-settings-server --onefile --icon icon.ico')
 os.chdir('..')
-shutil.move('config-back/dist/api.exe', 'MyKeymap/bin/')
+shutil.move('config-back/dist/mykeymap-settings-server.exe', 'MyKeymap/bin/')
 
 # 构建前端项目
 os.chdir('config-front')

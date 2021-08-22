@@ -2,12 +2,16 @@
 #SingleInstance Force
 #MaxHotkeysPerInterval 200
 #WinActivateForce               ; 解决「 winactivate 最小化的窗口时不会把窗口放到顶层(被其他窗口遮住) 」
+#InstallKeybdHook               ; 可能是 ahk 自动卸载 hook 导致的丢失 hook,  如果用这行指令, ahk 是否就不会卸载 hook 了呢?
 #include keymap/functions.ahk
+
+SetWorkingDir %A_ScriptDir%\..
+rqeruireAdmin()
+closeOldInstance()
 
 SetBatchLines -1
 ; ListLines Off
 process, Priority,, H
-SetWorkingDir %A_ScriptDir%\..
 ; 使用 sendinput 时,  通过 alt+3+j 输入 alt+1 时,  会发送 ctrl+alt
 SendMode Input
 ; SetKeyDelay, 0
@@ -19,8 +23,6 @@ coordmode, mouse, screen
 settitlematchmode, 2
 
 
-rqeruireAdmin()
-closeOldInstance()
 
 SemicolonAbbrTip := true
 time_enter_repeat = T0.2
@@ -32,8 +34,8 @@ slow_repeat := 13
 
 Menu, Tray, Icon, bin\logo.ico
 Menu, Tray, Tip, MyKeymap 1.0 by 咸鱼康2333
-processPath := getProcessPath()
-SetWorkingDir, %processPath%
+; processPath := getProcessPath()
+; SetWorkingDir, %processPath%
 
 
 CoordMode, Mouse, Screen
@@ -191,7 +193,7 @@ return
     FnMode := false
     return
 
-*2::backspace
+*2::send {blind}{backspace}
 
 #if Mode9
 X::
@@ -352,21 +354,20 @@ A::
     return
 
 #IfWinActive, ahk_exe explorer.exe ahk_class MultitaskingViewFrame
-r::tab
-d::down
-e::up
-s::Left
-f::Right
+d::send, {blind}{down}
+e::send, {blind}{up}
+s::send, {blind}{left}
+f::send, {blind}{right}
 *x::
     if GetKeyState("`j", "P")  
-        send {Esc}
+        send, {blind}{esc}
     else
         send,  {blind}{del}
     return
-space::enter
+space::send, {blind}{enter}
 
 
-#IfWinActive
+#If
 
 
 
