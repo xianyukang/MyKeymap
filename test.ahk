@@ -6,7 +6,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #UseHook
 #SingleInstance Force
 #include keymap/functions.ahk
-DetectHiddenWindows, 1
+settitlematchmode, 2
 
 
 time_enter_repeat = T0.2
@@ -41,8 +41,7 @@ toggleHook()
 }
 
 8::
-send % text("")
-send {blind} a b c
+openSettings()
 return
 9::
 activateVolumne()
@@ -97,6 +96,19 @@ onTypoEnd(ih) {
     ToolTip, % surroundWithSpace(ih.Input),,,17
 }
 
+openSettings()
+{
+    old := A_WorkingDir
+    SetWorkingDir, %A_WorkingDir%\bin
+    if not WinExist("mykeymap-settings-server.exe")
+        run, mykeymap-settings-server.exe
+    sleep 300
+    if WinExist("MyKeymap Settings")
+        WinActivate
+    else
+        run, http://localhost:12333
+    SetWorkingDir, %old%
+}
 
 
 inputHookTest() {

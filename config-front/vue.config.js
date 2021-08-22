@@ -1,5 +1,5 @@
 module.exports = {
-  outputDir: '../MyKeymap/bin/site',
+  outputDir: '../bin/site',
   transpileDependencies: [
     'vuetify'
   ]

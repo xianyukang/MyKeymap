@@ -34,7 +34,7 @@ const s = new Vuex.Store({
         .put(`${host}/config`, processConfig(store.state.config))
         .then(resp => {
           console.log(resp.data)
-          store.commit('SET_SNACKBAR', {snackbar: true, snackbarText: `保存成功`})
+          store.commit('SET_SNACKBAR', {snackbar: true, snackbarText: `保存成功, 请按 alt+' 重启 MyKeymap`})
         })
         .catch(error => {
           store.commit('SET_SNACKBAR', {snackbar: true, snackbarText: `保存失败`})

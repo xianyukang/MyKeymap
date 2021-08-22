@@ -33,10 +33,10 @@
       <router-view v-if="config" />
     </v-main>
 
-    <v-snackbar v-model="$store.state.snackbar" color="green" timeout="1000">
-      {{ $store.state.snackbarText }}
+    <v-snackbar v-model="$store.state.snackbar" color="blue" timeout="1500" min-width="600" height="70" outlined>
+      <span id="snackBarText">{{ $store.state.snackbarText }}</span>
       <template v-slot:action="{ attrs }">
-        <v-btn color="black" text v-bind="attrs" @click="snackbar = false"> Close </v-btn>
+        <v-btn color="black" text v-bind="attrs" @click="snackbar = false"> </v-btn>
       </template>
     </v-snackbar>
   </v-app>
@@ -100,5 +100,10 @@ export default {
 
 .nav-tab-icon {
   font-size: 26px !important;
+}
+#snackBarText {
+  color: black;
+  font-size: 1.4em;
+  padding-left: 115px;
 }
 </style>

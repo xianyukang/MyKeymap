@@ -1045,6 +1045,7 @@ closeOldInstance()
    {
       if (pid != thisPid) {
          Process, Close, %pid%
+        ;  tip("  Reload  ", -400)
       }
    }
 }

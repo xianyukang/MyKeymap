@@ -35,4 +35,15 @@ def save_config():
     return 'save config ok!'
 
 if __name__ == '__main__':
+    import logging
+    os.system('chcp 65001')
+    os.system('cls')
+    log = logging.getLogger('werkzeug')
+    log.setLevel(logging.ERROR)
+    print()
+    print(' ------------------------------------------------------------------')
+    print(' 1. 浏览器访问 http://localhost:12333 修改 MyKeyamp 的配置')
+    print(' 2. 修改并保存配置后按 alt+\' 可重启 MyKeymap (这里的\'是单引号键) ')
+    print(' 3. 修改完 MyKeymap 的配置后即可关闭本窗口')
+    print(' ------------------------------------------------------------------')
     app.run(port=12333, debug=True)
