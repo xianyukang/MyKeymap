@@ -58,49 +58,62 @@ RAlt::LCtrl
 +capslock::toggleCapslock()
 
 *capslock::
+    thisHotkey := A_ThisHotkey
+    disableOtherHotkey(thisHotkey)
     CapslockMode := true
     keywait capslock
     CapslockMode := false
     if (A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450) {
         enterCapslockAbbr()
     }
+    enableOtherHotkey(thisHotkey)
     return
 
 
 *j::
-    ; hotkey, *capslock, off
+    thisHotkey := A_ThisHotkey
+    disableOtherHotkey(thisHotkey)
     JMode := true
-    keywait `j
+    keywait j
     JMode := false
     if (A_PriorKey == "j" && A_TimeSinceThisHotkey < 350)
-            send  {blind}`j
-    ; hotkey, *capslock, on
+            send  {blind}j
+    enableOtherHotkey(thisHotkey)
     return
 
 
 *`;::
+    thisHotkey := A_ThisHotkey
+    disableOtherHotkey(thisHotkey)
     PunctuationMode := true
     keywait `; 
     PunctuationMode := false
     if (A_PriorKey == ";" && A_TimeSinceThisHotkey < 350)
         enterSemicolonAbbr(semiHook)
+    enableOtherHotkey(thisHotkey)
     return
 
 
 *3::
+    thisHotkey := A_ThisHotkey
+    disableOtherHotkey(thisHotkey)
     DigitMode := true
     keywait 3 
     DigitMode := false
     if (A_PriorKey == "3" && A_TimeSinceThisHotkey < 350)
         send {blind}3 
+    enableOtherHotkey(thisHotkey)
     return
 
 *9::
+    thisHotkey := A_ThisHotkey
+    disableOtherHotkey(thisHotkey)
     Mode9 := true
     keywait 9 
     Mode9 := false
     if (A_PriorKey == "9" && A_TimeSinceThisHotkey < 350)
         send {blind}9 
+    enableOtherHotkey(thisHotkey)
     return
 
 #if JMode
@@ -259,13 +272,11 @@ B::winMinimizeIgnoreDesktop()
 
 
 f::
-    hotkey, *`;, off
     FMode := true
     CapslockMode := false
     SLOWMODE := false
     keywait f
     FMode := false
-    hotkey, *`;, on
     return
 
 
@@ -360,12 +371,7 @@ d::send, {blind}{down}
 e::send, {blind}{up}
 s::send, {blind}{left}
 f::send, {blind}{right}
-*x::
-    if GetKeyState("`j", "P")  
-        send, {blind}{esc}
-    else
-        send,  {blind}{del}
-    return
+*x::send,  {blind}{del}
 space::send, {blind}{enter}
 
 
@@ -530,11 +536,9 @@ return
 enterSemicolonAbbr(ih) 
 {
     typoTip.show("    ") 
-    hotkey, *`j, off
     ih.Start()
     ih.Wait()
     ih.Stop()
-    hotkey, *`j, on
     typoTip.hide()
     if (ih.Match)
         execSemicolonAbbr(ih.Match)
@@ -558,7 +562,6 @@ enterCapslockAbbr()
     SoundPlay, D:\Downloads\QQ炫舞 音效\sound\bingo.wav
     result := ""
 
-    hotkey, *`j, off
     Loop 
     {
         Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
@@ -580,7 +583,6 @@ enterCapslockAbbr()
             break
         }
     }
-    hotkey, *`j, on
 
     typo := ""
     postMessageToTipWidnow(HIDE_TYPO_WINDOW)

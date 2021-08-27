@@ -1066,3 +1066,30 @@ openSettings()
     else
         run, http://localhost:12333
 }
+
+
+disableOtherHotkey(thisHotkey)
+{
+    ; ToolTip, % thisHotkey
+    allHotkeys := ["*capslock", "*;", "*j", "*3", "*9"]
+    for index,value in allHotkeys
+    {
+        if (value != thisHotkey) {
+            hotkey, %value%, off
+        }
+    }
+    
+}
+
+enableOtherHotkey(thisHotkey)
+{
+    ; ToolTip, % thisHotkey
+    allHotkeys := ["*capslock", "*;", "*j", "*3", "*9"]
+    for index,value in allHotkeys
+    {
+        if (value != thisHotkey) {
+            hotkey, %value%, on
+        }
+    }
+    
+}
