@@ -20,7 +20,8 @@ os.system('pnpm run build')
 os.chdir('..')
 
 # 复制 index.html 到 flask 的 templates 文件夹
-os.mkdir('bin/templates')
+if not os.path.isdir('bin/templates'):
+    os.mkdir('bin/templates')
 shutil.copy('bin/site/index.html', 'bin/templates/index.html')
 shutil.copy('config-back/templates/script.ahk', 'bin/templates/script.ahk')
 
