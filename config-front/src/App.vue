@@ -33,7 +33,7 @@
       <router-view v-if="config" />
     </v-main>
 
-    <v-snackbar v-model="$store.state.snackbar" color="green" timeout="1500" min-width="600" height="70"  outlined>
+    <v-snackbar v-model="$store.state.snackbar" color="green" timeout="2000" min-width="600" height="70"  outlined>
       <span id="snackBarText">{{ $store.state.snackbarText }}</span>
       <template v-slot:action="{ attrs }">
         <v-btn color="black" text v-bind="attrs" @click="snackbar = false"> </v-btn>

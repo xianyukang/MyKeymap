@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card min-height="630" width="790" elevation="5">
+    <v-card min-height="630" width="790" elevation="5" class="action-config">
       <v-card-title>
         <v-select
           class="action-select"
@@ -15,31 +15,29 @@
         <template v-if="currKey().type === '启动程序或激活窗口'">
           <v-text-field
             label="要激活的窗口 (选填)"
-            outlined
             v-model="currKey().toActivate"
             @input="activateOrRun"
           ></v-text-field>
-          <v-text-field label="窗口不存在时要启动的程序" outlined v-model="currKey().toRun" @input="activateOrRun"></v-text-field>
-          <v-text-field label="启动程序的命令行参数 (选填)" outlined v-model="currKey().cmdArgs" @input="activateOrRun"></v-text-field>
-          <v-text-field label="启动程序的工作目录 (选填)" outlined v-model="currKey().workingDir" @input="activateOrRun"></v-text-field>
+          <v-text-field label="窗口不存在时要启动的程序"  v-model="currKey().toRun" @input="activateOrRun"></v-text-field>
+          <br>
+          <v-text-field label="启动程序的命令行参数 (选填)" dense  v-model="currKey().cmdArgs" @input="activateOrRun"></v-text-field>
+          <v-text-field label="启动程序的工作目录 (选填)"  dense v-model="currKey().workingDir" @input="activateOrRun"></v-text-field>
         </template>
 
         <template v-if="currKey().type === '输入文本或按键'">
           <v-textarea
-            outlined
             auto-grow
-            rows="2"
+            rows="1"
             label="要输入的文本"
             v-model="currKey().textToSend"
             @input="sendKeys"
           ></v-textarea>
-          <v-text-field label="然后要输入的按键" outlined v-model="currKey().keysToSend" @input="sendKeys"></v-text-field>
+          <v-text-field label="然后要输入的按键"  v-model="currKey().keysToSend" @input="sendKeys"></v-text-field>
           <img alt="img" :src="require('../assets/send-keys.png')" /><img />
         </template>
 
         <template v-if="currKey().type === '执行单行 ahk 代码'">
-          <p id="single-line-code-hint">自定义的函数可以放到 data/custom_functions.ahk:</p>
-          <v-text-field label="单行代码" outlined v-model="currKey().value"></v-text-field>
+          <v-text-field label="单行代码 (自定义的函数可以放到 data/custom_functions.ahk)"  v-model="currKey().value"></v-text-field>
           <img alt="img" :src="require('../assets/send-keys.png')" /><img />
         </template>
 
@@ -314,7 +312,7 @@ export default {
 <style>
 /* 需要去掉 scoped 属性才能让 css 作用于 vuetify 的组件 */
 label.v-label.v-label--active {
-  font-size: 1.2em;
+  font-size: 1.15em;
   color: darkmagenta;
 }
 div.v-radio label.v-label {
@@ -331,5 +329,9 @@ div.v-radio.v-item--active label.v-label {
 .action-select .v-select__selection {
   color: black;
   font-size: 1.1em;
+}
+.action-config .v-text-field {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 </style>

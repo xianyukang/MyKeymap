@@ -381,7 +381,7 @@ space::send, {blind}{enter}
 
 matchCapslockAbbr(typo) {
     
-    arr := [ "xk","ss","sk","sl","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr","ne","vo","se" ]
+    arr := [ "xk","ss","sk","sl","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr","ne","vo","se","no" ]
 
     return arrayContains(arr, typo)
 }
@@ -460,6 +460,11 @@ send {blind}{enter}
 execCapslockAbbr(typo) {
     switch typo 
     {
+        case "no":
+           
+    path = notepad.exe
+    ActivateOrRun("记事本", path, "", "")
+    return
         case "sl":
            
     path = rundll32.exe

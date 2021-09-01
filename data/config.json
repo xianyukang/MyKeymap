@@ -1339,6 +1339,13 @@
         "se": {
             "type": "其他功能",
             "value": "openSettings()"
+        },
+        "no": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = notepad.exe\n    ActivateOrRun(\"记事本\", path, \"\", \"\")\n    return",
+            "toRun": "notepad.exe",
+            "toActivate": "记事本",
+            "cmdArgs": ""
         }
     },
     "CapslockAbbrKeys": [
@@ -1368,7 +1375,8 @@
         "dr",
         "ne",
         "vo",
-        "se"
+        "se",
+        "no"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",
