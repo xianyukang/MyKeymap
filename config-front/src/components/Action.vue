@@ -312,6 +312,7 @@ export default {
 <style>
 /* 需要去掉 scoped 属性才能让 css 作用于 vuetify 的组件 */
 label.v-label.v-label--active {
+  top: 2px;
   font-size: 1.15em;
   color: darkmagenta;
 }
