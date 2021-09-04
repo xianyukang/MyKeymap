@@ -119,7 +119,7 @@
           </v-radio-group>
         </template>
 
-        <template v-if="currKey().type === '其他功能'">
+        <template v-if="currKey().type === '系统控制'">
           <v-radio-group v-model="currKey().value">
             <v-row>
               <v-col>
@@ -133,6 +133,44 @@
               <v-col>
                 <v-radio
                   v-for="action in otherFeatures2"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+              </v-col>
+            </v-row>
+
+            <br />
+            <v-divider></v-divider>
+            <br />
+
+            <!-- <v-row>
+              <v-col>
+                <v-radio
+                  v-for="action in clickActions"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+              </v-col>
+              <v-col> </v-col>
+            </v-row> -->
+          </v-radio-group>
+        </template>
+        <template v-if="currKey().type === '文字编辑'">
+          <v-radio-group v-model="currKey().value">
+            <v-row>
+              <v-col>
+                <v-radio
+                  v-for="action in textFeatures1"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+              </v-col>
+              <v-col>
+                <v-radio
+                  v-for="action in textFeatures2"
                   :key="action.label"
                   :label="`${action.label}`"
                   :value="action.value"
@@ -210,18 +248,22 @@ export default {
         { label: '窗口居中(1370x930)', value: 'center_window_to_current_monitor(1370, 930)' },
       ],
       otherFeatures1: [
+        { label: '滑动关机', value: 'slideToShutdown()' },
+        { label: '滑动重启', value: 'slideToReboot()' },
+        { label: '音量调节', value: 'run, bin\\soundControl.exe' },
+        { label: '显示器亮度调节', value: 'run, bin\\changeBrightness.exe' },
+        { label: '打开 MyKeymap 设置', value: 'openSettings()' },
+      ],
+      otherFeatures2: [
+      ],
+      textFeatures1: [
         { label: '设置字体为红色', value: 'setColor("#D05")' },
         { label: '设置字体为紫色', value: 'setColor("#b309bb")' },
         { label: '设置字体为粉色', value: 'setColor("#FF00FF")' },
         { label: '设置字体为蓝色', value: 'setColor("#2E66FF")' },
         { label: '设置字体为绿色', value: 'setColor("#080")' },
       ],
-      otherFeatures2: [
-        { label: '滑动关机', value: 'slideToShutdown()' },
-        { label: '滑动重启', value: 'slideToReboot()' },
-        { label: '音量调节', value: 'run, bin\\soundControl.exe' },
-        { label: '显示器亮度调节', value: 'run, bin\\changeBrightness.exe' },
-        { label: '打开 MyKeymap 设置', value: 'openSettings()' },
+      textFeatures2: [
       ],
     }
   },
@@ -302,10 +344,11 @@ export default {
           '输入文本或按键',
           '鼠标操作',
           '窗口操作',
-          '其他功能',
+          '系统控制',
+          '文字编辑',
           '执行单行 ahk 代码',
         ]
-      else return ['什么也不做', '启动程序或激活窗口', '输入文本或按键', '窗口操作', '其他功能', '执行单行 ahk 代码']
+      else return ['什么也不做', '启动程序或激活窗口', '输入文本或按键', '窗口操作', '系统控制', '文字编辑', '执行单行 ahk 代码']
     },
   },
 }

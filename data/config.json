@@ -1203,7 +1203,7 @@
             "prefix": "*"
         },
         "ss": {
-            "type": "其他功能",
+            "type": "系统控制",
             "value": "slideToShutdown()"
         },
         "sk": {
@@ -1261,32 +1261,24 @@
             "value": "quit(true)"
         },
         "rb": {
-            "type": "其他功能",
+            "type": "系统控制",
             "value": "slideToReboot()"
         },
         "fi": {
-            "type": "其他功能",
+            "type": "文字编辑",
             "value": "setColor(\"#D05\")"
         },
         "fp": {
-            "type": "其他功能",
+            "type": "文字编辑",
             "value": "setColor(\"#b309bb\")"
         },
-        "fo": {
-            "type": "其他功能",
-            "value": "setColor(\"#FF00FF\")"
-        },
         "fb": {
-            "type": "其他功能",
+            "type": "文字编辑",
             "value": "setColor(\"#2E66FF\")"
         },
         "fg": {
-            "type": "其他功能",
+            "type": "文字编辑",
             "value": "setColor(\"#080\")"
-        },
-        "fk": {
-            "type": "其他功能",
-            "value": "setColor(\"#7B68EE\")"
         },
         "dd": {
             "type": "启动程序或激活窗口",
@@ -1325,7 +1317,7 @@
             "toRun": "shortcuts\\网易云音乐.lnk"
         },
         "se": {
-            "type": "其他功能",
+            "type": "系统控制",
             "value": "openSettings()"
         },
         "no": {
@@ -1336,12 +1328,16 @@
             "cmdArgs": ""
         },
         "sd": {
-            "type": "其他功能",
+            "type": "系统控制",
             "value": "run, bin\\soundControl.exe"
         },
         "ld": {
-            "type": "其他功能",
+            "type": "系统控制",
             "value": "run, bin\\changeBrightness.exe"
+        },
+        "fo": {
+            "type": "文字编辑",
+            "value": "setColor(\"#FF00FF\")"
         }
     },
     "CapslockAbbrKeys": [
@@ -1359,10 +1355,8 @@
         "rb",
         "fi",
         "fp",
-        "fo",
         "fb",
         "fg",
-        "fk",
         "dd",
         "dp",
         "dv",
@@ -1372,7 +1366,8 @@
         "se",
         "no",
         "sd",
-        "ld"
+        "ld",
+        "fo"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",
