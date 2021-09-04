@@ -11,7 +11,7 @@
       <v-col><v-text-field label="激活" v-model="item.value"></v-text-field></v-col>
       <v-col><v-text-field label="或运行" v-model="item.value"></v-text-field></v-col>
     </v-row> -->
-    <Abbr @clickKey="keyChanged" @delKey="deleteKey" :currentKey="currentKey" />
+    <Abbr @clickKey="keyChanged" @delKey="deleteKey" @renameKey="renameKey" :currentKey="currentKey" />
     <Action :currentKey="currentKey" />
   </v-container>
 </template>
@@ -30,6 +30,12 @@ export default {
       console.log(toDel, toFocus)
       this.keyChanged(toFocus)
       delete this.currConfig()[toDel]
+    },
+    renameKey(newKey) {
+      const old = this.currentKey
+      this.currConfig()[newKey] = this.currConfig()[old] 
+      this.keyChanged(newKey)
+      delete this.currConfig()[old]
     },
   },
   data() {

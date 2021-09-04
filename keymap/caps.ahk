@@ -381,7 +381,7 @@ space::send, {blind}{enter}
 
 matchCapslockAbbr(typo) {
     
-    arr := [ "xk","ss","sk","sl","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr","ne","vo","se","no","ld" ]
+    arr := [ "xk","ss","sk","sl","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr","ne","se","no","ld","so" ]
 
     return arrayContains(arr, typo)
 }
@@ -460,16 +460,6 @@ send {blind}{enter}
 execCapslockAbbr(typo) {
     switch typo 
     {
-        case "ld":
-           
-    path = bin\changeBrightness.exe
-    ActivateOrRun("", path, "", "")
-    return
-        case "vo":
-           
-    path = ms-settings:apps-volume
-    ActivateOrRun("", path, "", "")
-    return
         case "no":
            
     path = notepad.exe
@@ -504,6 +494,10 @@ execCapslockAbbr(typo) {
            openSettings()
         case "ex":
            quit(true)
+        case "ld":
+           run, bin\changeBrightness.exe
+        case "so":
+           run, ms-settings:apps-volume
         case "ss":
            send {blind}""{left}
         case "xk":

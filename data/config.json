@@ -1330,12 +1330,6 @@
             "toActivate": "网易云音乐",
             "toRun": "shortcuts\\网易云音乐.lnk"
         },
-        "vo": {
-            "type": "启动程序或激活窗口",
-            "value": "\n    path = ms-settings:apps-volume\n    ActivateOrRun(\"\", path, \"\", \"\")\n    return",
-            "toRun": "ms-settings:apps-volume",
-            "toActivate": ""
-        },
         "se": {
             "type": "其他功能",
             "value": "openSettings()"
@@ -1348,10 +1342,12 @@
             "cmdArgs": ""
         },
         "ld": {
-            "type": "启动程序或激活窗口",
-            "value": "\n    path = bin\\changeBrightness.exe\n    ActivateOrRun(\"\", path, \"\", \"\")\n    return",
-            "toRun": "bin\\changeBrightness.exe",
-            "toActivate": ""
+            "type": "其他功能",
+            "value": "run, bin\\changeBrightness.exe"
+        },
+        "so": {
+            "type": "其他功能",
+            "value": "run, ms-settings:apps-volume"
         }
     },
     "CapslockAbbrKeys": [
@@ -1380,10 +1376,10 @@
         "da",
         "dr",
         "ne",
-        "vo",
         "se",
         "no",
-        "ld"
+        "ld",
+        "so"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",

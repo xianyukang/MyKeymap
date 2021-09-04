@@ -75,6 +75,16 @@ export default {
         this.abbr = ''
         return
       } 
+
+      // 重命名逻辑
+      if (this.abbr.length > 3 && this.abbr.startsWith('rn ')) {
+        if (Object.keys(this.currConfig()).length > 1) {
+          let newKey = this.abbr.substring(3)
+          this.$emit('renameKey', newKey)
+        }
+        this.abbr = ''
+        return
+      } 
       
       else if (!this.currConfig()[this.abbr]) {
         let k = this.abbr.replaceAll(' ', '')
