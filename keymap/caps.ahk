@@ -460,6 +460,11 @@ send {blind}{enter}
 execCapslockAbbr(typo) {
     switch typo 
     {
+        case "vo":
+           
+    path = ms-settings:apps-volume
+    ActivateOrRun("", path, "", "")
+    return
         case "no":
            
     path = notepad.exe
@@ -475,10 +480,6 @@ execCapslockAbbr(typo) {
     path = shortcuts\网易云音乐.lnk
     ActivateOrRun("网易云音乐", path)
     return
-        case "vo":
-           
-send {blind}#b{sleep 600}#b{sleep 10}{left 4}{sleep 10}{space}
-return
         case "da":
             path = %A_WorkingDir%
             ActivateOrRun("", path)
