@@ -1346,6 +1346,12 @@
             "toRun": "notepad.exe",
             "toActivate": "记事本",
             "cmdArgs": ""
+        },
+        "ld": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = bin\\changeBrightness.exe\n    ActivateOrRun(\"\", path, \"\", \"\")\n    return",
+            "toRun": "bin\\changeBrightness.exe",
+            "toActivate": ""
         }
     },
     "CapslockAbbrKeys": [
@@ -1376,7 +1382,8 @@
         "ne",
         "vo",
         "se",
-        "no"
+        "no",
+        "ld"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",
