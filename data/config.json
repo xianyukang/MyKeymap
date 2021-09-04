@@ -1196,69 +1196,17 @@
         }
     },
     "CapslockAbbr": {
-        "xk": {
-            "type": "输入文本或按键",
-            "value": "send {blind}(){left 1}",
-            "keysToSend": "(){left 1}",
-            "prefix": "*"
-        },
         "ss": {
             "type": "系统控制",
             "value": "slideToShutdown()"
         },
-        "sk": {
-            "type": "输入文本或按键",
-            "value": "send {blind}「  」{left 2}",
-            "keysToSend": "「  」{left 2}",
-            "prefix": "*"
-        },
         "sl": {
-            "type": "启动程序或激活窗口",
-            "value": "\n    path = rundll32.exe\n    ActivateOrRun(\"\", path, \"powrprof.dll, SetSuspendState Sleep\", \"\")\n    return",
-            "toRun": "rundll32.exe",
-            "toActivate": "",
-            "cmdArgs": "powrprof.dll, SetSuspendState Sleep",
-            "workingDir": ""
-        },
-        "dk": {
-            "type": "输入文本或按键",
-            "value": "send {blind}{{}{}}{left}",
-            "keysToSend": "{{}{}}{left}",
-            "prefix": "*"
-        },
-        "dh": {
-            "type": "输入文本或按键",
-            "value": "send {blind}、",
-            "keysToSend": "、",
-            "prefix": "*"
-        },
-        "jt": {
-            "type": "输入文本或按键",
-            "value": "send {blind}➤{space 1}",
-            "keysToSend": "➤{space 1}",
-            "prefix": "*"
-        },
-        "gt": {
-            "type": "输入文本或按键",
-            "value": "send {blind}🐶",
-            "keysToSend": "🐶",
-            "prefix": "*"
-        },
-        "lx": {
-            "type": "输入文本或按键",
-            "value": "send {blind}💚",
-            "keysToSend": "💚",
-            "prefix": "*"
-        },
-        "sm": {
-            "type": "输入文本或按键",
-            "value": "send {blind}《》{left}",
-            "keysToSend": "《》{left}",
-            "prefix": "*"
+            "type": "系统控制",
+            "value": "DllCall(\"PowrProf\\SetSuspendState\", \"Int\", 0, \"Int\", 0, \"Int\", 0)"
         },
         "ex": {
-            "type": "执行单行 ahk 代码",
-            "value": "quit(true)"
+            "type": "系统控制",
+            "value": "quit(false)"
         },
         "rb": {
             "type": "系统控制",
@@ -1341,16 +1289,8 @@
         }
     },
     "CapslockAbbrKeys": [
-        "xk",
         "ss",
-        "sk",
         "sl",
-        "dk",
-        "dh",
-        "jt",
-        "gt",
-        "lx",
-        "sm",
         "ex",
         "rb",
         "fi",

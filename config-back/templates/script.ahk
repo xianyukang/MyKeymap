@@ -36,7 +36,7 @@ slow_repeat := 13
 
 Menu, Tray, Icon
 Menu, Tray, Icon, bin\logo.ico
-Menu, Tray, Tip, MyKeymap 1.0 by 咸鱼康2333
+Menu, Tray, Tip, MyKeymap 1.0 by 咸鱼阿康12333
 ; processPath := getProcessPath()
 ; SetWorkingDir, %processPath%
 

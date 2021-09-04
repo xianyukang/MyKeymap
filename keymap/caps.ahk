@@ -36,7 +36,7 @@ slow_repeat := 13
 
 Menu, Tray, Icon
 Menu, Tray, Icon, bin\logo.ico
-Menu, Tray, Tip, MyKeymap 1.0 by 咸鱼康2333
+Menu, Tray, Tip, MyKeymap 1.0 by 咸鱼阿康12333
 ; processPath := getProcessPath()
 ; SetWorkingDir, %processPath%
 
@@ -382,7 +382,7 @@ space::send, {blind}{enter}
 
 matchCapslockAbbr(typo) {
     
-    arr := [ "xk","ss","sk","sl","dk","dh","jt","gt","lx","sm","ex","rb","fi","fp","fb","fg","dd","dp","dv","da","dr","ne","se","no","sd","ld","fo" ]
+    arr := [ "ss","sl","ex","rb","fi","fp","fb","fg","dd","dp","dv","da","dr","ne","se","no","sd","ld","fo" ]
 
     return arrayContains(arr, typo)
 }
@@ -466,11 +466,6 @@ execCapslockAbbr(typo) {
     path = notepad.exe
     ActivateOrRun("记事本", path, "", "")
     return
-        case "sl":
-           
-    path = rundll32.exe
-    ActivateOrRun("", path, "powrprof.dll, SetSuspendState Sleep", "")
-    return
         case "ne":
            
     path = shortcuts\网易云音乐.lnk
@@ -491,30 +486,16 @@ execCapslockAbbr(typo) {
         case "dr":
             path = shell:RecycleBinFolder
             ActivateOrRun("", path)
+        case "sl":
+           DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
         case "se":
            openSettings()
         case "ex":
-           quit(true)
+           quit(false)
         case "ld":
            run, bin\changeBrightness.exe
         case "sd":
            run, bin\soundControl.exe
-        case "xk":
-           send {blind}(){left 1}
-        case "dk":
-           send {blind}{{}{}}{left}
-        case "jt":
-           send {blind}➤{space 1}
-        case "dh":
-           send {blind}、
-        case "sm":
-           send {blind}《》{left}
-        case "sk":
-           send {blind}「  」{left 2}
-        case "gt":
-           send {blind}🐶
-        case "lx":
-           send {blind}💚
         case "fg":
            setColor("#080")
         case "fb":
