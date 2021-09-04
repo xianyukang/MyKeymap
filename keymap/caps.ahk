@@ -6,6 +6,7 @@
 #InstallKeybdHook               ; 可能是 ahk 自动卸载 hook 导致的丢失 hook,  如果用这行指令, ahk 是否就不会卸载 hook 了呢?
 #include keymap/functions.ahk
 
+StringCaseSense, On
 SetWorkingDir %A_ScriptDir%\..
 rqeruireAdmin()
 closeOldInstance()
@@ -381,7 +382,7 @@ space::send, {blind}{enter}
 
 matchCapslockAbbr(typo) {
     
-    arr := [ "xk","ss","sk","sl","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr","ne","se","no","ld","so" ]
+    arr := [ "xk","ss","sk","sl","dk","dh","jt","gt","lx","sm","ex","rb","fi","fp","fo","fb","fg","fk","dd","dp","dv","da","dr","ne","se","no","sd","ld" ]
 
     return arrayContains(arr, typo)
 }
@@ -496,10 +497,8 @@ execCapslockAbbr(typo) {
            quit(true)
         case "ld":
            run, bin\changeBrightness.exe
-        case "so":
+        case "sd":
            run, bin\soundControl.exe
-        case "ss":
-           send {blind}""{left}
         case "xk":
            send {blind}(){left 1}
         case "dk":
@@ -530,7 +529,7 @@ execCapslockAbbr(typo) {
            setColor("#FF00FF")
         case "rb":
            slideToReboot()
-        case "sd":
+        case "ss":
            slideToShutdown()
         default: 
             return false
@@ -569,7 +568,7 @@ enterCapslockAbbr()
 
     Loop 
     {
-        Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
+        Input, key, C L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
 
         if InStr(ErrorLevel, "EndKey:") {
             SoundPlay, D:\Downloads\QQ炫舞 音效\sound\beatmiss.wav

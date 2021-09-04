@@ -6,6 +6,7 @@
 #InstallKeybdHook               ; 可能是 ahk 自动卸载 hook 导致的丢失 hook,  如果用这行指令, ahk 是否就不会卸载 hook 了呢?
 #include keymap/functions.ahk
 
+StringCaseSense, On
 SetWorkingDir %A_ScriptDir%\..
 rqeruireAdmin()
 closeOldInstance()
@@ -314,7 +315,7 @@ enterCapslockAbbr()
 
     Loop 
     {
-        Input, key, L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
+        Input, key, C L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
 
         if InStr(ErrorLevel, "EndKey:") {
             SoundPlay, D:\Downloads\QQ炫舞 音效\sound\beatmiss.wav

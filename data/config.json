@@ -1203,10 +1203,8 @@
             "prefix": "*"
         },
         "ss": {
-            "type": "输入文本或按键",
-            "value": "send {blind}\"\"{left}",
-            "keysToSend": "\"\"{left}",
-            "prefix": "*"
+            "type": "其他功能",
+            "value": "slideToShutdown()"
         },
         "sk": {
             "type": "输入文本或按键",
@@ -1261,10 +1259,6 @@
         "ex": {
             "type": "执行单行 ahk 代码",
             "value": "quit(true)"
-        },
-        "sd": {
-            "type": "其他功能",
-            "value": "slideToShutdown()"
         },
         "rb": {
             "type": "其他功能",
@@ -1341,13 +1335,13 @@
             "toActivate": "记事本",
             "cmdArgs": ""
         },
+        "sd": {
+            "type": "其他功能",
+            "value": "run, bin\\soundControl.exe"
+        },
         "ld": {
             "type": "其他功能",
             "value": "run, bin\\changeBrightness.exe"
-        },
-        "so": {
-            "type": "其他功能",
-            "value": "run, bin\\soundControl.exe"
         }
     },
     "CapslockAbbrKeys": [
@@ -1362,7 +1356,6 @@
         "lx",
         "sm",
         "ex",
-        "sd",
         "rb",
         "fi",
         "fp",
@@ -1378,8 +1371,8 @@
         "ne",
         "se",
         "no",
-        "ld",
-        "so"
+        "sd",
+        "ld"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",
