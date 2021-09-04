@@ -1347,7 +1347,7 @@
         },
         "so": {
             "type": "其他功能",
-            "value": "run, ms-settings:apps-volume"
+            "value": "run, bin\\soundControl.exe"
         }
     },
     "CapslockAbbrKeys": [

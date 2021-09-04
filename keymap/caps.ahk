@@ -497,7 +497,7 @@ execCapslockAbbr(typo) {
         case "ld":
            run, bin\changeBrightness.exe
         case "so":
-           run, ms-settings:apps-volume
+           run, bin\soundControl.exe
         case "ss":
            send {blind}""{left}
         case "xk":

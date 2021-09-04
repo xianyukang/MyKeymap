@@ -219,7 +219,7 @@ export default {
       otherFeatures2: [
         { label: '滑动关机', value: 'slideToShutdown()' },
         { label: '滑动重启', value: 'slideToReboot()' },
-        { label: '音量调节', value: 'run, ms-settings:apps-volume' },
+        { label: '音量调节', value: 'run, bin\\soundControl.exe' },
         { label: '显示器亮度调节', value: 'run, bin\\changeBrightness.exe' },
         { label: '打开 MyKeymap 设置', value: 'openSettings()' },
       ],
