@@ -13,15 +13,21 @@
       </v-card-title>
       <v-card-text>
         <template v-if="currKey().type === '启动程序或激活窗口'">
+          <v-text-field label="要激活的窗口 (选填)" v-model="currKey().toActivate" @input="activateOrRun"></v-text-field>
+          <v-text-field label="窗口不存在时要启动的程序" v-model="currKey().toRun" @input="activateOrRun"></v-text-field>
+          <br />
           <v-text-field
-            label="要激活的窗口 (选填)"
-            v-model="currKey().toActivate"
+            label="启动程序的命令行参数 (选填)"
+            dense
+            v-model="currKey().cmdArgs"
             @input="activateOrRun"
           ></v-text-field>
-          <v-text-field label="窗口不存在时要启动的程序"  v-model="currKey().toRun" @input="activateOrRun"></v-text-field>
-          <br>
-          <v-text-field label="启动程序的命令行参数 (选填)" dense  v-model="currKey().cmdArgs" @input="activateOrRun"></v-text-field>
-          <v-text-field label="启动程序的工作目录 (选填)"  dense v-model="currKey().workingDir" @input="activateOrRun"></v-text-field>
+          <v-text-field
+            label="启动程序的工作目录 (选填)"
+            dense
+            v-model="currKey().workingDir"
+            @input="activateOrRun"
+          ></v-text-field>
         </template>
 
         <template v-if="currKey().type === '输入文本或按键'">
@@ -32,12 +38,15 @@
             v-model="currKey().textToSend"
             @input="sendKeys"
           ></v-textarea>
-          <v-text-field label="然后要输入的按键"  v-model="currKey().keysToSend" @input="sendKeys"></v-text-field>
+          <v-text-field label="然后要输入的按键" v-model="currKey().keysToSend" @input="sendKeys"></v-text-field>
           <img alt="img" :src="require('../assets/send-keys.png')" /><img />
         </template>
 
         <template v-if="currKey().type === '执行单行 ahk 代码'">
-          <v-text-field label="单行代码 (自定义的函数可以放到 data/custom_functions.ahk)"  v-model="currKey().value"></v-text-field>
+          <v-text-field
+            label="单行代码 (自定义的函数可以放到 data/custom_functions.ahk)"
+            v-model="currKey().value"
+          ></v-text-field>
           <img alt="img" :src="require('../assets/send-keys.png')" /><img />
         </template>
 
@@ -254,8 +263,7 @@ export default {
         { label: '显示器亮度调节', value: 'run, bin\\changeBrightness.exe' },
         { label: '打开 MyKeymap 设置', value: 'openSettings()' },
       ],
-      otherFeatures2: [
-      ],
+      otherFeatures2: [],
       textFeatures1: [
         { label: '设置字体为红色', value: 'setColor("#D05")' },
         { label: '设置字体为紫色', value: 'setColor("#b309bb")' },
@@ -263,8 +271,7 @@ export default {
         { label: '设置字体为蓝色', value: 'setColor("#2E66FF")' },
         { label: '设置字体为绿色', value: 'setColor("#080")' },
       ],
-      textFeatures2: [
-      ],
+      textFeatures2: [],
     }
   },
   methods: {
@@ -337,18 +344,20 @@ export default {
   },
   computed: {
     actionTypes() {
-      if (this.$route.name === 'Capslock')
-        return [
-          '什么也不做',
-          '启动程序或激活窗口',
-          '输入文本或按键',
-          '鼠标操作',
-          '窗口操作',
-          '系统控制',
-          '文字编辑',
-          '执行单行 ahk 代码',
-        ]
-      else return ['什么也不做', '启动程序或激活窗口', '输入文本或按键', '窗口操作', '系统控制', '文字编辑', '执行单行 ahk 代码']
+      const result = [
+        { text: '⛔ 什么也不做', value: '什么也不做' },
+        { text: '👾 启动程序或激活窗口', value: '启动程序或激活窗口' },
+        { text: '🅰️ 输入文本或按键', value: '输入文本或按键' },
+        { text: '🖱️  鼠标操作', value: '鼠标操作' },
+        { text: '🏠 窗口操作', value: '窗口操作' },
+        { text: '🖥️ 系统控制', value: '系统控制' },
+        { text: '📚 文字编辑', value: '文字编辑' },
+        { text: '⚛️ 执行单行 ahk 代码', value: '执行单行 ahk 代码' },
+      ]
+      if (this.$route.name !== 'Capslock') {
+        result.splice(3, 1)
+      }
+      return result
     },
   },
 }
@@ -373,8 +382,8 @@ div.v-radio.v-item--active label.v-label {
   color: orangered;
 }
 .action-select .v-select__selection {
-  color: black;
-  font-size: 1.1em;
+  /* color: black; */
+  /* font-size: 1.1em; */
 }
 .action-config .v-text-field {
   margin-left: 10px;
