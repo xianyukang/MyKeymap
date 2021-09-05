@@ -1093,3 +1093,20 @@ enableOtherHotkey(thisHotkey)
     }
     
 }
+
+trayMenuHandler(ItemName, ItemPos, MenuName)
+{
+    if (InStr(ItemName, "退出" )) {
+        myExit()
+    }
+    if (InStr(ItemName, "打开设置" )) {
+        openSettings()
+    }
+    if (InStr(ItemName, "视频教程" )) {
+        openSettings()
+    }
+    if (InStr(ItemName, "文档示例" )) {
+        openSettings()
+    }
+
+}

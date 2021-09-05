@@ -34,6 +34,14 @@ fast_repeat := 70
 slow_one :=  10     
 slow_repeat := 13
 
+; Menu, Tray, NoStandard
+Menu, Tray, Add, 视频教程, trayMenuHandler
+Menu, Tray, Add, 参考/示例, trayMenuHandler 
+Menu, Tray, Add 
+Menu, Tray, Add, 退出, trayMenuHandler
+Menu, Tray, Add, 打开设置, trayMenuHandler 
+Menu, Tray, Add 
+
 Menu, Tray, Icon
 Menu, Tray, Icon, bin\logo.ico
 Menu, Tray, Tip, MyKeymap 1.0 by 咸鱼阿康12333
