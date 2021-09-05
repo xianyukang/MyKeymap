@@ -1258,12 +1258,6 @@
             "toRun": "shell:RecycleBinFolder",
             "toActivate": ""
         },
-        "ne": {
-            "type": "启动程序或激活窗口",
-            "value": "\n    path = shortcuts\\网易云音乐.lnk\n    ActivateOrRun(\"网易云音乐\", path)\n    return",
-            "toActivate": "网易云音乐",
-            "toRun": "shortcuts\\网易云音乐.lnk"
-        },
         "se": {
             "type": "系统控制",
             "value": "openSettings()"
@@ -1286,6 +1280,12 @@
         "fo": {
             "type": "文字编辑",
             "value": "setColor(\"#FF00FF\")"
+        },
+        "we": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = shortcuts\\网易云音乐.lnk\n    ActivateOrRun(\"网易云音乐\", path)\n    return",
+            "toActivate": "网易云音乐",
+            "toRun": "shortcuts\\网易云音乐.lnk"
         }
     },
     "CapslockAbbrKeys": [
@@ -1302,12 +1302,12 @@
         "dv",
         "da",
         "dr",
-        "ne",
         "se",
         "no",
         "sd",
         "ld",
-        "fo"
+        "fo",
+        "we"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",

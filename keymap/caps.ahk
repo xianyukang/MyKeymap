@@ -382,7 +382,7 @@ space::send, {blind}{enter}
 
 matchCapslockAbbr(typo) {
     
-    arr := [ "ss","sl","ex","rb","fi","fp","fb","fg","dd","dp","dv","da","dr","ne","se","no","sd","ld","fo" ]
+    arr := [ "ss","sl","ex","rb","fi","fp","fb","fg","dd","dp","dv","da","dr","se","no","sd","ld","fo","we" ]
 
     return arrayContains(arr, typo)
 }
@@ -466,7 +466,7 @@ execCapslockAbbr(typo) {
     path = notepad.exe
     ActivateOrRun("记事本", path, "", "")
     return
-        case "ne":
+        case "we":
            
     path = shortcuts\网易云音乐.lnk
     ActivateOrRun("网易云音乐", path)
