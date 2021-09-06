@@ -9,7 +9,7 @@
     <key>AutoCheckForUpdate</key>
     <false />
     <key>AutoStart</key>
-    <false />
+    <true />
     <key>PathTrackerTriggerButton</key>
     <integer>1</integer>
     <key>PathTrackerStayTimeout</key>

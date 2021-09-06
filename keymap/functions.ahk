@@ -723,10 +723,10 @@ slideToShutdown()
 
 slideToReboot()
 {
-    run, SlideToShutDown
-    sleep, 1300
-    MouseClick, Left, 100, 100
-    sleep, 350
+    ; run, SlideToShutDown
+    ; sleep, 1300
+    ; MouseClick, Left, 100, 100
+    ; sleep, 250
     shutdown, 2
 }
 

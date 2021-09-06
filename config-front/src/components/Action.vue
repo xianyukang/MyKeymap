@@ -259,7 +259,7 @@ export default {
       otherFeatures1: [
         { label: '系统睡眠', value: 'DllCall("PowrProf\\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)' },
         { label: '滑动关机', value: 'slideToShutdown()' },
-        { label: '滑动重启', value: 'slideToReboot()' },
+        { label: '系统重启', value: 'slideToReboot()' },
         { label: '音量调节', value: 'run, bin\\soundControl.exe' },
         { label: '显示器亮度调节', value: 'run, bin\\changeBrightness.exe' },
         { label: '打开 MyKeymap 设置', value: 'openSettings()' },
