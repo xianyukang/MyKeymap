@@ -1212,10 +1212,6 @@
             "type": "系统控制",
             "value": "slideToReboot()"
         },
-        "fi": {
-            "type": "文字编辑",
-            "value": "setColor(\"#D05\")"
-        },
         "fp": {
             "type": "文字编辑",
             "value": "setColor(\"#b309bb\")"
@@ -1267,10 +1263,6 @@
             "type": "系统控制",
             "value": "run, bin\\changeBrightness.exe"
         },
-        "fo": {
-            "type": "文字编辑",
-            "value": "setColor(\"#FF00FF\")"
-        },
         "we": {
             "type": "启动程序或激活窗口",
             "value": "\n    path = shortcuts\\网易云音乐.lnk\n    ActivateOrRun(\"网易云音乐\", path)\n    return",
@@ -1300,6 +1292,14 @@
             "cmdArgs": "--app=https://translate.google.cn/?op=translate&sl=auto&tl=zh-CN&text=nice",
             "toActivate": "Google 翻译",
             "toRun": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+        },
+        "fr": {
+            "type": "文字编辑",
+            "value": "setColor(\"#D05\")"
+        },
+        "fi": {
+            "type": "文字编辑",
+            "value": "setColor(\"#FF00FF\")"
         }
     },
     "CapslockAbbrKeys": [
@@ -1307,7 +1307,6 @@
         "sl",
         "ex",
         "rb",
-        "fi",
         "fp",
         "fb",
         "fg",
@@ -1320,12 +1319,13 @@
         "no",
         "sd",
         "ld",
-        "fo",
         "we",
         "st",
         "dw",
         "bb",
-        "gg"
+        "gg",
+        "fr",
+        "fi"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",

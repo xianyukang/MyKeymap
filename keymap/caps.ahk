@@ -389,7 +389,7 @@ space::send, {blind}{enter}
 
 matchCapslockAbbr(typo) {
     
-    arr := [ "ss","sl","ex","rb","fi","fp","fb","fg","dd","dp","dv","da","dr","se","no","sd","ld","fo","we","st","dw","bb","gg" ]
+    arr := [ "ss","sl","ex","rb","fp","fb","fg","dd","dp","dv","da","dr","se","no","sd","ld","we","st","dw","bb","gg","fr","fi" ]
 
     return arrayContains(arr, typo)
 }
@@ -521,9 +521,9 @@ execCapslockAbbr(typo) {
            setColor("#2E66FF")
         case "fp":
            setColor("#b309bb")
-        case "fi":
+        case "fr":
            setColor("#D05")
-        case "fo":
+        case "fi":
            setColor("#FF00FF")
         case "rb":
            slideToReboot()
