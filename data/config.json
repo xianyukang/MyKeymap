@@ -1257,11 +1257,11 @@
         },
         "sd": {
             "type": "系统控制",
-            "value": "run, bin\\soundControl.exe"
+            "value": "run, bin\\ahk.exe bin\\soundControl.ahk"
         },
         "ld": {
             "type": "系统控制",
-            "value": "run, bin\\changeBrightness.exe"
+            "value": "run, bin\\ahk.exe bin\\changeBrightness.ahk"
         },
         "we": {
             "type": "启动程序或激活窗口",

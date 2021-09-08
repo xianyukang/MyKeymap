@@ -502,9 +502,9 @@ execCapslockAbbr(typo) {
         case "da":
            run, %A_WorkingDir%
         case "ld":
-           run, bin\changeBrightness.exe
+           run, bin\ahk.exe bin\changeBrightness.ahk
         case "sd":
-           run, bin\soundControl.exe
+           run, bin\ahk.exe bin\soundControl.ahk
         case "dd":
            run, shell:downloads
         case "dp":
