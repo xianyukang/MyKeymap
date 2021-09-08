@@ -265,7 +265,14 @@ export default {
         { label: '打开 MyKeymap 设置', value: 'openSettings()' },
         { label: '退出 MyKeymap', value: 'quit(false)' },
       ],
-      otherFeatures2: [],
+      otherFeatures2: [
+        { label: '打开「MyKeymap」文件夹', value: 'run, %A_WorkingDir%' },
+        { label: '打开「 回收站 」文件夹', value: 'run, shell:RecycleBinFolder' },
+        { label: '打开「 下载 」文件夹', value: 'run, shell:downloads' },
+        { label: '打开「 图片 」文件夹', value: 'run, shell:my pictures' },
+        { label: '打开「 视频 」文件夹', value: 'run, shell:My Video' },
+        { label: '打开「 文档 」文件夹', value: 'run, shell:Personal' },
+      ],
       textFeatures1: [
         { label: '设置字体为红色', value: 'setColor("#D05")' },
         { label: '设置字体为紫色', value: 'setColor("#b309bb")' },

@@ -390,7 +390,7 @@ space::send, {blind}{enter}
 
 matchCapslockAbbr(typo) {
     
-    arr := [ "ss","sl","ex","rb","fi","fp","fb","fg","dd","dp","dv","da","dr","se","no","sd","ld","fo","we" ]
+    arr := [ "ss","sl","ex","rb","fi","fp","fb","fg","dd","dp","dv","da","dr","se","no","sd","ld","fo","we","st","dw" ]
 
     return arrayContains(arr, typo)
 }
@@ -474,36 +474,38 @@ execCapslockAbbr(typo) {
     path = notepad.exe
     ActivateOrRun("记事本", path, "", "")
     return
+        case "st":
+           
+    path = shortcuts\Store.lnk
+    ActivateOrRun("Microsoft Store", path, "", "")
+    return
         case "we":
            
     path = shortcuts\网易云音乐.lnk
     ActivateOrRun("网易云音乐", path)
     return
-        case "da":
-            path = %A_WorkingDir%
-            ActivateOrRun("", path)
-        case "dd":
-            path = shell:downloads
-            ActivateOrRun("", path)
-        case "dp":
-            path = shell:my pictures
-            ActivateOrRun("", path)
-        case "dv":
-            path = shell:My Video
-            ActivateOrRun("", path)
-        case "dr":
-            path = shell:RecycleBinFolder
-            ActivateOrRun("", path)
         case "sl":
            DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
         case "se":
            openSettings()
         case "ex":
            quit(false)
+        case "da":
+           run, %A_WorkingDir%
         case "ld":
            run, bin\changeBrightness.exe
         case "sd":
            run, bin\soundControl.exe
+        case "dd":
+           run, shell:downloads
+        case "dp":
+           run, shell:my pictures
+        case "dv":
+           run, shell:My Video
+        case "dw":
+           run, shell:Personal
+        case "dr":
+           run, shell:RecycleBinFolder
         case "fg":
            setColor("#080")
         case "fb":

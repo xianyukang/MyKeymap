@@ -1,8 +1,8 @@
 {
     "Capslock": {
         "Space": {
-            "type": "执行单行 ahk 代码",
-            "value": "ShowCommandBar()"
+            "type": "什么也不做",
+            "value": ""
         },
         "Q": {
             "type": "窗口操作",
@@ -1229,34 +1229,24 @@
             "value": "setColor(\"#080\")"
         },
         "dd": {
-            "type": "启动程序或激活窗口",
-            "value": " path = shell:downloads\n            ActivateOrRun(\"\", path)",
-            "toRun": "shell:downloads",
-            "toActivate": ""
+            "type": "系统控制",
+            "value": "run, shell:downloads"
         },
         "dp": {
-            "type": "启动程序或激活窗口",
-            "value": " path = shell:my pictures\n            ActivateOrRun(\"\", path)",
-            "toRun": "shell:my pictures",
-            "toActivate": ""
+            "type": "系统控制",
+            "value": "run, shell:my pictures"
         },
         "dv": {
-            "type": "启动程序或激活窗口",
-            "value": " path = shell:My Video\n            ActivateOrRun(\"\", path)",
-            "toRun": "shell:My Video",
-            "toActivate": ""
+            "type": "系统控制",
+            "value": "run, shell:My Video"
         },
         "da": {
-            "type": "启动程序或激活窗口",
-            "value": " path = %A_WorkingDir%\n            ActivateOrRun(\"\", path)",
-            "toRun": "%A_WorkingDir%",
-            "toActivate": ""
+            "type": "系统控制",
+            "value": "run, %A_WorkingDir%"
         },
         "dr": {
-            "type": "启动程序或激活窗口",
-            "value": " path = shell:RecycleBinFolder\n            ActivateOrRun(\"\", path)",
-            "toRun": "shell:RecycleBinFolder",
-            "toActivate": ""
+            "type": "系统控制",
+            "value": "run, shell:RecycleBinFolder"
         },
         "se": {
             "type": "系统控制",
@@ -1286,6 +1276,16 @@
             "value": "\n    path = shortcuts\\网易云音乐.lnk\n    ActivateOrRun(\"网易云音乐\", path)\n    return",
             "toActivate": "网易云音乐",
             "toRun": "shortcuts\\网易云音乐.lnk"
+        },
+        "st": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = shortcuts\\Store.lnk\n    ActivateOrRun(\"Microsoft Store\", path, \"\", \"\")\n    return",
+            "toActivate": "Microsoft Store",
+            "toRun": "shortcuts\\Store.lnk"
+        },
+        "dw": {
+            "type": "系统控制",
+            "value": "run, shell:Personal"
         }
     },
     "CapslockAbbrKeys": [
@@ -1307,7 +1307,9 @@
         "sd",
         "ld",
         "fo",
-        "we"
+        "we",
+        "st",
+        "dw"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",
