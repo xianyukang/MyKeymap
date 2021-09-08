@@ -1286,6 +1286,20 @@
         "dw": {
             "type": "系统控制",
             "value": "run, shell:Personal"
+        },
+        "bb": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\n    ActivateOrRun(\"Bing 词典\", path, \"--app=https://cn.bing.com/dict/search?q=nice\", \"\")\n    return",
+            "toActivate": "Bing 词典",
+            "toRun": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+            "cmdArgs": "--app=https://cn.bing.com/dict/search?q=nice"
+        },
+        "gg": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\n    ActivateOrRun(\"Google 翻译\", path, \"--app=https://translate.google.cn/?op=translate&sl=auto&tl=zh-CN&text=nice\", \"\")\n    return",
+            "cmdArgs": "--app=https://translate.google.cn/?op=translate&sl=auto&tl=zh-CN&text=nice",
+            "toActivate": "Google 翻译",
+            "toRun": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
         }
     },
     "CapslockAbbrKeys": [
@@ -1309,7 +1323,9 @@
         "fo",
         "we",
         "st",
-        "dw"
+        "dw",
+        "bb",
+        "gg"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",

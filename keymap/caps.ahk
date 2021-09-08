@@ -273,7 +273,6 @@ D::send #+{right}
 E::send ^!{tab}
 Y::send {LControl down}{LWin down}{Left}{LWin up}{LControl up}
 P::send {LControl down}{LWin down}{Right}{LWin up}{LControl up}
-Space::ShowCommandBar()
 X::SmartCloseWindow()
 R::SwitchWindows()
 Q::winmaximize, A
@@ -390,7 +389,7 @@ space::send, {blind}{enter}
 
 matchCapslockAbbr(typo) {
     
-    arr := [ "ss","sl","ex","rb","fi","fp","fb","fg","dd","dp","dv","da","dr","se","no","sd","ld","fo","we","st","dw" ]
+    arr := [ "ss","sl","ex","rb","fi","fp","fb","fg","dd","dp","dv","da","dr","se","no","sd","ld","fo","we","st","dw","bb","gg" ]
 
     return arrayContains(arr, typo)
 }
@@ -469,6 +468,16 @@ send {blind}{enter}
 execCapslockAbbr(typo) {
     switch typo 
     {
+        case "bb":
+           
+    path = C:\Program Files\Google\Chrome\Application\chrome.exe
+    ActivateOrRun("Bing 词典", path, "--app=https://cn.bing.com/dict/search?q=nice", "")
+    return
+        case "gg":
+           
+    path = C:\Program Files\Google\Chrome\Application\chrome.exe
+    ActivateOrRun("Google 翻译", path, "--app=https://translate.google.cn/?op=translate&sl=auto&tl=zh-CN&text=nice", "")
+    return
         case "no":
            
     path = notepad.exe
