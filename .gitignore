@@ -3,3 +3,4 @@ node_modules
 .pnpm-debug.log
 MyKeymap
 bin/site
+bin/mykeymap-settings-server.exe
