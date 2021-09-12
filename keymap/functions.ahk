@@ -1053,18 +1053,7 @@ closeOldInstance()
 
 openSettings()
 {
-    if not WinExist("mykeymap-settings-server.exe")
-    {
-        old := A_WorkingDir
-        SetWorkingDir, %A_WorkingDir%\bin
-        run, mykeymap-settings-server.exe
-        SetWorkingDir, %old%
-        sleep 500
-    }
-    if WinExist("MyKeymap Settings")
-        WinActivate
-    else
-        run, http://localhost:12333
+    run, bin\ahk.exe bin\openSettings.ahk
 }
 
 

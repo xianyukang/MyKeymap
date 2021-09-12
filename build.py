@@ -3,16 +3,24 @@
 
 import os
 import shutil
+import sys
+
+arg = ''
+if (len(sys.argv) > 1):
+    arg = sys.argv[1]
+
+if (arg == 'server'):
+    # 构建后端项目
+    os.chdir('config-back')
+    os.system('pyinstaller.exe api.py -n mykeymap-settings-server --onefile --icon icon.ico')
+    os.chdir('..')
+    shutil.copy('config-back/dist/mykeymap-settings-server.exe', 'bin/')
+    sys.exit()
+
 
 # 清除老版本
 shutil.rmtree('MyKeymap', ignore_errors=True)
 os.mkdir('MyKeymap/')
-
-# 构建后端项目
-os.chdir('config-back')
-os.system('pyinstaller.exe api.py -n mykeymap-settings-server --onefile --icon icon.ico')
-os.chdir('..')
-shutil.copy('config-back/dist/mykeymap-settings-server.exe', 'bin/')
 
 # 构建前端项目
 os.chdir('config-front')

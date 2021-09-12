@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 import json
 from flask import jsonify
@@ -5,8 +7,8 @@ from flask import request
 from flask import Flask
 from flask import render_template
 from ahk_script import AhkScript
-
 from flask_cors import CORS
+import sys
 
 app = Flask(__name__, static_url_path='', static_folder='site',)
 CORS(app)
@@ -34,12 +36,12 @@ def save_config():
     script.makeCapslock(data)
     return 'save config ok!'
 
-if __name__ == '__main__':
+def serveApi():
     import logging
     log = logging.getLogger('werkzeug')
     log.setLevel(logging.ERROR)
-    os.system('chcp 65001')
-    os.system('cls')
+    # os.system('chcp 65001')
+    # os.system('cls')
     print()
     print('   ------------------------------------------------------------------')
     print('   1. 打开浏览器访问 http://localhost:12333 修改 MyKeyamp 的配置')
@@ -48,3 +50,14 @@ if __name__ == '__main__':
     print('   ------------------------------------------------------------------')
     os.environ['WERKZEUG_RUN_MAIN'] = 'true'    # 关掉 flask 启动消息
     app.run(port=12333, debug=False)
+
+if __name__ == '__main__':
+    if len(sys.argv) <= 1:
+        print('必须提供一个参数,  rain 或 api')
+        exit(1)
+    arg = sys.argv[1]
+    if (arg == '--server'):
+        serveApi()
+    elif (arg == '--rain'):
+        from unimatrix import startRain
+        startRain()
