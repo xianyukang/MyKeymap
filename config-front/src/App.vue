@@ -6,7 +6,7 @@
           <v-img alt="img" :src="require('./assets/logo.png')"></v-img>
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title class="text-h4"> MyKeymap </v-list-item-title>
+          <v-list-item-title id="site-title"> MyKeymap </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -105,5 +105,9 @@ export default {
   /* color: black; */
   font-size: 1.4em;
   padding-left: 115px;
+}
+#site-title {
+  font-size: 1.85em;
+  font-weight: 500;
 }
 </style>

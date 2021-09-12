@@ -46,4 +46,5 @@ if __name__ == '__main__':
     print('   2. 保存配置后需要按 alt+\' 重启 MyKeymap (这里的\'是单引号键) ')
     print('   3. 修改完 MyKeymap 的配置后即可关闭本窗口')
     print('   ------------------------------------------------------------------')
+    os.environ['WERKZEUG_RUN_MAIN'] = 'true'    # 关掉 flask 启动消息
     app.run(port=12333, debug=False)
