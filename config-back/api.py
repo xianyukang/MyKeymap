@@ -54,10 +54,11 @@ def serveApi():
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
         print('必须提供一个参数,  rain 或 api')
-        exit(1)
+        sys.exit(1)
     arg = sys.argv[1]
     if (arg == '--server'):
         serveApi()
     elif (arg == '--rain'):
+        # Windows 中需要 pip.exe install windows-curses
         from unimatrix import startRain
         startRain()

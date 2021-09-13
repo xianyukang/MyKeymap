@@ -9,12 +9,13 @@ arg = ''
 if (len(sys.argv) > 1):
     arg = sys.argv[1]
 
+# 构建后端项目
+os.chdir('config-back')
+os.system('pyinstaller.exe api.py -n mykeymap-settings-server --onefile --icon icon.ico')
+os.chdir('..')
+shutil.copy('config-back/dist/mykeymap-settings-server.exe', 'bin/')
+
 if (arg == 'server'):
-    # 构建后端项目
-    os.chdir('config-back')
-    os.system('pyinstaller.exe api.py -n mykeymap-settings-server --onefile --icon icon.ico')
-    os.chdir('..')
-    shutil.copy('config-back/dist/mykeymap-settings-server.exe', 'bin/')
     sys.exit()
 
 
