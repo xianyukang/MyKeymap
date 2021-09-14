@@ -297,21 +297,66 @@ space::send, {blind}{enter}
 
 #if LButtonMode
 
-*W::send {blind}^+{tab}
-*Z::send {blind}{appskey}
-*C::send {blind}{backspace}
-*V::send {blind}{delete}
-*D::send {blind}{down}
-*G::send {blind}^v
-*A::send {blind}^c
-*X::send {blind}{esc}
-*I::send {blind}{insert}
-*S::send {blind}{left}
-*T::send {blind}{pgdn}
-*Q::send {blind}{pgup}
-*F::send {blind}{right}
-*R::send {blind}^{tab}
-*E::send {blind}{up}
+*E::
+    send {LButton up}
+    send {blind}{enter}
+return
+*W::
+    send {LButton up}
+    send {blind}^+{tab}
+return
+*Z::
+    send {LButton up}
+    send {blind}^z
+return
+*C::
+    send {LButton up}
+    send {blind}{backspace}
+return
+*V::
+    send {LButton up}
+    send {blind}{delete}
+return
+*D::
+    send {LButton up}
+    send {blind}{down}
+return
+*G::
+    send {LButton up}
+    send {blind}^v
+return
+*A::
+    send {LButton up}
+    send {blind}^c
+return
+*X::
+    send {LButton up}
+    send {blind}{esc}
+return
+*I::
+    send {LButton up}
+    send {blind}{insert}
+return
+*S::
+    send {LButton up}
+    send {blind}{left}
+return
+*T::
+    send {LButton up}
+    send {blind}^{End}
+return
+*Q::
+    send {LButton up}
+    send {blind}^{Home}
+return
+*F::
+    send {LButton up}
+    send {blind}{right}
+return
+*R::
+    send {LButton up}
+    send {blind}^{tab}
+return
 
 #if RButtonMode
 
