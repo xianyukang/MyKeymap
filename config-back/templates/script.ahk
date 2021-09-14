@@ -371,7 +371,7 @@ WheelDown::send ^{tab}
 *D::send {blind}{down}
 *G::send {blind}^v
 *A::send {blind}^c
-*X::send {blind}{esc}
+*X::SmartCloseWindow()
 *I::send {blind}{insert}
 *S::send {blind}{left}
 *T::send {blind}{pgdn}
