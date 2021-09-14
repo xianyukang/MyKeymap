@@ -125,6 +125,57 @@ RAlt::LCtrl
     enableOtherHotkey(thisHotkey)
     return
 
+RButton::
+enterRButtonMode()
+{
+	global RButtonMode
+    thisHotkey := A_ThisHotkey
+    RButtonMode := true
+	timeOut = T0.01
+	movedMouse := false
+	MouseGetPos, initialX, initialY
+
+	; 当按下右键时跑一个循环,  移动鼠标 / 弹起鼠标右键才能跳出这个循环
+	keywait, RButton, %timeOut%
+    while (errorlevel != 0)
+    {
+		MouseGetPos, x, y
+		if (Abs(x - initialX) > 3 || Abs(y - initialY) > 3) {
+			movedMouse := true
+			break
+		}
+		keywait, RButton, %timeOut%
+    }
+
+    RButtonMode := false
+	triggerOtherHotkey := thisHotkey != A_ThisHotkey
+	Hotkey, %thisHotkey%, Off
+
+	; 如果移动了鼠标,  那么按下鼠标右键,  以兼容其他软件的鼠标手势,  需要等待 RButton 弹起后才能重新启用热键
+	if (!triggerOtherHotkey && movedMouse) {
+		send {blind}{RButton down}
+		keywait, RButton
+	} 
+	else if (!triggerOtherHotkey) {
+		SendInput, {Click Right}
+	}
+	Hotkey, %thisHotkey%, On
+    return
+
+}
+
+
+~LButton::
+enterLButtonMode()
+{
+	global LButtonMode
+    LButtonMode := true
+    keywait LButton
+    LButtonMode := false
+    return
+}
+
+
 #if JMode
 *capslock::return
 *capslock up::return
@@ -382,6 +433,45 @@ f::send, {blind}{right}
 *x::send,  {blind}{del}
 space::send, {blind}{enter}
 
+#if LButtonMode
+
+*W::send {blind}^+{tab}
+*Z::send {blind}{appskey}
+*C::send {blind}{backspace}
+*V::send {blind}{delete}
+*D::send {blind}{down}
+*G::send {blind}^v
+*A::send {blind}^c
+*X::send {blind}{esc}
+*I::send {blind}{insert}
+*S::send {blind}{left}
+*T::send {blind}{pgdn}
+*Q::send {blind}{pgup}
+*F::send {blind}{right}
+*R::send {blind}^{tab}
+*E::send {blind}{up}
+
+#if RButtonMode
+
+*Space::send {blind}{enter}
+~LButton::send ^!{tab}
+WheelUp::send ^+{tab}
+WheelDown::send ^{tab}
+*W::send {blind}^+{tab}
+*Z::send {blind}{appskey}
+*C::send {blind}{backspace}
+*V::send {blind}{delete}
+*D::send {blind}{down}
+*G::send {blind}^v
+*A::send {blind}^c
+*X::send {blind}{esc}
+*I::send {blind}{insert}
+*S::send {blind}{left}
+*T::send {blind}{pgdn}
+*Q::send {blind}{pgup}
+*F::send {blind}{right}
+*R::send {blind}^{tab}
+*E::send {blind}{up}
 
 #If
 
