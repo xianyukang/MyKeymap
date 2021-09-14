@@ -53,7 +53,7 @@ def serveApi():
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
-        print('必须提供一个参数,  rain 或 api')
+        print('必须提供一个参数,  --server 或 --rain')
         sys.exit(1)
     arg = sys.argv[1]
     if (arg == '--server'):

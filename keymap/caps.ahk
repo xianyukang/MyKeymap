@@ -1,6 +1,6 @@
 ﻿#NoEnv
 #SingleInstance Force
-#MaxHotkeysPerInterval 200
+#MaxHotkeysPerInterval 70
 #NoTrayIcon
 #WinActivateForce               ; 解决「 winactivate 最小化的窗口时不会把窗口放到顶层(被其他窗口遮住) 」
 #InstallKeybdHook               ; 可能是 ahk 自动卸载 hook 导致的丢失 hook,  如果用这行指令, ahk 是否就不会卸载 hook 了呢?
@@ -153,12 +153,14 @@ enterRButtonMode()
 
 	; 如果移动了鼠标,  那么按下鼠标右键,  以兼容其他软件的鼠标手势,  需要等待 RButton 弹起后才能重新启用热键
 	if (!triggerOtherHotkey && movedMouse) {
-		send {blind}{RButton down}
+		SendInput, {Blind}{RButton down}
 		keywait, RButton
 	} 
 	else if (!triggerOtherHotkey) {
-		SendInput, {Click Right}
+		SendInput, {Blind}{RButton}
 	}
+    ; 这里睡眠很重要, 否则会触发无限循环的 bug, 因为发送 RButton 触发 RButton 热键
+    sleep, 50
 	Hotkey, %thisHotkey%, On
     return
 
