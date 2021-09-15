@@ -501,7 +501,7 @@ return
 #if RButtonMode
 
 *Space::send {blind}{enter}
-~LButton::send ^!{tab}
+LButton::send ^!{tab}
 WheelUp::send ^+{tab}
 WheelDown::send ^{tab}
 *W::send {blind}^+{tab}
