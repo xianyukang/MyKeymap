@@ -201,9 +201,9 @@
         },
         "P": {
             "type": "启动程序或激活窗口",
-            "value": "\n    path = C:\\ProgramMicrosoft\\Windows\\Start Menu\\Programs\\paint.net.lnk\n    ActivateOrRun(\"ahk_exe PaintDotNet.exe\", path)\n    return",
+            "value": "\n    path = %A_StartMenuCommon%\\Programs\\paint.net.lnk\n    ActivateOrRun(\"ahk_exe PaintDotNet.exe\", path, \"\", \"\")\n    return",
             "toActivate": "ahk_exe PaintDotNet.exe",
-            "toRun": "C:\\ProgramMicrosoft\\Windows\\Start Menu\\Programs\\paint.net.lnk"
+            "toRun": "%A_StartMenuCommon%\\Programs\\paint.net.lnk"
         },
         "A": {
             "type": "启动程序或激活窗口",

@@ -398,6 +398,10 @@ H::
     path = %A_ProgramsCommon%\Visual Studio 2019.lnk
     ActivateOrRun("- Microsoft Visual Studio", path)
     return
+P::
+    path = %A_StartMenuCommon%\Programs\paint.net.lnk
+    ActivateOrRun("ahk_exe PaintDotNet.exe", path, "", "")
+    return
 E::
     path = C:\Program Files (x86)\Yinxiang Biji\印象笔记\Evernote.exe
     ActivateOrRun("ahk_class YXMainFrame", path)
@@ -405,10 +409,6 @@ E::
 I::
     path = C:\Program Files\Typora\Typora.exe
     ActivateOrRun("ahk_exe Typora.exe", path)
-    return
-P::
-    path = C:\ProgramMicrosoft\Windows\Start Menu\Programs\paint.net.lnk
-    ActivateOrRun("ahk_exe PaintDotNet.exe", path)
     return
 Z::
     path = D:\
