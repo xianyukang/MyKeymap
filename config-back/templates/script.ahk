@@ -38,12 +38,13 @@ slow_repeat := 13
 Menu, Tray, Add, 视频教程, trayMenuHandler
 Menu, Tray, Add, 参考/示例, trayMenuHandler 
 Menu, Tray, Add 
-Menu, Tray, Add, 退出, trayMenuHandler
 Menu, Tray, Add, 打开设置, trayMenuHandler 
+Menu, Tray, Add, 暂停, trayMenuHandler
+Menu, Tray, Add, 退出, trayMenuHandler
 Menu, Tray, Add 
 
 Menu, Tray, Icon
-Menu, Tray, Icon, bin\logo.ico
+Menu, Tray, Icon, bin\logo.ico,, 1
 Menu, Tray, Tip, MyKeymap 1.0 by 咸鱼阿康12333
 ; processPath := getProcessPath()
 ; SetWorkingDir, %processPath%
@@ -63,7 +64,14 @@ semiHook.OnEnd := Func("onTypoEnd")
 return
 
 RAlt::LCtrl
-!'::ReloadProgram()
+!+'::
+    Suspend, Permit
+    toggleSuspend()
+    return
+!'::
+    Suspend, Toggle
+    ReloadProgram()
+    return
 +capslock::toggleCapslock()
 
 *capslock::
@@ -331,7 +339,7 @@ return
 return
 *X::
     send {LButton up}
-    send {blind}{esc}
+    send {blind}^x
 return
 *I::
     send {LButton up}

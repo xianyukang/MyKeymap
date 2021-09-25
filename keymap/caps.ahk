@@ -38,12 +38,13 @@ slow_repeat := 13
 Menu, Tray, Add, 视频教程, trayMenuHandler
 Menu, Tray, Add, 参考/示例, trayMenuHandler 
 Menu, Tray, Add 
-Menu, Tray, Add, 退出, trayMenuHandler
 Menu, Tray, Add, 打开设置, trayMenuHandler 
+Menu, Tray, Add, 暂停, trayMenuHandler
+Menu, Tray, Add, 退出, trayMenuHandler
 Menu, Tray, Add 
 
 Menu, Tray, Icon
-Menu, Tray, Icon, bin\logo.ico
+Menu, Tray, Icon, bin\logo.ico,, 1
 Menu, Tray, Tip, MyKeymap 1.0 by 咸鱼阿康12333
 ; processPath := getProcessPath()
 ; SetWorkingDir, %processPath%
@@ -63,7 +64,14 @@ semiHook.OnEnd := Func("onTypoEnd")
 return
 
 RAlt::LCtrl
-!'::ReloadProgram()
+!+'::
+    Suspend, Permit
+    toggleSuspend()
+    return
+!'::
+    Suspend, Toggle
+    ReloadProgram()
+    return
 +capslock::toggleCapslock()
 
 *capslock::
@@ -418,6 +426,10 @@ R::
     path = D:\install\Foxit Reader\FoxitReader.exe
     ActivateOrRun("ahk_exe FoxitReader.exe", path)
     return
+N::
+    path = D:\MyFiles\MyKeymap\shortcuts\网易云音乐.lnk
+    ActivateOrRun("", path, "", "")
+    return
 O::
     path = shortcuts\OneNote for Windows 10.lnk
     ActivateOrRun("OneNote for Windows 10", path)
@@ -471,7 +483,7 @@ return
 return
 *X::
     send {LButton up}
-    send {blind}{esc}
+    send {blind}^x
 return
 *I::
     send {LButton up}

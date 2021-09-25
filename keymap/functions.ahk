@@ -1083,10 +1083,26 @@ enableOtherHotkey(thisHotkey)
     
 }
 
+toggleSuspend()
+{
+        Suspend, Toggle
+        if (A_IsSuspended) {
+            Menu, Tray, Check, 暂停
+            tip("  暂停 MyKeymap  ", -500)
+        }
+        else {
+            Menu, Tray, UnCheck, 暂停
+            tip("  恢复 MyKeymap  ", -500)
+        }
+}
+
 trayMenuHandler(ItemName, ItemPos, MenuName)
 {
     if (InStr(ItemName, "退出" )) {
         myExit()
+    }
+    if (InStr(ItemName, "暂停" )) {
+        toggleSuspend()
     }
     if (InStr(ItemName, "打开设置" )) {
         openSettings()

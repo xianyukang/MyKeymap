@@ -280,8 +280,10 @@
             "value": ""
         },
         "N": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = D:\\MyFiles\\MyKeymap\\shortcuts\\网易云音乐.lnk\n    ActivateOrRun(\"\", path, \"\", \"\")\n    return",
+            "toRun": "D:\\MyFiles\\MyKeymap\\shortcuts\\网易云音乐.lnk",
+            "toActivate": ""
         },
         "M": {
             "type": "什么也不做",
