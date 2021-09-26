@@ -168,7 +168,7 @@ enterRButtonMode()
 		SendInput, {Blind}{RButton}
 	}
     ; 这里睡眠很重要, 否则会触发无限循环的 bug, 因为发送 RButton 触发 RButton 热键
-    sleep, 50
+    sleep, 70
 	Hotkey, %thisHotkey%, On
     return
 
@@ -364,7 +364,7 @@ H::horizontalScroll("H", -1)
 *N::leftClick()
 *O::MouseClick, WheelDown, , , 1
 *U::MouseClick, WheelUp, , , 1
-M::rightClick()
+M::rightClick(true)
 
 
 esc::exitMouseMode()

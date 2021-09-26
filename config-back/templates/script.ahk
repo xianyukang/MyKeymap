@@ -168,7 +168,7 @@ enterRButtonMode()
 		SendInput, {Blind}{RButton}
 	}
     ; 这里睡眠很重要, 否则会触发无限循环的 bug, 因为发送 RButton 触发 RButton 热键
-    sleep, 50
+    sleep, 70
 	Hotkey, %thisHotkey%, On
     return
 
@@ -277,7 +277,7 @@ f::
 
 {% for key,value in Capslock.items()|sort(attribute="1.value") %}
     {% if value.value and value.type == "鼠标操作" %}
-{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value | replace("fast", "slow") }}}
+{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ "rightClick(true)" if value.value == "rightClick()" else value.value | replace("fast", "slow") }}}
     {% endif %}
 {% endfor %}
 
