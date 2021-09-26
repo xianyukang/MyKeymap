@@ -13,8 +13,8 @@
       </v-card-title>
       <v-card-text>
         <template v-if="currKey().type === '启动程序或激活窗口'">
-          <v-text-field label="要激活的窗口 (选填)" v-model="currKey().toActivate" @input="activateOrRun"></v-text-field>
-          <v-text-field label="窗口不存在时要启动的程序" v-model="currKey().toRun" @input="activateOrRun"></v-text-field>
+          <v-text-field label="要激活的窗口 (窗口标识符)" v-model="currKey().toActivate" @input="activateOrRun"></v-text-field>
+          <v-text-field label="窗口不存在时要启动的程序 (程序路径, 不要用双引号包起来)" v-model="currKey().toRun" @input="activateOrRun"></v-text-field>
           <br />
           <v-text-field
             label="启动程序的命令行参数 (选填)"

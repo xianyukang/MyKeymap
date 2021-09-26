@@ -47,12 +47,12 @@ def save_config():
 @app.route('/execute', methods=['POST'])
 def execute():
     command = request.get_json()
-    print(command)
+    # print(command)
     if command['type'] == 'run-program':
         # print(os.getcwd())
         val = list(map(lambda x: '../' + x, command['value']))
         # print(val)
-        subprocess.run(val)
+        subprocess.Popen(val)
     return command
 
 def serveApi():
