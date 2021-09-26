@@ -1,7 +1,7 @@
 {
     "Capslock": {
         "Space": {
-            "type": "什么也不做",
+            "type": "启动程序或激活窗口",
             "value": ""
         },
         "Q": {

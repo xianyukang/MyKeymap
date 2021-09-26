@@ -28,6 +28,9 @@
             v-model="currKey().workingDir"
             @input="activateOrRun"
           ></v-text-field>
+          <v-card-actions>
+            <v-btn color="purple" dark outlined @click="execute">查看窗口标识符</v-btn>
+          </v-card-actions>
         </template>
 
         <template v-if="currKey().type === '输入文本或按键'">
@@ -211,6 +214,8 @@
 
 <script>
 import { escapeFuncString } from '../util'
+import axios from 'axios'
+import { host } from '../util';
 
 function toAhkString(s) {
   return s.replaceAll('"', '""')
@@ -284,6 +289,12 @@ export default {
     }
   },
   methods: {
+    execute() {
+      axios .post(`${host}/execute`, {
+        type: 'run-program',
+        value: ['bin/ahk.exe', 'bin/WindowSpy.ahk'],
+      })
+    },
     sendKeys() {
       this.currKey().prefix = '*'
       const lines = ['']
