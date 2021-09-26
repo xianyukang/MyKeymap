@@ -649,18 +649,21 @@ lbuttonDown()
 leftClick() 
 {
     global SLOWMODE
-    send,  {blind}{Lbutton down}
-    sleep 50
-    send {Lbutton up}
+    send,  {blind}{LButton}
     SLOWMODE := false
 }
 
-rightClick() 
+rightClick(tempDisableRButton := false) 
 {
     global SLOWMODE
-    send,  {blind}{Rbutton down}
-    sleep 50
-    send {Rbutton up}
+    if (!tempDisableRButton)
+        send,  {blind}{RButton}
+    else {
+        Hotkey, RButton,, Off
+        send,  {blind}{RButton}
+        sleep, 70
+        Hotkey, RButton,, On
+    }
     SLOWMODE := false
 }
 
@@ -1060,7 +1063,7 @@ openSettings()
 disableOtherHotkey(thisHotkey)
 {
     ; ToolTip, % thisHotkey
-    allHotkeys := ["*capslock", "*;", "*j", "*3", "*9"]
+    allHotkeys := ["*capslock", "*;", "*j", "*3", "*9", "~LButton", "RButton"]
     for index,value in allHotkeys
     {
         if (value != thisHotkey) {
@@ -1073,7 +1076,7 @@ disableOtherHotkey(thisHotkey)
 enableOtherHotkey(thisHotkey)
 {
     ; ToolTip, % thisHotkey
-    allHotkeys := ["*capslock", "*;", "*j", "*3", "*9"]
+    allHotkeys := ["*capslock", "*;", "*j", "*3", "*9", "~LButton", "RButton"]
     for index,value in allHotkeys
     {
         if (value != thisHotkey) {
