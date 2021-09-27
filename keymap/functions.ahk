@@ -860,7 +860,7 @@ copySelectedText()
     ; old_clipboard := clipboardall
     clipboard =
     send ^c
-    send ^{insert}
+    ; send ^{insert}
     clipwait, 0.5, 1
 
     if (errorlevel) {
