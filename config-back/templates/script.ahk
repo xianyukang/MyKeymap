@@ -12,7 +12,7 @@ rqeruireAdmin()
 closeOldInstance()
 
 SetBatchLines -1
-; ListLines Off
+ListLines Off
 process, Priority,, H
 ; 使用 sendinput 时,  通过 alt+3+j 输入 alt+1 时,  会发送 ctrl+alt
 SendMode Input
