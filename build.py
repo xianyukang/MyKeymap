@@ -40,7 +40,6 @@ os.system('cp -r bin MyKeymap/')
 os.system('cp -r shortcuts MyKeymap/')
 os.system('cp -r tools MyKeymap/')
 
-os.mkdir('MyKeymap/keymap')
 
 shutil.copy('AutoHotkey.dll', 'MyKeymap/AutoHotkey.dll')
 shutil.copy('vcruntime140.dll', 'MyKeymap/vcruntime140.dll')
