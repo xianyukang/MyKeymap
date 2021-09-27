@@ -38,10 +38,9 @@ shutil.copy('config-back/templates/script.ahk', 'bin/templates/script.ahk')
 os.system('cp -r data MyKeymap/')
 os.system('cp -r bin MyKeymap/')
 os.system('cp -r shortcuts MyKeymap/')
+os.system('cp -r tools MyKeymap/')
 
 os.mkdir('MyKeymap/keymap')
-shutil.copy('keymap/caps.ahk', 'MyKeymap/keymap/caps.ahk')
-shutil.copy('keymap/functions.ahk', 'MyKeymap/keymap/functions.ahk')
 
 shutil.copy('AutoHotkey.dll', 'MyKeymap/AutoHotkey.dll')
 shutil.copy('vcruntime140.dll', 'MyKeymap/vcruntime140.dll')

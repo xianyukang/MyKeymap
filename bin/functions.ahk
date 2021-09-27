@@ -1018,7 +1018,7 @@ myExit()
     Process, Close, %thisPid%
 }
 
-rqeruireAdmin()
+requireAdmin()
 {
    if not A_IsAdmin
    {
