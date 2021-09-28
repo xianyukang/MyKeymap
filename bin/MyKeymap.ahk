@@ -516,20 +516,20 @@ return
 LButton::send ^!{tab}
 WheelUp::send ^+{tab}
 WheelDown::send ^{tab}
-*W::send {blind}^+{tab}
-*Z::send {blind}{appskey}
+*W::send {blind}^c
+*R::send {blind}^v
+*Z::send {blind}^x
 *C::send {blind}{backspace}
 *V::send {blind}{delete}
 *D::send {blind}{down}
-*G::send {blind}^v
-*A::send {blind}^c
+*G::send {blind}{end}
+*A::send {blind}{home}
 *X::SmartCloseWindow()
 *I::send {blind}{insert}
 *S::send {blind}{left}
 *T::send {blind}{pgdn}
 *Q::send {blind}{pgup}
 *F::send {blind}{right}
-*R::send {blind}^{tab}
 *E::send {blind}{up}
 
 #If

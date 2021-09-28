@@ -33,7 +33,7 @@
       <router-view v-if="config" />
     </v-main>
 
-    <v-snackbar v-model="$store.state.snackbar" color="green" timeout="2000" min-width="600" height="70"  outlined>
+    <v-snackbar id="snack-bar" v-model="$store.state.snackbar" color="purple" timeout="2000" min-width="600" height="70">
       <span id="snackBarText">{{ $store.state.snackbarText }}</span>
       <template v-slot:action="{ attrs }">
         <v-btn color="black" text v-bind="attrs" @click="snackbar = false"> </v-btn>
@@ -102,12 +102,16 @@ export default {
   font-size: 26px !important;
 }
 #snackBarText {
-  /* color: black; */
-  font-size: 1.4em;
+  color: white;
+  /* font-weight: 600; */
+  font-size: 1.5em;
   padding-left: 115px;
 }
 #site-title {
   font-size: 1.85em;
   font-weight: 500;
+}
+#snack-bar {
+  margin-bottom: 110px;
 }
 </style>
