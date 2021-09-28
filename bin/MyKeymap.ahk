@@ -8,7 +8,7 @@
 
 StringCaseSense, On
 SetWorkingDir %A_ScriptDir%\..
-requireAdmin()
+; requireAdmin()
 closeOldInstance()
 
 SetBatchLines -1
@@ -518,17 +518,17 @@ WheelUp::send ^+{tab}
 WheelDown::send ^{tab}
 *W::send {blind}^c
 *R::send {blind}^v
-*Z::send {blind}^x
+*X::send {blind}^x
 *C::send {blind}{backspace}
 *V::send {blind}{delete}
 *D::send {blind}{down}
 *G::send {blind}{end}
 *A::send {blind}{home}
-*X::SmartCloseWindow()
 *I::send {blind}{insert}
 *S::send {blind}{left}
-*T::send {blind}{pgdn}
-*Q::send {blind}{pgup}
+
+*Q::send {LControl down}{LWin down}{Left}{LWin up}{LControl up}
+*T::send {LControl down}{LWin down}{Right}{LWin up}{LControl up}
 *F::send {blind}{right}
 *E::send {blind}{up}
 
