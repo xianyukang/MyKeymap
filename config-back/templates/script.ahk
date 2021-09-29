@@ -8,7 +8,7 @@
 
 StringCaseSense, On
 SetWorkingDir %A_ScriptDir%\..
-requireAdmin()
+; requireAdmin()
 closeOldInstance()
 
 SetBatchLines -1
@@ -395,20 +395,6 @@ WheelDown::send ^{tab}
 
 
 
-matchCapslockAbbr(typo) {
-    
-    arr := [ {{{ CapslockAbbrKeys|map('ahkString')|join(',') }}} ]
-
-    return arrayContains(arr, typo)
-}
-
-
-matchSemicolonAbbr(typo) {
-    
-    arr := [ {{{ SemicolonAbbrKeys|map('ahkString')|join(',') }}} ]
-
-    return arrayContains(arr, typo)
-}
 
 execSemicolonAbbr(typo) {
     switch typo 

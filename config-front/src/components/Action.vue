@@ -270,6 +270,7 @@ export default {
         { label: '窗口最小化', value: 'winMinimizeIgnoreDesktop()' },
         { label: '窗口居中(1200x800)', value: 'center_window_to_current_monitor(1200, 800)' },
         { label: '窗口居中(1370x930)', value: 'center_window_to_current_monitor(1370, 930)' },
+        { label: '切换窗口置顶状态', value: 'ToggleTopMost()' },
       ],
       otherFeatures1: [
         { label: '系统睡眠', value: 'DllCall("PowrProf\\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)' },

@@ -62,7 +62,7 @@ export default {
   data: () => ({
     drawer: true,
     items: [
-      { title: 'Capslock', icon: 'mdi-triangle', to: 'Capslock', color: 'green' },
+      { title: 'Capslock', icon: 'mdi-star-four-points', to: 'Capslock', color: 'green' },
       { title: 'Capslock + F', icon: 'mdi-triangle', to: 'CapslockF', color: 'green' },
       { title: 'Capslock 缩写', icon: 'mdi-triangle', to: 'CapslockAbbr', color: 'green' },
       { title: 'J 模式', icon: 'mdi-circle', to: 'JMode', color: 'blue' },

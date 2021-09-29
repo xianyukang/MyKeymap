@@ -16,6 +16,7 @@ txtMouseCtrl := "Control Under Mouse Position"
 txtFocusCtrl := "Focused Control"
 
 Gui, New, hwndhGui AlwaysOnTop Resize MinSize
+Gui, Color, FFFFFF
 Gui, Font, s11 Verdana normal
 Gui, Add, Text, y+5, ` 
 Gui, Add, Text, y+5, 窗口标识符有下面三种, 可以单独使用:

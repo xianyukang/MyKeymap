@@ -8,7 +8,7 @@
 
 StringCaseSense, On
 SetWorkingDir %A_ScriptDir%\..
-requireAdmin()
+; requireAdmin()
 closeOldInstance()
 
 SetBatchLines -1
@@ -539,20 +539,6 @@ WheelDown::send ^{tab}
 
 
 
-matchCapslockAbbr(typo) {
-    
-    arr := [ "ss","sl","ex","rb","fp","fb","fg","dd","dp","dv","da","dr","se","no","sd","ld","we","st","dw","bb","gg","fr","fi" ]
-
-    return arrayContains(arr, typo)
-}
-
-
-matchSemicolonAbbr(typo) {
-    
-    arr := [ "xk","ss","sk","rr","sl","zk","dk","dh","jt","gt","lx","sm","ex","sd","rb","fi","fp","fo","fb","fg","fk","wy","cout","zh","gg" ]
-
-    return arrayContains(arr, typo)
-}
 
 execSemicolonAbbr(typo) {
     switch typo 

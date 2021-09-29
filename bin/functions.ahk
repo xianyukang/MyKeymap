@@ -917,16 +917,16 @@ StrPutVar(Str, ByRef Var, Enc = "")
 ToggleTopMost()
 {
     winexist("A")
-    WinGet, ExStyle, ExStyle
-    If (ExStyle & 0x8) {
-         ExStyle = AlwaysOnTop Off
+    WinGet, style, ExStyle
+    if (style & 0x8) {
+         style := "  取消置顶  "
          winset, alwaysontop, off
     }
-    Else {
-         ExStyle = AlwaysOnTop On
+    else {
+         style := "  窗口置顶  "
          winset, alwaysontop, on
     }
-    ShowTip(ExStyle, 800)
+    ; tip(style, -500)
 }
 
 htmlEscape(text) 
