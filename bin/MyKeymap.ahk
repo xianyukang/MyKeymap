@@ -60,7 +60,7 @@ global typoTip := new TypoTipWindow()
 semiHook := InputHook("C", "{Space}", "xk,ss,sk,rr,sl,zk,dk,dh,jt,gt,lx,sm,ex,sd,rb,fi,fp,fo,fb,fg,fk,wy,cout,zh,gg")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,da,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi")
+capsHook := InputHook("C", "{LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,da,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -667,6 +667,8 @@ execCapslockAbbr(typo) {
            slideToReboot()
         case "ss":
            slideToShutdown()
+        case "ee":
+           ToggleTopMost()
         default: 
             return false
     }

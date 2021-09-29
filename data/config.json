@@ -1302,6 +1302,10 @@
         "fi": {
             "type": "文字编辑",
             "value": "setColor(\"#FF00FF\")"
+        },
+        "ee": {
+            "type": "窗口操作",
+            "value": "ToggleTopMost()"
         }
     },
     "CapslockAbbrKeys": [
@@ -1327,7 +1331,8 @@
         "bb",
         "gg",
         "fr",
-        "fi"
+        "fi",
+        "ee"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",

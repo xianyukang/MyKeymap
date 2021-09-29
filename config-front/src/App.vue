@@ -13,7 +13,7 @@
       <v-divider></v-divider>
 
       <v-list nav>
-        <v-list-item v-for="item in items" :key="item.title" :to="{ name: item.to }">
+        <v-list-item class="nav-item" v-for="item in items" :key="item.title" :to="{ name: item.to }">
           <v-list-item-icon>
             <v-icon class="nav-tab-icon" :color="item.color">{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -23,7 +23,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
-        <v-btn width="100%" elevation="2" color="primary" @click="saveConfig">
+        <v-btn width="100%" elevation="0" color="primary" @click="saveConfig" outlined>
           <v-icon left> mdi-content-save </v-icon> 保存配置 (ctrl+s)</v-btn
         >
       </v-list>
@@ -62,17 +62,19 @@ export default {
   data: () => ({
     drawer: true,
     items: [
-      { title: 'Capslock', icon: 'mdi-star-four-points', to: 'Capslock', color: 'green' },
-      { title: 'Capslock + F', icon: 'mdi-triangle', to: 'CapslockF', color: 'green' },
-      { title: 'Capslock 缩写', icon: 'mdi-triangle', to: 'CapslockAbbr', color: 'green' },
-      { title: 'J 模式', icon: 'mdi-circle', to: 'JMode', color: 'blue' },
-      { title: '; 分号模式', icon: 'mdi-circle', to: 'Semicolon', color: 'blue' },
-      { title: '; 分号缩写', icon: 'mdi-circle', to: 'SemicolonAbbr', color: 'blue' },
-      { title: '3 模式', icon: 'mdi-numeric-3-box', to: 'Mode3', color: 'red' },
-      { title: '3 + R 模式', icon: 'mdi-numeric-3-box', to: 'Mode3R', color: 'red' },
-      { title: '9 模式', icon: 'mdi-numeric-9-box', to: 'Mode9', color: 'red' },
-      { title: '使用说明', icon: 'mdi-help-box', to: 'About', color: 'purple' },
-      { title: '关于作者', icon: 'mdi-exclamation-thick', to: 'About', color: 'purple' },
+      { title: 'Capslock', icon: 'mdi-alpha-c-box', to: 'Capslock', color: 'purple' },
+      { title: 'Capslock + F', icon: 'mdi-alpha-c-box', to: 'CapslockF', color: 'purple' },
+      { title: 'Capslock 缩写', icon: 'mdi-alpha-c-box', to: 'CapslockAbbr', color: 'purple' },
+      { title: 'J 模式', icon: 'mdi-alpha-j-box', to: 'JMode', color: 'blue' },
+      { title: '分号模式', icon: 'mdi-rhombus', to: 'Semicolon', color: 'blue' },
+      { title: '分号缩写', icon: 'mdi-rhombus', to: 'SemicolonAbbr', color: 'blue' },
+      { title: '3 模式', icon: 'mdi-numeric-3-box-outline', to: 'Mode3', color: 'red' },
+      { title: '3 + R', icon: 'mdi-numeric-3-box-outline', to: 'Mode3R', color: 'red' },
+      { title: '9 模式', icon: 'mdi-numeric-9-box-outline', to: 'Mode9', color: 'red' },
+      { title: '鼠标左键', icon: 'mdi-cursor-default-outline', to: 'Mode3R', color: '' },
+      { title: '鼠标右键', icon: 'mdi-cursor-default', to: 'Mode9', color: '' },
+      { title: '使用说明', icon: 'mdi-help', to: 'About', color: 'light-green' },
+      { title: '关于作者', icon: 'mdi-exclamation-thick', to: 'About', color: 'light-green' },
     ],
   }),
   methods: {
@@ -97,7 +99,9 @@ export default {
   background: #f2f3f6;
   background: #fafafa;
 }
-
+.nav-item {
+  margin-bottom: 3px !important;
+}
 .nav-tab-icon {
   font-size: 26px !important;
 }
