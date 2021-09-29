@@ -8,7 +8,7 @@
 
 StringCaseSense, On
 SetWorkingDir %A_ScriptDir%\..
-; requireAdmin()
+requireAdmin()
 closeOldInstance()
 
 SetBatchLines -1
@@ -60,6 +60,9 @@ global typoTip := new TypoTipWindow()
 semiHook := InputHook("C", "{Space}", "xk,ss,sk,rr,sl,zk,dk,dh,jt,gt,lx,sm,ex,sd,rb,fi,fp,fo,fb,fg,fk,wy,cout,zh,gg")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
+capsHook := InputHook("C", "{LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,da,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi")
+capsHook.OnChar := Func("capsOnTypoChar")
+capsHook.OnEnd := Func("capsOnTypoEnd")
 
 return
 
@@ -81,7 +84,7 @@ RAlt::LCtrl
     keywait capslock
     CapslockMode := false
     if (A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450) {
-        enterCapslockAbbr()
+        enterCapslockAbbr(capsHook)
     }
     enableOtherHotkey(thisHotkey)
     return
@@ -702,47 +705,49 @@ onTypoChar(ih, char) {
 onTypoEnd(ih) {
     ; typoTip.show(ih.Input)
 }
+capsOnTypoChar(ih, char) {
+    postCharToTipWidnow(char)
+    ; SoundPlay, bin\bingo.wav
+}
 
-enterCapslockAbbr() 
+capsOnTypoEnd(ih) {
+    ; typoTip.show(ih.Input)
+}
+
+enterCapslockAbbr(ih) 
 {
     WM_USER := 0x0400
     SHOW_TYPO_WINDOW := WM_USER + 0x0001
     HIDE_TYPO_WINDOW := WM_USER + 0x0002
 
     postMessageToTipWidnow(SHOW_TYPO_WINDOW)
-    SoundPlay, bin\bingo.wav
+    ; SoundPlay, bin\bingo.wav
     result := ""
 
-    Loop 
-    {
-        Input, key, C L1, {LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}{CapsLock}
 
-        if InStr(ErrorLevel, "EndKey:") {
-            SoundPlay, bin\beatmiss.wav
-            break
-        }
-        if (ErrorLevel == "NewInput") {
-            break
-        }
-            
-        typo := typo . key
-        postCharToTipWidnow(key)
-        SoundPlay, bin\bingo.wav
-
-        if matchCapslockAbbr(typo) {
-            result := typo
-            break
-        }
+    ih.Start()
+    endReason := ih.Wait()
+    ih.Stop()
+    if InStr(endReason, "EndKey") {
+        ; SoundPlay, bin\beatmiss.wav
     }
+    if InStr(endReason, "Match") {
+        lastChar := SubStr(ih.Match, ih.Match.Length-1)
+        postCharToTipWidnow(lastChar)
+        SetTimer, delayedHideTipWindow, -50
+    } else {
+        postMessageToTipWidnow(HIDE_TYPO_WINDOW)
+    }
+    if (ih.Match)
+        execCapslockAbbr(ih.Match)
 
-    typo := ""
+    ; if (StrLen(ih.Match) >= 4) 
+    ;     SoundPlay, bin\cool.wav
+}
+
+delayedHideTipWindow()
+{
+    ; SoundPlay, bin\bingo.wav
+    HIDE_TYPO_WINDOW := 0x0400 + 0x0002
     postMessageToTipWidnow(HIDE_TYPO_WINDOW)
-    if (result) {
-        if (StrLen(result) < 4) {
-        } else {
-            SoundPlay, bin\cool.wav
-            ; SoundPlay, bin\perfect.wav
-        }
-        execCapslockAbbr(result)
-    }
 }
