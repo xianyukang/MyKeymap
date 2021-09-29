@@ -16,19 +16,20 @@ txtMouseCtrl := "Control Under Mouse Position"
 txtFocusCtrl := "Focused Control"
 
 Gui, New, hwndhGui AlwaysOnTop Resize MinSize
-Gui, Font, s11
+Gui, Font, s11 Verdana normal
 Gui, Add, Text, y+5, ` 
-Gui, Add, Text, y+5, 窗口标识符可以单独使用, 比如:
-Gui, Add, Text, y+5, 1) 记事本 (窗口标题的一部分
-Gui, Add, Text, y+5, 2) ahk_exe notepad.exe
+Gui, Add, Text, y+5, 窗口标识符有下面三种, 可以单独使用:
+Gui, Add, Text, y+5, (1) 窗口名:   记事本
+Gui, Add, Text, y+5, (2) 进程名:   ahk_exe notepad.exe
+Gui, Add, Text, y+5, (3) 窗口类名: ahk_class Notepad
 Gui, Add, Text, y+5, ` 
 Gui, Add, Text, y+5, 窗口标识符也可以组合使用, 比如:
-Gui, Add, Text, y+5, 1) 记事本 ahk_class Notepad
-Gui, Add, Text, y+5, 2) 记事本 ahk_exe notepad.exe
+Gui, Add, Text, y+5, (1) 记事本 ahk_class Notepad
+Gui, Add, Text, y+5, (2) 记事本 ahk_exe notepad.exe
 Gui, Add, Text, y+5, ` 
-Gui, Font, s12 bold
+Gui, Font, s12 Bold
 Gui, Add, Text, y+5, 当前活动窗口的标识符:
-Gui, Font, s11 normal
+Gui, Font, s11 Verdana normal
 Gui, Add, Edit, xm w320 r4 ReadOnly -Wrap vCtrl_Title
 ; Gui, Add, Checkbox, yp xp+200 w120 Right vCtrl_FollowMouse, Follow Mouse
 ; Gui, Add, Text,, Mouse Position:

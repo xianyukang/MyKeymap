@@ -13,8 +13,16 @@
       </v-card-title>
       <v-card-text>
         <template v-if="currKey().type === '启动程序或激活窗口'">
-          <v-text-field label="要激活的窗口 (窗口标识符)" v-model="currKey().toActivate" @input="activateOrRun"></v-text-field>
-          <v-text-field label="窗口不存在时要启动的程序 (程序路径, 不要用双引号包起来)" v-model="currKey().toRun" @input="activateOrRun"></v-text-field>
+          <v-text-field
+            label="要激活的窗口 (窗口标识符)"
+            v-model="currKey().toActivate"
+            @input="activateOrRun"
+          ></v-text-field>
+          <v-text-field
+            label="窗口不存在时要启动的程序 (程序路径)"
+            v-model="currKey().toRun"
+            @input="activateOrRun"
+          ></v-text-field>
           <br />
           <v-text-field
             label="启动程序的命令行参数 (选填)"
@@ -31,6 +39,8 @@
           <v-card-actions>
             <v-btn color="purple" dark outlined @click="execute">查看窗口标识符</v-btn>
           </v-card-actions>
+          <br>
+          <div class="tips">Tips: <br>(1) 文件管理器中按住 Shift 并右键点击文件,  然后选择「 复制为路径 」 (记得去掉两端双引号)</div>
         </template>
 
         <template v-if="currKey().type === '输入文本或按键'">
@@ -215,7 +225,7 @@
 <script>
 import { escapeFuncString } from '../util'
 import axios from 'axios'
-import { host } from '../util';
+import { host } from '../util'
 
 function toAhkString(s) {
   return s.replaceAll('"', '""')
@@ -290,7 +300,7 @@ export default {
   },
   methods: {
     execute() {
-      axios .post(`${host}/execute`, {
+      axios.post(`${host}/execute`, {
         type: 'run-program',
         value: ['bin/ahk.exe', 'bin/WindowSpy.ahk'],
       })
@@ -400,6 +410,9 @@ div.v-radio.v-item--active label.v-label {
 #single-line-code-hint {
   margin-top: -20px;
   color: orangered;
+}
+.tips {
+  margin: 10px;
 }
 .action-select .v-select__selection {
   /* color: black; */
