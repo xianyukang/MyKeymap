@@ -159,8 +159,6 @@ WinVisible(id)
 }
 
 
-; 傻逼 uwp, 有窗口没最小化的时候, 进程名是 ApplicationFrameHost.exe
-; 窗口最小化后, ApplicationFrameHost.exe 内部持有的控件就消失了, 你没办法获得 core.window 控件,  也就没办法确定它的进程名
 GetVisibleWindows(winFilter)
 {
     ids := []

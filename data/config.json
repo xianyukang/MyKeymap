@@ -888,6 +888,291 @@
             "value": ""
         }
     },
+    "LButtonMode": {
+        "Space": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "Q": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "W": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "E": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "R": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "T": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "Y": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "U": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "I": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "O": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "P": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "A": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "S": {
+            "type": "输入文本或按键",
+            "value": "\nsend {blind}^#{Left}\nreturn",
+            "keysToSend": "^#{Left}",
+            "prefix": "*"
+        },
+        "D": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "F": {
+            "type": "输入文本或按键",
+            "value": "\nsend {blind}^#{Right}\nreturn",
+            "keysToSend": "^#{Right}",
+            "prefix": "*",
+            "textToSend": ""
+        },
+        "G": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "H": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "J": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "K": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "L": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        ";": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "Z": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "X": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "C": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "V": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "B": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "N": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "M": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        ",": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        ".": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "/": {
+            "type": "什么也不做",
+            "value": ""
+        }
+    },
+    "RButtonMode": {
+        "Space": {
+            "type": "输入文本或按键",
+            "value": "\nsend {blind}{enter}\nreturn",
+            "keysToSend": "{enter}",
+            "prefix": "*"
+        },
+        "Q": {
+            "type": "输入文本或按键",
+            "value": "send {blind}{pgup}",
+            "prefix": "*",
+            "keysToSend": "{pgup}"
+        },
+        "W": {
+            "type": "输入文本或按键",
+            "value": "\nsend {blind}^c\nreturn",
+            "prefix": "*",
+            "keysToSend": "^c"
+        },
+        "E": {
+            "type": "输入文本或按键",
+            "value": "send {blind}{up}",
+            "prefix": "*",
+            "keysToSend": "{up}"
+        },
+        "R": {
+            "type": "输入文本或按键",
+            "value": "\nsend {blind}^v\nreturn",
+            "keysToSend": "^v",
+            "prefix": "*"
+        },
+        "T": {
+            "type": "输入文本或按键",
+            "value": "send {blind}{pgdn}",
+            "keysToSend": "{pgdn}",
+            "prefix": "*"
+        },
+        "Y": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "U": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "I": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "O": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "P": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "A": {
+            "type": "输入文本或按键",
+            "value": "send {blind}{home}",
+            "keysToSend": "{home}",
+            "prefix": "*"
+        },
+        "S": {
+            "type": "输入文本或按键",
+            "value": "send {blind}{left}",
+            "keysToSend": "{left}",
+            "prefix": "*"
+        },
+        "D": {
+            "type": "输入文本或按键",
+            "value": "send {blind}{down}",
+            "keysToSend": "{down}",
+            "prefix": "*"
+        },
+        "F": {
+            "type": "输入文本或按键",
+            "value": "send {blind}{right}",
+            "keysToSend": "{right}",
+            "prefix": "*"
+        },
+        "G": {
+            "type": "输入文本或按键",
+            "value": "send {blind}{end}",
+            "keysToSend": "{end}",
+            "prefix": "*"
+        },
+        "H": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "J": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "K": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "L": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        ";": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "Z": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "X": {
+            "type": "输入文本或按键",
+            "value": "\nsend {blind}^x\nreturn",
+            "keysToSend": "^x",
+            "prefix": "*"
+        },
+        "C": {
+            "type": "输入文本或按键",
+            "value": "send {blind}{backspace}",
+            "keysToSend": "{backspace}",
+            "prefix": "*"
+        },
+        "V": {
+            "type": "输入文本或按键",
+            "value": "send {blind}{delete}",
+            "keysToSend": "{delete}",
+            "prefix": "*"
+        },
+        "B": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "N": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "M": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        ",": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        ".": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "/": {
+            "type": "什么也不做",
+            "value": ""
+        }
+    },
     "Semicolon": {
         "Space": {
             "type": "什么也不做",

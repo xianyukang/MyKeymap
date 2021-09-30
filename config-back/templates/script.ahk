@@ -4,6 +4,7 @@
 #NoTrayIcon
 #WinActivateForce               ; 解决「 winactivate 最小化的窗口时不会把窗口放到顶层(被其他窗口遮住) 」
 #InstallKeybdHook               ; 可能是 ahk 自动卸载 hook 导致的丢失 hook,  如果用这行指令, ahk 是否就不会卸载 hook 了呢?
+#include data/custom_functions.ahk
 #include bin/functions.ahk
 
 StringCaseSense, On
@@ -188,6 +189,9 @@ enterLButtonMode()
     return
 }
 
+#if DisableCapslockKey
+*capslock::return
+*capslock up::return
 
 #if JMode
 *capslock::return
@@ -307,89 +311,22 @@ f::send, {blind}{right}
 space::send, {blind}{enter}
 
 #if LButtonMode
-
-*E::
-    send {LButton up}
-    send {blind}{enter}
-return
-*W::
-    send {LButton up}
-    send {blind}^+{tab}
-return
-*Z::
-    send {LButton up}
-    send {blind}^z
-return
-*C::
-    send {LButton up}
-    send {blind}{backspace}
-return
-*V::
-    send {LButton up}
-    send {blind}{delete}
-return
-*D::
-    send {LButton up}
-    send {blind}{down}
-return
-*G::
-    send {LButton up}
-    send {blind}^v
-return
-*A::
-    send {LButton up}
-    send {blind}^c
-return
-*X::
-    send {LButton up}
-    send {blind}^x
-return
-*I::
-    send {LButton up}
-    send {blind}{insert}
-return
-*S::
-    send {LButton up}
-    send {blind}{left}
-return
-*T::
-    send {LButton up}
-    send {blind}^{End}
-return
-*Q::
-    send {LButton up}
-    send {blind}^{Home}
-return
-*F::
-    send {LButton up}
-    send {blind}{right}
-return
-*R::
-    send {LButton up}
-    send {blind}^{tab}
-return
+{% for key,value in LButtonMode.items()|sort(attribute="1.value") %}
+    {% if value.value %}
+{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
+    {% endif %}
+{% endfor %}
 
 #if RButtonMode
+{% for key,value in RButtonMode.items()|sort(attribute="1.value") %}
+    {% if value.value %}
+{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
+    {% endif %}
+{% endfor %}
 
-*Space::send {blind}{enter}
 LButton::send ^!{tab}
 WheelUp::send ^+{tab}
 WheelDown::send ^{tab}
-*W::send {blind}^c
-*R::send {blind}^v
-*X::send {blind}^x
-*C::send {blind}{backspace}
-*V::send {blind}{delete}
-*D::send {blind}{down}
-*G::send {blind}{end}
-*A::send {blind}{home}
-*I::send {blind}{insert}
-*S::send {blind}{left}
-
-*Q::send {LControl down}{LWin down}{Left}{LWin up}{LControl up}
-*T::send {LControl down}{LWin down}{Right}{LWin up}{LControl up}
-*F::send {blind}{right}
-*E::send {blind}{up}
 
 #If
 
@@ -428,11 +365,17 @@ execCapslockAbbr(typo) {
 
 enterSemicolonAbbr(ih) 
 {
+    global DisableCapslockKey
+    DisableCapslockKey := true
+
     typoTip.show("    ") 
     ih.Start()
     ih.Wait()
     ih.Stop()
     typoTip.hide()
+    DisableCapslockKey := false
+
+
     if (ih.Match)
         execSemicolonAbbr(ih.Match)
 }

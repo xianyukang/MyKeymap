@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>发送按键示例</title>
+</head>
+<body>
+    
+    <h1>发送按键示例</h1>
+
+    (1) {Text} 表示文本模式, {Raw} 表示原始模式,  原始模式相当于发送按键,  文本模式相当于发送字符所以不会受输入法影响
+    (2) ^c 表示 Ctrl+C,  +c 表示 Shift+C,  ^+c 表示 Ctrl+Shift+C,  另外 !/# 分别表示 Alt/Win 键
+    (3) {Enter} 表示回车键,  {Space} 表示空格键,  {Sleep 50} 表示等待 50ms,  
+    (4) 按住或释放按键: 把按键名称和单词 Down 或 Up 写入到大括号中. 例如:
+          {b down}{b up}              // 按住 b 然后释放 b
+          {Up down}{Sleep 50}{Up Up}  // 按住向上键,  50ms后释放向上键
+    
+    (5) 一些输入按键的例子、一些输入按键的例子、一些输入按键的例子:
+          abc                         // 依次输入 abc 
+          abcd{Left 2}                // 依次输入 abcd 然后输入两次向左键
+</body>
+</html>

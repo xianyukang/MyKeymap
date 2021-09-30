@@ -59,6 +59,20 @@ const routes = [
     })
   },
   {
+    path: '/LButtonMode',
+    name: 'LButtonMode',
+    component: CapslockF,
+    props: route => ({
+    })
+  },
+  {
+    path: '/RButtonMode',
+    name: 'RButtonMode',
+    component: CapslockF,
+    props: route => ({
+    })
+  },
+  {
     path: '/Semicolon',
     name: 'Semicolon',
     component: CapslockF,

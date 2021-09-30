@@ -44,6 +44,7 @@
         </template>
 
         <template v-if="currKey().type === '输入文本或按键'">
+          <v-text-field label="要输入的按键" v-model="currKey().keysToSend" @input="sendKeys"></v-text-field>
           <v-textarea
             auto-grow
             rows="1"
@@ -51,8 +52,11 @@
             v-model="currKey().textToSend"
             @input="sendKeys"
           ></v-textarea>
-          <v-text-field label="然后要输入的按键" v-model="currKey().keysToSend" @input="sendKeys"></v-text-field>
-          <img alt="img" :src="require('../assets/send-keys.png')" /><img />
+          <!-- <img alt="img" :src="require('../assets/send-keys.png')" /><img /> -->
+          <pre class="tips">
+<a target="_blank" href="SendKeyExample.html">点此查看配置示例</a>
+    
+          </pre>
         </template>
 
         <template v-if="currKey().type === '执行单行 ahk 代码'">
