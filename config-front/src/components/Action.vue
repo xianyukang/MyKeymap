@@ -414,6 +414,7 @@ div.v-radio.v-item--active label.v-label {
 }
 .tips {
   margin: 10px;
+  color: black;
 }
 .action-select .v-select__selection {
   /* color: black; */

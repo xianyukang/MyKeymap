@@ -74,7 +74,8 @@ export default {
       { title: '鼠标左键', icon: 'mdi-cursor-default-outline', to: 'Mode3R', color: '' },
       { title: '鼠标右键', icon: 'mdi-cursor-default', to: 'Mode9', color: '' },
       { title: '使用说明', icon: 'mdi-help', to: 'About', color: 'light-green' },
-      { title: '关于作者', icon: 'mdi-exclamation-thick', to: 'About', color: 'light-green' },
+      // { title: '关于作者', icon: 'mdi-exclamation-thick', to: 'About', color: 'light-green' },
+      { title: '其他设置', icon: 'mdi-toggle-switch', to: 'About', color: 'light-green' },
     ],
   }),
   methods: {
