@@ -37,7 +37,7 @@
             @input="activateOrRun"
           ></v-text-field>
           <v-card-actions>
-            <v-btn color="purple" dark outlined @click="execute">查看窗口标识符</v-btn>
+            <v-btn color="purple" dark outlined @click="execute('bin/WindowSpy.ahk')">查看窗口标识符</v-btn>
           </v-card-actions>
           <br>
           <div class="tips">Tips: <br>(1) 文件管理器中按住 Shift 并右键点击文件,  然后选择「 复制为路径 」 (记得去掉两端双引号)</div>
@@ -54,7 +54,10 @@
           ></v-textarea>
           <!-- <img alt="img" :src="require('../assets/send-keys.png')" /><img /> -->
           <pre class="tips">
-<a target="_blank" href="SendKeyExample.html">点此查看配置示例</a>
+Tips:
+    (1) <a target="_blank" href="SendKeyExample.html" style="color: green;">点此查看发送按键的示例</a>
+    (2) 如果两个框都填了会先输入文本然后输入按键
+    
     
           </pre>
         </template>
@@ -227,12 +230,30 @@
 </template>
 
 <script>
-import { escapeFuncString } from '../util'
-import axios from 'axios'
+import { escapeFuncString, executeScript } from '../util.js'
 import { host } from '../util'
+import _ from 'lodash'
 
-function toAhkString(s) {
-  return s.replaceAll('"', '""')
+function ahkText(s) {
+  s = s.replaceAll('`', '``')
+  s = s.replaceAll('%', '`%')
+  s = s.replaceAll(';', '`;')
+
+  // 全是空格
+  if (_.trim(s, ' ') === '') {
+    return _.repeat('` ', s.length + 1)
+  }
+  // 保留两端空格
+  let temp = _.trimStart(s, ' ')
+  if (s.length !== temp.length) {
+    s = _.repeat('` ', s.length - temp.length) + temp
+  }
+  temp = _.trimEnd(s, ' ')
+  if (s.length !== temp.length) {
+    s = temp + _.repeat('` ', s.length - temp.length + 1)
+  }
+
+  return s
 }
 
 export default {
@@ -304,22 +325,20 @@ export default {
     }
   },
   methods: {
-    execute() {
-      axios.post(`${host}/execute`, {
-        type: 'run-program',
-        value: ['bin/ahk.exe', 'bin/WindowSpy.ahk'],
-      })
+    execute(arg) {
+      executeScript(arg)
     },
     sendKeys() {
       this.currKey().prefix = '*'
       const lines = ['']
-      if (this.currKey().textToSend) {
-        const list = toAhkString(this.currKey().textToSend).split('\n')
-        const result = list.map(item => `send % text("${item}")`).join(' "{enter}"\n')
+      const textToSend = this.currKey().textToSend
+      if (textToSend) {
+        const list = ahkText(textToSend).split('\n')
+        const result = 'send, {blind}{text}' + list.join('`n')
         lines.push(result)
       }
       if (this.currKey().keysToSend) {
-        lines.push('send {blind}' + this.currKey().keysToSend)
+        lines.push('send, {blind}' + this.currKey().keysToSend)
       }
       lines.push('return')
       this.currKey().value = lines.join('\n')

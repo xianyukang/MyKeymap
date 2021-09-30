@@ -1,11 +1,10 @@
-﻿#Warn
-#NoEnv
+﻿#NoEnv
 #SingleInstance, force
 #NoTrayIcon
+ListLines Off
 SetWorkingDir %A_ScriptDir%
 Menu, Tray, Icon, logo.ico
 SendMode Input
-
 
 layout := new CLayout()
 

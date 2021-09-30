@@ -238,6 +238,9 @@ return
 *I::
 send {blind}:
 return
+*Space::
+send, {blind}{enter}
+return
 *U::send {blind}$
 *R::send {blind}&
 *Q::send {blind}(
@@ -266,6 +269,9 @@ return
 
 *Space::
 send {blind}{f1}
+return
+*,::
+send, {blind}abcd{1000}+{Home}{1000}{BackSpace}
 return
 *H::send {blind}0
 *J::send {blind}1
@@ -463,6 +469,9 @@ send {blind}^#{Right}
 return
 
 #if RButtonMode
+*Z::
+send {blind}#v
+return
 *W::
 send {blind}^c
 return
@@ -500,8 +509,8 @@ execSemicolonAbbr(typo) {
     {
         case "gg":
             
-send % text("git add -A; git commit -a -m """"; git push origin (git branch --show-current);")
-send {blind}{left 47}
+send, {blind}{text}git add -A`; git commit -a -m ""`; git push origin (git branch --show-current)`;
+send, {blind}{left 47}
 return
         case "ex":
             quit(true)

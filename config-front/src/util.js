@@ -1,4 +1,4 @@
-// import axios from 'axios'
+import axios from 'axios'
 
 // export function fetchConfig() {
 //     return axios.get('http://localhost:8000/config')
@@ -19,3 +19,10 @@ export function notEmptyAction(action) {
 }
 
 export const host = process.env.NODE_ENV === 'production' ? 'http://localhost:12333' : 'http://localhost:12333'
+
+export function executeScript(arg) {
+    axios.post(`${host}/execute`, {
+        type: 'run-program',
+        value: ['bin/ahk.exe', arg],
+    })
+}

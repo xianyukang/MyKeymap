@@ -438,8 +438,11 @@
             "prefix": "*"
         },
         ",": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "输入文本或按键",
+            "value": "\nsend, {blind}abcd{1000}+{Home}{1000}{BackSpace}\nreturn",
+            "keysToSend": "abcd{1000}+{Home}{1000}{BackSpace}",
+            "prefix": "*",
+            "textToSend": ""
         },
         ".": {
             "type": "什么也不做",
@@ -1127,8 +1130,10 @@
             "value": ""
         },
         "Z": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "输入文本或按键",
+            "value": "\nsend {blind}#v\nreturn",
+            "keysToSend": "#v",
+            "prefix": "*"
         },
         "X": {
             "type": "输入文本或按键",
@@ -1175,8 +1180,10 @@
     },
     "Semicolon": {
         "Space": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "输入文本或按键",
+            "value": "\nsend, {blind}{enter}\nreturn",
+            "keysToSend": "{enter}",
+            "prefix": "*"
         },
         "Q": {
             "type": "输入文本或按键",
@@ -1476,7 +1483,7 @@
         },
         "gg": {
             "type": "输入文本或按键",
-            "value": "\nsend % text(\"git add -A; git commit -a -m \"\"\"\"; git push origin (git branch --show-current);\")\nsend {blind}{left 47}\nreturn",
+            "value": "\nsend, {blind}{text}git add -A`; git commit -a -m \"\"`; git push origin (git branch --show-current)`;\nsend, {blind}{left 47}\nreturn",
             "textToSend": "git add -A; git commit -a -m \"\"; git push origin (git branch --show-current);",
             "prefix": "*",
             "keysToSend": "{left 47}"
