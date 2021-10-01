@@ -9,7 +9,7 @@
 
 StringCaseSense, On
 SetWorkingDir %A_ScriptDir%\..
-; requireAdmin()
+requireAdmin()
 closeOldInstance()
 
 SetBatchLines -1
