@@ -665,7 +665,6 @@ onTypoEnd(ih) {
 }
 capsOnTypoChar(ih, char) {
     postCharToTipWidnow(char)
-    ; SoundPlay, bin\bingo.wav
 }
 
 capsOnTypoEnd(ih) {
@@ -679,7 +678,6 @@ enterCapslockAbbr(ih)
     HIDE_TYPO_WINDOW := WM_USER + 0x0002
 
     postMessageToTipWidnow(SHOW_TYPO_WINDOW)
-    ; SoundPlay, bin\bingo.wav
     result := ""
 
 
@@ -687,7 +685,6 @@ enterCapslockAbbr(ih)
     endReason := ih.Wait()
     ih.Stop()
     if InStr(endReason, "EndKey") {
-        ; SoundPlay, bin\beatmiss.wav
     }
     if InStr(endReason, "Match") {
         lastChar := SubStr(ih.Match, ih.Match.Length-1)
@@ -698,14 +695,10 @@ enterCapslockAbbr(ih)
     }
     if (ih.Match)
         execCapslockAbbr(ih.Match)
-
-    ; if (StrLen(ih.Match) >= 4) 
-    ;     SoundPlay, bin\cool.wav
 }
 
 delayedHideTipWindow()
 {
-    ; SoundPlay, bin\bingo.wav
     HIDE_TYPO_WINDOW := 0x0400 + 0x0002
     postMessageToTipWidnow(HIDE_TYPO_WINDOW)
 }
