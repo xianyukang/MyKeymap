@@ -58,7 +58,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{Space}", "xk,ss,sk,rr,sl,zk,dk,dh,jt,gt,lx,sm,ex,sd,rb,fi,fp,fo,fb,fg,fk,wy,cout,zh,gg")
+semiHook := InputHook("C", "{Space}", "xk,ss,sk,sl,zk,dk,dh,jt,gt,lx,sm,zh,gg,ver,xm")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
 capsHook := InputHook("C", "{LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,da,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee")
@@ -268,10 +268,7 @@ return
 #if DigitMode
 
 *Space::
-send {blind}{f1}
-return
-*,::
-send, {blind}abcd{1000}+{Home}{1000}{BackSpace}
+send, {blind}{f1}
 return
 *H::send {blind}0
 *J::send {blind}1
@@ -507,30 +504,37 @@ WheelDown::send ^{tab}
 execSemicolonAbbr(typo) {
     switch typo 
     {
+        case "ver":
+            
+send, {blind}#r
+             sleep 700
+send, {blind}winver{enter}
+return
+        case "xk":
+            
+send, {blind}(){left 1}
+return
         case "gg":
             
 send, {blind}{text}git add -A`; git commit -a -m ""`; git push origin (git branch --show-current)`;
 send, {blind}{left 47}
 return
-        case "ex":
-            quit(true)
-        case "rr":
-            ReloadProgram()
+        case "dk":
+            
+send, {blind}{text}{}
+send, {blind}{left}
+return
+        case "xm":
+            
+send, {blind}{text}❖` ` 
+return
         case "zh":
             send % text(" site:zhihu.com")
 send {blind}{enter}
-        case "wy":
-            send {blind}"
         case "ss":
             send {blind}""{left}
-        case "xk":
-            send {blind}(){left 1}
         case "zk":
             send {blind}[]{left}
-        case "cout":
-            send {blind}cout <<  << endl;{left 9}
-        case "dk":
-            send {blind}{{}{}}{left}
         case "jt":
             send {blind}➤{space 1}
         case "dh":
@@ -545,22 +549,6 @@ send {blind}{enter}
             send {blind}🐶
         case "lx":
             send {blind}💚
-        case "fg":
-            setColor("#080")
-        case "fb":
-            setColor("#2E66FF")
-        case "fk":
-            setColor("#7B68EE")
-        case "fp":
-            setColor("#b309bb")
-        case "fi":
-            setColor("#D05")
-        case "fo":
-            setColor("#FF00FF")
-        case "rb":
-            slideToReboot()
-        case "sd":
-            slideToShutdown()
         default: 
             return false
     }

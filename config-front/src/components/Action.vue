@@ -39,12 +39,21 @@
           <v-card-actions>
             <v-btn color="purple" dark outlined @click="execute('bin/WindowSpy.ahk')">查看窗口标识符</v-btn>
           </v-card-actions>
-          <br>
-          <div class="tips">Tips: <br>(1) 文件管理器中按住 Shift 并右键点击文件,  然后选择「 复制为路径 」 (记得去掉两端双引号)</div>
+          <br />
+          <pre class="tips">
+Tips:
+    (1) 文件管理器中按住 Shift 并右键点击文件, 然后选择「 复制为路径 」 (记得去掉两端双引号)</pre
+          >
         </template>
 
         <template v-if="currKey().type === '输入文本或按键'">
-          <v-text-field label="要输入的按键" v-model="currKey().keysToSend" @input="sendKeys"></v-text-field>
+          <v-textarea
+            auto-grow
+            rows="1"
+            label="要输入的按键"
+            v-model="currKey().keysToSend"
+            @input="sendKeys"
+          ></v-textarea>
           <v-textarea
             auto-grow
             rows="1"
@@ -56,7 +65,8 @@
           <pre class="tips">
 Tips:
     (1) <a target="_blank" href="SendKeyExample.html" style="color: green;">点此查看发送按键的示例</a>
-    (2) 如果两个框都填了会先输入文本然后输入按键
+    (2) 如果两个框都填了会先输入文本、然后输入按键
+    (3) 输入按键 abc 会受输入法中英文状态的影响,  输入文本 abc 则不会
     
     
           </pre>
@@ -330,18 +340,26 @@ export default {
     },
     sendKeys() {
       this.currKey().prefix = '*'
-      const lines = ['']
+      const result = ['']
       const textToSend = this.currKey().textToSend
       if (textToSend) {
-        const list = ahkText(textToSend).split('\n')
-        const result = 'send, {blind}{text}' + list.join('`n')
-        lines.push(result)
+        const lines = ahkText(textToSend).split('\n')
+        result.push('send, {blind}{text}' + lines.join('`n'))
       }
-      if (this.currKey().keysToSend) {
-        lines.push('send, {blind}' + this.currKey().keysToSend)
+      const keysToSend = this.currKey().keysToSend
+      if (keysToSend) {
+        const lines = keysToSend
+          .split('\n')
+          .filter(x => x.length > 0)
+          .map(line => {
+            if (line.startsWith('sleep') || line.startsWith('sleep')) 
+              return '             ' + line
+            return 'send, {blind}' + line
+          })
+        result.push(lines.join('\n'))
       }
-      lines.push('return')
-      this.currKey().value = lines.join('\n')
+      result.push('return')
+      this.currKey().value = result.join('\n')
     },
     activateOrRun() {
       const toActivate = escapeFuncString(this.currKey().toActivate)

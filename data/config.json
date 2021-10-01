@@ -305,7 +305,7 @@
     "Mode3": {
         "Space": {
             "type": "输入文本或按键",
-            "value": "\nsend {blind}{f1}\nreturn",
+            "value": "\nsend, {blind}{f1}\nreturn",
             "keysToSend": "{f1}",
             "prefix": "*"
         },
@@ -438,11 +438,8 @@
             "prefix": "*"
         },
         ",": {
-            "type": "输入文本或按键",
-            "value": "\nsend, {blind}abcd{1000}+{Home}{1000}{BackSpace}\nreturn",
-            "keysToSend": "abcd{1000}+{Home}{1000}{BackSpace}",
-            "prefix": "*",
-            "textToSend": ""
+            "type": "什么也不做",
+            "value": ""
         },
         ".": {
             "type": "什么也不做",
@@ -1357,9 +1354,10 @@
     "SemicolonAbbr": {
         "xk": {
             "type": "输入文本或按键",
-            "value": "send {blind}(){left 1}",
+            "value": "\nsend, {blind}(){left 1}\nreturn",
             "keysToSend": "(){left 1}",
-            "prefix": "*"
+            "prefix": "*",
+            "textToSend": ""
         },
         "ss": {
             "type": "输入文本或按键",
@@ -1372,10 +1370,6 @@
             "value": "send {blind}「  」{left 2}",
             "keysToSend": "「  」{left 2}",
             "prefix": "*"
-        },
-        "rr": {
-            "type": "执行单行 ahk 代码",
-            "value": "ReloadProgram()"
         },
         "sl": {
             "type": "输入文本或按键",
@@ -1392,9 +1386,10 @@
         },
         "dk": {
             "type": "输入文本或按键",
-            "value": "send {blind}{{}{}}{left}",
-            "keysToSend": "{{}{}}{left}",
-            "prefix": "*"
+            "value": "\nsend, {blind}{text}{}\nsend, {blind}{left}\nreturn",
+            "keysToSend": "{left}",
+            "prefix": "*",
+            "textToSend": "{}"
         },
         "dh": {
             "type": "输入文本或按键",
@@ -1426,54 +1421,6 @@
             "keysToSend": "《》{left}",
             "prefix": "*"
         },
-        "ex": {
-            "type": "执行单行 ahk 代码",
-            "value": "quit(true)"
-        },
-        "sd": {
-            "type": "其他功能",
-            "value": "slideToShutdown()"
-        },
-        "rb": {
-            "type": "其他功能",
-            "value": "slideToReboot()"
-        },
-        "fi": {
-            "type": "其他功能",
-            "value": "setColor(\"#D05\")"
-        },
-        "fp": {
-            "type": "其他功能",
-            "value": "setColor(\"#b309bb\")"
-        },
-        "fo": {
-            "type": "其他功能",
-            "value": "setColor(\"#FF00FF\")"
-        },
-        "fb": {
-            "type": "其他功能",
-            "value": "setColor(\"#2E66FF\")"
-        },
-        "fg": {
-            "type": "其他功能",
-            "value": "setColor(\"#080\")"
-        },
-        "fk": {
-            "type": "其他功能",
-            "value": "setColor(\"#7B68EE\")"
-        },
-        "wy": {
-            "type": "输入文本或按键",
-            "value": "send {blind}\"",
-            "keysToSend": "\"",
-            "prefix": "*"
-        },
-        "cout": {
-            "type": "输入文本或按键",
-            "value": "send {blind}cout <<  << endl;{left 9}",
-            "keysToSend": "cout <<  << endl;{left 9}",
-            "prefix": "*"
-        },
         "zh": {
             "type": "输入文本或按键",
             "value": "send % text(\" site:zhihu.com\")\nsend {blind}{enter}",
@@ -1487,6 +1434,18 @@
             "textToSend": "git add -A; git commit -a -m \"\"; git push origin (git branch --show-current);",
             "prefix": "*",
             "keysToSend": "{left 47}"
+        },
+        "ver": {
+            "type": "输入文本或按键",
+            "value": "\nsend, {blind}#r\n             sleep 700\nsend, {blind}winver{enter}\nreturn",
+            "keysToSend": "#r\nsleep 700\nwinver{enter}",
+            "prefix": "*"
+        },
+        "xm": {
+            "type": "输入文本或按键",
+            "value": "\nsend, {blind}{text}❖` ` \nreturn",
+            "textToSend": "❖ ",
+            "prefix": "*"
         }
     },
     "CapslockAbbr": {
@@ -1632,7 +1591,6 @@
         "xk",
         "ss",
         "sk",
-        "rr",
         "sl",
         "zk",
         "dk",
@@ -1641,18 +1599,9 @@
         "gt",
         "lx",
         "sm",
-        "ex",
-        "sd",
-        "rb",
-        "fi",
-        "fp",
-        "fo",
-        "fb",
-        "fg",
-        "fk",
-        "wy",
-        "cout",
         "zh",
-        "gg"
+        "gg",
+        "ver",
+        "xm"
     ]
 }

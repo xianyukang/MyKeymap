@@ -28,7 +28,7 @@
                   dense
                   v-model="abbr"
                   @keyup.enter="addAbbr"
-                  label="输入ab按回车添加ab, 输入del ab删除ab, 输入rn cd重命名为cd"
+                  label="输入ab按回车添加ab, del ab删除ab, rn cd重命名当前为cd"
                 ></v-text-field>
               </v-col>
             </v-row>

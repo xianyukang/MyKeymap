@@ -35,7 +35,8 @@ const s = new Vuex.Store({
         .then(resp => {
           console.log(resp.data)
           store.commit('SET_SNACKBAR', {snackbar: true, snackbarText: `保存成功, 可按 alt+' 重启 MyKeymap`})
-          executeScript('bin/ReloadAtSave.ahk')
+          // 自动重启 MyKeymap 体验并不好,  容易误触发大小写切换
+          // executeScript('bin/ReloadAtSave.ahk')
         })
         .catch(error => {
           store.commit('SET_SNACKBAR', {snackbar: true, snackbarText: `保存失败`})
