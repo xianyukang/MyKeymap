@@ -35,13 +35,13 @@ fast_repeat := 70
 slow_one :=  10     
 slow_repeat := 13
 
-; Menu, Tray, NoStandard
-Menu, Tray, Add, 视频教程, trayMenuHandler
-Menu, Tray, Add, 参考/示例, trayMenuHandler 
-Menu, Tray, Add 
-Menu, Tray, Add, 打开设置, trayMenuHandler 
+Menu, Tray, NoStandard
 Menu, Tray, Add, 暂停, trayMenuHandler
 Menu, Tray, Add, 退出, trayMenuHandler
+Menu, Tray, Add, 打开设置, trayMenuHandler 
+Menu, Tray, Add, 视频教程, trayMenuHandler
+Menu, Tray, Add, 帮助文档, trayMenuHandler 
+Menu, Tray, Add, 检查更新, trayMenuHandler 
 Menu, Tray, Add 
 
 Menu, Tray, Icon
@@ -61,7 +61,7 @@ global typoTip := new TypoTipWindow()
 semiHook := InputHook("C", "{Space}", "xk,ss,sk,sl,zk,dk,dh,jt,gt,lx,sm,zh,gg,ver,xm")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,da,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee")
+capsHook := InputHook("C", "{LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee,dm,rex,xx")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -436,10 +436,6 @@ R::
     path = D:\install\Foxit Reader\FoxitReader.exe
     ActivateOrRun("ahk_exe FoxitReader.exe", path)
     return
-N::
-    path = D:\MyFiles\MyKeymap\shortcuts\网易云音乐.lnk
-    ActivateOrRun("", path, "", "")
-    return
 O::
     path = shortcuts\OneNote for Windows 10.lnk
     ActivateOrRun("OneNote for Windows 10", path)
@@ -449,7 +445,7 @@ A::
     ActivateOrRun("ahk_exe WindowsTerminal.exe", path)
     return
 
-#IfWinActive, ahk_exe explorer.exe ahk_class MultitaskingViewFrame
+#IfWinActive, ahk_class MultitaskingViewFrame
 d::send, {blind}{down}
 e::send, {blind}{up}
 s::send, {blind}{left}
@@ -492,7 +488,13 @@ return
 *F::send {blind}{right}
 *E::send {blind}{up}
 
-LButton::send ^!{tab}
+LButton::
+; if WinActive("ahk_class MultitaskingViewFrame")
+if ( A_PriorHotkey == "~LButton")
+    send #{tab}
+else
+    send ^!{tab}
+return
 WheelUp::send ^+{tab}
 WheelDown::send ^{tab}
 
@@ -583,13 +585,18 @@ execCapslockAbbr(typo) {
     path = shortcuts\网易云音乐.lnk
     ActivateOrRun("网易云音乐", path)
     return
+        case "rex":
+           
+    path = tools\重启资源管理器.exe
+    ActivateOrRun("", path, "", "")
+    return
         case "sl":
            DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
         case "se":
            openSettings()
         case "ex":
            quit(false)
-        case "da":
+        case "dm":
            run, %A_WorkingDir%
         case "ld":
            run, bin\ahk.exe bin\changeBrightness.ahk

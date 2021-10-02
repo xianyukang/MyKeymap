@@ -14,36 +14,40 @@
       <v-card-text>
         <template v-if="currKey().type === '启动程序或激活窗口'">
           <v-text-field
+            autocomplete="off"
             label="要激活的窗口 (窗口标识符)"
             v-model="currKey().toActivate"
             @input="activateOrRun"
           ></v-text-field>
           <v-text-field
+            autocomplete="off"
             label="窗口不存在时要启动的程序 (程序路径)"
             v-model="currKey().toRun"
             @input="activateOrRun"
           ></v-text-field>
-          <br />
           <v-text-field
+            autocomplete="off"
             label="启动程序的命令行参数 (选填)"
-            dense
             v-model="currKey().cmdArgs"
             @input="activateOrRun"
           ></v-text-field>
           <v-text-field
+            autocomplete="off"
             label="启动程序的工作目录 (选填)"
-            dense
             v-model="currKey().workingDir"
             @input="activateOrRun"
           ></v-text-field>
           <v-card-actions>
-            <v-btn color="purple" dark outlined @click="execute('bin/WindowSpy.ahk')">查看窗口标识符</v-btn>
+            <v-btn color="purple" dark outlined @click="execute('bin/WindowSpy.ahk')">🔍 查看窗口标识符</v-btn>
+            <pre>   </pre>
+            <v-btn color="purple" dark outlined target="_blank" href="SendKeyExample.html">📗 程序路径的例子</v-btn>
           </v-card-actions>
           <br />
-          <pre class="tips">
+<pre class="tips">
 Tips:
-    (1) 文件管理器中按住 Shift 并右键点击文件, 然后选择「 复制为路径 」 (记得去掉两端双引号)</pre
-          >
+    (1) 要激活的窗口不存在时会帮你启动程序,  窗口存在时则为你激活该窗口
+    (2) 文件管理器中按住 Shift 并右击文件, 可以选择「 复制为路径 」 (记得去掉两端双引号)
+</pre>
         </template>
 
         <template v-if="currKey().type === '输入文本或按键'">
@@ -74,6 +78,7 @@ Tips:
 
         <template v-if="currKey().type === '执行单行 ahk 代码'">
           <v-text-field
+            autocomplete="off"
             label="单行代码 (自定义的函数可以放到 data/custom_functions.ahk)"
             v-model="currKey().value"
           ></v-text-field>
@@ -363,13 +368,17 @@ export default {
     },
     activateOrRun() {
       const toActivate = escapeFuncString(this.currKey().toActivate)
-      const toRun = escapeFuncString(this.currKey().toRun)
+      let toRun = escapeFuncString(this.currKey().toRun)
       const cmdArgs = escapeFuncString(this.currKey().cmdArgs)
       const workingDir = escapeFuncString(this.currKey().workingDir)
       // console.log(toActivate, toRun)
 
       if (!toActivate) {
         this.currKey().toActivate = ''
+      }
+
+      if (toRun && (toRun.startsWith('%Home%'))) {
+        toRun = 'C:\\Users\\%A_UserName%' + toRun.substr(6)
       }
 
       this.currKey().value = `

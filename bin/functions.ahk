@@ -1025,7 +1025,7 @@ requireAdmin()
          myExit()
       }
       catch {
-        tip("MyKeymap 当前以普通权限运行 `n在一些高权限窗口中会失效 (比如任务管理器)", -3400)
+        tip("MyKeymap 当前以普通权限运行 `n在一些高权限窗口中会完全失效 (比如任务管理器)", -3700)
       }
    }
 }
@@ -1108,11 +1108,14 @@ trayMenuHandler(ItemName, ItemPos, MenuName)
     if (InStr(ItemName, "打开设置" )) {
         openSettings()
     }
+    if (InStr(ItemName, "检查更新" )) {
+        run, https://xianyukang.com/MyKeymap.html?mv=1.0
+    }
     if (InStr(ItemName, "视频教程" )) {
         openSettings()
     }
-    if (InStr(ItemName, "文档示例" )) {
-        openSettings()
+    if (InStr(ItemName, "帮助文档" )) {
+        run, https://xianyukang.com/MyKeymap.html
     }
 
 }

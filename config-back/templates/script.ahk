@@ -35,13 +35,13 @@ fast_repeat := 70
 slow_one :=  10     
 slow_repeat := 13
 
-; Menu, Tray, NoStandard
-Menu, Tray, Add, 视频教程, trayMenuHandler
-Menu, Tray, Add, 参考/示例, trayMenuHandler 
-Menu, Tray, Add 
-Menu, Tray, Add, 打开设置, trayMenuHandler 
+Menu, Tray, NoStandard
 Menu, Tray, Add, 暂停, trayMenuHandler
 Menu, Tray, Add, 退出, trayMenuHandler
+Menu, Tray, Add, 打开设置, trayMenuHandler 
+Menu, Tray, Add, 视频教程, trayMenuHandler
+Menu, Tray, Add, 帮助文档, trayMenuHandler 
+Menu, Tray, Add, 检查更新, trayMenuHandler 
 Menu, Tray, Add 
 
 Menu, Tray, Icon
@@ -302,7 +302,7 @@ f::return
     {% endif %}
 {% endfor %}
 
-#IfWinActive, ahk_exe explorer.exe ahk_class MultitaskingViewFrame
+#IfWinActive, ahk_class MultitaskingViewFrame
 d::send, {blind}{down}
 e::send, {blind}{up}
 s::send, {blind}{left}
@@ -324,7 +324,13 @@ space::send, {blind}{enter}
     {% endif %}
 {% endfor %}
 
-LButton::send ^!{tab}
+LButton::
+; if WinActive("ahk_class MultitaskingViewFrame")
+if ( A_PriorHotkey == "~LButton")
+    send #{tab}
+else
+    send ^!{tab}
+return
 WheelUp::send ^+{tab}
 WheelDown::send ^{tab}
 

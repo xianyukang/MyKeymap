@@ -1,7 +1,7 @@
 {
     "Capslock": {
         "Space": {
-            "type": "启动程序或激活窗口",
+            "type": "什么也不做",
             "value": ""
         },
         "Q": {
@@ -280,10 +280,8 @@
             "value": ""
         },
         "N": {
-            "type": "启动程序或激活窗口",
-            "value": "\n    path = D:\\MyFiles\\MyKeymap\\shortcuts\\网易云音乐.lnk\n    ActivateOrRun(\"\", path, \"\", \"\")\n    return",
-            "toRun": "D:\\MyFiles\\MyKeymap\\shortcuts\\网易云音乐.lnk",
-            "toActivate": ""
+            "type": "什么也不做",
+            "value": ""
         },
         "M": {
             "type": "什么也不做",
@@ -307,7 +305,8 @@
             "type": "输入文本或按键",
             "value": "\nsend, {blind}{f1}\nreturn",
             "keysToSend": "{f1}",
-            "prefix": "*"
+            "prefix": "*",
+            "textToSend": ""
         },
         "Q": {
             "type": "什么也不做",
@@ -898,7 +897,7 @@
             "value": ""
         },
         "W": {
-            "type": "什么也不做",
+            "type": "启动程序或激活窗口",
             "value": ""
         },
         "E": {
@@ -1489,10 +1488,6 @@
             "type": "系统控制",
             "value": "run, shell:My Video"
         },
-        "da": {
-            "type": "系统控制",
-            "value": "run, %A_WorkingDir%"
-        },
         "dr": {
             "type": "系统控制",
             "value": "run, shell:RecycleBinFolder"
@@ -1557,6 +1552,20 @@
         "ee": {
             "type": "窗口操作",
             "value": "ToggleTopMost()"
+        },
+        "dm": {
+            "type": "系统控制",
+            "value": "run, %A_WorkingDir%"
+        },
+        "rex": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = tools\\重启资源管理器.exe\n    ActivateOrRun(\"\", path, \"\", \"\")\n    return",
+            "toRun": "tools\\重启资源管理器.exe",
+            "toActivate": ""
+        },
+        "xx": {
+            "type": "什么也不做",
+            "value": ""
         }
     },
     "CapslockAbbrKeys": [
@@ -1570,7 +1579,6 @@
         "dd",
         "dp",
         "dv",
-        "da",
         "dr",
         "se",
         "no",
@@ -1583,7 +1591,10 @@
         "gg",
         "fr",
         "fi",
-        "ee"
+        "ee",
+        "dm",
+        "rex",
+        "xx"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",
