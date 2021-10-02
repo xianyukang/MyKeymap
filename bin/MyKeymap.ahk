@@ -267,6 +267,9 @@ return
 
 #if DigitMode
 
+*`;::
+send, {blind}7
+return
 *Space::
 send, {blind}{f1}
 return
@@ -277,7 +280,6 @@ return
 *U::send {blind}4
 *I::send {blind}5
 *O::send {blind}6
-*P::send {blind}7
 *N::send {blind}8
 *M::send {blind}9
 
@@ -303,6 +305,9 @@ W::
 #if FnMode
 *r::return
 
+*`;::
+send, {blind}{f7}
+return
 *H::send {blind}{f10}
 *,::send {blind}{f11}
 */::send {blind}{f12}
@@ -312,7 +317,6 @@ W::
 *U::send {blind}{f4}
 *I::send {blind}{f5}
 *O::send {blind}{f6}
-*P::send {blind}{f7}
 *N::send {blind}{f8}
 *M::send {blind}{f9}
 
