@@ -267,7 +267,7 @@ return
 
 #if DigitMode
 
-*`;::
+*B::
 send, {blind}7
 return
 *Space::
@@ -305,7 +305,7 @@ W::
 #if FnMode
 *r::return
 
-*`;::
+*B::
 send, {blind}{f7}
 return
 *H::send {blind}{f10}

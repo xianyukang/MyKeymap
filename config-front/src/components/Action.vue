@@ -40,7 +40,7 @@
           <v-card-actions>
             <v-btn color="purple" dark outlined @click="execute('bin/WindowSpy.ahk')">🔍 查看窗口标识符</v-btn>
             <pre>   </pre>
-            <v-btn color="purple" dark outlined target="_blank" href="SendKeyExample.html">📗 程序路径的例子</v-btn>
+            <v-btn color="purple" dark outlined target="_blank" href="/ProgramPathExample.html">📗 程序路径的例子</v-btn>
           </v-card-actions>
           <br />
 <pre class="tips">

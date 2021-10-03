@@ -399,10 +399,8 @@
             "prefix": "*"
         },
         ";": {
-            "type": "输入文本或按键",
-            "value": "\nsend, {blind}7\nreturn",
-            "keysToSend": "7",
-            "prefix": "*"
+            "type": "什么也不做",
+            "value": ""
         },
         "Z": {
             "type": "什么也不做",
@@ -421,8 +419,10 @@
             "value": ""
         },
         "B": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "输入文本或按键",
+            "value": "\nsend, {blind}7\nreturn",
+            "keysToSend": "7",
+            "prefix": "*"
         },
         "N": {
             "type": "输入文本或按键",
@@ -545,10 +545,8 @@
             "prefix": "*"
         },
         ";": {
-            "type": "输入文本或按键",
-            "value": "\nsend, {blind}{f7}\nreturn",
-            "keysToSend": "{f7}",
-            "prefix": "*"
+            "type": "什么也不做",
+            "value": ""
         },
         "Z": {
             "type": "什么也不做",
@@ -567,8 +565,10 @@
             "value": ""
         },
         "B": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "输入文本或按键",
+            "value": "\nsend, {blind}{f7}\nreturn",
+            "keysToSend": "{f7}",
+            "prefix": "*"
         },
         "N": {
             "type": "输入文本或按键",
