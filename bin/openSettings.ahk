@@ -10,9 +10,11 @@ SetBatchLines -1
 ListLines Off
 settitlematchmode, 2
 
-run, mykeymap-settings-server.exe --server,, Hide
-run, mykeymap-settings-server.exe --rain
-sleep, 1000
+if (!WinExist("mykeymap-settings-server.exe")) {
+    run, mykeymap-settings-server.exe --server,, Hide
+    run, mykeymap-settings-server.exe --rain
+    sleep, 1000
+}
 
 if WinExist("MyKeymap Settings")
     WinActivate
