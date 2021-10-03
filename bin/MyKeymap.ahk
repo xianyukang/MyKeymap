@@ -305,12 +305,14 @@ W::
 #if FnMode
 *r::return
 
+*.::
+send, {blind}{f12}
+return
 *B::
 send, {blind}{f7}
 return
 *H::send {blind}{f10}
 *,::send {blind}{f11}
-*/::send {blind}{f12}
 *J::send {blind}{f1}
 *K::send {blind}{f2}
 *L::send {blind}{f3}

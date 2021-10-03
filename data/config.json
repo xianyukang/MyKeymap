@@ -589,14 +589,14 @@
             "prefix": "*"
         },
         ".": {
-            "type": "什么也不做",
-            "value": ""
-        },
-        "/": {
             "type": "输入文本或按键",
-            "value": "send {blind}{f12}",
+            "value": "\nsend, {blind}{f12}\nreturn",
             "keysToSend": "{f12}",
             "prefix": "*"
+        },
+        "/": {
+            "type": "什么也不做",
+            "value": ""
         }
     },
     "Mode9": {
