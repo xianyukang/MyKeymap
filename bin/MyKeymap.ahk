@@ -35,6 +35,14 @@ fast_repeat := 70
 slow_one :=  10     
 slow_repeat := 13
 
+allHotkeys := []
+allHotkeys.Push("*3")
+allHotkeys.Push("*j")
+allHotkeys.Push("*capslock")
+allHotkeys.Push("*;")
+allHotkeys.Push("RButton")
+
+
 Menu, Tray, NoStandard
 Menu, Tray, Add, 暂停, trayMenuHandler
 Menu, Tray, Add, 退出, trayMenuHandler
@@ -68,6 +76,7 @@ capsHook.OnEnd := Func("capsOnTypoEnd")
 return
 
 RAlt::LCtrl
+
 !+'::
     Suspend, Permit
     toggleSuspend()
@@ -76,6 +85,7 @@ RAlt::LCtrl
     Suspend, Toggle
     ReloadProgram()
     return
+
 +capslock::toggleCapslock()
 
 *capslock::
@@ -95,8 +105,10 @@ RAlt::LCtrl
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     JMode := true
+    DisableCapslockKey := true
     keywait j
     JMode := false
+    DisableCapslockKey := false
     if (A_PriorKey == "j" && A_TimeSinceThisHotkey < 350)
             send  {blind}j
     enableOtherHotkey(thisHotkey)
@@ -114,7 +126,6 @@ RAlt::LCtrl
     enableOtherHotkey(thisHotkey)
     return
 
-
 *3::
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
@@ -123,17 +134,6 @@ RAlt::LCtrl
     DigitMode := false
     if (A_PriorKey == "3" && A_TimeSinceThisHotkey < 350)
         send {blind}3 
-    enableOtherHotkey(thisHotkey)
-    return
-
-*9::
-    thisHotkey := A_ThisHotkey
-    disableOtherHotkey(thisHotkey)
-    Mode9 := true
-    keywait 9 
-    Mode9 := false
-    if (A_PriorKey == "9" && A_TimeSinceThisHotkey < 350)
-        send {blind}9 
     enableOtherHotkey(thisHotkey)
     return
 
@@ -152,7 +152,7 @@ enterRButtonMode()
     while (errorlevel != 0)
     {
 		MouseGetPos, x, y
-		if (Abs(x - initialX) > 3 || Abs(y - initialY) > 3) {
+		if (Abs(x - initialX) > 20 || Abs(y - initialY) > 20) {
 			movedMouse := true
 			break
 		}
@@ -179,23 +179,8 @@ enterRButtonMode()
 }
 
 
-~LButton::
-enterLButtonMode()
-{
-	global LButtonMode
-    LButtonMode := true
-    keywait LButton
-    LButtonMode := false
-    return
-}
-
-#if DisableCapslockKey
-*capslock::return
-*capslock up::return
 
 #if JMode
-*capslock::return
-*capslock up::return
     ^l::return
     +k::return
     *k::
@@ -229,7 +214,6 @@ return
 *E::send {blind}{up}
 
     
-
 
 #if PunctuationMode
 *A::
@@ -290,17 +274,6 @@ return
     FnMode := false
     return
 
-*2::send {blind}{backspace}
-
-#if Mode9
-X::
-    path = C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE
-    ActivateOrRun("ahk_exe EXCEL.EXE", path, "", "")
-    return
-W::
-    path = shortcuts\网易云音乐.lnk
-    ActivateOrRun("网易云音乐", path, "", "")
-    return
 
 #if FnMode
 *r::return
@@ -321,6 +294,8 @@ return
 *O::send {blind}{f6}
 *N::send {blind}{f8}
 *M::send {blind}{f9}
+
+
 
 
 #if CapslockMode
@@ -365,8 +340,6 @@ f::
     return
 
 
-
-
 #if SLOWMODE
 
 /::centerMouse()
@@ -383,8 +356,8 @@ H::horizontalScroll("H", -1)
 M::rightClick(true)
 
 
-esc::exitMouseMode()
-space::exitMouseMode()
+Esc::exitMouseMode()
+Space::exitMouseMode()
 
 
 #if FMode
@@ -451,21 +424,11 @@ A::
     ActivateOrRun("ahk_exe WindowsTerminal.exe", path)
     return
 
-#IfWinActive, ahk_class MultitaskingViewFrame
-d::send, {blind}{down}
-e::send, {blind}{up}
-s::send, {blind}{left}
-f::send, {blind}{right}
-*x::send,  {blind}{del}
-space::send, {blind}{enter}
 
-#if LButtonMode
-*S::
-send {blind}^#{Left}
-return
-*F::
-send {blind}^#{Right}
-return
+#if DisableCapslockKey
+*capslock::return
+*capslock up::return
+
 
 #if RButtonMode
 *Z::
@@ -496,7 +459,7 @@ return
 
 LButton::
 ; if WinActive("ahk_class MultitaskingViewFrame")
-if ( A_PriorHotkey == "~LButton")
+if ( A_PriorHotkey == "~LButton" || A_PriorHotkey == "LButton")
     send #{tab}
 else
     send ^!{tab}
@@ -504,6 +467,13 @@ return
 WheelUp::send ^+{tab}
 WheelDown::send ^{tab}
 
+#IfWinActive, ahk_class MultitaskingViewFrame
+*D::send, {blind}{down}
+*E::send, {blind}{up}
+*S::send, {blind}{left}
+*F::send, {blind}{right}
+*X::send,  {blind}{del}
+*Space::send, {blind}{enter}
 #If
 
 

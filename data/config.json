@@ -609,10 +609,8 @@
             "value": ""
         },
         "W": {
-            "type": "启动程序或激活窗口",
-            "value": "\n    path = shortcuts\\网易云音乐.lnk\n    ActivateOrRun(\"网易云音乐\", path, \"\", \"\")\n    return",
-            "toActivate": "网易云音乐",
-            "toRun": "shortcuts\\网易云音乐.lnk"
+            "type": "什么也不做",
+            "value": ""
         },
         "E": {
             "type": "什么也不做",
@@ -691,10 +689,8 @@
             "value": ""
         },
         "X": {
-            "type": "启动程序或激活窗口",
-            "value": "\n    path = C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE\n    ActivateOrRun(\"ahk_exe EXCEL.EXE\", path, \"\", \"\")\n    return",
-            "toRun": "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE",
-            "toActivate": "ahk_exe EXCEL.EXE"
+            "type": "什么也不做",
+            "value": ""
         },
         "C": {
             "type": "什么也不做",
@@ -937,21 +933,16 @@
             "value": ""
         },
         "S": {
-            "type": "输入文本或按键",
-            "value": "\nsend {blind}^#{Left}\nreturn",
-            "keysToSend": "^#{Left}",
-            "prefix": "*"
+            "type": "什么也不做",
+            "value": ""
         },
         "D": {
             "type": "什么也不做",
             "value": ""
         },
         "F": {
-            "type": "输入文本或按键",
-            "value": "\nsend {blind}^#{Right}\nreturn",
-            "keysToSend": "^#{Right}",
-            "prefix": "*",
-            "textToSend": ""
+            "type": "什么也不做",
+            "value": ""
         },
         "G": {
             "type": "什么也不做",
@@ -1614,5 +1605,25 @@
         "gg",
         "ver",
         "xm"
-    ]
+    ],
+    "Settings": {
+        "LButtonMode": false,
+        "enableLButtonMode": true,
+        "enableRButtonMode": true,
+        "runAsAdmin": true,
+        "enable3Mode": true,
+        "enable9Mode": true,
+        "enableJMode": true,
+        "enableCapslockMode": true,
+        "enableSemicolonMode": true,
+        "enableMode3": true,
+        "enableMode9": true,
+        "Mode3": true,
+        "Mode9": false,
+        "JMode": true,
+        "CapslockMode": true,
+        "SemicolonMode": true,
+        "RButtonMode": true,
+        "mapRAltToCtrl": true
+    }
 }

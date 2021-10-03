@@ -657,10 +657,10 @@ rightClick(tempDisableRButton := false)
     if (!tempDisableRButton)
         send,  {blind}{RButton}
     else {
-        Hotkey, RButton,, Off
+        setHotkeyStatus("RButton", false)
         send,  {blind}{RButton}
         sleep, 70
-        Hotkey, RButton,, On
+        setHotkeyStatus("RButton", true)
     }
     SLOWMODE := false
 }
@@ -710,6 +710,7 @@ ReloadProgram()
     Menu, Tray, NoIcon 
     tooltip, ` ` Reload !` ` 
     run, MyKeymap.exe
+    ExitApp
     ;run, "%exeFullPath%" Reload
     ;process, close, %pid%
     ;process, close, ahk.exe
@@ -732,32 +733,6 @@ slideToReboot()
 }
 
 
-EnterHotstringMode()
-{
-    global HotsringMode
-    HotsringMode := true
-    hotkey, IfWinActive
-    hotkey, *j, off
-    blockinput on
-    click up ; 重置热字串状态
-    settimer, timer_HotstringMode, 50
-}
-ExitHotstringMode()
-{
-    global HotsringMode
-    HotsringMode := false
-    hotkey, IfWinActive
-    hotkey, *j, on
-    blockinput off
-    settimer, timer_HotstringMode, off
-}
-
-timer_HotstringMode()
-{
-    if (A_thishotkey != "*;")
-        ExitHotstringMode()
-    return
-}
 
 
 wp_GetMonitorAt(x, y, default=1)
@@ -1057,11 +1032,24 @@ openSettings()
     run, bin\ahk.exe bin\openSettings.ahk
 }
 
+setHotkeyStatus(theHotkey, enableHotkey)
+{
+    global allHotkeys
+    for index,value in allHotkeys
+    {
+        if (value == theHotkey) {
+            if (enableHotkey)
+                hotkey, %theHotkey%, on
+            else
+                hotkey, %theHotkey%, off
+        }
+    }
+}
 
 disableOtherHotkey(thisHotkey)
 {
+    global allHotkeys
     ; ToolTip, % thisHotkey
-    allHotkeys := ["*capslock", "*;", "*j", "*3", "*9", "~LButton", "RButton"]
     for index,value in allHotkeys
     {
         if (value != thisHotkey) {
@@ -1073,8 +1061,8 @@ disableOtherHotkey(thisHotkey)
 
 enableOtherHotkey(thisHotkey)
 {
+    global allHotkeys
     ; ToolTip, % thisHotkey
-    allHotkeys := ["*capslock", "*;", "*j", "*3", "*9", "~LButton", "RButton"]
     for index,value in allHotkeys
     {
         if (value != thisHotkey) {

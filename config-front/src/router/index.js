@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import CapslockF from '../views/CapslockF.vue'
+import Settings from '../views/Settings.vue'
 import CapslockAbbr from '../views/CapslockAbbr.vue'
 
 Vue.use(VueRouter)
@@ -55,6 +56,13 @@ const routes = [
     path: '/JMode',
     name: 'JMode',
     component: CapslockF,
+    props: route => ({
+    })
+  },
+  {
+    path: '/Settings',
+    name: 'Settings',
+    component: Settings,
     props: route => ({
     })
   },

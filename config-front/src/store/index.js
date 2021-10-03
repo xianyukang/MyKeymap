@@ -6,9 +6,28 @@ import { host, executeScript } from '../util.js';
 
 Vue.use(Vuex)
 
+
+function containsKeymap(data) {
+  if (!data) return false
+  for (const [key, value] of Object.entries(data)) {
+    if (value && value.value) return true;
+  }
+  return false
+}
+
 function processConfig(config) {
   config['CapslockAbbrKeys'] = Object.keys(config.CapslockAbbr)
   config['SemicolonAbbrKeys'] = Object.keys(config.SemicolonAbbr)
+  
+  const s = config.Settings
+  s['Mode3'] = s.enableMode3 && containsKeymap(config.Mode3)
+  s['Mode9'] = s.enableMode9 && containsKeymap(config.Mode9)
+  s['JMode'] = s.enableJMode && containsKeymap(config.JMode)
+  s['CapslockMode'] = s.enableCapslockMode && containsKeymap(config.Capslock)
+  s['SemicolonMode'] = s.enableSemicolonMode && containsKeymap(config.Semicolon)
+  s['LButtonMode'] = s.enableLButtonMode && containsKeymap(config.LButtonMode)
+  s['RButtonMode'] = s.enableRButtonMode && containsKeymap(config.RButtonMode)
+
   return config
 }
 
@@ -20,10 +39,10 @@ const s = new Vuex.Store({
   },
   mutations: {
     SET_CONFIG(state, value) {
-      console.log('update config', value)
+      console.log('fetch config', value)
       state.config = value
     },
-    SET_SNACKBAR(state, {snackbar, snackbarText}) {
+    SET_SNACKBAR(state, { snackbar, snackbarText }) {
       state.snackbar = snackbar
       state.snackbarText = snackbarText
     },
@@ -34,12 +53,12 @@ const s = new Vuex.Store({
         .put(`${host}/config`, processConfig(store.state.config))
         .then(resp => {
           console.log(resp.data)
-          store.commit('SET_SNACKBAR', {snackbar: true, snackbarText: `保存成功, 可按 alt+' 重启 MyKeymap`})
+          store.commit('SET_SNACKBAR', { snackbar: true, snackbarText: `保存成功, 可按 alt+' 重启 MyKeymap` })
           // 自动重启 MyKeymap 体验并不好,  容易误触发大小写切换
           // executeScript('bin/ReloadAtSave.ahk')
         })
         .catch(error => {
-          store.commit('SET_SNACKBAR', {snackbar: true, snackbarText: `保存失败`})
+          store.commit('SET_SNACKBAR', { snackbar: true, snackbarText: `保存失败` })
           throw error
         })
     },

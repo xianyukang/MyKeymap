@@ -35,6 +35,30 @@ fast_repeat := 70
 slow_one :=  10     
 slow_repeat := 13
 
+allHotkeys := []
+{% if Settings.Mode3 %}
+allHotkeys.Push("*3")
+{% endif %}
+{% if Settings.Mode9 %}
+allHotkeys.Push("*9")
+{% endif %}
+{% if Settings.JMode %}
+allHotkeys.Push("*j")
+{% endif %}
+{% if Settings.CapslockMode %}
+allHotkeys.Push("*capslock")
+{% endif %}
+{% if Settings.SemicolonMode %}
+allHotkeys.Push("*;")
+{% endif %}
+{% if Settings.LButtonMode %}
+allHotkeys.Push("~LButton")
+{% endif %}
+{% if Settings.RButtonMode %}
+allHotkeys.Push("RButton")
+{% endif %}
+
+
 Menu, Tray, NoStandard
 Menu, Tray, Add, 暂停, trayMenuHandler
 Menu, Tray, Add, 退出, trayMenuHandler
@@ -67,7 +91,10 @@ capsHook.OnEnd := Func("capsOnTypoEnd")
 
 return
 
+{% if Settings.mapRAltToCtrl %}
 RAlt::LCtrl
+{% endif %}
+
 !+'::
     Suspend, Permit
     toggleSuspend()
@@ -76,6 +103,8 @@ RAlt::LCtrl
     Suspend, Toggle
     ReloadProgram()
     return
+
+{% if Settings.CapslockMode %}
 +capslock::toggleCapslock()
 
 *capslock::
@@ -89,20 +118,26 @@ RAlt::LCtrl
     }
     enableOtherHotkey(thisHotkey)
     return
+{% endif %}
 
 
+{% if Settings.JMode %}
 *j::
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     JMode := true
+    DisableCapslockKey := true
     keywait j
     JMode := false
+    DisableCapslockKey := false
     if (A_PriorKey == "j" && A_TimeSinceThisHotkey < 350)
             send  {blind}j
     enableOtherHotkey(thisHotkey)
     return
+{% endif %}
 
 
+{% if Settings.SemicolonMode %}
 *`;::
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
@@ -113,8 +148,9 @@ RAlt::LCtrl
         enterSemicolonAbbr(semiHook)
     enableOtherHotkey(thisHotkey)
     return
+{% endif %}
 
-
+{% if Settings.Mode3 %}
 *3::
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
@@ -125,7 +161,8 @@ RAlt::LCtrl
         send {blind}3 
     enableOtherHotkey(thisHotkey)
     return
-
+{% endif %}
+{% if Settings.Mode9 %}
 *9::
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
@@ -136,7 +173,9 @@ RAlt::LCtrl
         send {blind}9 
     enableOtherHotkey(thisHotkey)
     return
+{% endif %}
 
+{% if Settings.RButtonMode %}
 RButton::
 enterRButtonMode()
 {
@@ -152,7 +191,7 @@ enterRButtonMode()
     while (errorlevel != 0)
     {
 		MouseGetPos, x, y
-		if (Abs(x - initialX) > 3 || Abs(y - initialY) > 3) {
+		if (Abs(x - initialX) > 20 || Abs(y - initialY) > 20) {
 			movedMouse := true
 			break
 		}
@@ -177,8 +216,10 @@ enterRButtonMode()
     return
 
 }
+{% endif %}
 
 
+{% if Settings.LButtonMode %}
 ~LButton::
 enterLButtonMode()
 {
@@ -188,14 +229,10 @@ enterLButtonMode()
     LButtonMode := false
     return
 }
+{% endif %}
 
-#if DisableCapslockKey
-*capslock::return
-*capslock up::return
-
+{% if Settings.JMode %}
 #if JMode
-*capslock::return
-*capslock up::return
     ^l::return
     +k::return
     *k::
@@ -214,18 +251,21 @@ enterLButtonMode()
 {{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
     {% endif %}
 {% endfor %}
+{% endif %}
 
     
 
-
+{% if Settings.SemicolonMode %}
 #if PunctuationMode
 {% for key,value in Semicolon.items()|sort(attribute="1.value") %}
     {% if value.value %}
 {{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
     {% endif %}
 {% endfor %}
+{% endif %}
 
 
+{% if Settings.Mode3 %}
 #if DigitMode
 
 {% for key,value in Mode3.items()|sort(attribute="1.value") %}
@@ -241,14 +281,6 @@ enterLButtonMode()
     FnMode := false
     return
 
-*2::send {blind}{backspace}
-
-#if Mode9
-{% for key,value in Mode9.items()|sort(attribute="1.value") %}
-    {% if value.value %}
-{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
-    {% endif %}
-{% endfor %}
 
 #if FnMode
 *r::return
@@ -258,8 +290,20 @@ enterLButtonMode()
 {{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
     {% endif %}
 {% endfor %}
+{% endif %}
 
 
+{% if Settings.Mode9 %}
+#if Mode9
+{% for key,value in Mode9.items()|sort(attribute="1.value") %}
+    {% if value.value %}
+{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
+    {% endif %}
+{% endfor %}
+{% endif %}
+
+
+{% if Settings.CapslockMode %}
 #if CapslockMode
 
 {% for key,value in Capslock.items()|sort(attribute="1.value") %}
@@ -278,8 +322,6 @@ f::
     return
 
 
-
-
 #if SLOWMODE
 
 {% for key,value in Capslock.items()|sort(attribute="1.value") %}
@@ -289,8 +331,8 @@ f::
 {% endfor %}
 
 
-esc::exitMouseMode()
-space::exitMouseMode()
+Esc::exitMouseMode()
+Space::exitMouseMode()
 
 
 #if FMode
@@ -302,21 +344,22 @@ f::return
     {% endif %}
 {% endfor %}
 
-#IfWinActive, ahk_class MultitaskingViewFrame
-d::send, {blind}{down}
-e::send, {blind}{up}
-s::send, {blind}{left}
-f::send, {blind}{right}
-*x::send,  {blind}{del}
-space::send, {blind}{enter}
 
+#if DisableCapslockKey
+*capslock::return
+*capslock up::return
+{% endif %}
+
+{% if Settings.LButtonMode %}
 #if LButtonMode
 {% for key,value in LButtonMode.items()|sort(attribute="1.value") %}
     {% if value.value %}
 {{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
     {% endif %}
 {% endfor %}
+{% endif %}
 
+{% if Settings.RButtonMode %}
 #if RButtonMode
 {% for key,value in RButtonMode.items()|sort(attribute="1.value") %}
     {% if value.value %}
@@ -326,14 +369,24 @@ space::send, {blind}{enter}
 
 LButton::
 ; if WinActive("ahk_class MultitaskingViewFrame")
-if ( A_PriorHotkey == "~LButton")
+if ( A_PriorHotkey == "~LButton" || A_PriorHotkey == "LButton")
     send #{tab}
 else
     send ^!{tab}
 return
 WheelUp::send ^+{tab}
 WheelDown::send ^{tab}
+{% endif %}
 
+{% if Settings.CapslockMode %}
+#IfWinActive, ahk_class MultitaskingViewFrame
+*D::send, {blind}{down}
+*E::send, {blind}{up}
+*S::send, {blind}{left}
+*F::send, {blind}{right}
+*X::send,  {blind}{del}
+*Space::send, {blind}{enter}
+{% endif %}
 #If
 
 
