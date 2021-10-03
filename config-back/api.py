@@ -50,7 +50,10 @@ def execute():
     # print(command)
     if command['type'] == 'run-program':
         # print(os.getcwd())
-        val = list(map(lambda x: '../' + x, command['value']))
+        val = command['value']
+        if val[0] == 'bin/ahk.exe':
+            val[1] = '../' + val[1]
+        val[0] = '../' + val[0]
         # print(val)
         subprocess.Popen(val)
     return command
@@ -61,16 +64,16 @@ def serveApi():
     os.system('cls')
     print()
     print('   ------------------------------------------------------------------')
-    print('   1. 打开浏览器访问 http://localhost:12333 修改 MyKeyamp 的配置')
+    print('   1. 打开浏览器访问 http://127.0.0.1:12333 修改 MyKeyamp 的配置')
     print('   2. 保存配置后需要按 alt+\' 重启 MyKeymap (这里的\'是单引号键) ')
     print('   3. 修改完 MyKeymap 的配置后即可关闭本窗口')
     print('   ------------------------------------------------------------------')
     script_compiled = getattr(sys, 'frozen', False)
     if script_compiled:
-        app.run(port=12333, debug=False)
+        app.run(host="127.0.0.1", port=12333, debug=False, threaded=True)
     else:
         # os.environ['WERKZEUG_RUN_MAIN'] = 'true'    # 关掉 flask 启动消息
-        app.run(port=12333, debug=True)
+        app.run(host="127.0.0.1", port=12333, debug=True, threaded=True)
 
 if __name__ == '__main__':
     arg = '--server'

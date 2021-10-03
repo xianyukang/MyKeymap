@@ -987,6 +987,7 @@ class TypoTipWindow
 
 myExit()
 {
+    Menu, Tray, NoIcon 
     thisPid := DllCall("GetCurrentProcessId")
     Process, Close, %thisPid%
 }

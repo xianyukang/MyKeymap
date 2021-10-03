@@ -61,7 +61,7 @@ allHotkeys.Push("RButton")
 {% endif %}
 
 
-Menu, Tray, NoStandard
+; Menu, Tray, NoStandard
 Menu, Tray, Add, 暂停, trayMenuHandler
 Menu, Tray, Add, 退出, trayMenuHandler
 Menu, Tray, Add, 打开设置, trayMenuHandler 

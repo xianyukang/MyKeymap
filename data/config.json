@@ -1624,6 +1624,7 @@
         "CapslockMode": true,
         "SemicolonMode": true,
         "RButtonMode": true,
-        "mapRAltToCtrl": true
+        "mapRAltToCtrl": true,
+        "runOnStartup": false
     }
 }

@@ -18,11 +18,18 @@ export function notEmptyAction(action) {
     return action.type != '什么也不做' && action.value
 }
 
-export const host = process.env.NODE_ENV === 'production' ? 'http://localhost:12333' : 'http://localhost:12333'
+// 魔法: 用 localhost 访问 flask 会有 300ms 延迟,  用 127.0.0.1 则只要 5ms ...
+export const host = process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:12333' : 'http://127.0.0.1:12333'
 
 export function executeScript(arg) {
+    
+    let value = ['bin/ahk.exe', arg]
+    if (Array.isArray(arg)) {
+        value = ['bin/ahk.exe', ...arg]
+    }
+
     axios.post(`${host}/execute`, {
         type: 'run-program',
-        value: ['bin/ahk.exe', arg],
+        value
     })
 }

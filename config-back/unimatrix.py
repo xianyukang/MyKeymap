@@ -764,7 +764,7 @@ def mapWideChar(s):
 def printBanner(screen):
     offset = 5
     sep__ = mapWideChar('--------------------------------------------------------------------------')
-    line1 = mapWideChar('|    1. 打开浏览器访问 http://localhost:12333 修改 MyKeyamp 的配置       |')
+    line1 = mapWideChar('|    1. 打开浏览器访问 http://127.0.0.1:12333 修改 MyKeyamp 的配置       |')
     line2 = mapWideChar('|    2. 保存配置后需要按 alt+\' 重启 MyKeymap (这里的\'是单引号键)         |')
     line3 = mapWideChar('|    3. 修改完 MyKeymap 的配置后即可关闭本窗口                           |')
     screen.addstr(offset + 0, 10, sep__)

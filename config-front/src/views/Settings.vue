@@ -16,7 +16,13 @@
         </v-row>
         <v-row>
           <v-col cols="7">
-            <v-switch class="switch" width="50" v-model="currConfig()['mapRAltToCtrl']" label="右 Alt 映射为 Ctrl"></v-switch>
+            <v-switch class="switch" width="50" v-model="currConfig()['runOnStartup']" label="开机自启" @change="runOnStartup"></v-switch>
+            <v-switch
+              class="switch"
+              width="50"
+              v-model="currConfig()['mapRAltToCtrl']"
+              label="右 Alt 映射为 Ctrl"
+            ></v-switch>
             <v-switch
               class="switch"
               width="50"
@@ -32,16 +38,23 @@
 </template>
 
 <script>
+import { escapeFuncString, executeScript } from '../util.js'
 export default {
   name: 'Settings',
   created() {
-    console.log(this.currConfig())
+    // console.log(this.currConfig())
   },
   methods: {
+    runOnStartup() {
+      if (this.currConfig()['runOnStartup']) {
+        executeScript(['bin/other.ahk', 'enableRunOnStartup'])
+      } else {
+        executeScript(['bin/other.ahk', 'disableRunOnStartup'])
+      }
+    }
   },
   data() {
-    return {
-    }
+    return {}
   },
 }
 </script>

@@ -17,7 +17,7 @@ sleep, 1000
 if WinExist("MyKeymap Settings")
     WinActivate
 else
-    run, http://localhost:12333
+    run, http://127.0.0.1:12333
 SetTimer, if_window_not_exists_then_close_process, 1000
 return
 
