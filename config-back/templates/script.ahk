@@ -9,7 +9,9 @@
 
 StringCaseSense, On
 SetWorkingDir %A_ScriptDir%\..
+{% if Settings.runAsAdmin %}
 requireAdmin()
+{% endif %}
 closeOldInstance()
 
 SetBatchLines -1
