@@ -1626,7 +1626,7 @@
         "RButtonMode": true,
         "mapRAltToCtrl": true,
         "runOnStartup": false,
-        "scrollOnceLineCount": "3",
+        "scrollOnceLineCount": "1",
         "scrollDelay1": "0.2",
         "scrollDelay2": "0.03"
     }

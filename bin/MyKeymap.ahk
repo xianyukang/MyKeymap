@@ -26,7 +26,7 @@ coordmode, mouse, screen
 settitlematchmode, 2
 
 
-scrollOnceLineCount := 3
+scrollOnceLineCount := 1
 scrollDelay1 = T0.2
 scrollDelay2 = T0.03
 
