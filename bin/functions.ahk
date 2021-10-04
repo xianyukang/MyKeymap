@@ -793,23 +793,29 @@ winMinimizeIgnoreDesktop()
 }
 
 
-horizontalScroll(key, direction) {
-    global time_enter_repeat, delay_before_repeat
-    if (direction > 0) {
-        MouseClick, WheelRight, , , 1
-    } else {
-        MouseClick, WheelLeft, , , 1
+scrollOnce(direction, scrollCount :=1)
+{
+    if (direction == 1) {
+        MouseClick, WheelUp, , , %scrollCount%
     }
-
-    keywait, %key%, %time_enter_repeat%
+    if (direction == 2) {
+        MouseClick, WheelDown, , , %scrollCount%
+    }
+    if (direction == 3) {
+        MouseClick, WheelLeft, , , %scrollCount%
+    }
+    if (direction == 4) {
+        MouseClick, WheelRight, , , %scrollCount%
+    }
+}
+scrollWheel(key, direction) {
+    global scrollOnceLineCount, scrollDelay1, scrollDelay2 
+    scrollOnce(direction, scrollOnceLineCount)
+    keywait, %key%, %scrollDelay1%
     while (errorlevel != 0)
     {
-        if (direction > 0) {
-            MouseClick, WheelRight, , , 1
-        } else {
-            MouseClick, WheelLeft, , , 1
-        }
-        keywait,  %key%,  %delay_before_repeat%
+        scrollOnce(direction)
+        keywait,  %key%,  %scrollDelay2%
     }
 }
 

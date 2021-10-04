@@ -28,6 +28,9 @@ coordmode, mouse, screen
 settitlematchmode, 2
 
 
+scrollOnceLineCount := {{{ Settings.scrollOnceLineCount if Settings.scrollOnceLineCount else 3 }}}
+scrollDelay1 = {{{ "T" + Settings.scrollDelay1 if Settings.scrollDelay1 else "T0.2" }}}
+scrollDelay2 = {{{ "T" + Settings.scrollDelay2 if Settings.scrollDelay2 else "T0.03" }}}
 
 SemicolonAbbrTip := true
 time_enter_repeat = T0.2

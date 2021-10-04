@@ -26,6 +26,9 @@ coordmode, mouse, screen
 settitlematchmode, 2
 
 
+scrollOnceLineCount := 3
+scrollDelay1 = T0.2
+scrollDelay2 = T0.03
 
 SemicolonAbbrTip := true
 time_enter_repeat = T0.2
@@ -313,13 +316,13 @@ I::fastMoveMouse("I", 0, -1)
 J::fastMoveMouse("J", -1, 0)
 K::fastMoveMouse("K", 0, 1)
 L::fastMoveMouse("L", 1, 0)
-`;::horizontalScroll(";", 1)
-H::horizontalScroll("H", -1)
 ,::lbuttonDown()
 *N::leftClick()
-*O::MouseClick, WheelDown, , , 1
-*U::MouseClick, WheelUp, , , 1
 M::rightClick()
+`;::scrollWheel(";", 4)
+H::scrollWheel("H", 3)
+*O::scrollWheel("O", 2)
+*U::scrollWheel("U", 1)
 W::send !{tab}
 D::send #+{right}
 E::send ^!{tab}
@@ -347,13 +350,13 @@ I::slowMoveMouse("I", 0, -1)
 J::slowMoveMouse("J", -1, 0)
 K::slowMoveMouse("K", 0, 1)
 L::slowMoveMouse("L", 1, 0)
-`;::horizontalScroll(";", 1)
-H::horizontalScroll("H", -1)
 ,::lbuttonDown()
 *N::leftClick()
-*O::MouseClick, WheelDown, , , 1
-*U::MouseClick, WheelUp, , , 1
 M::rightClick(true)
+`;::scrollWheel(";", 4)
+H::scrollWheel("H", 3)
+*O::scrollWheel("O", 2)
+*U::scrollWheel("U", 1)
 
 
 Esc::exitMouseMode()

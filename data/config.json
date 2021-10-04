@@ -32,7 +32,7 @@
         },
         "U": {
             "type": "鼠标操作",
-            "value": "MouseClick, WheelUp, , , 1",
+            "value": "scrollWheel(\"U\", 1)",
             "label": "滚轮上滑",
             "prefix": "*"
         },
@@ -43,7 +43,7 @@
         },
         "O": {
             "type": "鼠标操作",
-            "value": "MouseClick, WheelDown, , , 1",
+            "value": "scrollWheel(\"O\", 2)",
             "label": "滚轮下滑",
             "prefix": "*"
         },
@@ -73,7 +73,7 @@
         },
         "H": {
             "type": "鼠标操作",
-            "value": "horizontalScroll(\"H\", -1)",
+            "value": "scrollWheel(\"H\", 3)",
             "label": "滚轮左滑"
         },
         "J": {
@@ -93,7 +93,7 @@
         },
         ";": {
             "type": "鼠标操作",
-            "value": "horizontalScroll(\";\", 1)",
+            "value": "scrollWheel(\";\", 4)",
             "label": "滚轮右滑"
         },
         "Z": {
@@ -1625,6 +1625,9 @@
         "SemicolonMode": true,
         "RButtonMode": true,
         "mapRAltToCtrl": true,
-        "runOnStartup": false
+        "runOnStartup": false,
+        "scrollOnceLineCount": "3",
+        "scrollDelay1": "0.2",
+        "scrollDelay2": "0.03"
     }
 }

@@ -13,10 +13,39 @@
             <v-switch class="switch" width="50" v-model="currConfig()['enableLButtonMode']" label="鼠标左键"></v-switch>
             <v-switch class="switch" width="50" v-model="currConfig()['enableRButtonMode']" label="鼠标右键"></v-switch>
           </v-col>
+          <v-col cols="5">
+            <v-text-field
+              type="number"
+              v-model="currConfig()['scrollOnceLineCount']"
+              step=".1"
+              maxlength="5"
+              label="单次滚动的行数"
+            ></v-text-field>
+            <v-text-field
+              type="number"
+              v-model="currConfig()['scrollDelay1']"
+              step=".1"
+              maxlength="5"
+              label="进入连续滚动前的延时 (秒)"
+            ></v-text-field>
+            <v-text-field
+              type="number"
+              v-model="currConfig()['scrollDelay2']"
+              step=".1"
+              maxlength="5"
+              label="两次滚动的间隔时间 (越小滚动速度越快)"
+            ></v-text-field>
+          </v-col>
         </v-row>
         <v-row>
           <v-col cols="7">
-            <v-switch class="switch" width="50" v-model="currConfig()['runOnStartup']" label="开机自启" @change="runOnStartup"></v-switch>
+            <v-switch
+              class="switch"
+              width="50"
+              v-model="currConfig()['runOnStartup']"
+              label="开机自启"
+              @change="runOnStartup"
+            ></v-switch>
             <v-switch
               class="switch"
               width="50"
@@ -51,7 +80,7 @@ export default {
       } else {
         executeScript(['bin/other.ahk', 'disableRunOnStartup'])
       }
-    }
+    },
   },
   data() {
     return {}

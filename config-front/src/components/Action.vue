@@ -118,7 +118,8 @@ Tips:
                   :value="action.label"
                 ></v-radio>
               </v-col>
-              <v-col> </v-col>
+              <v-col>
+              </v-col>
             </v-row>
           </v-radio-group>
         </template>
@@ -401,10 +402,10 @@ export default {
       map['鼠标上移'] = ``
       let key = this.currentKey
 
-      map['滚轮上滑'] = `MouseClick, WheelUp, , , 1`
-      map['滚轮下滑'] = `MouseClick, WheelDown, , , 1`
-      map['滚轮左滑'] = `horizontalScroll("${key}", -1)`
-      map['滚轮右滑'] = `horizontalScroll("${key}", 1)`
+      map['滚轮上滑'] = `scrollWheel("${key}", 1)`
+      map['滚轮下滑'] = `scrollWheel("${key}", 2)`
+      map['滚轮左滑'] = `scrollWheel("${key}", 3)`
+      map['滚轮右滑'] = `scrollWheel("${key}", 4)`
 
       map['鼠标上移'] = `fastMoveMouse("${key}", 0, -1)`
       map['鼠标下移'] = `fastMoveMouse("${key}", 0, 1)`
@@ -418,7 +419,6 @@ export default {
 
       if (newValue === '滚轮上滑') this.currKey().prefix = '*'
       if (newValue === '滚轮下滑') this.currKey().prefix = '*'
-      if (newValue === '鼠标左键') this.currKey().prefix = '*'
       this.currKey().value = map[newValue] || ''
     },
   },
