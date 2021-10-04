@@ -30,13 +30,20 @@ scrollOnceLineCount := 1
 scrollDelay1 = T0.2
 scrollDelay2 = T0.03
 
+fastMoveSingle := 110
+fastMoveRepeat := 70
+slowMoveSingle := 10
+slowMoveRepeat := 13
+moveDelay1 = T0.2
+moveDelay2 = T0.01
+
 SemicolonAbbrTip := true
-time_enter_repeat = T0.2
-delay_before_repeat = T0.01
-fast_one := 110     
-fast_repeat := 70
-slow_one :=  10     
-slow_repeat := 13
+; time_enter_repeat = T0.2
+; delay_before_repeat = T0.01
+; fast_one := 110     
+; fast_repeat := 70
+; slow_one :=  10     
+; slow_repeat := 13
 
 allHotkeys := []
 allHotkeys.Push("*3")

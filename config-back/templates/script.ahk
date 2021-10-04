@@ -32,13 +32,20 @@ scrollOnceLineCount := {{{ Settings.scrollOnceLineCount if Settings.scrollOnceLi
 scrollDelay1 = {{{ "T" + Settings.scrollDelay1 if Settings.scrollDelay1 else "T0.2" }}}
 scrollDelay2 = {{{ "T" + Settings.scrollDelay2 if Settings.scrollDelay2 else "T0.03" }}}
 
+fastMoveSingle := {{{ Settings.fastMoveSingle if Settings.fastMoveSingle else 110 }}}
+fastMoveRepeat := {{{ Settings.fastMoveRepeat if Settings.fastMoveRepeat else 70 }}}
+slowMoveSingle := {{{ Settings.slowMoveSingle if Settings.slowMoveSingle else 10 }}}
+slowMoveRepeat := {{{ Settings.slowMoveRepeat if Settings.slowMoveRepeat else 13 }}}
+moveDelay1 = {{{ "T" + Settings.moveDelay1 if Settings.moveDelay1 else "T0.2" }}}
+moveDelay2 = {{{ "T" + Settings.moveDelay2 if Settings.moveDelay2 else "T0.01" }}}
+
 SemicolonAbbrTip := true
-time_enter_repeat = T0.2
-delay_before_repeat = T0.01
-fast_one := 110     
-fast_repeat := 70
-slow_one :=  10     
-slow_repeat := 13
+; time_enter_repeat = T0.2
+; delay_before_repeat = T0.01
+; fast_one := 110     
+; fast_repeat := 70
+; slow_one :=  10     
+; slow_repeat := 13
 
 allHotkeys := []
 {% if Settings.Mode3 %}

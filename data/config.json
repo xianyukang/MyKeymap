@@ -1628,6 +1628,12 @@
         "runOnStartup": false,
         "scrollOnceLineCount": "1",
         "scrollDelay1": "0.2",
-        "scrollDelay2": "0.03"
+        "scrollDelay2": "0.03",
+        "moveDelay1": "0.2",
+        "moveDelay2": "0.01",
+        "fastMoveRepeat": "70",
+        "fastMoveSingle": "110",
+        "slowMoveRepeat": "13",
+        "slowMoveSingle": "10"
     }
 }

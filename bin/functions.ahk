@@ -492,33 +492,33 @@ showXianyukangWindow() {
 
 
 slowMoveMouse(key, direction_x, direction_y) {
-    global slow_one, slow_repeat, time_enter_repeat, delay_before_repeat
-    one_x := direction_x * slow_one
-    one_y := direction_y * slow_one
-    repeat_x := direction_x * slow_repeat
-    repeat_y := direction_y * slow_repeat
+    global slowMoveSingle, slowMoveRepeat, moveDelay1, moveDelay2 
+    one_x := direction_x * slowMoveSingle
+    one_y := direction_y * slowMoveSingle
+    repeat_x := direction_x * slowMoveRepeat
+    repeat_y := direction_y * slowMoveRepeat
     mousemove, %one_x% , %one_y%, 0, R
-    keywait, %key%, %time_enter_repeat%
+    keywait, %key%, %moveDelay1%
     while (errorlevel != 0)
     {
         mousemove, %repeat_x%, %repeat_y%, 0, R
-        keywait,  %key%,  %delay_before_repeat%
+        keywait,  %key%,  %moveDelay2%
     }
 }
 
 fastMoveMouse(key, direction_x, direction_y) {
-    global fast_one, fast_repeat, time_enter_repeat, delay_before_repeat, SLOWMODE
+    global fastMoveSingle, fastMoveRepeat, moveDelay1, moveDelay2, SLOWMODE
     SLOWMODE := true
-    one_x := direction_x * fast_one
-    one_y := direction_y * fast_one
-    repeat_x := direction_x * fast_repeat
-    repeat_y := direction_y * fast_repeat
+    one_x := direction_x *fastMoveSingle 
+    one_y := direction_y *fastMoveSingle 
+    repeat_x := direction_x *fastMoveRepeat 
+    repeat_y := direction_y *fastMoveRepeat 
     mousemove, %one_x% , %one_y%, 0, R
-    keywait, %key%, %time_enter_repeat%
+    keywait, %key%, %moveDelay1%
     while (errorlevel != 0)
     {
         mousemove, %repeat_x%, %repeat_y%, 0, R
-        keywait,  %key%,  %delay_before_repeat%
+        keywait,  %key%,  %moveDelay2%
     }
 }
 
