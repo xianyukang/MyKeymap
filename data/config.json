@@ -1024,9 +1024,9 @@
         },
         "W": {
             "type": "输入文本或按键",
-            "value": "\nsend {blind}^c\nreturn",
+            "value": "\nsend, {blind}^#{left}\nreturn",
             "prefix": "*",
-            "keysToSend": "^c"
+            "keysToSend": "^#{left}"
         },
         "E": {
             "type": "输入文本或按键",
@@ -1036,8 +1036,8 @@
         },
         "R": {
             "type": "输入文本或按键",
-            "value": "\nsend {blind}^v\nreturn",
-            "keysToSend": "^v",
+            "value": "\nsend, {blind}^#{right}\nreturn",
+            "keysToSend": "^#{right}",
             "prefix": "*"
         },
         "T": {

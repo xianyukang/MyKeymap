@@ -444,17 +444,17 @@ A::
 *Z::
 send {blind}#v
 return
-*W::
-send {blind}^c
-return
-*R::
-send {blind}^v
-return
 *X::
 send {blind}^x
 return
 *Space::
 send {blind}{enter}
+return
+*W::
+send, {blind}^#{left}
+return
+*R::
+send, {blind}^#{right}
 return
 *C::send {blind}{backspace}
 *V::send {blind}{delete}
