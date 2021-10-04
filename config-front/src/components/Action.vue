@@ -82,7 +82,6 @@ Tips:
             label="单行代码 (自定义的函数可以放到 data/custom_functions.ahk)"
             v-model="currKey().value"
           ></v-text-field>
-          <img alt="img" :src="require('../assets/send-keys.png')" /><img />
         </template>
 
         <template v-if="currKey().type === '鼠标操作'">

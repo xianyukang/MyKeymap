@@ -1101,7 +1101,7 @@ trayMenuHandler(ItemName, ItemPos, MenuName)
         run, https://xianyukang.com/MyKeymap.html?mv=1.0
     }
     if (InStr(ItemName, "视频教程" )) {
-        openSettings()
+        run, https://space.bilibili.com/34674679
     }
     if (InStr(ItemName, "帮助文档" )) {
         run, https://xianyukang.com/MyKeymap.html
