@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios';
 import { host, executeScript } from '../util.js';
+import _ from 'lodash'
 
 
 Vue.use(Vuex)
@@ -18,6 +19,9 @@ function containsKeymap(data) {
 function processConfig(config) {
   config['CapslockAbbrKeys'] = Object.keys(config.CapslockAbbr)
   config['SemicolonAbbrKeys'] = Object.keys(config.SemicolonAbbr)
+  // 逗号开头的放在前面
+  config['CapslockAbbrKeys'] = _.concat(_.remove(config['CapslockAbbrKeys'], x => x.startsWith(',')), config['CapslockAbbrKeys'])
+  config['SemicolonAbbrKeys'] = _.concat(_.remove(config['SemicolonAbbrKeys'], x => x.startsWith(',')), config['SemicolonAbbrKeys'])
   
   const s = config.Settings
   s['Mode3'] = s.enableMode3 && containsKeymap(config.Mode3)

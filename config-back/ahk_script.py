@@ -30,6 +30,8 @@ class AhkScript:
         return '"' + s + '"'
 
     def makeCapslock(self, data):
+        data['SemicolonAbbrKeys'] = [ x.replace(",", ",,") for x in  data['SemicolonAbbrKeys']]
+        data['CapslockAbbrKeys'] = [ x.replace(",", ",,") for x in  data['CapslockAbbrKeys']]
         with open("../bin/MyKeymap.ahk", "w+", encoding="utf-8-sig") as f:
             template = self.env.get_template("script.ahk")
             print(template.render(

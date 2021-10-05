@@ -957,7 +957,7 @@ class TypoTipWindow
     __New()
     {
 
-        text := "           "                       ; 初始化 text control 的宽度
+        text := "               "                       ; 初始化 text control 的宽度
         fontSize := 12
         Font_Colour := 0x0 ;0x2879ff
         Back_Colour := 0xffffe1 ; 0x34495e

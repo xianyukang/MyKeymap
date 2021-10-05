@@ -94,7 +94,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{Space}", {{{ SemicolonAbbrKeys|join(',')|ahkString }}})
+semiHook := InputHook("C", "{Space}{Esc}", {{{ SemicolonAbbrKeys|join(',')|ahkString }}})
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
 capsHook := InputHook("C", "{LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}", {{{ CapslockAbbrKeys|join(',')|ahkString }}})

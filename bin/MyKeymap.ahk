@@ -76,7 +76,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{Space}", "xk,ss,sk,sl,zk,dk,dh,jt,gt,lx,sm,zh,gg,ver,xm")
+semiHook := InputHook("C", "{Space}{Esc}", ",,,xk,ss,sk,sl,zk,dk,dh,jt,gt,lx,sm,zh,gg,ver,xm,static,.")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
 capsHook := InputHook("C", "{LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee,dm,rex,xx")
@@ -507,6 +507,10 @@ return
 send, {blind}{text}git add -A`; git commit -a -m ""`; git push origin (git branch --show-current)`;
 send, {blind}{left 47}
 return
+        case "static":
+            
+send, {blind}{text}https://static.xianyukang.com/
+return
         case "dk":
             
 send, {blind}{text}{}
@@ -515,6 +519,14 @@ return
         case "xm":
             
 send, {blind}{text}❖` ` 
+return
+        case ".":
+            
+send, {blind}{text}。
+return
+        case ",":
+            
+send, {blind}{text}，
 return
         case "zh":
             send % text(" site:zhihu.com")

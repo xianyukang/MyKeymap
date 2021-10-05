@@ -7,7 +7,7 @@
             @click="clickKey(key)"
             :class="hover ? 'my-hover' : ''"
             :height="hover ? 63 : 63"
-            :max-width="100"
+            :max-width="200"
             :elevation="hover ? 13 : 4"
             :color="keyColor(key, hover).color"
             :dark="keyColor(key, hover).dark"
