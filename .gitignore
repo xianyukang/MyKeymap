@@ -4,3 +4,4 @@ node_modules
 MyKeymap
 bin/site
 bin/mykeymap-settings-server.exe
+*.7z
