@@ -568,7 +568,8 @@
             "type": "输入文本或按键",
             "value": "\nsend, {blind}{f7}\nreturn",
             "keysToSend": "{f7}",
-            "prefix": "*"
+            "prefix": "*",
+            "textToSend": ""
         },
         "N": {
             "type": "输入文本或按键",
@@ -1381,12 +1382,6 @@
             "prefix": "*",
             "textToSend": "{}"
         },
-        "dh": {
-            "type": "输入文本或按键",
-            "value": "send {blind}、",
-            "keysToSend": "、",
-            "prefix": "*"
-        },
         "jt": {
             "type": "输入文本或按键",
             "value": "send {blind}➤{space 1}",
@@ -1443,16 +1438,23 @@
             "textToSend": "https://static.xianyukang.com/",
             "prefix": "*"
         },
-        ".": {
+        "fs": {
             "type": "输入文本或按键",
-            "value": "\nsend, {blind}{text}。\nreturn",
-            "textToSend": "。",
-            "prefix": "*"
+            "value": "\nsend, {blind}{text}、\nreturn",
+            "keysToSend": "",
+            "prefix": "*",
+            "textToSend": "、"
         },
-        ",": {
+        "fd": {
             "type": "输入文本或按键",
             "value": "\nsend, {blind}{text}，\nreturn",
             "textToSend": "，",
+            "prefix": "*"
+        },
+        "ff": {
+            "type": "输入文本或按键",
+            "value": "\nsend, {blind}{text}。\nreturn",
+            "textToSend": "。",
             "prefix": "*"
         }
     },
@@ -1608,14 +1610,12 @@
     "snackbar": true,
     "snackbarText": "保存成功",
     "SemicolonAbbrKeys": [
-        ",",
         "xk",
         "ss",
         "sk",
         "sl",
         "zk",
         "dk",
-        "dh",
         "jt",
         "gt",
         "lx",
@@ -1625,7 +1625,9 @@
         "ver",
         "xm",
         "static",
-        "."
+        "fs",
+        "fd",
+        "ff"
     ],
     "Settings": {
         "LButtonMode": false,

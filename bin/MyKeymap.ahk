@@ -76,7 +76,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{Space}{Esc}", ",,,xk,ss,sk,sl,zk,dk,dh,jt,gt,lx,sm,zh,gg,ver,xm,static,.")
+semiHook := InputHook("C", "{Space}{Esc}", "xk,ss,sk,sl,zk,dk,jt,gt,lx,sm,zh,gg,ver,xm,static,fs,fd,ff")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
 capsHook := InputHook("C", "{LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee,dm,rex,xx")
@@ -520,11 +520,15 @@ return
             
 send, {blind}{text}❖` ` 
 return
-        case ".":
+        case "fs":
+            
+send, {blind}{text}、
+return
+        case "ff":
             
 send, {blind}{text}。
 return
-        case ",":
+        case "fd":
             
 send, {blind}{text}，
 return
@@ -537,8 +541,6 @@ send {blind}{enter}
             send {blind}[]{left}
         case "jt":
             send {blind}➤{space 1}
-        case "dh":
-            send {blind}、
         case "sm":
             send {blind}《》{left}
         case "sk":

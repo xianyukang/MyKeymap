@@ -131,6 +131,7 @@ export default {
 .abbr {
   /* border: 2px solid black; */
   font-size: 1.3em;
+  font-weight: 400;
   cursor: pointer;
 }
 .my-hover {

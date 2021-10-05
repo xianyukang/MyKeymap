@@ -73,7 +73,7 @@ export default {
       { title: '9 模式', icon: 'mdi-numeric-9-box-outline', to: 'Mode9', color: 'red' },
       { title: '鼠标左键', icon: 'mdi-cursor-default-outline', to: 'LButtonMode', color: '' },
       { title: '鼠标右键', icon: 'mdi-cursor-default', to: 'RButtonMode', color: '' },
-      { title: '使用说明', icon: 'mdi-help', to: 'About', color: 'light-green' },
+      // { title: '使用说明', icon: 'mdi-help', to: 'About', color: 'light-green' },
       // { title: '关于作者', icon: 'mdi-exclamation-thick', to: 'About', color: 'light-green' },
       { title: '开关/设置', icon: 'mdi-toggle-switch', to: 'Settings', color: 'light-green' },
     ],
