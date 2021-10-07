@@ -70,7 +70,7 @@ class CLayout
         this.curr := 1
         Gui MyGui:New, +HwndGuiHwnd
         Gui MyGui:+LabelMyGui_On
-        Gui, Font, s12
+        Gui, Font, s12, 等线
         Gui Add, Text, x10 y280 w290 h20 +0x200, EDSF调节亮度、WR切换显示器、X退出
         Gui Add, Text, x10 y300 w490 h20 +0x200, 如果不起作用, 用 Win+P 断开并重连该显示器, 然后重启本程序试试
         
@@ -140,8 +140,8 @@ class CMon
 
         Gui, Font, s128 c0
         Gui Add, Text, x%X% y%Y% w%W% h%H% +0x200 vMonitorIcon%i%, 🖥️
-        X += 62
-        Y += 70
+        X += 58
+        Y += 60
         W := 70
         H := 32
         this.i := i

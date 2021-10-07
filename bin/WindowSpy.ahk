@@ -17,7 +17,7 @@ txtFocusCtrl := "Focused Control"
 
 Gui, New, hwndhGui AlwaysOnTop Resize MinSize
 Gui, Color, FFFFFF
-Gui, Font, s11 Verdana normal
+Gui, Font, s12 normal, 等线
 Gui, Add, Text, y+5, ` 
 Gui, Add, Text, y+5, 窗口标识符有下面三种, 可以单独使用:
 Gui, Add, Text, y+5, (1) 窗口名:   记事本
@@ -46,7 +46,7 @@ Gui, Add, Edit, xm w320 r4 ReadOnly -Wrap vCtrl_Title
 ; Gui, Add, Edit, w320 r2 ReadOnly vCtrl_VisText
 ; Gui, Add, Text,, All Text:
 ; Gui, Add, Edit, w320 r2 ReadOnly vCtrl_AllText
-Gui, Add, Text, w320 r1 vCtrl_Freeze, % txtNotFrozen
+; Gui, Add, Text, w320 r1 vCtrl_Freeze, % txtNotFrozen
 Gui, Show, NoActivate w600 h360, 查看窗口标识符
 GetClientSize(hGui, temp)
 horzMargin := temp*96//A_ScreenDPI - 580
@@ -91,7 +91,7 @@ if (curWin = hGui || t2 = "MultitaskingViewFrame") ; Our Gui || Alt-tab
 UpdateText("Ctrl_Freeze", txtNotFrozen)
 WinGet, t3, ProcessName
 WinGet, t4, PID
-UpdateText("Ctrl_Title", t1 "`nahk_class " t2 "`nahk_exe " t3 "`nahk_pid " t4)
+UpdateText("Ctrl_Title", t1 "`nahk_class " t2 "`nahk_exe " t3)
 CoordMode, Mouse, Relative
 MouseGetPos, mrX, mrY
 CoordMode, Mouse, Client

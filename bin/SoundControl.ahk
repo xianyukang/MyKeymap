@@ -46,12 +46,12 @@ class CLayout
         Gui MyGui:New,  +HwndGuiHwnd
         Gui MyGui:+LabelMyGui_On
         ; Gui, Font,, Consolas
-        Gui, Font, s12
+        Gui, Font, s12, 等线
         Gui Add, Text, x6 y296 w590 h20 +0x200, EDSF调节音量、AG上一首下一首、空格切换静音、C暂停/播放、V设置、X退出
     }
     show()
     {
-        w :=  this.X + 166
+        w :=  this.X + 175
         h :=  320
         Gui Show, w%w% h%h%, 声音控制
     }
