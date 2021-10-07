@@ -42,6 +42,17 @@ os.system('cp -r tools MyKeymap/')
 
 
 shutil.copy('AutoHotkey.dll', 'MyKeymap/AutoHotkey.dll')
-shutil.copy('vcruntime140.dll', 'MyKeymap/vcruntime140.dll')
 shutil.copy('clip_dll.dll', 'MyKeymap/clip_dll.dll')
+shutil.copy('concrt140.dll', 'MyKeymap/concrt140.dll')
+shutil.copy('msvcp140.dll', 'MyKeymap/msvcp140.dll')
+shutil.copy('msvcp140_1.dll', 'MyKeymap/msvcp140_1.dll')
+shutil.copy('msvcp140_2.dll', 'MyKeymap/msvcp140_2.dll')
+shutil.copy('msvcp140_atomic_wait.dll', 'MyKeymap/msvcp140_atomic_wait.dll')
+shutil.copy('msvcp140_codecvt_ids.dll', 'MyKeymap/msvcp140_codecvt_ids.dll')
+shutil.copy('vcamp140.dll', 'MyKeymap/vcamp140.dll')
+shutil.copy('vccorlib140.dll', 'MyKeymap/vccorlib140.dll')
+shutil.copy('vcomp140.dll', 'MyKeymap/vcomp140.dll')
+shutil.copy('vcruntime140.dll', 'MyKeymap/vcruntime140.dll')
+shutil.copy('vcruntime140_1.dll', 'MyKeymap/vcruntime140_1.dll')
+
 shutil.copy('MyKeymap.exe', 'MyKeymap/MyKeymap.exe')

@@ -68,7 +68,7 @@ class CLayout
         this.count := c
         this.mon := []
         this.curr := 1
-        Gui MyGui:New, +HwndGuiHwnd
+        Gui MyGui:New, +HwndGuiHwnd +Resize
         Gui MyGui:+LabelMyGui_On
         Gui, Font, s12, 等线
         Gui Add, Text, x10 y280 w290 h20 +0x200, EDSF调节亮度、WR切换显示器、X退出
