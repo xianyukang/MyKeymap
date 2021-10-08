@@ -56,3 +56,13 @@ shutil.copy('vcruntime140.dll', 'MyKeymap/vcruntime140.dll')
 shutil.copy('vcruntime140_1.dll', 'MyKeymap/vcruntime140_1.dll')
 
 shutil.copy('MyKeymap.exe', 'MyKeymap/MyKeymap.exe')
+
+
+if arg == 'upload':
+    print('打包 7z 文件...')
+    os.system('rm MyKeymap.7z')
+    os.system('7z.exe a MyKeymap.7z MyKeymap\\')
+    print('上传文件到对象存储...')
+    os.system('qshell fput static-x MyKeymap.7z MyKeymap.7z --overwrite')
+    print('------------- ok ok ok -------------------------------')
+    sys.exit()
