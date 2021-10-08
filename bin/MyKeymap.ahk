@@ -104,7 +104,7 @@ RAlt::LCtrl
     CapslockMode := true
     keywait capslock
     CapslockMode := false
-    if (A_ThisHotkey == "*capslock" && A_TimeSinceThisHotkey < 450) {
+    if (A_ThisHotkey == "*capslock" && A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450) {
         enterCapslockAbbr(capsHook)
     }
     enableOtherHotkey(thisHotkey)
