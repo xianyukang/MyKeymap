@@ -79,7 +79,7 @@ global typoTip := new TypoTipWindow()
 semiHook := InputHook("C", "{Space}{Esc}", "xk,ss,sk,sl,zk,dk,jt,gt,lx,sm,zh,gg,ver,xm,static,fs,fd,ff")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee,dm,rex,xx")
+capsHook := InputHook("C", "{LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee,dm,rex,xx,fw")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -556,6 +556,11 @@ send {blind}{enter}
 execCapslockAbbr(typo) {
     switch typo 
     {
+        case "fw":
+           
+    path = %A_ProgramsCommon%\Google Chrome.lnk
+    ActivateOrRun("", path, "", "")
+    return
         case "bb":
            
     path = C:\Program Files\Google\Chrome\Application\chrome.exe

@@ -27,13 +27,13 @@
           ></v-text-field>
           <v-text-field
             autocomplete="off"
-            label="启动程序的命令行参数 (选填)"
+            label="启动程序的命令行参数"
             v-model="currKey().cmdArgs"
             @input="activateOrRun"
           ></v-text-field>
           <v-text-field
             autocomplete="off"
-            label="启动程序的工作目录 (选填)"
+            label="启动程序的工作目录"
             v-model="currKey().workingDir"
             @input="activateOrRun"
           ></v-text-field>
@@ -46,7 +46,8 @@
 <pre class="tips">
 Tips:
     (1) 要激活的窗口不存在时会帮你启动程序,  窗口存在时则为你激活该窗口
-    (2) 文件管理器中按住 Shift 并右击文件, 可以选择「 复制为路径 」 (记得去掉两端双引号)
+    (2) 参数都是选填的,  比如不填窗口标识符就不会尝试激活窗口,  直接启动程序
+    (3) 文件管理器中按住 Shift 并右击文件, 可以选择「 复制为路径 」 (记得去掉两端双引号)
 </pre>
         </template>
 
