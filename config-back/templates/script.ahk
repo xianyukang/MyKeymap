@@ -125,7 +125,7 @@ RAlt::LCtrl
     CapslockMode := true
     keywait capslock
     CapslockMode := false
-    if (A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450) {
+    if (A_ThisHotkey == "*capslock" && A_TimeSinceThisHotkey < 450) {
         enterCapslockAbbr(capsHook)
     }
     enableOtherHotkey(thisHotkey)
@@ -333,6 +333,8 @@ f::
     FMode := false
     return
 
+WheelUp::send {blind}^#{left}
+WheelDown::send {blind}^#{right}
 
 #if SLOWMODE
 

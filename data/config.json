@@ -1024,10 +1024,8 @@
             "keysToSend": "{pgup}"
         },
         "W": {
-            "type": "输入文本或按键",
-            "value": "\nsend, {blind}^#{left}\nreturn",
-            "prefix": "*",
-            "keysToSend": "^#{left}"
+            "type": "什么也不做",
+            "value": ""
         },
         "E": {
             "type": "输入文本或按键",
@@ -1036,10 +1034,8 @@
             "keysToSend": "{up}"
         },
         "R": {
-            "type": "输入文本或按键",
-            "value": "\nsend, {blind}^#{right}\nreturn",
-            "keysToSend": "^#{right}",
-            "prefix": "*"
+            "type": "什么也不做",
+            "value": ""
         },
         "T": {
             "type": "输入文本或按键",
