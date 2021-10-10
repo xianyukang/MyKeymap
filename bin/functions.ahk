@@ -630,7 +630,7 @@ exitMouseMode()
 {
     global SLOWMODE
     SLOWMODE := false
-    send {Lbutton up}
+    send {blind}{Lbutton up}
 }
 
 centerMouse() 
@@ -1113,4 +1113,11 @@ trayMenuHandler(ItemName, ItemPos, MenuName)
         run, https://xianyukang.com/MyKeymap.html
     }
 
+}
+
+moveCurrentWindow()
+{
+    PostMessage, 0x0112, 0xF010, 0,, A
+    sleep 50
+    SendInput, {right}
 }

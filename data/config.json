@@ -39,7 +39,8 @@
         "I": {
             "type": "鼠标操作",
             "value": "fastMoveMouse(\"I\", 0, -1)",
-            "label": "鼠标上移"
+            "label": "鼠标上移",
+            "prefix": "*"
         },
         "O": {
             "type": "鼠标操作",
@@ -74,27 +75,32 @@
         "H": {
             "type": "鼠标操作",
             "value": "scrollWheel(\"H\", 3)",
-            "label": "滚轮左滑"
+            "label": "滚轮左滑",
+            "prefix": "*"
         },
         "J": {
             "type": "鼠标操作",
             "value": "fastMoveMouse(\"J\", -1, 0)",
-            "label": "鼠标左移"
+            "label": "鼠标左移",
+            "prefix": "*"
         },
         "K": {
             "type": "鼠标操作",
             "value": "fastMoveMouse(\"K\", 0, 1)",
-            "label": "鼠标下移"
+            "label": "鼠标下移",
+            "prefix": "*"
         },
         "L": {
             "type": "鼠标操作",
             "value": "fastMoveMouse(\"L\", 1, 0)",
-            "label": "鼠标右移"
+            "label": "鼠标右移",
+            "prefix": "*"
         },
         ";": {
             "type": "鼠标操作",
             "value": "scrollWheel(\";\", 4)",
-            "label": "滚轮右滑"
+            "label": "滚轮右滑",
+            "prefix": "*"
         },
         "Z": {
             "type": "什么也不做",
@@ -127,21 +133,26 @@
         "M": {
             "type": "鼠标操作",
             "value": "rightClick()",
-            "label": "鼠标右键"
+            "label": "鼠标右键",
+            "prefix": "*"
         },
         ",": {
             "type": "鼠标操作",
             "value": "lbuttonDown()",
-            "label": "鼠标左键按下"
+            "label": "鼠标左键按下",
+            "prefix": "*"
         },
         ".": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "鼠标操作",
+            "value": "moveCurrentWindow()",
+            "label": "让当前窗口进入拖动模式",
+            "prefix": "*"
         },
         "/": {
             "type": "鼠标操作",
             "value": "centerMouse()",
-            "label": "移动鼠标到窗口中心"
+            "label": "移动鼠标到窗口中心",
+            "prefix": "*"
         }
     },
     "CapslockF": {

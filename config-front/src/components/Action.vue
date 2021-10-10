@@ -296,6 +296,7 @@ export default {
         { label: '鼠标右键', value: '鼠标右键' },
         { label: '鼠标左键按下', value: '鼠标左键按下' },
         { label: '移动鼠标到窗口中心', value: '移动鼠标到窗口中心' },
+        { label: '让当前窗口进入拖动模式', value: '让当前窗口进入拖动模式' },
       ],
       windowActions1: [
         { label: '关闭窗口', value: 'SmartCloseWindow()' },
@@ -417,9 +418,9 @@ export default {
       map['鼠标右键'] = `rightClick()`
       map['鼠标左键按下'] = `lbuttonDown()`
       map['移动鼠标到窗口中心'] = `centerMouse()`
+      map['让当前窗口进入拖动模式'] = `moveCurrentWindow()`
 
-      if (newValue === '滚轮上滑') this.currKey().prefix = '*'
-      if (newValue === '滚轮下滑') this.currKey().prefix = '*'
+      this.currKey().prefix = '*'
       this.currKey().value = map[newValue] || ''
     },
   },

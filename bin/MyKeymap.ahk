@@ -76,10 +76,10 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{Space}{Esc}", "xk,ss,sk,sl,zk,dk,jt,gt,lx,sm,zh,gg,ver,xm,static,fs,fd,ff")
+semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,sl,zk,dk,jt,gt,lx,sm,zh,gg,ver,xm,static,fs,fd,ff")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee,dm,rex,xx,fw")
+capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee,dm,rex,xx,fw")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -318,16 +318,17 @@ send {blind}#{right}
 return
 S::center_window_to_current_monitor(1200, 800)
 A::center_window_to_current_monitor(1370, 930)
-/::centerMouse()
-I::fastMoveMouse("I", 0, -1)
-J::fastMoveMouse("J", -1, 0)
-K::fastMoveMouse("K", 0, 1)
-L::fastMoveMouse("L", 1, 0)
-,::lbuttonDown()
+*/::centerMouse()
+*I::fastMoveMouse("I", 0, -1)
+*J::fastMoveMouse("J", -1, 0)
+*K::fastMoveMouse("K", 0, 1)
+*L::fastMoveMouse("L", 1, 0)
+*,::lbuttonDown()
 *N::leftClick()
-M::rightClick()
-`;::scrollWheel(";", 4)
-H::scrollWheel("H", 3)
+*.::moveCurrentWindow()
+*M::rightClick()
+*`;::scrollWheel(";", 4)
+*H::scrollWheel("H", 3)
 *O::scrollWheel("O", 2)
 *U::scrollWheel("U", 1)
 W::send !{tab}
@@ -354,22 +355,23 @@ WheelDown::send {blind}^#{right}
 
 #if SLOWMODE
 
-/::centerMouse()
-I::slowMoveMouse("I", 0, -1)
-J::slowMoveMouse("J", -1, 0)
-K::slowMoveMouse("K", 0, 1)
-L::slowMoveMouse("L", 1, 0)
-,::lbuttonDown()
+*/::centerMouse()
+*I::slowMoveMouse("I", 0, -1)
+*J::slowMoveMouse("J", -1, 0)
+*K::slowMoveMouse("K", 0, 1)
+*L::slowMoveMouse("L", 1, 0)
+*,::lbuttonDown()
 *N::leftClick()
-M::rightClick(true)
-`;::scrollWheel(";", 4)
-H::scrollWheel("H", 3)
+*.::moveCurrentWindow()
+*M::rightClick(true)
+*`;::scrollWheel(";", 4)
+*H::scrollWheel("H", 3)
 *O::scrollWheel("O", 2)
 *U::scrollWheel("U", 1)
 
 
 Esc::exitMouseMode()
-Space::exitMouseMode()
+*Space::exitMouseMode()
 
 
 #if FMode

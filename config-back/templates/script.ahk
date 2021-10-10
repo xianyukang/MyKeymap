@@ -94,10 +94,10 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{Space}{Esc}", {{{ SemicolonAbbrKeys|join(',')|ahkString }}})
+semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", {{{ SemicolonAbbrKeys|join(',')|ahkString }}})
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{LControl}{RControl}{LAlt}{RAlt}{Space}{Esc}{LWin}{RWin}", {{{ CapslockAbbrKeys|join(',')|ahkString }}})
+capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", {{{ CapslockAbbrKeys|join(',')|ahkString }}})
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -346,7 +346,7 @@ WheelDown::send {blind}^#{right}
 
 
 Esc::exitMouseMode()
-Space::exitMouseMode()
+*Space::exitMouseMode()
 
 
 #if FMode
