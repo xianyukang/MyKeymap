@@ -45,9 +45,8 @@
           <br />
 <pre class="tips">
 Tips:
-    (1) 要激活的窗口不存在时会帮你启动程序,  窗口存在时则为你激活该窗口
-    (2) 参数都是选填的,  比如不填窗口标识符就不会尝试激活窗口,  直接启动程序
-    (3) 文件管理器中按住 Shift 并右击文件, 可以选择「 复制为路径 」 (记得去掉两端双引号)
+    (1) 参数都是选填的,  比如不填窗口标识符就不会尝试激活窗口,  直接启动程序
+    (2) 文件管理器中按住 Shift 并右击文件, 可以选择「 复制为路径 」 (记得去掉两端双引号)
 </pre>
         </template>
 
@@ -55,23 +54,16 @@ Tips:
           <v-textarea
             auto-grow
             rows="1"
-            label="要输入的按键"
+            label="要输入的按键或文本"
             v-model="currKey().keysToSend"
-            @input="sendKeys"
-          ></v-textarea>
-          <v-textarea
-            auto-grow
-            rows="1"
-            label="要输入的文本"
-            v-model="currKey().textToSend"
             @input="sendKeys"
           ></v-textarea>
           <!-- <img alt="img" :src="require('../assets/send-keys.png')" /><img /> -->
           <pre class="tips">
 Tips:
-    (1) <a target="_blank" href="SendKeyExample.html" style="color: green;">点此查看发送按键的示例</a>
-    (2) 如果两个框都填了会先输入文本、然后输入按键
-    (3) 输入按键 abc 会受输入法中英文状态的影响,  输入文本 abc 则不会
+    (1) <a target="_blank" href="SendKeyExample.html" style="color: green;">点此查看发送按键或文本的示例</a>
+    (2) 输入按键 abc 会受输入法中英文状态的影响,  输入文本 abc 则不会
+    (3) 所以想发送文本 abc 时,  建议给文本加 {text} 前缀, 比如 {text}abc
     
     
           </pre>
@@ -246,31 +238,10 @@ Tips:
 </template>
 
 <script>
-import { escapeFuncString, executeScript } from '../util.js'
+import { escapeFuncString, executeScript, mapKeysToSend } from '../util.js'
 import { host } from '../util'
 import _ from 'lodash'
 
-function ahkText(s) {
-  s = s.replaceAll('`', '``')
-  s = s.replaceAll('%', '`%')
-  s = s.replaceAll(';', '`;')
-
-  // 全是空格
-  if (_.trim(s, ' ') === '') {
-    return _.repeat('` ', s.length + 1)
-  }
-  // 保留两端空格
-  let temp = _.trimStart(s, ' ')
-  if (s.length !== temp.length) {
-    s = _.repeat('` ', s.length - temp.length) + temp
-  }
-  temp = _.trimEnd(s, ' ')
-  if (s.length !== temp.length) {
-    s = temp + _.repeat('` ', s.length - temp.length + 1)
-  }
-
-  return s
-}
 
 export default {
   created() {},
@@ -348,21 +319,9 @@ export default {
     sendKeys() {
       this.currKey().prefix = '*'
       const result = ['']
-      const textToSend = this.currKey().textToSend
-      if (textToSend) {
-        const lines = ahkText(textToSend).split('\n')
-        result.push('send, {blind}{text}' + lines.join('`n'))
-      }
       const keysToSend = this.currKey().keysToSend
       if (keysToSend) {
-        const lines = keysToSend
-          .split('\n')
-          .filter(x => x.length > 0)
-          .map(line => {
-            if (line.startsWith('sleep') || line.startsWith('sleep')) 
-              return '             ' + line
-            return 'send, {blind}' + line
-          })
+        const lines = keysToSend.split('\n').filter(x => x && _.trim(x).length > 0).map(mapKeysToSend)
         result.push(lines.join('\n'))
       }
       result.push('return')

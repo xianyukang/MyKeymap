@@ -79,7 +79,7 @@ global typoTip := new TypoTipWindow()
 semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,sl,zk,dk,jt,gt,lx,sm,zh,gg,ver,xm,static,fs,fd,ff")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee,dm,rex,xx,fw")
+capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee,dm,rex,fw,fx")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -500,9 +500,19 @@ send, {blind}#r
              sleep 700
 send, {blind}winver{enter}
 return
+        case "zh":
+            
+send, {blind}{text} site:zhihu.com
+return
+        case "ss":
+            
+send, {blind}{text}""
+send, {blind}{left}
+return
         case "xk":
             
-send, {blind}(){left 1}
+send, {blind}{text}()
+send, {blind}{left 1}
 return
         case "gg":
             
@@ -522,6 +532,10 @@ return
             
 send, {blind}{text}❖` ` 
 return
+        case "jt":
+            
+send, {blind}{text}➤` ` 
+return
         case "fs":
             
 send, {blind}{text}、
@@ -530,29 +544,35 @@ return
             
 send, {blind}{text}。
 return
+        case "sm":
+            
+send, {blind}{text}《》
+send, {blind}{left}
+return
+        case "sk":
+            
+send, {blind}{text}「  」
+send, {blind}{left 2}
+return
+        case "sl":
+            
+send, {blind}{text}【】
+send, {blind}{left 1}
+return
         case "fd":
             
 send, {blind}{text}，
 return
-        case "zh":
-            send % text(" site:zhihu.com")
-send {blind}{enter}
-        case "ss":
-            send {blind}""{left}
+        case "gt":
+            
+send, {blind}{text}🐶
+return
+        case "lx":
+            
+send, {blind}{text}💚
+return
         case "zk":
             send {blind}[]{left}
-        case "jt":
-            send {blind}➤{space 1}
-        case "sm":
-            send {blind}《》{left}
-        case "sk":
-            send {blind}「  」{left 2}
-        case "sl":
-            send {blind}【】{left 1}
-        case "gt":
-            send {blind}🐶
-        case "lx":
-            send {blind}💚
         default: 
             return false
     }
@@ -597,6 +617,14 @@ execCapslockAbbr(typo) {
     path = tools\重启资源管理器.exe
     ActivateOrRun("", path, "", "")
     return
+        case "fx":
+           
+send, {blind}^x           ; 发送 Ctrl+X
+sleep 100    ; 等待 100 ms, 等剪切板拿到复制的文本
+; {text} 前缀表示以文本模式发送,  这不会被输入法影响,  也不会解析 {enter} 之类的特殊代码
+send, {blind}{text}<span alt="underline"></span>
+send, {blind}{left 7}^v    ; 移动光标、发送 Ctrl+V
+return
         case "sl":
            DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
         case "se":
