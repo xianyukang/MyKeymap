@@ -82,7 +82,7 @@ export default {
         ],
         [
           { key: 'Z', disabled: false, used: false, disableAt: ['Capslock', 'Mode3', 'Mode3R'] },
-          { key: 'X', disabled: false, used: true, disableAt: ['CapslockF', 'Mode3', 'Mode3R'] },
+          { key: 'X', disabled: false, used: true, disableAt: ['Mode3', 'Mode3R'] },
           { key: 'C', disabled: false, used: false, disableAt: ['CapslockF', 'Mode3', 'Mode3R'] },
           { key: 'V', disabled: false, used: false, disableAt: ['CapslockF', 'Mode3', 'Mode3R'] },
           { key: 'B', disabled: false, used: true, disableAt: ['JMode', 'Mode9'] },
