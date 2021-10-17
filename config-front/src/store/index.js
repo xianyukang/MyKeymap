@@ -22,6 +22,8 @@ function processConfig(config) {
   // 逗号开头的放在前面
   config['CapslockAbbrKeys'] = _.concat(_.remove(config['CapslockAbbrKeys'], x => x.startsWith(',')), config['CapslockAbbrKeys'])
   config['SemicolonAbbrKeys'] = _.concat(_.remove(config['SemicolonAbbrKeys'], x => x.startsWith(',')), config['SemicolonAbbrKeys'])
+  // 路径变量不要空行
+  config['pathVariables'] = _.filter(config['pathVariables'], x => x.key && x.value)
   
   const s = config.Settings
   s['Mode3'] = s.enableMode3 && containsKeymap(config.Mode3)

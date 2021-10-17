@@ -15,6 +15,10 @@ export function escapeFuncString(arg) {
     return arg.replaceAll('"', '""')
 }
 
+export function notBlank(str) {
+    return str && str.trim().length > 0
+}
+
 
 // 转义文本中的 ahk 特殊字符
 function ahkText(s) {

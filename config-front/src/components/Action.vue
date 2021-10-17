@@ -1,5 +1,14 @@
 <template>
   <v-container>
+    <v-dialog
+      v-model="showConfigPathVariableDialog"
+      overlay-opacity="0.50"
+      max-width="1080"
+      @click:outside="showConfigPathVariableDialog = !showConfigPathVariableDialog"
+    >
+      <key-value-config @hideDialog="showConfigPathVariableDialog = false" />
+    </v-dialog>
+
     <v-card min-height="630" width="790" elevation="5" class="action-config">
       <v-card-title>
         <v-select
@@ -38,16 +47,23 @@
             @input="activateOrRun"
           ></v-text-field>
           <v-card-actions>
-            <v-btn color="purple" dark outlined @click="execute('bin/WindowSpy.ahk')">🔍 查看窗口标识符</v-btn>
-            <pre>   </pre>
-            <v-btn color="purple" dark outlined target="_blank" href="/ProgramPathExample.html">📗 程序路径的例子</v-btn>
+            <v-btn class="action-button" color="purple" dark outlined @click="execute('bin/WindowSpy.ahk')"
+              >🔍 查看窗口标识符</v-btn
+            >
+            <v-btn class="action-button" color="purple" dark outlined target="_blank" href="/ProgramPathExample.html"
+              >📗 程序路径的例子</v-btn
+            >
+            <v-btn class="action-button" color="purple" dark outlined @click="configPathVariable"
+              >⚙️点此配置路径变量</v-btn
+            >
           </v-card-actions>
           <br />
-<pre class="tips">
+          <pre class="tips">
 Tips:
     (1) 参数都是选填的,  比如不填窗口标识符就不会尝试激活窗口,  直接启动程序
     (2) 文件管理器中按住 Shift 并右击文件, 可以选择「 复制为路径 」 (记得去掉两端双引号)
-</pre>
+</pre
+          >
         </template>
 
         <template v-if="currKey().type === '输入文本或按键'">
@@ -111,8 +127,7 @@ Tips:
                   :value="action.label"
                 ></v-radio>
               </v-col>
-              <v-col>
-              </v-col>
+              <v-col> </v-col>
             </v-row>
           </v-radio-group>
         </template>
@@ -238,18 +253,20 @@ Tips:
 </template>
 
 <script>
-import { escapeFuncString, executeScript, mapKeysToSend } from '../util.js'
+import { escapeFuncString, executeScript, mapKeysToSend, notBlank } from '../util.js'
 import { host } from '../util'
 import _ from 'lodash'
-
+import KeyValueConfig from './KeyValueConfig.vue'
 
 export default {
+  components: { KeyValueConfig },
   created() {},
   props: {
     currentKey: { type: String },
   },
   data() {
     return {
+      showConfigPathVariableDialog: false,
       mouseActions: [
         { label: '鼠标上移', value: '鼠标上移' },
         { label: '鼠标下移', value: '鼠标下移' },
@@ -273,30 +290,54 @@ export default {
         { label: '关闭窗口', value: 'SmartCloseWindow()' },
         { label: '切换到上一个窗口', value: 'send !{tab}' },
         { label: '在当前程序的窗口间切换', value: 'SwitchWindows()' },
-        { label: '窗口管理器(EDSF切换、X关闭、空格选择)', value: 'send ^!{tab}' },
-        { label: '上一个虚拟桌面', value: 'send {LControl down}{LWin down}{Left}{LWin up}{LControl up}' },
-        { label: '下一个虚拟桌面', value: 'send {LControl down}{LWin down}{Right}{LWin up}{LControl up}' },
+        {
+          label: '窗口管理器(EDSF切换、X关闭、空格选择)',
+          value: 'send ^!{tab}',
+        },
+        {
+          label: '上一个虚拟桌面',
+          value: 'send {LControl down}{LWin down}{Left}{LWin up}{LControl up}',
+        },
+        {
+          label: '下一个虚拟桌面',
+          value: 'send {LControl down}{LWin down}{Right}{LWin up}{LControl up}',
+        },
         { label: '移动窗口到下一个显示器', value: 'send #+{right}' },
       ],
       windowActions2: [
         { label: '窗口最大化', value: 'winmaximize, A' },
         { label: '窗口最小化', value: 'winMinimizeIgnoreDesktop()' },
-        { label: '窗口居中(1200x800)', value: 'center_window_to_current_monitor(1200, 800)' },
-        { label: '窗口居中(1370x930)', value: 'center_window_to_current_monitor(1370, 930)' },
+        {
+          label: '窗口居中(1200x800)',
+          value: 'center_window_to_current_monitor(1200, 800)',
+        },
+        {
+          label: '窗口居中(1370x930)',
+          value: 'center_window_to_current_monitor(1370, 930)',
+        },
         { label: '切换窗口置顶状态', value: 'ToggleTopMost()' },
       ],
       otherFeatures1: [
-        { label: '系统睡眠', value: 'DllCall("PowrProf\\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)' },
+        {
+          label: '系统睡眠',
+          value: 'DllCall("PowrProf\\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)',
+        },
         { label: '滑动关机', value: 'slideToShutdown()' },
         { label: '系统重启', value: 'slideToReboot()' },
         { label: '音量调节', value: 'run, bin\\ahk.exe bin\\soundControl.ahk' },
-        { label: '显示器亮度调节', value: 'run, bin\\ahk.exe bin\\changeBrightness.ahk' },
+        {
+          label: '显示器亮度调节',
+          value: 'run, bin\\ahk.exe bin\\changeBrightness.ahk',
+        },
         { label: '打开 MyKeymap 设置', value: 'openSettings()' },
         { label: '退出 MyKeymap', value: 'quit(false)' },
       ],
       otherFeatures2: [
         { label: '打开「MyKeymap」文件夹', value: 'run, %A_WorkingDir%' },
-        { label: '打开「 回收站 」文件夹', value: 'run, shell:RecycleBinFolder' },
+        {
+          label: '打开「 回收站 」文件夹',
+          value: 'run, shell:RecycleBinFolder',
+        },
         { label: '打开「 下载 」文件夹', value: 'run, shell:downloads' },
         { label: '打开「 图片 」文件夹', value: 'run, shell:my pictures' },
         { label: '打开「 视频 」文件夹', value: 'run, shell:My Video' },
@@ -316,12 +357,18 @@ export default {
     execute(arg) {
       executeScript(arg)
     },
+    configPathVariable() {
+      this.showConfigPathVariableDialog = true
+    },
     sendKeys() {
       this.currKey().prefix = '*'
       const result = ['']
       const keysToSend = this.currKey().keysToSend
       if (keysToSend) {
-        const lines = keysToSend.split('\n').filter(x => x && _.trim(x).length > 0).map(mapKeysToSend)
+        const lines = keysToSend
+          .split('\n')
+          .filter(x => x && _.trim(x).length > 0)
+          .map(mapKeysToSend)
         result.push(lines.join('\n'))
       }
       result.push('return')
@@ -338,11 +385,19 @@ export default {
         this.currKey().toActivate = ''
       }
 
-      if (toRun && (toRun.startsWith('%Home%'))) {
-        toRun = 'C:\\Users\\%A_UserName%' + toRun.substr(6)
+      // 用路径变量替换路径
+      if (toRun) {
+        for (const item of this.$store.state.config.pathVariables) {
+          if (item.key && item.value) {
+            const re = new RegExp(`%${item.key}%`, 'g')
+            toRun = toRun.replace(re, item.value)
+          }
+        }
       }
 
-      this.currKey().value = `
+      this.currKey().value = !(notBlank(toRun) || notBlank(toActivate))
+        ? ''
+        : `
     path = ${toRun}
     ActivateOrRun("${toActivate}", path, "${cmdArgs}", "${workingDir}")
     return`
@@ -433,5 +488,8 @@ div.v-radio.v-item--active label.v-label {
 .action-config .v-text-field {
   margin-left: 10px;
   margin-right: 10px;
+}
+.action-button {
+  margin-right: 17px;
 }
 </style>

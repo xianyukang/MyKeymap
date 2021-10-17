@@ -1580,12 +1580,6 @@
             "value": "\n    path = %A_ProgramsCommon%\\Google Chrome.lnk\n    ActivateOrRun(\"\", path, \"\", \"\")\n    return",
             "toRun": "%A_ProgramsCommon%\\Google Chrome.lnk",
             "toActivate": ""
-        },
-        "fx": {
-            "type": "输入文本或按键",
-            "value": "\nsend, {blind}^x           ; 发送 Ctrl+X\nsleep 100    ; 等待 100 ms, 等剪切板拿到复制的文本\n; {text} 前缀表示以文本模式发送,  这不会被输入法影响,  也不会解析 {enter} 之类的特殊代码\nsend, {blind}{text}<span alt=\"underline\"></span>\nsend, {blind}{left 7}^v    ; 移动光标、发送 Ctrl+V\nreturn",
-            "keysToSend": "^x           ; 发送 Ctrl+X\nsleep 100    ; 等待 100 ms, 等剪切板拿到复制的文本\n\n; {text} 前缀表示以文本模式发送,  这不会被输入法影响,  也不会解析 {enter} 之类的特殊代码\n{text}<span alt=\"underline\"></span>\n\n{left 7}^v    ; 移动光标、发送 Ctrl+V",
-            "prefix": "*"
         }
     },
     "CapslockAbbrKeys": [
@@ -1614,8 +1608,7 @@
         "ee",
         "dm",
         "rex",
-        "fw",
-        "fx"
+        "fw"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",
@@ -1638,6 +1631,16 @@
         "fs",
         "fd",
         "ff"
+    ],
+    "pathVariables": [
+        {
+            "key": "Home",
+            "value": "C:\\Users\\%A_UserName%"
+        },
+        {
+            "key": "config",
+            "value": "D:\\坚果云\\my-config"
+        }
     ],
     "Settings": {
         "LButtonMode": false,

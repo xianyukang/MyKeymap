@@ -79,7 +79,7 @@ global typoTip := new TypoTipWindow()
 semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,sl,zk,dk,jt,gt,lx,sm,zh,gg,ver,xm,static,fs,fd,ff")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee,dm,rex,fw,fx")
+capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee,dm,rex,fw")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -617,14 +617,6 @@ execCapslockAbbr(typo) {
     path = tools\重启资源管理器.exe
     ActivateOrRun("", path, "", "")
     return
-        case "fx":
-           
-send, {blind}^x           ; 发送 Ctrl+X
-sleep 100    ; 等待 100 ms, 等剪切板拿到复制的文本
-; {text} 前缀表示以文本模式发送,  这不会被输入法影响,  也不会解析 {enter} 之类的特殊代码
-send, {blind}{text}<span alt="underline"></span>
-send, {blind}{left 7}^v    ; 移动光标、发送 Ctrl+V
-return
         case "sl":
            DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
         case "se":
