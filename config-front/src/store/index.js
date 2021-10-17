@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios';
-import { host, executeScript } from '../util.js';
+import { host, executeScript, emptyKeymap } from '../util.js';
 import _ from 'lodash'
 
 
@@ -70,7 +70,10 @@ const s = new Vuex.Store({
     },
     fetchConfig(store) {
       return axios.get(`${host}/config`)
-        .then(resp => store.commit('SET_CONFIG', resp.data))
+        .then(resp => {
+          resp.data.AltMode = resp.data.AltMode || emptyKeymap
+          store.commit('SET_CONFIG', resp.data)
+        })
         .catch(error => {
           throw error // 方便后面看堆栈定位问题
         })

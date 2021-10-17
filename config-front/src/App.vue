@@ -65,6 +65,7 @@ export default {
       { title: 'Capslock', icon: 'mdi-alpha-c-box', to: 'Capslock', color: 'purple' },
       { title: 'Capslock + F', icon: 'mdi-alpha-c-box', to: 'CapslockF', color: 'purple' },
       { title: 'Capslock 缩写', icon: 'mdi-alpha-c-box', to: 'CapslockAbbr', color: 'purple' },
+      { title: 'Alt 模式 (好按)', icon: 'mdi-alpha-a-box', to: 'AltMode', color: 'blue' },
       { title: 'J 模式', icon: 'mdi-alpha-j-box', to: 'JMode', color: 'blue' },
       { title: '分号模式', icon: 'mdi-rhombus', to: 'Semicolon', color: 'blue' },
       { title: '分号缩写', icon: 'mdi-rhombus', to: 'SemicolonAbbr', color: 'blue' },

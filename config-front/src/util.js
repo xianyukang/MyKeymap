@@ -44,7 +44,7 @@ function ahkText(s) {
 }
 
 // 映射一行要发送的按键
-export function mapKeysToSend(line) {
+export function mapKeysToSend(line, isAltMode) {
     line = _.trimStart(line)
     if (line.startsWith(';') || line.startsWith('sleep') || line.startsWith('Sleep')) {
         return line
@@ -52,7 +52,11 @@ export function mapKeysToSend(line) {
     if (line.startsWith('{text}') || line.startsWith('{Text}')) {
         line = ahkText(line)
     }
-    return 'send, {blind}' + line
+    if (isAltMode) {
+        return 'send, ' + line
+    } else {
+        return 'send, {blind}' + line
+    }
 }
 
 
@@ -74,4 +78,131 @@ export function executeScript(arg) {
         type: 'run-program',
         value
     })
+}
+
+export const emptyKeymap = {
+    "Space": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "Q": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "W": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "E": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "R": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "T": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "Y": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "U": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "I": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "O": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "P": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "A": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "S": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "D": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "F": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "G": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "H": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "J": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "K": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "L": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    ";": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "Z": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "X": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "C": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "V": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "B": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "N": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "M": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    ",": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    ".": {
+        "type": "什么也不做",
+        "value": ""
+    },
+    "/": {
+        "type": "什么也不做",
+        "value": ""
+    }
 }

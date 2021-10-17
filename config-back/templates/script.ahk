@@ -243,6 +243,14 @@ enterLButtonMode()
 }
 {% endif %}
 
+
+{% for key,value in AltMode.items()|sort(attribute="1.value") %}
+    {% if value.value %}
+!{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
+    {% endif %}
+{% endfor %}
+
+
 {% if Settings.JMode %}
 #if JMode
     ^l::return

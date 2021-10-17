@@ -53,6 +53,13 @@ const routes = [
     })
   },
   {
+    path: '/AltMode',
+    name: 'AltMode',
+    component: CapslockF,
+    props: route => ({
+    })
+  },
+  {
     path: '/JMode',
     name: 'JMode',
     component: CapslockF,
