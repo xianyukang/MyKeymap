@@ -4,6 +4,20 @@
 import os
 import shutil
 import sys
+import json
+
+def read_josn(file_path):
+    if os.path.isfile(file_path):
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return data
+    # 文件不存在
+    raise ValueError(file_path + ' not found')
+        
+def write_json(data, file_path):
+    with open(file_path, 'r+', encoding='utf-8') as f:
+        json.dump(data, f, indent=4, ensure_ascii=False)
+        f.truncate()
 
 arg = ''
 if (len(sys.argv) > 1):
@@ -59,10 +73,28 @@ shutil.copy('MyKeymap.exe', 'MyKeymap/MyKeymap.exe')
 
 
 if arg == 'upload':
+    # 读取 build 数据
+    file_path = 'build.json'
+    build = read_josn(file_path)
+
+    # 新老文件名
+    major = build['version']['major']
+    minor = build['version']['minor']
+    patch = build['version']['patch']
+    old_release_name = '.'.join(map(str, ['MyKeymap-' + str(major), minor, patch, '7z']))
+    new_release_name = '.'.join(map(str, ['MyKeymap-' + str(major), minor, patch + 1, '7z']))
+
+
     print('打包 7z 文件...')
-    os.system('rm MyKeymap.7z')
-    os.system('7z.exe a MyKeymap.7z MyKeymap\\')
+    os.system(f'rm {old_release_name}')
+    os.system(f'7z.exe a {new_release_name} MyKeymap\\')
+    
     print('上传文件到对象存储...')
-    os.system('qshell fput static-x MyKeymap.7z MyKeymap.7z --overwrite')
+    os.system(f'qshell fput static-x {new_release_name} {new_release_name} --overwrite')
+
+    # 更新 build 数据
+    build['version']['patch'] = patch + 1
+    write_json(build, file_path)
+
     print('------------- ok ok ok -------------------------------')
     sys.exit()
