@@ -90,6 +90,11 @@ export default {
 </script>
 
 <style>
+
+body * {
+  font-family: Roboto, sans-serif, Microsoft YaHei !important;
+}
+
 .v-avatar.logo {
   height: 60px !important;
   width: 60px !important;
