@@ -119,7 +119,7 @@ body * {
   padding-left: 115px;
 }
 #site-title {
-  font-size: 1.85em;
+  font-size: 1.68em;
   font-weight: 500;
 }
 #snack-bar {
