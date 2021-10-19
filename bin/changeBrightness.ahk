@@ -77,9 +77,11 @@ class CLayout
     }
     show()
     {
+        global GuiHwnd
         w :=  this.X + 70
         h :=  320
         Gui Show, w%w% h%h%, 显示器亮度调节
+        disableIME(GuiHwnd)
     }
 
     addMon(i)
@@ -251,6 +253,13 @@ GetCurrentBrightNess()
         currentBrightness := property.CurrentBrightness	
 
     return currentBrightness
+}
+
+disableIME(hwnd)
+{
+    ControlGetFocus, controlName, ahk_id %hwnd%
+    ControlGet, controlHwnd, Hwnd,, %controlName%, A
+    DllCall("Imm32\ImmAssociateContext", "ptr", controlHwnd, "ptr", 0, "ptr")
 }
 
 MyGui_OnClose:

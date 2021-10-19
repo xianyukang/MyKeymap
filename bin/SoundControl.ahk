@@ -51,9 +51,11 @@ class CLayout
     }
     show()
     {
+        global GuiHwnd
         w :=  this.X + 175
         h :=  320
         Gui Show, w%w% h%h%, 声音控制
+        disableIME(GuiHwnd)
     }
 
     addItem(i)
@@ -221,6 +223,12 @@ WM_KEYDOWN(wParam, lParam)
     return 0
 }
 
+disableIME(hwnd)
+{
+    ControlGetFocus, controlName, ahk_id %hwnd%
+    ControlGet, controlHwnd, Hwnd,, %controlName%, A
+    DllCall("Imm32\ImmAssociateContext", "ptr", controlHwnd, "ptr", 0, "ptr")
+}
 
 
 MyGui_OnClose:
