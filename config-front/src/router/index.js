@@ -7,6 +7,16 @@ import CapslockAbbr from '../views/CapslockAbbr.vue'
 
 Vue.use(VueRouter)
 
+function keymap(name) {
+  return {
+    path: '/' + name,
+    name: name,
+    component: CapslockF,
+    props: route => ({
+    })
+  }
+}
+
 const routes = [
   {
     path: '/',
@@ -17,80 +27,20 @@ const routes = [
     name: 'Home',
     component: Home,
   },
-  {
-    path: '/Capslock',
-    name: 'Capslock',
-    component: CapslockF,
-    props: route => ({
-    })
-  },
-  {
-    path: '/CapslockF',
-    name: 'CapslockF',
-    component: CapslockF,
-    props: route => ({
-    })
-  },
-  {
-    path: '/Mode3',
-    name: 'Mode3',
-    component: CapslockF,
-    props: route => ({
-    })
-  },
-  {
-    path: '/Mode3R',
-    name: 'Mode3R',
-    component: CapslockF,
-    props: route => ({
-    })
-  },
-  {
-    path: '/Mode9',
-    name: 'Mode9',
-    component: CapslockF,
-    props: route => ({
-    })
-  },
-  {
-    path: '/AltMode',
-    name: 'AltMode',
-    component: CapslockF,
-    props: route => ({
-    })
-  },
-  {
-    path: '/JMode',
-    name: 'JMode',
-    component: CapslockF,
-    props: route => ({
-    })
-  },
+  keymap('Capslock'),
+  keymap('CapslockF'),
+  keymap('Mode3'),
+  keymap('Mode3R'),
+  keymap('Mode9'),
+  keymap('CapslockSpace'),
+  keymap('JMode'),
+  keymap('Semicolon'),
+  keymap('RButtonMode'),
+  keymap('LButtonMode'),
   {
     path: '/Settings',
     name: 'Settings',
     component: Settings,
-    props: route => ({
-    })
-  },
-  {
-    path: '/LButtonMode',
-    name: 'LButtonMode',
-    component: CapslockF,
-    props: route => ({
-    })
-  },
-  {
-    path: '/RButtonMode',
-    name: 'RButtonMode',
-    component: CapslockF,
-    props: route => ({
-    })
-  },
-  {
-    path: '/Semicolon',
-    name: 'Semicolon',
-    component: CapslockF,
     props: route => ({
     })
   },

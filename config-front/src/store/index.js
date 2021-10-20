@@ -71,7 +71,7 @@ const s = new Vuex.Store({
     fetchConfig(store) {
       return axios.get(`${host}/config`)
         .then(resp => {
-          resp.data.AltMode = resp.data.AltMode || emptyKeymap
+          resp.data.CapslockSpace = resp.data.CapslockSpace || emptyKeymap
           store.commit('SET_CONFIG', resp.data)
         })
         .catch(error => {

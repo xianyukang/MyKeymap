@@ -1672,7 +1672,7 @@
         "slowMoveRepeat": "13",
         "slowMoveSingle": "10"
     },
-    "AltMode": {
+    "CapslockSpace": {
         "Space": {
             "type": "什么也不做",
             "value": ""
@@ -1750,12 +1750,16 @@
             "value": ""
         },
         "L": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE\n    ActivateOrRun(\"ahk_exe EXCEL.EXE\", path, \"\", \"\")\n    return",
+            "toActivate": "ahk_exe EXCEL.EXE",
+            "toRun": "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE"
         },
         ";": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "输入文本或按键",
+            "value": "\nsend, {blind}{text}git add -A`; git commit -a -m \"\"`; git push origin (git branch --show-current)`;\nsend, {blind}{left 47}\nreturn",
+            "keysToSend": "{text}git add -A; git commit -a -m \"\"; git push origin (git branch --show-current);\n{left 47}",
+            "prefix": "*"
         },
         "Z": {
             "type": "什么也不做",
@@ -1778,8 +1782,10 @@
             "value": ""
         },
         "N": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = notepad.exe\n    ActivateOrRun(\"记事本\", path, \"\", \"\")\n    return",
+            "toActivate": "记事本",
+            "toRun": "notepad.exe"
         },
         "M": {
             "type": "什么也不做",

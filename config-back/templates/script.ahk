@@ -244,11 +244,6 @@ enterLButtonMode()
 {% endif %}
 
 
-{% for key,value in AltMode.items()|sort(attribute="1.value") %}
-    {% if value.value %}
-!{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
-    {% endif %}
-{% endfor %}
 
 
 {% if Settings.JMode %}
@@ -340,6 +335,13 @@ f::
     keywait f
     FMode := false
     return
+space::
+    CapslockSpaceMode := true
+    CapslockMode := false
+    SLOWMODE := false
+    keywait space
+    CapslockSpaceMode := false
+    return
 
 WheelUp::send {blind}^#{left}
 WheelDown::send {blind}^#{right}
@@ -361,6 +363,15 @@ Esc::exitMouseMode()
 f::return
 
 {% for key,value in CapslockF.items()|sort(attribute="1.value") %}
+    {% if value.value %}
+{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
+    {% endif %}
+{% endfor %}
+
+#if CapslockSpaceMode
+space::return
+
+{% for key,value in CapslockSpace.items()|sort(attribute="1.value") %}
     {% if value.value %}
 {{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
     {% endif %}

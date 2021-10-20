@@ -44,7 +44,7 @@ function ahkText(s) {
 }
 
 // 映射一行要发送的按键
-export function mapKeysToSend(line, isAltMode) {
+export function mapKeysToSend(line) {
     line = _.trimStart(line)
     if (line.startsWith(';') || line.startsWith('sleep') || line.startsWith('Sleep')) {
         return line
@@ -52,11 +52,7 @@ export function mapKeysToSend(line, isAltMode) {
     if (line.startsWith('{text}') || line.startsWith('{Text}')) {
         line = ahkText(line)
     }
-    if (isAltMode) {
-        return 'send, ' + line
-    } else {
-        return 'send, {blind}' + line
-    }
+    return 'send, {blind}' + line
 }
 
 

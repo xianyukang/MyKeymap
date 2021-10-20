@@ -352,6 +352,13 @@ f::
     keywait f
     FMode := false
     return
+space::
+    CapslockSpaceMode := true
+    CapslockMode := false
+    SLOWMODE := false
+    keywait space
+    CapslockSpaceMode := false
+    return
 
 WheelUp::send {blind}^#{left}
 WheelDown::send {blind}^#{right}
@@ -444,6 +451,22 @@ A::
     path = shortcuts\Windows Terminal Preview.lnk
     ActivateOrRun("ahk_exe WindowsTerminal.exe", path)
     return
+
+#if CapslockSpaceMode
+space::return
+
+L::
+    path = C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE
+    ActivateOrRun("ahk_exe EXCEL.EXE", path, "", "")
+    return
+N::
+    path = notepad.exe
+    ActivateOrRun("记事本", path, "", "")
+    return
+*`;::
+send, {blind}{text}git add -A`; git commit -a -m ""`; git push origin (git branch --show-current)`;
+send, {blind}{left 47}
+return
 
 
 #if DisableCapslockKey

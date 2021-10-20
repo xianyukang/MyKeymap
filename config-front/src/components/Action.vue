@@ -18,6 +18,7 @@
           outlined
           @change="clearValue"
           :menu-props="{ maxHeight: 900 }"
+          :disabled="$route.name === 'CapslockSpace' && currentKey === 'Space'"
         ></v-select>
       </v-card-title>
       <v-card-text>
@@ -362,14 +363,13 @@ export default {
     },
     sendKeys() {
       this.currKey().prefix = '*'
-      const isAltMode = this.$route.name === 'AltMode'
       const result = ['']
       const keysToSend = this.currKey().keysToSend
       if (keysToSend) {
         const lines = keysToSend
           .split('\n')
           .filter(x => x && _.trim(x).length > 0)
-          .map(x => mapKeysToSend(x, isAltMode))
+          .map(x => mapKeysToSend(x))
         result.push(lines.join('\n'))
       }
       result.push('return')
