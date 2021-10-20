@@ -18,7 +18,7 @@
           outlined
           @change="clearValue"
           :menu-props="{ maxHeight: 900 }"
-          :disabled="$route.name === 'CapslockSpace' && currentKey === 'Space'"
+          :disabled="($route.name === 'CapslockSpace' || $route.name === 'Capslock') && currentKey === 'Space'"
         ></v-select>
       </v-card-title>
       <v-card-text>

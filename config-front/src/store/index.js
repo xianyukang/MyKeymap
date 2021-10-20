@@ -72,6 +72,7 @@ const s = new Vuex.Store({
       return axios.get(`${host}/config`)
         .then(resp => {
           resp.data.CapslockSpace = resp.data.CapslockSpace || emptyKeymap
+          resp.data.Capslock.Space = { "type": "什么也不做", "value": "" }
           store.commit('SET_CONFIG', resp.data)
         })
         .catch(error => {
