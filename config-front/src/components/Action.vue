@@ -378,8 +378,8 @@ export default {
     activateOrRun() {
       const toActivate = escapeFuncString(this.currKey().toActivate)
       let toRun = escapeFuncString(this.currKey().toRun)
-      const cmdArgs = escapeFuncString(this.currKey().cmdArgs)
-      const workingDir = escapeFuncString(this.currKey().workingDir)
+      let cmdArgs = escapeFuncString(this.currKey().cmdArgs)
+      let workingDir = escapeFuncString(this.currKey().workingDir)
       // console.log(toActivate, toRun)
 
       if (!toActivate) {
@@ -387,11 +387,18 @@ export default {
       }
 
       // 用路径变量替换路径
-      if (toRun) {
-        for (const item of this.$store.state.config.pathVariables) {
-          if (item.key && item.value) {
-            const re = new RegExp(`%${item.key}%`, 'g')
+
+      for (const item of this.$store.state.config.pathVariables) {
+        if (item.key && item.value) {
+          const re = new RegExp(`%${item.key}%`, 'g')
+          if (toRun) {
             toRun = toRun.replace(re, item.value)
+          }
+          if (cmdArgs) {
+            cmdArgs = cmdArgs.replace(re, item.value)
+          }
+          if (workingDir) {
+            workingDir = workingDir.replace(re, item.value)
           }
         }
       }
@@ -400,7 +407,8 @@ export default {
         ? ''
         : `
     path = ${toRun}
-    ActivateOrRun("${toActivate}", path, "${cmdArgs}", "${workingDir}")
+    workingDir = ${workingDir}
+    ActivateOrRun("${toActivate}", path, "${cmdArgs}", workingDir)
     return`
     },
     // note 当选项发生改变时,  是否要清空掉 value ?

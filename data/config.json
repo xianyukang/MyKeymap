@@ -1583,24 +1583,17 @@
         },
         "mm": {
             "type": "启动程序或激活窗口",
-            "value": "\n    path = C:\\Program Files\\Typora\\Typora.exe\n    ActivateOrRun(\"MyKeymap-Roadmap.md - Typora\", path, \"D:\\notes\\MyKeymap-Roadmap.md\", \"\")\n    return",
+            "value": "\n    path = D:\\notes\\MyKeymap-Roadmap.md\n    ActivateOrRun(\"MyKeymap-Roadmap.md - Typora\", path, \"\", \"\")\n    return",
             "toActivate": "MyKeymap-Roadmap.md - Typora",
-            "toRun": "C:\\Program Files\\Typora\\Typora.exe",
-            "cmdArgs": "D:\\notes\\MyKeymap-Roadmap.md"
-        },
-        "wo": {
-            "type": "启动程序或激活窗口",
-            "value": "\n    path = C:\\Program Files\\Typora\\Typora.exe\n    ActivateOrRun(\"working.md - Typora\", path, \"D:\\notes\\working.md\", \"\")\n    return",
-            "toActivate": "working.md - Typora",
-            "cmdArgs": "D:\\notes\\working.md",
-            "toRun": "C:\\Program Files\\Typora\\Typora.exe"
+            "toRun": "D:\\notes\\MyKeymap-Roadmap.md",
+            "cmdArgs": ""
         },
         "md": {
             "type": "启动程序或激活窗口",
-            "value": "\n    path = C:\\Program Files\\Typora\\Typora.exe\n    ActivateOrRun(\"MyKeymap.md - Typora\", path, \"D:\\project\\my_site\\docs\\MyKeymap.md\", \"\")\n    return",
-            "toRun": "C:\\Program Files\\Typora\\Typora.exe",
+            "value": "\n    path = D:\\project\\my_site\\docs\\MyKeymap.md\n    ActivateOrRun(\"MyKeymap.md - Typora\", path, \"\", \"\")\n    return",
+            "toRun": "D:\\project\\my_site\\docs\\MyKeymap.md",
             "toActivate": "MyKeymap.md - Typora",
-            "cmdArgs": "D:\\project\\my_site\\docs\\MyKeymap.md"
+            "cmdArgs": ""
         },
         "cs": {
             "type": "启动程序或激活窗口",
@@ -1631,6 +1624,13 @@
             "toRun": "%idea%",
             "cmdArgs": "D:\\work\\room-order-api",
             "workingDir": ""
+        },
+        "mw": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = D:\\notes\\working.md\n    ActivateOrRun(\"working.md - Typora\", path, \"\", \"\")\n    return",
+            "toActivate": "working.md - Typora",
+            "cmdArgs": "",
+            "toRun": "D:\\notes\\working.md"
         }
     },
     "CapslockAbbrKeys": [
@@ -1661,12 +1661,12 @@
         "rex",
         "fw",
         "mm",
-        "wo",
         "md",
         "cs",
         "cm",
         "ir",
-        "io"
+        "io",
+        "mw"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",

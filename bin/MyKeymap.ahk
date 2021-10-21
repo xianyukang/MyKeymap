@@ -79,7 +79,7 @@ global typoTip := new TypoTipWindow()
 semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,sl,zk,dk,jt,gt,lx,sm,zh,gg,ver,xm,static,fs,fd,ff")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee,dm,rex,fw,mm,wo,md,cs,cm,ir,io")
+capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee,dm,rex,fw,mm,md,cs,cm,ir,io,mw")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -653,18 +653,18 @@ execCapslockAbbr(typo) {
     return
         case "mm":
            
-    path = C:\Program Files\Typora\Typora.exe
-    ActivateOrRun("MyKeymap-Roadmap.md - Typora", path, "D:\notes\MyKeymap-Roadmap.md", "")
+    path = D:\notes\MyKeymap-Roadmap.md
+    ActivateOrRun("MyKeymap-Roadmap.md - Typora", path, "", "")
+    return
+        case "mw":
+           
+    path = D:\notes\working.md
+    ActivateOrRun("working.md - Typora", path, "", "")
     return
         case "md":
            
-    path = C:\Program Files\Typora\Typora.exe
-    ActivateOrRun("MyKeymap.md - Typora", path, "D:\project\my_site\docs\MyKeymap.md", "")
-    return
-        case "wo":
-           
-    path = C:\Program Files\Typora\Typora.exe
-    ActivateOrRun("working.md - Typora", path, "D:\notes\working.md", "")
+    path = D:\project\my_site\docs\MyKeymap.md
+    ActivateOrRun("MyKeymap.md - Typora", path, "", "")
     return
         case "no":
            
