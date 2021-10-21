@@ -235,6 +235,18 @@ return
 *I::
 send {blind}:
 return
+*B::
+send, {blind}`%
+return
+*J::
+send, {blind}`;
+return
+*K::
+send, {blind}``
+return
+*H::
+send, {blind}{+}
+return
 *Space::
 send, {blind}{enter}
 return
@@ -250,12 +262,8 @@ return
 *Y::send {blind}@
 *Z::send {blind}\
 *X::send {blind}_
-*B::send {blind}`%
-*H::send {blind}`;
-*K::send {blind}``
 *G::send {blind}{!}
 *W::send {blind}{#}
-*J::send {blind}{+}
 *E::send {blind}{^}
 *O::send {blind}{space 4}
 *V::send {blind}|

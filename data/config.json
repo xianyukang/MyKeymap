@@ -1270,19 +1270,19 @@
         },
         "H": {
             "type": "输入文本或按键",
-            "value": "send {blind}`;",
-            "keysToSend": "`;",
+            "value": "\nsend, {blind}{+}\nreturn",
+            "keysToSend": "{+}",
             "prefix": "*"
         },
         "J": {
             "type": "输入文本或按键",
-            "value": "send {blind}{+}",
-            "keysToSend": "{+}",
+            "value": "\nsend, {blind}`;\nreturn",
+            "keysToSend": "`;",
             "prefix": "*"
         },
         "K": {
             "type": "输入文本或按键",
-            "value": "send {blind}``",
+            "value": "\nsend, {blind}``\nreturn",
             "keysToSend": "``",
             "prefix": "*"
         },
@@ -1320,7 +1320,7 @@
         },
         "B": {
             "type": "输入文本或按键",
-            "value": "send {blind}`%",
+            "value": "\nsend, {blind}`%\nreturn",
             "keysToSend": "`%",
             "prefix": "*"
         },

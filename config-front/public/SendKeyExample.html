@@ -134,7 +134,7 @@ a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; 
 .md-fn-count::after { content: "."; }
 code, pre, samp, tt { font-family: var(--monospace); }
 kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
-.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
 code { text-align: left; vertical-align: initial; }
 a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
 .os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
@@ -282,38 +282,6 @@ span.cm-strikethrough { text-decoration: line-through; }
 }
 
 
-@font-face{font-family:"iconfont";src:url('file:///C://Users//tgk//AppData//Roaming//Typora/themes/source/dy/iconfont.woff2') format('woff2'),url('file:///C://Users//tgk//AppData//Roaming//Typora/themes/source/dy/iconfont.woff') format('woff'),url('file:///C://Users//tgk//AppData//Roaming//Typora/themes/source/dy/iconfont.ttf') format('truetype');}.iconfont{font-family:"iconfont" !important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}.icon-info2:before{content:"\e746";}.icon-093info:before{content:"\e664";}.icon-institueinfo:before{content:"\e613";}.icon-fengshan:before{content:"\e600";}.icon-fengshan1:before{content:"\e6cc";}.icon-a-28tongfengfengshan:before{content:"\e604";}.icon-a-28atongfengfengshan:before{content:"\e605";}.icon-weibiaoti-:before{content:"\e689";}.icon-fengche2:before{content:"\e625";}
-/* cyrillic-ext */
-/* cyrillic */
-/* greek-ext */
-/* greek */
-/* vietnamese */
-/* latin-ext */
-/* latin */
-/* cyrillic-ext */
-/* cyrillic */
-/* greek-ext */
-/* greek */
-/* vietnamese */
-/* latin-ext */
-/* latin */
-/* cyrillic-ext */
-/* cyrillic */
-/* greek-ext */
-/* greek */
-/* vietnamese */
-/* latin-ext */
-/* latin */
-@font-face {
-  font-family: 'Source Sans Pro';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Source Sans Pro SemiBold'), local('SourceSansPro-SemiBold'),
-    url('file:///C://Users//tgk//AppData//Roaming//Typora/themes/source/zj/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwlxdu.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F,
-    U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}@import '';
-@import '';
 :root {
     /* dy color */
     --select-text-bg-color: #ffafa3; /* 文本选中背景色（粉红） */
@@ -354,7 +322,8 @@ span.cm-strikethrough { text-decoration: line-through; }
     --para-color: #000000; /* 段落文本颜色（黑色） */
     /* dy font */
 
-    --my-font: 'Iosevka', 'PingFangX';
+    --normal-font: 'Iosevka', 'PingFangX';
+    --medium-font: 'Iosevka Medium', 'PingFangMedium';
     --body-font: 'Iosevka', 'PingFangX', 'Helvetica Neue', Arial, sans-serif; /* 全局字体 */
     --code-font: 'Iosevka', 'PingFangX'; /* 代码块以及行内代码字体 */
     --monospace: 'Iosevka', 'PingFangX';
@@ -376,22 +345,9 @@ body {
 #write {
     max-width: 1024px;
     margin: 0 auto;
-    padding: 20px 30px 160px;
+    padding: 20px 0px 160px;
 }
 
-/*
-@media only screen and (min-width: 1400px) {
-	#write {
-		max-width: 1024px;
-	}
-}
-
-@media only screen and (min-width: 1800px) {
-	#write {
-		max-width: 1200px;
-	}
-}
-*/
 
 #write p {
     line-height: 1.8rem;
@@ -414,57 +370,8 @@ body>*:last-child {
 
 
 
-/** 超链接 **/
-
-
-#write a {
-    border-bottom:2px solid var(--abottom-color);
-    padding: 0 4px;
-    /*padding-top: 2px;*/
-    transition: .3s;
-    color: var(--atext-color);
-    text-decoration: none;
-}
-#write a:hover {
-    border-radius:6px;
-    border-bottom:2px solid transparent;
-    background-color:var(--abottom-color);
-    color:#ffffffe6;
-    cursor:pointer;
-}
-#write a[href*="muggledy"] {
-    border-bottom:2px solid red;
-}
-#write a[href*="muggledy"]:hover {
-    background-color:red;
-}
-#write h2 a, #write h4 a, #write a[alt="null"]{
-    border-bottom: none !important;
-    /*color: var(--code-color);*/
-}
-h2 a:hover:before, h4 a:hover:before, #write a[alt="null"]:hover:before{
-    content: none !important;
-}
-
-/* 修复空链接（标题锚点）显示底部下划线的问题（padding宽度引起的问题），但是自定义锚点怎么处理？因为自定义的锚点链接里有一个空格，非空，所以自定义锚点时请额外加上alt="none"，这将会使得链接“消失” */
-#write a:empty, #write a[alt="none"] {
-    padding-left:0px; /*直接上display:none消除超链接会导致锚点失效，visibility:hidden又占位*/
-    padding-right:0px;
-}
-#write a[alt="none"] span {
-    display: none; /*消除空格或其他内容*/
-}
-
-/* 无样式超链接 */
-#write a[alt="null"]:hover{
-    background-color: inherit;
-    border-radius: 0px;
-    color: var(--atext-color);
-}
-
 
 /** 目录 **/
-
 
 #write a.md-toc-inner {
     line-height: 1.6;
@@ -557,29 +464,6 @@ h1:after { //一级大标题下划线（为固定长度）
     border-bottom: 2px solid var(--titlebefore-color);
 }
 */
-#write h2 {
-    margin: 1.8em auto 1.2em;
-    font-size: 1.8em;
-    border-bottom: 2px solid var(--titlebefore-color);
-}
-#write h2::before {
-    content: '\e689' !important; /* 风车图标 */
-    color: var(--titlebefore-color);
-    font-family: "iconfont";
-}
-
-/* h2标题前缀旋转动画 */
-@-moz-keyframes avatar_turn_around{from{-webkit-transform:rotate(0);-moz-transform:rotate(0);-o-transform:rotate(0);-ms-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-o-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg)}}@-webkit-keyframes avatar_turn_around{from{-webkit-transform:rotate(0);-moz-transform:rotate(0);-o-transform:rotate(0);-ms-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-o-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg)}}@-o-keyframes avatar_turn_around{from{-webkit-transform:rotate(0);-moz-transform:rotate(0);-o-transform:rotate(0);-ms-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-o-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes avatar_turn_around{from{-webkit-transform:rotate(0);-moz-transform:rotate(0);-o-transform:rotate(0);-ms-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-o-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg)}}
-h2:before {
-    display: inline-block;
-    -webkit-animation: avatar_turn_around 1s linear infinite;
-    -moz-animation: avatar_turn_around 1s linear infinite;
-    -o-animation: avatar_turn_around 1s linear infinite;
-    -ms-animation: avatar_turn_around 1s linear infinite;
-    animation: avatar_turn_around 1s linear infinite;
-    font-size: 34px;
-    margin-left: -29px;
-}
 
 /* h2标题内容稍稍偏右一点 */
 #write h2 * {
@@ -599,28 +483,6 @@ h2:before {
     padding-left: 9px;
     border-left: 5px solid var(--titlebefore-color);
 }
-#write h4 {
-    margin-top: 1.3em;
-    font-size: 1.2em;
-    padding-left: 6px;
-    padding-right: 6px;
-    display: inline-block;
-    border: 1px solid var(--titlebefore-color);
-    border-top: 4px solid var(--titlebefore-color);
-}
-
-/* 三级四级标题点击后的前缀提示图标 */
-#write>h3.md-focus:before,
-#write>h4.md-focus:before {
-    width: auto;
-    height: auto;
-    /* background-color: var(--focus-color); */
-    color: #ffffff;
-}
-#write>h3.md-focus,
-#write>h4.md-focus {
-    /* border-color: var(--focus-color); */
-}
 
 #write h5::before,
 #write h6::before {
@@ -637,10 +499,6 @@ h2:before {
 }
 #write h5.md-focus:before, #write h6.md-focus:before{
     /* color: var(--focus-color); */
-}
-#write h5, #write h6 {
-    /* margin-left: 2em; */
-    font-size: 1rem;
 }
 #write h5::before {
     content: 'H5';
@@ -990,23 +848,6 @@ hr { /* 来自next主题样式 */
 
 
 
-/* @media print {
-    html {
-        font-size: 13px;
-    }
-    table,
-    pre {
-        page-break-inside: avoid;
-    }
-    pre {
-        word-wrap: break-word;
-    }
-} */
-
-/* .md-fences {
-    background-color: #f8f8f8;
-} */
-
 #write pre.md-meta-block {
     /* padding: 1rem; */
     font-size: 85%;
@@ -1115,11 +956,6 @@ hr { /* 来自next主题样式 */
     top: 10px;
 }
 
-/* focus mode */
-
-.on-focus-mode blockquote {
-    border-left-color: rgba(85, 85, 85, 0.12);
-}
 
 header,
 .context-menu,
@@ -1138,11 +974,8 @@ footer {
 .outline-item:hover {
     color: var(--titlebefore-color) !important;
 }
-/*
-.mac-seamless-mode #typora-sidebar {
-    background-color: var(--side-bar-bg-color);
-}
-*/
+
+
 .md-lang {
     color: #b4654d;
 }
@@ -1165,87 +998,9 @@ footer {
 }
 */
 
-@media print {
-    .typora-export * {
-        -webkit-print-color-adjust: exact;
-    }
-    html {
-        font-size: 16px!important;
-    }
-    body {
-        font-family: Times, 'SimSun', serif!important;
-        color: #000000!important;
-    }
-    p {
-        color: #000000!important;
-    }
-    table,
-    pre {
-        page-break-inside: avoid;
-    }
-    pre {
-        word-wrap: break-word;
-    }
-    .MathJax_SVG_Display svg{
-        max-width: 100% !important;
-    }
-}
 
 
 
-/** 有序、无序列表，来自Butterfly主题 **/
-
-
-/* #write ul li, #write ol li, #write .ul .li, #write .ol .li {
-    list-style-type: none;
-}
-#write ul>li:not(.tab):before, #write .ul>.li:not(.tab):before {
-    margin-left: -22px;
-    margin-top: 10px;
-    width: .62em;
-    height: .62em;
-    border: .1em solid var(--ulol-color); 
-    border-radius: .31em;
-    background: 0 0;
-    content: '';
-    line-height: .42em;
-}
-#write ol li:before, #write ul li:before, #write .ol .li:before, #write .ul .li:before {
-    position: absolute;
-    background: var(--ulol-color); 
-    color: #fff;
-    cursor: pointer;
-    -webkit-transition: all .3s ease-out;
-    -moz-transition: all .3s ease-out;
-    -o-transition: all .3s ease-out;
-    -ms-transition: all .3s ease-out;
-    transition: all .3s ease-out;
-}
-#write ol li:first-child, #write .ol .li:first-child { 
-    counter-reset: li;
-}
-#write ol li:hover:before, #write ul li:hover:before, #write .ol .li:hover:before, #write .ul .li:hover:before {
-    -webkit-transform:rotate(360deg);
-    -moz-transform:rotate(360deg);
-    -o-transform:rotate(360deg);
-    -ms-transform:rotate(360deg);
-    transform:rotate(360deg);
-}
-#write ul>li:not(.tab):hover:before, #write .ul>.li:not(.tab):hover:before{
-    border-color: var(--focus-color);
-}
-#write ol>li:before, #write .ol>.li:before {
-    margin-top: 6px;
-    margin-left: -25px;
-    width: 1.65em;
-    height: 1.65em;
-    border-radius: 0.825em;
-    content: counter(li);
-    counter-increment: li;
-    text-align: center;
-    font-size: .65em;
-    line-height: 1.7em;
-} */
 
 /* 列表子项上下间隔调整 */
 #write ul li *, #write ol li *, #write .ul .li *, #write .ol .li * {
@@ -1261,8 +1016,7 @@ footer {
 
 /** 小标签 **/
 
-
-/* font {
+font[title] {
     display: inline;
     padding: .2em .6em;
     font-size: 90%;
@@ -1272,10 +1026,10 @@ footer {
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
-    border-radius: .1rem;
-    border-radius: 6px;
+    border-radius: 0px;
     background-color: var(--spannote-color);
-} */
+    border: solid 1px;
+}
 
 font[title="red"] {
     background-color:#e91e64;
@@ -1290,7 +1044,8 @@ font[title="green"] {
     background-color:#8bc34a;
 }
 font[title="gray"] {
-    background-color:#4c4c4c;
+    color: #000;
+    background-color: #dcd2d261;
 }
 
 
@@ -1298,7 +1053,7 @@ font[title="gray"] {
 
 
 span[alt='emp'] {
-    border-bottom: 4px dotted var(--emptext-color);
+    border-bottom: 3px dotted var(--emptext-color);
 }
 span[alt='underline'] {
     border-bottom: 2px solid var(--emptext-color);
@@ -1372,109 +1127,12 @@ audio:focus{
 }
 
 
-/** 隐藏型文本 **/
 
 
-span[alt="hide"] {
-    color: transparent;
-    background: var(--hidetextcover-color);
-    border-radius: 2px;
-    -webkit-transition: all .28s ease;
-    -moz-transition: all .28s ease;
-    -o-transition: all .28s ease;
-    -ms-transition: all .28s ease;
-    transition: all .28s ease;
-    -moz-transition: all .28s ease;
-    -webkit-transition: all .28s ease;
-    -o-transition: all .28s ease;
-}
-span[alt="hide"]:hover {
-    color:var(--hidetext-color);
-    background:0 0
-}
-
-
-/** 彩虹变换字体特效（来自黑石博客） **/
-
-
-@-webkit-keyframes rainbowan {
-    to {
-        background-position: -2000vw;
-    }
-}
-@keyframes rainbowan {
-    to {
-        background-position: -2000vw;
-    }
-}
-span[alt="rainbow"], span[alt="rainbow"] * {
-    padding-top: 3px;
-    background-image: linear-gradient( to left, orangered, orange, gold, lightgreen, cyan, dodgerblue, mediumpurple, hotpink, orangered);
-    background-size: 110vw;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    -webkit-animation: rainbowan 60s linear infinite;
-    animation: rainbowan 60s linear infinite;
-}
-
-
-/** 一款时尚的span字体，来自QinXS **/
-
-
-span[alt="modern"] {
-    display: inline;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-family: var(--body-font);
-    font-size: 1em;
-    letter-spacing: .2em;
-    color: red;
-    text-shadow: 0 8px 9px #c4b59d, 0 -2px 1px #fff;
-    font-weight: 700;
-    background: linear-gradient(to bottom,#ece4d9 0,#e9dfd1 100%);
-}
-
-
-/** volantis文本按钮样式 **/
-
-
-span[alt="btn"] {
-    color: var(--spanbtn-color);
-    border: 1px solid var(--spanbtn-color);
-    padding: 3px 4px 2px;
-    margin: 4px;
-    line-height: 1.1;
-    border-radius: 2px;
-}
-#write span[alt="btn"] a{
-    color: var(--spanbtn-color);
-    border-bottom:none;
-    background-color:inherit;
-    transition: none;
-}
-span[alt="btn"]:hover {
-    color: var(--focus-color);
-    border: 1px solid var(--focus-color);
-}
-#write span[alt="btn"]:hover a{
-    color: var(--focus-color);
-}
-
-
-/** 抖音字效 **/
-
-
-@-webkit-keyframes uk-text-shadow-glitch{0%{text-shadow:none}25%{text-shadow:-1px -1px 0 #ff0048,1px 1px 0 #3234ff}50%{text-shadow:1px -1px 0 #ff0048,-1px 1px 0 #3234ff}75%{text-shadow:-1px 1px 0 #ff0048,1px -1px 0 #3234ff}to{text-shadow:1px 1px 0 #ff0048,-1px -1px 0 #3234ff}}@keyframes uk-text-shadow-glitch{0%{text-shadow:none}25%{text-shadow:-1px -1px 0 #ff0048,1px 1px 0 #3234ff}50%{text-shadow:1px -1px 0 #ff0048,-1px 1px 0 #3234ff}75%{text-shadow:-1px 1px 0 #ff0048,1px -1px 0 #3234ff}to{text-shadow:1px 1px 0 #ff0048,-1px -1px 0 #3234ff}}
-
-span[alt="shake"] {
-    -webkit-animation: uk-text-shadow-glitch .95s cubic-bezier(1,-1.91,0,2.79) 0s infinite normal both running;
-    animation: uk-text-shadow-glitch .95s cubic-bezier(1,-1.91,0,2.79) 0s infinite normal both running;
-}
-
-#write h1 * {
-    /* color: #ef5350; */
-    /* border-bottom: 2px solid black; */
+#write h2 {
+    margin: 1.8em auto 1.2em;
+    font-size: 1.8em;
+    border-bottom: 2px solid var(--titlebefore-color);
 }
 
 #write h2 {
@@ -1489,32 +1147,30 @@ span[alt="shake"] {
     /* color: #ff679a; */
 }
 #write h3 {
-    font-family: var(--my-font);
+    font-family: var(--normal-font);
     color: #1c71ca;
     color: #486df1;
     color: #d05;
     color: black;
     left: -28px;
-    font-size: 1.04rem;
+    font-size: 1.03rem;
     margin-bottom: 0.1rem !important;
     border-left: unset;
     border-left: 4px solid var(--titlebefore-color);
     border-left: 4px solid #ff6624;
     border-left: 4px solid #486df1;
 }
-/* h3 * {
-    border-bottom: 1.5px solid #486df1;
-} */
 
-#write h5 {
-    font-family: var(--my-font);
-    /* color: #d05; */
+#write h4,
+#write h5,
+#write h6
+{
+    font-family: var(--normal-font);
     left: -15px;
     margin-bottom: 0.1rem !important;
 }
-#write h5 * {
-    /* border-bottom: 2px solid #486df1; */
-}
+
+
 #write h2::before {
     content: '' !important;
     margin-left: 0px;
@@ -1633,15 +1289,53 @@ table {
 
 
 html {
+    font-size: 16px;
+}
+
+#typora-sidebar {
+    font-family: var(--medium-font);
+}
+#file-library {
     font-size: 15px;
+}
+#outline-content {
+    font-size: 15px;
+    font-family: var(--normal-font);
+}
+
+#write h4, #write h5, #write h6 {
+    font-size: 1rem;
+}
+
+
+#write h5 {
+    display: inline;
+    padding: .2em .6em;
+    font-size: 90%;
+    font-weight: 400;
+    line-height: 1;
+    color: #000;
+    background-color: #dcd2d261;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0px;
+    border: solid 1px;
+    font-family: var(--medium-font);
+}
+
+#write h6 {
+    font-family: var(--medium-font);
+    font-size: 94%;
+    font-weight: 400;
 }
 
 
 </style><title>sendKeyExample</title>
 </head>
 <body class='typora-export os-windows'><div class='typora-export-content'>
-<div id='write'  class=''><h2 id='简介'><span>简介</span></h2><h3 id='输入文本或按键的功能有啥用呢-'><span>输入文本或按键的功能有啥用呢 ?  </span></h3><ol start='' ><li><span>输入成对符号并移动光标,  比如「 ... 」(...)</span></li><li><span>常用文本缩写,  比如可以让 yx 等于 </span><a href='mailto:youxiang@mail.com' target='_blank' class='url'>youxiang@mail.com</a></li><li><span>做一些简单的 </span><code>「 按键自动化 」</code><span>,  比如按一下分号键并输入 ver 就能查看系统版本</span></li><li><span>在阅读下面的文档前,  可以先看下分号缩写 gg、sk、ver 是怎么配置的</span></li></ol><p>&nbsp;</p><h2 id='例子'><span>例子</span></h2><h3 id='用-font-标签包裹选中的文本'><span>用 </span><span>&lt;</span><span>font&gt; 标签包裹选中的文本</span></h3><pre class="md-fences md-end-block ty-contain-cm modeLoaded md-focus" spellcheck="false" lang="lisp"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap CodeMirror-focused" lang="lisp"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 94px; left: 257.729px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre>x</pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">^x</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="cm-comment">; 发送 Ctrl+X</span></span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">sleep</span> <span class="cm-number">100</span> &nbsp; &nbsp;<span class="cm-comment">; 等待 100 ms, 等剪切板拿到复制的文本</span></span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
-</span></span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">; {text} 前缀表示以文本模式发送,  这不会被输入法影响,  也不会解析 {enter} 之类的特殊代码</span></span></pre></div><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">{text}&lt;span</span> <span class="cm-variable">alt=</span><span class="cm-string">"underline"</span><span class="cm-variable">&gt;&lt;/span&gt;</span></span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
-</span></span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">{left</span> <span class="cm-number">7</span><span class="cm-variable">}^v</span> &nbsp; &nbsp;<span class="cm-comment">; 移动光标、发送 Ctrl+V</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 149px;"></div><div class="CodeMirror-gutters" style="display: none; height: 149px;"></div></div></div></pre><p>&nbsp;</p><h3 id='输入-abcde🐶-并复制粘贴两次'><span>输入「 abcde🐶 」并复制粘贴两次</span></h3><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="lisp"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="lisp"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 8.66667px; left: 12px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">abcd🐶</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">; 输入 abcd🐶</span></span></pre></div><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">sleep</span> <span class="cm-number">100</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">; 等待 100 ms</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">+{home}</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">; 输入 Shift+Home 选中当前行</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">sleep</span> <span class="cm-number">100</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">; 等待 100 ms</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">^c{end}{enter}</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="cm-comment">; 输入 Ctrl+C ➤ End ➤ Enter</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">sleep</span> <span class="cm-number">100</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">; 等待 100 ms</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">^v{space</span> <span class="cm-number">4</span><span class="cm-variable">}^v</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">; 输入 Ctrl+V ➤ 四下空格 ➤ Ctrl+V</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 149px;"></div><div class="CodeMirror-gutters" style="display: none; height: 149px;"></div></div></div></pre><p>&nbsp;</p><h2 id='参考文档'><span>参考文档</span></h2><h3 id='几个特殊符号'><span>几个特殊符号</span></h3><figure><table><thead><tr><th style='text-align:left;' ><span>符号</span></th><th style='text-align:left;' ><span>表示的按键</span></th></tr></thead><tbody><tr><td style='text-align:left;' ><span>^</span></td><td style='text-align:left;' ><span>Ctrl</span></td></tr><tr><td style='text-align:left;' ><span>+</span></td><td style='text-align:left;' ><span>Shift</span></td></tr><tr><td style='text-align:left;' ><span>!</span></td><td style='text-align:left;' ><span>Alt</span></td></tr><tr><td style='text-align:left;' ><span>#</span></td><td style='text-align:left;' ><span>Win</span></td></tr></tbody></table></figure><p>&nbsp;</p><h3 id='发送组合键'><span>发送组合键</span></h3><figure><table><thead><tr><th><span>代码</span></th><th><span>表示的组合键</span></th></tr></thead><tbody><tr><td><span>^c</span></td><td><span>Ctrl + C</span></td></tr><tr><td><span>#e</span></td><td><span>Win + E</span></td></tr><tr><td><span>^{end}</span></td><td><span>Ctrl + End</span></td></tr><tr><td><span>^!c</span></td><td><span>Ctrl + Alt + C</span></td></tr><tr><td><span>+!c</span></td><td><span>Shift + Alt + C</span></td></tr></tbody></table></figure><p>&nbsp;</p><h3 id='按键重复次数按下和弹起等待若干毫秒'><span>按键重复次数、按下和弹起、等待若干毫秒</span></h3><figure><table><thead><tr><th><span>代码</span></th><th><span>作用</span></th></tr></thead><tbody><tr><td><span>{enter 5}</span></td><td><span>按回车键 5 下</span></td></tr><tr><td><span>{left 3}</span></td><td><span>按左箭头 3 下</span></td></tr><tr><td><span>{lwin down}i{lwin up}</span></td><td><font color='#2E66FF'><span>打开设置:</span></font><br><span>按下 LWin ➤ 输入 i ➤ 松开 LWin</span></td></tr><tr><td><span>{lwin down}{e 2}{lwin up}</span></td><td><font color='#2E66FF'><span>打开两个文件管理器:</span></font><br><span>按下 LWin ➤ 输入两次 e ➤ 松开 LWin</span></td></tr><tr><td><span>#r</span><br><span>sleep 700</span><br><span>winver{enter}</span></td><td><font color='#2E66FF'><span>查看操作系统版本:</span></font><br><span>输入 Win+R ➤ 等待 700 毫秒 ➤ 输入 winver、回车键</span></td></tr></tbody></table></figure><p>&nbsp;</p><h3 id='特殊按键列表'><span>特殊按键列表</span></h3><p><font color='#D05'><span>下表中列出了可以发送的特殊按键 (每个按键名称必须用大括号括起来):</span></font></p><figure><table><thead><tr><th style='text-align:left;' ><span>按键名称</span></th><th style='text-align:left;' ><span>表示的按键</span></th></tr></thead><tbody><tr><td style='text-align:left;' ><span>{F1} - {F24}</span></td><td style='text-align:left;' ><span>功能键. 例如: {F12} 表示 F12.</span></td></tr><tr><td style='text-align:left;' ><span>{!}</span></td><td style='text-align:left;' ><span>!</span></td></tr><tr><td style='text-align:left;' ><span>{#}</span></td><td style='text-align:left;' ><span>#</span></td></tr><tr><td style='text-align:left;' ><span>{+}</span></td><td style='text-align:left;' ><span>+</span></td></tr><tr><td style='text-align:left;' ><span>{^}</span></td><td style='text-align:left;' ><span>^</span></td></tr><tr><td style='text-align:left;' ><span>{{}</span></td><td style='text-align:left;' ><span>{</span></td></tr><tr><td style='text-align:left;' ><span>{}}</span></td><td style='text-align:left;' ><span>}</span></td></tr><tr><td style='text-align:left;' ><span>{Esc}</span></td><td style='text-align:left;' ><span>Esc</span></td></tr><tr><td style='text-align:left;' ><span>{Tab}</span></td><td style='text-align:left;' ><span>Tab</span></td></tr><tr><td style='text-align:left;' ><span>{Enter}</span></td><td style='text-align:left;' ><span>Enter (回车键)</span></td></tr><tr><td style='text-align:left;' ><span>{Space}</span></td><td style='text-align:left;' ><span>Space (空格键)</span></td></tr><tr><td style='text-align:left;' ><span>{BS}</span></td><td style='text-align:left;' ><span>Backspace (退格键)</span></td></tr><tr><td style='text-align:left;' ><span>{Del}</span></td><td style='text-align:left;' ><span>Delete (删除键)</span></td></tr><tr><td style='text-align:left;' ><span>{Ins}</span></td><td style='text-align:left;' ><span>Insert (插入键)</span></td></tr><tr><td style='text-align:left;' ><span>{Up}</span></td><td style='text-align:left;' ><span>↑ (键盘上的向上键)</span></td></tr><tr><td style='text-align:left;' ><span>{Down}</span></td><td style='text-align:left;' ><span>↓ (键盘上的向下键)</span></td></tr><tr><td style='text-align:left;' ><span>{Left}</span></td><td style='text-align:left;' ><span>← (键盘上的向左键)</span></td></tr><tr><td style='text-align:left;' ><span>{Right}</span></td><td style='text-align:left;' ><span>→ (键盘上的向右键)</span></td></tr><tr><td style='text-align:left;' ><span>{Home}</span></td><td style='text-align:left;' ><span>Home (编辑器中移动光标到行首)</span></td></tr><tr><td style='text-align:left;' ><span>{End}</span></td><td style='text-align:left;' ><span>End (编辑器中移动光标到行尾)</span></td></tr><tr><td style='text-align:left;' ><span>{PgUp}</span></td><td style='text-align:left;' ><span>PgUp (向上翻页)</span></td></tr><tr><td style='text-align:left;' ><span>{PgDn}</span></td><td style='text-align:left;' ><span>PgDn (向下翻页)</span></td></tr><tr><td style='text-align:left;' ><span>{LCtrl} 或 {RCtrl}</span></td><td style='text-align:left;' ><span>左 Ctrl 、右 Ctrl</span></td></tr><tr><td style='text-align:left;' ><span>{LAlt} 或 {RAlt}</span></td><td style='text-align:left;' ><span>左 Alt 、右 Alt</span></td></tr><tr><td style='text-align:left;' ><span>{LWin} 或 {RWin}</span></td><td style='text-align:left;' ><span>左 Win 、右 Win</span></td></tr><tr><td style='text-align:left;' ><span>{LShift} 或 {RShift}</span></td><td style='text-align:left;' ><span>左 Shift 、右 Shift</span></td></tr><tr><td style='text-align:left;' ><span>{AppsKey}</span></td><td style='text-align:left;' ><span>Menu (右键菜单)</span></td></tr><tr><td style='text-align:left;' ><span>{PrintScreen}</span></td><td style='text-align:left;' ><span>PrtScr (屏幕截图到剪切板)</span></td></tr></tbody></table></figure><p>&nbsp;</p></div></div>
+<div id='write'  class=''><h2 id='简介'><span>简介</span></h2><h3 id='输入文本或按键的功能有啥用呢-'><span>输入文本或按键的功能有啥用呢 ?  </span></h3><ol start='' ><li><span>输入成对符号并移动光标,  比如「 ... 」(...)</span></li><li><span>常用文本缩写,  比如可以让 yx 等于 </span><a href='mailto:youxiang@mail.com' target='_blank' class='url'>youxiang@mail.com</a></li><li><span>做一些简单的 </span><code>「 按键自动化 」</code><span>,  比如按一下分号键并输入 ver 就能查看系统版本</span></li><li><span>在阅读下面的文档前,  可以先看下分号缩写 gg、sk、ver 是怎么配置的</span></li></ol><p>&nbsp;</p><h2 id='例子'><span>例子</span></h2><h3 id='用-font-标签包裹选中的文本'><span>用 </span><span>&lt;</span><span>font&gt; 标签包裹选中的文本</span></h3><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="lisp"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="lisp"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.33333px; left: 12px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">^x</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="cm-comment">; 发送 Ctrl+X</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">sleep</span> <span class="cm-number">100</span> &nbsp; &nbsp;<span class="cm-comment">; d 100 ms, 等剪切板拿到复制的文本</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-comment">; {text} 前缀表示以文本模式发送,  这不会被输入法影响,  也不会解析 {enter} 之类的特殊代码</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">{text}&lt;span</span> <span class="cm-variable">alt=</span><span class="cm-string">"underline"</span><span class="cm-variable">&gt;&lt;/span&gt;</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span cm-text="" cm-zwsp="">
+</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">{left</span> <span class="cm-number">7</span><span class="cm-variable">}^v</span> &nbsp; &nbsp;<span class="cm-comment">; 移动光标、发送 Ctrl+V</span></span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 159px;"></div><div class="CodeMirror-gutters" style="display: none; height: 159px;"></div></div></div></pre><p>&nbsp;</p><h3 id='输入-abcde🐶-并复制粘贴两次'><span>输入「 abcde🐶 」并复制粘贴两次</span></h3><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="lisp"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="lisp"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.33333px; left: 12px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">abcd🐶</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">; 输入 abcd🐶</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">sleep</span> <span class="cm-number">100</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">; 等待 100 ms</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">+{home}</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">; 输入 Shift+Home 选中当前行</span></span></pre><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">sleep</span> <span class="cm-number">100</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">; 等待 100 ms</span></span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">^c{end}{enter}</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="cm-comment">; 输入 Ctrl+C ➤ End ➤ Enter</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">sleep</span> <span class="cm-number">100</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">; 等待 100 ms</span></span></pre><div class="" style="position: relative;"><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-variable">^v{space</span> <span class="cm-number">4</span><span class="cm-variable">}^v</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="cm-comment">; 输入 Ctrl+V ➤ 四下空格 ➤ Ctrl+V</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 159px;"></div><div class="CodeMirror-gutters" style="display: none; height: 159px;"></div></div></div></pre><p>&nbsp;</p><h2 id='参考文档'><span>参考文档</span></h2><h3 id='几个特殊符号'><span>几个特殊符号</span></h3><figure><table><thead><tr><th style='text-align:left;' ><span>符号</span></th><th style='text-align:left;' ><span>表示的按键</span></th></tr></thead><tbody><tr><td style='text-align:left;' ><span>^</span></td><td style='text-align:left;' ><span>Ctrl</span></td></tr><tr><td style='text-align:left;' ><span>+</span></td><td style='text-align:left;' ><span>Shift</span></td></tr><tr><td style='text-align:left;' ><span>!</span></td><td style='text-align:left;' ><span>Alt</span></td></tr><tr><td style='text-align:left;' ><span>#</span></td><td style='text-align:left;' ><span>Win</span></td></tr></tbody></table></figure><p>&nbsp;</p><h3 id='发送组合键'><span>发送组合键</span></h3><figure><table><thead><tr><th><span>代码</span></th><th><span>表示的组合键</span></th></tr></thead><tbody><tr><td><span>^c</span></td><td><span>Ctrl + C</span></td></tr><tr><td><span>#e</span></td><td><span>Win + E</span></td></tr><tr><td><span>^{end}</span></td><td><span>Ctrl + End</span></td></tr><tr><td><span>^!c</span></td><td><span>Ctrl + Alt + C</span></td></tr><tr><td><span>+!c</span></td><td><span>Shift + Alt + C</span></td></tr></tbody></table></figure><p>&nbsp;</p><h3 id='按键重复次数按下和弹起等待若干毫秒'><span>按键重复次数、按下和弹起、等待若干毫秒</span></h3><figure><table><thead><tr><th><span>代码</span></th><th><span>作用</span></th></tr></thead><tbody><tr><td><span>{enter 5}</span></td><td><span>按回车键 5 下</span></td></tr><tr><td><span>{left 3}</span></td><td><span>按左箭头 3 下</span></td></tr><tr><td><span>{lwin down}i{lwin up}</span></td><td><font color='#2E66FF'><span>打开设置:</span></font><br><span>按下 LWin ➤ 输入 i ➤ 松开 LWin</span></td></tr><tr><td><span>{lwin down}{e 2}{lwin up}</span></td><td><font color='#2E66FF'><span>打开两个文件管理器:</span></font><br><span>按下 LWin ➤ 输入两次 e ➤ 松开 LWin</span></td></tr><tr><td><span>#r</span><br><span>sleep 700</span><br><span>winver{enter}</span></td><td><font color='#2E66FF'><span>查看操作系统版本:</span></font><br><span>输入 Win+R ➤ 等待 700 毫秒 ➤ 输入 winver、回车键</span></td></tr></tbody></table></figure><p>&nbsp;</p><h3 id='特殊按键列表'><span>特殊按键列表</span></h3><ul><li><font color='#D05'><span>下表中列出了可以发送的特殊按键:</span></font></li><li><span>更多按键可以参考 AutoHotkey 文档: </span><a href='https://wyagd001.github.io/zh-cn/docs/commands/Send.htm#keynames'><span>link</span></a></li></ul><figure><table><thead><tr><th style='text-align:left;' ><span>按键名称</span></th><th style='text-align:left;' ><span>表示的按键</span></th></tr></thead><tbody><tr><td style='text-align:left;' ><span>{F1} - {F24}</span></td><td style='text-align:left;' ><span>功能键. 例如: {F12} 表示 F12.</span></td></tr><tr><td style='text-align:left;' ><code>`,</code></td><td style='text-align:left;' ><span>,</span></td></tr><tr><td style='text-align:left;' ><code>`;</code></td><td style='text-align:left;' ><span>;</span></td></tr><tr><td style='text-align:left;' ><code>``</code></td><td style='text-align:left;' ><span>`</span></td></tr><tr><td style='text-align:left;' ><code>`%</code></td><td style='text-align:left;' ><span>%</span></td></tr><tr><td style='text-align:left;' ><span>{!}</span></td><td style='text-align:left;' ><span>!</span></td></tr><tr><td style='text-align:left;' ><span>{#}</span></td><td style='text-align:left;' ><span>#</span></td></tr><tr><td style='text-align:left;' ><span>{+}</span></td><td style='text-align:left;' ><span>+</span></td></tr><tr><td style='text-align:left;' ><span>{^}</span></td><td style='text-align:left;' ><span>^</span></td></tr><tr><td style='text-align:left;' ><span>{{}</span></td><td style='text-align:left;' ><span>{</span></td></tr><tr><td style='text-align:left;' ><span>{}}</span></td><td style='text-align:left;' ><span>}</span></td></tr><tr><td style='text-align:left;' ><span>{Esc}</span></td><td style='text-align:left;' ><span>Esc</span></td></tr><tr><td style='text-align:left;' ><span>{Tab}</span></td><td style='text-align:left;' ><span>Tab</span></td></tr><tr><td style='text-align:left;' ><span>{Enter}</span></td><td style='text-align:left;' ><span>Enter (回车键)</span></td></tr><tr><td style='text-align:left;' ><span>{Space}</span></td><td style='text-align:left;' ><span>Space (空格键)</span></td></tr><tr><td style='text-align:left;' ><span>{BS}</span></td><td style='text-align:left;' ><span>Backspace (退格键)</span></td></tr><tr><td style='text-align:left;' ><span>{Del}</span></td><td style='text-align:left;' ><span>Delete (删除键)</span></td></tr><tr><td style='text-align:left;' ><span>{Ins}</span></td><td style='text-align:left;' ><span>Insert (插入键)</span></td></tr><tr><td style='text-align:left;' ><span>{Up}</span></td><td style='text-align:left;' ><span>↑ (键盘上的向上键)</span></td></tr><tr><td style='text-align:left;' ><span>{Down}</span></td><td style='text-align:left;' ><span>↓ (键盘上的向下键)</span></td></tr><tr><td style='text-align:left;' ><span>{Left}</span></td><td style='text-align:left;' ><span>← (键盘上的向左键)</span></td></tr><tr><td style='text-align:left;' ><span>{Right}</span></td><td style='text-align:left;' ><span>→ (键盘上的向右键)</span></td></tr><tr><td style='text-align:left;' ><span>{Home}</span></td><td style='text-align:left;' ><span>Home (编辑器中移动光标到行首)</span></td></tr><tr><td style='text-align:left;' ><span>{End}</span></td><td style='text-align:left;' ><span>End (编辑器中移动光标到行尾)</span></td></tr><tr><td style='text-align:left;' ><span>{PgUp}</span></td><td style='text-align:left;' ><span>PgUp (向上翻页)</span></td></tr><tr><td style='text-align:left;' ><span>{PgDn}</span></td><td style='text-align:left;' ><span>PgDn (向下翻页)</span></td></tr><tr><td style='text-align:left;' ><span>{LCtrl} 或 {RCtrl}</span></td><td style='text-align:left;' ><span>左 Ctrl 、右 Ctrl</span></td></tr><tr><td style='text-align:left;' ><span>{LAlt} 或 {RAlt}</span></td><td style='text-align:left;' ><span>左 Alt 、右 Alt</span></td></tr><tr><td style='text-align:left;' ><span>{LWin} 或 {RWin}</span></td><td style='text-align:left;' ><span>左 Win 、右 Win</span></td></tr><tr><td style='text-align:left;' ><span>{LShift} 或 {RShift}</span></td><td style='text-align:left;' ><span>左 Shift 、右 Shift</span></td></tr><tr><td style='text-align:left;' ><span>{AppsKey}</span></td><td style='text-align:left;' ><span>Menu (右键菜单)</span></td></tr><tr><td style='text-align:left;' ><span>{PrintScreen}</span></td><td style='text-align:left;' ><span>PrtScr (屏幕截图到剪切板)</span></td></tr></tbody></table></figure><p>&nbsp;</p></div></div>
 </body>
 </html>
