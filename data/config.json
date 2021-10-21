@@ -1617,14 +1617,14 @@
             "workingDir": "",
             "cmdArgs": "D:\\MyFiles\\MyKeymap"
         },
-        "rm": {
+        "ir": {
             "type": "启动程序或激活窗口",
             "value": "\n    path = %A_Programs%\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk\n    ActivateOrRun(\"room-api ahk_exe idea64.exe\", path, \"D:\\work\\room-api\", \"\")\n    return",
             "toActivate": "room-api ahk_exe idea64.exe",
             "toRun": "%idea%",
             "cmdArgs": "D:\\work\\room-api"
         },
-        "ro": {
+        "io": {
             "type": "启动程序或激活窗口",
             "value": "\n    path = %A_Programs%\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk\n    ActivateOrRun(\"room-order-api ahk_exe idea64.exe\", path, \"D:\\work\\room-order-api\", \"\")\n    return",
             "toActivate": "room-order-api ahk_exe idea64.exe",
@@ -1665,8 +1665,8 @@
         "md",
         "cs",
         "cm",
-        "rm",
-        "ro"
+        "ir",
+        "io"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",
