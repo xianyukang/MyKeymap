@@ -250,9 +250,9 @@
         },
         "J": {
             "type": "启动程序或激活窗口",
-            "value": "\n    path = %A_Programs%\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk\n    ActivateOrRun(\"ahk_exe idea64.exe\", path)\n    return",
+            "value": "\n    path = %A_Programs%\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk\n    ActivateOrRun(\"ahk_exe idea64.exe\", path, \"\", \"\")\n    return",
             "toActivate": "ahk_exe idea64.exe",
-            "toRun": "%A_Programs%\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk"
+            "toRun": "%idea%"
         },
         "K": {
             "type": "什么也不做",
@@ -1580,6 +1580,57 @@
             "value": "\n    path = %A_ProgramsCommon%\\Google Chrome.lnk\n    ActivateOrRun(\"\", path, \"\", \"\")\n    return",
             "toRun": "%A_ProgramsCommon%\\Google Chrome.lnk",
             "toActivate": ""
+        },
+        "mm": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = C:\\Program Files\\Typora\\Typora.exe\n    ActivateOrRun(\"MyKeymap-Roadmap.md - Typora\", path, \"D:\\notes\\MyKeymap-Roadmap.md\", \"\")\n    return",
+            "toActivate": "MyKeymap-Roadmap.md - Typora",
+            "toRun": "C:\\Program Files\\Typora\\Typora.exe",
+            "cmdArgs": "D:\\notes\\MyKeymap-Roadmap.md"
+        },
+        "wo": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = C:\\Program Files\\Typora\\Typora.exe\n    ActivateOrRun(\"working.md - Typora\", path, \"D:\\notes\\working.md\", \"\")\n    return",
+            "toActivate": "working.md - Typora",
+            "cmdArgs": "D:\\notes\\working.md",
+            "toRun": "C:\\Program Files\\Typora\\Typora.exe"
+        },
+        "md": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = C:\\Program Files\\Typora\\Typora.exe\n    ActivateOrRun(\"MyKeymap.md - Typora\", path, \"D:\\project\\my_site\\docs\\MyKeymap.md\", \"\")\n    return",
+            "toRun": "C:\\Program Files\\Typora\\Typora.exe",
+            "toActivate": "MyKeymap.md - Typora",
+            "cmdArgs": "D:\\project\\my_site\\docs\\MyKeymap.md"
+        },
+        "cs": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = %A_Programs%\\Visual Studio Code\\Visual Studio Code.lnk\n    ActivateOrRun(\"my_site - Visual Studio Code\", path, \"D:\\project\\my_site\", \"\")\n    return",
+            "cmdArgs": "D:\\project\\my_site",
+            "toActivate": "my_site - Visual Studio Code",
+            "toRun": "%code%"
+        },
+        "cm": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = %A_Programs%\\Visual Studio Code\\Visual Studio Code.lnk\n    ActivateOrRun(\"MyKeymap - Visual Studio Code\", path, \"D:\\MyFiles\\MyKeymap\", \"\")\n    return",
+            "toActivate": "MyKeymap - Visual Studio Code",
+            "toRun": "%code%",
+            "workingDir": "",
+            "cmdArgs": "D:\\MyFiles\\MyKeymap"
+        },
+        "rm": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = %A_Programs%\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk\n    ActivateOrRun(\"room-api ahk_exe idea64.exe\", path, \"D:\\work\\room-api\", \"\")\n    return",
+            "toActivate": "room-api ahk_exe idea64.exe",
+            "toRun": "%idea%",
+            "cmdArgs": "D:\\work\\room-api"
+        },
+        "ro": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = %A_Programs%\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk\n    ActivateOrRun(\"room-order-api ahk_exe idea64.exe\", path, \"D:\\work\\room-order-api\", \"\")\n    return",
+            "toActivate": "room-order-api ahk_exe idea64.exe",
+            "toRun": "%idea%",
+            "cmdArgs": "D:\\work\\room-order-api",
+            "workingDir": ""
         }
     },
     "CapslockAbbrKeys": [
@@ -1608,7 +1659,14 @@
         "ee",
         "dm",
         "rex",
-        "fw"
+        "fw",
+        "mm",
+        "wo",
+        "md",
+        "cs",
+        "cm",
+        "rm",
+        "ro"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",
@@ -1640,6 +1698,14 @@
         {
             "key": "config",
             "value": "D:\\坚果云\\my-config"
+        },
+        {
+            "key": "code",
+            "value": "%A_Programs%\\Visual Studio Code\\Visual Studio Code.lnk"
+        },
+        {
+            "key": "idea",
+            "value": "%A_Programs%\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk"
         }
     ],
     "Settings": {

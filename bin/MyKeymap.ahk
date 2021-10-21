@@ -79,7 +79,7 @@ global typoTip := new TypoTipWindow()
 semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,sl,zk,dk,jt,gt,lx,sm,zh,gg,ver,xm,static,fs,fd,ff")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee,dm,rex,fw")
+capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee,dm,rex,fw,mm,wo,md,cs,cm,rm,ro")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -409,7 +409,7 @@ U::
     return
 J::
     path = %A_Programs%\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk
-    ActivateOrRun("ahk_exe idea64.exe", path)
+    ActivateOrRun("ahk_exe idea64.exe", path, "", "")
     return
 S::
     path = %A_Programs%\Visual Studio Code\Visual Studio Code.lnk
@@ -616,6 +616,26 @@ return
 execCapslockAbbr(typo) {
     switch typo 
     {
+        case "rm":
+           
+    path = %A_Programs%\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk
+    ActivateOrRun("room-api ahk_exe idea64.exe", path, "D:\work\room-api", "")
+    return
+        case "ro":
+           
+    path = %A_Programs%\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk
+    ActivateOrRun("room-order-api ahk_exe idea64.exe", path, "D:\work\room-order-api", "")
+    return
+        case "cs":
+           
+    path = %A_Programs%\Visual Studio Code\Visual Studio Code.lnk
+    ActivateOrRun("my_site - Visual Studio Code", path, "D:\project\my_site", "")
+    return
+        case "cm":
+           
+    path = %A_Programs%\Visual Studio Code\Visual Studio Code.lnk
+    ActivateOrRun("MyKeymap - Visual Studio Code", path, "D:\MyFiles\MyKeymap", "")
+    return
         case "fw":
            
     path = %A_ProgramsCommon%\Google Chrome.lnk
@@ -630,6 +650,21 @@ execCapslockAbbr(typo) {
            
     path = C:\Program Files\Google\Chrome\Application\chrome.exe
     ActivateOrRun("Google 翻译", path, "--app=https://translate.google.cn/?op=translate&sl=auto&tl=zh-CN&text=nice", "")
+    return
+        case "mm":
+           
+    path = C:\Program Files\Typora\Typora.exe
+    ActivateOrRun("MyKeymap-Roadmap.md - Typora", path, "D:\notes\MyKeymap-Roadmap.md", "")
+    return
+        case "md":
+           
+    path = C:\Program Files\Typora\Typora.exe
+    ActivateOrRun("MyKeymap.md - Typora", path, "D:\project\my_site\docs\MyKeymap.md", "")
+    return
+        case "wo":
+           
+    path = C:\Program Files\Typora\Typora.exe
+    ActivateOrRun("working.md - Typora", path, "D:\notes\working.md", "")
     return
         case "no":
            
