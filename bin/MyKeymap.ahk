@@ -52,7 +52,6 @@ allHotkeys.Push("*capslock")
 allHotkeys.Push("*;")
 allHotkeys.Push("RButton")
 
-
 Menu, Tray, NoStandard
 Menu, Tray, Add, 暂停, trayMenuHandler
 Menu, Tray, Add, 退出, trayMenuHandler
@@ -146,6 +145,7 @@ RAlt::LCtrl
         send {blind}3 
     enableOtherHotkey(thisHotkey)
     return
+
 
 RButton::
 enterRButtonMode()
@@ -268,6 +268,7 @@ return
 *O::send {blind}{space 4}
 *V::send {blind}|
 *T::send {blind}~
+
 
 
 #if DigitMode

@@ -93,7 +93,7 @@ export default {
           { key: '/', disabled: false, used: true, disableAt: ['Semicolon', 'Mode9'] },
         ],
         [
-          { key: 'Space', disabled: false, used: false, disableAt: ['CapslockSpace', 'Capslock'] },
+          { key: 'Space', disabled: false, used: false, disableAt: ['CapslockSpace', 'Capslock', 'SpaceMode'] },
         ],
       ],
     }

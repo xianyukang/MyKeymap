@@ -7,6 +7,7 @@
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title id="site-title"> MyKeymap </v-list-item-title>
+          <v-list-item-text id="site-text"> version: 1.0.8 </v-list-item-text>
         </v-list-item-content>
       </v-list-item>
 
@@ -30,6 +31,9 @@
     </v-navigation-drawer>
 
     <v-main id="main">
+      <v-card v-if="!currentModeEnabled" outlined max-width="810" dark id="warn" color="#555">
+        <v-card-title>此模式尚未开启,  若想使用需要在设置中打开</v-card-title>
+      </v-card>
       <router-view v-if="config" />
     </v-main>
 
@@ -58,7 +62,36 @@ export default {
       this.saveConfig()
     })
   },
-
+  computed: {
+    currentModeEnabled() {
+      if (!this.$store.state.config) return true
+      if (this.$route.name.startsWith('Capslock')) {
+        return this.$store.state.config.Settings['enableCapslockMode']
+      }
+      if (this.$route.name.startsWith('Semicolon')) {
+        return this.$store.state.config.Settings['enableSemicolonMode']
+      }
+      if (this.$route.name.startsWith('SpaceMode')) {
+        return this.$store.state.config.Settings['enableSpaceMode']
+      }
+      if (this.$route.name.startsWith('JMode')) {
+        return this.$store.state.config.Settings['enableJMode']
+      }
+      if (this.$route.name.startsWith('Mode3')) {
+        return this.$store.state.config.Settings['enableMode3']
+      }
+      if (this.$route.name.startsWith('Mode9')) {
+        return this.$store.state.config.Settings['enableMode9']
+      }
+      if (this.$route.name.startsWith('LButtonMode')) {
+        return this.$store.state.config.Settings['enableLButtonMode']
+      }
+      if (this.$route.name.startsWith('RButtonMode')) {
+        return this.$store.state.config.Settings['enableRButtonMode']
+      }
+      return true 
+    }
+  },
   data: () => ({
     drawer: true,
     items: [
@@ -66,7 +99,8 @@ export default {
       { title: 'Capslock + F', icon: 'mdi-alpha-c-box', to: 'CapslockF', color: 'purple' },
       { title: 'Capslock + Space', icon: 'mdi-alpha-c-box', to: 'CapslockSpace', color: 'purple' },
       { title: 'Capslock 缩写', icon: 'mdi-alpha-c-box', to: 'CapslockAbbr', color: 'purple' },
-      { title: 'J 模式', icon: 'mdi-alpha-j-box', to: 'JMode', color: 'blue' },
+      { title: '空格模式', icon: 'mdi-alpha-s-box', to: 'SpaceMode', color: '#d05' },
+      { title: 'J 模式', icon: 'mdi-alpha-j-box', to: 'JMode', color: '#d05' },
       { title: '分号模式', icon: 'mdi-rhombus', to: 'Semicolon', color: 'blue' },
       { title: '分号缩写', icon: 'mdi-rhombus', to: 'SemicolonAbbr', color: 'blue' },
       { title: '3 模式', icon: 'mdi-numeric-3-box-outline', to: 'Mode3', color: 'red' },
@@ -84,8 +118,6 @@ export default {
       this.$store.dispatch('saveConfig')
     },
   },
-
-  computed: {},
 }
 </script>
 
@@ -124,5 +156,11 @@ body * {
 }
 #snack-bar {
   margin-bottom: 110px;
+}
+
+#warn {
+  margin: 20px;
+  margin-top: 5px;
+  margin-bottom: 1px;
 }
 </style>

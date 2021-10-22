@@ -19,13 +19,16 @@
                 <v-switch class="switch" v-model="currConfig()['enableCapslockMode']" label="Capslock"></v-switch>
               </v-col>
               <v-col cols="4">
-                <v-switch class="switch" v-model="currConfig()['enableSemicolonMode']" label="分号模式"></v-switch>
+                <v-switch class="switch" v-model="currConfig()['enableSemicolonMode']" label="分号相关"></v-switch>
               </v-col>
               <v-col cols="4">
                 <v-switch class="switch" v-model="currConfig()['enableLButtonMode']" label="鼠标左键"></v-switch>
               </v-col>
               <v-col cols="4">
                 <v-switch class="switch" v-model="currConfig()['enableRButtonMode']" label="鼠标右键"></v-switch>
+              </v-col>
+              <v-col cols="4">
+                <v-switch class="switch" v-model="currConfig()['enableSpaceMode']" label="空格模式"></v-switch>
               </v-col>
             </v-row>
           </v-card-text>

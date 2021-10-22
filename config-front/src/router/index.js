@@ -33,6 +33,7 @@ const routes = [
   keymap('Mode3R'),
   keymap('Mode9'),
   keymap('CapslockSpace'),
+  keymap('SpaceMode'),
   keymap('JMode'),
   keymap('Semicolon'),
   keymap('RButtonMode'),

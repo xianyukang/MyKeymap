@@ -9,7 +9,7 @@
       <key-value-config @hideDialog="showConfigPathVariableDialog = false" />
     </v-dialog>
 
-    <v-card min-height="630" width="790" elevation="5" class="action-config">
+    <v-card min-height="620" width="790" elevation="5" class="action-config">
       <v-card-title>
         <v-select
           class="action-select"
@@ -18,7 +18,7 @@
           outlined
           @change="clearValue"
           :menu-props="{ maxHeight: 900 }"
-          :disabled="($route.name === 'CapslockSpace' || $route.name === 'Capslock') && currentKey === 'Space'"
+          :disabled="($route.name === 'CapslockSpace' || $route.name === 'Capslock' || $route.name === 'SpaceMode') && currentKey === 'Space'"
         ></v-select>
       </v-card-title>
       <v-card-text>

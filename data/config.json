@@ -1736,7 +1736,9 @@
         "fastMoveRepeat": "70",
         "fastMoveSingle": "110",
         "slowMoveRepeat": "13",
-        "slowMoveSingle": "10"
+        "slowMoveSingle": "10",
+        "SpaceMode": false,
+        "enableSpaceMode": false
     },
     "CapslockSpace": {
         "Space": {
@@ -1850,6 +1852,136 @@
         "N": {
             "type": "启动程序或激活窗口",
             "value": "\n    path = notepad.exe\n    ActivateOrRun(\"记事本\", path, \"\", \"\")\n    return",
+            "toActivate": "记事本",
+            "toRun": "notepad.exe"
+        },
+        "M": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        ",": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        ".": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "/": {
+            "type": "什么也不做",
+            "value": ""
+        }
+    },
+    "SpaceMode": {
+        "Space": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "Q": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "W": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "E": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "R": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "T": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "Y": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "U": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "I": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "O": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "P": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "A": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "S": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "D": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "F": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = notepad.exe\n    workingDir = \n    ActivateOrRun(\"记事本\", path, \"\", workingDir)\n    return",
+            "toActivate": "记事本",
+            "toRun": "notepad.exe"
+        },
+        "G": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "H": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "J": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "K": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "L": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        ";": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "Z": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "X": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "C": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "V": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "B": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "N": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = notepad.exe\n    workingDir = \n    ActivateOrRun(\"记事本\", path, \"\", workingDir)\n    return",
             "toActivate": "记事本",
             "toRun": "notepad.exe"
         },

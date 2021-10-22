@@ -69,7 +69,9 @@ allHotkeys.Push("~LButton")
 {% if Settings.RButtonMode %}
 allHotkeys.Push("RButton")
 {% endif %}
-
+{% if Settings.SpaceMode %}
+allHotkeys.Push("*Space")
+{% endif %}
 
 Menu, Tray, NoStandard
 Menu, Tray, Add, 暂停, trayMenuHandler
@@ -187,6 +189,19 @@ RAlt::LCtrl
     return
 {% endif %}
 
+{% if Settings.SpaceMode %}
+*Space::
+    thisHotkey := A_ThisHotkey
+    disableOtherHotkey(thisHotkey)
+    SpaceMode := true
+    keywait Space 
+    SpaceMode := false
+    if (A_PriorKey == "Space" && A_TimeSinceThisHotkey < 350)
+        send {blind}{Space} 
+    enableOtherHotkey(thisHotkey)
+    return
+{% endif %}
+
 {% if Settings.RButtonMode %}
 RButton::
 enterRButtonMode()
@@ -273,6 +288,15 @@ enterLButtonMode()
 {% if Settings.SemicolonMode %}
 #if PunctuationMode
 {% for key,value in Semicolon.items()|sort(attribute="1.value") %}
+    {% if value.value %}
+{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
+    {% endif %}
+{% endfor %}
+{% endif %}
+
+{% if Settings.SpaceMode %}
+#if SpaceMode
+{% for key,value in SpaceMode.items()|sort(attribute="1.value") %}
     {% if value.value %}
 {{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
     {% endif %}
@@ -428,12 +452,14 @@ WheelDown::send ^{tab}
 execSemicolonAbbr(typo) {
     switch typo 
     {
+{% if Settings.SemicolonMode %}
 {% for key,value in SemicolonAbbr.items()|sort(attribute="1.value") %}
     {% if value.value %}
         case {{{ key|ahkString }}}:
             {{{ value.value }}}
     {% endif %}
 {% endfor %}
+{% endif %}
         default: 
             return false
     }
@@ -443,12 +469,14 @@ execSemicolonAbbr(typo) {
 execCapslockAbbr(typo) {
     switch typo 
     {
+{% if Settings.CapslockMode %}
 {% for key,value in CapslockAbbr.items()|sort(attribute="1.value") %}
     {% if value.value %}
         case {{{ key|ahkString }}}:
            {{{ value.value }}}
     {% endif %}
 {% endfor %}
+{% endif %}
         default: 
             return false
     }
