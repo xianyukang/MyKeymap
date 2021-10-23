@@ -396,9 +396,10 @@ Esc::exitMouseMode()
 #if FMode
 f::return
 
-L::
+K::
     path = %A_ProgramFiles%\DAUM\PotPlayer\PotPlayerMini64.exe
-    ActivateOrRun("ahk_class PotPlayer64", path)
+    workingDir = 
+    ActivateOrRun("ahk_class PotPlayer64", path, "", workingDir)
     return
 Q::
     path = %A_ProgramFiles%\Everything\Everything.exe
@@ -436,9 +437,10 @@ I::
     path = C:\Program Files\Typora\Typora.exe
     ActivateOrRun("ahk_exe Typora.exe", path)
     return
-N::
+L::
     path = C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Excel.lnk
-    ActivateOrRun("ahk_exe EXCEL.EXE", path, "", "")
+    workingDir = 
+    ActivateOrRun("ahk_exe EXCEL.EXE", path, "", workingDir)
     return
 P::
     path = C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk

@@ -7,7 +7,7 @@
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title id="site-title"> MyKeymap </v-list-item-title>
-          <v-list-item-text id="site-text"> version: 1.0.8 </v-list-item-text>
+          <v-list-item-subtitle > version: 1.0.8 </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
@@ -98,7 +98,7 @@ export default {
       { title: 'Capslock', icon: 'mdi-alpha-c-box', to: 'Capslock', color: 'purple' },
       { title: 'Capslock + F', icon: 'mdi-alpha-c-box', to: 'CapslockF', color: 'purple' },
       { title: 'Capslock + Space', icon: 'mdi-alpha-c-box', to: 'CapslockSpace', color: 'purple' },
-      { title: 'Capslock 缩写', icon: 'mdi-alpha-c-box', to: 'CapslockAbbr', color: 'purple' },
+      { title: 'Capslock 指令', icon: 'mdi-alpha-c-box', to: 'CapslockAbbr', color: 'purple' },
       { title: '空格模式', icon: 'mdi-alpha-s-box', to: 'SpaceMode', color: '#d05' },
       { title: 'J 模式', icon: 'mdi-alpha-j-box', to: 'JMode', color: '#d05' },
       { title: '分号模式', icon: 'mdi-rhombus', to: 'Semicolon', color: 'blue' },
@@ -151,7 +151,7 @@ body * {
   padding-left: 115px;
 }
 #site-title {
-  font-size: 1.68em;
+  font-size: 1.60em;
   font-weight: 500;
 }
 #snack-bar {
@@ -162,5 +162,9 @@ body * {
   margin: 20px;
   margin-top: 5px;
   margin-bottom: 1px;
+}
+
+.v-navigation-drawer__content::-webkit-scrollbar { 
+  width: 0 !important 
 }
 </style>

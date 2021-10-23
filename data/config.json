@@ -255,14 +255,16 @@
             "toRun": "%idea%"
         },
         "K": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = %A_ProgramFiles%\\DAUM\\PotPlayer\\PotPlayerMini64.exe\n    workingDir = \n    ActivateOrRun(\"ahk_class PotPlayer64\", path, \"\", workingDir)\n    return",
+            "toRun": "%A_ProgramFiles%\\DAUM\\PotPlayer\\PotPlayerMini64.exe",
+            "toActivate": "ahk_class PotPlayer64"
         },
         "L": {
             "type": "启动程序或激活窗口",
-            "value": "\n    path = %A_ProgramFiles%\\DAUM\\PotPlayer\\PotPlayerMini64.exe\n    ActivateOrRun(\"ahk_class PotPlayer64\", path)\n    return",
-            "toActivate": "ahk_class PotPlayer64",
-            "toRun": "%A_ProgramFiles%\\DAUM\\PotPlayer\\PotPlayerMini64.exe"
+            "value": "\n    path = C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Excel.lnk\n    workingDir = \n    ActivateOrRun(\"ahk_exe EXCEL.EXE\", path, \"\", workingDir)\n    return",
+            "toActivate": "ahk_exe EXCEL.EXE",
+            "toRun": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Excel.lnk"
         },
         ";": {
             "type": "什么也不做",
@@ -291,10 +293,8 @@
             "value": ""
         },
         "N": {
-            "type": "启动程序或激活窗口",
-            "value": "\n    path = C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Excel.lnk\n    ActivateOrRun(\"ahk_exe EXCEL.EXE\", path, \"\", \"\")\n    return",
-            "toRun": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Excel.lnk",
-            "toActivate": "ahk_exe EXCEL.EXE"
+            "type": "什么也不做",
+            "value": ""
         },
         "M": {
             "type": "什么也不做",
