@@ -8,6 +8,8 @@ from flask import Flask
 from flask import render_template
 from ahk_script import AhkScript
 from flask_cors import CORS
+# from multiprocessing import Process
+import traceback
 import subprocess
 import sys
 
@@ -23,6 +25,25 @@ import logging
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 
+# def browser_open(url):
+#     import webbrowser
+#     webbrowser.open_new(url)
+
+# def get_random_port():
+#     import socket
+#     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#     sock.bind(('127.0.0.1', 0))
+#     port = sock.getsockname()[1]
+#     sock.close()
+#     return port
+
+def print_banner(url):
+    print()
+    print('   ------------------------------------------------------------------')
+    print(f'   1. 打开浏览器访问 {url} 修改 MyKeyamp 的配置')
+    print('   2. 保存配置后需要按 alt+\' 重启 MyKeymap (这里的\'是单引号键) ')
+    print('   3. 修改完 MyKeymap 的配置后即可关闭本窗口')
+    print('   ------------------------------------------------------------------')
 
 @app.route('/', methods=['GET'])
 def index_page():
@@ -58,30 +79,60 @@ def execute():
         subprocess.Popen(val)
     return command
 
-def serveApi():
+def dev_api():
+    print_banner('http://127.0.0.1:12333')
+    # os.environ['WERKZEUG_RUN_MAIN'] = 'true'    # 关掉 flask 启动消息
+    app.run(host="127.0.0.1", port=12333, debug=True, threaded=True)
 
-    # os.system('chcp 65001')
-    os.system('cls')
-    print()
-    print('   ------------------------------------------------------------------')
-    print('   1. 打开浏览器访问 http://127.0.0.1:12333 修改 MyKeyamp 的配置')
-    print('   2. 保存配置后需要按 alt+\' 重启 MyKeymap (这里的\'是单引号键) ')
-    print('   3. 修改完 MyKeymap 的配置后即可关闭本窗口')
-    print('   ------------------------------------------------------------------')
-    script_compiled = getattr(sys, 'frozen', False)
-    if script_compiled:
-        app.run(host="127.0.0.1", port=12333, debug=False, threaded=True)
-    else:
-        # os.environ['WERKZEUG_RUN_MAIN'] = 'true'    # 关掉 flask 启动消息
-        app.run(host="127.0.0.1", port=12333, debug=True, threaded=True)
+def pro_api(port=12333):
+    app.run(host="127.0.0.1", port=port, debug=False, threaded=True)
 
-if __name__ == '__main__':
+def main():
     arg = '--server'
     if len(sys.argv) >= 2:
         arg = sys.argv[1]
     if (arg == '--server'):
-        serveApi()
+        script_compiled = getattr(sys, 'frozen', False)
+        if script_compiled:
+            pro_api()
+        else:
+            dev_api()
     elif (arg == '--rain'):
-        # Windows 中需要 pip.exe install windows-curses
+        # 获取随机端口避免端口冲突
+        # port = get_random_port()
+        # url = f'http://127.0.0.1:{port}'
+
+        # 启动后端服务
+        # p = Process(target=pro_api, args=(port,))
+        # p.start()
+        # browser_open(url)
+
         from unimatrix import startRain
         startRain()
+
+if __name__ == '__main__':
+    try:
+        main()
+    except Exception as e:
+        error_log = traceback.format_exc()
+        with open('error.txt', 'a') as f:
+            f.write('\n')
+            f.write(str(error_log))
+        print(error_log)
+        sys.exit(1)
+
+
+# python 中文主机名 bug
+# https://blog.csdn.net/qq_38161040/article/details/119416321
+# getfqdn() 这个方法是为了获取包含域名的计算机名,  当主机名包含中文时这个函数会报错
+# 简单的解决办法是修改主机名不包含中文,  但我不可能让用户去改主机名呀,  太不友好了
+# 所以修改 socket.py 的 getfqdn() 的源码:
+# 整个函数包一个 try-except, 加一个降级逻辑,  如果 gethostbyaddr() 报错则只返回 gethostname()
+'''
+    try:
+        return gethostbyaddr()
+    except Exception as e:
+        print(e)
+        return gethostname()
+''' 
+
