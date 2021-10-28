@@ -210,6 +210,12 @@ enterRButtonMode()
 *Space::
 send {blind}{enter}
 return
+*I::
+send, {blind}ji
+return
+*.::
+send, {blind}{insert}
+return
 *W::send {blind}+{tab}
 *Z::send {blind}{appskey}
 *C::send {blind}{backspace}
@@ -218,7 +224,6 @@ return
 *G::send {blind}{end}
 *X::send {blind}{esc}
 *A::send {blind}{home}
-*I::send {blind}{insert}
 *S::send {blind}{left}
 *T::send {blind}{pgdn}
 *Q::send {blind}{pgup}

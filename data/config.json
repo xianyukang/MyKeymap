@@ -784,8 +784,8 @@
         },
         "I": {
             "type": "输入文本或按键",
-            "value": "send {blind}{insert}",
-            "keysToSend": "{insert}",
+            "value": "\nsend, {blind}ji\nreturn",
+            "keysToSend": "ji",
             "prefix": "*"
         },
         "O": {
@@ -887,8 +887,10 @@
             "value": ""
         },
         ".": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "输入文本或按键",
+            "value": "\nsend, {blind}{insert}\nreturn",
+            "keysToSend": "{insert}",
+            "prefix": "*"
         },
         "/": {
             "type": "什么也不做",
