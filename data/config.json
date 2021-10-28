@@ -1712,7 +1712,7 @@
     ],
     "Settings": {
         "LButtonMode": false,
-        "enableLButtonMode": true,
+        "enableLButtonMode": false,
         "enableRButtonMode": true,
         "runAsAdmin": true,
         "enable3Mode": true,
@@ -1721,7 +1721,7 @@
         "enableCapslockMode": true,
         "enableSemicolonMode": true,
         "enableMode3": true,
-        "enableMode9": true,
+        "enableMode9": false,
         "Mode3": true,
         "Mode9": false,
         "JMode": true,
@@ -1740,7 +1740,9 @@
         "slowMoveRepeat": "13",
         "slowMoveSingle": "10",
         "SpaceMode": false,
-        "enableSpaceMode": false
+        "enableSpaceMode": false,
+        "enableTabMode": true,
+        "TabMode": true
     },
     "CapslockSpace": {
         "Space": {
@@ -1960,6 +1962,140 @@
         ";": {
             "type": "什么也不做",
             "value": ""
+        },
+        "Z": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "X": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "C": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "V": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "B": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "N": {
+            "type": "启动程序或激活窗口",
+            "value": "\n    path = notepad.exe\n    workingDir = \n    ActivateOrRun(\"记事本\", path, \"\", workingDir)\n    return",
+            "toActivate": "记事本",
+            "toRun": "notepad.exe"
+        },
+        "M": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        ",": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        ".": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "/": {
+            "type": "什么也不做",
+            "value": ""
+        }
+    },
+    "TabMode": {
+        "Space": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "Q": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "W": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "E": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "R": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "T": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "Y": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "U": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "I": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "O": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "P": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "A": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "S": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "D": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "F": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "G": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "H": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "J": {
+            "type": "输入文本或按键",
+            "value": "\nsend, {blind}{left}\nreturn",
+            "keysToSend": "{left}",
+            "prefix": "*"
+        },
+        "K": {
+            "type": "什么也不做",
+            "value": ""
+        },
+        "L": {
+            "type": "输入文本或按键",
+            "value": "\nsend, {blind}{right}\nreturn",
+            "keysToSend": "{right}",
+            "prefix": "*"
+        },
+        ";": {
+            "type": "输入文本或按键",
+            "value": "\nsend, {blind}{bs}\nreturn",
+            "keysToSend": "{bs}",
+            "prefix": "*"
         },
         "Z": {
             "type": "什么也不做",

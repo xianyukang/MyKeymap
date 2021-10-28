@@ -72,6 +72,9 @@ allHotkeys.Push("RButton")
 {% if Settings.SpaceMode %}
 allHotkeys.Push("*Space")
 {% endif %}
+{% if Settings.TabMode %}
+allHotkeys.Push("Tab")
+{% endif %}
 
 Menu, Tray, NoStandard
 Menu, Tray, Add, 暂停, trayMenuHandler
@@ -202,6 +205,19 @@ RAlt::LCtrl
     return
 {% endif %}
 
+{% if Settings.TabMode %}
+Tab::
+    thisHotkey := A_ThisHotkey
+    disableOtherHotkey(thisHotkey)
+    TabMode := true
+    keywait Tab 
+    TabMode := false
+    if (A_PriorKey == "Tab" && A_TimeSinceThisHotkey < 350)
+        send {blind}{Tab} 
+    enableOtherHotkey(thisHotkey)
+    return
+{% endif %}
+
 {% if Settings.RButtonMode %}
 RButton::
 enterRButtonMode()
@@ -297,6 +313,15 @@ enterLButtonMode()
 {% if Settings.SpaceMode %}
 #if SpaceMode
 {% for key,value in SpaceMode.items()|sort(attribute="1.value") %}
+    {% if value.value %}
+{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
+    {% endif %}
+{% endfor %}
+{% endif %}
+
+{% if Settings.TabMode %}
+#if TabMode
+{% for key,value in TabMode.items()|sort(attribute="1.value") %}
     {% if value.value %}
 {{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
     {% endif %}

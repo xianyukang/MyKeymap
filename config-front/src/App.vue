@@ -7,14 +7,14 @@
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title id="site-title"> MyKeymap </v-list-item-title>
-          <v-list-item-subtitle > version: 1.0.11 </v-list-item-subtitle>
+          <v-list-item-subtitle> version: 1.0.13 </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
       <v-divider></v-divider>
 
       <v-list nav>
-        <v-list-item class="nav-item" v-for="item in items" :key="item.title" :to="{ name: item.to }">
+        <v-list-item class="nav-item" v-for="item in enabledItems" :key="item.title" :to="{ name: item.to }">
           <v-list-item-icon>
             <v-icon class="nav-tab-icon" :color="item.color">{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -31,8 +31,8 @@
     </v-navigation-drawer>
 
     <v-main id="main">
-      <v-card v-if="!currentModeEnabled" outlined max-width="810" dark id="warn" color="#555">
-        <v-card-title>此模式尚未开启,  若想使用需要在设置中打开</v-card-title>
+      <v-card v-if="!currentModeEnabled" outlined max-width="100%" dark id="warn" color="#555">
+        <v-card-title>此模式尚未开启, 若想使用需要在设置中打开</v-card-title>
       </v-card>
       <router-view v-if="config" />
     </v-main>
@@ -65,31 +65,13 @@ export default {
   computed: {
     currentModeEnabled() {
       if (!this.$store.state.config) return true
-      if (this.$route.name.startsWith('Capslock')) {
-        return this.$store.state.config.Settings['enableCapslockMode']
-      }
-      if (this.$route.name.startsWith('Semicolon')) {
-        return this.$store.state.config.Settings['enableSemicolonMode']
-      }
-      if (this.$route.name.startsWith('SpaceMode')) {
-        return this.$store.state.config.Settings['enableSpaceMode']
-      }
-      if (this.$route.name.startsWith('JMode')) {
-        return this.$store.state.config.Settings['enableJMode']
-      }
-      if (this.$route.name.startsWith('Mode3')) {
-        return this.$store.state.config.Settings['enableMode3']
-      }
-      if (this.$route.name.startsWith('Mode9')) {
-        return this.$store.state.config.Settings['enableMode9']
-      }
-      if (this.$route.name.startsWith('LButtonMode')) {
-        return this.$store.state.config.Settings['enableLButtonMode']
-      }
-      if (this.$route.name.startsWith('RButtonMode')) {
-        return this.$store.state.config.Settings['enableRButtonMode']
-      }
-      return true 
+      let mode = this.$route.name
+      let settings = this.$store.state.config.Settings;
+      return this.isModeEnabled(mode, settings)
+    },
+    enabledItems() {
+      if (!this.$store.state.config) return this.items
+      return this.items.filter(x => this.isModeEnabled(x.to, this.$store.state.config.Settings))
     }
   },
   data: () => ({
@@ -99,6 +81,7 @@ export default {
       { title: 'Capslock + F', icon: 'mdi-alpha-c-box', to: 'CapslockF', color: 'purple' },
       { title: 'Capslock + Space', icon: 'mdi-alpha-c-box', to: 'CapslockSpace', color: 'purple' },
       { title: 'Capslock 指令', icon: 'mdi-alpha-c-box', to: 'CapslockAbbr', color: 'purple' },
+      { title: 'Tab 模式', icon: 'mdi-alpha-t-box', to: 'TabMode', color: '#d05' },
       { title: '空格模式', icon: 'mdi-alpha-s-box', to: 'SpaceMode', color: '#d05' },
       { title: 'J 模式', icon: 'mdi-alpha-j-box', to: 'JMode', color: '#d05' },
       { title: '分号模式', icon: 'mdi-rhombus', to: 'Semicolon', color: 'blue' },
@@ -117,12 +100,41 @@ export default {
     saveConfig() {
       this.$store.dispatch('saveConfig')
     },
+    isModeEnabled(mode, settings) {
+      if (mode.startsWith('Capslock')) {
+        return settings['enableCapslockMode']
+      }
+      if (mode.startsWith('Semicolon')) {
+        return settings['enableSemicolonMode']
+      }
+      if (mode.startsWith('SpaceMode')) {
+        return settings['enableSpaceMode']
+      }
+      if (mode.startsWith('JMode')) {
+        return settings['enableJMode']
+      }
+      if (mode.startsWith('Mode3')) {
+        return settings['enableMode3']
+      }
+      if (mode.startsWith('Mode9')) {
+        return settings['enableMode9']
+      }
+      if (mode.startsWith('LButtonMode')) {
+        return settings['enableLButtonMode']
+      }
+      if (mode.startsWith('RButtonMode')) {
+        return settings['enableRButtonMode']
+      }
+      if (mode.startsWith('TabMode')) {
+        return settings['enableTabMode']
+      }
+      return true
+    }
   },
 }
 </script>
 
 <style>
-
 body * {
   font-family: Roboto, sans-serif, Microsoft YaHei !important;
 }
@@ -151,7 +163,7 @@ body * {
   padding-left: 115px;
 }
 #site-title {
-  font-size: 1.60em;
+  font-size: 1.6em;
   font-weight: 500;
 }
 #snack-bar {
@@ -164,7 +176,7 @@ body * {
   margin-bottom: 1px;
 }
 
-.v-navigation-drawer__content::-webkit-scrollbar { 
-  width: 0 !important 
+.v-navigation-drawer__content::-webkit-scrollbar {
+  width: 0 !important;
 }
 </style>

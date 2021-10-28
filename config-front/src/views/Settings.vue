@@ -1,8 +1,8 @@
 <template>
   <v-container id="app">
     <v-row>
-      <v-col>
-        <v-card height="320" max-width="450" class="settings-card">
+      <v-col cols="5">
+        <v-card height="320" min-width="410" class="settings-card">
           <v-card-title>各模式开关</v-card-title>
           <v-card-text>
             <v-row>
@@ -30,11 +30,14 @@
               <v-col cols="4">
                 <v-switch class="switch" v-model="currConfig()['enableSpaceMode']" label="空格模式"></v-switch>
               </v-col>
+              <v-col cols="4">
+                <v-switch class="switch" v-model="currConfig()['enableTabMode']" label="Tab 模式"></v-switch>
+              </v-col>
             </v-row>
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col lg="8">
+      <v-col lg="7">
         <v-card height="320" max-width="450" class="settings-card">
           <v-card-title>其他设置</v-card-title>
           <v-card-text>

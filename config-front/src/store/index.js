@@ -34,6 +34,7 @@ function processConfig(config) {
   s['LButtonMode'] = s.enableLButtonMode && containsKeymap(config.LButtonMode)
   s['RButtonMode'] = s.enableRButtonMode && containsKeymap(config.RButtonMode)
   s['SpaceMode'] = s.enableSpaceMode && containsKeymap(config.SpaceMode)
+  s['TabMode'] = s.enableTabMode && containsKeymap(config.TabMode)
 
   return config
 }
@@ -74,6 +75,7 @@ const s = new Vuex.Store({
         .then(resp => {
           resp.data.CapslockSpace = resp.data.CapslockSpace || emptyKeymap
           resp.data.SpaceMode = resp.data.SpaceMode || emptyKeymap
+          resp.data.TabMode = resp.data.TabMode || emptyKeymap
           resp.data.Capslock.Space = { "type": "什么也不做", "value": "" }
           store.commit('SET_CONFIG', resp.data)
         })
