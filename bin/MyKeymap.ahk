@@ -507,10 +507,6 @@ N::
     path = notepad.exe
     ActivateOrRun("记事本", path, "", "")
     return
-*`;::
-send, {blind}{text}git add -A`; git commit -a -m ""`; git push origin (git branch --show-current)`;
-send, {blind}{left 47}
-return
 
 
 #if DisableCapslockKey

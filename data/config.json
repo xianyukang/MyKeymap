@@ -1828,10 +1828,8 @@
             "toRun": "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE"
         },
         ";": {
-            "type": "输入文本或按键",
-            "value": "\nsend, {blind}{text}git add -A`; git commit -a -m \"\"`; git push origin (git branch --show-current)`;\nsend, {blind}{left 47}\nreturn",
-            "keysToSend": "{text}git add -A; git commit -a -m \"\"; git push origin (git branch --show-current);\n{left 47}",
-            "prefix": "*"
+            "type": "什么也不做",
+            "value": ""
         },
         "Z": {
             "type": "什么也不做",

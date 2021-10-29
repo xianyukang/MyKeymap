@@ -31,7 +31,7 @@
           ></v-text-field>
           <v-text-field
             autocomplete="off"
-            label="窗口不存在时要启动的程序 (程序路径)"
+            label="窗口不存在时要启动的: 程序路径 / 文件夹 / URL"
             v-model="currKey().toRun"
             @input="activateOrRun"
           ></v-text-field>
@@ -63,6 +63,8 @@
 Tips:
     (1) 参数都是选填的,  比如不填窗口标识符就不会尝试激活窗口,  直接启动程序
     (2) 文件管理器中按住 Shift 并右击文件, 可以选择「 复制为路径 」 (记得去掉两端双引号)
+    (3) 程序路径可以填 URL 比如 https://google.com、ms-settings:display
+
 </pre
           >
         </template>
@@ -320,11 +322,15 @@ export default {
       ],
       otherFeatures1: [
         {
-          label: '系统睡眠',
+          label: '锁屏',
+          value: '\nsleep 300\nDllCall("LockWorkStation")\nreturn',
+        },
+        {
+          label: '睡眠',
           value: 'DllCall("PowrProf\\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)',
         },
-        { label: '滑动关机', value: 'slideToShutdown()' },
-        { label: '系统重启', value: 'slideToReboot()' },
+        { label: '关机', value: 'slideToShutdown()' },
+        { label: '重启', value: 'slideToReboot()' },
         { label: '音量调节', value: 'run, bin\\ahk.exe bin\\soundControl.ahk' },
         {
           label: '显示器亮度调节',
