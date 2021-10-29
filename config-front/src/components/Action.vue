@@ -160,17 +160,17 @@ Tips:
             <v-divider></v-divider>
             <br />
 
-            <!-- <v-row>
+            <v-row>
               <v-col>
                 <v-radio
-                  v-for="action in clickActions"
+                  v-for="action in windowActions3"
                   :key="action.label"
                   :label="`${action.label}`"
-                  :value="action.value"
+                  :value="action.value()"
                 ></v-radio>
               </v-col>
               <v-col> </v-col>
-            </v-row> -->
+            </v-row>
           </v-radio-group>
         </template>
 
@@ -256,7 +256,7 @@ Tips:
 </template>
 
 <script>
-import { escapeFuncString, executeScript, mapKeysToSend, notBlank } from '../util.js'
+import { bindWindow, escapeFuncString, executeScript, mapKeysToSend, notBlank } from '../util.js'
 import { host } from '../util'
 import _ from 'lodash'
 import KeyValueConfig from './KeyValueConfig.vue'
@@ -319,6 +319,9 @@ export default {
           value: 'center_window_to_current_monitor(1370, 930)',
         },
         { label: '切换窗口置顶状态', value: 'ToggleTopMost()' },
+      ],
+      windowActions3: [
+        { label: '「 绑定活动窗口到当前键 」', value: () => bindWindow(this.$route.name, this.currentKey) },
       ],
       otherFeatures1: [
         {

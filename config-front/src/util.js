@@ -55,6 +55,18 @@ export function mapKeysToSend(line) {
     return 'send, {blind}' + line
 }
 
+export function bindWindow(ctx, key) {
+    key = key === ';' ? 'semicolon' : key
+    key = key === ',' ? 'comma' : key
+    key = key === '.' ? 'dot' : key
+    key = key === '/' ? 'slash' : key
+    const var_name = ctx + '__' + key
+    return `
+    global ${var_name}
+    bindOrActivate(${var_name})
+    return`
+}
+
 
 export function notEmptyAction(action) {
     return action.type != '什么也不做' && action.value

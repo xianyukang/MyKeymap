@@ -1104,7 +1104,7 @@ trayMenuHandler(ItemName, ItemPos, MenuName)
         openSettings()
     }
     if (InStr(ItemName, "检查更新" )) {
-        run, https://xianyukang.com/MyKeymap.html?mv=1.0
+        run, https://xianyukang.com/MyKeymap-Change-Log.html
     }
     if (InStr(ItemName, "视频教程" )) {
         run, https://space.bilibili.com/34674679
@@ -1120,4 +1120,18 @@ moveCurrentWindow()
     PostMessage, 0x0112, 0xF010, 0,, A
     sleep 50
     SendInput, {right}
+}
+
+bindOrActivate(ByRef id)
+{
+    old := A_DetectHiddenWindows
+    DetectHiddenWindows, 1
+    if WinExist("ahk_id " id) {
+        WinActivate
+    }
+    else {
+        tip("重新绑定 " A_ThisHotkey, -400)
+        id := WinExist("A")
+    }
+    DetectHiddenWindows, %old%
 }

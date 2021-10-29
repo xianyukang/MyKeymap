@@ -499,13 +499,17 @@ A::
 #if CapslockSpaceMode
 space::return
 
-L::
-    path = C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE
-    ActivateOrRun("ahk_exe EXCEL.EXE", path, "", "")
+J::
+    global CapslockSpace__J
+    bindOrActivate(CapslockSpace__J)
     return
-N::
-    path = notepad.exe
-    ActivateOrRun("记事本", path, "", "")
+K::
+    global CapslockSpace__K
+    bindOrActivate(CapslockSpace__K)
+    return
+L::
+    global CapslockSpace__L
+    bindOrActivate(CapslockSpace__L)
     return
 
 

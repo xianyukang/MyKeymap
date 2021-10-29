@@ -1814,18 +1814,16 @@
             "value": ""
         },
         "J": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "窗口操作",
+            "value": "\n    global CapslockSpace__J\n    bindOrActivate(CapslockSpace__J)\n    return"
         },
         "K": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "窗口操作",
+            "value": "\n    global CapslockSpace__K\n    bindOrActivate(CapslockSpace__K)\n    return"
         },
         "L": {
-            "type": "启动程序或激活窗口",
-            "value": "\n    path = C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE\n    ActivateOrRun(\"ahk_exe EXCEL.EXE\", path, \"\", \"\")\n    return",
-            "toActivate": "ahk_exe EXCEL.EXE",
-            "toRun": "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE"
+            "type": "窗口操作",
+            "value": "\n    global CapslockSpace__L\n    bindOrActivate(CapslockSpace__L)\n    return"
         },
         ";": {
             "type": "什么也不做",
@@ -1852,10 +1850,8 @@
             "value": ""
         },
         "N": {
-            "type": "启动程序或激活窗口",
-            "value": "\n    path = notepad.exe\n    ActivateOrRun(\"记事本\", path, \"\", \"\")\n    return",
-            "toActivate": "记事本",
-            "toRun": "notepad.exe"
+            "type": "什么也不做",
+            "value": ""
         },
         "M": {
             "type": "什么也不做",
