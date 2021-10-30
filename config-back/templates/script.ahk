@@ -73,7 +73,7 @@ allHotkeys.Push("RButton")
 allHotkeys.Push("*Space")
 {% endif %}
 {% if Settings.TabMode %}
-allHotkeys.Push("Tab")
+allHotkeys.Push("$Tab")
 {% endif %}
 
 Menu, Tray, NoStandard

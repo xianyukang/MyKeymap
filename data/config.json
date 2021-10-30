@@ -293,16 +293,16 @@
             "value": ""
         },
         "N": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "窗口操作",
+            "value": "\n    global CapslockF__N\n    bindOrActivate(CapslockF__N)\n    return"
         },
         "M": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "窗口操作",
+            "value": "\n    global CapslockF__M\n    bindOrActivate(CapslockF__M)\n    return"
         },
         ",": {
-            "type": "什么也不做",
-            "value": ""
+            "type": "窗口操作",
+            "value": "\n    global CapslockF__comma\n    bindOrActivate(CapslockF__comma)\n    return"
         },
         ".": {
             "type": "什么也不做",
@@ -1814,16 +1814,16 @@
             "value": ""
         },
         "J": {
-            "type": "窗口操作",
-            "value": "\n    global CapslockSpace__J\n    bindOrActivate(CapslockSpace__J)\n    return"
+            "type": "什么也不做",
+            "value": ""
         },
         "K": {
-            "type": "窗口操作",
-            "value": "\n    global CapslockSpace__K\n    bindOrActivate(CapslockSpace__K)\n    return"
+            "type": "什么也不做",
+            "value": ""
         },
         "L": {
-            "type": "窗口操作",
-            "value": "\n    global CapslockSpace__L\n    bindOrActivate(CapslockSpace__L)\n    return"
+            "type": "什么也不做",
+            "value": ""
         },
         ";": {
             "type": "什么也不做",
@@ -2070,26 +2070,20 @@
             "value": ""
         },
         "J": {
-            "type": "输入文本或按键",
-            "value": "\nsend, {blind}{left}\nreturn",
-            "keysToSend": "{left}",
-            "prefix": "*"
+            "type": "什么也不做",
+            "value": ""
         },
         "K": {
             "type": "什么也不做",
             "value": ""
         },
         "L": {
-            "type": "输入文本或按键",
-            "value": "\nsend, {blind}{right}\nreturn",
-            "keysToSend": "{right}",
-            "prefix": "*"
+            "type": "什么也不做",
+            "value": ""
         },
         ";": {
-            "type": "输入文本或按键",
-            "value": "\nsend, {blind}{bs}\nreturn",
-            "keysToSend": "{bs}",
-            "prefix": "*"
+            "type": "什么也不做",
+            "value": ""
         },
         "Z": {
             "type": "什么也不做",

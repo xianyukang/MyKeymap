@@ -51,7 +51,7 @@ allHotkeys.Push("*j")
 allHotkeys.Push("*capslock")
 allHotkeys.Push("*;")
 allHotkeys.Push("RButton")
-allHotkeys.Push("Tab")
+allHotkeys.Push("$Tab")
 
 Menu, Tray, NoStandard
 Menu, Tray, Add, 暂停, trayMenuHandler
@@ -293,15 +293,6 @@ N::
     workingDir = 
     ActivateOrRun("记事本", path, "", workingDir)
     return
-*`;::
-send, {blind}{bs}
-return
-*J::
-send, {blind}{left}
-return
-*L::
-send, {blind}{right}
-return
 
 
 #if DigitMode
@@ -429,6 +420,18 @@ Esc::exitMouseMode()
 #if FMode
 f::return
 
+,::
+    global CapslockF__comma
+    bindOrActivate(CapslockF__comma)
+    return
+M::
+    global CapslockF__M
+    bindOrActivate(CapslockF__M)
+    return
+N::
+    global CapslockF__N
+    bindOrActivate(CapslockF__N)
+    return
 K::
     path = %A_ProgramFiles%\DAUM\PotPlayer\PotPlayerMini64.exe
     workingDir = 
@@ -499,18 +502,6 @@ A::
 #if CapslockSpaceMode
 space::return
 
-J::
-    global CapslockSpace__J
-    bindOrActivate(CapslockSpace__J)
-    return
-K::
-    global CapslockSpace__K
-    bindOrActivate(CapslockSpace__K)
-    return
-L::
-    global CapslockSpace__L
-    bindOrActivate(CapslockSpace__L)
-    return
 
 
 #if DisableCapslockKey
