@@ -148,7 +148,7 @@ RAlt::LCtrl
     return
 
 
-Tab::
+$Tab::
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     TabMode := true

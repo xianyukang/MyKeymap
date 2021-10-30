@@ -206,7 +206,7 @@ RAlt::LCtrl
 {% endif %}
 
 {% if Settings.TabMode %}
-Tab::
+$Tab::
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     TabMode := true
