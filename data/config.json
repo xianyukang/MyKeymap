@@ -1742,7 +1742,7 @@
         "SpaceMode": false,
         "enableSpaceMode": false,
         "enableTabMode": true,
-        "TabMode": true
+        "TabMode": false
     },
     "CapslockSpace": {
         "Space": {
@@ -2106,10 +2106,8 @@
             "value": ""
         },
         "N": {
-            "type": "启动程序或激活窗口",
-            "value": "\n    path = notepad.exe\n    workingDir = \n    ActivateOrRun(\"记事本\", path, \"\", workingDir)\n    return",
-            "toActivate": "记事本",
-            "toRun": "notepad.exe"
+            "type": "什么也不做",
+            "value": ""
         },
         "M": {
             "type": "什么也不做",

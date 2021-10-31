@@ -51,7 +51,6 @@ allHotkeys.Push("*j")
 allHotkeys.Push("*capslock")
 allHotkeys.Push("*;")
 allHotkeys.Push("RButton")
-allHotkeys.Push("$Tab")
 
 Menu, Tray, NoStandard
 Menu, Tray, Add, 暂停, trayMenuHandler
@@ -148,16 +147,6 @@ RAlt::LCtrl
     return
 
 
-$Tab::
-    thisHotkey := A_ThisHotkey
-    disableOtherHotkey(thisHotkey)
-    TabMode := true
-    keywait Tab 
-    TabMode := false
-    if (A_PriorKey == "Tab" && A_TimeSinceThisHotkey < 350)
-        send {blind}{Tab} 
-    enableOtherHotkey(thisHotkey)
-    return
 
 RButton::
 enterRButtonMode()
@@ -287,12 +276,6 @@ return
 *T::send {blind}~
 
 
-#if TabMode
-N::
-    path = notepad.exe
-    workingDir = 
-    ActivateOrRun("记事本", path, "", workingDir)
-    return
 
 
 #if DigitMode

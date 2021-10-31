@@ -343,6 +343,7 @@ export default {
         { label: '退出 MyKeymap', value: 'quit(false)' },
       ],
       otherFeatures2: [
+        { label: '切换 CapsLock 状态', value: 'toggleCapslock()' },
         { label: '打开「MyKeymap」文件夹', value: 'run, %A_WorkingDir%' },
         {
           label: '打开「 回收站 」文件夹',
