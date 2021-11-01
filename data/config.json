@@ -1031,10 +1031,8 @@
             "prefix": "*"
         },
         "Q": {
-            "type": "输入文本或按键",
-            "value": "send {blind}{pgup}",
-            "prefix": "*",
-            "keysToSend": "{pgup}"
+            "type": "什么也不做",
+            "value": ""
         },
         "W": {
             "type": "什么也不做",
@@ -1051,10 +1049,8 @@
             "value": ""
         },
         "T": {
-            "type": "输入文本或按键",
-            "value": "send {blind}{pgdn}",
-            "keysToSend": "{pgdn}",
-            "prefix": "*"
+            "type": "什么也不做",
+            "value": ""
         },
         "Y": {
             "type": "什么也不做",
@@ -1078,7 +1074,7 @@
         },
         "A": {
             "type": "输入文本或按键",
-            "value": "send {blind}{home}",
+            "value": "\nsend, {blind}{home}\nreturn",
             "keysToSend": "{home}",
             "prefix": "*"
         },
@@ -1102,7 +1098,7 @@
         },
         "G": {
             "type": "输入文本或按键",
-            "value": "send {blind}{end}",
+            "value": "\nsend, {blind}{end}\nreturn",
             "keysToSend": "{end}",
             "prefix": "*"
         },
@@ -1134,8 +1130,8 @@
         },
         "X": {
             "type": "输入文本或按键",
-            "value": "\nsend {blind}^x\nreturn",
-            "keysToSend": "^x",
+            "value": "\nsend, {blind}{esc}\nreturn",
+            "keysToSend": "{esc}",
             "prefix": "*"
         },
         "C": {

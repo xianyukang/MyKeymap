@@ -496,20 +496,22 @@ space::return
 *Z::
 send {blind}#v
 return
-*X::
-send {blind}^x
-return
 *Space::
 send {blind}{enter}
+return
+*G::
+send, {blind}{end}
+return
+*X::
+send, {blind}{esc}
+return
+*A::
+send, {blind}{home}
 return
 *C::send {blind}{backspace}
 *V::send {blind}{delete}
 *D::send {blind}{down}
-*G::send {blind}{end}
-*A::send {blind}{home}
 *S::send {blind}{left}
-*T::send {blind}{pgdn}
-*Q::send {blind}{pgup}
 *F::send {blind}{right}
 *E::send {blind}{up}
 

@@ -1126,7 +1126,11 @@ bindOrActivate(ByRef id)
 {
     old := A_DetectHiddenWindows
     DetectHiddenWindows, 1
-    if WinExist("ahk_id " id) {
+    if WinActive("ahk_id " id) {
+        id := ""
+        tip("取消绑定", -400)
+    }
+    else if WinExist("ahk_id " id) {
         WinActivate
     }
     else {
