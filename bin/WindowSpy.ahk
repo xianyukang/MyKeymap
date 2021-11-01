@@ -20,19 +20,19 @@ Gui, Color, FFFFFF
 Gui, Font, s12 normal, 等线
 Gui, Add, Text, y+5, ` 
 Gui, Add, Text, y+5, 窗口标识符有下面三种, 可以单独使用:
-Gui, Add, Text, y+5, (1) 窗口名:   记事本
-Gui, Add, Text, y+5, (2) 进程名:   ahk_exe notepad.exe
-Gui, Add, Text, y+5, (3) 窗口类名: ahk_class Notepad
+Gui, Add, Text, y+5, ➤ 窗口名:      记事本
+Gui, Add, Text, y+5, ➤ 进程名:      ahk_exe notepad.exe
+Gui, Add, Text, y+5, ➤ 窗口类名:   ahk_class Notepad
 Gui, Add, Text, y+5, ` 
-Gui, Add, Text, y+5, 窗口标识符也可以组合使用, 比如:
-Gui, Add, Text, y+5, (1) 记事本 ahk_class Notepad
-Gui, Add, Text, y+5, (2) 记事本 ahk_exe notepad.exe
+Gui, Add, Text, y+5, 也可以组合使用, 例如:
+Gui, Add, Text, y+5, ➤ 记事本 ahk_class Notepad
+Gui, Add, Text, y+5, ➤ 记事本 ahk_exe notepad.exe
 Gui, Add, Text, y+5, ` 
 Gui, Font, s12 Bold
 Gui, Add, Text, y+5, 当前活动窗口的标识符:
 Gui, Font, s11 Verdana normal
 Gui, Add, Edit, xm w320 r4 ReadOnly -Wrap vCtrl_Title
-; Gui, Add, Checkbox, yp xp+200 w120 Right vCtrl_FollowMouse, Follow Mouse
+Gui, Add, Checkbox, y+5 x5 Right vCtrl_FollowMouse, 检测鼠标下的窗口, 而不是活动窗口
 ; Gui, Add, Text,, Mouse Position:
 ; Gui, Add, Edit, w320 r4 ReadOnly vCtrl_MousePos
 ; Gui, Add, Text, w320 vCtrl_CtrlLabel, % txtFocusCtrl ":"
