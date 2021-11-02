@@ -1738,7 +1738,8 @@
         "SpaceMode": false,
         "enableSpaceMode": false,
         "enableTabMode": true,
-        "TabMode": false
+        "TabMode": false,
+        "enableCapslockAbbr": true
     },
     "CapslockSpace": {
         "Space": {

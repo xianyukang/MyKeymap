@@ -7,7 +7,7 @@
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title id="site-title"> MyKeymap </v-list-item-title>
-          <v-list-item-subtitle> version: 1.0.18 </v-list-item-subtitle>
+          <v-list-item-subtitle> version: 1.0.19 </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
@@ -102,6 +102,9 @@ export default {
     },
     isModeEnabled(mode, settings) {
       if (mode.startsWith('Capslock')) {
+        if (mode.startsWith('CapslockAbbr')) {
+          return settings['enableCapslockMode'] && settings['enableCapslockAbbr']
+        }
         return settings['enableCapslockMode']
       }
       if (mode.startsWith('Semicolon')) {

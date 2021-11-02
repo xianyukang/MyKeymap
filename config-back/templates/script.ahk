@@ -131,7 +131,11 @@ RAlt::LCtrl
     keywait capslock
     CapslockMode := false
     if (A_ThisHotkey == "*capslock" && A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450) {
+        {% if Settings.enableCapslockAbbr %}
         enterCapslockAbbr(capsHook)
+        {% else %}
+        toggleCapslock()
+        {% endif %}
     }
     enableOtherHotkey(thisHotkey)
     return

@@ -77,6 +77,9 @@ const s = new Vuex.Store({
           resp.data.SpaceMode = resp.data.SpaceMode || emptyKeymap
           resp.data.TabMode = resp.data.TabMode || emptyKeymap
           resp.data.Capslock.Space = { "type": "什么也不做", "value": "" }
+          if (resp.data.Settings.enableCapslockAbbr === undefined) {
+            resp.data.Settings.enableCapslockAbbr = true
+          }
           store.commit('SET_CONFIG', resp.data)
         })
         .catch(error => {

@@ -1,8 +1,8 @@
 <template>
   <v-container id="app">
     <v-row>
-      <v-col cols="5">
-        <v-card height="320" min-width="410" class="settings-card">
+      <v-col cols="7">
+        <v-card height="420" min-width="410" class="settings-card">
           <v-card-title>各模式开关</v-card-title>
           <v-card-text>
             <v-row>
@@ -17,6 +17,9 @@
               </v-col>
               <v-col cols="4">
                 <v-switch class="switch" v-model="currConfig()['enableCapslockMode']" label="Capslock"></v-switch>
+              </v-col>
+              <v-col cols="4">
+                <v-switch class="switch" v-model="currConfig()['enableCapslockAbbr']" label="Capslock 指令"></v-switch>
               </v-col>
               <v-col cols="4">
                 <v-switch class="switch" v-model="currConfig()['enableSemicolonMode']" label="分号相关"></v-switch>
@@ -37,7 +40,7 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col lg="7">
+      <v-col lg="5">
         <v-card height="320" max-width="450" class="settings-card">
           <v-card-title>其他设置</v-card-title>
           <v-card-text>
@@ -52,7 +55,7 @@
               class="switch"
               v-model="currConfig()['runAsAdmin']"
               label="管理员权限运行"
-              messages=" 某窗口有管理员权限时, MyKeymap 也要有相同的权限才能操作它"
+              messages="某窗口有管理员权限时, MyKeymap也要有相同的权限才能操作它"
             ></v-switch>
           </v-card-text>
         </v-card>

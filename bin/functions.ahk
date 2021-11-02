@@ -823,9 +823,9 @@ toggleCapslock() {
     newState := !GetKeyState("CapsLock", "T")
     SetCapsLockState %newState%
     if (newState)
-        tip("CapsLock 开启", -700)
+        tip("CapsLock 开启", -400)
     else
-        tip("CapsLock 关闭", -700)
+        tip("CapsLock 关闭", -400)
 }
 
 
