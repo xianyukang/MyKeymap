@@ -194,6 +194,7 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
 {
     to_activate := Trim(to_activate)
     ; WinShow, %to_activate%
+    ; if (to_activate && firstVisibleWindow(to_activate))
     if (to_activate && winexist(to_activate))
         MyGroupActivate(to_activate)
     else if (target != "")
@@ -355,6 +356,8 @@ firstVisibleWindow(windowSelector)
     {
         item := winList%A_Index%
         WinGetTitle, title, ahk_id %item%
+        ; WingetPos x, y, width, height, ahk_id %item%
+        ; if (Trim(title) != "" && height > 30 && width > 30) {
         if (Trim(title) != "") {
             return item
         }
