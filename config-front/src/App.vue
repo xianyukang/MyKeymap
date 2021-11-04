@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer app id="drawer">
+    <v-navigation-drawer app id="drawer" permanent>
       <v-list-item>
         <v-list-item-avatar rounded="0" class="logo">
           <v-img alt="img" :src="require('./assets/logo.png')"></v-img>
