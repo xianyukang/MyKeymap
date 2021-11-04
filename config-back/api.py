@@ -16,7 +16,12 @@ import sys
 # 如何禁用 flask 的启动信息、各种日志...
 # https://stackoverflow.com/a/57086684/15989650
 
-app = Flask(__name__, static_url_path='', static_folder='site',)
+base_dir = os.getcwd()
+static_dir = os.path.join(base_dir, 'site')
+template_dir = os.path.join(base_dir, 'templates')
+print(base_dir)
+
+app = Flask(__name__, static_url_path='', static_folder=static_dir, template_folder=template_dir)
 CORS(app)
 app.config['JSON_SORT_KEYS'] = False
 script = AhkScript()

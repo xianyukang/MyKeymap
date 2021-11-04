@@ -24,10 +24,11 @@ if (len(sys.argv) > 1):
     arg = sys.argv[1]
 
 # 构建后端项目
+shutil.rmtree('bin/mykeymap-settings-server', ignore_errors=True)
 os.chdir('config-back')
-os.system('pyinstaller.exe api.py -n mykeymap-settings-server --onefile --icon icon.ico')
+os.system('pyinstaller.exe api.py -n mykeymap-settings-server -y --clean --icon icon.ico')
 os.chdir('..')
-shutil.copy('config-back/dist/mykeymap-settings-server.exe', 'bin/')
+os.system('cp -r config-back/dist/mykeymap-settings-server bin/')
 
 if (arg == 'server'):
     sys.exit()

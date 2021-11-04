@@ -95,7 +95,7 @@ RAlt::LCtrl
     ReloadProgram()
     return
 
-+capslock::toggleCapslock()
+!capslock::toggleCapslock()
 
 *capslock::
     thisHotkey := A_ThisHotkey

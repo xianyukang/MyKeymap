@@ -4,5 +4,6 @@ node_modules
 MyKeymap
 bin/site
 bin/templates
+bin/mykeymap-settings-server
 bin/mykeymap-settings-server.exe
 *.7z
