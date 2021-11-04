@@ -358,7 +358,8 @@ firstVisibleWindow(windowSelector)
         WinGetTitle, title, ahk_id %item%
         ; if (Trim(title) != "") {
         WingetPos x, y, width, height, ahk_id %item%
-        if (Trim(title) != "" && height > 40 && width > 40) {
+        ; tip(width "-" height)
+        if (Trim(title) != "" && (height > 20 || width > 20)) {
             return item
         }
     }
