@@ -826,10 +826,10 @@ scrollWheel(key, direction) {
 toggleCapslock() {
     newState := !GetKeyState("CapsLock", "T")
     SetCapsLockState %newState%
-    if (newState)
-        tip("CapsLock 开启", -400)
-    else
-        tip("CapsLock 关闭", -400)
+    ; if (newState)
+    ;     tip("CapsLock 开启", -400)
+    ; else
+    ;     tip("CapsLock 关闭", -400)
 }
 
 
@@ -1142,4 +1142,33 @@ bindOrActivate(ByRef id)
         id := WinExist("A")
     }
     DetectHiddenWindows, %old%
+}
+
+toggleAutoHideTaskBar()
+{
+    VarSetCapacity(APPBARDATA, A_PtrSize=4 ? 36:48)
+    NumPut(DllCall("Shell32\SHAppBarMessage", "UInt", 4 ; ABM_GETSTATE
+                                           , "Ptr", &APPBARDATA
+                                           , "Int")
+ ? 2:1, APPBARDATA, A_PtrSize=4 ? 32:40) ; 2 - ABS_ALWAYSONTOP, 1 - ABS_AUTOHIDE
+ , DllCall("Shell32\SHAppBarMessage", "UInt", 10 ; ABM_SETSTATE
+                                    , "Ptr", &APPBARDATA)
+}
+
+restartExplorer()
+{
+    run, tools\Rexplorer_x64.exe
+}
+
+toggleRemoveTaskBar()
+{
+    global HIDE_TASK_BAR
+    HIDE_TASK_BAR := !HIDE_TASK_BAR
+    if (HIDE_TASK_BAR) {
+        runwait, tools\TaskBarHider.exe -hide -exit
+        run, tools\TaskBarHider.exe -hide -exit
+    }
+    else {
+        run, tools\TaskBarHider.exe -show -exit
+    }
 }

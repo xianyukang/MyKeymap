@@ -198,6 +198,24 @@ Tips:
             <br />
             <v-divider></v-divider>
             <br />
+            <v-row>
+              <v-col>
+                <v-radio
+                  v-for="action in otherFeatures3"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+              </v-col>
+              <!-- <v-col>
+                <v-radio
+                  v-for="action in otherFeatures2"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+              </v-col> -->
+            </v-row>
 
             <!-- <v-row>
               <v-col>
@@ -340,10 +358,9 @@ export default {
           value: 'run, bin\\ahk.exe bin\\changeBrightness.ahk',
         },
         { label: '打开 MyKeymap 设置', value: 'openSettings()' },
-        { label: '退出 MyKeymap', value: 'quit(false)' },
       ],
       otherFeatures2: [
-        { label: '切换 CapsLock 状态', value: 'toggleCapslock()' },
+        { label: '退出 MyKeymap', value: 'quit(false)' },
         { label: '打开「MyKeymap」文件夹', value: 'run, %A_WorkingDir%' },
         {
           label: '打开「 回收站 」文件夹',
@@ -353,6 +370,12 @@ export default {
         { label: '打开「 图片 」文件夹', value: 'run, shell:my pictures' },
         { label: '打开「 视频 」文件夹', value: 'run, shell:My Video' },
         { label: '打开「 文档 」文件夹', value: 'run, shell:Personal' },
+      ],
+      otherFeatures3: [
+        { label: '重启资源管理器', value: 'restartExplorer()' },
+        { label: '切换 CapsLock 状态', value: 'toggleCapslock()' },
+        { label: '切换「 移除 TaskBar 」', value: 'toggleRemoveTaskBar()' },
+        { label: '切换「 自动隐藏 TaskBar 」', value: 'toggleAutoHideTaskBar()' },
       ],
       textFeatures1: [
         { label: '设置字体为红色', value: 'setColor("#D05")' },

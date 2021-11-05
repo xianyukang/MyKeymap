@@ -693,17 +693,14 @@ execCapslockAbbr(typo) {
     path = shortcuts\网易云音乐.lnk
     ActivateOrRun("网易云音乐", path)
     return
-        case "rex":
-           
-    path = tools\重启资源管理器.exe
-    ActivateOrRun("", path, "", "")
-    return
         case "sl":
            DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
         case "se":
            openSettings()
         case "ex":
            quit(false)
+        case "rex":
+           restartExplorer()
         case "dm":
            run, %A_WorkingDir%
         case "ld":

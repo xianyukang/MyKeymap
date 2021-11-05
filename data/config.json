@@ -1568,10 +1568,8 @@
             "value": "run, %A_WorkingDir%"
         },
         "rex": {
-            "type": "启动程序或激活窗口",
-            "value": "\n    path = tools\\重启资源管理器.exe\n    ActivateOrRun(\"\", path, \"\", \"\")\n    return",
-            "toRun": "tools\\重启资源管理器.exe",
-            "toActivate": ""
+            "type": "系统控制",
+            "value": "restartExplorer()"
         },
         "fw": {
             "type": "启动程序或激活窗口",
