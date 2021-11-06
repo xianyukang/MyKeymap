@@ -27,6 +27,11 @@ SetDefaultMouseSpeed, 0
 coordmode, mouse, screen
 settitlematchmode, 2
 
+; win10 任务切换、任务视图
+GroupAdd, TASK_SWITCH_GROUP, ahk_class MultitaskingViewFrame
+; GroupAdd, TASK_SWITCH_GROUP, ahk_class Windows.UI.Core.CoreWindow
+; win11 任务切换、任务视图
+GroupAdd, TASK_SWITCH_GROUP, ahk_class XamlExplorerHostIslandWindow
 
 scrollOnceLineCount := {{{ Settings.scrollOnceLineCount if Settings.scrollOnceLineCount else 3 }}}
 scrollDelay1 = {{{ "T" + Settings.scrollDelay1 if Settings.scrollDelay1 else "T0.2" }}}
@@ -465,7 +470,9 @@ WheelDown::send ^{tab}
 {% endif %}
 
 {% if Settings.CapslockMode %}
-#IfWinActive, ahk_class MultitaskingViewFrame
+#IfWinActive, ahk_group TASK_SWITCH_GROUP
+; *W::send, {blind}+{Tab}
+; *R::send, {blind}{Tab}
 *D::send, {blind}{down}
 *E::send, {blind}{up}
 *S::send, {blind}{left}

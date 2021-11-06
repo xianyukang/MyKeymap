@@ -25,6 +25,11 @@ SetDefaultMouseSpeed, 0
 coordmode, mouse, screen
 settitlematchmode, 2
 
+; win10 任务切换、任务视图
+GroupAdd, TASK_SWITCH_GROUP, ahk_class MultitaskingViewFrame
+; GroupAdd, TASK_SWITCH_GROUP, ahk_class Windows.UI.Core.CoreWindow
+; win11 任务切换、任务视图
+GroupAdd, TASK_SWITCH_GROUP, ahk_class XamlExplorerHostIslandWindow
 
 scrollOnceLineCount := 1
 scrollDelay1 = T0.2
@@ -253,6 +258,9 @@ return
 *H::
 send, {blind}{+}
 return
+*O::
+send, {blind}{end};
+return
 *Space::
 send, {blind}{enter}
 return
@@ -271,7 +279,6 @@ return
 *G::send {blind}{!}
 *W::send {blind}{#}
 *E::send {blind}{^}
-*O::send {blind}{space 4}
 *V::send {blind}|
 *T::send {blind}~
 
@@ -525,7 +532,9 @@ return
 WheelUp::send ^+{tab}
 WheelDown::send ^{tab}
 
-#IfWinActive, ahk_class MultitaskingViewFrame
+#IfWinActive, ahk_group TASK_SWITCH_GROUP
+; *W::send, {blind}+{Tab}
+; *R::send, {blind}{Tab}
 *D::send, {blind}{down}
 *E::send, {blind}{up}
 *S::send, {blind}{left}

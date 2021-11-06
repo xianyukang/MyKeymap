@@ -1228,8 +1228,8 @@
         },
         "O": {
             "type": "输入文本或按键",
-            "value": "send {blind}{space 4}",
-            "keysToSend": "{space 4}",
+            "value": "\nsend, {blind}{end};\nreturn",
+            "keysToSend": "{end};",
             "prefix": "*"
         },
         "P": {
