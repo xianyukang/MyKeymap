@@ -12,7 +12,7 @@ settitlematchmode, 2
 
 if (!WinExist("mykeymap-settings-server.exe")) {
     run, mykeymap-settings-server\mykeymap-settings-server.exe --server,, Hide
-    run, mykeymap-settings-server.exe --rain
+    run, mykeymap-settings-server\mykeymap-settings-server.exe --rain
     sleep, 1000
 }
 
