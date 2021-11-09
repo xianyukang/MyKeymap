@@ -824,6 +824,10 @@ scrollWheel(key, direction) {
 }
 
 toggleCapslock() {
+    ; 方案 2,  未测试
+    ; send, {Blind}{Lctrl}{LAlt UP}{CapsLock}
+    
+    ; 方案 1,  输入法大小写指示可能不对
     newState := !GetKeyState("CapsLock", "T")
     SetCapsLockState %newState%
     ; if (newState)
