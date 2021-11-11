@@ -178,12 +178,13 @@ RAlt::LCtrl
 
 {% if Settings.Mode3 %}
 *3::
+    start_tick := A_TickCount
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     DigitMode := true
     keywait 3 
     DigitMode := false
-    if (A_PriorKey == "3" && A_TimeSinceThisHotkey < 350)
+    if (A_PriorKey == "3" && (A_TickCount - start_tick < 250))
         send {blind}3 
     enableOtherHotkey(thisHotkey)
     return

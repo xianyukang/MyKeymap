@@ -53,14 +53,14 @@ export default {
       return {}
     },
   },
-  data() {
-    return {
-      lines: [
+  computed: {
+    lines() {
+      const lns = [
         [
-          { key: '1', disableAt: []},
-          { key: '2', disableAt: []},
-          { key: '3', disableAt: ['Mode3']},
-          { key: '4', disableAt: []},
+          { key: '1', disableAt: [] },
+          { key: '2', disableAt: [] },
+          { key: '3', disableAt: ['Mode3'] },
+          { key: '4', disableAt: [] },
           { key: '5', disableAt: [] },
           { key: '6', disableAt: [] },
           { key: '7', disableAt: [] },
@@ -69,26 +69,26 @@ export default {
           { key: '0', disableAt: [] },
         ],
         [
-          { key: 'Q', },
-          { key: 'W', },
-          { key: 'E', },
-          { key: 'R', disableAt: ['Mode3', 'Mode3R']},
+          { key: 'Q' },
+          { key: 'W' },
+          { key: 'E' },
+          { key: 'R', disableAt: ['Mode3', 'Mode3R'] },
           { key: 'T', disableAt: ['CapslockF', 'Mode3R'] },
           { key: 'Y', disableAt: ['JMode'] },
           { key: 'U', disableAt: [] },
           { key: 'I', disableAt: [] },
           { key: 'O', disableAt: ['Mode9'] },
-          { key: 'P', disableAt: ['Semicolon', ] },
+          { key: 'P', disableAt: ['Semicolon'] },
         ],
         [
-          { key: 'A', },
+          { key: 'A' },
           { key: 'S', disableAt: [] },
-          { key: 'D', },
-          { key: 'F', disableAt: ['Capslock', 'CapslockF', 'Mode3R']},
+          { key: 'D' },
+          { key: 'F', disableAt: ['Capslock', 'CapslockF', 'Mode3R'] },
           { key: 'G', disableAt: ['Mode3R'] },
           { key: 'H', disableAt: [] },
-          { key: 'J', disableAt: ['JMode', ]},
-          { key: 'K', disableAt: ['JMode', ] },
+          { key: 'J', disableAt: ['JMode'] },
+          { key: 'K', disableAt: ['JMode'] },
           { key: 'L', disableAt: ['JMode', 'Mode9'] },
           { key: ';', disableAt: ['Semicolon', 'Mode9'] },
         ],
@@ -98,17 +98,26 @@ export default {
           { key: 'C', disableAt: ['Mode3R'] },
           { key: 'V', disableAt: ['Mode3R'] },
           { key: 'B', disableAt: [] },
-          { key: 'N', disableAt: ['JMode', ] },
+          { key: 'N', disableAt: ['JMode'] },
           { key: 'M', disableAt: [] },
           { key: ',', disableAt: ['Mode9'] },
           { key: '.', disableAt: ['Mode9'] },
           { key: '/', disableAt: ['Semicolon', 'Mode9'] },
         ],
-        [
-          { key: 'Space', disableAt: ['CapslockSpace', 'Capslock', 'SpaceMode'] },
-        ],
-      ],
-    }
+        [{ key: 'Space', disableAt: ['CapslockSpace', 'Capslock', 'SpaceMode'] }],
+      ]
+      
+      // 请求尚未返回 || 开启了数字键
+      const numKeyConfigurable = !this.$store.state.config || this.$store.state.config.Settings.numKeyConfigurable
+      if (!numKeyConfigurable) {
+        lns.splice(0, 1)
+      }
+
+      return lns
+    },
+  },
+  data() {
+    return {}
   },
 }
 </script>

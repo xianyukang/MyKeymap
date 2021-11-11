@@ -141,12 +141,13 @@ RAlt::LCtrl
     return
 
 *3::
+    start_tick := A_TickCount
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     DigitMode := true
     keywait 3 
     DigitMode := false
-    if (A_PriorKey == "3" && A_TimeSinceThisHotkey < 350)
+    if (A_PriorKey == "3" && (A_TickCount - start_tick < 250))
         send {blind}3 
     enableOtherHotkey(thisHotkey)
     return
@@ -353,7 +354,6 @@ A::center_window_to_current_monitor(1370, 930)
 *N::leftClick()
 *.::moveCurrentWindow()
 *M::rightClick()
-3::run, bin\ahk.exe bin\soundControl.ahk
 *`;::scrollWheel(";", 4)
 *H::scrollWheel("H", 3)
 *O::scrollWheel("O", 2)

@@ -13,8 +13,8 @@
             "value": ""
         },
         "3": {
-            "type": "系统控制",
-            "value": "run, bin\\ahk.exe bin\\soundControl.ahk"
+            "type": "什么也不做",
+            "value": ""
         },
         "4": {
             "type": "什么也不做",
