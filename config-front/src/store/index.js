@@ -1,12 +1,28 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios';
-import { host, executeScript, emptyKeymap } from '../util.js';
+import { host, executeScript, emptyKeymap, ALL_KEYMAPS, NEW_CONFIGURABLE_KEYS } from '../util.js';
 import _ from 'lodash'
 
 
 Vue.use(Vuex)
 
+
+function addExtendedKeys(data) {
+  // 处理键盘中后来新增的可配置按键
+  if (!data) return
+
+  for (const km of ALL_KEYMAPS) {
+    for (const k of NEW_CONFIGURABLE_KEYS) {
+      if (data[km] && data[km][k] === undefined) {
+        data[km][k] = {
+          "type": "什么也不做",
+          "value": ""
+        }
+      }
+    }
+  }
+}
 
 function containsKeymap(data) {
   if (!data) return false
@@ -24,7 +40,7 @@ function processConfig(config) {
   config['SemicolonAbbrKeys'] = _.concat(_.remove(config['SemicolonAbbrKeys'], x => x.startsWith(',')), config['SemicolonAbbrKeys'])
   // 路径变量不要空行
   config['pathVariables'] = _.filter(config['pathVariables'], x => x.key && x.value)
-  
+
   const s = config.Settings
   s['Mode3'] = s.enableMode3 && containsKeymap(config.Mode3)
   s['Mode9'] = s.enableMode9 && containsKeymap(config.Mode9)
@@ -76,6 +92,7 @@ const s = new Vuex.Store({
           resp.data.CapslockSpace = resp.data.CapslockSpace || emptyKeymap
           resp.data.SpaceMode = resp.data.SpaceMode || emptyKeymap
           resp.data.TabMode = resp.data.TabMode || emptyKeymap
+          addExtendedKeys(resp.data)
           resp.data.Capslock.Space = { "type": "什么也不做", "value": "" }
           if (resp.data.Settings.enableCapslockAbbr === undefined) {
             resp.data.Settings.enableCapslockAbbr = true

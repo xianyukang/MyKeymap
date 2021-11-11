@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import CapslockF from '../views/CapslockF.vue'
 import Settings from '../views/Settings.vue'
 import CapslockAbbr from '../views/CapslockAbbr.vue'
+import { ALL_KEYMAPS } from '../util.js'
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,8 @@ function keymap(name) {
   }
 }
 
+const keymaps = ALL_KEYMAPS.map(x => keymap(x))
+
 const routes = [
   {
     path: '/',
@@ -27,18 +30,7 @@ const routes = [
     name: 'Home',
     component: Home,
   },
-  keymap('Capslock'),
-  keymap('CapslockF'),
-  keymap('Mode3'),
-  keymap('Mode3R'),
-  keymap('Mode9'),
-  keymap('CapslockSpace'),
-  keymap('SpaceMode'),
-  keymap('JMode'),
-  keymap('TabMode'),
-  keymap('Semicolon'),
-  keymap('RButtonMode'),
-  keymap('LButtonMode'),
+  ...keymaps,
   {
     path: '/Settings',
     name: 'Settings',

@@ -1166,6 +1166,7 @@ restartExplorer()
 
 toggleRemoveTaskBar()
 {
+    ; 下面的软件能完全移除 TaskBar 但个人偏好「 自动隐藏任务栏 」
     global HIDE_TASK_BAR
     HIDE_TASK_BAR := !HIDE_TASK_BAR
     if (HIDE_TASK_BAR) {

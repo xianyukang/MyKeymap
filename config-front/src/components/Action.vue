@@ -9,7 +9,7 @@
       <key-value-config @hideDialog="showConfigPathVariableDialog = false" />
     </v-dialog>
 
-    <v-card min-height="620" width="790" elevation="5" class="action-config">
+    <v-card min-height="590" width="790" elevation="5" class="action-config">
       <v-card-title>
         <v-select
           class="action-select"
@@ -60,13 +60,10 @@
           </v-card-actions>
           <br />
           <pre class="tips">
-Tips:
-    (1) 参数都是选填的,  比如不填窗口标识符就不会尝试激活窗口,  直接启动程序
-    (2) 文件管理器中按住 Shift 并右击文件, 可以选择「 复制为路径 」 (记得去掉两端双引号)
-    (3) 程序路径可以填 URL 比如 https://google.com、ms-settings:display
 
-</pre
-          >
+ Tips: (1) 参数都是选填的,  比如不填窗口标识符就不会尝试激活窗口,  直接启动程序
+       (2) 文件管理器中按住 Shift 并右击文件, 可以选择「 复制为路径 」 (记得去掉两端双引号)
+       (3) 程序路径可以填 URL 比如 https://google.com、ms-settings:display</pre>
         </template>
 
         <template v-if="currKey().type === '输入文本或按键'">
@@ -79,13 +76,10 @@ Tips:
           ></v-textarea>
           <!-- <img alt="img" :src="require('../assets/send-keys.png')" /><img /> -->
           <pre class="tips">
-Tips:
-    (1) <a target="_blank" href="SendKeyExample.html" style="color: green;">点此查看发送按键或文本的示例</a>
-    (2) 输入按键 abc 会受输入法中英文状态的影响,  输入文本 abc 则不会
-    (3) 所以想发送文本 abc 时,  建议给文本加 {text} 前缀, 比如 {text}abc
-    
-    
-          </pre>
+
+ Tips: (1) <a target="_blank" href="SendKeyExample.html" style="color: green;">点此查看发送按键或文本的示例</a>
+       (2) 输入按键 abc 会受输入法中英文状态的影响,  输入文本 abc 则不会
+       (3) 所以想发送文本 abc 时,  建议给文本加 {text} 前缀, 比如 {text}abc</pre>
         </template>
 
         <template v-if="currKey().type === '执行单行 ahk 代码'">
@@ -374,8 +368,7 @@ export default {
       otherFeatures3: [
         { label: '重启资源管理器', value: 'restartExplorer()' },
         { label: '切换 CapsLock 状态', value: 'toggleCapslock()' },
-        { label: '切换「 移除 TaskBar 」', value: 'toggleRemoveTaskBar()' },
-        { label: '切换「 自动隐藏 TaskBar 」', value: 'toggleAutoHideTaskBar()' },
+        { label: '切换「 自动隐藏任务栏 」', value: 'toggleAutoHideTaskBar()' },
       ],
       textFeatures1: [
         { label: '设置字体为红色', value: 'setColor("#D05")' },

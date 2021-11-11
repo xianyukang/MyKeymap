@@ -1,5 +1,2 @@
-Rexplorer_x64
+Rexplorer_x64 用于重启资源管理器
 https://www.sordum.org/9192/restart-explorer-v1-5/
-
-TaskBarHider
-http://www.itsamples.com/taskbar-hider.html

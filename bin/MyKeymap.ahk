@@ -353,6 +353,7 @@ A::center_window_to_current_monitor(1370, 930)
 *N::leftClick()
 *.::moveCurrentWindow()
 *M::rightClick()
+3::run, bin\ahk.exe bin\soundControl.ahk
 *`;::scrollWheel(";", 4)
 *H::scrollWheel("H", 3)
 *O::scrollWheel("O", 2)
