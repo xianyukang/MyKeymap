@@ -39,7 +39,7 @@ fastMoveSingle := 110
 fastMoveRepeat := 70
 slowMoveSingle := 10
 slowMoveRepeat := 13
-moveDelay1 = T0.1
+moveDelay1 = T0.13
 moveDelay2 = T0.01
 
 SemicolonAbbrTip := true
