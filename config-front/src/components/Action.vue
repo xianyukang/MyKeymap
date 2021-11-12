@@ -331,6 +331,8 @@ export default {
           value: 'center_window_to_current_monitor(1370, 930)',
         },
         { label: '切换窗口置顶状态', value: 'ToggleTopMost()' },
+        { label: '上一个窗口 (Alt+Esc)', value: 'send !{Esc}' },
+        { label: '下一个窗口 (Shift+Alt+Esc)', value: 'send +!{Esc}' },
       ],
       windowActions3: [
         { label: '「 绑定活动窗口到当前键 」', value: () => bindWindow(this.$route.name, this.currentKey) },
