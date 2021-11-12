@@ -1,7 +1,7 @@
 <template>
-  <v-container id="app">
+  <div class="my-container">
     <v-row>
-      <v-col cols="7">
+      <v-col cols="6">
         <v-card height="420" min-width="410" class="settings-card">
           <v-card-title>各模式开关</v-card-title>
           <v-card-text>
@@ -159,7 +159,7 @@
         </v-card>
       </v-col>
     </v-row>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -187,10 +187,10 @@ export default {
 <style scoped>
 .settings-card {
   margin: 20px;
-  margin-top: 70px;
+  /* margin-top: 70px; */
 }
 
-#app >>> label {
+.my-container >>> label {
   margin: 0;
   color: black;
 }

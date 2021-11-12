@@ -1,5 +1,5 @@
 <template>
-  <v-container id="app">
+  <div class="my-container">
     <!-- <v-row v-for="item in config.capslockf" :key="item.name" dense>
       <v-col cols="1">
         <v-chip dark color="green" label><span class="key">{{ item.key }}</span></v-chip>
@@ -13,7 +13,7 @@
     </v-row> -->
     <Abbr @clickKey="keyChanged" @delKey="deleteKey" @renameKey="renameKey" :currentKey="currentKey" />
     <Action :currentKey="currentKey" />
-  </v-container>
+  </div>
 </template>
 
 <script>

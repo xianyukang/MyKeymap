@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div class="my-container">
     <v-row justify="start">
       <v-col cols="auto" v-for="key in Object.keys(currConfig()).sort()" :key="key">
         <v-hover v-slot="{ hover }">
@@ -36,7 +36,7 @@
         </v-card>
       </v-col>
     </v-row>
-  </v-container>
+  </div>
 </template>
 
 <script>

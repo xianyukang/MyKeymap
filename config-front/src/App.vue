@@ -182,4 +182,7 @@ body * {
 .v-navigation-drawer__content::-webkit-scrollbar {
   width: 0 !important;
 }
+.my-container {
+  margin: 30px 20px 20px 20px;
+}
 </style>

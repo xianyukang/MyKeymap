@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div class="my-container">
     <v-dialog
       v-model="showConfigPathVariableDialog"
       overlay-opacity="0.50"
@@ -9,7 +9,7 @@
       <key-value-config @hideDialog="showConfigPathVariableDialog = false" />
     </v-dialog>
 
-    <v-card min-height="590" width="790" elevation="5" class="action-config">
+    <v-card min-height="570" width="790" elevation="5" class="action-config">
       <v-card-title>
         <v-select
           class="action-select"
@@ -264,7 +264,7 @@
         </template>
       </v-card-text>
     </v-card>
-  </v-container>
+  </div>
 </template>
 
 <script>

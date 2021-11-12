@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div class="my-container">
     <v-row justify="start" v-for="(line, index) in lines" :key="index">
       <v-col v-for="k in line" :key="k.key" cols="auto">
         <v-hover v-slot="{ hover }">
@@ -18,7 +18,7 @@
         </v-hover>
       </v-col>
     </v-row>
-  </v-container>
+  </div>
 </template>
 
 <script>
