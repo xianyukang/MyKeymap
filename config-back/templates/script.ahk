@@ -4,7 +4,6 @@
 #NoTrayIcon
 #WinActivateForce               ; 解决「 winactivate 最小化的窗口时不会把窗口放到顶层(被其他窗口遮住) 」
 #InstallKeybdHook               ; 可能是 ahk 自动卸载 hook 导致的丢失 hook,  如果用这行指令, ahk 是否就不会卸载 hook 了呢?
-#include data/custom_functions.ahk
 #include bin/functions.ahk
 
 StringCaseSense, On
@@ -111,6 +110,7 @@ capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", {{{ CapslockAbbrKeys|join(
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
+#include data/custom_functions.ahk
 return
 
 {% if Settings.mapRAltToCtrl %}
