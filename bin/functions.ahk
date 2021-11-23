@@ -1177,3 +1177,20 @@ toggleRemoveTaskBar()
         run, tools\TaskBarHider.exe -show -exit
     }
 }
+
+
+enterJModeK()
+{
+    global
+    JModeK := true
+    keywait k
+    JModeK := false
+}
+
+enterJModeL()
+{
+    global
+    JModeL := true
+    keywait l
+    JModeL := false
+}

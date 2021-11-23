@@ -92,6 +92,8 @@ const s = new Vuex.Store({
           resp.data.CapslockSpace = resp.data.CapslockSpace || emptyKeymap
           resp.data.SpaceMode = resp.data.SpaceMode || emptyKeymap
           resp.data.TabMode = resp.data.TabMode || emptyKeymap
+          resp.data.JModeK = resp.data.JModeK || emptyKeymap
+          resp.data.JModeL = resp.data.JModeL || emptyKeymap
           addExtendedKeys(resp.data)
           resp.data.Capslock.Space = { "type": "什么也不做", "value": "" }
           if (resp.data.Settings.enableCapslockAbbr === undefined) {

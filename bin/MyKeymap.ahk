@@ -4,8 +4,8 @@
 #NoTrayIcon
 #WinActivateForce               ; 解决「 winactivate 最小化的窗口时不会把窗口放到顶层(被其他窗口遮住) 」
 #InstallKeybdHook               ; 可能是 ahk 自动卸载 hook 导致的丢失 hook,  如果用这行指令, ahk 是否就不会卸载 hook 了呢?
-#include data/custom_functions.ahk
 #include bin/functions.ahk
+
 
 StringCaseSense, On
 SetWorkingDir %A_ScriptDir%\..
@@ -87,6 +87,7 @@ capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", "ss,sl,ex,rb,fp,fb,fg,dd,d
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
+#include data/custom_functions.ahk
 return
 
 RAlt::LCtrl
@@ -200,19 +201,69 @@ enterRButtonMode()
 
 
 
+
+#if JModeK
+k::return
+*V::
+send, {blind}+{del}
+return
+*D::
+send, {blind}+{down}
+return
+*G::
+send, {blind}+{end}
+return
+*X::
+send, {blind}+{esc}
+return
+*A::
+send, {blind}+{home}
+return
+*S::
+send, {blind}+{left}
+return
+*F::
+send, {blind}+{right}
+return
+*E::
+send, {blind}+{up}
+return
+*W::
+send, {blind}^+{left}
+return
+*R::
+send, {blind}^+{right}
+return
+*C::
+send, {blind}{bs}
+return
+*T::
+send, {blind}{home}+{end}
+return
+
+
+#if JModeL
+l::return
+*W::
+send, {blind}^+{tab}
+return
+*C::
+send, {blind}^{bs}
+return
+*S::
+send, {blind}^{left}
+return
+*F::
+send, {blind}^{right}
+return
+*R::
+send, {blind}^{tab}
+return
+
+
 #if JMode
-    ^l::return
-    +k::return
-    *k::
-        send {blind}{Rshift down}
-        keywait k
-        send {Rshift up}
-        return
-    *l::
-        send {blind}{Lctrl down}
-        keywait l
-        send {Lctrl up}
-        return
+k::enterJModeK()
+l::enterJModeL()
 
 *Space::
 send {blind}{enter}

@@ -6,6 +6,15 @@
 #InstallKeybdHook               ; 可能是 ahk 自动卸载 hook 导致的丢失 hook,  如果用这行指令, ahk 是否就不会卸载 hook 了呢?
 #include bin/functions.ahk
 
+{## 定义可重用的模板,  减少代码重复 ##}
+{% macro keymapToAhk(keymap) %}
+{% for key,value in keymap.items()|sort(attribute="1.value") %}
+    {% if value.value %}
+{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
+    {% endif %}
+{% endfor %}
+{% endmacro %}
+
 StringCaseSense, On
 SetWorkingDir %A_ScriptDir%\..
 {% if Settings.runAsAdmin %}
@@ -288,28 +297,27 @@ enterLButtonMode()
 
 
 {% if Settings.JMode %}
+
+#if JModeK
+k::return
+{{{ keymapToAhk(JModeK) }}}
+
+#if JModeL
+l::return
+{{{ keymapToAhk(JModeL) }}}
+
 #if JMode
-    ^l::return
-    +k::return
-    *k::
-        send {blind}{Rshift down}
-        keywait k
-        send {Rshift up}
-        return
-    *l::
-        send {blind}{Lctrl down}
-        keywait l
-        send {Lctrl up}
-        return
+k::enterJModeK()
+l::enterJModeL()
 
 {% for key,value in JMode.items()|sort(attribute="1.value") %}
     {% if value.value %}
 {{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
     {% endif %}
 {% endfor %}
-{% endif %}
 
     
+{% endif %}
 
 {% if Settings.SemicolonMode %}
 #if PunctuationMode
