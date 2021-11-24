@@ -73,7 +73,7 @@ export default {
           { key: 'W' },
           { key: 'E' },
           { key: 'R', disableAt: ['Mode3', 'Mode3R'] },
-          { key: 'T', disableAt: ['CapslockF', 'Mode3R'] },
+          { key: 'T', disableAt: ['Mode3R'] },
           { key: 'Y', disableAt: [] },
           { key: 'U', disableAt: [] },
           { key: 'I', disableAt: [] },

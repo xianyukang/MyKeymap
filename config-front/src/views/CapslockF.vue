@@ -20,9 +20,16 @@
 <script>
 import Action from '@/components/Action.vue'
 import Keyboard from '../components/Keyboard.vue'
+import { EMPTY_KEY } from '../util.js'
 export default {
   name: 'CapslockF',
   created() {},
+  beforeRouteLeave(to, from, next) {
+    // 当 route 变成其他东西前,  重置当前组件的当前 key 
+    // console.log('update currentKey', this.currentKey)
+    this.currentKey = EMPTY_KEY
+    next();
+  },
   methods: {
     keyChanged(key) {
       this.currentKey = key
@@ -30,7 +37,7 @@ export default {
   },
   data() {
     return {
-      currentKey: Object.keys(this.$store.state.config[this.$route.name])[0],
+      currentKey: EMPTY_KEY,  // 组件的创建时的默认 key 是 EMPTY_KEY
       keys: 'abcdefghijklmnopqrstuvwxyz,./',
       items: ['启动程序或激活窗口', '输入文本或按键', '鼠标操作', '窗口操作', '执行单行 ahk 代码'],
     }

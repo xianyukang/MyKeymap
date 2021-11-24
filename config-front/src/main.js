@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
+import { EMPTY_KEY } from './util.js'
 
 
 Vue.config.productionTip = false
@@ -10,6 +11,9 @@ Vue.config.productionTip = false
 Vue.mixin({
   methods: {
     currKey() {
+      if (this.currentKey === EMPTY_KEY) {
+        return { type: '什么也不做', value: '' }
+      }
       return this.currConfig()[this.currentKey]
     },
     currConfig() {

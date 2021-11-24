@@ -18,7 +18,7 @@
           outlined
           @change="clearValue"
           :menu-props="{ maxHeight: 900 }"
-          :disabled="($route.name === 'CapslockSpace' || $route.name === 'Capslock' || $route.name === 'SpaceMode') && currentKey === 'Space'"
+          :disabled="disableSelectBox"
         ></v-select>
       </v-card-title>
       <v-card-text>
@@ -269,7 +269,7 @@
 
 <script>
 import { bindWindow, escapeFuncString, executeScript, mapKeysToSend, notBlank } from '../util.js'
-import { host } from '../util'
+import { host, EMPTY_KEY } from '../util'
 import _ from 'lodash'
 import KeyValueConfig from './KeyValueConfig.vue'
 
@@ -492,6 +492,9 @@ export default {
       }
       return result
     },
+    disableSelectBox() {
+      return this.currentKey === EMPTY_KEY
+    }
   },
 }
 </script>

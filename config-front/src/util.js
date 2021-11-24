@@ -35,6 +35,7 @@ export const ALL_KEYMAPS = [
     'RButtonMode',
     'LButtonMode',
 ]
+export const EMPTY_KEY = 'EMPTY_KEY';
 export const NEW_CONFIGURABLE_KEYS = [
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 ]
