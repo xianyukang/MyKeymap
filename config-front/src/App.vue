@@ -86,6 +86,7 @@ export default {
       { title: 'J 模式', icon: 'mdi-alpha-j-box', to: 'JMode', color: '#d05' },
       { title: 'J + K 模式', icon: 'mdi-alpha-j-box', to: 'JModeK', color: '#d05' },
       { title: 'J + L 模式', icon: 'mdi-alpha-j-box', to: 'JModeL', color: '#d05' },
+      { title: '逗号模式', icon: 'mdi-rhombus', to: 'CommaMode', color: '#d05' },
       { title: '分号模式', icon: 'mdi-rhombus', to: 'Semicolon', color: 'blue' },
       { title: '分号缩写', icon: 'mdi-rhombus', to: 'SemicolonAbbr', color: 'blue' },
       { title: '3 模式', icon: 'mdi-numeric-3-box-outline', to: 'Mode3', color: 'red' },
@@ -132,6 +133,9 @@ export default {
       }
       if (mode.startsWith('TabMode')) {
         return settings['enableTabMode']
+      }
+      if (mode.startsWith('CommaMode')) {
+        return settings['enableCommaMode']
       }
       return true
     }

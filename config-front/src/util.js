@@ -35,6 +35,7 @@ export const ALL_KEYMAPS = [
     'Semicolon',
     'RButtonMode',
     'LButtonMode',
+    'CommaMode',
 ]
 // 所有的按键映射 + 缩写功能
 export const KEYMAP_PLUS_ABBR = [
@@ -117,129 +118,55 @@ export function executeScript(arg) {
     })
 }
 
-export const emptyKeymap = {
-    "Space": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "Q": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "W": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "E": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "R": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "T": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "Y": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "U": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "I": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "O": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "P": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "A": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "S": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "D": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "F": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "G": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "H": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "J": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "K": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "L": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    ";": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "Z": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "X": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "C": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "V": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "B": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "N": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "M": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    ",": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    ".": {
-        "type": "什么也不做",
-        "value": ""
-    },
-    "/": {
+export function emptyKeyConfig(supportPerAppConfig) {
+    if (supportPerAppConfig) {
+        return {
+            '2': {
+                "type": "什么也不做",
+                "value": ""
+            }
+        }
+    }
+    return {
         "type": "什么也不做",
         "value": ""
     }
+}
+
+export function emptyKeymap(supportPerAppConfig) {
+    const km = {
+        "Space": emptyKeyConfig(supportPerAppConfig),
+        "Q": emptyKeyConfig(supportPerAppConfig),
+        "W": emptyKeyConfig(supportPerAppConfig),
+        "E": emptyKeyConfig(supportPerAppConfig),
+        "R": emptyKeyConfig(supportPerAppConfig),
+        "T": emptyKeyConfig(supportPerAppConfig),
+        "Y": emptyKeyConfig(supportPerAppConfig),
+        "U": emptyKeyConfig(supportPerAppConfig),
+        "I": emptyKeyConfig(supportPerAppConfig),
+        "O": emptyKeyConfig(supportPerAppConfig),
+        "P": emptyKeyConfig(supportPerAppConfig),
+        "A": emptyKeyConfig(supportPerAppConfig),
+        "S": emptyKeyConfig(supportPerAppConfig),
+        "D": emptyKeyConfig(supportPerAppConfig),
+        "F": emptyKeyConfig(supportPerAppConfig),
+        "G": emptyKeyConfig(supportPerAppConfig),
+        "H": emptyKeyConfig(supportPerAppConfig),
+        "J": emptyKeyConfig(supportPerAppConfig),
+        "K": emptyKeyConfig(supportPerAppConfig),
+        "L": emptyKeyConfig(supportPerAppConfig),
+        ";": emptyKeyConfig(supportPerAppConfig),
+        "Z": emptyKeyConfig(supportPerAppConfig),
+        "X": emptyKeyConfig(supportPerAppConfig),
+        "C": emptyKeyConfig(supportPerAppConfig),
+        "V": emptyKeyConfig(supportPerAppConfig),
+        "B": emptyKeyConfig(supportPerAppConfig),
+        "N": emptyKeyConfig(supportPerAppConfig),
+        "M": emptyKeyConfig(supportPerAppConfig),
+        ",": emptyKeyConfig(supportPerAppConfig),
+        ".": emptyKeyConfig(supportPerAppConfig),
+        "/": emptyKeyConfig(supportPerAppConfig)
+    }
+
+    return km
 }

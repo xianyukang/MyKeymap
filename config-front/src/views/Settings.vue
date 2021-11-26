@@ -36,6 +36,9 @@
               <v-col cols="4">
                 <v-switch class="switch" v-model="currConfig()['enableTabMode']" label="Tab 模式"></v-switch>
               </v-col>
+              <v-col cols="4">
+                <v-switch class="switch" v-model="currConfig()['enableCommaMode']" label="逗号模式"></v-switch>
+              </v-col>
             </v-row>
           </v-card-text>
         </v-card>

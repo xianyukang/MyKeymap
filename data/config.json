@@ -2937,7 +2937,9 @@
         "enableSpaceMode": false,
         "enableTabMode": false,
         "TabMode": false,
-        "enableCapslockAbbr": true
+        "enableCapslockAbbr": true,
+        "enableCommaMode": false,
+        "CommaMode": false
     },
     "CapslockSpace": {
         "0": {
@@ -4241,8 +4243,281 @@
             "Semicolon",
             "RButtonMode",
             "LButtonMode",
+            "CommaMode",
             "CapslockAbbr",
             "SemicolonAbbr"
         ]
+    },
+    "CommaMode": {
+        "0": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "1": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "2": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "3": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "4": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "5": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "6": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "7": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "8": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "9": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "Space": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "Q": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "W": {
+            "2": {
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}+{tab}\nreturn",
+                "keysToSend": "+{tab}",
+                "prefix": "*"
+            }
+        },
+        "E": {
+            "2": {
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{up}\nreturn",
+                "keysToSend": "{up}",
+                "prefix": "*"
+            }
+        },
+        "R": {
+            "2": {
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{tab}\nreturn",
+                "keysToSend": "{tab}",
+                "prefix": "*"
+            }
+        },
+        "T": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "Y": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "U": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "I": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "O": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "P": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "A": {
+            "2": {
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{home}\nreturn",
+                "keysToSend": "{home}",
+                "prefix": "*"
+            }
+        },
+        "S": {
+            "2": {
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{left}\nreturn",
+                "keysToSend": "{left}",
+                "prefix": "*"
+            }
+        },
+        "D": {
+            "2": {
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{down}\nreturn",
+                "keysToSend": "{down}",
+                "prefix": "*"
+            }
+        },
+        "F": {
+            "2": {
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{right}\nreturn",
+                "keysToSend": "{right}",
+                "prefix": "*"
+            }
+        },
+        "G": {
+            "2": {
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{end}\nreturn",
+                "keysToSend": "{end}",
+                "prefix": "*"
+            }
+        },
+        "H": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "J": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "K": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "L": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        ";": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "Z": {
+            "2": {
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{AppsKey}\nreturn",
+                "keysToSend": "{AppsKey}",
+                "prefix": "*"
+            }
+        },
+        "X": {
+            "2": {
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{esc}\nreturn",
+                "keysToSend": "{esc}",
+                "prefix": "*"
+            }
+        },
+        "C": {
+            "2": {
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{bs}\nreturn",
+                "keysToSend": "{bs}",
+                "prefix": "*"
+            }
+        },
+        "V": {
+            "2": {
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{del}\nreturn",
+                "keysToSend": "{del}",
+                "prefix": "*"
+            }
+        },
+        "B": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "N": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "M": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        ",": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        ".": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "/": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        }
     }
 }

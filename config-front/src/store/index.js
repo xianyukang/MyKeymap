@@ -1,24 +1,21 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios';
-import { host, executeScript, emptyKeymap, ALL_KEYMAPS, NEW_CONFIGURABLE_KEYS, KEYMAP_PLUS_ABBR } from '../util.js';
+import { host, executeScript, emptyKeymap, ALL_KEYMAPS, NEW_CONFIGURABLE_KEYS, KEYMAP_PLUS_ABBR, emptyKeyConfig } from '../util.js';
 import _ from 'lodash'
 
 
 Vue.use(Vuex)
 
 
-function addExtendedKeys(data) {
+function addExtendedKeys(data, supportPerAppConfig) {
   // 处理键盘中后来新增的可配置按键
   if (!data) return
 
   for (const km of ALL_KEYMAPS) {
     for (const k of NEW_CONFIGURABLE_KEYS) {
       if (data[km] && data[km][k] === undefined) {
-        data[km][k] = {
-          "type": "什么也不做",
-          "value": ""
-        }
+        data[km][k] = emptyKeyConfig(supportPerAppConfig)
       }
     }
   }
@@ -51,6 +48,7 @@ function processConfig(config) {
   s['RButtonMode'] = s.enableRButtonMode && containsKeymap(config.RButtonMode)
   s['SpaceMode'] = s.enableSpaceMode && containsKeymap(config.SpaceMode)
   s['TabMode'] = s.enableTabMode && containsKeymap(config.TabMode)
+  s['CommaMode'] = s.enableCommaMode && containsKeymap(config.CommaMode)
   
   if (!config['otherInfo']) {
     config['otherInfo'] = {}
@@ -104,13 +102,15 @@ const s = new Vuex.Store({
     fetchConfig(store) {
       return axios.get(`${host}/config`)
         .then(resp => {
-          resp.data.CapslockSpace = resp.data.CapslockSpace || emptyKeymap
-          resp.data.SpaceMode = resp.data.SpaceMode || emptyKeymap
-          resp.data.TabMode = resp.data.TabMode || emptyKeymap
-          resp.data.JModeK = resp.data.JModeK || emptyKeymap
-          resp.data.JModeL = resp.data.JModeL || emptyKeymap
+          for (const km of ALL_KEYMAPS) {
+            if (!resp.data[km]) {
+              resp.data[km] = emptyKeymap(resp.data.supportPerAppConfig)
+            }
+          }
           resp.data.windowSelectors = resp.data.windowSelectors || [{id: '3', key: 'IntelliJ IDEA', value: 'ahk_exe idea64.exe'}]
-          addExtendedKeys(resp.data)
+          addExtendedKeys(resp.data, resp.data.supportPerAppConfig)
+
+          // 这里不能用 || 语法,  因为要判断值是否 undefined 而不是判断值是否 falsy
           if (resp.data.Settings.enableCapslockAbbr === undefined) {
             resp.data.Settings.enableCapslockAbbr = true
           }

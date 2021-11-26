@@ -156,6 +156,7 @@ RAlt::LCtrl
 
 
 
+
 RButton::
 enterRButtonMode()
 {
@@ -383,6 +384,7 @@ return
 *O::send {blind}{f6}
 *N::send {blind}{f8}
 *M::send {blind}{f9}
+
 
 
 

@@ -67,6 +67,9 @@ allHotkeys.Push("*3")
 {% if Settings.Mode9 %}
 allHotkeys.Push("*9")
 {% endif %}
+{% if Settings.CommaMode %}
+allHotkeys.Push("*,")
+{% endif %}
 {% if Settings.JMode %}
 allHotkeys.Push("*j")
 {% endif %}
@@ -208,6 +211,19 @@ RAlt::LCtrl
     Mode9 := false
     if (A_PriorKey == "9" && A_TimeSinceThisHotkey < 350)
         send {blind}9 
+    enableOtherHotkey(thisHotkey)
+    return
+{% endif %}
+
+{% if Settings.CommaMode %}
+*,::
+    thisHotkey := A_ThisHotkey
+    disableOtherHotkey(thisHotkey)
+    CommaMode := true
+    keywait `, 
+    CommaMode := false
+    if (A_PriorKey == "," && A_TimeSinceThisHotkey < 350)
+        send {blind}`, 
     enableOtherHotkey(thisHotkey)
     return
 {% endif %}
@@ -383,6 +399,11 @@ l::enterJModeL()
 {{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
     {% endif %}
 {% endfor %}
+{% endif %}
+
+{% if Settings.CommaMode %}
+#if CommaMode
+{{{ keymapToAhk(CommaMode) }}}
 {% endif %}
 
 

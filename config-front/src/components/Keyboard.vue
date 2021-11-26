@@ -100,7 +100,7 @@ export default {
           { key: 'B', disableAt: [] },
           { key: 'N', disableAt: [] },
           { key: 'M', disableAt: [] },
-          { key: ',', disableAt: ['Mode9'] },
+          { key: ',', disableAt: ['Mode9', 'CommaMode'] },
           { key: '.', disableAt: ['Mode9'] },
           { key: '/', disableAt: ['Semicolon', 'Mode9'] },
         ],
