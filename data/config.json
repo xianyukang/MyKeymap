@@ -3822,8 +3822,10 @@
         },
         "A": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}^{home}\nreturn",
+                "keysToSend": "^{home}",
+                "prefix": "*"
             }
         },
         "S": {
@@ -3850,8 +3852,10 @@
         },
         "G": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}^{end}\nreturn",
+                "keysToSend": "^{end}",
+                "prefix": "*"
             }
         },
         "H": {

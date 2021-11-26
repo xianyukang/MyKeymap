@@ -252,6 +252,12 @@ return
 *C::
 send, {blind}^{bs}
 return
+*G::
+send, {blind}^{end}
+return
+*A::
+send, {blind}^{home}
+return
 *S::
 send, {blind}^{left}
 return
