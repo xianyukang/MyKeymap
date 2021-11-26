@@ -2,24 +2,52 @@
   <div class="my-container">
     <v-dialog
       v-model="showConfigPathVariableDialog"
-      overlay-opacity="0.50"
+      overlay-opacity="0.30"
       max-width="1080"
       @click:outside="showConfigPathVariableDialog = !showConfigPathVariableDialog"
     >
       <key-value-config @hideDialog="showConfigPathVariableDialog = false" />
     </v-dialog>
 
+    <v-dialog
+      persistent
+      v-model="showWindowSelectorConfig"
+      overlay-opacity="0.30"
+      max-width="1080"
+      @click:outside="hideWindowSelectorConfig"
+    >
+      <window-selector-config/>
+    </v-dialog>
+
     <v-card min-height="570" width="790" elevation="5" class="action-config">
       <v-card-title>
-        <v-select
-          class="action-select"
-          :items="actionTypes"
-          v-model="currKey().type"
-          outlined
-          @change="clearValue"
-          :menu-props="{ maxHeight: 900 }"
-          :disabled="disableSelectBox"
-        ></v-select>
+        <v-row>
+          <v-col cols="8">
+            <v-select
+              class="action-select"
+              :items="actionTypes"
+              v-model="currKey().type"
+              outlined
+              @change="clearValue"
+              :menu-props="{ maxHeight: 900 }"
+              :disabled="disableSelectBox"
+            ></v-select>
+          </v-col>
+          <v-col cols="4">
+
+            <v-select
+              outlined
+              class="action-select"
+              :menu-props="{ maxHeight: 900 }"
+              :disabled="disableSelectBox"
+              :items="windowSelectors"
+              item-text="key"
+              item-value="id"
+              v-model="currentWindowSelector"
+              @change="changeWindowSelector"
+            ></v-select>
+          </v-col>
+        </v-row>
       </v-card-title>
       <v-card-text>
         <template v-if="currKey().type === '启动程序或激活窗口'">
@@ -63,7 +91,8 @@
 
  Tips: (1) 参数都是选填的,  比如不填窗口标识符就不会尝试激活窗口,  直接启动程序
        (2) 文件管理器中按住 Shift 并右击文件, 可以选择「 复制为路径 」 (记得去掉两端双引号)
-       (3) 程序路径可以填 URL 比如 https://google.com、ms-settings:display</pre>
+       (3) 程序路径可以填 URL 比如 https://google.com、ms-settings:display</pre
+          >
         </template>
 
         <template v-if="currKey().type === '输入文本或按键'">
@@ -272,16 +301,24 @@ import { bindWindow, escapeFuncString, executeScript, mapKeysToSend, notBlank } 
 import { host, EMPTY_KEY } from '../util'
 import _ from 'lodash'
 import KeyValueConfig from './KeyValueConfig.vue'
+import WindowSelectorConfig from './WindowSelectorConfig.vue'
 
 export default {
-  components: { KeyValueConfig },
+  components: { KeyValueConfig, WindowSelectorConfig },
   created() {},
   props: {
     currentKey: { type: String },
   },
+  watch: {
+    currentKey(newValue, oldValue) {
+      this.currentWindowSelector = '2'
+    }
+  },
   data() {
     return {
+      currentWindowSelector: '2',
       showConfigPathVariableDialog: false,
+      showWindowSelectorConfig: false,
       mouseActions: [
         { label: '鼠标上移', value: '鼠标上移' },
         { label: '鼠标下移', value: '鼠标下移' },
@@ -389,6 +426,11 @@ export default {
     configPathVariable() {
       this.showConfigPathVariableDialog = true
     },
+    hideWindowSelectorConfig() {
+      this.showWindowSelectorConfig = false
+      this.currentWindowSelector = '2'
+      this.changeWindowSelector('2')
+    },
     sendKeys() {
       this.currKey().prefix = '*'
       const result = ['']
@@ -439,15 +481,21 @@ export default {
     ActivateOrRun("${toActivate}", path, "${cmdArgs}", workingDir)
     return`
     },
-    // note 当选项发生改变时,  是否要清空掉 value ?
     clearValue() {
+      // 把当前键的 value 清空,  然后把 'value' 和 'type' 这两者之外的属性删掉
       this.currKey().value = ''
       for (const key of Object.keys(this.currKey())) {
         if (!['type', 'value'].includes(key)) {
           delete this.currKey()[key]
         }
       }
-      console.log(Object.entries(this.currKey()))
+      // console.log(Object.entries(this.currKey()))
+    },
+    changeWindowSelector(new_value) {
+      if (new_value === '1') {
+        this.showWindowSelectorConfig = true
+        return
+      }
     },
     mouseActionChanged(newValue) {
       console.log('mouseActionChanged')
@@ -476,6 +524,19 @@ export default {
     },
   },
   computed: {
+    windowSelectors() {
+      const config = this.$store.state.config
+      const selectors = [
+        {id: '1', key: '🛠️ 点此添加应用', value: 'USELESS' },
+        {id: '2', key: '🌎 全局生效', value: 'USELESS' },
+      ]
+
+      if (config && config.windowSelectors) {
+        return [...selectors, ...config.windowSelectors]
+      }
+
+      return selectors
+    },
     actionTypes() {
       const result = [
         { text: '⛔ 什么也不做', value: '什么也不做' },
@@ -494,7 +555,7 @@ export default {
     },
     disableSelectBox() {
       return this.currentKey === EMPTY_KEY
-    }
+    },
   },
 }
 </script>

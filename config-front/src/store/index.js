@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios';
-import { host, executeScript, emptyKeymap, ALL_KEYMAPS, NEW_CONFIGURABLE_KEYS } from '../util.js';
+import { host, executeScript, emptyKeymap, ALL_KEYMAPS, NEW_CONFIGURABLE_KEYS, KEYMAP_PLUS_ABBR } from '../util.js';
 import _ from 'lodash'
 
 
@@ -27,7 +27,7 @@ function addExtendedKeys(data) {
 function containsKeymap(data) {
   if (!data) return false
   for (const [key, value] of Object.entries(data)) {
-    if (value && value.value) return true;
+    if (value && value['2'] && value['2'].value) return true;
   }
   return false
 }
@@ -51,8 +51,23 @@ function processConfig(config) {
   s['RButtonMode'] = s.enableRButtonMode && containsKeymap(config.RButtonMode)
   s['SpaceMode'] = s.enableSpaceMode && containsKeymap(config.SpaceMode)
   s['TabMode'] = s.enableTabMode && containsKeymap(config.TabMode)
+  
+  if (!config['otherInfo']) {
+    config['otherInfo'] = {}
+  }
+  const otherInfo = config['otherInfo']
+  otherInfo['KEYMAP_PLUS_ABBR'] = KEYMAP_PLUS_ABBR
 
   return config
+}
+
+function upgrade(config) {
+  // 把所有老配置放成全局生效
+  for (const keymap of KEYMAP_PLUS_ABBR) {
+    for (const [key, value] of Object.entries(config[keymap])) {
+      config[keymap][key] = { '2': value }
+    }
+  }
 }
 
 const s = new Vuex.Store({
@@ -94,11 +109,18 @@ const s = new Vuex.Store({
           resp.data.TabMode = resp.data.TabMode || emptyKeymap
           resp.data.JModeK = resp.data.JModeK || emptyKeymap
           resp.data.JModeL = resp.data.JModeL || emptyKeymap
+          resp.data.windowSelectors = resp.data.windowSelectors || [{id: '3', key: 'IntelliJ IDEA', value: 'ahk_exe idea64.exe'}]
           addExtendedKeys(resp.data)
-          resp.data.Capslock.Space = { "type": "什么也不做", "value": "" }
           if (resp.data.Settings.enableCapslockAbbr === undefined) {
             resp.data.Settings.enableCapslockAbbr = true
           }
+
+          // 从不支持分应用配置的版本升级
+          if (resp.data.supportPerAppConfig === undefined) {
+            upgrade(resp.data)
+            resp.data.supportPerAppConfig = true
+          }
+
           store.commit('SET_CONFIG', resp.data)
         })
         .catch(error => {

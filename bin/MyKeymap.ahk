@@ -64,6 +64,7 @@ Menu, Tray, Add, 打开设置, trayMenuHandler
 Menu, Tray, Add, 视频教程, trayMenuHandler
 Menu, Tray, Add, 帮助文档, trayMenuHandler 
 Menu, Tray, Add, 检查更新, trayMenuHandler 
+Menu, Tray, Add, 查看窗口标识符, trayMenuHandler 
 Menu, Tray, Add 
 
 Menu, Tray, Icon
@@ -863,3 +864,7 @@ delayedHideTipWindow()
     HIDE_TYPO_WINDOW := 0x0400 + 0x0002
     postMessageToTipWidnow(HIDE_TYPO_WINDOW)
 }
+
+
+
+

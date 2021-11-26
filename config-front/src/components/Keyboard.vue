@@ -46,9 +46,9 @@ export default {
       // if (hover) return { color: '#f3448f', dark: true }
       if (this.keyDisabled(keyObj)) return { color: '#AAA', dark: true }
       if (keyObj.key === this.currentKey) return { color: 'blue', dark: true }
-      const action = this.currConfig()[keyObj.key]
-      if (action) {
-        if (action.type != '什么也不做' && action.value) return { color: '#98FB98', dark: false }
+      const action = this.currConfig()[keyObj.key]['2']
+      if (action && action.type != '什么也不做' && action.value) {
+        return { color: '#98FB98', dark: false }
       }
       return {}
     },
@@ -106,7 +106,7 @@ export default {
         ],
         [{ key: 'Space', disableAt: ['CapslockSpace', 'Capslock', 'SpaceMode'] }],
       ]
-      
+
       // 请求尚未返回 || 开启了数字键
       const numKeyConfigurable = !this.$store.state.config || this.$store.state.config.Settings.numKeyConfigurable
       if (!numKeyConfigurable) {

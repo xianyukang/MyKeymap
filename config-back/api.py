@@ -67,7 +67,7 @@ def save_config():
     with open('../data/config.json', 'r+', encoding='utf-8') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
         f.truncate()
-    script.makeCapslock(data)
+    script.generate(data)
     return 'save config ok!'
 
 @app.route('/execute', methods=['POST'])

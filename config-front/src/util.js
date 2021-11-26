@@ -19,6 +19,7 @@ export function notBlank(str) {
     return str && str.trim().length > 0
 }
 
+// 所有的按键映射
 export const ALL_KEYMAPS = [
     'Capslock',
     'CapslockF',
@@ -35,6 +36,13 @@ export const ALL_KEYMAPS = [
     'RButtonMode',
     'LButtonMode',
 ]
+// 所有的按键映射 + 缩写功能
+export const KEYMAP_PLUS_ABBR = [
+    ...ALL_KEYMAPS,
+    'CapslockAbbr',
+    'SemicolonAbbr',
+]
+
 export const EMPTY_KEY = 'EMPTY_KEY';
 export const NEW_CONFIGURABLE_KEYS = [
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',

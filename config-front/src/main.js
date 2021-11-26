@@ -14,7 +14,17 @@ Vue.mixin({
       if (this.currentKey === EMPTY_KEY) {
         return { type: '什么也不做', value: '' }
       }
-      return this.currConfig()[this.currentKey]
+
+      let sel = this.currentWindowSelector
+      if (sel === '1') {
+        sel = '2'
+      }
+
+      if (!this.currConfig()[this.currentKey][sel]) {
+        Vue.set(this.currConfig()[this.currentKey], sel, { type: '什么也不做', value: '' })
+      }
+
+      return this.currConfig()[this.currentKey][sel]
     },
     currConfig() {
       return this.config[this.$route.name]

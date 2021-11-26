@@ -1120,6 +1120,9 @@ trayMenuHandler(ItemName, ItemPos, MenuName)
     if (InStr(ItemName, "帮助文档" )) {
         run, https://xianyukang.com/MyKeymap.html
     }
+    if (InStr(ItemName, "查看窗口标识符" )) {
+        run, bin\ahk.exe bin\WindowSpy.ahk
+    }
 
 }
 
