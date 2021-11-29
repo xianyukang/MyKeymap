@@ -29,8 +29,9 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn class="btn" color="green" dark @click="addNewItem"
-        >添加一行</v-btn
+      <v-btn class="btn" color="green" dark @click="addNewItem">添加一行</v-btn>
+      <v-btn class="action-button" color="purple" dark outlined @click="execute('bin/WindowSpy.ahk')"
+        >🔍 查看窗口标识符</v-btn
       >
       <!-- <v-btn class="btn" color="blue" dark @click="$emit('hideDialog')">确认</v-btn> -->
     </v-card-actions>
@@ -40,6 +41,7 @@
 
 <script>
 import _ from 'lodash'
+import { executeScript } from '../util'
 
 export default {
   emits: ['hideDialog'],
@@ -48,8 +50,11 @@ export default {
       const selectors = this.$store.state.config.windowSelectors
       const maxItem = _.maxBy(selectors, x => parseInt(x.id))
       const id = maxItem !== undefined ? parseInt(maxItem.id) + 1 : 3
-      selectors.push({ id: ''+id, key: '', value: '' })
-    }
+      selectors.push({ id: '' + id, key: '', value: '' })
+    },
+    execute(arg) {
+      executeScript(arg)
+    },
   },
   data() {
     return {
