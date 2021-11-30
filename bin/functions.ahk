@@ -1197,3 +1197,30 @@ enterJModeL()
     keywait l
     JModeL := false
 }
+
+actionAddSpaceBetweenEnglishChinese()
+{
+    text := copySelectedText()
+    if (!text) {
+        return
+    }
+
+    clipboard := addSpaceBetweenEnglishChinese(text)
+    send {LShift down}{Insert down}{Insert up}{LShift up}
+}
+
+addSpaceBetweenEnglishChinese(str) {
+    ; 参考 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions/Assertions
+
+    ; 前面加空格,  使用 look behind,  当英文在非英文之后时匹配
+    regexp := "(?<=[^ -~])([!-~]+)"
+    replacement := " $1"
+    str := RegExReplace(str, regexp, replacement)
+    ; 后面加空格, 使用 look ahead,  当英文在非英文之前时匹配
+    regexp := "([!-~]+)(?=[^ -~])"
+    replacement := "$1 "
+    str := RegExReplace(str, regexp, replacement)
+    ; 去除两端空格
+    ; return Trim(str)
+    return str
+}

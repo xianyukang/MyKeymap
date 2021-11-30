@@ -2835,6 +2835,12 @@
                 "toRun": "taskmgr.exe",
                 "toActivate": ""
             }
+        },
+        "kg": {
+            "2": {
+                "type": "文字编辑",
+                "value": "actionAddSpaceBetweenEnglishChinese()"
+            }
         }
     },
     "CapslockAbbrKeys": [
@@ -2871,7 +2877,8 @@
         "ir",
         "io",
         "mw",
-        "tm"
+        "tm",
+        "kg"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",

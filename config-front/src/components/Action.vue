@@ -416,7 +416,9 @@ export default {
         { label: '设置字体为蓝色', value: 'setColor("#2E66FF")' },
         { label: '设置字体为绿色', value: 'setColor("#080")' },
       ],
-      textFeatures2: [],
+      textFeatures2: [
+        { label: '在中英文之间添加空格', value: 'actionAddSpaceBetweenEnglishChinese()' },
+      ],
     }
   },
   methods: {
