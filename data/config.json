@@ -2827,6 +2827,14 @@
                 "cmdArgs": "",
                 "toRun": "D:\\notes\\working.md"
             }
+        },
+        "tm": {
+            "2": {
+                "type": "启动程序或激活窗口",
+                "value": "\n    path = taskmgr.exe\n    workingDir = \n    ActivateOrRun(\"\", path, \"\", workingDir)\n    return",
+                "toRun": "taskmgr.exe",
+                "toActivate": ""
+            }
         }
     },
     "CapslockAbbrKeys": [
@@ -2862,7 +2870,8 @@
         "cm",
         "ir",
         "io",
-        "mw"
+        "mw",
+        "tm"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",

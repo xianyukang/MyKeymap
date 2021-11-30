@@ -99,10 +99,7 @@ export default {
         // }
         
         // 这样写,  才是响应式属性
-        this.$set(this.currConfig(), k, {
-          type: '什么也不做',
-          value: '',
-        })
+        this.$set(this.currConfig(), k, {})
 
         this.clickKey(k)
         this.abbr = ''
