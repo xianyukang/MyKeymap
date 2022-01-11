@@ -1,18 +1,6 @@
 <template>
   <div class="my-container">
-    
-    <!-- <v-row v-for="item in config.capslockf" :key="item.name" dense>
-      <v-col cols="1">
-        <v-chip dark color="green" label><span class="key">{{ item.key }}</span></v-chip>
-      </v-col>
-      <v-col cols="2">
-        <v-chip dark color="green" label ><span class="key">{{ item.key }}</span></v-chip>
-        <v-select class="fuck" :items="items" v-model="item.type" label="操作类型"></v-select>
-      </v-col>
-      <v-col><v-text-field label="激活" v-model="item.value"></v-text-field></v-col>
-      <v-col><v-text-field label="或运行" v-model="item.value"></v-text-field></v-col>
-    </v-row> -->
-    <keyboard @clickKey="keyChanged" :currentKey="currentKey" />
+    <keyboard ref="kb" @clickKey="currentKey = $event" />
     <action :currentKey="currentKey"/>
   </div>
 </template>
@@ -23,17 +11,11 @@ import Keyboard from '../components/Keyboard.vue'
 import { EMPTY_KEY } from '../util.js'
 export default {
   name: 'CapslockF',
-  created() {},
   beforeRouteLeave(to, from, next) {
-    // 当 route 变成其他东西前,  重置当前组件的当前 key 
-    // console.log('update currentKey', this.currentKey)
-    this.currentKey = EMPTY_KEY
+    // note 两个路由共用一个组件时,  可能需要重置组件状态
+    this.currentKey = EMPTY_KEY // 路由变化前,  重置当前 key 
+    this.$refs.kb.reset()       // 重置键盘按下的键
     next();
-  },
-  methods: {
-    keyChanged(key) {
-      this.currentKey = key
-    },
   },
   data() {
     return {

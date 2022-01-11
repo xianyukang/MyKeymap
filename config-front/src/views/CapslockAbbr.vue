@@ -19,9 +19,14 @@
 <script>
 import Action from '@/components/Action.vue'
 import Abbr from '../components/Abbr.vue'
+import { EMPTY_KEY } from '../util'
 export default {
   name: 'CapslockAbbr',
   created() {},
+  beforeRouteLeave(to, from, next) {
+    this.currentKey = EMPTY_KEY // 路由变化前,  重置当前 key 
+    next();
+  },
   methods: {
     keyChanged(key) {
       this.currentKey = key
@@ -40,7 +45,7 @@ export default {
   },
   data() {
     return {
-      currentKey: Object.keys(this.$store.state.config[this.$route.name])[0],
+      currentKey: EMPTY_KEY,
     }
   },
   components: { Action, Abbr },

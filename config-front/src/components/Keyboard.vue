@@ -22,13 +22,15 @@
 </template>
 
 <script>
+import { EMPTY_KEY } from '../util'
 export default {
   emits: ['clickKey'],
-  props: {
-    currentKey: { type: String },
-  },
   methods: {
+    reset() {
+      this.pressedKey = EMPTY_KEY
+    },
     clickKey(key) {
+      this.pressedKey = key
       this.$emit('clickKey', key)
     },
 
@@ -45,7 +47,7 @@ export default {
     keyColor(keyObj, hover) {
       // if (hover) return { color: '#f3448f', dark: true }
       if (this.keyDisabled(keyObj)) return { color: '#AAA', dark: true }
-      if (keyObj.key === this.currentKey) return { color: 'blue', dark: true }
+      if (keyObj.key === this.pressedKey) return { color: 'blue', dark: true }
       const action = this.currConfig()[keyObj.key]['2']
       if (action && action.type != '什么也不做' && action.value) {
         return { color: '#98FB98', dark: false }
@@ -117,7 +119,9 @@ export default {
     },
   },
   data() {
-    return {}
+    return {
+      pressedKey: EMPTY_KEY,
+    }
   },
 }
 </script>
