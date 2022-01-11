@@ -9,6 +9,15 @@ import _ from 'lodash'
 //         })
 // }
 
+// 获取当前页面对应的配置的 mixin
+export const currConfigMixin = {
+    methods: {
+        currConfig() {
+            return this.$store.state.config[this.$route.name]
+        },
+    },
+}
+
 // 用户输入的字符串可能包含双引号,  不做处理的话, 会导致 ahk 脚本语法错误
 export function escapeFuncString(arg) {
     if (!arg) return ''

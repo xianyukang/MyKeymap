@@ -34,7 +34,7 @@
       <v-card v-if="!currentModeEnabled" outlined max-width="100%" dark id="warn" color="#555">
         <v-card-title>此模式尚未开启, 若想使用需要在设置中打开</v-card-title>
       </v-card>
-      <router-view v-if="config" />
+      <router-view v-if="$store.state.config" />
     </v-main>
 
     <v-snackbar id="snack-bar" v-model="$store.state.snackbar" color="purple" timeout="1600" min-width="600" height="70">

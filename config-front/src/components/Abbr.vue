@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { currConfigMixin } from '../util'
 function anyKeyExcept(obj, toExclude) {
   for (const [key, value] of Object.entries(obj)) {
     if (key != toExclude) return key
@@ -48,6 +49,7 @@ function anyKeyExcept(obj, toExclude) {
 
 export default {
   emits: ['clickKey', 'delKey'],
+  mixins: [currConfigMixin],
   props: {
     currentKey: { type: String },
   },

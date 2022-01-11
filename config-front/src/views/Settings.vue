@@ -166,9 +166,10 @@
 </template>
 
 <script>
-import { escapeFuncString, executeScript } from '../util.js'
+import { currConfigMixin, escapeFuncString, executeScript } from '../util.js'
 export default {
   name: 'Settings',
+  mixins: [currConfigMixin],
   created() {
     // console.log(this.currConfig())
   },

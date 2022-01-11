@@ -22,9 +22,10 @@
 </template>
 
 <script>
-import { EMPTY_KEY } from '../util'
+import { currConfigMixin, EMPTY_KEY } from '../util'
 export default {
   emits: ['clickKey'],
+  mixins: [currConfigMixin],
   methods: {
     reset() {
       this.pressedKey = EMPTY_KEY

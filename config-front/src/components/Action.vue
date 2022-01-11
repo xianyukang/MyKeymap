@@ -297,13 +297,15 @@
 </template>
 
 <script>
-import { bindWindow, escapeFuncString, executeScript, mapKeysToSend, notBlank } from '../util.js'
+import Vue from 'vue'
+import { bindWindow, currConfigMixin, escapeFuncString, executeScript, mapKeysToSend, notBlank } from '../util.js'
 import { host, EMPTY_KEY } from '../util'
 import _ from 'lodash'
 import KeyValueConfig from './KeyValueConfig.vue'
 import WindowSelectorConfig from './WindowSelectorConfig.vue'
 
 export default {
+  mixins: [currConfigMixin],
   components: { KeyValueConfig, WindowSelectorConfig },
   created() {},
   props: {
@@ -422,6 +424,22 @@ export default {
     }
   },
   methods: {
+    currKey() {
+      if (this.currentKey === EMPTY_KEY) {
+        return { type: '什么也不做', value: '' }
+      }
+
+      let sel = this.currentWindowSelector
+      if (sel === '1') {
+        sel = '2'
+      }
+
+      if (!this.currConfig()[this.currentKey][sel]) {
+        Vue.set(this.currConfig()[this.currentKey], sel, { type: '什么也不做', value: '' })
+      }
+
+      return this.currConfig()[this.currentKey][sel]
+    },
     execute(arg) {
       executeScript(arg)
     },
