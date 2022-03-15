@@ -1423,9 +1423,9 @@
         "Q": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "\nsend, {blind}+{tab}\nreturn",
+                "value": "\nsend, {blind}+{home}{bs}\nreturn",
                 "prefix": "*",
-                "keysToSend": "+{tab}"
+                "keysToSend": "+{home}{bs}"
             }
         },
         "W": {
@@ -1455,8 +1455,8 @@
         "T": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "\nsend, {blind}{tab}\nreturn",
-                "keysToSend": "{tab}",
+                "value": "\nsend, {blind}+{end}{bs}\nreturn",
+                "keysToSend": "+{end}{bs}",
                 "prefix": "*"
             }
         },
@@ -1587,16 +1587,16 @@
         "V": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "\nsend, {blind}^{bs}\nreturn",
-                "keysToSend": "^{bs}",
+                "value": "\nsend, {blind}{del}\nreturn",
+                "keysToSend": "{del}",
                 "prefix": "*"
             }
         },
         "B": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "\nsend, {blind}{del}\nreturn",
-                "keysToSend": "{del}",
+                "value": "\nsend, {blind}^{bs}\nreturn",
+                "keysToSend": "^{bs}",
                 "prefix": "*"
             }
         },

@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    src: url(./iosevka-ss03-regular.woff2) format('woff2');
+  }
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bold;
+    src: url(./iosevka-ss03-bold.woff2) format('woff2');
+  }

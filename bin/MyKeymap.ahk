@@ -248,13 +248,16 @@ l::enterJModeL()
 *Space::
 send {blind}{enter}
 return
+*T::
+send, {blind}+{end}{bs}
+return
 *Q::
-send, {blind}+{tab}
+send, {blind}+{home}{bs}
 return
 *2::
 send, {blind}^+{tab}
 return
-*V::
+*B::
 send, {blind}^{bs}
 return
 *W::
@@ -269,14 +272,11 @@ return
 *C::
 send, {blind}{bs}
 return
-*B::
+*V::
 send, {blind}{del}
 return
 *.::
 send, {blind}{insert}
-return
-*T::
-send, {blind}{tab}
 return
 *Z::send {blind}{appskey}
 *D::send {blind}{down}
