@@ -3783,20 +3783,26 @@
         },
         "W": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}^+{left}\nreturn",
+                "keysToSend": "^+{left}",
+                "prefix": "*"
             }
         },
         "E": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}+{up}\nreturn",
+                "keysToSend": "+{up}",
+                "prefix": "*"
             }
         },
         "R": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}^+{right}\nreturn",
+                "keysToSend": "^+{right}",
+                "prefix": "*"
             }
         },
         "T": {
@@ -3837,32 +3843,42 @@
         },
         "A": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}+{home}\nreturn",
+                "keysToSend": "+{home}",
+                "prefix": "*"
             }
         },
         "S": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}+{left}\nreturn",
+                "keysToSend": "+{left}",
+                "prefix": "*"
             }
         },
         "D": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}+{down}\nreturn",
+                "keysToSend": "+{down}",
+                "prefix": "*"
             }
         },
         "F": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}+{right}\nreturn",
+                "keysToSend": "+{right}",
+                "prefix": "*"
             }
         },
         "G": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}+{end}\nreturn",
+                "keysToSend": "+{end}",
+                "prefix": "*"
             }
         },
         "H": {
@@ -3903,20 +3919,26 @@
         },
         "X": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}+{esc}\nreturn",
+                "keysToSend": "+{esc}",
+                "prefix": "*"
             }
         },
         "C": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{bs}\nreturn",
+                "keysToSend": "{bs}",
+                "prefix": "*"
             }
         },
         "V": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}+{del}\nreturn",
+                "keysToSend": "+{del}",
+                "prefix": "*"
             }
         },
         "B": {
@@ -3979,7 +4001,6 @@
             "CapslockSpace",
             "SpaceMode",
             "JMode",
-            "JModeK",
             "JModeL",
             "TabMode",
             "Semicolon",
