@@ -315,16 +315,12 @@ enterLButtonMode()
 
 {% if Settings.JMode %}
 
-#if JModeK
-k::return
-{{{ keymapToAhk(JModeK) }}}
 
 #if JModeL
 l::return
 {{{ keymapToAhk(JModeL) }}}
 
 #if JMode
-k::enterJModeK()
 l::enterJModeL()
 
 {% for key,value in JMode.items()|sort(attribute="1.value") %}

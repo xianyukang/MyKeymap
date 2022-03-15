@@ -90,9 +90,9 @@ export default {
           { key: 'F', disableAt: ['Capslock', 'CapslockF', 'Mode3R'] },
           { key: 'G', disableAt: ['Mode3R'] },
           { key: 'H', disableAt: [] },
-          { key: 'J', disableAt: ['JMode', 'JModeK', 'JModeL'] },
-          { key: 'K', disableAt: ['JMode', 'JModeK', 'JModeL'] },
-          { key: 'L', disableAt: ['JMode', 'JModeK', 'JModeL', 'Mode9'] },
+          { key: 'J', disableAt: ['JMode', 'JModeL'] },
+          { key: 'K', disableAt: [] },
+          { key: 'L', disableAt: ['JMode', 'JModeL', 'Mode9'] },
           { key: ';', disableAt: ['Semicolon', 'Mode9'] },
         ],
         [

@@ -1182,14 +1182,6 @@ toggleRemoveTaskBar()
 }
 
 
-enterJModeK()
-{
-    global
-    JModeK := true
-    keywait k
-    JModeK := false
-}
-
 enterJModeL()
 {
     global

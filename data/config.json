@@ -3837,18 +3837,14 @@
         },
         "A": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}^{home}\nreturn",
-                "keysToSend": "^{home}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "S": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}^{left}\nreturn",
-                "keysToSend": "^{left}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "D": {
@@ -3859,18 +3855,14 @@
         },
         "F": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}^{right}\nreturn",
-                "keysToSend": "^{right}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "G": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}^{end}\nreturn",
-                "keysToSend": "^{end}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "H": {
@@ -3917,288 +3909,14 @@
         },
         "C": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}^{bs}\nreturn",
-                "keysToSend": "^{bs}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "V": {
             "2": {
                 "type": "什么也不做",
                 "value": ""
-            }
-        },
-        "B": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "N": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "M": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        ",": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        ".": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "/": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        }
-    },
-    "JModeK": {
-        "0": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "1": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "2": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "3": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "4": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "5": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "6": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "7": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "8": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "9": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "Space": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "Q": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "W": {
-            "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}^+{left}\nreturn",
-                "keysToSend": "^+{left}",
-                "prefix": "*"
-            }
-        },
-        "E": {
-            "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}+{up}\nreturn",
-                "keysToSend": "+{up}",
-                "prefix": "*"
-            }
-        },
-        "R": {
-            "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}^+{right}\nreturn",
-                "keysToSend": "^+{right}",
-                "prefix": "*"
-            }
-        },
-        "T": {
-            "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}{home}+{end}\nreturn",
-                "keysToSend": "{home}+{end}",
-                "prefix": "*"
-            }
-        },
-        "Y": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "U": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "I": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "O": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "P": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "A": {
-            "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}+{home}\nreturn",
-                "keysToSend": "+{home}",
-                "prefix": "*"
-            }
-        },
-        "S": {
-            "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}+{left}\nreturn",
-                "keysToSend": "+{left}",
-                "prefix": "*"
-            }
-        },
-        "D": {
-            "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}+{down}\nreturn",
-                "keysToSend": "+{down}",
-                "prefix": "*"
-            }
-        },
-        "F": {
-            "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}+{right}\nreturn",
-                "keysToSend": "+{right}",
-                "prefix": "*"
-            }
-        },
-        "G": {
-            "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}+{end}\nreturn",
-                "keysToSend": "+{end}",
-                "prefix": "*"
-            }
-        },
-        "H": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "J": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "K": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "L": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        ";": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "Z": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "X": {
-            "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}+{esc}\nreturn",
-                "keysToSend": "+{esc}",
-                "prefix": "*"
-            }
-        },
-        "C": {
-            "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}{bs}\nreturn",
-                "keysToSend": "{bs}",
-                "prefix": "*"
-            }
-        },
-        "V": {
-            "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}+{del}\nreturn",
-                "keysToSend": "+{del}",
-                "prefix": "*"
             }
         },
         "B": {

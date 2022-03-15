@@ -38,7 +38,6 @@ export const ALL_KEYMAPS = [
     'CapslockSpace',
     'SpaceMode',
     'JMode',
-    'JModeK',
     'JModeL',
     'TabMode',
     'Semicolon',
