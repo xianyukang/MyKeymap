@@ -560,20 +560,26 @@
     "Mode3": {
         "0": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{f10}\nreturn",
+                "keysToSend": "{f10}",
+                "prefix": "*"
             }
         },
         "1": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{f1}\nreturn",
+                "keysToSend": "{f1}",
+                "prefix": "*"
             }
         },
         "2": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{f2}\nreturn",
+                "keysToSend": "{f2}",
+                "prefix": "*"
             }
         },
         "3": {
@@ -584,14 +590,18 @@
         },
         "4": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{f4}\nreturn",
+                "keysToSend": "{f4}",
+                "prefix": "*"
             }
         },
         "5": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{f5}\nreturn",
+                "keysToSend": "{f5}",
+                "prefix": "*"
             }
         },
         "6": {
@@ -608,14 +618,18 @@
         },
         "8": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{f8}\nreturn",
+                "keysToSend": "{f8}",
+                "prefix": "*"
             }
         },
         "9": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{f9}\nreturn",
+                "keysToSend": "{f9}",
+                "prefix": "*"
             }
         },
         "Space": {
@@ -640,8 +654,10 @@
         },
         "E": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{f3}\nreturn",
+                "keysToSend": "{f3}",
+                "prefix": "*"
             }
         },
         "R": {
@@ -652,14 +668,18 @@
         },
         "T": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{f6}\nreturn",
+                "keysToSend": "{f6}",
+                "prefix": "*"
             }
         },
         "Y": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{f7}\nreturn",
+                "keysToSend": "{f7}",
+                "prefix": "*"
             }
         },
         "U": {
@@ -688,8 +708,10 @@
         },
         "P": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{f11}\nreturn",
+                "keysToSend": "{f11}",
+                "prefix": "*"
             }
         },
         "A": {
@@ -756,8 +778,10 @@
         },
         ";": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{f12}\nreturn",
+                "keysToSend": "{f12}",
+                "prefix": "*"
             }
         },
         "Z": {
@@ -932,26 +956,20 @@
         },
         "U": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send {blind}{f4}",
-                "keysToSend": "{f4}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "I": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send {blind}{f5}",
-                "keysToSend": "{f5}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "O": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send {blind}{f6}",
-                "keysToSend": "{f6}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "P": {
@@ -992,34 +1010,26 @@
         },
         "H": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send {blind}{f10}",
-                "keysToSend": "{f10}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "J": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send {blind}{f1}",
-                "keysToSend": "{f1}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "K": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send {blind}{f2}",
-                "keysToSend": "{f2}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "L": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send {blind}{f3}",
-                "keysToSend": "{f3}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         ";": {
@@ -1054,42 +1064,32 @@
         },
         "B": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}{f7}\nreturn",
-                "keysToSend": "{f7}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "N": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send {blind}{f8}",
-                "keysToSend": "{f8}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "M": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send {blind}{f9}",
-                "keysToSend": "{f9}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         ",": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send {blind}{f11}",
-                "keysToSend": "{f11}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         ".": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}{f12}\nreturn",
-                "keysToSend": "{f12}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "/": {
@@ -1362,14 +1362,18 @@
         },
         "2": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}^+{tab}\nreturn",
+                "keysToSend": "^+{tab}",
+                "prefix": "*"
             }
         },
         "3": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}^{tab}\nreturn",
+                "keysToSend": "^{tab}",
+                "prefix": "*"
             }
         },
         "4": {
@@ -1419,17 +1423,17 @@
         "Q": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}{pgup}",
+                "value": "\nsend, {blind}+{tab}\nreturn",
                 "prefix": "*",
-                "keysToSend": "{pgup}"
+                "keysToSend": "+{tab}"
             }
         },
         "W": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}+{tab}",
+                "value": "\nsend, {blind}^{left}\nreturn",
                 "prefix": "*",
-                "keysToSend": "+{tab}"
+                "keysToSend": "^{left}"
             }
         },
         "E": {
@@ -1443,16 +1447,16 @@
         "R": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}{tab}",
-                "keysToSend": "{tab}",
+                "value": "\nsend, {blind}^{right}\nreturn",
+                "keysToSend": "^{right}",
                 "prefix": "*"
             }
         },
         "T": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}{pgdn}",
-                "keysToSend": "{pgdn}",
+                "value": "\nsend, {blind}{tab}\nreturn",
+                "keysToSend": "{tab}",
                 "prefix": "*"
             }
         },
@@ -1470,10 +1474,8 @@
         },
         "I": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}ji\nreturn",
-                "keysToSend": "ji",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "O": {
@@ -1577,23 +1579,25 @@
         "C": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}{backspace}",
-                "keysToSend": "{backspace}",
+                "value": "\nsend, {blind}{bs}\nreturn",
+                "keysToSend": "{bs}",
                 "prefix": "*"
             }
         },
         "V": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}{delete}",
-                "keysToSend": "{delete}",
+                "value": "\nsend, {blind}^{bs}\nreturn",
+                "keysToSend": "^{bs}",
                 "prefix": "*"
             }
         },
         "B": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "\nsend, {blind}{del}\nreturn",
+                "keysToSend": "{del}",
+                "prefix": "*"
             }
         },
         "N": {
@@ -2955,7 +2959,8 @@
         "TabMode": false,
         "enableCapslockAbbr": true,
         "enableCommaMode": false,
-        "CommaMode": false
+        "CommaMode": false,
+        "numKeyConfigurable": true
     },
     "CapslockSpace": {
         "0": {
@@ -3352,10 +3357,8 @@
         },
         "F": {
             "2": {
-                "type": "启动程序或激活窗口",
-                "value": "\n    path = notepad.exe\n    workingDir = \n    ActivateOrRun(\"记事本\", path, \"\", workingDir)\n    return",
-                "toActivate": "记事本",
-                "toRun": "notepad.exe"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "G": {
@@ -3780,10 +3783,8 @@
         },
         "W": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}^+{tab}\nreturn",
-                "keysToSend": "^+{tab}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "E": {
@@ -3794,10 +3795,8 @@
         },
         "R": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "\nsend, {blind}^{tab}\nreturn",
-                "keysToSend": "^{tab}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "T": {
@@ -4244,6 +4243,11 @@
             "id": "3",
             "key": "IntelliJ IDEA",
             "value": "ahk_exe idea64.exe"
+        },
+        {
+            "id": "4",
+            "key": "文件管理器",
+            "value": "ahk_exe explorer.exe"
         }
     ],
     "supportPerAppConfig": true,

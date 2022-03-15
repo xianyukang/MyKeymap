@@ -1138,14 +1138,14 @@ bindOrActivate(ByRef id)
     old := A_DetectHiddenWindows
     DetectHiddenWindows, 1
     if WinActive("ahk_id " id) {
-        id := ""
-        tip("取消绑定", -400)
+        ; id := ""
+        ; tip("取消绑定", -400)
     }
     else if WinExist("ahk_id " id) {
         WinActivate
     }
     else {
-        tip("重新绑定 " A_ThisHotkey, -400)
+        tip("绑定当前窗口到 " A_ThisHotkey " 键", -400)
         id := WinExist("A")
     }
     DetectHiddenWindows, %old%

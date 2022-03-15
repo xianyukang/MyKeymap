@@ -7,3 +7,4 @@ bin/templates
 bin/mykeymap-settings-server
 bin/mykeymap-settings-server.exe
 *.7z
+todo.md

@@ -246,9 +246,6 @@ return
 
 #if JModeL
 l::return
-*W::
-send, {blind}^+{tab}
-return
 *C::
 send, {blind}^{bs}
 return
@@ -264,9 +261,6 @@ return
 *F::
 send, {blind}^{right}
 return
-*R::
-send, {blind}^{tab}
-return
 
 
 #if JMode
@@ -276,25 +270,43 @@ l::enterJModeL()
 *Space::
 send {blind}{enter}
 return
-*I::
-send, {blind}ji
+*Q::
+send, {blind}+{tab}
+return
+*2::
+send, {blind}^+{tab}
+return
+*V::
+send, {blind}^{bs}
+return
+*W::
+send, {blind}^{left}
+return
+*R::
+send, {blind}^{right}
+return
+*3::
+send, {blind}^{tab}
+return
+*C::
+send, {blind}{bs}
+return
+*B::
+send, {blind}{del}
 return
 *.::
 send, {blind}{insert}
 return
-*W::send {blind}+{tab}
+*T::
+send, {blind}{tab}
+return
 *Z::send {blind}{appskey}
-*C::send {blind}{backspace}
-*V::send {blind}{delete}
 *D::send {blind}{down}
 *G::send {blind}{end}
 *X::send {blind}{esc}
 *A::send {blind}{home}
 *S::send {blind}{left}
-*T::send {blind}{pgdn}
-*Q::send {blind}{pgup}
 *F::send {blind}{right}
-*R::send {blind}{tab}
 *E::send {blind}{up}
 
     
@@ -350,8 +362,44 @@ return
 *B::
 send, {blind}7
 return
+*0::
+send, {blind}{f10}
+return
+*P::
+send, {blind}{f11}
+return
+*`;::
+send, {blind}{f12}
+return
+*1::
+send, {blind}{f1}
+return
 *Space::
 send, {blind}{f1}
+return
+*2::
+send, {blind}{f2}
+return
+*E::
+send, {blind}{f3}
+return
+*4::
+send, {blind}{f4}
+return
+*5::
+send, {blind}{f5}
+return
+*T::
+send, {blind}{f6}
+return
+*Y::
+send, {blind}{f7}
+return
+*8::
+send, {blind}{f8}
+return
+*9::
+send, {blind}{f9}
 return
 *H::send {blind}0
 *J::send {blind}1
@@ -374,22 +422,6 @@ return
 #if FnMode
 *r::return
 
-*.::
-send, {blind}{f12}
-return
-*B::
-send, {blind}{f7}
-return
-*H::send {blind}{f10}
-*,::send {blind}{f11}
-*J::send {blind}{f1}
-*K::send {blind}{f2}
-*L::send {blind}{f3}
-*U::send {blind}{f4}
-*I::send {blind}{f5}
-*O::send {blind}{f6}
-*N::send {blind}{f8}
-*M::send {blind}{f9}
 
 
 
