@@ -49,8 +49,8 @@ export default {
       // if (hover) return { color: '#f3448f', dark: true }
       if (this.keyDisabled(keyObj)) return { color: '#AAA', dark: true }
       if (keyObj.key === this.pressedKey) return { color: 'blue', dark: true }
-      const action = this.currConfig()[keyObj.key]['2']
-      if (action && action.type != '什么也不做' && action.value) {
+      const config = this.$store.state.config[this.$store.state.routeName][keyObj.key][this.$store.state.windowSelector]
+      if (config && config.type != '什么也不做' && config.value) {
         return { color: '#98FB98', dark: false }
       }
       return {}
@@ -75,7 +75,7 @@ export default {
           { key: 'Q' },
           { key: 'W' },
           { key: 'E' },
-          { key: 'R', disableAt: ['Mode3', 'Mode3R'] },
+          { key: 'R', disableAt: ['Mode3R'] },
           { key: 'T', disableAt: ['Mode3R'] },
           { key: 'Y', disableAt: [] },
           { key: 'U', disableAt: [] },

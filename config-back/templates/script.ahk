@@ -5,6 +5,7 @@
 #WinActivateForce               ; 解决「 winactivate 最小化的窗口时不会把窗口放到顶层(被其他窗口遮住) 」
 #InstallKeybdHook               ; 可能是 ahk 自动卸载 hook 导致的丢失 hook,  如果用这行指令, ahk 是否就不会卸载 hook 了呢?
 #include bin/functions.ahk
+#include bin/actions.ahk
 
 {## 定义可重用的模板,  减少代码重复 ##}
 {% macro keymapToAhk(keymap) %}
@@ -35,10 +36,8 @@ SetDefaultMouseSpeed, 0
 coordmode, mouse, screen
 settitlematchmode, 2
 
-; win10 任务切换、任务视图
+; win10、win11 任务切换、任务视图
 GroupAdd, TASK_SWITCH_GROUP, ahk_class MultitaskingViewFrame
-; GroupAdd, TASK_SWITCH_GROUP, ahk_class Windows.UI.Core.CoreWindow
-; win11 任务切换、任务视图
 GroupAdd, TASK_SWITCH_GROUP, ahk_class XamlExplorerHostIslandWindow
 
 scrollOnceLineCount := {{{ Settings.scrollOnceLineCount if Settings.scrollOnceLineCount else 3 }}}
@@ -53,12 +52,6 @@ moveDelay1 = {{{ "T" + Settings.moveDelay1 if Settings.moveDelay1 else "T0.2" }}
 moveDelay2 = {{{ "T" + Settings.moveDelay2 if Settings.moveDelay2 else "T0.01" }}}
 
 SemicolonAbbrTip := true
-; time_enter_repeat = T0.2
-; delay_before_repeat = T0.01
-; fast_one := 110     
-; fast_repeat := 70
-; slow_one :=  10     
-; slow_repeat := 13
 
 allHotkeys := []
 {% if Settings.Mode3 %}
@@ -104,7 +97,7 @@ Menu, Tray, Add
 
 Menu, Tray, Icon
 Menu, Tray, Icon, bin\logo.ico,, 1
-Menu, Tray, Tip, MyKeymap 1.0 by 咸鱼阿康12333
+Menu, Tray, Tip, MyKeymap 1.1 by 咸鱼阿康
 ; processPath := getProcessPath()
 ; SetWorkingDir, %processPath%
 
@@ -181,8 +174,10 @@ RAlt::LCtrl
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     PunctuationMode := true
+    DisableCapslockKey := true
     keywait `; 
     PunctuationMode := false
+    DisableCapslockKey := false
     if (A_PriorKey == ";" && A_TimeSinceThisHotkey < 350)
         enterSemicolonAbbr(semiHook)
     enableOtherHotkey(thisHotkey)
@@ -322,7 +317,6 @@ l::return
 
 #if JMode
 l::enterJModeL()
-
 {% for key,value in JMode.items()|sort(attribute="1.value") %}
     {% if value.value %}
 {{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
@@ -362,29 +356,12 @@ l::enterJModeL()
 
 {% if Settings.Mode3 %}
 #if DigitMode
-
 {% for key,value in Mode3.items()|sort(attribute="1.value") %}
     {% if value.value %}
 {{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
     {% endif %}
 {% endfor %}
 
-*r::
-    DigitMode := false
-    FnMode := true
-    keywait r
-    FnMode := false
-    return
-
-
-#if FnMode
-*r::return
-
-{% for key,value in Mode3R.items()|sort(attribute="1.value") %}
-    {% if value.value %}
-{{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
-    {% endif %}
-{% endfor %}
 {% endif %}
 
 
@@ -512,9 +489,7 @@ WheelDown::send ^{tab}
 {% endif %}
 
 {% if Settings.CapslockMode %}
-#IfWinActive, ahk_group TASK_SWITCH_GROUP
-; *W::send, {blind}+{Tab}
-; *R::send, {blind}{Tab}
+#If TASK_SWITCH_MODE
 *D::send, {blind}{down}
 *E::send, {blind}{up}
 *S::send, {blind}{left}
@@ -628,3 +603,7 @@ delayedHideTipWindow()
 
 
 {{{ all_ahk_funcs|join('\n') }}}
+
+{% for value in send_key_functions %}
+{{{ value }}}
+{% endfor %}

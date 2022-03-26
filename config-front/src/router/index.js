@@ -6,6 +6,8 @@ import Settings from '../views/Settings.vue'
 import CapslockAbbr from '../views/CapslockAbbr.vue'
 import { ALL_KEYMAPS } from '../util.js'
 
+import store from '../store/index.js'
+
 Vue.use(VueRouter)
 
 function keymap(name) {
@@ -65,5 +67,12 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  store.state.routeName = to.name
+  store.state.windowSelector = '2'
+  next()
+})
+
 
 export default router

@@ -4,7 +4,9 @@
       v-model="showConfigPathVariableDialog"
       overlay-opacity="0.30"
       max-width="1080"
-      @click:outside="showConfigPathVariableDialog = !showConfigPathVariableDialog"
+      @click:outside="
+        showConfigPathVariableDialog = !showConfigPathVariableDialog
+      "
     >
       <key-value-config @hideDialog="showConfigPathVariableDialog = false" />
     </v-dialog>
@@ -16,25 +18,13 @@
       max-width="1080"
       @click:outside="hideWindowSelectorConfig"
     >
-      <window-selector-config/>
+      <window-selector-config />
     </v-dialog>
 
     <v-card min-height="570" width="790" elevation="5" class="action-config">
-      <v-card-title>
+      <v-card-title style="padding-bottom: 0">
         <v-row>
-          <v-col cols="8">
-            <v-select
-              class="action-select"
-              :items="actionTypes"
-              v-model="currKey().type"
-              outlined
-              @change="clearValue"
-              :menu-props="{ maxHeight: 900 }"
-              :disabled="disableSelectBox"
-            ></v-select>
-          </v-col>
-          <v-col cols="4">
-
+          <v-col cols="5">
             <v-select
               outlined
               class="action-select"
@@ -43,67 +33,102 @@
               :items="windowSelectors"
               item-text="key"
               item-value="id"
-              v-model="currentWindowSelector"
-              @change="changeWindowSelector"
+              v-model="$store.state.windowSelector"
+              @change="handleWindowSelectorChange"
+            ></v-select>
+          </v-col>
+          <v-col cols="7">
+            <v-select
+              class="action-select"
+              :items="actionTypes"
+              v-model="config.type"
+              outlined
+              @change="clearConfig"
+              :menu-props="{ maxHeight: 900 }"
+              :disabled="disableSelectBox"
             ></v-select>
           </v-col>
         </v-row>
       </v-card-title>
       <v-card-text>
-        <template v-if="currKey().type === '启动程序或激活窗口'">
+        <template v-if="config.type === '启动程序或激活窗口'">
           <v-text-field
             autocomplete="off"
             label="要激活的窗口 (窗口标识符)"
-            v-model="currKey().toActivate"
+            v-model="config.toActivate"
             @input="activateOrRun"
           ></v-text-field>
           <v-text-field
             autocomplete="off"
             label="窗口不存在时要启动的: 程序路径 / 文件夹 / URL"
-            v-model="currKey().toRun"
+            v-model="config.toRun"
             @input="activateOrRun"
           ></v-text-field>
           <v-text-field
             autocomplete="off"
             label="启动程序的命令行参数"
-            v-model="currKey().cmdArgs"
+            v-model="config.cmdArgs"
             @input="activateOrRun"
           ></v-text-field>
           <v-text-field
             autocomplete="off"
             label="启动程序的工作目录"
-            v-model="currKey().workingDir"
+            v-model="config.workingDir"
+            @input="activateOrRun"
+          ></v-text-field>
+          <v-text-field
+            autocomplete="off"
+            label="自定义备注 (按 Caps 输入 help 可回顾配置)"
+            v-model="config.comment"
             @input="activateOrRun"
           ></v-text-field>
           <v-card-actions>
-            <v-btn class="action-button" color="purple" dark outlined @click="execute('bin/WindowSpy.ahk')"
+            <v-btn
+              class="action-button"
+              color="purple"
+              dark
+              outlined
+              @click="execute('bin/WindowSpy.ahk')"
               >🔍 查看窗口标识符</v-btn
             >
-            <v-btn class="action-button" color="purple" dark outlined target="_blank" href="/ProgramPathExample.html"
-              >📗 程序路径的例子</v-btn
+            <v-btn
+              class="action-button"
+              color="purple"
+              dark
+              outlined
+              target="_blank"
+              href="/ProgramPathExample.html"
+              >📗 查看例子</v-btn
             >
-            <v-btn class="action-button" color="purple" dark outlined @click="configPathVariable"
-              >⚙️点此配置路径变量</v-btn
+            <v-btn
+              class="action-button"
+              color="purple"
+              dark
+              outlined
+              @click="configPathVariable"
+              >⚙️配置路径变量</v-btn
             >
           </v-card-actions>
-          <br />
-          <pre class="tips">
 
- Tips: (1) 参数都是选填的,  比如不填窗口标识符就不会尝试激活窗口,  直接启动程序
-       (2) 文件管理器中按住 Shift 并右击文件, 可以选择「 复制为路径 」 (记得去掉两端双引号)
-       (3) 程序路径可以填 URL 比如 https://google.com、ms-settings:display</pre
+          <pre class="tips">
+ Tips: (1) 如果不填窗口标识符就不会尝试激活窗口,  直接启动程序
+       (2) 前两个参数至少选填一个,  其他参数可以不填</pre
           >
         </template>
 
-        <template v-if="currKey().type === '输入文本或按键'">
+        <template v-if="config.type === '输入文本或按键'">
           <v-textarea
             auto-grow
             rows="1"
             label="要输入的按键或文本"
-            v-model="currKey().keysToSend"
-            @input="sendKeys"
+            v-model="config.keysToSend"
+            @input="action_send_keys"
           ></v-textarea>
-          <!-- <img alt="img" :src="require('../assets/send-keys.png')" /><img /> -->
+          <v-text-field
+            autocomplete="off"
+            label="自定义备注 (按 Caps 输入 help 可回顾配置)"
+            v-model="config.comment"
+          ></v-text-field>
           <pre class="tips">
 
  Tips: (1) <a target="_blank" href="SendKeyExample.html" style="color: green;">点此查看发送按键或文本的示例</a>
@@ -111,16 +136,16 @@
        (3) 所以想发送文本 abc 时,  建议给文本加 {text} 前缀, 比如 {text}abc</pre>
         </template>
 
-        <template v-if="currKey().type === '执行单行 ahk 代码'">
+        <template v-if="config.type === '执行单行 ahk 代码'">
           <v-text-field
             autocomplete="off"
             label="单行代码 (自定义的函数可以放到 data/custom_functions.ahk)"
-            v-model="currKey().value"
+            v-model="config.value"
           ></v-text-field>
         </template>
 
-        <template v-if="currKey().type === '鼠标操作'">
-          <v-radio-group v-model="currKey().label" @change="mouseActionChanged">
+        <template v-if="config.type === '鼠标操作'">
+          <v-radio-group v-model="config.label" @change="mouseActionChanged">
             <v-row>
               <v-col>
                 <v-radio
@@ -158,8 +183,8 @@
           </v-radio-group>
         </template>
 
-        <template v-if="currKey().type === '窗口操作'">
-          <v-radio-group v-model="currKey().value">
+        <template v-if="config.type === '窗口操作'">
+          <v-radio-group v-model="config.value">
             <v-row>
               <v-col>
                 <v-radio
@@ -197,64 +222,11 @@
           </v-radio-group>
         </template>
 
-        <template v-if="currKey().type === '系统控制'">
-          <v-radio-group v-model="currKey().value">
-            <v-row>
-              <v-col>
-                <v-radio
-                  v-for="action in otherFeatures1"
-                  :key="action.label"
-                  :label="`${action.label}`"
-                  :value="action.value"
-                ></v-radio>
-              </v-col>
-              <v-col>
-                <v-radio
-                  v-for="action in otherFeatures2"
-                  :key="action.label"
-                  :label="`${action.label}`"
-                  :value="action.value"
-                ></v-radio>
-              </v-col>
-            </v-row>
-
-            <br />
-            <v-divider></v-divider>
-            <br />
-            <v-row>
-              <v-col>
-                <v-radio
-                  v-for="action in otherFeatures3"
-                  :key="action.label"
-                  :label="`${action.label}`"
-                  :value="action.value"
-                ></v-radio>
-              </v-col>
-              <!-- <v-col>
-                <v-radio
-                  v-for="action in otherFeatures2"
-                  :key="action.label"
-                  :label="`${action.label}`"
-                  :value="action.value"
-                ></v-radio>
-              </v-col> -->
-            </v-row>
-
-            <!-- <v-row>
-              <v-col>
-                <v-radio
-                  v-for="action in clickActions"
-                  :key="action.label"
-                  :label="`${action.label}`"
-                  :value="action.value"
-                ></v-radio>
-              </v-col>
-              <v-col> </v-col>
-            </v-row> -->
-          </v-radio-group>
+        <template v-if="config.type === '系统控制'">
+          <ExplorerAction :config="config" />
         </template>
-        <template v-if="currKey().type === '文字编辑'">
-          <v-radio-group v-model="currKey().value">
+        <template v-if="config.type === '文字处理'">
+          <v-radio-group v-model="config.value">
             <v-row>
               <v-col>
                 <v-radio
@@ -297,287 +269,280 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import { bindWindow, currConfigMixin, escapeFuncString, executeScript, mapKeysToSend, notBlank } from '../util.js'
-import { host, EMPTY_KEY } from '../util'
-import _ from 'lodash'
-import KeyValueConfig from './KeyValueConfig.vue'
-import WindowSelectorConfig from './WindowSelectorConfig.vue'
+import Vue from "vue";
+import {
+  bindWindow,
+  currConfigMixin,
+  escapeFuncString,
+  executeScript,
+  mapKeysToSend,
+  notBlank,
+  uniqueName,
+} from "../util.js";
+import { host, EMPTY_KEY } from "../util";
+import _ from "lodash";
+import KeyValueConfig from "./KeyValueConfig.vue";
+import ExplorerAction from "./SystemAction.vue";
+import WindowSelectorConfig from "./WindowSelectorConfig.vue";
 
 export default {
   mixins: [currConfigMixin],
-  components: { KeyValueConfig, WindowSelectorConfig },
+  components: { KeyValueConfig, WindowSelectorConfig, ExplorerAction },
   created() {},
   props: {
     currentKey: { type: String },
   },
-  watch: {
-    currentKey(newValue, oldValue) {
-      this.currentWindowSelector = '2'
-    }
-  },
+  watch: {},
   data() {
     return {
-      currentWindowSelector: '2',
       showConfigPathVariableDialog: false,
       showWindowSelectorConfig: false,
       mouseActions: [
-        { label: '鼠标上移', value: '鼠标上移' },
-        { label: '鼠标下移', value: '鼠标下移' },
-        { label: '鼠标左移', value: '鼠标左移' },
-        { label: '鼠标右移', value: '鼠标右移' },
+        { label: "鼠标上移", value: "鼠标上移" },
+        { label: "鼠标下移", value: "鼠标下移" },
+        { label: "鼠标左移", value: "鼠标左移" },
+        { label: "鼠标右移", value: "鼠标右移" },
       ],
       scrollActions: [
-        { label: '滚轮上滑', value: '滚轮上滑' },
-        { label: '滚轮下滑', value: '滚轮下滑' },
-        { label: '滚轮左滑', value: '滚轮左滑' },
-        { label: '滚轮右滑', value: '滚轮右滑' },
+        { label: "滚轮上滑", value: "滚轮上滑" },
+        { label: "滚轮下滑", value: "滚轮下滑" },
+        { label: "滚轮左滑", value: "滚轮左滑" },
+        { label: "滚轮右滑", value: "滚轮右滑" },
       ],
       clickActions: [
-        { label: '鼠标左键', value: '鼠标左键' },
-        { label: '鼠标右键', value: '鼠标右键' },
-        { label: '鼠标左键按下', value: '鼠标左键按下' },
-        { label: '移动鼠标到窗口中心', value: '移动鼠标到窗口中心' },
-        { label: '让当前窗口进入拖动模式', value: '让当前窗口进入拖动模式' },
+        { label: "鼠标左键", value: "鼠标左键" },
+        { label: "鼠标右键", value: "鼠标右键" },
+        { label: "鼠标左键按下", value: "鼠标左键按下" },
+        { label: "移动鼠标到窗口中心", value: "移动鼠标到窗口中心" },
+        { label: "让当前窗口进入拖动模式", value: "让当前窗口进入拖动模式" },
       ],
       windowActions1: [
-        { label: '关闭窗口', value: 'SmartCloseWindow()' },
-        { label: '切换到上一个窗口', value: 'send !{tab}' },
-        { label: '在当前程序的窗口间切换', value: 'SwitchWindows()' },
+        { label: "关闭窗口", value: "SmartCloseWindow()" },
+        { label: "切换到上一个窗口", value: "send !{tab}" },
+        { label: "在当前程序的窗口间切换", value: "SwitchWindows()" },
         {
-          label: '窗口管理器(EDSF切换、X关闭、空格选择)',
-          value: 'send ^!{tab}',
+          label: "窗口管理器(EDSF切换、X关闭、空格选择)",
+          value: "action_enter_task_switch_mode()",
         },
         {
-          label: '上一个虚拟桌面',
-          value: 'send {LControl down}{LWin down}{Left}{LWin up}{LControl up}',
+          label: "上一个虚拟桌面",
+          value: "send {LControl down}{LWin down}{Left}{LWin up}{LControl up}",
         },
         {
-          label: '下一个虚拟桌面',
-          value: 'send {LControl down}{LWin down}{Right}{LWin up}{LControl up}',
+          label: "下一个虚拟桌面",
+          value: "send {LControl down}{LWin down}{Right}{LWin up}{LControl up}",
         },
-        { label: '移动窗口到下一个显示器', value: 'send #+{right}' },
+        { label: "移动窗口到下一个显示器", value: "send #+{right}" },
       ],
       windowActions2: [
-        { label: '窗口最大化', value: 'winmaximize, A' },
-        { label: '窗口最小化', value: 'winMinimizeIgnoreDesktop()' },
+        { label: "窗口最大化", value: "winmaximize, A" },
+        { label: "窗口最小化", value: "winMinimizeIgnoreDesktop()" },
         {
-          label: '窗口居中(1200x800)',
-          value: 'center_window_to_current_monitor(1200, 800)',
+          label: "窗口居中(1200x800)",
+          value: "center_window_to_current_monitor(1200, 800)",
         },
         {
-          label: '窗口居中(1370x930)',
-          value: 'center_window_to_current_monitor(1370, 930)',
+          label: "窗口居中(1370x930)",
+          value: "center_window_to_current_monitor(1370, 930)",
         },
-        { label: '切换窗口置顶状态', value: 'ToggleTopMost()' },
-        { label: '上一个窗口 (Alt+Esc)', value: 'send !{Esc}' },
-        { label: '下一个窗口 (Shift+Alt+Esc)', value: 'send +!{Esc}' },
+        { label: "切换窗口置顶状态", value: "ToggleTopMost()" },
+        { label: "上一个窗口 (Alt+Esc)", value: "send !{Esc}" },
+        { label: "下一个窗口 (Shift+Alt+Esc)", value: "send +!{Esc}" },
       ],
       windowActions3: [
-        { label: '「 绑定活动窗口到当前键 」', value: () => bindWindow(this.$route.name, this.currentKey) },
-      ],
-      otherFeatures1: [
         {
-          label: '锁屏',
-          value: '\nsleep 300\nDllCall("LockWorkStation")\nreturn',
+          label: "「 绑定活动窗口到当前键 」",
+          value: () => bindWindow(this.$route.name, this.currentKey),
         },
-        {
-          label: '睡眠',
-          value: 'DllCall("PowrProf\\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)',
-        },
-        { label: '关机', value: 'slideToShutdown()' },
-        { label: '重启', value: 'slideToReboot()' },
-        { label: '音量调节', value: 'run, bin\\ahk.exe bin\\soundControl.ahk' },
-        {
-          label: '显示器亮度调节',
-          value: 'run, bin\\ahk.exe bin\\changeBrightness.ahk',
-        },
-        { label: '打开 MyKeymap 设置', value: 'openSettings()' },
-      ],
-      otherFeatures2: [
-        { label: '退出 MyKeymap', value: 'quit(false)' },
-        { label: '打开「MyKeymap」文件夹', value: 'run, %A_WorkingDir%' },
-        {
-          label: '打开「 回收站 」文件夹',
-          value: 'run, shell:RecycleBinFolder',
-        },
-        { label: '打开「 下载 」文件夹', value: 'run, shell:downloads' },
-        { label: '打开「 图片 」文件夹', value: 'run, shell:my pictures' },
-        { label: '打开「 视频 」文件夹', value: 'run, shell:My Video' },
-        { label: '打开「 文档 」文件夹', value: 'run, shell:Personal' },
-      ],
-      otherFeatures3: [
-        { label: '重启资源管理器', value: 'restartExplorer()' },
-        { label: '切换 CapsLock 状态', value: 'toggleCapslock()' },
-        { label: '切换「 自动隐藏任务栏 」', value: 'toggleAutoHideTaskBar()' },
       ],
       textFeatures1: [
-        { label: '设置字体为红色', value: 'setColor("#D05")' },
-        { label: '设置字体为紫色', value: 'setColor("#b309bb")' },
-        { label: '设置字体为粉色', value: 'setColor("#FF00FF")' },
-        { label: '设置字体为蓝色', value: 'setColor("#2E66FF")' },
-        { label: '设置字体为绿色', value: 'setColor("#080")' },
+        { label: "设置字体为红色", value: 'setColor("#D05")' },
+        { label: "设置字体为紫色", value: 'setColor("#b309bb")' },
+        { label: "设置字体为粉色", value: 'setColor("#FF00FF")' },
+        { label: "设置字体为蓝色", value: 'setColor("#2E66FF")' },
+        { label: "设置字体为绿色", value: 'setColor("#080")' },
       ],
       textFeatures2: [
-        { label: '在中英文之间添加空格', value: 'actionAddSpaceBetweenEnglishChinese()' },
+        {
+          label: "在中英文之间添加空格",
+          value: "actionAddSpaceBetweenEnglishChinese()",
+        },
       ],
-    }
+    };
   },
   methods: {
-    currKey() {
-      if (this.currentKey === EMPTY_KEY) {
-        return { type: '什么也不做', value: '' }
-      }
-
-      let sel = this.currentWindowSelector
-      if (sel === '1') {
-        sel = '2'
-      }
-
-      if (!this.currConfig()[this.currentKey][sel]) {
-        Vue.set(this.currConfig()[this.currentKey], sel, { type: '什么也不做', value: '' })
-      }
-
-      return this.currConfig()[this.currentKey][sel]
-    },
     execute(arg) {
-      executeScript(arg)
+      executeScript(arg);
     },
     configPathVariable() {
-      this.showConfigPathVariableDialog = true
+      this.showConfigPathVariableDialog = true;
     },
     hideWindowSelectorConfig() {
-      this.showWindowSelectorConfig = false
-      this.currentWindowSelector = '2'
-      this.changeWindowSelector('2')
+      this.showWindowSelectorConfig = false;
+      this.$store.state.windowSelector = "2";
     },
-    sendKeys() {
-      this.currKey().prefix = '*'
-      const result = ['']
-      const keysToSend = this.currKey().keysToSend
-      if (keysToSend) {
-        const lines = keysToSend
-          .split('\n')
-          .filter(x => x && _.trim(x).length > 0)
-          .map(x => mapKeysToSend(x))
-        result.push(lines.join('\n'))
+    action_send_keys() {
+      this.config.prefix = "*";
+      this.config.value = "";
+      delete this.config['send_key_function']
+      const keysToSend = this.config.keysToSend;
+
+      if (!keysToSend) {
+        return;
       }
-      result.push('return')
-      this.currKey().value = result.join('\n')
+
+      const lines = keysToSend
+        .split("\n")
+        .filter((x) => x && _.trim(x).length > 0)
+        .map((x) => mapKeysToSend(x));
+
+      if (lines.length == 1) {
+        this.config.value = lines[0].trimStart();
+        return;
+      }
+
+      const prefix = this.$route.name + this.$store.state.windowSelector;
+      const funcName = uniqueName(prefix, this.currentKey);
+
+      const result = [`${funcName}() {`];
+      result.push(lines.join("\n"));
+      result.push("}");
+
+      this.config.send_key_function = result.join("\n");
+      this.config.value = `${funcName}()`;
     },
     activateOrRun() {
-      const toActivate = escapeFuncString(this.currKey().toActivate)
-      let toRun = escapeFuncString(this.currKey().toRun)
-      let cmdArgs = escapeFuncString(this.currKey().cmdArgs)
-      let workingDir = escapeFuncString(this.currKey().workingDir)
-      // console.log(toActivate, toRun)
+      let toActivate = escapeFuncString(this.config.toActivate);
+      let toRun = escapeFuncString(this.config.toRun);
+      let cmdArgs = escapeFuncString(this.config.cmdArgs);
+      let workingDir = escapeFuncString(this.config.workingDir);
 
       if (!toActivate) {
-        this.currKey().toActivate = ''
+        this.config.toActivate = "";
       }
 
       // 用路径变量替换路径
-
       for (const item of this.$store.state.config.pathVariables) {
         if (item.key && item.value) {
-          const re = new RegExp(`%${item.key}%`, 'g')
+          const re = new RegExp(`%${item.key}%`, "g");
           if (toRun) {
-            toRun = toRun.replace(re, item.value)
+            toRun = toRun.replace(re, item.value);
           }
           if (cmdArgs) {
-            cmdArgs = cmdArgs.replace(re, item.value)
+            cmdArgs = cmdArgs.replace(re, item.value);
           }
           if (workingDir) {
-            workingDir = workingDir.replace(re, item.value)
+            workingDir = workingDir.replace(re, item.value);
           }
         }
       }
 
-      this.currKey().value = !(notBlank(toRun) || notBlank(toActivate))
-        ? ''
-        : `
-    path = ${toRun}
-    workingDir = ${workingDir}
-    ActivateOrRun("${toActivate}", path, "${cmdArgs}", workingDir)
-    return`
+      toRun = toRun.replace(/%(\w+)%/g, `" $1 "`);
+      workingDir = workingDir.replace(/%(\w+)%/g, `" $1 "`);
+
+      if (notBlank(toRun) || notBlank(toActivate)) {
+        this.config.value = `ActivateOrRun("${toActivate}", "${toRun}", "${cmdArgs}", "${workingDir}")`;
+      } else {
+        this.config.value = "";
+      }
     },
-    clearValue() {
-      // 把当前键的 value 清空,  然后把 'value' 和 'type' 这两者之外的属性删掉
-      this.currKey().value = ''
-      for (const key of Object.keys(this.currKey())) {
-        if (!['type', 'value'].includes(key)) {
-          delete this.currKey()[key]
+    clearConfig() {
+      this.config.value = "";
+      for (const key of Object.keys(this.config)) {
+        if (key === "type" || key === "value") {
+          // skip
+        } else {
+          delete this.config[key];
         }
       }
-      // console.log(Object.entries(this.currKey()))
     },
-    changeWindowSelector(new_value) {
-      if (new_value === '1') {
-        this.showWindowSelectorConfig = true
-        return
+    handleWindowSelectorChange(new_value) {
+      if (new_value === "1") {
+        this.showWindowSelectorConfig = true;
+        return;
       }
     },
     mouseActionChanged(newValue) {
-      console.log('mouseActionChanged')
-      let map = {}
-      map['鼠标上移'] = ``
-      let key = this.currentKey
+      console.log("mouseActionChanged");
+      let map = {};
+      map["鼠标上移"] = ``;
+      let key = this.currentKey;
 
-      map['滚轮上滑'] = `scrollWheel("${key}", 1)`
-      map['滚轮下滑'] = `scrollWheel("${key}", 2)`
-      map['滚轮左滑'] = `scrollWheel("${key}", 3)`
-      map['滚轮右滑'] = `scrollWheel("${key}", 4)`
+      map["滚轮上滑"] = `scrollWheel("${key}", 1)`;
+      map["滚轮下滑"] = `scrollWheel("${key}", 2)`;
+      map["滚轮左滑"] = `scrollWheel("${key}", 3)`;
+      map["滚轮右滑"] = `scrollWheel("${key}", 4)`;
 
-      map['鼠标上移'] = `fastMoveMouse("${key}", 0, -1)`
-      map['鼠标下移'] = `fastMoveMouse("${key}", 0, 1)`
-      map['鼠标左移'] = `fastMoveMouse("${key}", -1, 0)`
-      map['鼠标右移'] = `fastMoveMouse("${key}", 1, 0)`
+      map["鼠标上移"] = `fastMoveMouse("${key}", 0, -1)`;
+      map["鼠标下移"] = `fastMoveMouse("${key}", 0, 1)`;
+      map["鼠标左移"] = `fastMoveMouse("${key}", -1, 0)`;
+      map["鼠标右移"] = `fastMoveMouse("${key}", 1, 0)`;
 
-      map['鼠标左键'] = `leftClick()`
-      map['鼠标右键'] = `rightClick()`
-      map['鼠标左键按下'] = `lbuttonDown()`
-      map['移动鼠标到窗口中心'] = `centerMouse()`
-      map['让当前窗口进入拖动模式'] = `moveCurrentWindow()`
+      map["鼠标左键"] = `leftClick()`;
+      map["鼠标右键"] = `rightClick()`;
+      map["鼠标左键按下"] = `lbuttonDown()`;
+      map["移动鼠标到窗口中心"] = `centerMouse()`;
+      map["让当前窗口进入拖动模式"] = `moveCurrentWindow()`;
 
-      this.currKey().prefix = '*'
-      this.currKey().value = map[newValue] || ''
+      this.config.prefix = "*";
+      this.config.value = map[newValue] || "";
     },
   },
   computed: {
-    windowSelectors() {
-      const config = this.$store.state.config
-      const selectors = [
-        {id: '1', key: '🛠️ 点此添加应用', value: 'USELESS' },
-        {id: '2', key: '🌎 全局生效', value: 'USELESS' },
-      ]
-
-      if (config && config.windowSelectors) {
-        return [...selectors, ...config.windowSelectors]
+    config() {
+      // 返回当前选中的键关联的配置
+      if (this.currentKey === EMPTY_KEY) {
+        return { type: "什么也不做", value: "" };
       }
 
-      return selectors
+      let sel = this.$store.state.windowSelector;
+      if (sel === "1") {
+        sel = "2";
+      }
+
+      if (!this.currConfig()[this.currentKey][sel]) {
+        Vue.set(this.currConfig()[this.currentKey], sel, {
+          type: "什么也不做",
+          value: "",
+        });
+      }
+
+      return this.currConfig()[this.currentKey][sel];
+    },
+    windowSelectors() {
+      const config = this.$store.state.config;
+      const selectors = [
+        { id: "1", key: "🛠️ 点此添加应用", value: "USELESS" },
+        { id: "2", key: "🌎 全局生效", value: "USELESS" },
+      ];
+
+      if (config && config.windowSelectors) {
+        return [...selectors, ...config.windowSelectors].filter(x => x.value);
+      }
+
+      return selectors;
     },
     actionTypes() {
       const result = [
-        { text: '⛔ 什么也不做', value: '什么也不做' },
-        { text: '👾 启动程序或激活窗口', value: '启动程序或激活窗口' },
-        { text: '🅰️ 输入文本或按键', value: '输入文本或按键' },
-        { text: '🖱️  鼠标操作', value: '鼠标操作' },
-        { text: '🏠 窗口操作', value: '窗口操作' },
-        { text: '🖥️ 系统控制', value: '系统控制' },
-        { text: '📚 文字编辑', value: '文字编辑' },
-        { text: '⚛️ 执行单行 ahk 代码', value: '执行单行 ahk 代码' },
-      ]
-      if (this.$route.name !== 'Capslock') {
-        result.splice(3, 1)
+        { text: "⛔ 什么也不做", value: "什么也不做" },
+        { text: "👾 启动程序或激活窗口", value: "启动程序或激活窗口" },
+        { text: "🅰️ 输入文本或按键", value: "输入文本或按键" },
+        { text: "🖱️  鼠标操作", value: "鼠标操作" },
+        { text: "🏠 窗口操作", value: "窗口操作" },
+        { text: "🖥️ 系统控制", value: "系统控制" },
+        { text: "📚 文字处理", value: "文字处理" },
+        { text: "⚛️ 执行单行 ahk 代码", value: "执行单行 ahk 代码" },
+      ];
+      if (this.$route.name !== "Capslock") {
+        result.splice(3, 1);
       }
-      return result
+      return result;
     },
     disableSelectBox() {
-      return this.currentKey === EMPTY_KEY
+      return this.currentKey === EMPTY_KEY;
     },
   },
-}
+};
 </script>
 
 <style>

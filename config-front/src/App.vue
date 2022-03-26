@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer app id="drawer" permanent>
+    <v-navigation-drawer app id="drawer">
       <v-list-item>
         <v-list-item-avatar rounded="0" class="logo">
           <v-img alt="img" :src="require('./assets/logo.png')"></v-img>
@@ -80,7 +80,7 @@ export default {
       { title: 'Capslock', icon: 'mdi-alpha-c-box', to: 'Capslock', color: 'purple' },
       { title: 'Capslock + F', icon: 'mdi-alpha-c-box', to: 'CapslockF', color: 'purple' },
       { title: 'Capslock + Space', icon: 'mdi-alpha-c-box', to: 'CapslockSpace', color: 'purple' },
-      { title: 'Capslock 指令', icon: 'mdi-alpha-c-box', to: 'CapslockAbbr', color: 'purple' },
+      { title: 'Capslock 指令', icon: 'mdi-rocket-launch', to: 'CapslockAbbr', color: 'deep-orange' },
       { title: 'Tab 模式', icon: 'mdi-alpha-t-box', to: 'TabMode', color: '#d05' },
       { title: '空格模式', icon: 'mdi-alpha-s-box', to: 'SpaceMode', color: '#d05' },
       { title: 'J 模式', icon: 'mdi-alpha-j-box', to: 'JMode', color: '#d05' },
@@ -89,7 +89,6 @@ export default {
       { title: '分号模式', icon: 'mdi-rhombus', to: 'Semicolon', color: 'blue' },
       { title: '分号缩写', icon: 'mdi-rhombus', to: 'SemicolonAbbr', color: 'blue' },
       { title: '3 模式', icon: 'mdi-numeric-3-box-outline', to: 'Mode3', color: 'red' },
-      { title: '3 + R', icon: 'mdi-numeric-3-box-outline', to: 'Mode3R', color: 'red' },
       { title: '9 模式', icon: 'mdi-numeric-9-box-outline', to: 'Mode9', color: 'red' },
       { title: '鼠标左键', icon: 'mdi-cursor-default-outline', to: 'LButtonMode', color: '' },
       { title: '鼠标右键', icon: 'mdi-cursor-default', to: 'RButtonMode', color: '' },

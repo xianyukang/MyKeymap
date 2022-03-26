@@ -689,26 +689,6 @@ arrayContains(arr, target)
     return false
 }
 
-
-postCharToTipWidnow(char) {
-    oldValue := A_DetectHiddenWindows
-    DetectHiddenWindows, 1
-    if WinExist("ahk_class MyKeymap_Typo_Window")
-        PostMessage, 0x0102, Ord(char), 0
-    DetectHiddenWindows, %oldValue%
-}
-
-
-postMessageToTipWidnow(messageType) {
-    oldValue := A_DetectHiddenWindows
-    DetectHiddenWindows, 1
-    if WinExist("ahk_class MyKeymap_Typo_Window")
-        PostMessage, %messageType%, 0, 0
-    DetectHiddenWindows, %oldValue%
-}
-
-
-
 ReloadProgram()
 {
     Menu, Tray, NoIcon 
@@ -1215,4 +1195,77 @@ addSpaceBetweenEnglishChinese(str) {
     ; 去除两端空格
     ; return Trim(str)
     return str
+}
+
+
+
+; 参考 => https://www.autohotkey.com/boards/viewtopic.php?p=255256#p255256
+; 返回文件管理器中选中的文件列表
+; 如果没有选中任何东西,  返回当前所在文件夹的路径 (甚至是 shell clsid,  amazing !)
+Explorer_GetSelection() 
+{
+    WinGetClass, winClass, % "ahk_id" . hWnd := WinExist("A")
+    if !(winClass ~="Progman|WorkerW|(Cabinet|Explore)WClass")
+        Return
+
+    shellWindows := ComObjCreate("Shell.Application").Windows
+    if (winClass ~= "Progman|WorkerW")
+        shellFolderView := shellWindows.FindWindowSW(0, 0, SWC_DESKTOP := 8, 0, SWFO_NEEDDISPATCH := 1).Document
+    else {
+        for window in shellWindows
+            if (hWnd = window.HWND) && (shellFolderView := window.Document)
+            break
+    }
+    ; FolerItem 对象参考 => https://docs.microsoft.com/en-us/windows/win32/shell/folderitem
+    ; for item in shellFolderView.SelectedItems
+    ;     result .= (result = "" ? "" : "`n") . item.Path
+    ; if !result
+    ;     result := shellFolderView.Folder.Self.Path
+    ; Return """" StrReplace(result, "`n", """ """)  """"
+
+    res := {}
+    res.current := shellFolderView.Folder.Self.Path
+
+    paths := ""
+    for item in shellFolderView.SelectedItems
+    {
+        paths .= (paths == "" ? "" : " ") . ("""" item.Path """")
+        res.filename := item.Name
+    }
+    res.selected := paths ? paths : res.current
+
+    res.purename := res.filename
+    if (res.filename && ( pos := InStr(res.filename, ".", false, 0))) {
+        res.purename := SubStr(res.filename, 1 , pos - 1)
+    }
+
+    ; MsgBox, % "current: " res.current "`npaths: " res.selected "`nfilename: " res.filename "`npurename: " res.purename
+    Return res
+}
+
+
+setCommandInputHwnd(hwnd)
+{
+    global commandInputHwnd
+    commandInputHwnd := hwnd
+}
+
+postCharToTipWidnow(char) {
+    global commandInputHwnd
+    oldValue := A_DetectHiddenWindows
+    DetectHiddenWindows, 1
+    ; if WinExist("ahk_class MyKeymap_Command_Input")
+    ;     PostMessage, 0x0102, Ord(char), 0
+    PostMessage, 0x0102, Ord(char), 0,, ahk_id %commandInputHwnd%
+    DetectHiddenWindows, %oldValue%
+}
+
+postMessageToTipWidnow(messageType) {
+    global commandInputHwnd
+    oldValue := A_DetectHiddenWindows
+    DetectHiddenWindows, 1
+    ; if WinExist("ahk_class MyKeymap_Command_Input")
+    ;     PostMessage, %messageType%, 0, 0
+    PostMessage, %messageType%, 0, 0,, ahk_id %commandInputHwnd%
+    DetectHiddenWindows, %oldValue%
 }

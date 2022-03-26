@@ -71,6 +71,8 @@ shutil.copy('vcruntime140.dll', 'MyKeymap/vcruntime140.dll')
 shutil.copy('vcruntime140_1.dll', 'MyKeymap/vcruntime140_1.dll')
 
 shutil.copy('MyKeymap.exe', 'MyKeymap/MyKeymap.exe')
+shutil.copy('SoundControl.exe', 'MyKeymap/SoundControl.exe')
+shutil.copy('font.ttf', 'MyKeymap/font.ttf')
 
 
 if arg == 'upload':

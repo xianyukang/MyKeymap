@@ -5,6 +5,7 @@
 #WinActivateForce               ; 解决「 winactivate 最小化的窗口时不会把窗口放到顶层(被其他窗口遮住) 」
 #InstallKeybdHook               ; 可能是 ahk 自动卸载 hook 导致的丢失 hook,  如果用这行指令, ahk 是否就不会卸载 hook 了呢?
 #include bin/functions.ahk
+#include bin/actions.ahk
 
 
 StringCaseSense, On
@@ -25,10 +26,8 @@ SetDefaultMouseSpeed, 0
 coordmode, mouse, screen
 settitlematchmode, 2
 
-; win10 任务切换、任务视图
+; win10、win11 任务切换、任务视图
 GroupAdd, TASK_SWITCH_GROUP, ahk_class MultitaskingViewFrame
-; GroupAdd, TASK_SWITCH_GROUP, ahk_class Windows.UI.Core.CoreWindow
-; win11 任务切换、任务视图
 GroupAdd, TASK_SWITCH_GROUP, ahk_class XamlExplorerHostIslandWindow
 
 scrollOnceLineCount := 1
@@ -43,15 +42,10 @@ moveDelay1 = T0.13
 moveDelay2 = T0.01
 
 SemicolonAbbrTip := true
-; time_enter_repeat = T0.2
-; delay_before_repeat = T0.01
-; fast_one := 110     
-; fast_repeat := 70
-; slow_one :=  10     
-; slow_repeat := 13
 
 allHotkeys := []
 allHotkeys.Push("*3")
+allHotkeys.Push("*9")
 allHotkeys.Push("*j")
 allHotkeys.Push("*capslock")
 allHotkeys.Push("*;")
@@ -69,7 +63,7 @@ Menu, Tray, Add
 
 Menu, Tray, Icon
 Menu, Tray, Icon, bin\logo.ico,, 1
-Menu, Tray, Tip, MyKeymap 1.0 by 咸鱼阿康12333
+Menu, Tray, Tip, MyKeymap 1.1 by 咸鱼阿康
 ; processPath := getProcessPath()
 ; SetWorkingDir, %processPath%
 
@@ -81,10 +75,10 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,sl,zk,dk,jt,gt,lx,sm,zh,gg,ver,xm,static,fs,fd,ff")
+semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,jt,gt,zh,gg,ver,fs,ff")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", "ss,sl,ex,rb,fp,fb,fg,dd,dp,dv,dr,se,no,sd,ld,we,st,dw,bb,gg,fr,fi,ee,dm,rex,fw,mm,md,cs,cm,ir,io,mw,tm,kg")
+capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", "ss,sl,rb,fp,fb,fg,dd,se,no,sd,ld,we,st,bb,fr,fi,dm,rex,tm,kg,sp,lj")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -135,8 +129,10 @@ RAlt::LCtrl
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     PunctuationMode := true
+    DisableCapslockKey := true
     keywait `; 
     PunctuationMode := false
+    DisableCapslockKey := false
     if (A_PriorKey == ";" && A_TimeSinceThisHotkey < 350)
         enterSemicolonAbbr(semiHook)
     enableOtherHotkey(thisHotkey)
@@ -151,6 +147,16 @@ RAlt::LCtrl
     DigitMode := false
     if (A_PriorKey == "3" && (A_TickCount - start_tick < 250))
         send {blind}3 
+    enableOtherHotkey(thisHotkey)
+    return
+*9::
+    thisHotkey := A_ThisHotkey
+    disableOtherHotkey(thisHotkey)
+    Mode9 := true
+    keywait 9 
+    Mode9 := false
+    if (A_PriorKey == "9" && A_TimeSinceThisHotkey < 350)
+        send {blind}9 
     enableOtherHotkey(thisHotkey)
     return
 
@@ -207,113 +213,44 @@ enterRButtonMode()
 
 #if JModeL
 l::return
-*V::
-send, {blind}+{del}
-return
-*D::
-send, {blind}+{down}
-return
-*G::
-send, {blind}+{end}
-return
-*X::
-send, {blind}+{esc}
-return
-*A::
-send, {blind}+{home}
-return
-*S::
-send, {blind}+{left}
-return
-*F::
-send, {blind}+{right}
-return
-*E::
-send, {blind}+{up}
-return
-*W::
-send, {blind}^+{left}
-return
-*R::
-send, {blind}^+{right}
-return
-*C::
-send, {blind}{bs}
-return
+*D::send, {blind}+{down}
+*G::send, {blind}+{end}
+*X::send, {blind}+{esc}
+*A::send, {blind}+{home}
+*S::send, {blind}+{left}
+*F::send, {blind}+{right}
+*E::send, {blind}+{up}
+*W::send, {blind}^+{left}
+*T::send, {blind}^+{right}
+*R::send, {blind}^{tab}
+*C::send, {blind}{bs}
 
 
 #if JMode
 l::enterJModeL()
-
-*Space::
-send {blind}{enter}
-return
-*T::
-send, {blind}+{end}{bs}
-return
-*Q::
-send, {blind}+{home}{bs}
-return
-*2::
-send, {blind}^+{tab}
-return
-*B::
-send, {blind}^{bs}
-return
-*W::
-send, {blind}^{left}
-return
-*R::
-send, {blind}^{right}
-return
-*3::
-send, {blind}^{tab}
-return
-*C::
-send, {blind}{bs}
-return
-*V::
-send, {blind}{del}
-return
-*.::
-send, {blind}{insert}
-return
 *Z::send {blind}{appskey}
 *D::send {blind}{down}
-*G::send {blind}{end}
 *X::send {blind}{esc}
-*A::send {blind}{home}
 *S::send {blind}{left}
 *F::send {blind}{right}
 *E::send {blind}{up}
+*Q::send, {blind}+{home}{bs}
+*2::send, {blind}^+{tab}
+*V::send, {blind}^{bs}
+*W::send, {blind}^{left}
+*T::send, {blind}^{right}
+*3::send, {blind}^{tab}
+*C::send, {blind}{bs}
+*B::send, {blind}{del}
+*G::send, {blind}{end}
+*Space::send, {blind}{enter}
+*A::send, {blind}{home}
+*.::send, {blind}{insert}
+*R::send, {blind}{tab}
 
     
 
 #if PunctuationMode
-*A::
-send {blind}*
-return
-*I::
-send {blind}:
-return
-*B::
-send, {blind}`%
-return
-*J::
-send, {blind}`;
-return
-*K::
-send, {blind}``
-return
-*H::
-send, {blind}{+}
-return
-*O::
-send, {blind}{end};
-return
-*Space::
-send, {blind}{enter}
-return
 *U::send {blind}$
 *R::send {blind}&
 *Q::send {blind}(
@@ -331,88 +268,61 @@ return
 *E::send {blind}{^}
 *V::send {blind}|
 *T::send {blind}~
+*A::send, {blind}*
+*I::send, {blind}:
+*B::send, {blind}`%
+*J::send, {blind}`;
+*K::send, {blind}``
+*H::send, {blind}{+}
+*O::send, {blind}{end};
 
 
 
 
 #if DigitMode
-
-*B::
-send, {blind}7
-return
-*0::
-send, {blind}{f10}
-return
-*P::
-send, {blind}{f11}
-return
-*`;::
-send, {blind}{f12}
-return
-*1::
-send, {blind}{f1}
-return
-*Space::
-send, {blind}{f1}
-return
-*2::
-send, {blind}{f2}
-return
-*E::
-send, {blind}{f3}
-return
-*4::
-send, {blind}{f4}
-return
-*5::
-send, {blind}{f5}
-return
-*T::
-send, {blind}{f6}
-return
-*Y::
-send, {blind}{f7}
-return
-*8::
-send, {blind}{f8}
-return
-*9::
-send, {blind}{f9}
-return
-*H::send {blind}0
-*J::send {blind}1
-*K::send {blind}2
-*L::send {blind}3
-*U::send {blind}4
-*I::send {blind}5
-*O::send {blind}6
-*N::send {blind}8
-*M::send {blind}9
-
-*r::
-    DigitMode := false
-    FnMode := true
-    keywait r
-    FnMode := false
-    return
-
-
-#if FnMode
-*r::return
+*H::send, {blind}0
+*J::send, {blind}1
+*K::send, {blind}2
+*L::send, {blind}3
+*U::send, {blind}4
+*I::send, {blind}5
+*O::send, {blind}6
+*B::send, {blind}7
+*N::send, {blind}8
+*M::send, {blind}9
+*0::send, {blind}{f10}
+*P::send, {blind}{f11}
+*`;::send, {blind}{f12}
+*1::send, {blind}{f1}
+*Space::send, {blind}{f1}
+*2::send, {blind}{f2}
+*E::send, {blind}{f3}
+*4::send, {blind}{f4}
+*R::send, {blind}{f5}
+*T::send, {blind}{f6}
+*Y::send, {blind}{f7}
+*8::send, {blind}{f8}
+*9::send, {blind}{f9}
 
 
 
+#if Mode9
+*E::Mode9__785()
+*T::Mode9__787()
+*U::Mode9__789()
+*S::Mode9__794()
+*D::Mode9__795()
+*F::Mode9__796()
+*G::Mode9__797()
+*X::Mode9__804()
+*C::Mode9__805()
+*V::Mode9__806()
 
 
 
 #if CapslockMode
 
-*C::
-send {blind}#{left}
-return
-*T::
-send {blind}#{right}
-return
+E::action_enter_task_switch_mode()
 S::center_window_to_current_monitor(1200, 800)
 A::center_window_to_current_monitor(1370, 930)
 */::centerMouse()
@@ -424,15 +334,16 @@ A::center_window_to_current_monitor(1370, 930)
 *N::leftClick()
 *.::moveCurrentWindow()
 *M::rightClick()
+C::run, SoundControl.exe
 *`;::scrollWheel(";", 4)
 *H::scrollWheel("H", 3)
 *O::scrollWheel("O", 2)
 *U::scrollWheel("U", 1)
 W::send !{tab}
 D::send #+{right}
-E::send ^!{tab}
 Y::send {LControl down}{LWin down}{Left}{LWin up}{LControl up}
 P::send {LControl down}{LWin down}{Right}{LWin up}{LControl up}
+*T::send, {blind}#{right}
 X::SmartCloseWindow()
 R::SwitchWindows()
 Q::winmaximize, A
@@ -481,88 +392,31 @@ Esc::exitMouseMode()
 #if FMode
 f::return
 
-,::
-    global CapslockF__comma
-    bindOrActivate(CapslockF__comma)
-    return
-M::
-    global CapslockF__M
-    bindOrActivate(CapslockF__M)
-    return
-N::
-    global CapslockF__N
-    bindOrActivate(CapslockF__N)
-    return
-K::
-    path = %A_ProgramFiles%\DAUM\PotPlayer\PotPlayerMini64.exe
-    workingDir = 
-    ActivateOrRun("ahk_class PotPlayer64", path, "", workingDir)
-    return
-Q::
-    path = %A_ProgramFiles%\Everything\Everything.exe
-    ActivateOrRun("ahk_class EVERYTHING", path)
-    return
-U::
-    path = %A_Programs%\JetBrains Toolbox\DataGrip.lnk
-    ActivateOrRun("ahk_exe datagrip64.exe", path)
-    return
-J::
-    path = %A_Programs%\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk
-    ActivateOrRun("ahk_exe idea64.exe", path, "", "")
-    return
-S::
-    path = %A_Programs%\Visual Studio Code\Visual Studio Code.lnk
-    ActivateOrRun("ahk_exe Code.exe", path)
-    return
-W::
-    path = %A_ProgramsCommon%\Google Chrome.lnk
-    ActivateOrRun("ahk_exe chrome.exe", path)
-    return
-D::
-    path = %A_ProgramsCommon%\Microsoft Edge.lnk
-    ActivateOrRun("ahk_exe msedge.exe", path)
-    return
-H::
-    path = %A_ProgramsCommon%\Visual Studio 2019.lnk
-    ActivateOrRun("- Microsoft Visual Studio", path)
-    return
-E::
-    path = C:\Program Files (x86)\Yinxiang Biji\印象笔记\Evernote.exe
-    ActivateOrRun("ahk_class YXMainFrame", path)
-    return
-I::
-    path = C:\Program Files\Typora\Typora.exe
-    ActivateOrRun("ahk_exe Typora.exe", path)
-    return
-L::
-    path = C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Excel.lnk
-    workingDir = 
-    ActivateOrRun("ahk_exe EXCEL.EXE", path, "", workingDir)
-    return
-P::
-    path = C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk
-    ActivateOrRun("ahk_exe POWERPNT.EXE", path, "", "")
-    return
-Z::
-    path = D:\
-    ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", path)
-    return
-R::
-    path = D:\install\Foxit Reader\FoxitReader.exe
-    ActivateOrRun("ahk_exe FoxitReader.exe", path)
-    return
-O::
-    path = shortcuts\OneNote for Windows 10.lnk
-    ActivateOrRun("OneNote for Windows 10", path)
-    return
-A::
-    path = shortcuts\Windows Terminal Preview.lnk
-    ActivateOrRun("ahk_exe WindowsTerminal.exe", path)
-    return
+B::ActivateOrRun("", "" A_ProgramsCommon "\Google Chrome.lnk", "", "")
+H::ActivateOrRun("- Microsoft Visual Studio", "" A_ProgramsCommon "\Visual Studio 2019.lnk", "", "")
+Z::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\", "", "")
+Q::ActivateOrRun("ahk_class EVERYTHING", "" A_ProgramFiles "\Everything\Everything.exe", "", "")
+K::ActivateOrRun("ahk_class PotPlayer64", "" A_ProgramFiles "\DAUM\PotPlayer\PotPlayerMini64.exe", "", "")
+E::ActivateOrRun("ahk_class YXMainFrame", "C:\Program Files (x86)\Yinxiang Biji\印象笔记\Evernote.exe", "", "")
+W::ActivateOrRun("ahk_exe chrome.exe", "" A_ProgramsCommon "\Google Chrome.lnk", "", "")
+S::ActivateOrRun("ahk_exe Code.exe", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "", "")
+U::ActivateOrRun("ahk_exe datagrip64.exe", "" A_Programs "\JetBrains Toolbox\DataGrip.lnk", "", "")
+L::ActivateOrRun("ahk_exe EXCEL.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Excel.lnk", "", "")
+R::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe", "", "")
+J::ActivateOrRun("ahk_exe idea64.exe", "" A_Programs "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk", "", "")
+D::ActivateOrRun("ahk_exe msedge.exe", "" A_ProgramsCommon "\Microsoft Edge.lnk", "", "")
+P::ActivateOrRun("ahk_exe POWERPNT.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk", "", "")
+I::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe", "", "")
+A::ActivateOrRun("ahk_exe WindowsTerminal.exe", "shortcuts\Windows Terminal Preview.lnk", "", "")
+O::ActivateOrRun("OneNote for Windows 10", "shortcuts\OneNote for Windows 10.lnk", "", "")
+M::bindOrActivate(CapslockF__M)
+N::bindOrActivate(CapslockF__N)
 
 #if CapslockSpaceMode
 space::return
 
+S::ActivateOrRun("my_site - Visual Studio Code", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\project\my_site", "")
+M::ActivateOrRun("MyKeymap - Visual Studio Code", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\MyFiles\MyKeymap", "")
 
 
 #if DisableCapslockKey
@@ -571,27 +425,18 @@ space::return
 
 
 #if RButtonMode
-*Z::
-send {blind}#v
-return
-*Space::
-send {blind}{enter}
-return
-*G::
-send, {blind}{end}
-return
-*X::
-send, {blind}{esc}
-return
-*A::
-send, {blind}{home}
-return
-*C::send {blind}{backspace}
-*V::send {blind}{delete}
-*D::send {blind}{down}
-*S::send {blind}{left}
-*F::send {blind}{right}
-*E::send {blind}{up}
+*Z::send, {blind}#v
+*V::send, {blind}^{bs}
+*C::send, {blind}{backspace}
+*B::send, {blind}{del}
+*D::send, {blind}{down}
+*G::send, {blind}{end}
+*Space::send, {blind}{enter}
+*X::send, {blind}{esc}
+*A::send, {blind}{home}
+*S::send, {blind}{left}
+*F::send, {blind}{right}
+*E::send, {blind}{up}
 
 LButton::
 ; if WinActive("ahk_class MultitaskingViewFrame")
@@ -603,9 +448,7 @@ return
 WheelUp::send ^+{tab}
 WheelDown::send ^{tab}
 
-#IfWinActive, ahk_group TASK_SWITCH_GROUP
-; *W::send, {blind}+{Tab}
-; *R::send, {blind}{Tab}
+#If TASK_SWITCH_MODE
 *D::send, {blind}{down}
 *E::send, {blind}{up}
 *S::send, {blind}{left}
@@ -620,85 +463,30 @@ WheelDown::send ^{tab}
 execSemicolonAbbr(typo) {
     switch typo 
     {
-        case "ver":
-            
-send, {blind}#r
-             sleep 700
-send, {blind}winver{enter}
-return
-        case "zh":
-            
-send, {blind}{text} site:zhihu.com
-return
-        case "ss":
-            
-send, {blind}{text}""
-send, {blind}{left}
-return
-        case "xk":
-            
-send, {blind}{text}()
-send, {blind}{left 1}
-return
-        case "gg":
-            
-send, {blind}{text}git add -A`; git commit -a -m ""`; git push origin (git branch --show-current)`;
-send, {blind}{left 47}
-return
-        case "static":
-            
-send, {blind}{text}https://static.xianyukang.com/
-return
-        case "dk":
-            
-send, {blind}{text}{}
-send, {blind}{left}
-return
-        case "xm":
-            
-send, {blind}{text}❖` ` 
-return
-        case "jt":
-            
-send, {blind}{text}➤` ` 
-return
-        case "fs":
-            
-send, {blind}{text}、
-return
-        case "ff":
-            
-send, {blind}{text}。
-return
-        case "sm":
-            
-send, {blind}{text}《》
-send, {blind}{left}
-return
-        case "sk":
-            
-send, {blind}{text}「  」
-send, {blind}{left 2}
-return
-        case "sl":
-            
-send, {blind}{text}【】
-send, {blind}{left 1}
-return
-        case "fd":
-            
-send, {blind}{text}，
-return
-        case "gt":
-            
-send, {blind}{text}🐶
-return
-        case "lx":
-            
-send, {blind}{text}💚
-return
         case "zk":
-            send {blind}[]{left}
+                send, {blind}[]{left}
+        case "zh":
+                send, {blind}{text} site:zhihu.com
+        case "jt":
+                send, {blind}{text}➤` ` 
+        case "fs":
+                send, {blind}{text}、
+        case "ff":
+                send, {blind}{text}。
+        case "gt":
+                send, {blind}{text}🐶
+        case "dk":
+            SemicolonAbbr2__dk()
+        case "gg":
+            SemicolonAbbr2__gg()
+        case "sk":
+            SemicolonAbbr2__sk()
+        case "ss":
+            SemicolonAbbr2__ss()
+        case "ver":
+            SemicolonAbbr2__ver()
+        case "xk":
+            SemicolonAbbr2__xk()
         default: 
             return false
     }
@@ -708,102 +496,35 @@ return
 execCapslockAbbr(typo) {
     switch typo 
     {
-        case "ir":
-           
-    path = %A_Programs%\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk
-    ActivateOrRun("room-api ahk_exe idea64.exe", path, "D:\work\room-api", "")
-    return
-        case "io":
-           
-    path = %A_Programs%\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk
-    ActivateOrRun("room-order-api ahk_exe idea64.exe", path, "D:\work\room-order-api", "")
-    return
-        case "cs":
-           
-    path = %A_Programs%\Visual Studio Code\Visual Studio Code.lnk
-    ActivateOrRun("my_site - Visual Studio Code", path, "D:\project\my_site", "")
-    return
-        case "cm":
-           
-    path = %A_Programs%\Visual Studio Code\Visual Studio Code.lnk
-    ActivateOrRun("MyKeymap - Visual Studio Code", path, "D:\MyFiles\MyKeymap", "")
-    return
-        case "fw":
-           
-    path = %A_ProgramsCommon%\Google Chrome.lnk
-    ActivateOrRun("", path, "", "")
-    return
-        case "bb":
-           
-    path = C:\Program Files\Google\Chrome\Application\chrome.exe
-    ActivateOrRun("Bing 词典", path, "--app=https://cn.bing.com/dict/search?q=nice", "")
-    return
-        case "gg":
-           
-    path = C:\Program Files\Google\Chrome\Application\chrome.exe
-    ActivateOrRun("Google 翻译", path, "--app=https://translate.google.cn/?op=translate&sl=auto&tl=zh-CN&text=nice", "")
-    return
-        case "mm":
-           
-    path = D:\notes\MyKeymap-Roadmap.md
-    ActivateOrRun("MyKeymap-Roadmap.md - Typora", path, "", "")
-    return
-        case "mw":
-           
-    path = D:\notes\working.md
-    ActivateOrRun("working.md - Typora", path, "", "")
-    return
-        case "md":
-           
-    path = D:\project\my_site\docs\MyKeymap.md
-    ActivateOrRun("MyKeymap.md - Typora", path, "", "")
-    return
-        case "no":
-           
-    path = notepad.exe
-    ActivateOrRun("记事本", path, "", "")
-    return
-        case "st":
-           
-    path = shortcuts\Store.lnk
-    ActivateOrRun("Microsoft Store", path, "", "")
-    return
-        case "we":
-           
-    path = shortcuts\网易云音乐.lnk
-    ActivateOrRun("网易云音乐", path)
-    return
-        case "tm":
-           
-    path = taskmgr.exe
-    workingDir = 
-    ActivateOrRun("", path, "", workingDir)
-    return
         case "kg":
            actionAddSpaceBetweenEnglishChinese()
+        case "dm":
+           ActivateOrRun("", ".\", "", "")
+        case "sp":
+           ActivateOrRun("", "https://open.spotify.com/", "", "")
+        case "tm":
+           ActivateOrRun("", "taskmgr.exe", "", "")
+        case "bb":
+           ActivateOrRun("Bing 词典", "C:\Program Files\Google\Chrome\Application\chrome.exe", "--app=https://cn.bing.com/dict/search?q=nice", "")
+        case "st":
+           ActivateOrRun("Microsoft Store", "shortcuts\Store.lnk", "", "")
+        case "we":
+           ActivateOrRun("网易云音乐", "shortcuts\网易云音乐.lnk", "", "")
+        case "no":
+           ActivateOrRun("记事本", "notepad.exe", "", "")
         case "sl":
            DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
         case "se":
            openSettings()
-        case "ex":
-           quit(false)
         case "rex":
            restartExplorer()
-        case "dm":
-           run, %A_WorkingDir%
         case "ld":
            run, bin\ahk.exe bin\changeBrightness.ahk
         case "sd":
            run, bin\ahk.exe bin\soundControl.ahk
         case "dd":
            run, shell:downloads
-        case "dp":
-           run, shell:my pictures
-        case "dv":
-           run, shell:My Video
-        case "dw":
-           run, shell:Personal
-        case "dr":
+        case "lj":
            run, shell:RecycleBinFolder
         case "fg":
            setColor("#080")
@@ -819,8 +540,6 @@ execCapslockAbbr(typo) {
            slideToReboot()
         case "ss":
            slideToShutdown()
-        case "ee":
-           ToggleTopMost()
         default: 
             return false
     }
@@ -893,4 +612,120 @@ delayedHideTipWindow()
 
 
 
+Mode9__785()
+{
+    if winactive("ahk_exe explorer.exe") {
+        sel := Explorer_GetSelection(), action_open_selected_with("" A_ProgramFiles "\Everything\Everything.exe", "-filename " sel.selected "")
+        return
+    }
+    if winactive("- Visual Studio Code") {
+        send, {blind}+!{f5}
+        return
+    }
+    if winactive("- Microsoft Visual Studio") {
+        send, {blind}+{f8}
+        return
+    }
+}
+Mode9__787()
+{
+    if winactive("ahk_exe explorer.exe") {
+        sel := Explorer_GetSelection(), action_open_selected_with("wt.exe", "-d " sel.selected "")
+        return
+    }
+}
+Mode9__789()
+{
+    if winactive("- Microsoft Visual Studio") {
+        send, {blind}^1s
+        return
+    }
+}
+Mode9__794()
+{
+    if winactive("- Microsoft Visual Studio") {
+        send, {blind}^-
+        return
+    }
+}
+Mode9__795()
+{
+    if winactive("- Visual Studio Code") {
+        send, {blind}!{f5}
+        return
+    }
+    if winactive("- Microsoft Visual Studio") {
+        send, {blind}{f8}
+        return
+    }
+}
+Mode9__796()
+{
+    if winactive("ahk_exe explorer.exe") {
+        action_copy_selected_file_path()
+        return
+    }
+    if winactive("- Microsoft Visual Studio") {
+        send, {blind}^+-
+        return
+    }
+}
+Mode9__797()
+{
+    if winactive("- Visual Studio Code") {
+        send, {blind}^+g
+        return
+    }
+    if winactive("- Microsoft Visual Studio") {
+        send, {blind}^0^g
+        return
+    }
+}
+Mode9__804()
+{
+    if winactive("ahk_exe explorer.exe") {
+        sel := Explorer_GetSelection(), action_open_selected_with("C:\Program Files\7-Zip\7z.exe", "x " sel.selected " -o""" sel.current "\" sel.purename """")
+        return
+    }
+}
+Mode9__805()
+{
+    if winactive("ahk_exe explorer.exe") {
+        sel := Explorer_GetSelection(), action_open_selected_with("" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "" sel.selected "")
+        return
+    }
+}
+Mode9__806()
+{
+    if winactive("- Microsoft Visual Studio") {
+        send, {blind}+!.
+        return
+    }
+}
+
+SemicolonAbbr2__xk() {
+    send, {blind}{text}()
+    send, {blind}{left 1}
+}
+SemicolonAbbr2__ss() {
+    send, {blind}{text}""
+    send, {blind}{left}
+}
+SemicolonAbbr2__sk() {
+    send, {blind}{text}「  」
+    send, {blind}{left 2}
+}
+SemicolonAbbr2__dk() {
+    send, {blind}{text}{}
+    send, {blind}{left}
+}
+SemicolonAbbr2__gg() {
+    send, {blind}{text}git add -A`; git commit -a -m ""`; git push origin (git branch --show-current)`;
+    send, {blind}{left 47}
+}
+SemicolonAbbr2__ver() {
+    send, {blind}#r
+    sleep 700
+    send, {blind}winver{enter}
+}
 

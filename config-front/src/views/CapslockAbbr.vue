@@ -31,6 +31,7 @@ export default {
   methods: {
     keyChanged(key) {
       this.currentKey = key
+      this.$store.state.selectedKey = key
     },
     deleteKey(toDel, toFocus) {
       console.log(toDel, toFocus)

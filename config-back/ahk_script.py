@@ -23,7 +23,6 @@ class AhkScript:
     @staticmethod
     def ifBranch(selId, windowSelector, value):
         value = value.lstrip('\n')
-        value = value.rstrip('return')
         value = value.rstrip(' ')
         value = value.rstrip('\n')
         value = '\n'.join(['        ' + x.lstrip() for x in value.split('\n') if x])

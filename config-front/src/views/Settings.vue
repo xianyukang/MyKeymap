@@ -54,7 +54,7 @@
               @change="runOnStartup"
             ></v-switch>
             <v-switch class="switch" v-model="currConfig()['mapRAltToCtrl']" label="右 Alt 映射为 Ctrl"></v-switch>
-            <v-switch class="switch" v-model="currConfig()['numKeyConfigurable']" label="让主键区上方的数字键可自定义"></v-switch>
+            <!-- <v-switch class="switch" v-model="currConfig()['numKeyConfigurable']" label="让主键区上方的数字键可自定义"></v-switch> -->
             <v-switch
               class="switch"
               v-model="currConfig()['runAsAdmin']"

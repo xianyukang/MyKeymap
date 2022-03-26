@@ -1,6 +1,6 @@
 <template>
   <div class="my-container">
-    <keyboard ref="kb" @clickKey="currentKey = $event" />
+    <keyboard ref="kb" @clickKey="handleClickKey" />
     <action :currentKey="currentKey"/>
   </div>
 </template>
@@ -25,6 +25,12 @@ export default {
     }
   },
   components: { Action, Keyboard },
+  methods: {
+    handleClickKey(key) {
+      this.currentKey = key
+      this.$store.state.selectedKey = key
+    }
+  }
 }
 </script>
 

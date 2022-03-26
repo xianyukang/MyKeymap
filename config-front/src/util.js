@@ -85,24 +85,31 @@ function ahkText(s) {
 export function mapKeysToSend(line) {
     line = _.trimStart(line)
     if (line.startsWith(';') || line.startsWith('sleep') || line.startsWith('Sleep')) {
-        return line
+        return '    ' + line
     }
     if (line.startsWith('{text}') || line.startsWith('{Text}')) {
         line = ahkText(line)
     }
-    return 'send, {blind}' + line
+    return '    send, {blind}' + line
+}
+
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+  }
+  
+
+export function uniqueName(ctx, key)
+{
+    const symbolList = ' !"#$%&\'()*+,-./:;<=>?@[\\]^`{|}~';
+    for (const c of symbolList) {
+        key = key.replace(new RegExp(escapeRegExp(c), "g"), c.charCodeAt(0))
+    }
+    return ctx + '__' + key
 }
 
 export function bindWindow(ctx, key) {
-    key = key === ';' ? 'semicolon' : key
-    key = key === ',' ? 'comma' : key
-    key = key === '.' ? 'dot' : key
-    key = key === '/' ? 'slash' : key
-    const var_name = ctx + '__' + key
-    return `
-    global ${var_name}
-    bindOrActivate(${var_name})
-    return`
+    const var_name =uniqueName(ctx, key)
+    return `bindOrActivate(${var_name})`
 }
 
 

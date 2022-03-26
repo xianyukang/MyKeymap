@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios';
-import { host, executeScript, emptyKeymap, ALL_KEYMAPS, NEW_CONFIGURABLE_KEYS, KEYMAP_PLUS_ABBR, emptyKeyConfig } from '../util.js';
+import { host, executeScript, emptyKeymap, ALL_KEYMAPS, NEW_CONFIGURABLE_KEYS, KEYMAP_PLUS_ABBR, EMPTY_KEY, emptyKeyConfig } from '../util.js';
 import _ from 'lodash'
 
 
@@ -21,15 +21,39 @@ function addExtendedKeys(data, supportPerAppConfig) {
   }
 }
 
-function containsKeymap(data) {
+function contains_one_valid_key(data, windowSelectorIds) {
   if (!data) return false
   for (const [key, value] of Object.entries(data)) {
-    if (value && value['2'] && value['2'].value) return true;
+    for (const sel of windowSelectorIds) {
+      if (value && value[sel] && value[sel].value)
+        return true;
+    }
   }
   return false
 }
 
+function get_send_key_functions(config, windowSelectorIds) {
+  const res = []
+  for (const keymapName of KEYMAP_PLUS_ABBR) {
+    for (const value of Object.values(config[keymapName])) {
+      for (const sel of windowSelectorIds) {
+        if (value && value[sel]) {
+          if (value[sel].send_key_function) {
+            res.push(value[sel].send_key_function)
+          }
+          if (sel !== '2' && !value[sel].value) {
+            delete value[sel]   // 删掉无用配置
+          }
+        }
+      }
+    }
+  }
+
+  return res;
+}
+
 function processConfig(config) {
+  const ids = ['2', ...config.windowSelectors.map(x => x.id)]
   config['CapslockAbbrKeys'] = Object.keys(config.CapslockAbbr)
   config['SemicolonAbbrKeys'] = Object.keys(config.SemicolonAbbr)
   // 逗号开头的放在前面
@@ -37,19 +61,22 @@ function processConfig(config) {
   config['SemicolonAbbrKeys'] = _.concat(_.remove(config['SemicolonAbbrKeys'], x => x.startsWith(',')), config['SemicolonAbbrKeys'])
   // 路径变量不要空行
   config['pathVariables'] = _.filter(config['pathVariables'], x => x.key && x.value)
+  // 如果发送按键时写了多行,  则生成一个函数包起来
+  config['send_key_functions'] = get_send_key_functions(config, ids)
+
 
   const s = config.Settings
-  s['Mode3'] = s.enableMode3 && containsKeymap(config.Mode3)
-  s['Mode9'] = s.enableMode9 && containsKeymap(config.Mode9)
-  s['JMode'] = s.enableJMode && containsKeymap(config.JMode)
-  s['CapslockMode'] = s.enableCapslockMode && containsKeymap(config.Capslock)
-  s['SemicolonMode'] = s.enableSemicolonMode && containsKeymap(config.Semicolon)
-  s['LButtonMode'] = s.enableLButtonMode && containsKeymap(config.LButtonMode)
-  s['RButtonMode'] = s.enableRButtonMode && containsKeymap(config.RButtonMode)
-  s['SpaceMode'] = s.enableSpaceMode && containsKeymap(config.SpaceMode)
-  s['TabMode'] = s.enableTabMode && containsKeymap(config.TabMode)
-  s['CommaMode'] = s.enableCommaMode && containsKeymap(config.CommaMode)
-  
+  s['Mode3'] = s.enableMode3 && contains_one_valid_key(config.Mode3, ids)
+  s['Mode9'] = s.enableMode9 && contains_one_valid_key(config.Mode9, ids)
+  s['JMode'] = s.enableJMode && contains_one_valid_key(config.JMode, ids)
+  s['CapslockMode'] = s.enableCapslockMode && contains_one_valid_key(config.Capslock, ids)
+  s['SemicolonMode'] = s.enableSemicolonMode && contains_one_valid_key(config.Semicolon, ids)
+  s['LButtonMode'] = s.enableLButtonMode && contains_one_valid_key(config.LButtonMode, ids)
+  s['RButtonMode'] = s.enableRButtonMode && contains_one_valid_key(config.RButtonMode, ids)
+  s['SpaceMode'] = s.enableSpaceMode && contains_one_valid_key(config.SpaceMode, ids)
+  s['TabMode'] = s.enableTabMode && contains_one_valid_key(config.TabMode, ids)
+  s['CommaMode'] = s.enableCommaMode && contains_one_valid_key(config.CommaMode, ids)
+
   if (!config['otherInfo']) {
     config['otherInfo'] = {}
   }
@@ -73,6 +100,24 @@ const s = new Vuex.Store({
     config: null,
     snackbar: false,
     snackbarText: '',
+    routeName: '',
+    windowSelector: '2',
+    selectedKey: EMPTY_KEY,
+  },
+  getters: {
+    config(state) {
+      // 返回当前选中的键关联的配置
+      if (state.selectedKey === EMPTY_KEY) {
+        return { type: '什么也不做', value: '' }
+      }
+
+      const currentKey = state.config[state.routeName][state.selectedKey]
+      if (!currentKey[state.windowSelector]) {
+        Vue.set(currentKey, state.windowSelector, { type: '什么也不做', value: '' })
+      }
+
+      return currentKey[state.windowSelector]
+    },
   },
   mutations: {
     SET_CONFIG(state, value) {
@@ -107,7 +152,7 @@ const s = new Vuex.Store({
               resp.data[km] = emptyKeymap(resp.data.supportPerAppConfig)
             }
           }
-          resp.data.windowSelectors = resp.data.windowSelectors || [{id: '3', key: 'IntelliJ IDEA', value: 'ahk_exe idea64.exe'}]
+          resp.data.windowSelectors = resp.data.windowSelectors || []
           addExtendedKeys(resp.data, resp.data.supportPerAppConfig)
 
           // 这里不能用 || 语法,  因为要判断值是否 undefined 而不是判断值是否 falsy
