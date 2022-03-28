@@ -43,6 +43,11 @@ os.chdir('config-front')
 os.system('pnpm run build')
 os.chdir('..')
 
+# 构建帮助页 css
+os.chdir('tailwind')
+os.system('npm run build-help-page-css')
+os.chdir('..')
+
 # 复制 index.html 到 flask 的 templates 文件夹
 if not os.path.isdir('bin/templates'):
     os.mkdir('bin/templates')

@@ -890,10 +890,10 @@ ToggleTopMost()
          winset, alwaysontop, off
     }
     else {
-         style := "  窗口置顶  "
+         style := "  置顶窗口  "
          winset, alwaysontop, on
     }
-    ; tip(style, -500)
+    tip(style, -500)
 }
 
 htmlEscape(text) 

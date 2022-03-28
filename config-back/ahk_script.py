@@ -1,7 +1,7 @@
 import os
 import subprocess
 from codecs import BOM_UTF8
-from jinja2 import Environment, FileSystemLoader
+from template_engine import template_engine
 
 
 class AhkScript:
@@ -9,16 +9,7 @@ class AhkScript:
 
     def __init__(self):
         super().__init__()
-        self.env = Environment(
-            loader=FileSystemLoader("templates"), 
-            variable_start_string='{{{', 
-            variable_end_string='}}}',
-            comment_start_string= '{##',
-            comment_end_string= '##}',
-            lstrip_blocks=True,
-            trim_blocks=True,
-            )
-        self.env.filters['ahkString'] = self.ahkString
+        self.env = template_engine
 
     @staticmethod
     def ifBranch(selId, windowSelector, value):
@@ -82,11 +73,6 @@ class AhkScript:
         if (key == ';'): 
             return '`;'
         return key
-
-    @staticmethod
-    def ahkString(s):
-        s = s.replace('"',  '""')
-        return '"' + s + '"'
 
     def generate(self, data):
         self.processData(data)

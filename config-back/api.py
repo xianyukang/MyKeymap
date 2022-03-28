@@ -12,6 +12,7 @@ from flask_cors import CORS
 import traceback
 import subprocess
 import sys
+from template_engine import template_engine
 
 # 如何禁用 flask 的启动信息、各种日志...
 # https://stackoverflow.com/a/57086684/15989650
@@ -42,6 +43,12 @@ log.setLevel(logging.ERROR)
 #     sock.close()
 #     return port
 
+def saveHelpPageHtml(html):
+    template = template_engine.get_template('help.html')
+    with open("../bin/site/help.html", "w+", encoding="utf-8") as f:
+        print(template.render(helpPageHtml=html), file=f)
+    return
+
 def print_banner(url):
     print()
     print('   ------------------------------------------------------------------')
@@ -64,10 +71,12 @@ def get_config():
 @app.route('/config', methods=['PUT'])
 def save_config():
     data = request.get_json()
+    helpPageHtml = data.pop('helpPageHtml', None)
     with open('../data/config.json', 'r+', encoding='utf-8') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
         f.truncate()
     script.generate(data)
+    saveHelpPageHtml(helpPageHtml)
     return 'save config ok!'
 
 @app.route('/execute', methods=['POST'])

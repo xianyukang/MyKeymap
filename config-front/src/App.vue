@@ -1,6 +1,6 @@
 <template>
-  <v-app id="inspire">
-    <v-navigation-drawer app id="drawer">
+  <v-app>
+    <v-navigation-drawer app id="drawer" permanent>
       <v-list-item>
         <v-list-item-avatar rounded="0" class="logo">
           <v-img alt="img" :src="require('./assets/logo.png')"></v-img>
@@ -31,6 +31,7 @@
     </v-navigation-drawer>
 
     <v-main id="main">
+      <HelpPage />
       <v-card v-if="!currentModeEnabled" outlined max-width="100%" dark id="warn" color="#555">
         <v-card-title>此模式尚未开启, 若想使用需要在设置中打开</v-card-title>
       </v-card>
@@ -48,6 +49,7 @@
 
 <script>
 import hotkeys from 'hotkeys-js'
+import HelpPage from './components/HelpPage.vue'
 
 // By default hotkeys are not enabled for INPUT SELECT TEXTAREA elements.
 hotkeys.filter = function (event) {
@@ -55,6 +57,7 @@ hotkeys.filter = function (event) {
 }
 
 export default {
+  components: { HelpPage },
   name: 'App',
   created() {
     hotkeys('ctrl+s', (event, handler) => {
@@ -75,7 +78,6 @@ export default {
     }
   },
   data: () => ({
-    drawer: true,
     items: [
       { title: 'Capslock', icon: 'mdi-alpha-c-box', to: 'Capslock', color: 'purple' },
       { title: 'Capslock + F', icon: 'mdi-alpha-c-box', to: 'CapslockF', color: 'purple' },

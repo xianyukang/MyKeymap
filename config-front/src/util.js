@@ -33,7 +33,6 @@ export const ALL_KEYMAPS = [
     'Capslock',
     'CapslockF',
     'Mode3',
-    'Mode3R',
     'Mode9',
     'CapslockSpace',
     'SpaceMode',

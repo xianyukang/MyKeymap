@@ -83,6 +83,8 @@ function processConfig(config) {
   const otherInfo = config['otherInfo']
   otherInfo['KEYMAP_PLUS_ABBR'] = KEYMAP_PLUS_ABBR
 
+  config['helpPageHtml'] = document.querySelector('#HelpPage').outerHTML
+
   return config
 }
 

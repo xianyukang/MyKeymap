@@ -78,7 +78,7 @@ global typoTip := new TypoTipWindow()
 semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,jt,gt,zh,gg,ver,fs,ff")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", "ss,sl,rb,fp,fb,fg,dd,se,no,sd,ld,we,st,bb,fr,fi,dm,rex,tm,kg,sp,lj")
+capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", "ss,sl,rb,fp,fb,fg,dd,se,no,sd,ld,we,st,bb,fr,fi,dm,rex,tm,kg,sp,lj,ee")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -213,6 +213,7 @@ enterRButtonMode()
 
 #if JModeL
 l::return
+*B::send, {blind}+{del}
 *D::send, {blind}+{down}
 *G::send, {blind}+{end}
 *X::send, {blind}+{esc}
@@ -220,9 +221,8 @@ l::return
 *S::send, {blind}+{left}
 *F::send, {blind}+{right}
 *E::send, {blind}+{up}
-*W::send, {blind}^+{left}
-*T::send, {blind}^+{right}
-*R::send, {blind}^{tab}
+*I::send, {blind}^+{left}
+*K::send, {blind}^+{rihgt}
 *C::send, {blind}{bs}
 
 
@@ -234,11 +234,12 @@ l::enterJModeL()
 *S::send {blind}{left}
 *F::send {blind}{right}
 *E::send {blind}{up}
-*Q::send, {blind}+{home}{bs}
+*,::send, {blind}+{home}{bs}
+*W::send, {blind}+{Tab}
 *2::send, {blind}^+{tab}
 *V::send, {blind}^{bs}
-*W::send, {blind}^{left}
-*T::send, {blind}^{right}
+*I::send, {blind}^{left}
+*K::send, {blind}^{right}
 *3::send, {blind}^{tab}
 *C::send, {blind}{bs}
 *B::send, {blind}{del}
@@ -307,16 +308,16 @@ l::enterJModeL()
 
 
 #if Mode9
-*E::Mode9__785()
-*T::Mode9__787()
-*U::Mode9__789()
-*S::Mode9__794()
-*D::Mode9__795()
-*F::Mode9__796()
-*G::Mode9__797()
-*X::Mode9__804()
-*C::Mode9__805()
-*V::Mode9__806()
+*E::Mode9__136()
+*T::Mode9__138()
+*U::Mode9__140()
+*S::Mode9__145()
+*D::Mode9__146()
+*F::Mode9__147()
+*G::Mode9__148()
+*X::Mode9__155()
+*C::Mode9__156()
+*V::Mode9__157()
 
 
 
@@ -343,7 +344,7 @@ W::send !{tab}
 D::send #+{right}
 Y::send {LControl down}{LWin down}{Left}{LWin up}{LControl up}
 P::send {LControl down}{LWin down}{Right}{LWin up}{LControl up}
-*T::send, {blind}#{right}
+*T::send, {blind}#{left}
 X::SmartCloseWindow()
 R::SwitchWindows()
 Q::winmaximize, A
@@ -540,6 +541,8 @@ execCapslockAbbr(typo) {
            slideToReboot()
         case "ss":
            slideToShutdown()
+        case "ee":
+           ToggleTopMost()
         default: 
             return false
     }
@@ -612,7 +615,7 @@ delayedHideTipWindow()
 
 
 
-Mode9__785()
+Mode9__136()
 {
     if winactive("ahk_exe explorer.exe") {
         sel := Explorer_GetSelection(), action_open_selected_with("" A_ProgramFiles "\Everything\Everything.exe", "-filename " sel.selected "")
@@ -627,28 +630,28 @@ Mode9__785()
         return
     }
 }
-Mode9__787()
+Mode9__138()
 {
     if winactive("ahk_exe explorer.exe") {
         sel := Explorer_GetSelection(), action_open_selected_with("wt.exe", "-d " sel.selected "")
         return
     }
 }
-Mode9__789()
+Mode9__140()
 {
     if winactive("- Microsoft Visual Studio") {
         send, {blind}^1s
         return
     }
 }
-Mode9__794()
+Mode9__145()
 {
     if winactive("- Microsoft Visual Studio") {
         send, {blind}^-
         return
     }
 }
-Mode9__795()
+Mode9__146()
 {
     if winactive("- Visual Studio Code") {
         send, {blind}!{f5}
@@ -659,7 +662,7 @@ Mode9__795()
         return
     }
 }
-Mode9__796()
+Mode9__147()
 {
     if winactive("ahk_exe explorer.exe") {
         action_copy_selected_file_path()
@@ -670,7 +673,7 @@ Mode9__796()
         return
     }
 }
-Mode9__797()
+Mode9__148()
 {
     if winactive("- Visual Studio Code") {
         send, {blind}^+g
@@ -681,21 +684,21 @@ Mode9__797()
         return
     }
 }
-Mode9__804()
+Mode9__155()
 {
     if winactive("ahk_exe explorer.exe") {
         sel := Explorer_GetSelection(), action_open_selected_with("C:\Program Files\7-Zip\7z.exe", "x " sel.selected " -o""" sel.current "\" sel.purename """")
         return
     }
 }
-Mode9__805()
+Mode9__156()
 {
     if winactive("ahk_exe explorer.exe") {
         sel := Explorer_GetSelection(), action_open_selected_with("" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "" sel.selected "")
         return
     }
 }
-Mode9__806()
+Mode9__157()
 {
     if winactive("- Microsoft Visual Studio") {
         send, {blind}+!.

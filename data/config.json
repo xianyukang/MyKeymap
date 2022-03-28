@@ -93,10 +93,10 @@
         "T": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send, {blind}#{right}",
-                "keysToSend": "#{right}",
+                "value": "send, {blind}#{left}",
+                "keysToSend": "#{left}",
                 "prefix": "*",
-                "comment": "窗口靠右 (Win+Right)"
+                "comment": "窗口靠左 (Win+Left)"
             }
         },
         "Y": {
@@ -891,254 +891,6 @@
             }
         }
     },
-    "Mode3R": {
-        "0": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "1": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "2": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "3": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "4": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "5": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "6": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "7": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "8": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "9": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "Space": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "Q": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "W": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "E": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "R": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "T": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "Y": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "U": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "I": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "O": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "P": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "A": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "S": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "D": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "F": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "G": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "H": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "J": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "K": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "L": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        ";": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "Z": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "X": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "C": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "V": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "B": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "N": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "M": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        ",": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        ".": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        },
-        "/": {
-            "2": {
-                "type": "什么也不做",
-                "value": ""
-            }
-        }
-    },
     "Mode9": {
         "0": {
             "2": {
@@ -1565,20 +1317,17 @@
         },
         "Q": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}+{home}{bs}",
-                "keysToSend": "+{home}{bs}",
-                "prefix": "*",
-                "comment": "从光标位置删除到行首"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "W": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send, {blind}^{left}",
-                "keysToSend": "^{left}",
+                "value": "send, {blind}+{Tab}",
+                "keysToSend": "+{Tab}",
                 "prefix": "*",
-                "comment": "向左移动一个英文单词、中文词组"
+                "comment": "Shift + Tab 键"
             }
         },
         "E": {
@@ -1601,11 +1350,8 @@
         },
         "T": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}^{right}",
-                "keysToSend": "^{right}",
-                "prefix": "*",
-                "comment": "向右移动一个英文单词、中文词组"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "Y": {
@@ -1622,8 +1368,11 @@
         },
         "I": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "send, {blind}^{left}",
+                "comment": "向左移动一个英文单词、中文词组",
+                "keysToSend": "^{left}",
+                "prefix": "*"
             }
         },
         "O": {
@@ -1697,8 +1446,10 @@
         },
         "K": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "send, {blind}^{right}",
+                "keysToSend": "^{right}",
+                "prefix": "*"
             }
         },
         "L": {
@@ -1772,8 +1523,11 @@
         },
         ",": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "send, {blind}+{home}{bs}",
+                "keysToSend": "+{home}{bs}",
+                "prefix": "*",
+                "comment": "从光标位置删除到行首"
             }
         },
         ".": {
@@ -2908,6 +2662,12 @@
                 "value": "run, shell:RecycleBinFolder",
                 "label": "打开「 回收站 」"
             }
+        },
+        "ee": {
+            "2": {
+                "type": "窗口操作",
+                "value": "ToggleTopMost()"
+            }
         }
     },
     "CapslockAbbrKeys": [
@@ -2932,7 +2692,8 @@
         "tm",
         "kg",
         "sp",
-        "lj"
+        "lj",
+        "ee"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",
@@ -3833,11 +3594,8 @@
         },
         "W": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}^+{left}",
-                "keysToSend": "^+{left}",
-                "prefix": "*",
-                "comment": "向左选择一个英文单词、中文词组"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "E": {
@@ -3851,20 +3609,14 @@
         },
         "R": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}^{tab}",
-                "keysToSend": "^{tab}",
-                "prefix": "*",
-                "comment": "Ctrl + Tab"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "T": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}^+{right}",
-                "keysToSend": "^+{right}",
-                "prefix": "*",
-                "comment": "向右选择一个英文单词、中文词组"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "Y": {
@@ -3881,8 +3633,10 @@
         },
         "I": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "send, {blind}^+{left}",
+                "keysToSend": "^+{left}",
+                "prefix": "*"
             }
         },
         "O": {
@@ -3956,8 +3710,10 @@
         },
         "K": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "send, {blind}^+{rihgt}",
+                "keysToSend": "^+{rihgt}",
+                "prefix": "*"
             }
         },
         "L": {
@@ -4004,8 +3760,10 @@
         },
         "B": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "send, {blind}+{del}",
+                "keysToSend": "+{del}",
+                "prefix": "*"
             }
         },
         "N": {
@@ -4067,7 +3825,6 @@
             "Capslock",
             "CapslockF",
             "Mode3",
-            "Mode3R",
             "Mode9",
             "CapslockSpace",
             "SpaceMode",
