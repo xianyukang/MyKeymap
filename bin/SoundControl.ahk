@@ -199,12 +199,12 @@ WM_KEYDOWN(wParam, lParam)
     ; tooltip, % GetKeyName(Format("vk{:x}", wParam))
     switch (GetKeyName(Format("vk{:x}", wParam)))
     {
-        case "a": send {Media_Prev}
-        case "g": send {Media_Next}
+        case "a": send, {Media_Prev}
+        case "g": send, {Media_Next}
         case "v": 
             run, ms-settings:apps-volume
             ExitApp
-        case "c": send {Media_Play_Pause}
+        case "c": send, {Media_Play_Pause}
         case "s": layout.decBrightness(1)
         case "f": layout.incBrightness(1)
         case "d": layout.decBrightness(5)

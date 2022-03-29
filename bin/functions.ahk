@@ -456,13 +456,13 @@ SmartCloseWindow()
     WinGetclass, class, A
     name := GetProcessName()
     if IsBrowser(name)
-        send ^w
+        send, ^w
     else if WinActive("- Microsoft Visual Studio ahk_exe devenv.exe")
-        send ^{f4}
+        send, ^{f4}
     else
     {
         if (class == "ApplicationFrameWindow"  || name == "explorer.exe")
-            send !{f4}
+            send, !{f4}
         else
             PostMessage, 0x112, 0xF060,,, A
     }
@@ -626,7 +626,7 @@ moveActiveWindow()
     else 
     {
         postmessage 0x0112, 0xF010, 0,, A
-        send {left}
+        send, {left}
     }
 }
 
@@ -634,7 +634,7 @@ exitMouseMode()
 {
     global SLOWMODE
     SLOWMODE := false
-    send {blind}{Lbutton up}
+    send, {blind}{Lbutton up}
 }
 
 centerMouse() 
@@ -645,7 +645,7 @@ centerMouse()
 
 lbuttonDown() 
 {
-    send {Lbutton down}
+    send, {Lbutton down}
 }
 
 leftClick() 
@@ -826,8 +826,8 @@ copySelectedText()
 {
     ; old_clipboard := clipboardall
     clipboard =
-    send ^c
-    ; send ^{insert}
+    send, ^c
+    ; send, ^{insert}
     clipwait, 0.5, 1
 
     if (errorlevel) {
@@ -936,7 +936,7 @@ setColor(color := "#000000", fontFamily:= "Iosevka")
         Sleep, 100
     }
 
-    send {LShift down}{Insert down}{Insert up}{LShift up}
+    send, {LShift down}{Insert down}{Insert up}{LShift up}
 }
 
 
@@ -1178,7 +1178,7 @@ actionAddSpaceBetweenEnglishChinese()
     }
 
     clipboard := addSpaceBetweenEnglishChinese(text)
-    send {LShift down}{Insert down}{Insert up}{LShift up}
+    send, {LShift down}{Insert down}{Insert up}{LShift up}
 }
 
 addSpaceBetweenEnglishChinese(str) {

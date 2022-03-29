@@ -75,10 +75,10 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,jt,gt,zh,gg,ver,fs,ff")
+semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,gt,zh,gg,ver,fs")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", "ss,sl,rb,fp,fb,fg,dd,se,no,sd,ld,we,st,bb,fr,fi,dm,rex,tm,kg,sp,lj,ee")
+capsHook := InputHook("C", "{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,sd,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -120,7 +120,7 @@ RAlt::LCtrl
     JMode := false
     DisableCapslockKey := false
     if (A_PriorKey == "j" && A_TimeSinceThisHotkey < 350)
-            send  {blind}j
+            send,  {blind}j
     enableOtherHotkey(thisHotkey)
     return
 
@@ -146,7 +146,7 @@ RAlt::LCtrl
     keywait 3 
     DigitMode := false
     if (A_PriorKey == "3" && (A_TickCount - start_tick < 250))
-        send {blind}3 
+        send, {blind}3 
     enableOtherHotkey(thisHotkey)
     return
 *9::
@@ -156,7 +156,7 @@ RAlt::LCtrl
     keywait 9 
     Mode9 := false
     if (A_PriorKey == "9" && A_TimeSinceThisHotkey < 350)
-        send {blind}9 
+        send, {blind}9 
     enableOtherHotkey(thisHotkey)
     return
 
@@ -222,18 +222,12 @@ l::return
 *F::send, {blind}+{right}
 *E::send, {blind}+{up}
 *I::send, {blind}^+{left}
-*K::send, {blind}^+{rihgt}
+*K::send, {blind}^+{right}
 *C::send, {blind}{bs}
 
 
 #if JMode
 l::enterJModeL()
-*Z::send {blind}{appskey}
-*D::send {blind}{down}
-*X::send {blind}{esc}
-*S::send {blind}{left}
-*F::send {blind}{right}
-*E::send {blind}{up}
 *,::send, {blind}+{home}{bs}
 *W::send, {blind}+{Tab}
 *2::send, {blind}^+{tab}
@@ -241,41 +235,47 @@ l::enterJModeL()
 *I::send, {blind}^{left}
 *K::send, {blind}^{right}
 *3::send, {blind}^{tab}
+*Z::send, {blind}{appskey}
 *C::send, {blind}{bs}
 *B::send, {blind}{del}
+*D::send, {blind}{down}
 *G::send, {blind}{end}
 *Space::send, {blind}{enter}
+*X::send, {blind}{esc}
 *A::send, {blind}{home}
 *.::send, {blind}{insert}
+*S::send, {blind}{left}
+*F::send, {blind}{right}
 *R::send, {blind}{tab}
+*E::send, {blind}{up}
 
     
 
 #if PunctuationMode
-*U::send {blind}$
-*R::send {blind}&
-*Q::send {blind}(
-*M::send {blind}-
-*C::send {blind}.
-*N::send {blind}/
-*S::send {blind}<
-*D::send {blind}=
-*F::send {blind}>
-*Y::send {blind}@
-*Z::send {blind}\
-*X::send {blind}_
-*G::send {blind}{!}
-*W::send {blind}{#}
-*E::send {blind}{^}
-*V::send {blind}|
-*T::send {blind}~
+*U::send, {blind}$
+*R::send, {blind}&
+*Q::send, {blind}(
 *A::send, {blind}*
+*M::send, {blind}-
+*C::send, {blind}.
+*N::send, {blind}/
 *I::send, {blind}:
+*S::send, {blind}<
+*D::send, {blind}=
+*F::send, {blind}>
+*Y::send, {blind}@
+*Z::send, {blind}\
+*X::send, {blind}_
 *B::send, {blind}`%
 *J::send, {blind}`;
 *K::send, {blind}``
+*G::send, {blind}{!}
+*W::send, {blind}{#}
 *H::send, {blind}{+}
+*E::send, {blind}{^}
 *O::send, {blind}{end};
+*V::send, {blind}|
+*T::send, {blind}~
 
 
 
@@ -326,7 +326,6 @@ l::enterJModeL()
 E::action_enter_task_switch_mode()
 S::center_window_to_current_monitor(1200, 800)
 A::center_window_to_current_monitor(1370, 930)
-*/::centerMouse()
 *I::fastMoveMouse("I", 0, -1)
 *J::fastMoveMouse("J", -1, 0)
 *K::fastMoveMouse("K", 0, 1)
@@ -340,13 +339,14 @@ C::run, SoundControl.exe
 *H::scrollWheel("H", 3)
 *O::scrollWheel("O", 2)
 *U::scrollWheel("U", 1)
-W::send !{tab}
-D::send #+{right}
-Y::send {LControl down}{LWin down}{Left}{LWin up}{LControl up}
-P::send {LControl down}{LWin down}{Right}{LWin up}{LControl up}
+W::send, !{tab}
+D::send, #+{right}
 *T::send, {blind}#{left}
+Y::send, {LControl down}{LWin down}{Left}{LWin up}{LControl up}
+P::send, {LControl down}{LWin down}{Right}{LWin up}{LControl up}
 X::SmartCloseWindow()
 R::SwitchWindows()
+G::ToggleTopMost()
 Q::winmaximize, A
 B::winMinimizeIgnoreDesktop()
 
@@ -366,8 +366,8 @@ space::
     CapslockSpaceMode := false
     return
 
-WheelUp::send {blind}^#{left}
-WheelDown::send {blind}^#{right}
+WheelUp::send, {blind}^#{left}
+WheelDown::send, {blind}^#{right}
 
 #if SLOWMODE
 
@@ -442,12 +442,12 @@ M::ActivateOrRun("MyKeymap - Visual Studio Code", "" A_Programs "\Visual Studio 
 LButton::
 ; if WinActive("ahk_class MultitaskingViewFrame")
 if ( A_PriorHotkey == "~LButton" || A_PriorHotkey == "LButton")
-    send #{tab}
+    send, #{tab}
 else
-    send ^!{tab}
+    send, ^!{tab}
 return
-WheelUp::send ^+{tab}
-WheelDown::send ^{tab}
+WheelUp::send, ^+{tab}
+WheelDown::send, ^{tab}
 
 #If TASK_SWITCH_MODE
 *D::send, {blind}{down}
@@ -468,12 +468,8 @@ execSemicolonAbbr(typo) {
                 send, {blind}[]{left}
         case "zh":
                 send, {blind}{text} site:zhihu.com
-        case "jt":
-                send, {blind}{text}➤` ` 
         case "fs":
                 send, {blind}{text}、
-        case "ff":
-                send, {blind}{text}。
         case "gt":
                 send, {blind}{text}🐶
         case "dk":
@@ -497,18 +493,20 @@ execSemicolonAbbr(typo) {
 execCapslockAbbr(typo) {
     switch typo 
     {
-        case "kg":
-           actionAddSpaceBetweenEnglishChinese()
         case "dm":
            ActivateOrRun("", ".\", "", "")
         case "sp":
            ActivateOrRun("", "https://open.spotify.com/", "", "")
+        case "bd ":
+           ActivateOrRun("", "https://www.baidu.com", "", "")
         case "tm":
            ActivateOrRun("", "taskmgr.exe", "", "")
         case "bb":
            ActivateOrRun("Bing 词典", "C:\Program Files\Google\Chrome\Application\chrome.exe", "--app=https://cn.bing.com/dict/search?q=nice", "")
         case "st":
            ActivateOrRun("Microsoft Store", "shortcuts\Store.lnk", "", "")
+        case "help":
+           ActivateOrRun("所有键位映射", "bin\site\help.html", "", "")
         case "we":
            ActivateOrRun("网易云音乐", "shortcuts\网易云音乐.lnk", "", "")
         case "no":
@@ -527,22 +525,10 @@ execCapslockAbbr(typo) {
            run, shell:downloads
         case "lj":
            run, shell:RecycleBinFolder
-        case "fg":
-           setColor("#080")
-        case "fb":
-           setColor("#2E66FF")
-        case "fp":
-           setColor("#b309bb")
-        case "fr":
-           setColor("#D05")
-        case "fi":
-           setColor("#FF00FF")
         case "rb":
            slideToReboot()
         case "ss":
            slideToShutdown()
-        case "ee":
-           ToggleTopMost()
         default: 
             return false
     }

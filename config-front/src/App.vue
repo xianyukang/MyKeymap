@@ -31,7 +31,7 @@
     </v-navigation-drawer>
 
     <v-main id="main">
-      <HelpPage />
+      <HelpPage v-show="false" />
       <v-card v-if="!currentModeEnabled" outlined max-width="100%" dark id="warn" color="#555">
         <v-card-title>此模式尚未开启, 若想使用需要在设置中打开</v-card-title>
       </v-card>
@@ -50,6 +50,7 @@
 <script>
 import hotkeys from 'hotkeys-js'
 import HelpPage from './components/HelpPage.vue'
+import { isModeEnabled } from './util'
 
 // By default hotkeys are not enabled for INPUT SELECT TEXTAREA elements.
 hotkeys.filter = function (event) {
@@ -103,42 +104,7 @@ export default {
     saveConfig() {
       this.$store.dispatch('saveConfig')
     },
-    isModeEnabled(mode, settings) {
-      if (mode.startsWith('Capslock')) {
-        if (mode.startsWith('CapslockAbbr')) {
-          return settings['enableCapslockMode'] && settings['enableCapslockAbbr']
-        }
-        return settings['enableCapslockMode']
-      }
-      if (mode.startsWith('Semicolon')) {
-        return settings['enableSemicolonMode']
-      }
-      if (mode.startsWith('SpaceMode')) {
-        return settings['enableSpaceMode']
-      }
-      if (mode.startsWith('JMode')) {
-        return settings['enableJMode']
-      }
-      if (mode.startsWith('Mode3')) {
-        return settings['enableMode3']
-      }
-      if (mode.startsWith('Mode9')) {
-        return settings['enableMode9']
-      }
-      if (mode.startsWith('LButtonMode')) {
-        return settings['enableLButtonMode']
-      }
-      if (mode.startsWith('RButtonMode')) {
-        return settings['enableRButtonMode']
-      }
-      if (mode.startsWith('TabMode')) {
-        return settings['enableTabMode']
-      }
-      if (mode.startsWith('CommaMode')) {
-        return settings['enableCommaMode']
-      }
-      return true
-    }
+    isModeEnabled,
   },
 }
 </script>

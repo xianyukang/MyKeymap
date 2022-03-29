@@ -210,13 +210,14 @@
 
             <v-row>
               <v-col>
-                <v-radio
-                  v-for="action in windowActions3"
-                  :key="action.label"
-                  :label="`${action.label}`"
-                  :value="action.value()"
-                ></v-radio>
+                <v-radio-group v-model="config.value">
+                  <v-radio
+                    :label="specialAction.bindWindowToCurrentKey.label"
+                    :value="specialAction.bindWindowToCurrentKey.generateValue(this.$route.name, this.currentKey)"
+                  ></v-radio>
+                </v-radio-group>
               </v-col>
+
               <v-col> </v-col>
             </v-row>
           </v-radio-group>
@@ -249,18 +250,6 @@
             <br />
             <v-divider></v-divider>
             <br />
-
-            <!-- <v-row>
-              <v-col>
-                <v-radio
-                  v-for="action in clickActions"
-                  :key="action.label"
-                  :label="`${action.label}`"
-                  :value="action.value"
-                ></v-radio>
-              </v-col>
-              <v-col> </v-col>
-            </v-row> -->
           </v-radio-group>
         </template>
       </v-card-text>
@@ -270,6 +259,7 @@
 
 <script>
 import Vue from "vue";
+import "../action";
 import {
   bindWindow,
   currConfigMixin,
@@ -284,6 +274,7 @@ import _ from "lodash";
 import KeyValueConfig from "./KeyValueConfig.vue";
 import ExplorerAction from "./SystemAction.vue";
 import WindowSelectorConfig from "./WindowSelectorConfig.vue";
+import { windowActions1, windowActions2, specialAction, mouseActions, scrollActions, textFeatures1, textFeatures2, clickActions } from "../action";
 
 export default {
   mixins: [currConfigMixin],
@@ -297,77 +288,14 @@ export default {
     return {
       showConfigPathVariableDialog: false,
       showWindowSelectorConfig: false,
-      mouseActions: [
-        { label: "鼠标上移", value: "鼠标上移" },
-        { label: "鼠标下移", value: "鼠标下移" },
-        { label: "鼠标左移", value: "鼠标左移" },
-        { label: "鼠标右移", value: "鼠标右移" },
-      ],
-      scrollActions: [
-        { label: "滚轮上滑", value: "滚轮上滑" },
-        { label: "滚轮下滑", value: "滚轮下滑" },
-        { label: "滚轮左滑", value: "滚轮左滑" },
-        { label: "滚轮右滑", value: "滚轮右滑" },
-      ],
-      clickActions: [
-        { label: "鼠标左键", value: "鼠标左键" },
-        { label: "鼠标右键", value: "鼠标右键" },
-        { label: "鼠标左键按下", value: "鼠标左键按下" },
-        { label: "移动鼠标到窗口中心", value: "移动鼠标到窗口中心" },
-        { label: "让当前窗口进入拖动模式", value: "让当前窗口进入拖动模式" },
-      ],
-      windowActions1: [
-        { label: "关闭窗口", value: "SmartCloseWindow()" },
-        { label: "切换到上一个窗口", value: "send !{tab}" },
-        { label: "在当前程序的窗口间切换", value: "SwitchWindows()" },
-        {
-          label: "窗口管理器(EDSF切换、X关闭、空格选择)",
-          value: "action_enter_task_switch_mode()",
-        },
-        {
-          label: "上一个虚拟桌面",
-          value: "send {LControl down}{LWin down}{Left}{LWin up}{LControl up}",
-        },
-        {
-          label: "下一个虚拟桌面",
-          value: "send {LControl down}{LWin down}{Right}{LWin up}{LControl up}",
-        },
-        { label: "移动窗口到下一个显示器", value: "send #+{right}" },
-      ],
-      windowActions2: [
-        { label: "窗口最大化", value: "winmaximize, A" },
-        { label: "窗口最小化", value: "winMinimizeIgnoreDesktop()" },
-        {
-          label: "窗口居中(1200x800)",
-          value: "center_window_to_current_monitor(1200, 800)",
-        },
-        {
-          label: "窗口居中(1370x930)",
-          value: "center_window_to_current_monitor(1370, 930)",
-        },
-        { label: "切换窗口置顶状态", value: "ToggleTopMost()" },
-        { label: "上一个窗口 (Alt+Esc)", value: "send !{Esc}" },
-        { label: "下一个窗口 (Shift+Alt+Esc)", value: "send +!{Esc}" },
-      ],
-      windowActions3: [
-        {
-          label: "「 绑定活动窗口到当前键 」",
-          value: () => bindWindow(this.$route.name, this.currentKey),
-        },
-      ],
-      textFeatures1: [
-        { label: "设置字体为红色", value: 'setColor("#D05")' },
-        { label: "设置字体为紫色", value: 'setColor("#b309bb")' },
-        { label: "设置字体为粉色", value: 'setColor("#FF00FF")' },
-        { label: "设置字体为蓝色", value: 'setColor("#2E66FF")' },
-        { label: "设置字体为绿色", value: 'setColor("#080")' },
-      ],
-      textFeatures2: [
-        {
-          label: "在中英文之间添加空格",
-          value: "actionAddSpaceBetweenEnglishChinese()",
-        },
-      ],
+      mouseActions,
+      scrollActions,
+      clickActions,
+      specialAction,
+      windowActions1,
+      windowActions2,
+      textFeatures1,
+      textFeatures2,
     };
   },
   methods: {
@@ -384,7 +312,7 @@ export default {
     action_send_keys() {
       this.config.prefix = "*";
       this.config.value = "";
-      delete this.config['send_key_function']
+      delete this.config["send_key_function"];
       const keysToSend = this.config.keysToSend;
 
       if (!keysToSend) {
@@ -517,7 +445,7 @@ export default {
       ];
 
       if (config && config.windowSelectors) {
-        return [...selectors, ...config.windowSelectors].filter(x => x.value);
+        return [...selectors, ...config.windowSelectors].filter((x) => x.value);
       }
 
       return selectors;

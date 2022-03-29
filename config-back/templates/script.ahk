@@ -112,7 +112,7 @@ global typoTip := new TypoTipWindow()
 semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", {{{ SemicolonAbbrKeys|join(',')|ahkString }}})
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{Space}{BackSpace}{Esc}", {{{ CapslockAbbrKeys|join(',')|ahkString }}})
+capsHook := InputHook("C", "{BackSpace}{Esc}", {{{ CapslockAbbrKeys|join(',')|ahkString }}})
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -163,7 +163,7 @@ RAlt::LCtrl
     JMode := false
     DisableCapslockKey := false
     if (A_PriorKey == "j" && A_TimeSinceThisHotkey < 350)
-            send  {blind}j
+            send,  {blind}j
     enableOtherHotkey(thisHotkey)
     return
 {% endif %}
@@ -193,7 +193,7 @@ RAlt::LCtrl
     keywait 3 
     DigitMode := false
     if (A_PriorKey == "3" && (A_TickCount - start_tick < 250))
-        send {blind}3 
+        send, {blind}3 
     enableOtherHotkey(thisHotkey)
     return
 {% endif %}
@@ -205,7 +205,7 @@ RAlt::LCtrl
     keywait 9 
     Mode9 := false
     if (A_PriorKey == "9" && A_TimeSinceThisHotkey < 350)
-        send {blind}9 
+        send, {blind}9 
     enableOtherHotkey(thisHotkey)
     return
 {% endif %}
@@ -218,7 +218,7 @@ RAlt::LCtrl
     keywait `, 
     CommaMode := false
     if (A_PriorKey == "," && A_TimeSinceThisHotkey < 350)
-        send {blind}`, 
+        send, {blind}`, 
     enableOtherHotkey(thisHotkey)
     return
 {% endif %}
@@ -231,7 +231,7 @@ RAlt::LCtrl
     keywait Space 
     SpaceMode := false
     if (A_PriorKey == "Space" && A_TimeSinceThisHotkey < 350)
-        send {blind}{Space} 
+        send, {blind}{Space} 
     enableOtherHotkey(thisHotkey)
     return
 {% endif %}
@@ -244,7 +244,7 @@ $Tab::
     keywait Tab 
     TabMode := false
     if (A_PriorKey == "Tab" && A_TimeSinceThisHotkey < 350)
-        send {blind}{Tab} 
+        send, {blind}{Tab} 
     enableOtherHotkey(thisHotkey)
     return
 {% endif %}
@@ -405,8 +405,8 @@ space::
     CapslockSpaceMode := false
     return
 
-WheelUp::send {blind}^#{left}
-WheelDown::send {blind}^#{right}
+WheelUp::send, {blind}^#{left}
+WheelDown::send, {blind}^#{right}
 
 #if SLOWMODE
 {## 
@@ -480,12 +480,12 @@ space::return
 LButton::
 ; if WinActive("ahk_class MultitaskingViewFrame")
 if ( A_PriorHotkey == "~LButton" || A_PriorHotkey == "LButton")
-    send #{tab}
+    send, #{tab}
 else
-    send ^!{tab}
+    send, ^!{tab}
 return
-WheelUp::send ^+{tab}
-WheelDown::send ^{tab}
+WheelUp::send, ^+{tab}
+WheelDown::send, ^{tab}
 {% endif %}
 
 {% if Settings.CapslockMode %}

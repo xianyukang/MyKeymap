@@ -75,7 +75,7 @@
         "W": {
             "2": {
                 "type": "窗口操作",
-                "value": "send !{tab}"
+                "value": "send, !{tab}"
             }
         },
         "E": {
@@ -96,13 +96,13 @@
                 "value": "send, {blind}#{left}",
                 "keysToSend": "#{left}",
                 "prefix": "*",
-                "comment": "窗口靠左 (Win+Left)"
+                "comment": "窗口靠左 (二分屏幕)"
             }
         },
         "Y": {
             "2": {
                 "type": "窗口操作",
-                "value": "send {LControl down}{LWin down}{Left}{LWin up}{LControl up}"
+                "value": "send, {LControl down}{LWin down}{Left}{LWin up}{LControl up}"
             }
         },
         "U": {
@@ -132,7 +132,7 @@
         "P": {
             "2": {
                 "type": "窗口操作",
-                "value": "send {LControl down}{LWin down}{Right}{LWin up}{LControl up}"
+                "value": "send, {LControl down}{LWin down}{Right}{LWin up}{LControl up}"
             }
         },
         "A": {
@@ -150,7 +150,7 @@
         "D": {
             "2": {
                 "type": "窗口操作",
-                "value": "send #+{right}"
+                "value": "send, #+{right}"
             }
         },
         "F": {
@@ -161,8 +161,8 @@
         },
         "G": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "窗口操作",
+                "value": "ToggleTopMost()"
             }
         },
         "H": {
@@ -270,10 +270,8 @@
         },
         "/": {
             "2": {
-                "type": "鼠标操作",
-                "value": "centerMouse()",
-                "label": "移动鼠标到窗口中心",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         }
     },
@@ -981,20 +979,21 @@
                 "label": "用指定程序打开选中的文件 / 文件夹",
                 "toRun": "%A_ProgramFiles%\\Everything\\Everything.exe",
                 "cmdArgs": "-filename %selected%",
-                "comment": "用 Everything 搜索这个文件夹里的文件"
+                "comment": "用 Everything 搜索选中文件夹里的文件"
             },
             "4": {
                 "type": "输入文本或按键",
                 "value": "send, {blind}+!{f5}",
                 "keysToSend": "+!{f5}",
                 "prefix": "*",
-                "comment": "上一处修改"
+                "comment": "Git - 上一处修改"
             },
             "5": {
                 "type": "输入文本或按键",
                 "value": "send, {blind}+{f8}",
                 "keysToSend": "+{f8}",
-                "prefix": "*"
+                "prefix": "*",
+                "comment": "Git - 上一处修改"
             }
         },
         "R": {
@@ -1032,7 +1031,8 @@
                 "type": "输入文本或按键",
                 "value": "send, {blind}^1s",
                 "keysToSend": "^1s",
-                "prefix": "*"
+                "prefix": "*",
+                "comment": "搜索 Symbol"
             }
         },
         "I": {
@@ -1068,7 +1068,8 @@
                 "type": "输入文本或按键",
                 "value": "send, {blind}^-",
                 "keysToSend": "^-",
-                "prefix": "*"
+                "prefix": "*",
+                "comment": "代码跳转 - 回退"
             }
         },
         "D": {
@@ -1081,13 +1082,14 @@
                 "value": "send, {blind}!{f5}",
                 "keysToSend": "!{f5}",
                 "prefix": "*",
-                "comment": "下一处修改"
+                "comment": "Git - 下一处修改"
             },
             "5": {
                 "type": "输入文本或按键",
                 "value": "send, {blind}{f8}",
                 "keysToSend": "{f8}",
-                "prefix": "*"
+                "prefix": "*",
+                "comment": "Git - 下一处修改"
             }
         },
         "F": {
@@ -1104,7 +1106,8 @@
                 "type": "输入文本或按键",
                 "value": "send, {blind}^+-",
                 "keysToSend": "^+-",
-                "prefix": "*"
+                "prefix": "*",
+                "comment": "代码跳转 - 前进"
             }
         },
         "G": {
@@ -1123,7 +1126,8 @@
                 "type": "输入文本或按键",
                 "value": "send, {blind}^0^g",
                 "keysToSend": "^0^g",
-                "prefix": "*"
+                "prefix": "*",
+                "comment": "Git 面板"
             }
         },
         "H": {
@@ -1187,19 +1191,20 @@
                 "label": "用指定程序打开选中的文件 / 文件夹",
                 "toRun": "%code%",
                 "cmdArgs": "%selected%",
-                "comment": "用 VSCode 打开选中的文件"
+                "comment": "用 Visual Studio Code 打开选中的文件"
             }
         },
         "V": {
             "2": {
-                "type": "输入文本或按键",
+                "type": "什么也不做",
                 "value": ""
             },
             "5": {
                 "type": "输入文本或按键",
                 "value": "send, {blind}+!.",
                 "keysToSend": "+!.",
-                "prefix": "*"
+                "prefix": "*",
+                "comment": "Shift + Alt + ."
             }
         },
         "B": {
@@ -1258,7 +1263,7 @@
                 "value": "send, {blind}^+{tab}",
                 "keysToSend": "^+{tab}",
                 "prefix": "*",
-                "comment": "左边的标签"
+                "comment": "切换到左边的标签"
             }
         },
         "3": {
@@ -1267,7 +1272,7 @@
                 "value": "send, {blind}^{tab}",
                 "keysToSend": "^{tab}",
                 "prefix": "*",
-                "comment": "右边的标签"
+                "comment": "切换到右边的标签"
             }
         },
         "4": {
@@ -1327,16 +1332,16 @@
                 "value": "send, {blind}+{Tab}",
                 "keysToSend": "+{Tab}",
                 "prefix": "*",
-                "comment": "Shift + Tab 键"
+                "comment": "常用键 - Shift + Tab 键"
             }
         },
         "E": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}{up}",
+                "value": "send, {blind}{up}",
                 "prefix": "*",
                 "keysToSend": "{up}",
-                "comment": "上方向键"
+                "comment": "方向键 - 上"
             }
         },
         "R": {
@@ -1345,7 +1350,7 @@
                 "value": "send, {blind}{tab}",
                 "keysToSend": "{tab}",
                 "prefix": "*",
-                "comment": "Tab 键"
+                "comment": "常用键 - Tab 键"
             }
         },
         "T": {
@@ -1370,7 +1375,7 @@
             "2": {
                 "type": "输入文本或按键",
                 "value": "send, {blind}^{left}",
-                "comment": "向左移动一个英文单词、中文词组",
+                "comment": "光标移动 - 左移一个单词",
                 "keysToSend": "^{left}",
                 "prefix": "*"
             }
@@ -1393,34 +1398,34 @@
                 "value": "send, {blind}{home}",
                 "keysToSend": "{home}",
                 "prefix": "*",
-                "comment": "Home 键"
+                "comment": "光标移动 - 行首"
             }
         },
         "S": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}{left}",
+                "value": "send, {blind}{left}",
                 "keysToSend": "{left}",
                 "prefix": "*",
-                "comment": "左方向键"
+                "comment": "方向键 - 左"
             }
         },
         "D": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}{down}",
+                "value": "send, {blind}{down}",
                 "keysToSend": "{down}",
                 "prefix": "*",
-                "comment": "下方向键"
+                "comment": "方向键 - 下"
             }
         },
         "F": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}{right}",
+                "value": "send, {blind}{right}",
                 "keysToSend": "{right}",
                 "prefix": "*",
-                "comment": "右方向键"
+                "comment": "方向键 - 右"
             }
         },
         "G": {
@@ -1429,7 +1434,7 @@
                 "value": "send, {blind}{end}",
                 "keysToSend": "{end}",
                 "prefix": "*",
-                "comment": "End 键"
+                "comment": "光标移动 - 行尾"
             }
         },
         "H": {
@@ -1449,7 +1454,8 @@
                 "type": "输入文本或按键",
                 "value": "send, {blind}^{right}",
                 "keysToSend": "^{right}",
-                "prefix": "*"
+                "prefix": "*",
+                "comment": "光标移动 - 右移一个单词"
             }
         },
         "L": {
@@ -1467,19 +1473,19 @@
         "Z": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}{appskey}",
+                "value": "send, {blind}{appskey}",
                 "keysToSend": "{appskey}",
                 "prefix": "*",
-                "comment": "打开右键菜单"
+                "comment": "常用键 - 打开右键菜单"
             }
         },
         "X": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}{esc}",
+                "value": "send, {blind}{esc}",
                 "keysToSend": "{esc}",
                 "prefix": "*",
-                "comment": "Esc 键"
+                "comment": "常用键 - Esc 键"
             }
         },
         "C": {
@@ -1488,7 +1494,7 @@
                 "value": "send, {blind}{bs}",
                 "keysToSend": "{bs}",
                 "prefix": "*",
-                "comment": "退格键 (BackSpace)"
+                "comment": "删除 - BackSpace 键"
             }
         },
         "V": {
@@ -1497,7 +1503,7 @@
                 "value": "send, {blind}^{bs}",
                 "keysToSend": "^{bs}",
                 "prefix": "*",
-                "comment": "删除一个英文单词、中文词组"
+                "comment": "删除 - 删掉一个单词"
             }
         },
         "B": {
@@ -1506,7 +1512,7 @@
                 "value": "send, {blind}{del}",
                 "keysToSend": "{del}",
                 "prefix": "*",
-                "comment": "Delete 键"
+                "comment": "删除 - Delete 键"
             }
         },
         "N": {
@@ -1527,7 +1533,7 @@
                 "value": "send, {blind}+{home}{bs}",
                 "keysToSend": "+{home}{bs}",
                 "prefix": "*",
-                "comment": "从光标位置删除到行首"
+                "comment": "删除 - 从光标位置删除到行首"
             }
         },
         ".": {
@@ -1621,7 +1627,7 @@
         },
         "W": {
             "2": {
-                "type": "启动程序或激活窗口",
+                "type": "什么也不做",
                 "value": ""
             }
         },
@@ -2136,7 +2142,7 @@
         "Q": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}(",
+                "value": "send, {blind}(",
                 "prefix": "*",
                 "keysToSend": "(",
                 "comment": "符号 ("
@@ -2145,7 +2151,7 @@
         "W": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}{#}",
+                "value": "send, {blind}{#}",
                 "prefix": "*",
                 "keysToSend": "{#}",
                 "comment": "符号 #"
@@ -2154,7 +2160,7 @@
         "E": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}{^}",
+                "value": "send, {blind}{^}",
                 "prefix": "*",
                 "keysToSend": "{^}",
                 "comment": "符号 ^"
@@ -2163,7 +2169,7 @@
         "R": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}&",
+                "value": "send, {blind}&",
                 "keysToSend": "&",
                 "prefix": "*",
                 "comment": "符号 &"
@@ -2172,7 +2178,7 @@
         "T": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}~",
+                "value": "send, {blind}~",
                 "keysToSend": "~",
                 "prefix": "*",
                 "comment": "符号 ~"
@@ -2181,7 +2187,7 @@
         "Y": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}@",
+                "value": "send, {blind}@",
                 "keysToSend": "@",
                 "prefix": "*",
                 "comment": "符号 @"
@@ -2190,7 +2196,7 @@
         "U": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}$",
+                "value": "send, {blind}$",
                 "keysToSend": "$",
                 "prefix": "*",
                 "comment": "符号 $"
@@ -2211,7 +2217,7 @@
                 "value": "send, {blind}{end};",
                 "keysToSend": "{end};",
                 "prefix": "*",
-                "comment": "跳到行位输入一个分号"
+                "comment": "跳到行尾输入一个分号"
             }
         },
         "P": {
@@ -2232,7 +2238,7 @@
         "S": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}<",
+                "value": "send, {blind}<",
                 "keysToSend": "<",
                 "prefix": "*",
                 "comment": "符号 <"
@@ -2241,7 +2247,7 @@
         "D": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}=",
+                "value": "send, {blind}=",
                 "keysToSend": "=",
                 "prefix": "*",
                 "comment": "符号 ="
@@ -2250,7 +2256,7 @@
         "F": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}>",
+                "value": "send, {blind}>",
                 "keysToSend": ">",
                 "prefix": "*",
                 "comment": "符号 >"
@@ -2259,7 +2265,7 @@
         "G": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}{!}",
+                "value": "send, {blind}{!}",
                 "keysToSend": "{!}",
                 "prefix": "*",
                 "comment": "符号 !"
@@ -2307,7 +2313,7 @@
         "Z": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}\\",
+                "value": "send, {blind}\\",
                 "keysToSend": "\\",
                 "prefix": "*",
                 "comment": "符号 \\"
@@ -2316,7 +2322,7 @@
         "X": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}_",
+                "value": "send, {blind}_",
                 "keysToSend": "_",
                 "prefix": "*",
                 "comment": "符号 _"
@@ -2325,7 +2331,7 @@
         "C": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}.",
+                "value": "send, {blind}.",
                 "keysToSend": ".",
                 "prefix": "*",
                 "comment": "符号 ."
@@ -2334,7 +2340,7 @@
         "V": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}|",
+                "value": "send, {blind}|",
                 "keysToSend": "|",
                 "prefix": "*",
                 "comment": "符号 |"
@@ -2352,7 +2358,7 @@
         "N": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}/",
+                "value": "send, {blind}/",
                 "keysToSend": "/",
                 "prefix": "*",
                 "comment": "符号 /"
@@ -2361,7 +2367,7 @@
         "M": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send {blind}-",
+                "value": "send, {blind}-",
                 "keysToSend": "-",
                 "prefix": "*",
                 "comment": "符号 -"
@@ -2436,21 +2442,13 @@
                 "comment": "输入一对 {}"
             }
         },
-        "jt": {
-            "2": {
-                "type": "输入文本或按键",
-                "value": "    send, {blind}{text}➤` ` ",
-                "keysToSend": "{text}➤ ",
-                "prefix": "*"
-            }
-        },
         "gt": {
             "2": {
                 "type": "输入文本或按键",
                 "value": "    send, {blind}{text}🐶",
                 "keysToSend": "{text}🐶",
                 "prefix": "*",
-                "comment": "狗头符号"
+                "comment": "狗头符号🐶"
             }
         },
         "zh": {
@@ -2478,7 +2476,8 @@
                 "value": "SemicolonAbbr2__ver()",
                 "keysToSend": "#r\nsleep 700\nwinver{enter}",
                 "prefix": "*",
-                "send_key_function": "SemicolonAbbr2__ver() {\n    send, {blind}#r\n    sleep 700\n    send, {blind}winver{enter}\n}"
+                "send_key_function": "SemicolonAbbr2__ver() {\n    send, {blind}#r\n    sleep 700\n    send, {blind}winver{enter}\n}",
+                "comment": "查看系统版本"
             }
         },
         "fs": {
@@ -2486,15 +2485,8 @@
                 "type": "输入文本或按键",
                 "value": "    send, {blind}{text}、",
                 "keysToSend": "{text}、",
-                "prefix": "*"
-            }
-        },
-        "ff": {
-            "2": {
-                "type": "输入文本或按键",
-                "value": "    send, {blind}{text}。",
                 "prefix": "*",
-                "keysToSend": "{text}。"
+                "comment": "输入中文顿号 、"
             }
         }
     },
@@ -2520,24 +2512,6 @@
                 "label": "重启"
             }
         },
-        "fp": {
-            "2": {
-                "type": "文字处理",
-                "value": "setColor(\"#b309bb\")"
-            }
-        },
-        "fb": {
-            "2": {
-                "type": "文字处理",
-                "value": "setColor(\"#2E66FF\")"
-            }
-        },
-        "fg": {
-            "2": {
-                "type": "文字处理",
-                "value": "setColor(\"#080\")"
-            }
-        },
         "dd": {
             "2": {
                 "type": "系统控制",
@@ -2559,7 +2533,7 @@
                 "toRun": "notepad.exe",
                 "toActivate": "记事本",
                 "cmdArgs": "",
-                "comment": "记事本"
+                "comment": "召唤记事本"
             }
         },
         "sd": {
@@ -2604,18 +2578,6 @@
                 "comment": "Bing 词典"
             }
         },
-        "fr": {
-            "2": {
-                "type": "文字处理",
-                "value": "setColor(\"#D05\")"
-            }
-        },
-        "fi": {
-            "2": {
-                "type": "文字处理",
-                "value": "setColor(\"#FF00FF\")"
-            }
-        },
         "dm": {
             "2": {
                 "type": "启动程序或激活窗口",
@@ -2641,12 +2603,6 @@
                 "comment": "Task Manager 任务管理器"
             }
         },
-        "kg": {
-            "2": {
-                "type": "文字处理",
-                "value": "actionAddSpaceBetweenEnglishChinese()"
-            }
-        },
         "sp": {
             "2": {
                 "type": "启动程序或激活窗口",
@@ -2663,10 +2619,22 @@
                 "label": "打开「 回收站 」"
             }
         },
-        "ee": {
+        "help": {
             "2": {
-                "type": "窗口操作",
-                "value": "ToggleTopMost()"
+                "type": "启动程序或激活窗口",
+                "value": "ActivateOrRun(\"所有键位映射\", \"bin\\site\\help.html\", \"\", \"\")",
+                "toActivate": "所有键位映射",
+                "toRun": "bin\\site\\help.html",
+                "comment": "打开 MyKeymap 帮助"
+            }
+        },
+        "bd ": {
+            "2": {
+                "type": "启动程序或激活窗口",
+                "value": "ActivateOrRun(\"\", \"https://www.baidu.com\", \"\", \"\")",
+                "toRun": "https://www.baidu.com",
+                "toActivate": "",
+                "comment": "打开百度 (bd后面有个空格哦)"
             }
         }
     },
@@ -2674,9 +2642,6 @@
         "ss",
         "sl",
         "rb",
-        "fp",
-        "fb",
-        "fg",
         "dd",
         "se",
         "no",
@@ -2685,15 +2650,13 @@
         "we",
         "st",
         "bb",
-        "fr",
-        "fi",
         "dm",
         "rex",
         "tm",
-        "kg",
         "sp",
         "lj",
-        "ee"
+        "help",
+        "bd "
     ],
     "snackbar": true,
     "snackbarText": "保存成功",
@@ -2703,13 +2666,11 @@
         "sk",
         "zk",
         "dk",
-        "jt",
         "gt",
         "zh",
         "gg",
         "ver",
-        "fs",
-        "ff"
+        "fs"
     ],
     "pathVariables": [
         {
@@ -2906,7 +2867,8 @@
                 "value": "ActivateOrRun(\"my_site - Visual Studio Code\", \"\" A_Programs \"\\Visual Studio Code\\Visual Studio Code.lnk\", \"D:\\project\\my_site\", \"\")",
                 "toActivate": "my_site - Visual Studio Code",
                 "toRun": "%code%",
-                "cmdArgs": "D:\\project\\my_site"
+                "cmdArgs": "D:\\project\\my_site",
+                "comment": "召唤项目 My Site"
             }
         },
         "D": {
@@ -2999,7 +2961,8 @@
                 "value": "ActivateOrRun(\"MyKeymap - Visual Studio Code\", \"\" A_Programs \"\\Visual Studio Code\\Visual Studio Code.lnk\", \"D:\\MyFiles\\MyKeymap\", \"\")",
                 "toActivate": "MyKeymap - Visual Studio Code",
                 "cmdArgs": "D:\\MyFiles\\MyKeymap",
-                "toRun": "%code%"
+                "toRun": "%code%",
+                "comment": "召唤项目 MyKeymap"
             }
         },
         ",": {
@@ -3604,7 +3567,7 @@
                 "value": "send, {blind}+{up}",
                 "keysToSend": "+{up}",
                 "prefix": "*",
-                "comment": "向上选择"
+                "comment": "文字选择 - 向上"
             }
         },
         "R": {
@@ -3636,7 +3599,8 @@
                 "type": "输入文本或按键",
                 "value": "send, {blind}^+{left}",
                 "keysToSend": "^+{left}",
-                "prefix": "*"
+                "prefix": "*",
+                "comment": "选择一个单词 - 向左"
             }
         },
         "O": {
@@ -3666,7 +3630,7 @@
                 "value": "send, {blind}+{left}",
                 "keysToSend": "+{left}",
                 "prefix": "*",
-                "comment": "向左选择"
+                "comment": "文字选择 - 向左"
             }
         },
         "D": {
@@ -3675,7 +3639,7 @@
                 "value": "send, {blind}+{down}",
                 "keysToSend": "+{down}",
                 "prefix": "*",
-                "comment": "向下选择"
+                "comment": "文字选择 - 向下"
             }
         },
         "F": {
@@ -3684,7 +3648,7 @@
                 "value": "send, {blind}+{right}",
                 "keysToSend": "+{right}",
                 "prefix": "*",
-                "comment": "向右选择"
+                "comment": "文字选择 - 向右"
             }
         },
         "G": {
@@ -3711,9 +3675,10 @@
         "K": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send, {blind}^+{rihgt}",
-                "keysToSend": "^+{rihgt}",
-                "prefix": "*"
+                "value": "send, {blind}^+{right}",
+                "keysToSend": "^+{right}",
+                "prefix": "*",
+                "comment": "选择一个单词 - 向右"
             }
         },
         "L": {
@@ -3749,7 +3714,7 @@
                 "value": "send, {blind}{bs}",
                 "keysToSend": "{bs}",
                 "prefix": "*",
-                "comment": "BackSpace 键"
+                "comment": "BackSpace 键删掉中选的文字"
             }
         },
         "V": {
@@ -3763,7 +3728,8 @@
                 "type": "输入文本或按键",
                 "value": "send, {blind}+{del}",
                 "keysToSend": "+{del}",
-                "prefix": "*"
+                "prefix": "*",
+                "comment": "Shift + Del 永久删除文件"
             }
         },
         "N": {

@@ -13,7 +13,7 @@
             :dark="keyColor(key, hover).dark"
           >
             <v-card-title
-              ><span class="abbr">{{ key }}</span></v-card-title
+              ><span class="abbr">{{ addSpaceSymbol(key) }}</span></v-card-title
             >
           </v-card>
         </v-hover>
@@ -40,6 +40,12 @@
 </template>
 
 <script>
+
+function addSpaceSymbol(str) {
+  return str.replace(/ /g, '◻️')
+}
+
+
 import { currConfigMixin } from '../util'
 function anyKeyExcept(obj, toExclude) {
   for (const [key, value] of Object.entries(obj)) {
@@ -54,6 +60,7 @@ export default {
     currentKey: { type: String },
   },
   methods: {
+    addSpaceSymbol,
     clickKey(key) {
       this.$emit('clickKey', key)
     },
@@ -89,7 +96,8 @@ export default {
       } 
       
       else if (!this.currConfig()[this.abbr]) {
-        let k = this.abbr.replaceAll(' ', '')
+        // let k = this.abbr.replaceAll(' ', '')
+        let k = this.abbr
         if (!k) return
         console.log('添加', k)
 

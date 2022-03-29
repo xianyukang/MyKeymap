@@ -51,6 +51,64 @@ export const KEYMAP_PLUS_ABBR = [
     'SemicolonAbbr',
 ]
 
+
+export const getKeymapName = {
+    "Capslock": "Capslock",
+    "CapslockF": "Capslock + F",
+    "CapslockSpace": "Capslock + Space",
+    "CapslockAbbr": "Capslock 指令",
+    "TabMode": "Tab 模式",
+    "SpaceMode": "空格模式",
+    "JMode": "J 模式",
+    "JModeL": "J + L 模式",
+    "CommaMode": "逗号模式",
+    "Semicolon": "分号模式",
+    "SemicolonAbbr": "分号缩写",
+    "Mode3": "3 模式",
+    "Mode9": "9 模式",
+    "LButtonMode": "鼠标左键",
+    "RButtonMode": "鼠标右键",
+    "Settings": "开关/设置"
+}
+
+
+export function isModeEnabled(mode, settings) {
+    if (mode.startsWith('Capslock')) {
+        if (mode.startsWith('CapslockAbbr')) {
+            return settings['enableCapslockMode'] && settings['enableCapslockAbbr']
+        }
+        return settings['enableCapslockMode']
+    }
+    if (mode.startsWith('Semicolon')) {
+        return settings['enableSemicolonMode']
+    }
+    if (mode.startsWith('SpaceMode')) {
+        return settings['enableSpaceMode']
+    }
+    if (mode.startsWith('JMode')) {
+        return settings['enableJMode']
+    }
+    if (mode.startsWith('Mode3')) {
+        return settings['enableMode3']
+    }
+    if (mode.startsWith('Mode9')) {
+        return settings['enableMode9']
+    }
+    if (mode.startsWith('LButtonMode')) {
+        return settings['enableLButtonMode']
+    }
+    if (mode.startsWith('RButtonMode')) {
+        return settings['enableRButtonMode']
+    }
+    if (mode.startsWith('TabMode')) {
+        return settings['enableTabMode']
+    }
+    if (mode.startsWith('CommaMode')) {
+        return settings['enableCommaMode']
+    }
+    return true
+}
+
 export const EMPTY_KEY = 'EMPTY_KEY';
 export const NEW_CONFIGURABLE_KEYS = [
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -94,11 +152,10 @@ export function mapKeysToSend(line) {
 
 function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-  }
-  
+}
 
-export function uniqueName(ctx, key)
-{
+
+export function uniqueName(ctx, key) {
     const symbolList = ' !"#$%&\'()*+,-./:;<=>?@[\\]^`{|}~';
     for (const c of symbolList) {
         key = key.replace(new RegExp(escapeRegExp(c), "g"), c.charCodeAt(0))
@@ -107,7 +164,7 @@ export function uniqueName(ctx, key)
 }
 
 export function bindWindow(ctx, key) {
-    const var_name =uniqueName(ctx, key)
+    const var_name = uniqueName(ctx, key)
     return `bindOrActivate(${var_name})`
 }
 

@@ -123,7 +123,7 @@ const s = new Vuex.Store({
   },
   mutations: {
     SET_CONFIG(state, value) {
-      console.log('fetch config', value)
+      // console.log('fetch config', value)
       state.config = value
     },
     SET_SNACKBAR(state, { snackbar, snackbarText }) {
@@ -136,7 +136,7 @@ const s = new Vuex.Store({
       axios
         .put(`${host}/config`, processConfig(store.state.config))
         .then(resp => {
-          console.log(resp.data)
+          // console.log(resp.data)
           store.commit('SET_SNACKBAR', { snackbar: true, snackbarText: `保存成功, 可按 alt+' 重启 MyKeymap` })
           // 自动重启 MyKeymap 体验并不好,  容易误触发大小写切换
           // executeScript('bin/ReloadAtSave.ahk')
