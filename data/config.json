@@ -2501,6 +2501,12 @@
                 "type": "文字处理",
                 "value": "setColor(\"#D05\")"
             }
+        },
+        "gre": {
+            "2": {
+                "type": "文字处理",
+                "value": "setColor(\"#080\")"
+            }
         }
     },
     "CapslockAbbr": {
@@ -2684,7 +2690,8 @@
         "gg",
         "ver",
         "fs",
-        "red"
+        "red",
+        "gre"
     ],
     "pathVariables": [
         {

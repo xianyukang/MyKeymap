@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 import CapslockF from '../views/CapslockF.vue'
 import Settings from '../views/Settings.vue'
 import CapslockAbbr from '../views/CapslockAbbr.vue'
-import { ALL_KEYMAPS } from '../util.js'
+import { ALL_KEYMAPS, EMPTY_KEY } from '../util.js'
 
 import store from '../store/index.js'
 
@@ -71,6 +71,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   store.state.routeName = to.name
   store.state.windowSelector = '2'
+  store.state.selectedKey = EMPTY_KEY
   next()
 })
 
