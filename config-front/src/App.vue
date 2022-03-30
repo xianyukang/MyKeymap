@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app v-if="$store.state.config">
     <v-navigation-drawer app id="drawer" permanent>
       <v-list-item>
         <v-list-item-avatar rounded="0" class="logo">

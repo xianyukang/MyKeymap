@@ -365,9 +365,6 @@ space::
     CapslockSpaceMode := false
     return
 
-WheelUp::send, {blind}^#{left}
-WheelDown::send, {blind}^#{right}
-
 #if SLOWMODE
 
 */::centerMouse()
@@ -425,28 +422,12 @@ M::ActivateOrRun("MyKeymap - Visual Studio Code", "" A_Programs "\Visual Studio 
 
 
 #if RButtonMode
-*Z::send, {blind}#v
-*V::send, {blind}^{bs}
-*C::send, {blind}{backspace}
-*B::send, {blind}{del}
-*D::send, {blind}{down}
-*G::send, {blind}{end}
+*LButton::send, {blind}^!{tab}
+*WheelUp::send, {blind}^+{tab}
+*WheelDown::send, {blind}^{tab}
+*C::send, {blind}{bs}
 *Space::send, {blind}{enter}
-*X::send, {blind}{esc}
-*A::send, {blind}{home}
-*S::send, {blind}{left}
-*F::send, {blind}{right}
-*E::send, {blind}{up}
 
-LButton::
-; if WinActive("ahk_class MultitaskingViewFrame")
-if ( A_PriorHotkey == "~LButton" || A_PriorHotkey == "LButton")
-    send, #{tab}
-else
-    send, ^!{tab}
-return
-WheelUp::send, ^+{tab}
-WheelDown::send, ^{tab}
 
 #If TASK_SWITCH_MODE
 *D::send, {blind}{down}

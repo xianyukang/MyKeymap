@@ -404,9 +404,6 @@ space::
     CapslockSpaceMode := false
     return
 
-WheelUp::send, {blind}^#{left}
-WheelDown::send, {blind}^#{right}
-
 #if SLOWMODE
 {## 
 {% for key,value in Capslock.items()|sort(attribute="1.value") %}
@@ -476,15 +473,6 @@ space::return
     {% endif %}
 {% endfor %}
 
-LButton::
-; if WinActive("ahk_class MultitaskingViewFrame")
-if ( A_PriorHotkey == "~LButton" || A_PriorHotkey == "LButton")
-    send, #{tab}
-else
-    send, ^!{tab}
-return
-WheelUp::send, ^+{tab}
-WheelDown::send, ^{tab}
 {% endif %}
 
 {% if Settings.CapslockMode %}

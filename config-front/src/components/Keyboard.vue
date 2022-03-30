@@ -40,8 +40,8 @@ export default {
       return !!result
     },
     keyWidth(key, hover) {
-      if (key.key === 'Space') {
-        return 150
+      if (key.key.length > 1) {
+        return key.key.length * 10 + 40
       }
       return hover ? 54 : 53
     },
@@ -49,7 +49,9 @@ export default {
       // if (hover) return { color: '#f3448f', dark: true }
       if (this.keyDisabled(keyObj)) return { color: '#AAA', dark: true }
       if (keyObj.key === this.pressedKey) return { color: 'blue', dark: true }
-      const config = this.$store.state.config[this.$store.state.routeName][keyObj.key][this.$store.state.windowSelector]
+
+      const config = this.$store.getters.config(keyObj.key)
+
       if (config && config.type != '什么也不做' && config.value) {
         return { color: '#98FB98', dark: false }
       }
@@ -110,10 +112,11 @@ export default {
         [{ key: 'Space', disableAt: ['CapslockSpace', 'Capslock', 'SpaceMode'] }],
       ]
 
-      // 请求尚未返回 || 开启了数字键
-      const numKeyConfigurable = !this.$store.state.config || this.$store.state.config.Settings.numKeyConfigurable
-      if (!numKeyConfigurable) {
-        lns.splice(0, 1)
+      if (this.$route.name === 'RButtonMode') {
+          const lastLine = lns[lns.length - 1]
+          lastLine.push({ key: 'WheelUp'})
+          lastLine.push({ key: 'WheelDown'})
+          lastLine.push({ key: 'LButton'})
       }
 
       return lns

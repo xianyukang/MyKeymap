@@ -107,13 +107,22 @@ const s = new Vuex.Store({
     selectedKey: EMPTY_KEY,
   },
   getters: {
-    config(state) {
+    config: (state) => (keyName) => {
       // 返回当前选中的键关联的配置
-      if (state.selectedKey === EMPTY_KEY) {
+      if (!keyName && state.selectedKey === EMPTY_KEY) {
         return { type: '什么也不做', value: '' }
       }
 
-      const currentKey = state.config[state.routeName][state.selectedKey]
+      keyName = keyName ? keyName : state.selectedKey;
+
+      // 当前键不存在,  比如键盘里新增了 WheelUp、F1 之类的键时
+      if (!state.config[state.routeName][keyName]) {
+        Vue.set(state.config[state.routeName], keyName, {})
+      }
+
+      const currentKey = state.config[state.routeName][keyName]
+
+      // 在某个窗口选择器下当前键没有配置,  则新增空白配置
       if (!currentKey[state.windowSelector]) {
         Vue.set(currentKey, state.windowSelector, { type: '什么也不做', value: '' })
       }

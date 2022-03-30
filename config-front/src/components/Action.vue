@@ -33,7 +33,7 @@
               :items="windowSelectors"
               item-text="key"
               item-value="id"
-              v-model="$store.state.windowSelector"
+              v-model="windowSelector"
               @change="handleWindowSelectorChange"
             ></v-select>
           </v-col>
@@ -289,6 +289,7 @@ export default {
     return {
       showConfigPathVariableDialog: false,
       showWindowSelectorConfig: false,
+      windowSelector: "2",
       mouseActions,
       scrollActions,
       clickActions,
@@ -308,7 +309,8 @@ export default {
     },
     hideWindowSelectorConfig() {
       this.showWindowSelectorConfig = false;
-      this.$store.state.windowSelector = "2";
+      this.windowSelector = "2";
+      this.$store.state.windowSelector = "2"
     },
     action_send_keys() {
       this.config.prefix = "*";
@@ -390,6 +392,7 @@ export default {
         this.showWindowSelectorConfig = true;
         return;
       }
+      this.$store.state.windowSelector = new_value
     },
     mouseActionChanged(newValue) {
       console.log("mouseActionChanged");
@@ -419,24 +422,7 @@ export default {
   },
   computed: {
     config() {
-      // 返回当前选中的键关联的配置
-      if (this.currentKey === EMPTY_KEY) {
-        return { type: "什么也不做", value: "" };
-      }
-
-      let sel = this.$store.state.windowSelector;
-      if (sel === "1") {
-        sel = "2";
-      }
-
-      if (!this.currConfig()[this.currentKey][sel]) {
-        Vue.set(this.currConfig()[this.currentKey], sel, {
-          type: "什么也不做",
-          value: "",
-        });
-      }
-
-      return this.currConfig()[this.currentKey][sel];
+      return this.$store.getters.config();
     },
     windowSelectors() {
       const config = this.$store.state.config;

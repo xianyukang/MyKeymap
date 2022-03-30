@@ -1883,10 +1883,8 @@
         },
         "E": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}{up}",
-                "prefix": "*",
-                "keysToSend": "{up}"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "R": {
@@ -1933,42 +1931,32 @@
         },
         "A": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}{home}",
-                "keysToSend": "{home}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "S": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}{left}",
-                "keysToSend": "{left}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "D": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}{down}",
-                "keysToSend": "{down}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "F": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}{right}",
-                "keysToSend": "{right}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "G": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}{end}",
-                "keysToSend": "{end}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "H": {
@@ -2003,42 +1991,34 @@
         },
         "Z": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}#v",
-                "keysToSend": "#v",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "X": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}{esc}",
-                "keysToSend": "{esc}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "C": {
             "2": {
                 "type": "输入文本或按键",
-                "value": "send, {blind}{backspace}",
-                "keysToSend": "{backspace}",
+                "value": "send, {blind}{bs}",
+                "keysToSend": "{bs}",
                 "prefix": "*"
             }
         },
         "V": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}^{bs}",
-                "keysToSend": "^{bs}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "B": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}{del}",
-                "keysToSend": "{del}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "N": {
@@ -2069,6 +2049,33 @@
             "2": {
                 "type": "什么也不做",
                 "value": ""
+            }
+        },
+        "WheelUp": {
+            "2": {
+                "type": "输入文本或按键",
+                "value": "send, {blind}^+{tab}",
+                "keysToSend": "^+{tab}",
+                "prefix": "*",
+                "comment": "上一个标签"
+            }
+        },
+        "WheelDown": {
+            "2": {
+                "type": "输入文本或按键",
+                "value": "send, {blind}^{tab}",
+                "keysToSend": "^{tab}",
+                "prefix": "*",
+                "comment": "下一个标签"
+            }
+        },
+        "LButton": {
+            "2": {
+                "type": "输入文本或按键",
+                "value": "send, {blind}^!{tab}",
+                "keysToSend": "^!{tab}",
+                "prefix": "*",
+                "comment": "打开窗口管理器"
             }
         }
     },
