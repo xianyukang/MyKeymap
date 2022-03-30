@@ -53,6 +53,7 @@ if not os.path.isdir('bin/templates'):
     os.mkdir('bin/templates')
 shutil.copy('bin/site/index.html', 'bin/templates/index.html')
 shutil.copy('config-back/templates/script.ahk', 'bin/templates/script.ahk')
+shutil.copy('config-back/templates/help.html', 'bin/templates/help.html')
 
 # 复制文件
 os.system('cp -r data MyKeymap/')

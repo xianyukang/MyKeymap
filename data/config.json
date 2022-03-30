@@ -2655,6 +2655,13 @@
                 "toActivate": "",
                 "comment": "打开百度 (bd后面有个空格哦)"
             }
+        },
+        "ex": {
+            "2": {
+                "type": "系统控制",
+                "value": "quit(false)",
+                "label": "退出 MyKeymap"
+            }
         }
     },
     "CapslockAbbrKeys": [
@@ -2675,7 +2682,8 @@
         "sp",
         "lj",
         "help",
-        "bd "
+        "bd ",
+        "ex"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",

@@ -16,10 +16,10 @@
                 <v-switch class="switch" v-model="currConfig()['enableJMode']" label="J 模式"></v-switch>
               </v-col>
               <v-col cols="4">
-                <v-switch class="switch" v-model="currConfig()['enableCapslockMode']" label="Capslock"></v-switch>
+                <v-switch class="switch" v-model="currConfig()['enableCapslockMode']" label="Caps 相关"></v-switch>
               </v-col>
               <v-col cols="4">
-                <v-switch class="switch" v-model="currConfig()['enableCapslockAbbr']" label="Capslock 指令"></v-switch>
+                <v-switch class="switch" v-model="currConfig()['enableCapslockAbbr']" label="Caps 指令"></v-switch>
               </v-col>
               <v-col cols="4">
                 <v-switch class="switch" v-model="currConfig()['enableSemicolonMode']" label="分号相关"></v-switch>
@@ -52,6 +52,7 @@
               v-model="currConfig()['runOnStartup']"
               label="开机自启"
               @change="runOnStartup"
+              messages="可能需要关掉再开启才能生效"
             ></v-switch>
             <v-switch class="switch" v-model="currConfig()['mapRAltToCtrl']" label="右 Alt 映射为 Ctrl"></v-switch>
             <!-- <v-switch class="switch" v-model="currConfig()['numKeyConfigurable']" label="让主键区上方的数字键可自定义"></v-switch> -->

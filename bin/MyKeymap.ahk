@@ -77,7 +77,7 @@ global typoTip := new TypoTipWindow()
 semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,gt,zh,gg,ver,fs,red,gre")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,sd,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ")
+capsHook := InputHook("C", "{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,sd,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ,ex")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -499,6 +499,8 @@ execCapslockAbbr(typo) {
            DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
         case "se":
            openSettings()
+        case "ex":
+           quit(false)
         case "rex":
            restartExplorer()
         case "ld":

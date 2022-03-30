@@ -126,6 +126,7 @@ const actionMap = [
     label: "切换「 自动隐藏任务栏 」",
     value: "toggleAutoHideTaskBar()",
   },
+  { group: 3, label: "退出 MyKeymap", value: "quit(false)" },
 ];
 
 import {
