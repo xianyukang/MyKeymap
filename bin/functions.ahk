@@ -1091,6 +1091,9 @@ trayMenuHandler(ItemName, ItemPos, MenuName)
     if (InStr(ItemName, "打开设置" )) {
         openSettings()
     }
+    if (InStr(ItemName, "重启程序" )) {
+       ReloadProgram()
+    }
     if (InStr(ItemName, "检查更新" )) {
         run, https://xianyukang.com/MyKeymap-Change-Log.html
     }

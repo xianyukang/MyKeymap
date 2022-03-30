@@ -54,10 +54,9 @@ allHotkeys.Push("RButton")
 Menu, Tray, NoStandard
 Menu, Tray, Add, 暂停, trayMenuHandler
 Menu, Tray, Add, 退出, trayMenuHandler
+Menu, Tray, Add, 重启程序, trayMenuHandler
 Menu, Tray, Add, 打开设置, trayMenuHandler 
-Menu, Tray, Add, 视频教程, trayMenuHandler
 Menu, Tray, Add, 帮助文档, trayMenuHandler 
-Menu, Tray, Add, 检查更新, trayMenuHandler 
 Menu, Tray, Add, 查看窗口标识符, trayMenuHandler 
 Menu, Tray, Add 
 
