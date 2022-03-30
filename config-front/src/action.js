@@ -52,11 +52,11 @@ export const clickActions = [
 ]
 
 export const textFeatures1 = [
-    { label: "设置字体为红色", value: 'setColor("#D05")' },
-    { label: "设置字体为紫色", value: 'setColor("#b309bb")' },
-    { label: "设置字体为粉色", value: 'setColor("#FF00FF")' },
-    { label: "设置字体为蓝色", value: 'setColor("#2E66FF")' },
-    { label: "设置字体为绿色", value: 'setColor("#080")' },
+    { label: "把选中的文字设为红色", value: 'setColor("#D05")' },
+    { label: "把选中的文字设为紫色", value: 'setColor("#b309bb")' },
+    { label: "把选中的文字设为粉色", value: 'setColor("#FF00FF")' },
+    { label: "把选中的文字设为蓝色", value: 'setColor("#2E66FF")' },
+    { label: "把选中的文字设为绿色", value: 'setColor("#080")' },
 ]
 export const textFeatures2 = [
     {

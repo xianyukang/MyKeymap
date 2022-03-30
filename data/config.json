@@ -2495,6 +2495,12 @@
                 "prefix": "*",
                 "comment": "输入中文顿号 、"
             }
+        },
+        "red": {
+            "2": {
+                "type": "文字处理",
+                "value": "setColor(\"#D05\")"
+            }
         }
     },
     "CapslockAbbr": {
@@ -2677,7 +2683,8 @@
         "zh",
         "gg",
         "ver",
-        "fs"
+        "fs",
+        "red"
     ],
     "pathVariables": [
         {

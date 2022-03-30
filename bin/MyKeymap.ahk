@@ -74,7 +74,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,gt,zh,gg,ver,fs")
+semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,gt,zh,gg,ver,fs,red")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
 capsHook := InputHook("C", "{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,sd,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ")
@@ -464,6 +464,8 @@ execSemicolonAbbr(typo) {
             SemicolonAbbr2__ver()
         case "xk":
             SemicolonAbbr2__xk()
+        case "red":
+            setColor("#D05")
         default: 
             return false
     }
