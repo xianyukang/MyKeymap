@@ -127,6 +127,7 @@ const actionMap = [
     value: "toggleAutoHideTaskBar()",
   },
   { group: 3, label: "退出 MyKeymap", value: "quit(false)" },
+  { group: 3, label: "回顾 MyKeymap 配置", value: "run, bin\\site\\help.html" },
 ];
 
 import {

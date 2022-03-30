@@ -489,8 +489,6 @@ execCapslockAbbr(typo) {
            ActivateOrRun("Bing 词典", "C:\Program Files\Google\Chrome\Application\chrome.exe", "--app=https://cn.bing.com/dict/search?q=nice", "")
         case "st":
            ActivateOrRun("Microsoft Store", "shortcuts\Store.lnk", "", "")
-        case "help":
-           ActivateOrRun("所有键位映射", "bin\site\help.html", "", "")
         case "we":
            ActivateOrRun("网易云音乐", "shortcuts\网易云音乐.lnk", "", "")
         case "no":
@@ -507,6 +505,8 @@ execCapslockAbbr(typo) {
            run, bin\ahk.exe bin\changeBrightness.ahk
         case "sd":
            run, bin\ahk.exe bin\soundControl.ahk
+        case "help":
+           run, bin\site\help.html
         case "dd":
            run, shell:downloads
         case "lj":

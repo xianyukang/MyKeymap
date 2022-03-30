@@ -2640,11 +2640,9 @@
         },
         "help": {
             "2": {
-                "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"所有键位映射\", \"bin\\site\\help.html\", \"\", \"\")",
-                "toActivate": "所有键位映射",
-                "toRun": "bin\\site\\help.html",
-                "comment": "打开 MyKeymap 帮助"
+                "type": "系统控制",
+                "value": "run, bin\\site\\help.html",
+                "label": "回顾 MyKeymap 配置"
             }
         },
         "bd ": {
