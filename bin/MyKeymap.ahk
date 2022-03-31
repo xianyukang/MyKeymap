@@ -77,7 +77,7 @@ global typoTip := new TypoTipWindow()
 semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,gt,zh,gg,ver,fs,red,gre")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,sd,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ,ex")
+capsHook := InputHook("C", "{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ,ex")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -400,6 +400,7 @@ S::ActivateOrRun("ahk_exe Code.exe", "" A_Programs "\Visual Studio Code\Visual S
 U::ActivateOrRun("ahk_exe datagrip64.exe", "" A_Programs "\JetBrains Toolbox\DataGrip.lnk", "", "")
 L::ActivateOrRun("ahk_exe EXCEL.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Excel.lnk", "", "")
 R::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe", "", "")
+,::ActivateOrRun("ahk_exe goland64.exe", "" A_Programs "\JetBrains Toolbox\GoLand.lnk", "", "")
 J::ActivateOrRun("ahk_exe idea64.exe", "" A_Programs "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk", "", "")
 D::ActivateOrRun("ahk_exe msedge.exe", "" A_ProgramsCommon "\Microsoft Edge.lnk", "", "")
 P::ActivateOrRun("ahk_exe POWERPNT.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk", "", "")
@@ -503,8 +504,6 @@ execCapslockAbbr(typo) {
            restartExplorer()
         case "ld":
            run, bin\ahk.exe bin\changeBrightness.ahk
-        case "sd":
-           run, bin\ahk.exe bin\soundControl.ahk
         case "help":
            run, bin\site\help.html
         case "dd":

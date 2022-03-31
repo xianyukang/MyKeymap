@@ -129,6 +129,7 @@
             label="自定义备注 (按 Caps 输入 help 可回顾配置)"
             v-model="config.comment"
           ></v-text-field>
+          <!-- <v-checkbox v-model="config.useSendEvent" color="green" label="使用慢速模式发送按键 (速度慢些, 兼容性好些, 模拟按键不起作用时, 勾上这个试一试)"></v-checkbox> -->
           <pre class="tips">
 
  Tips: (1) <a target="_blank" href="SendKeyExample.html" style="color: green;">点此查看发送按键或文本的示例</a>

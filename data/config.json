@@ -555,8 +555,11 @@
         },
         ",": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "启动程序或激活窗口",
+                "value": "ActivateOrRun(\"ahk_exe goland64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\GoLand.lnk\", \"\", \"\")",
+                "toActivate": "ahk_exe goland64.exe",
+                "toRun": "%A_Programs%\\JetBrains Toolbox\\GoLand.lnk",
+                "comment": ""
             }
         },
         ".": {
@@ -2555,13 +2558,6 @@
                 "comment": "召唤记事本"
             }
         },
-        "sd": {
-            "2": {
-                "type": "系统控制",
-                "value": "run, bin\\ahk.exe bin\\soundControl.ahk",
-                "label": "音量调节"
-            }
-        },
         "ld": {
             "2": {
                 "type": "系统控制",
@@ -2669,7 +2665,6 @@
         "dd",
         "se",
         "no",
-        "sd",
         "ld",
         "we",
         "st",
