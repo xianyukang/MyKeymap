@@ -405,27 +405,12 @@ space::
     return
 
 #if SLOWMODE
-{## 
 {% for key,value in Capslock.items()|sort(attribute="1.value") %}
     {% if value.value and value.type == "鼠标操作" %}
 {{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ "rightClick(true)" if value.value == "rightClick()" else value.value | replace("fast", "slow") }}}
     {% endif %}
 {% endfor %}
-##}
 
-*/::centerMouse()
-*I::slowMoveMouse("I", 0, -1)
-*J::slowMoveMouse("J", -1, 0)
-*K::slowMoveMouse("K", 0, 1)
-*L::slowMoveMouse("L", 1, 0)
-*,::lbuttonDown()
-*N::leftClick()
-*.::moveCurrentWindow()
-*M::rightClick(true)
-*`;::scrollWheel(";", 4)
-*H::scrollWheel("H", 3)
-*O::scrollWheel("O", 2)
-*U::scrollWheel("U", 1)
 
 
 Esc::exitMouseMode()

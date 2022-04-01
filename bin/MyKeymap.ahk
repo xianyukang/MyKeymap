@@ -366,8 +366,6 @@ space::
     return
 
 #if SLOWMODE
-
-*/::centerMouse()
 *I::slowMoveMouse("I", 0, -1)
 *J::slowMoveMouse("J", -1, 0)
 *K::slowMoveMouse("K", 0, 1)
@@ -380,6 +378,7 @@ space::
 *H::scrollWheel("H", 3)
 *O::scrollWheel("O", 2)
 *U::scrollWheel("U", 1)
+
 
 
 Esc::exitMouseMode()
