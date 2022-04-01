@@ -2,8 +2,9 @@
     "Capslock": {
         "0": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "可能会用到的内置函数",
+                "value": "set_window_position_and_size(10, 10, \"DEFAULT\", \"DEFAULT\")",
+                "comment": "设置窗口位置、不修改大小"
             }
         },
         "1": {

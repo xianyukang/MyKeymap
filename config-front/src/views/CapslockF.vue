@@ -21,7 +21,7 @@ export default {
     return {
       currentKey: EMPTY_KEY,  // 组件的创建时的默认 key 是 EMPTY_KEY
       keys: 'abcdefghijklmnopqrstuvwxyz,./',
-      items: ['启动程序或激活窗口', '输入文本或按键', '鼠标操作', '窗口操作', '执行单行 ahk 代码'],
+      items: ['启动程序或激活窗口', '输入文本或按键', '鼠标操作', '窗口操作', '可能会用到的内置函数'],
     }
   },
   components: { Action, Keyboard },

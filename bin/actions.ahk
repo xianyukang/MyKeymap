@@ -10,6 +10,15 @@ action_open_selected_with(toRun, cmdArgs)
     ActivateOrRun("", toRun, cmdArgs) 
 }
 
+set_window_position_and_size(x, y, width, height)
+{
+    WinExist("A")
+    WinGet, state, MinMax
+    if state
+        WinRestore
+    WinMove, , , %x%, %y% , %width%, %height%
+}
+
 action_enter_task_switch_mode()
 {
     global TASK_SWITCH_MODE, CapslockMode

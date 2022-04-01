@@ -137,12 +137,22 @@
        (3) 所以想发送文本 abc 时,  建议给文本加 {text} 前缀, 比如 {text}abc</pre>
         </template>
 
-        <template v-if="config.type === '执行单行 ahk 代码'">
+        <template v-if="config.type === '可能会用到的内置函数'">
           <v-text-field
             autocomplete="off"
             label="单行代码 (自定义的函数可以放到 data/custom_functions.ahk)"
             v-model="config.value"
           ></v-text-field>
+          <v-text-field
+            autocomplete="off"
+            label="自定义备注 (按 Caps 输入 help 可回顾配置)"
+            v-model="config.comment"
+          ></v-text-field>
+          <pre class="tips">
+  几个可能用到的内置函数:
+  (1) 窗口居中并设置大小:           center_window_to_current_monitor(1200, 800)
+  (2) 设置窗口位置、并且不修改大小: set_window_position_and_size(10, 10, "DEFAULT", "DEFAULT")
+          </pre>
         </template>
 
         <template v-if="config.type === '鼠标操作'">
@@ -446,7 +456,7 @@ export default {
         { text: "🏠 窗口操作", value: "窗口操作" },
         { text: "🖥️ 系统控制", value: "系统控制" },
         { text: "📚 文字处理", value: "文字处理" },
-        { text: "⚛️ 执行单行 ahk 代码", value: "执行单行 ahk 代码" },
+        { text: "⚛️ 可能会用到的内置函数", value: "可能会用到的内置函数" },
       ];
       if (this.$route.name !== "Capslock") {
         result.splice(3, 1);

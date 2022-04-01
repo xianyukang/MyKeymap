@@ -69,9 +69,9 @@ ShellRun(prms*)
                 ; IShellDispatch2.ShellExecute
                 shell.ShellExecute(prms*)
             
-                ; ObjRelease(psv)
+                ObjRelease(psv)
             }
-            ; ObjRelease(ptlb)
+            ObjRelease(ptlb)
         }
     }
     catch {

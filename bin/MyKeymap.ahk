@@ -343,6 +343,7 @@ D::send, #+{right}
 *T::send, {blind}#{left}
 Y::send, {LControl down}{LWin down}{Left}{LWin up}{LControl up}
 P::send, {LControl down}{LWin down}{Right}{LWin up}{LControl up}
+0::set_window_position_and_size(10, 10, "DEFAULT", "DEFAULT")
 X::SmartCloseWindow()
 R::SwitchWindows()
 G::ToggleTopMost()
