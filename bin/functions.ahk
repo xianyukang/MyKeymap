@@ -29,19 +29,19 @@ https://autohotkey.com/boards/viewtopic.php?t=4334
 
 ShellRun(prms*)
 {
-    global shell
+    ; global shell
 
     try {
 
-        try {
-            if (shell) {
-                ; tip("使用缓存了的 shell 对象")
-                shell.ShellExecute(prms*)
-                return
-            }
-        } catch {
-            tip("refresh object")
-        }
+        ; try {
+        ;     if (shell) {
+        ;         ; tip("使用缓存了的 shell 对象")
+        ;         shell.ShellExecute(prms*)
+        ;         return
+        ;     }
+        ; } catch {
+        ;     tip("refresh object")
+        ; }
 
         shellWindows := ComObjCreate("Shell.Application").Windows
         VarSetCapacity(_hwnd, 4, 0)
