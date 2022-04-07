@@ -600,6 +600,10 @@ Mode9__136()
         send, {blind}+{f8}
         return
     }
+    if winactive("ahk_class SunAwtFrame") {
+        send, {blind}+{f7}
+        return
+    }
 }
 Mode9__138()
 {
@@ -632,6 +636,10 @@ Mode9__146()
         send, {blind}{f8}
         return
     }
+    if winactive("ahk_class SunAwtFrame") {
+        send, {blind}{f7}
+        return
+    }
 }
 Mode9__147()
 {
@@ -652,6 +660,10 @@ Mode9__148()
     }
     if winactive("- Microsoft Visual Studio") {
         send, {blind}^0^g
+        return
+    }
+    if winactive("ahk_class SunAwtFrame") {
+        send, {blind}!9
         return
     }
 }

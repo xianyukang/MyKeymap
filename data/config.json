@@ -998,6 +998,13 @@
                 "keysToSend": "+{f8}",
                 "prefix": "*",
                 "comment": "Git - 上一处修改"
+            },
+            "6": {
+                "type": "输入文本或按键",
+                "value": "send, {blind}+{f7}",
+                "keysToSend": "+{f7}",
+                "prefix": "*",
+                "comment": "Git - 上一处修改"
             }
         },
         "R": {
@@ -1094,6 +1101,13 @@
                 "keysToSend": "{f8}",
                 "prefix": "*",
                 "comment": "Git - 下一处修改"
+            },
+            "6": {
+                "type": "输入文本或按键",
+                "value": "send, {blind}{f7}",
+                "comment": "Git - 下一处修改",
+                "keysToSend": "{f7}",
+                "prefix": "*"
             }
         },
         "F": {
@@ -1130,6 +1144,13 @@
                 "type": "输入文本或按键",
                 "value": "send, {blind}^0^g",
                 "keysToSend": "^0^g",
+                "prefix": "*",
+                "comment": "Git 面板"
+            },
+            "6": {
+                "type": "输入文本或按键",
+                "value": "send, {blind}!9",
+                "keysToSend": "!9",
                 "prefix": "*",
                 "comment": "Git 面板"
             }
@@ -3804,8 +3825,8 @@
         },
         {
             "id": "6",
-            "key": "",
-            "value": ""
+            "key": "🔵 JetBrains IDE",
+            "value": "ahk_class SunAwtFrame"
         }
     ],
     "supportPerAppConfig": true,
