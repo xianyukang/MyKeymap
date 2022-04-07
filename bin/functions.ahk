@@ -29,19 +29,11 @@ https://autohotkey.com/boards/viewtopic.php?t=4334
 
 ShellRun(prms*)
 {
-    ; global shell
+    ; 为什么「 (有时候) 启动程序时窗口不在最前面 」?  不知道...
+    ; 下面这个魔法代码试图激活一下桌面窗口,  似乎能 "减少" 问题发生的概率
+    WinActivate, Program Manager ahk_class Progman
 
     try {
-
-        ; try {
-        ;     if (shell) {
-        ;         ; tip("使用缓存了的 shell 对象")
-        ;         shell.ShellExecute(prms*)
-        ;         return
-        ;     }
-        ; } catch {
-        ;     tip("refresh object")
-        ; }
 
         shellWindows := ComObjCreate("Shell.Application").Windows
         VarSetCapacity(_hwnd, 4, 0)
