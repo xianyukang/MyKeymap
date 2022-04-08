@@ -221,7 +221,7 @@
         "C": {
             "2": {
                 "type": "系统控制",
-                "value": "run, SoundControl.exe",
+                "value": "MyRun(\"SoundControl.exe\")",
                 "label": "音量调节"
             }
         },

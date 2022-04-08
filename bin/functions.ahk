@@ -29,9 +29,7 @@ https://autohotkey.com/boards/viewtopic.php?t=4334
 
 ShellRun(prms*)
 {
-    ; 为什么「 (有时候) 启动程序时窗口不在最前面 」?  不知道...
-    ; 下面这个魔法代码试图激活一下桌面窗口,  似乎能 "减少" 问题发生的概率
-    WinActivate, Program Manager ahk_class Progman
+    SetFocusToHiddenWindow()
 
     try {
 
@@ -182,6 +180,30 @@ GetVisibleWindows(winFilter)
 
 
 
+MyRun(target, workingdir := "", args := "")
+{
+    SetFocusToHiddenWindow()
+    try 
+    {
+        if (workingdir && args) {
+            run, %target% %args%, %workingdir%
+        } 
+        else if (workingdir) {
+            run, %target%, %workingdir%
+        } 
+        else if (args) {
+            run, %target% %args%
+        }
+        else {
+            run, %target%
+        }
+    }
+    catch e 
+    {
+        tip(e.message)
+    } 
+}
+
 ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:=false) 
 {
     to_activate := Trim(to_activate)
@@ -215,25 +237,7 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
                 }
 
             } else {
-                try 
-                {
-                    if (workingdir && args) {
-                        run, %oldTarget% %args%, %workingdir%
-                    } 
-                    else if (workingdir) {
-                        run, %oldTarget%, %workingdir%
-                    } 
-                    else if (args) {
-                        run, %oldTarget% %args%
-                    }
-                    else {
-                        run, %oldTarget%
-                    }
-                }
-                catch e 
-                {
-                    tip(e.message)
-                } 
+                MyRun(oldTarget, args, workingdir)
             }
         }
 
@@ -969,6 +973,14 @@ class TypoTipWindow
     hide() {
         Gui, TYPO_TIP_WINDOW:Show, Hide
     }
+    
+    activate() {
+        old := A_DetectHiddenWindows
+        hwnd := this.hwnd
+        DetectHiddenWindows, 1
+        WinActivate, ahk_id %hwnd%
+        DetectHiddenWindows, %old%
+    }
 }
 
 myExit()
@@ -1263,4 +1275,13 @@ postMessageToTipWidnow(messageType) {
     ;     PostMessage, %messageType%, 0, 0
     PostMessage, %messageType%, 0, 0,, ahk_id %commandInputHwnd%
     DetectHiddenWindows, %oldValue%
+}
+
+SetFocusToHiddenWindow()
+{
+    ; 为什么「 (有时候) 启动程序时窗口不在最前面 」?  
+    ; 不知道... 用 shellrun 或 run 都有这个问题
+    ; 在启动程序前激活一下其他窗口,  似乎能减少问题发生的概率
+    global typoTip
+    typoTip.activate()
 }

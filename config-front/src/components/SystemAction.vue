@@ -79,7 +79,7 @@ const actionMap = [
   {
     group: 1,
     label: "音量调节",
-    value: "run, SoundControl.exe",
+    value: `MyRun("SoundControl.exe")`,
   },
   {
     group: 1,
