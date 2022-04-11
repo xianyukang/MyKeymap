@@ -63,6 +63,11 @@
 const actionMap = [
   {
     group: 1,
+    label: "锁屏",
+    value: 'SystemLockScreen()',
+  },
+  {
+    group: 1,
     label: "睡眠",
     value: 'DllCall("PowrProf\\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)',
   },

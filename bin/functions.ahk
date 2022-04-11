@@ -1285,3 +1285,10 @@ SetFocusToHiddenWindow()
     global typoTip
     typoTip.activate()
 }
+
+
+SystemLockScreen()
+{
+    sleep 300
+    DllCall("LockWorkStation")
+}

@@ -133,6 +133,7 @@ RAlt::LCtrl
 
 {% if Settings.CapslockMode %}
 !capslock::toggleCapslock()
++capslock::toggleCapslock()
 
 *capslock::
     thisHotkey := A_ThisHotkey
