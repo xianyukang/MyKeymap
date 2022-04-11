@@ -77,6 +77,15 @@ function processConfig(config) {
   s['TabMode'] = s.enableTabMode && contains_one_valid_key(config.TabMode, ids)
   s['CommaMode'] = s.enableCommaMode && contains_one_valid_key(config.CommaMode, ids)
 
+  // 如果开启了 Caps + F 模式,  那么 F 键的配置要清空
+  if (s.enableCapsF) {
+    config["Capslock"]["F"] = emptyKeyConfig(true)
+  }
+  if (s.enableCapsSpace) {
+    config["Capslock"]["Space"] = emptyKeyConfig(true)
+  }
+  
+
   if (!config['otherInfo']) {
     config['otherInfo'] = {}
   }
@@ -169,6 +178,12 @@ const s = new Vuex.Store({
           // 这里不能用 || 语法,  因为要判断值是否 undefined 而不是判断值是否 falsy
           if (resp.data.Settings.enableCapslockAbbr === undefined) {
             resp.data.Settings.enableCapslockAbbr = true
+          }
+          if (resp.data.Settings.enableCapsF === undefined) {
+            resp.data.Settings.enableCapsF = true
+          }
+          if (resp.data.Settings.enableCapsSpace === undefined) {
+            resp.data.Settings.enableCapsSpace = true
           }
 
           // 从不支持分应用配置的版本升级

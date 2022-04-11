@@ -633,8 +633,11 @@
         },
         "7": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "send, {blind}{f7}",
+                "keysToSend": "{f7}",
+                "prefix": "*",
+                "comment": "F7 键"
             }
         },
         "8": {
@@ -2532,6 +2535,24 @@
                 "type": "文字处理",
                 "value": "setColor(\"#080\")"
             }
+        },
+        "blu": {
+            "2": {
+                "type": "文字处理",
+                "value": "setColor(\"#2E66FF\")"
+            }
+        },
+        "pur": {
+            "2": {
+                "type": "文字处理",
+                "value": "setColor(\"#b309bb\")"
+            }
+        },
+        "pin": {
+            "2": {
+                "type": "文字处理",
+                "value": "setColor(\"#FF00FF\")"
+            }
         }
     },
     "CapslockAbbr": {
@@ -2714,7 +2735,10 @@
         "ver",
         "fs",
         "red",
-        "gre"
+        "gre",
+        "blu",
+        "pur",
+        "pin"
     ],
     "pathVariables": [
         {
@@ -2770,7 +2794,9 @@
         "enableCapslockAbbr": true,
         "enableCommaMode": false,
         "CommaMode": false,
-        "numKeyConfigurable": true
+        "numKeyConfigurable": true,
+        "enableCapsF": true,
+        "enableCapsSpace": true
     },
     "CapslockSpace": {
         "0": {

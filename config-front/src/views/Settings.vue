@@ -6,37 +6,43 @@
           <v-card-title>各模式开关</v-card-title>
           <v-card-text>
             <v-row>
-              <v-col cols="4">
+              <v-col cols="3">
                 <v-switch class="switch" v-model="currConfig()['enableMode3']" label="3 模式"></v-switch>
               </v-col>
-              <v-col cols="4">
+              <v-col cols="3">
                 <v-switch class="switch" v-model="currConfig()['enableMode9']" label="9 模式"></v-switch>
               </v-col>
-              <v-col cols="4">
+              <v-col cols="3">
                 <v-switch class="switch" v-model="currConfig()['enableJMode']" label="J 模式"></v-switch>
               </v-col>
-              <v-col cols="4">
-                <v-switch class="switch" v-model="currConfig()['enableCapslockMode']" label="Caps 相关"></v-switch>
-              </v-col>
-              <v-col cols="4">
-                <v-switch class="switch" v-model="currConfig()['enableCapslockAbbr']" label="Caps 指令"></v-switch>
-              </v-col>
-              <v-col cols="4">
+              <v-col cols="3">
                 <v-switch class="switch" v-model="currConfig()['enableSemicolonMode']" label="分号相关"></v-switch>
               </v-col>
-              <v-col cols="4">
-                <v-switch class="switch" v-model="currConfig()['enableLButtonMode']" label="鼠标左键"></v-switch>
+              <v-col cols="3">
+                <v-switch class="switch" v-model="currConfig()['enableCapslockMode']" label="Caps 模式"></v-switch>
               </v-col>
-              <v-col cols="4">
+              <v-col cols="3">
+                <v-switch class="switch" v-model="currConfig()['enableCapslockAbbr']" label="Caps 指令"></v-switch>
+              </v-col>
+              <v-col cols="3">
+                <v-switch class="switch" v-model="currConfig()['enableCapsF']" label="Caps + F"></v-switch>
+              </v-col>
+              <v-col cols="3">
+                <v-switch class="switch" v-model="currConfig()['enableCapsSpace']" label="Caps + Space"></v-switch>
+              </v-col>
+              <!-- <v-col cols="3">
+                <v-switch class="switch" v-model="currConfig()['enableLButtonMode']" label="鼠标左键"></v-switch>
+              </v-col> -->
+              <v-col cols="3">
                 <v-switch class="switch" v-model="currConfig()['enableRButtonMode']" label="鼠标右键"></v-switch>
               </v-col>
-              <v-col cols="4">
+              <v-col cols="3">
                 <v-switch class="switch" v-model="currConfig()['enableSpaceMode']" label="空格模式"></v-switch>
               </v-col>
-              <v-col cols="4">
+              <v-col cols="3">
                 <v-switch class="switch" v-model="currConfig()['enableTabMode']" label="Tab 模式"></v-switch>
               </v-col>
-              <v-col cols="4">
+              <v-col cols="3">
                 <v-switch class="switch" v-model="currConfig()['enableCommaMode']" label="逗号模式"></v-switch>
               </v-col>
             </v-row>

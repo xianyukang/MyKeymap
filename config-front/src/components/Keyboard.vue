@@ -59,6 +59,12 @@ export default {
     },
   },
   computed: {
+    enableCapsF() {
+      return this.$store.state.config.Settings.enableCapsF
+    },
+    enableCapsSpace() {
+      return this.$store.state.config.Settings.enableCapsSpace
+    },
     lines() {
       const lns = [
         [
@@ -89,7 +95,7 @@ export default {
           { key: 'A' },
           { key: 'S', disableAt: [] },
           { key: 'D' },
-          { key: 'F', disableAt: ['Capslock', 'CapslockF', ] },
+          { key: 'F', disableAt: this.enableCapsF ? ['Capslock', 'CapslockF', ] : [] },
           { key: 'G', disableAt: [] },
           { key: 'H', disableAt: [] },
           { key: 'J', disableAt: ['JMode', 'JModeL'] },
@@ -109,7 +115,7 @@ export default {
           { key: '.', disableAt: ['Mode9'] },
           { key: '/', disableAt: ['Semicolon', 'Mode9'] },
         ],
-        [{ key: 'Space', disableAt: ['CapslockSpace', 'Capslock', 'SpaceMode'] }],
+        [{ key: 'Space', disableAt: this.enableCapsSpace ? ['CapslockSpace', 'Capslock', 'SpaceMode'] : ['SpaceMode'] }],
       ]
 
       if (this.$route.name === 'RButtonMode') {

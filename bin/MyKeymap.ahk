@@ -74,7 +74,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,gt,zh,gg,ver,fs,red,gre")
+semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,gt,zh,gg,ver,fs,red,gre,blu,pur,pin")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
 capsHook := InputHook("C", "{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ,ex")
@@ -300,6 +300,7 @@ l::enterJModeL()
 *4::send, {blind}{f4}
 *R::send, {blind}{f5}
 *T::send, {blind}{f6}
+*7::send, {blind}{f7}
 *Y::send, {blind}{f7}
 *8::send, {blind}{f8}
 *9::send, {blind}{f9}
@@ -358,6 +359,7 @@ f::
     keywait f
     FMode := false
     return
+
 space::
     CapslockSpaceMode := true
     CapslockMode := false
@@ -467,8 +469,14 @@ execSemicolonAbbr(typo) {
             SemicolonAbbr2__xk()
         case "gre":
             setColor("#080")
+        case "blu":
+            setColor("#2E66FF")
+        case "pur":
+            setColor("#b309bb")
         case "red":
             setColor("#D05")
+        case "pin":
+            setColor("#FF00FF")
         default: 
             return false
     }

@@ -389,6 +389,7 @@ l::enterJModeL()
 {% endfor %}
 
 
+{% if Settings.enableCapsF %}
 f::
     FMode := true
     CapslockMode := false
@@ -396,6 +397,9 @@ f::
     keywait f
     FMode := false
     return
+{% endif %}
+
+{% if Settings.enableCapsSpace %}
 space::
     CapslockSpaceMode := true
     CapslockMode := false
@@ -403,6 +407,7 @@ space::
     keywait space
     CapslockSpaceMode := false
     return
+{% endif %}
 
 #if SLOWMODE
 {% for key,value in Capslock.items()|sort(attribute="1.value") %}

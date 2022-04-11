@@ -77,6 +77,12 @@ export function isModeEnabled(mode, settings) {
         if (mode.startsWith('CapslockAbbr')) {
             return settings['enableCapslockMode'] && settings['enableCapslockAbbr']
         }
+        if (mode.startsWith('CapslockF')) {
+            return settings['enableCapslockMode'] && settings['enableCapsF']
+        }
+        if (mode.startsWith('CapslockSpace')) {
+            return settings['enableCapslockMode'] && settings['enableCapsSpace']
+        }
         return settings['enableCapslockMode']
     }
     if (mode.startsWith('Semicolon')) {
