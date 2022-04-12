@@ -644,6 +644,20 @@ lbuttonDown()
     send, {Lbutton down}
 }
 
+myDoubleClick()
+{
+    global SLOWMODE
+    send,  {blind}{LButton 2}
+    SLOWMODE := false
+}
+
+myTrippleClick()
+{
+    global SLOWMODE
+    send,  {blind}{LButton 3}
+    SLOWMODE := false
+}
+
 leftClick() 
 {
     global SLOWMODE

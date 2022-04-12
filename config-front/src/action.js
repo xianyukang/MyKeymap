@@ -47,6 +47,8 @@ export const clickActions = [
     { label: "鼠标左键", value: "鼠标左键" },
     { label: "鼠标右键", value: "鼠标右键" },
     { label: "鼠标左键按下", value: "鼠标左键按下" },
+    { label: "鼠标左键双击 (选中单词)", value: "鼠标左键双击 (选中单词)" },
+    { label: "鼠标左键三击 (选中一行)", value: "鼠标左键三击 (选中一行)" },
     { label: "移动鼠标到窗口中心", value: "移动鼠标到窗口中心" },
     { label: "让当前窗口进入拖动模式", value: "让当前窗口进入拖动模式" },
 ]

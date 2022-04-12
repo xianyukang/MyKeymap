@@ -264,8 +264,8 @@
         ".": {
             "2": {
                 "type": "鼠标操作",
-                "value": "moveCurrentWindow()",
-                "label": "让当前窗口进入拖动模式",
+                "value": "myDoubleClick()",
+                "label": "鼠标左键双击 (选中单词)",
                 "prefix": "*"
             }
         },
