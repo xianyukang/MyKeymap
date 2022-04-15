@@ -46,6 +46,7 @@ SemicolonAbbrTip := true
 allHotkeys := []
 allHotkeys.Push("*3")
 allHotkeys.Push("*9")
+allHotkeys.Push("*.")
 allHotkeys.Push("*j")
 allHotkeys.Push("*capslock")
 allHotkeys.Push("*;")
@@ -74,7 +75,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,gt,zh,gg,ver,fs,red,gre,blu,pur,pin")
+semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,gt,zh,gg,ver,fs,red,gre,blu,pur,pin,kg,jt")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
 capsHook := InputHook("C", "{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ,ex")
@@ -160,6 +161,24 @@ RAlt::LCtrl
     enableOtherHotkey(thisHotkey)
     return
 
+; RAlt::
+;     disableOtherHotkey(thisHotkey)
+;     CommaMode := true
+;     keywait RAlt
+;     CommaMode := false
+;     enableOtherHotkey(thisHotkey)
+;     return
+
+*.::
+    thisHotkey := A_ThisHotkey
+    disableOtherHotkey(thisHotkey)
+    DotMode := true
+    keywait `. 
+    DotMode := false
+    if (A_PriorKey == "." && A_TimeSinceThisHotkey < 350)
+        send, {blind}`. 
+    enableOtherHotkey(thisHotkey)
+    return
 
 
 
@@ -227,23 +246,28 @@ l::return
 
 
 #if JMode
-l::enterJModeL()
-*,::send, {blind}+{home}{bs}
-*W::send, {blind}+{Tab}
+*T::send, {blind}+{home}{bs}
+*W::send, {blind}+{tab}
 *2::send, {blind}^+{tab}
+*O::send, {blind}^c
+*L::send, {blind}^v
+*.::send, {blind}^x
+*Y::send, {blind}^y
+*Z::send, {blind}^z
 *V::send, {blind}^{bs}
 *I::send, {blind}^{left}
 *K::send, {blind}^{right}
 *3::send, {blind}^{tab}
-*Z::send, {blind}{appskey}
+*Q::send, {blind}{appskey}
 *C::send, {blind}{bs}
 *B::send, {blind}{del}
 *D::send, {blind}{down}
 *G::send, {blind}{end}
+*P::send, {blind}{end}+{home}
 *Space::send, {blind}{enter}
 *X::send, {blind}{esc}
 *A::send, {blind}{home}
-*.::send, {blind}{insert}
+*`;::send, {blind}{insert}
 *S::send, {blind}{left}
 *F::send, {blind}{right}
 *R::send, {blind}{tab}
@@ -321,6 +345,35 @@ l::enterJModeL()
 *V::Mode9__157()
 
 
+#if DotMode
+*T::send, {blind}+{home}{bs}
+*W::send, {blind}+{tab}
+*2::send, {blind}^+{tab}
+*O::send, {blind}^c
+*,::send, {blind}^v
+*K::send, {blind}^x
+*Y::send, {blind}^y
+*Z::send, {blind}^z
+*V::send, {blind}^{bs}
+*J::send, {blind}^{left}
+*M::send, {blind}^{right}
+*3::send, {blind}^{tab}
+*Q::send, {blind}{appskey}
+*C::send, {blind}{bs}
+*B::send, {blind}{del}
+*D::send, {blind}{down}
+*G::send, {blind}{end}
+*I::send, {blind}{end}+{home}
+*Space::send, {blind}{enter}
+*X::send, {blind}{esc}
+*A::send, {blind}{home}
+*S::send, {blind}{left}
+*F::send, {blind}{right}
+*N::send, {blind}{space}
+*R::send, {blind}{tab}
+*E::send, {blind}{up}
+
+
 
 #if CapslockMode
 
@@ -333,7 +386,7 @@ A::center_window_to_current_monitor(1370, 930)
 *L::fastMoveMouse("L", 1, 0)
 *,::lbuttonDown()
 *N::leftClick()
-*.::myDoubleClick()
+*.::moveCurrentWindow()
 C::MyRun("SoundControl.exe")
 *M::rightClick()
 *`;::scrollWheel(";", 4)
@@ -376,7 +429,7 @@ space::
 *L::slowMoveMouse("L", 1, 0)
 *,::lbuttonDown()
 *N::leftClick()
-*.::myDoubleClick()
+*.::moveCurrentWindow()
 *M::rightClick(true)
 *`;::scrollWheel(";", 4)
 *H::scrollWheel("H", 3)
@@ -456,6 +509,8 @@ execSemicolonAbbr(typo) {
                 send, {blind}{text}、
         case "gt":
                 send, {blind}{text}🐶
+        case "kg":
+            actionAddSpaceBetweenEnglishChinese()
         case "dk":
             SemicolonAbbr2__dk()
         case "gg":
@@ -468,6 +523,8 @@ execSemicolonAbbr(typo) {
             SemicolonAbbr2__ver()
         case "xk":
             SemicolonAbbr2__xk()
+        case "jt":
+            send, {blind}{text}➤` ` 
         case "gre":
             setColor("#080")
         case "blu":

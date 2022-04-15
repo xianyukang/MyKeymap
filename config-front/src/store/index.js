@@ -76,6 +76,7 @@ function processConfig(config) {
   s['SpaceMode'] = s.enableSpaceMode && contains_one_valid_key(config.SpaceMode, ids)
   s['TabMode'] = s.enableTabMode && contains_one_valid_key(config.TabMode, ids)
   s['CommaMode'] = s.enableCommaMode && contains_one_valid_key(config.CommaMode, ids)
+  s['DotMode'] = s.enableDotMode && contains_one_valid_key(config.DotMode, ids)
 
   // 如果开启了 Caps + F 模式,  那么 F 键的配置要清空
   if (s.enableCapsF) {

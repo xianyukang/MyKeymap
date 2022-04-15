@@ -100,7 +100,7 @@ export default {
           { key: 'H', disableAt: [] },
           { key: 'J', disableAt: ['JMode', 'JModeL'] },
           { key: 'K', disableAt: [] },
-          { key: 'L', disableAt: ['JMode', 'JModeL', 'Mode9'] },
+          { key: 'L', disableAt: [ 'JModeL', 'Mode9'] },
           { key: ';', disableAt: ['Semicolon', 'Mode9'] },
         ],
         [
@@ -112,7 +112,7 @@ export default {
           { key: 'N', disableAt: [] },
           { key: 'M', disableAt: [] },
           { key: ',', disableAt: ['Mode9', 'CommaMode'] },
-          { key: '.', disableAt: ['Mode9'] },
+          { key: '.', disableAt: ['Mode9', 'DotMode'] },
           { key: '/', disableAt: ['Semicolon', 'Mode9'] },
         ],
         [{ key: 'Space', disableAt: this.enableCapsSpace ? ['CapslockSpace', 'Capslock', 'SpaceMode'] : ['SpaceMode'] }],

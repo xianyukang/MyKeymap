@@ -59,17 +59,49 @@ export const textFeatures1 = [
     { label: "把选中的文字设为粉色", value: 'setColor("#FF00FF")' },
     { label: "把选中的文字设为蓝色", value: 'setColor("#2E66FF")' },
     { label: "把选中的文字设为绿色", value: 'setColor("#080")' },
+    { label: "在中英文之间添加空格", value: "actionAddSpaceBetweenEnglishChinese()", },
 ]
 export const textFeatures2 = [
-    {
-        label: "在中英文之间添加空格",
-        value: "actionAddSpaceBetweenEnglishChinese()",
-    },
+
+    { label: "方向键 - 上", value: "send, {blind}{up}" },
+    { label: "方向键 - 下", value: "send, {blind}{down}" },
+    { label: "方向键 - 左", value: "send, {blind}{left}" },
+    { label: "方向键 - 右", value: "send, {blind}{right}" },
+    { label: "光标移动 - 行首 (Home)", value: "send, {blind}{home}" },
+    { label: "光标移动 - 行尾 (End)", value: "send, {blind}{end}" },
+    { label: "光标移动 - 上一个单词", value: "send, {blind}^{left}" },
+    { label: "光标移动 - 下一个单词", value: "send, {blind}^{right}" },
+    { label: "删除 - 到行首", value: "send, {blind}+{home}{bs}" },
+    { label: "删除 - 一个单词", value: "send, {blind}^{bs}" },
+
+]
+
+export const textFeatures3 = [
+    { label: "常用键 - 右键菜单", value: "send, {blind}{appskey}" },
+    { label: "常用键 - Esc", value: "send, {blind}{esc}" },
+    { label: "常用键 - BackSpace", value: "send, {blind}{bs}" },
+    { label: "常用键 - Enter", value: "send, {blind}{enter}" },
+    { label: "常用键 - Space", value: "send, {blind}{space}" },
+    { label: "常用键 - Tab", value: "send, {blind}{tab}" },
+    { label: "常用键 - Shift + Tab", value: "send, {blind}+{tab}" },
+    { label: "常用键 - Delete", value: "send, {blind}{del}" },
+    { label: "其他键 - Insert", value: "send, {blind}{insert}" },
+]
+
+export const textFeatures4 = [
+    { label: "选中当前行", value: "send, {blind}{end}+{home}" },
+    { label: "Ctrl + C (复制)", value: "send, {blind}^c" },
+    { label: "Ctrl + X (剪切)", value: "send, {blind}^x" },
+    { label: "Ctrl + V (粘贴)", value: "send, {blind}^v" },
+    { label: "Ctrl + Z (撤销)", value: "send, {blind}^z" },
+    { label: "Ctrl + Y (重做)", value: "send, {blind}^y" },
+    { label: "Ctrl + Tab", value: "send, {blind}^{tab}" },
+    { label: "Ctrl + Shift + Tab", value: "send, {blind}^+{tab}" },
 ]
 
 
 
 export const getLabelByValue = [
     ...windowActions1, ...windowActions2, ...mouseActions, ...scrollActions, ...clickActions,
-    ...textFeatures1, ...textFeatures2
+    ...textFeatures1, ...textFeatures2, ...textFeatures3, ...textFeatures4,
 ].reduce((a, b) => { a[b.value] = b.label; return a }, {})

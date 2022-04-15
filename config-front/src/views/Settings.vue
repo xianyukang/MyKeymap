@@ -45,6 +45,9 @@
               <v-col cols="3">
                 <v-switch class="switch" v-model="currConfig()['enableCommaMode']" label="逗号模式"></v-switch>
               </v-col>
+              <v-col cols="3">
+                <v-switch class="switch" v-model="currConfig()['enableDotMode']" label="句号模式"></v-switch>
+              </v-col>
             </v-row>
           </v-card-text>
         </v-card>

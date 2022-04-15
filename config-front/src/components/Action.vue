@@ -21,7 +21,7 @@
       <window-selector-config />
     </v-dialog>
 
-    <v-card min-height="570" width="790" elevation="5" class="action-config">
+    <v-card min-height="570" :width="config.type === '文字处理' ? 1200 : 790" elevation="5" class="action-config">
       <v-card-title style="padding-bottom: 0">
         <v-row>
           <v-col cols="5">
@@ -238,7 +238,7 @@
           <ExplorerAction :config="config" />
         </template>
         <template v-if="config.type === '文字处理'">
-          <v-radio-group v-model="config.value">
+          <v-radio-group v-model="config.value" @change="onTextActionChanged">
             <v-row>
               <v-col>
                 <v-radio
@@ -256,11 +256,25 @@
                   :value="action.value"
                 ></v-radio>
               </v-col>
-            </v-row>
 
-            <br />
-            <v-divider></v-divider>
-            <br />
+              <v-col>
+                <v-radio
+                  v-for="action in textFeatures3"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+              </v-col>
+
+              <v-col>
+                <v-radio
+                  v-for="action in textFeatures4"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+              </v-col>
+            </v-row>
           </v-radio-group>
         </template>
       </v-card-text>
@@ -285,7 +299,7 @@ import _ from "lodash";
 import KeyValueConfig from "./KeyValueConfig.vue";
 import ExplorerAction from "./SystemAction.vue";
 import WindowSelectorConfig from "./WindowSelectorConfig.vue";
-import { windowActions1, windowActions2, specialAction, mouseActions, scrollActions, textFeatures1, textFeatures2, clickActions } from "../action";
+import { windowActions1, windowActions2, specialAction, mouseActions, scrollActions, textFeatures1, textFeatures2, textFeatures3, textFeatures4,clickActions } from "../action";
 
 export default {
   mixins: [currConfigMixin],
@@ -308,6 +322,8 @@ export default {
       windowActions2,
       textFeatures1,
       textFeatures2,
+      textFeatures3,
+      textFeatures4,
     };
   },
   methods: {
@@ -321,6 +337,11 @@ export default {
       this.showWindowSelectorConfig = false;
       this.windowSelector = "2";
       this.$store.state.windowSelector = "2"
+    },
+    onTextActionChanged() {
+      if (_.startsWith(this.config.value, 'send')) {
+        this.config.prefix = "*";
+      }
     },
     action_send_keys() {
       this.config.prefix = "*";
@@ -453,15 +474,15 @@ export default {
       const result = [
         { text: "⛔ 什么也不做", value: "什么也不做" },
         { text: "👾 启动程序或激活窗口", value: "启动程序或激活窗口" },
+        { text: "📚 文字处理", value: "文字处理" },
         { text: "🅰️ 输入文本或按键", value: "输入文本或按键" },
         { text: "🖱️  鼠标操作", value: "鼠标操作" },
         { text: "🏠 窗口操作", value: "窗口操作" },
         { text: "🖥️ 系统控制", value: "系统控制" },
-        { text: "📚 文字处理", value: "文字处理" },
         { text: "⚛️ 可能会用到的内置函数", value: "可能会用到的内置函数" },
       ];
       if (this.$route.name !== "Capslock") {
-        result.splice(3, 1);
+        result.splice(4, 1);
       }
       return result;
     },
