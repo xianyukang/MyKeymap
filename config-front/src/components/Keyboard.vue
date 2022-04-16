@@ -98,9 +98,9 @@ export default {
           { key: 'F', disableAt: this.enableCapsF ? ['Capslock', 'CapslockF', ] : [] },
           { key: 'G', disableAt: [] },
           { key: 'H', disableAt: [] },
-          { key: 'J', disableAt: ['JMode', 'JModeL'] },
-          { key: 'K', disableAt: [] },
-          { key: 'L', disableAt: [ 'JModeL', 'Mode9'] },
+          { key: 'J', disableAt: ['JMode'] },
+          { key: 'K', disableAt: ['JMode', 'JModeK'] },
+          { key: 'L', disableAt: ['Mode9'] },
           { key: ';', disableAt: ['Semicolon', 'Mode9'] },
         ],
         [

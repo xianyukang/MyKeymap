@@ -89,7 +89,7 @@ export const textFeatures3 = [
 ]
 
 export const textFeatures4 = [
-    { label: "选中当前行", value: "send, {blind}{end}+{home}" },
+    { label: "选中当前行", value: "send, {blind}{home}+{end}" },
     { label: "Ctrl + C (复制)", value: "send, {blind}^c" },
     { label: "Ctrl + X (剪切)", value: "send, {blind}^x" },
     { label: "Ctrl + V (粘贴)", value: "send, {blind}^v" },

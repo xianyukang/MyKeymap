@@ -230,9 +230,8 @@ enterRButtonMode()
 
 
 
-#if JModeL
-l::return
-*B::send, {blind}+{del}
+#if JModeK
+k::return
 *D::send, {blind}+{down}
 *G::send, {blind}+{end}
 *X::send, {blind}+{esc}
@@ -240,34 +239,29 @@ l::return
 *S::send, {blind}+{left}
 *F::send, {blind}+{right}
 *E::send, {blind}+{up}
-*I::send, {blind}^+{left}
-*K::send, {blind}^+{right}
+*Z::send, {blind}^+{left}
+*V::send, {blind}^+{right}
 *C::send, {blind}{bs}
 
 
 #if JMode
+k::enterJModeK()
 *T::send, {blind}+{home}{bs}
 *W::send, {blind}+{tab}
 *2::send, {blind}^+{tab}
-*O::send, {blind}^c
-*L::send, {blind}^v
-*.::send, {blind}^x
 *Y::send, {blind}^y
-*Z::send, {blind}^z
-*V::send, {blind}^{bs}
-*I::send, {blind}^{left}
-*K::send, {blind}^{right}
+*B::send, {blind}^{bs}
+*Z::send, {blind}^{left}
+*V::send, {blind}^{right}
 *3::send, {blind}^{tab}
 *Q::send, {blind}{appskey}
 *C::send, {blind}{bs}
-*B::send, {blind}{del}
 *D::send, {blind}{down}
 *G::send, {blind}{end}
-*P::send, {blind}{end}+{home}
 *Space::send, {blind}{enter}
 *X::send, {blind}{esc}
 *A::send, {blind}{home}
-*`;::send, {blind}{insert}
+*I::send, {blind}{home}+{end}
 *S::send, {blind}{left}
 *F::send, {blind}{right}
 *R::send, {blind}{tab}
@@ -349,27 +343,21 @@ l::return
 *T::send, {blind}+{home}{bs}
 *W::send, {blind}+{tab}
 *2::send, {blind}^+{tab}
-*O::send, {blind}^c
-*,::send, {blind}^v
-*K::send, {blind}^x
 *Y::send, {blind}^y
-*Z::send, {blind}^z
-*V::send, {blind}^{bs}
-*J::send, {blind}^{left}
-*M::send, {blind}^{right}
+*B::send, {blind}^{bs}
+*Z::send, {blind}^{left}
+*V::send, {blind}^{right}
 *3::send, {blind}^{tab}
 *Q::send, {blind}{appskey}
 *C::send, {blind}{bs}
-*B::send, {blind}{del}
 *D::send, {blind}{down}
 *G::send, {blind}{end}
-*I::send, {blind}{end}+{home}
 *Space::send, {blind}{enter}
 *X::send, {blind}{esc}
 *A::send, {blind}{home}
+*I::send, {blind}{home}+{end}
 *S::send, {blind}{left}
 *F::send, {blind}{right}
-*N::send, {blind}{space}
 *R::send, {blind}{tab}
 *E::send, {blind}{up}
 

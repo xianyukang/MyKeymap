@@ -334,11 +334,12 @@ enterLButtonMode()
 {% if Settings.JMode %}
 
 
-#if JModeL
-l::return
-{{{ keymapToAhk(JModeL) }}}
+#if JModeK
+k::return
+{{{ keymapToAhk(JModeK) }}}
 
 #if JMode
+k::enterJModeK()
 {% for key,value in JMode.items()|sort(attribute="1.value") %}
     {% if value.value %}
 {{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}

@@ -1183,12 +1183,12 @@ toggleRemoveTaskBar()
 }
 
 
-enterJModeL()
+enterJModeK()
 {
     global
-    JModeL := true
-    keywait l
-    JModeL := false
+    JModeK := true
+    keywait k
+    JModeK := false
 }
 
 actionAddSpaceBetweenEnglishChinese()

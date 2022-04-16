@@ -7,7 +7,7 @@
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title id="site-title"> MyKeymap </v-list-item-title>
-          <v-list-item-subtitle> version: 1.1.8 </v-list-item-subtitle>
+          <v-list-item-subtitle> version: 1.1.9 </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
@@ -87,7 +87,7 @@ export default {
       { title: 'Tab 模式', icon: 'mdi-alpha-t-box', to: 'TabMode', color: '#d05' },
       { title: '空格模式', icon: 'mdi-alpha-s-box', to: 'SpaceMode', color: '#d05' },
       { title: 'J 模式', icon: 'mdi-alpha-j-box', to: 'JMode', color: '#d05' },
-      // { title: 'J + L 模式', icon: 'mdi-alpha-j-box', to: 'JModeL', color: '#d05' },
+      { title: 'J + K 模式', icon: 'mdi-alpha-j-box', to: 'JModeK', color: '#d05' },
       { title: '逗号模式', icon: 'mdi-rhombus', to: 'CommaMode', color: '#d05' },
       { title: '句号模式', icon: 'mdi-rhombus', to: 'DotMode', color: '#d05' },
       { title: '分号模式', icon: 'mdi-rhombus', to: 'Semicolon', color: 'blue' },

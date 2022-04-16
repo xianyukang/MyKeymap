@@ -1393,22 +1393,20 @@
         "I": {
             "2": {
                 "type": "文字处理",
-                "value": "send, {blind}^{left}",
+                "value": "send, {blind}{home}+{end}",
                 "prefix": "*"
             }
         },
         "O": {
             "2": {
-                "type": "文字处理",
-                "value": "send, {blind}^c",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "P": {
             "2": {
-                "type": "文字处理",
-                "value": "send, {blind}{end}+{home}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "A": {
@@ -1460,29 +1458,26 @@
         },
         "K": {
             "2": {
-                "type": "文字处理",
-                "value": "send, {blind}^{right}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "L": {
             "2": {
-                "type": "文字处理",
-                "value": "send, {blind}^v",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         ";": {
             "2": {
-                "type": "文字处理",
-                "value": "send, {blind}{insert}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "Z": {
             "2": {
                 "type": "文字处理",
-                "value": "send, {blind}^z",
+                "value": "send, {blind}^{left}",
                 "prefix": "*"
             }
         },
@@ -1503,14 +1498,14 @@
         "V": {
             "2": {
                 "type": "文字处理",
-                "value": "send, {blind}^{bs}",
+                "value": "send, {blind}^{right}",
                 "prefix": "*"
             }
         },
         "B": {
             "2": {
                 "type": "文字处理",
-                "value": "send, {blind}{del}",
+                "value": "send, {blind}^{bs}",
                 "prefix": "*"
             }
         },
@@ -1534,9 +1529,8 @@
         },
         ".": {
             "2": {
-                "type": "文字处理",
-                "value": "send, {blind}^x",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "/": {
@@ -3561,7 +3555,7 @@
             }
         }
     },
-    "JModeL": {
+    "JModeK": {
         "0": {
             "2": {
                 "type": "什么也不做",
@@ -3675,11 +3669,8 @@
         },
         "I": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}^+{left}",
-                "keysToSend": "^+{left}",
-                "prefix": "*",
-                "comment": "选择一个单词 - 向左"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "O": {
@@ -3753,11 +3744,8 @@
         },
         "K": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}^+{right}",
-                "keysToSend": "^+{right}",
-                "prefix": "*",
-                "comment": "选择一个单词 - 向右"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "L": {
@@ -3774,8 +3762,11 @@
         },
         "Z": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "send, {blind}^+{left}",
+                "keysToSend": "^+{left}",
+                "prefix": "*",
+                "comment": "选择一个单词 - 向左"
             }
         },
         "X": {
@@ -3798,17 +3789,17 @@
         },
         "V": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "输入文本或按键",
+                "value": "send, {blind}^+{right}",
+                "comment": "选择一个单词 - 向右",
+                "keysToSend": "^+{right}",
+                "prefix": "*"
             }
         },
         "B": {
             "2": {
-                "type": "输入文本或按键",
-                "value": "send, {blind}+{del}",
-                "keysToSend": "+{del}",
-                "prefix": "*",
-                "comment": "Shift + Del 永久删除文件"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "N": {
@@ -3874,7 +3865,7 @@
             "CapslockSpace",
             "SpaceMode",
             "JMode",
-            "JModeL",
+            "JModeK",
             "TabMode",
             "Semicolon",
             "RButtonMode",
@@ -4282,15 +4273,14 @@
         "I": {
             "2": {
                 "type": "文字处理",
-                "value": "send, {blind}{end}+{home}",
+                "value": "send, {blind}{home}+{end}",
                 "prefix": "*"
             }
         },
         "O": {
             "2": {
-                "type": "文字处理",
-                "value": "send, {blind}^c",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "P": {
@@ -4342,16 +4332,14 @@
         },
         "J": {
             "2": {
-                "type": "文字处理",
-                "value": "send, {blind}^{left}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "K": {
             "2": {
-                "type": "文字处理",
-                "value": "send, {blind}^x",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "L": {
@@ -4369,7 +4357,7 @@
         "Z": {
             "2": {
                 "type": "文字处理",
-                "value": "send, {blind}^z",
+                "value": "send, {blind}^{left}",
                 "prefix": "*"
             }
         },
@@ -4390,36 +4378,33 @@
         "V": {
             "2": {
                 "type": "文字处理",
-                "value": "send, {blind}^{bs}",
+                "value": "send, {blind}^{right}",
                 "prefix": "*"
             }
         },
         "B": {
             "2": {
                 "type": "文字处理",
-                "value": "send, {blind}{del}",
+                "value": "send, {blind}^{bs}",
                 "prefix": "*"
             }
         },
         "N": {
             "2": {
-                "type": "文字处理",
-                "value": "send, {blind}{space}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "M": {
             "2": {
-                "type": "文字处理",
-                "value": "send, {blind}^{right}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         ",": {
             "2": {
-                "type": "文字处理",
-                "value": "send, {blind}^v",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         ".": {
