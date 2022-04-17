@@ -262,6 +262,7 @@ k::enterJModeK()
 *X::send, {blind}{esc}
 *A::send, {blind}{home}
 *I::send, {blind}{home}+{end}
+*.::send, {blind}{insert}
 *S::send, {blind}{left}
 *F::send, {blind}{right}
 *R::send, {blind}{tab}
@@ -366,6 +367,7 @@ k::enterJModeK()
 #if CapslockMode
 
 E::action_enter_task_switch_mode()
+V::ActivateOrRun("用剪切板收集文本", "bin\ahk.exe", "bin\CollectText.ahk")
 S::center_window_to_current_monitor(1200, 800)
 A::center_window_to_current_monitor(1370, 930)
 *I::fastMoveMouse("I", 0, -1)

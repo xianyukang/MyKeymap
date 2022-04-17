@@ -180,7 +180,7 @@ GetVisibleWindows(winFilter)
 
 
 
-MyRun(target, workingdir := "", args := "")
+MyRun(target, args := "", workingdir := "")
 {
     SetFocusToHiddenWindow()
     try 
@@ -206,6 +206,8 @@ MyRun(target, workingdir := "", args := "")
 
 ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:=false) 
 {
+    if !workingdir
+        workingdir := A_WorkingDir
     to_activate := Trim(to_activate)
     ; WinShow, %to_activate%
     ; if (to_activate && winexist(to_activate))
@@ -989,11 +991,8 @@ class TypoTipWindow
     }
     
     activate() {
-        old := A_DetectHiddenWindows
-        hwnd := this.hwnd
-        DetectHiddenWindows, 1
-        WinActivate, ahk_id %hwnd%
-        DetectHiddenWindows, %old%
+        DllCall("SetForegroundWindow", "UInt", this.hwnd)
+        sleep 20
     }
 }
 

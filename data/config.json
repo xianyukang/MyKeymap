@@ -227,8 +227,8 @@
         },
         "V": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "文字处理",
+                "value": "ActivateOrRun(\"用剪切板收集文本\", \"bin\\ahk.exe\", \"bin\\CollectText.ahk\")"
             }
         },
         "B": {
@@ -1529,8 +1529,9 @@
         },
         ".": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "文字处理",
+                "value": "send, {blind}{insert}",
+                "prefix": "*"
             }
         },
         "/": {
