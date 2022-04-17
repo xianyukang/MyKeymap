@@ -87,6 +87,7 @@ export const textFeatures3 = [
     { label: "常用键 - Shift + Tab", value: "send, {blind}+{tab}" },
     { label: "常用键 - Delete", value: "send, {blind}{del}" },
     { label: "其他键 - Insert", value: "send, {blind}{insert}" },
+    { label: "「 Shift 键 」", value: "action_hold_down_shift_key()" },
 ]
 
 export const textFeatures4 = [

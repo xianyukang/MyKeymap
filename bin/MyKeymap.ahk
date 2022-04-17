@@ -341,6 +341,7 @@ k::enterJModeK()
 
 
 #if DotMode
+*,::action_hold_down_shift_key()
 *T::send, {blind}+{home}{bs}
 *W::send, {blind}+{tab}
 *2::send, {blind}^+{tab}

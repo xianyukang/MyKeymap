@@ -339,7 +339,7 @@ export default {
       this.$store.state.windowSelector = "2"
     },
     onTextActionChanged() {
-      if (_.startsWith(this.config.value, 'send')) {
+      if (_.startsWith(this.config.value, 'send') || _.startsWith(this.config.value, 'action_hold_down_shift_key')) {
         this.config.prefix = "*";
       }
     },

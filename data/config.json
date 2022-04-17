@@ -4404,8 +4404,9 @@
         },
         ",": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "文字处理",
+                "value": "action_hold_down_shift_key()",
+                "prefix": "*"
             }
         },
         ".": {

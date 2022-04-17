@@ -31,3 +31,11 @@ action_enter_task_switch_mode()
     }
     TASK_SWITCH_MODE := false
 }
+
+action_hold_down_shift_key()
+{
+    send, {LShift down}
+    key := LTrim(A_ThisHotkey, "*")
+    keywait, %key%
+    send, {LShift up}
+}
