@@ -28,7 +28,7 @@
                 <v-switch class="switch" v-model="currConfig()['enableCapsF']" label="Caps + F"></v-switch>
               </v-col>
               <v-col cols="3">
-                <v-switch class="switch" v-model="currConfig()['enableCapsSpace']" label="Caps + Space"></v-switch>
+                <v-switch class="switch" v-model="currConfig()['enableCapsSpace']" label="Caps+Space"></v-switch>
               </v-col>
               <!-- <v-col cols="3">
                 <v-switch class="switch" v-model="currConfig()['enableLButtonMode']" label="鼠标左键"></v-switch>
