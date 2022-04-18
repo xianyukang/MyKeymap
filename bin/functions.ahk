@@ -991,8 +991,10 @@ class TypoTipWindow
     }
     
     activate() {
+        ; hwnd := WinExist("ahk_class WorkerW")
+        ; DllCall("SetForegroundWindow", "UInt", hwnd)
         DllCall("SetForegroundWindow", "UInt", this.hwnd)
-        sleep 20
+        sleep 50
     }
 }
 
