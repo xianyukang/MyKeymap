@@ -565,8 +565,10 @@
         },
         ".": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "启动程序或激活窗口",
+                "value": "ActivateOrRun(\"ahk_exe datagrip64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\DataGrip.lnk\", \"\", \"\")",
+                "toRun": "%A_Programs%\\JetBrains Toolbox\\DataGrip.lnk",
+                "toActivate": "ahk_exe datagrip64.exe"
             }
         },
         "/": {
