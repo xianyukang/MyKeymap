@@ -75,6 +75,8 @@ shutil.copy('vccorlib140.dll', 'MyKeymap/vccorlib140.dll')
 shutil.copy('vcomp140.dll', 'MyKeymap/vcomp140.dll')
 shutil.copy('vcruntime140.dll', 'MyKeymap/vcruntime140.dll')
 shutil.copy('vcruntime140_1.dll', 'MyKeymap/vcruntime140_1.dll')
+shutil.copy('vcruntime140.dll', 'MyKeymap/bin/vcruntime140.dll')
+shutil.copy('vcruntime140_1.dll', 'MyKeymap/bin/vcruntime140_1.dll')
 
 shutil.copy('MyKeymap.exe', 'MyKeymap/MyKeymap.exe')
 shutil.copy('SoundControl.exe', 'MyKeymap/SoundControl.exe')
