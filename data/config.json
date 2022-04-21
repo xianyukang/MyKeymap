@@ -1394,9 +1394,11 @@
         },
         "I": {
             "2": {
-                "type": "文字处理",
-                "value": "send, {blind}{home}+{end}",
-                "prefix": "*"
+                "type": "输入文本或按键",
+                "value": "send, {blind}ji",
+                "keysToSend": "ji",
+                "prefix": "*",
+                "comment": "防止连按 J+I 造成的误触"
             }
         },
         "O": {
@@ -1466,8 +1468,9 @@
         },
         "L": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "文字处理",
+                "value": "send, {blind}{home}+{end}",
+                "prefix": "*"
             }
         },
         ";": {
@@ -1525,8 +1528,9 @@
         },
         ",": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "文字处理",
+                "value": "send, {blind}{del}",
+                "prefix": "*"
             }
         },
         ".": {
@@ -4275,9 +4279,8 @@
         },
         "I": {
             "2": {
-                "type": "文字处理",
-                "value": "send, {blind}{home}+{end}",
-                "prefix": "*"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "O": {
@@ -4347,8 +4350,9 @@
         },
         "L": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "文字处理",
+                "value": "send, {blind}{home}+{end}",
+                "prefix": "*"
             }
         },
         ";": {
