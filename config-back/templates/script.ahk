@@ -125,6 +125,15 @@ return
 RAlt::LCtrl
 {% endif %}
 
+!F21::
+    MyRun2(run_target, run_args, run_workingdir)
+    ; tip(A_TickCount - run_start)
+    Return
+!F22::
+    ActivateOrRun2(run_to_activate, run_target, run_args, run_workingdir)
+    ; tip(A_TickCount - run_start)
+    Return
+
 !+'::
     Suspend, Permit
     toggleSuspend()

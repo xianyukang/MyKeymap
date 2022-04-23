@@ -29,7 +29,6 @@ https://autohotkey.com/boards/viewtopic.php?t=4334
 
 ShellRun(prms*)
 {
-    SetFocusToHiddenWindow()
 
     try {
 
@@ -182,7 +181,17 @@ GetVisibleWindows(winFilter)
 
 MyRun(target, args := "", workingdir := "")
 {
-    SetFocusToHiddenWindow()
+    global run_target, run_args, run_workingdir, run_start
+    run_start := A_TickCount
+    run_target := target
+    run_args := args
+    run_workingdir := workingdir
+    send, !{F21}
+}
+
+
+MyRun2(target, args := "", workingdir := "")
+{
     try 
     {
         if (workingdir && args) {
@@ -204,7 +213,18 @@ MyRun(target, args := "", workingdir := "")
     } 
 }
 
-ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:=false) 
+ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:=false)
+{
+    global run_to_activate, run_target, run_args, run_workingdir, run_start
+    run_start := A_TickCount
+    run_to_activate := to_activate
+    run_target := target
+    run_args := args
+    run_workingdir := workingdir
+    send, !{F22}
+}
+
+ActivateOrRun2(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:=false) 
 {
     if !workingdir
         workingdir := A_WorkingDir
@@ -990,12 +1010,6 @@ class TypoTipWindow
         Gui, TYPO_TIP_WINDOW:Show, Hide
     }
     
-    activate() {
-        ; hwnd := WinExist("ahk_class WorkerW")
-        ; DllCall("SetForegroundWindow", "UInt", hwnd)
-        DllCall("SetForegroundWindow", "UInt", this.hwnd)
-        sleep 50
-    }
 }
 
 myExit()
@@ -1290,15 +1304,6 @@ postMessageToTipWidnow(messageType) {
     ;     PostMessage, %messageType%, 0, 0
     PostMessage, %messageType%, 0, 0,, ahk_id %commandInputHwnd%
     DetectHiddenWindows, %oldValue%
-}
-
-SetFocusToHiddenWindow()
-{
-    ; 为什么「 (有时候) 启动程序时窗口不在最前面 」?  
-    ; 不知道... 用 shellrun 或 run 都有这个问题
-    ; 在启动程序前激活一下其他窗口,  似乎能减少问题发生的概率
-    global typoTip
-    typoTip.activate()
 }
 
 
