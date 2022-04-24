@@ -824,16 +824,19 @@ center_window_to_current_monitor(width, height)
     DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }
 
+winMaximizeIgnoreDesktop()
+{
+    if IsDesktopWindowActive()
+        return
+    winmaximize, A
+}
+
 winMinimizeIgnoreDesktop() 
 {
-    ; 如果是这个窗口是桌面就返回
-    if (winactive("ahk_class WorkerW ahk_exe explorer.exe"))
+    if IsDesktopWindowActive()
         return
-    ; if (winactive("ahk_class CabinetWClass ahk_exe explorer.exe"))
-    ;     return
     if (winactive("ahk_exe Rainmeter.exe"))
         return
-
     WinMinimize, A
 }
 

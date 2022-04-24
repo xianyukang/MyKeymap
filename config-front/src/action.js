@@ -21,7 +21,7 @@ export const windowActions1 = [
 ]
 
 export const windowActions2 = [
-    { label: "窗口最大化", value: "winmaximize, A" },
+    { label: "窗口最大化", value: "winMaximizeIgnoreDesktop()" },
     { label: "窗口最小化", value: "winMinimizeIgnoreDesktop()" },
     { label: "窗口居中(1200x800)", value: "center_window_to_current_monitor(1200, 800)", },
     { label: "窗口居中(1370x930)", value: "center_window_to_current_monitor(1370, 930)", },

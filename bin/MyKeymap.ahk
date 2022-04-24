@@ -404,7 +404,7 @@ P::send, {LControl down}{LWin down}{Right}{LWin up}{LControl up}
 X::SmartCloseWindow()
 R::SwitchWindows()
 G::ToggleTopMost()
-Q::winmaximize, A
+Q::winMaximizeIgnoreDesktop()
 B::winMinimizeIgnoreDesktop()
 
 

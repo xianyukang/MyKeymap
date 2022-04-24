@@ -70,7 +70,7 @@
         "Q": {
             "2": {
                 "type": "窗口操作",
-                "value": "winmaximize, A"
+                "value": "winMaximizeIgnoreDesktop()"
             }
         },
         "W": {
