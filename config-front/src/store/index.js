@@ -161,7 +161,7 @@ const s = new Vuex.Store({
           // executeScript('bin/ReloadAtSave.ahk')
         })
         .catch(error => {
-          store.commit('SET_SNACKBAR', { snackbar: true, snackbarText: `保存失败` })
+          store.commit('SET_SNACKBAR', { snackbar: true, snackbarText: `保存失败, 可能是设置程序被关了` })
           throw error
         })
     },

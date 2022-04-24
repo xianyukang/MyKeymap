@@ -489,7 +489,7 @@ IsBrowser(pname)
 
 SmartCloseWindow()
 {
-    if (winactive("ahk_class WorkerW ahk_exe explorer.exe"))
+    if IsDesktopWindowActive()
         return
 
     WinGetclass, class, A
@@ -786,8 +786,16 @@ wp_GetMonitorAt(x, y, default=1)
     return default
 }
 
+IsDesktopWindowActive()
+{
+    return WinActive("Program Manager ahk_class Progman") || WinActive("ahk_class WorkerW")
+}
+
 center_window_to_current_monitor(width, height)
 {
+    if IsDesktopWindowActive()
+        return
+
     ; 在 mousemove 时需要 PER_MONITOR_AWARE (-3), 否则当两个显示器有不同的缩放比例时,  mousemove 会有诡异的漂移
     ; 在 winmove   时需要 UNAWARE (-1),           这样即使写死了窗口大小为 1200x800,  系统会帮你缩放到合适的大小
     DllCall("SetThreadDpiAwarenessContext", "ptr", -1, "ptr")

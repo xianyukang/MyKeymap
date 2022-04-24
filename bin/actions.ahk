@@ -12,6 +12,8 @@ action_open_selected_with(toRun, cmdArgs)
 
 set_window_position_and_size(x, y, width, height)
 {
+    if IsDesktopWindowActive()
+        return
     WinExist("A")
     WinGet, state, MinMax
     if state
