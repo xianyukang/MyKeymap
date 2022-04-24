@@ -29,6 +29,7 @@ https://autohotkey.com/boards/viewtopic.php?t=4334
 
 ShellRun(prms*)
 {
+    MakeExplorerForegroundProcess()
 
     try {
 
@@ -177,6 +178,24 @@ GetVisibleWindows(winFilter)
 }
 
 
+MakeExplorerForegroundProcess()
+{
+    ; hwnd := WinExist("Program Manager ahk_class Progman")
+    ; hwnd := WinExist("ahk_class WorkerW ahk_exe Explorer.EXE")
+    DetectHiddenWindows, On
+    hwnd := WinExist("ahk_class ForegroundStaging")
+    DetectHiddenWindows, Off
+    res := DllCall("SetForegroundWindow", "uint", hwnd)
+    ; tip(hwnd ", " res)
+}
+
+MakeSelfForegroundProcess()
+{
+    global typoTip
+    res := DllCall("SetForegroundWindow", "uint", typoTip.hwnd)
+    ; tip(typoTip.hwnd ", " res)
+}
+
 
 
 MyRun(target, args := "", workingdir := "")
@@ -192,6 +211,7 @@ MyRun(target, args := "", workingdir := "")
 
 MyRun2(target, args := "", workingdir := "")
 {
+    MakeSelfForegroundProcess()
     try 
     {
         if (workingdir && args) {
@@ -226,6 +246,7 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
 
 ActivateOrRun2(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:=false) 
 {
+    SetWinDelay, 0
     if !workingdir
         workingdir := A_WorkingDir
     to_activate := Trim(to_activate)
@@ -259,7 +280,7 @@ ActivateOrRun2(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin
                 }
 
             } else {
-                MyRun(oldTarget, args, workingdir)
+                MyRun2(oldTarget, args, workingdir)
             }
         }
 
