@@ -78,7 +78,7 @@ global typoTip := new TypoTipWindow()
 semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,gt,zh,gg,ver,fs,red,gre,blu,pur,pin,kg,jt")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ,ex")
+capsHook := InputHook("C", "{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ,ex,ly")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -553,6 +553,8 @@ execCapslockAbbr(typo) {
            ActivateOrRun("", "https://open.spotify.com/", "", "")
         case "bd ":
            ActivateOrRun("", "https://www.baidu.com", "", "")
+        case "ly":
+           ActivateOrRun("", "ms-settings:bluetooth", "", "")
         case "tm":
            ActivateOrRun("", "taskmgr.exe", "", "")
         case "bb":

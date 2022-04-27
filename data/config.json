@@ -2681,6 +2681,15 @@
                 "value": "quit(false)",
                 "label": "退出 MyKeymap"
             }
+        },
+        "ly": {
+            "2": {
+                "type": "启动程序或激活窗口",
+                "value": "ActivateOrRun(\"\", \"ms-settings:bluetooth\", \"\", \"\")",
+                "toRun": "ms-settings:bluetooth",
+                "toActivate": "",
+                "comment": "打开蓝牙设置"
+            }
         }
     },
     "CapslockAbbrKeys": [
@@ -2701,7 +2710,8 @@
         "lj",
         "help",
         "bd ",
-        "ex"
+        "ex",
+        "ly"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",
