@@ -78,7 +78,7 @@ global typoTip := new TypoTipWindow()
 semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,gt,zh,gg,ver,fs,red,gre,blu,pur,pin,kg,jt")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ,ex,ly")
+capsHook := InputHook("C", "{CapsLock}{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ,ex,ly")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -628,6 +628,7 @@ enterCapslockAbbr(ih)
     WM_USER := 0x0400
     SHOW_TYPO_WINDOW := WM_USER + 0x0001
     HIDE_TYPO_WINDOW := WM_USER + 0x0002
+    Hotkey, *capslock, off
 
     postMessageToTipWidnow(SHOW_TYPO_WINDOW)
     result := ""
@@ -637,6 +638,9 @@ enterCapslockAbbr(ih)
     endReason := ih.Wait()
     ih.Stop()
     if InStr(endReason, "EndKey") {
+        if (ih.EndKey == "CapsLock") {
+            SetCapsLockState % !GetKeyState("CapsLock", "T")
+        }
     }
     if InStr(endReason, "Match") {
         lastChar := SubStr(ih.Match, ih.Match.Length-1)
@@ -647,6 +651,7 @@ enterCapslockAbbr(ih)
     }
     if (ih.Match)
         execCapslockAbbr(ih.Match)
+    Hotkey, *capslock, on
 }
 
 delayedHideTipWindow()

@@ -7,7 +7,7 @@
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title id="site-title"> MyKeymap </v-list-item-title>
-          <v-list-item-subtitle> version: 1.1.11 </v-list-item-subtitle>
+          <v-list-item-subtitle> version: 1.1.12 </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
