@@ -115,6 +115,7 @@ semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", {{{ SemicolonAbbrKeys|join
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
 capsHook := InputHook("C", "{CapsLock}{BackSpace}{Esc}", {{{ CapslockAbbrKeys|join(',')|ahkString }}})
+capsHook.KeyOpt("{CapsLock}", "S")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
 
@@ -586,28 +587,29 @@ capsOnTypoEnd(ih) {
 enterCapslockAbbr(ih) 
 {
     WM_USER := 0x0400
-    SHOW_TYPO_WINDOW := WM_USER + 0x0001
-    HIDE_TYPO_WINDOW := WM_USER + 0x0002
+    SHOW_COMMAND_INPUT := WM_USER + 0x0001
+    HIDE_COMMAND_INPUT := WM_USER + 0x0002
+    CANCEL_COMMAND_INPUT := WM_USER + 0x0003
     Hotkey, *capslock, off
 
-    postMessageToTipWidnow(SHOW_TYPO_WINDOW)
+    postMessageToTipWidnow(SHOW_COMMAND_INPUT)
     result := ""
 
 
     ih.Start()
     endReason := ih.Wait()
     ih.Stop()
-    if InStr(endReason, "EndKey") {
-        if (ih.EndKey == "CapsLock") {
-            SetCapsLockState % !GetKeyState("CapsLock", "T")
-        }
-    }
+
     if InStr(endReason, "Match") {
         lastChar := SubStr(ih.Match, ih.Match.Length-1)
         postCharToTipWidnow(lastChar)
-        SetTimer, delayedHideTipWindow, -50
+        SetTimer, delayedHideTipWindow, -1
     } else {
-        postMessageToTipWidnow(HIDE_TYPO_WINDOW)
+        if InStr(endReason, "EndKey") {
+            postMessageToTipWidnow(CANCEL_COMMAND_INPUT)
+        } else {
+            postMessageToTipWidnow(HIDE_COMMAND_INPUT)
+        }
     }
     if (ih.Match)
         execCapslockAbbr(ih.Match)
@@ -616,8 +618,8 @@ enterCapslockAbbr(ih)
 
 delayedHideTipWindow()
 {
-    HIDE_TYPO_WINDOW := 0x0400 + 0x0002
-    postMessageToTipWidnow(HIDE_TYPO_WINDOW)
+    HIDE_COMMAND_INPUT := 0x0400 + 0x0002
+    postMessageToTipWidnow(HIDE_COMMAND_INPUT)
 }
 
 
