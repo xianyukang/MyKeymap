@@ -77,7 +77,7 @@ export const getKeymapName = {
 export function isModeEnabled(mode, settings) {
     if (mode.startsWith('Capslock')) {
         if (mode.startsWith('CapslockAbbr')) {
-            return settings['enableCapslockMode'] && settings['enableCapslockAbbr']
+            return true
         }
         if (mode.startsWith('CapslockF')) {
             return settings['enableCapslockMode'] && settings['enableCapsF']

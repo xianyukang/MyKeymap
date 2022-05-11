@@ -21,9 +21,9 @@
               <v-col cols="3">
                 <v-switch class="switch" v-model="currConfig()['enableCapslockMode']" label="Caps 模式"></v-switch>
               </v-col>
-              <v-col cols="3">
+              <!-- <v-col cols="3">
                 <v-switch class="switch" v-model="currConfig()['enableCapslockAbbr']" label="Caps 指令"></v-switch>
-              </v-col>
+              </v-col> -->
               <v-col cols="3">
                 <v-switch class="switch" v-model="currConfig()['enableCapsF']" label="Caps + F"></v-switch>
               </v-col>

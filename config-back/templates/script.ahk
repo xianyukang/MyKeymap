@@ -127,10 +127,12 @@ RAlt::LCtrl
 {% endif %}
 
 !F21::
+    Suspend, Permit
     MyRun2(run_target, run_args, run_workingdir)
     ; tip(A_TickCount - run_start)
     Return
 !F22::
+    Suspend, Permit
     ActivateOrRun2(run_to_activate, run_target, run_args, run_workingdir)
     ; tip(A_TickCount - run_start)
     Return
@@ -155,11 +157,7 @@ RAlt::LCtrl
     keywait capslock
     CapslockMode := false
     if (A_ThisHotkey == "*capslock" && A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450) {
-        {% if Settings.enableCapslockAbbr %}
-        enterCapslockAbbr(capsHook)
-        {% else %}
-        toggleCapslock()
-        {% endif %}
+        {{{ SpecialKeys["Caps Up"].value }}}
     }
     enableOtherHotkey(thisHotkey)
     return
@@ -584,13 +582,15 @@ capsOnTypoEnd(ih) {
     ; typoTip.show(ih.Input)
 }
 
-enterCapslockAbbr(ih) 
+enterCapslockAbbr() 
 {
+    global capsHook
+    ih := capsHook
     WM_USER := 0x0400
     SHOW_COMMAND_INPUT := WM_USER + 0x0001
     HIDE_COMMAND_INPUT := WM_USER + 0x0002
     CANCEL_COMMAND_INPUT := WM_USER + 0x0003
-    Hotkey, *capslock, off
+    Suspend, On
 
     postMessageToTipWidnow(SHOW_COMMAND_INPUT)
     result := ""
@@ -599,6 +599,7 @@ enterCapslockAbbr(ih)
     ih.Start()
     endReason := ih.Wait()
     ih.Stop()
+    Suspend, Off
 
     if InStr(endReason, "Match") {
         lastChar := SubStr(ih.Match, ih.Match.Length-1)
@@ -613,7 +614,6 @@ enterCapslockAbbr(ih)
     }
     if (ih.Match)
         execCapslockAbbr(ih.Match)
-    Hotkey, *capslock, on
 }
 
 delayedHideTipWindow()

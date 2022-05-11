@@ -118,11 +118,14 @@ export default {
         [{ key: 'Space', disableAt: this.enableCapsSpace ? ['CapslockSpace', 'Capslock', 'SpaceMode'] : ['SpaceMode'] }],
       ]
 
+      const lastLine = lns[lns.length - 1]
       if (this.$route.name === 'RButtonMode') {
-          const lastLine = lns[lns.length - 1]
           lastLine.push({ key: 'WheelUp'})
           lastLine.push({ key: 'WheelDown'})
           lastLine.push({ key: 'LButton'})
+      }
+      if (this.$route.name === 'Capslock') {
+        lastLine.push({ key: 'Caps Up'})
       }
 
       return lns

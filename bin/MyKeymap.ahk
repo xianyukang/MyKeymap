@@ -78,7 +78,7 @@ global typoTip := new TypoTipWindow()
 semiHook := InputHook("C", "{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,gt,zh,gg,ver,fs,red,gre,blu,pur,pin,kg,jt")
 semiHook.OnChar := Func("onTypoChar")
 semiHook.OnEnd := Func("onTypoEnd")
-capsHook := InputHook("C", "{CapsLock}{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ,ex,ly")
+capsHook := InputHook("C", "{CapsLock}{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ,ex,ly,mm,ms")
 capsHook.KeyOpt("{CapsLock}", "S")
 capsHook.OnChar := Func("capsOnTypoChar")
 capsHook.OnEnd := Func("capsOnTypoEnd")
@@ -89,10 +89,12 @@ return
 RAlt::LCtrl
 
 !F21::
+    Suspend, Permit
     MyRun2(run_target, run_args, run_workingdir)
     ; tip(A_TickCount - run_start)
     Return
 !F22::
+    Suspend, Permit
     ActivateOrRun2(run_to_activate, run_target, run_args, run_workingdir)
     ; tip(A_TickCount - run_start)
     Return
@@ -116,7 +118,7 @@ RAlt::LCtrl
     keywait capslock
     CapslockMode := false
     if (A_ThisHotkey == "*capslock" && A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450) {
-        enterCapslockAbbr(capsHook)
+        enterCapslockAbbr()
     }
     enableOtherHotkey(thisHotkey)
     return
@@ -473,8 +475,6 @@ N::bindOrActivate(CapslockF__N)
 #if CapslockSpaceMode
 space::return
 
-S::ActivateOrRun("my_site - Visual Studio Code", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\project\my_site", "")
-M::ActivateOrRun("MyKeymap - Visual Studio Code", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\MyFiles\MyKeymap", "")
 
 
 #if DisableCapslockKey
@@ -562,6 +562,10 @@ execCapslockAbbr(typo) {
            ActivateOrRun("Bing 词典", "C:\Program Files\Google\Chrome\Application\chrome.exe", "--app=https://cn.bing.com/dict/search?q=nice", "")
         case "st":
            ActivateOrRun("Microsoft Store", "shortcuts\Store.lnk", "", "")
+        case "ms":
+           ActivateOrRun("my_site - Visual Studio Code", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\project\my_site", "")
+        case "mm":
+           ActivateOrRun("MyKeymap - Visual Studio Code", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\MyFiles\MyKeymap", "")
         case "we":
            ActivateOrRun("网易云音乐", "shortcuts\网易云音乐.lnk", "", "")
         case "no":
@@ -624,13 +628,15 @@ capsOnTypoEnd(ih) {
     ; typoTip.show(ih.Input)
 }
 
-enterCapslockAbbr(ih) 
+enterCapslockAbbr() 
 {
+    global capsHook
+    ih := capsHook
     WM_USER := 0x0400
     SHOW_COMMAND_INPUT := WM_USER + 0x0001
     HIDE_COMMAND_INPUT := WM_USER + 0x0002
     CANCEL_COMMAND_INPUT := WM_USER + 0x0003
-    Hotkey, *capslock, off
+    Suspend, On
 
     postMessageToTipWidnow(SHOW_COMMAND_INPUT)
     result := ""
@@ -639,6 +645,7 @@ enterCapslockAbbr(ih)
     ih.Start()
     endReason := ih.Wait()
     ih.Stop()
+    Suspend, Off
 
     if InStr(endReason, "Match") {
         lastChar := SubStr(ih.Match, ih.Match.Length-1)
@@ -653,7 +660,6 @@ enterCapslockAbbr(ih)
     }
     if (ih.Match)
         execCapslockAbbr(ih.Match)
-    Hotkey, *capslock, on
 }
 
 delayedHideTipWindow()

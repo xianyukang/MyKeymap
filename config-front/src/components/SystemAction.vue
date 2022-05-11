@@ -32,6 +32,14 @@
           :value="action.label"
         ></v-radio>
       </v-col>
+      <v-col>
+        <v-radio
+          v-for="action in otherFeatures4"
+          :key="action.label"
+          :label="`${action.label}`"
+          :value="action.label"
+        ></v-radio>
+      </v-col>
     </v-row>
     <v-row v-else>
       <v-col>
@@ -64,7 +72,7 @@ const actionMap = [
   {
     group: 1,
     label: "锁屏",
-    value: 'SystemLockScreen()',
+    value: "SystemLockScreen()",
   },
   {
     group: 1,
@@ -93,11 +101,6 @@ const actionMap = [
   },
   {
     group: 2,
-    label: "打开 MyKeymap 设置",
-    value: "openSettings()",
-  },
-  {
-    group: 2,
     label: "打开「 回收站 」",
     value: "run, shell:RecycleBinFolder",
   },
@@ -123,16 +126,14 @@ const actionMap = [
   },
   {
     group: 3,
-    label: "切换 CapsLock 状态",
-    value: "toggleCapslock()",
-  },
-  {
-    group: 3,
     label: "切换「 自动隐藏任务栏 」",
     value: "toggleAutoHideTaskBar()",
   },
-  { group: 3, label: "退出 MyKeymap", value: "quit(false)" },
-  { group: 3, label: "回顾 MyKeymap 配置", value: "run, bin\\site\\help.html" },
+  { group: 4, label: "退出 MyKeymap", value: "quit(false)" },
+  { group: 4, label: "打开 MyKeymap 设置", value: "openSettings()" },
+  { group: 4, label: "回顾 MyKeymap 配置", value: "run, bin\\site\\help.html" },
+  { group: 4, label: "Capslock 指令框", value: "enterCapslockAbbr()" },
+  { group: 4, label: "切换 Capslock 状态", value: "toggleCapslock()" },
 ];
 
 import {
@@ -158,6 +159,14 @@ export default {
     },
     otherFeatures3() {
       return actionMap.filter((x) => x.group === 3);
+    },
+    otherFeatures4() {
+      const res = actionMap.filter((x) => x.group === 4);
+      if (this.$store.state.selectedKey.includes(" Up")) {
+        return res;
+      } else {
+        return res;
+      }
     },
   },
   methods: {

@@ -85,7 +85,7 @@ function processConfig(config) {
   if (s.enableCapsSpace) {
     config["Capslock"]["Space"] = emptyKeyConfig(true)
   }
-  
+
 
   if (!config['otherInfo']) {
     config['otherInfo'] = {}
@@ -118,12 +118,17 @@ const s = new Vuex.Store({
   },
   getters: {
     config: (state) => (keyName) => {
-      // 返回当前选中的键关联的配置
+      // 此函数返回当前选中的键关联的配置
       if (!keyName && state.selectedKey === EMPTY_KEY) {
         return { type: '什么也不做', value: '' }
       }
 
       keyName = keyName ? keyName : state.selectedKey;
+
+      // 处理 Caps Up 之类的特殊键
+      if (state.config.SpecialKeys[keyName]) {
+        return state.config.SpecialKeys[keyName]
+      }
 
       // 当前键不存在,  比如键盘里新增了 WheelUp、F1 之类的键时
       if (!state.config[state.routeName][keyName]) {
@@ -185,6 +190,11 @@ const s = new Vuex.Store({
           }
           if (resp.data.Settings.enableCapsSpace === undefined) {
             resp.data.Settings.enableCapsSpace = true
+          }
+          if (resp.data.SpecialKeys === undefined) {
+            resp.data.SpecialKeys = {
+              'Caps Up': { type: "系统控制", label: "Capslock 指令框", value: "enterCapslockAbbr()" },
+            }
           }
 
           // 从不支持分应用配置的版本升级
