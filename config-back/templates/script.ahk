@@ -95,6 +95,8 @@ Menu, Tray, Add, 重启程序, trayMenuHandler
 Menu, Tray, Add, 打开设置, trayMenuHandler 
 Menu, Tray, Add, 帮助文档, trayMenuHandler 
 Menu, Tray, Add, 查看窗口标识符, trayMenuHandler 
+Menu, Tray, Default, 暂停
+Menu, Tray, Click, 1
 Menu, Tray, Add 
 
 Menu, Tray, Icon
