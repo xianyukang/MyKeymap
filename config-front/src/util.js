@@ -88,6 +88,9 @@ export function isModeEnabled(mode, settings) {
         return settings['enableCapslockMode']
     }
     if (mode.startsWith('Semicolon')) {
+        if (mode.startsWith('SemicolonAbbr')) {
+            return true
+        }
         return settings['enableSemicolonMode']
     }
     if (mode.startsWith('SpaceMode')) {

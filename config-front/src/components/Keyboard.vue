@@ -127,6 +127,9 @@ export default {
       if (this.$route.name === 'Capslock') {
         lastLine.push({ key: 'Caps Up'})
       }
+      if (this.$route.name === 'Semicolon') {
+        lastLine.push({ key: '; Up'})
+      }
 
       return lns
     },

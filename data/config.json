@@ -4457,6 +4457,11 @@
             "type": "系统控制",
             "label": "Capslock 指令框",
             "value": "enterCapslockAbbr()"
+        },
+        "; Up": {
+            "type": "系统控制",
+            "label": "缩写功能",
+            "value": "enterSemicolonAbbr()"
         }
     }
 }

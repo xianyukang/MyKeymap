@@ -1346,3 +1346,84 @@ SystemLockScreen()
     sleep 300
     DllCall("LockWorkStation")
 }
+
+onSemiHookChar(ih, char) {
+    typoTip.show(ih.Input)
+}
+
+onSemiHookEnd(ih) {
+    ; typoTip.show(ih.Input)
+}
+
+delayedHideSemicolonAbbr()
+{
+    typoTip.hide()
+}
+
+enterSemicolonAbbr() 
+{
+    global semiHook
+    ih := semiHook
+    Suspend, On
+
+    typoTip.show("    ") 
+    ih.Start()
+    ih.Wait()
+    ih.Stop()
+    typoTip.hide()
+    ; SetTimer, delayedHideSemicolonAbbr, -100
+
+    Suspend, Off
+
+    if (ih.Match)
+        execSemicolonAbbr(ih.Match)
+}
+
+
+onCapsHookChar(ih, char) {
+    postCharToTipWidnow(char)
+}
+
+onCapsHookEnd(ih) {
+    ; typoTip.show(ih.Input)
+}
+
+delayedHideTipWindow()
+{
+    HIDE_COMMAND_INPUT := 0x0400 + 0x0002
+    postMessageToTipWidnow(HIDE_COMMAND_INPUT)
+}
+
+enterCapslockAbbr() 
+{
+    global capsHook
+    ih := capsHook
+    WM_USER := 0x0400
+    SHOW_COMMAND_INPUT := WM_USER + 0x0001
+    HIDE_COMMAND_INPUT := WM_USER + 0x0002
+    CANCEL_COMMAND_INPUT := WM_USER + 0x0003
+    Suspend, On
+
+    postMessageToTipWidnow(SHOW_COMMAND_INPUT)
+    result := ""
+
+
+    ih.Start()
+    endReason := ih.Wait()
+    ih.Stop()
+    Suspend, Off
+
+    if InStr(endReason, "Match") {
+        lastChar := SubStr(ih.Match, ih.Match.Length-1)
+        postCharToTipWidnow(lastChar)
+        SetTimer, delayedHideTipWindow, -1
+    } else {
+        if InStr(endReason, "EndKey") {
+            postMessageToTipWidnow(CANCEL_COMMAND_INPUT)
+        } else {
+            postMessageToTipWidnow(HIDE_COMMAND_INPUT)
+        }
+    }
+    if (ih.Match)
+        execCapslockAbbr(ih.Match)
+}

@@ -16,7 +16,7 @@
                 <v-switch class="switch" v-model="currConfig()['enableJMode']" label="J 模式"></v-switch>
               </v-col>
               <v-col cols="3">
-                <v-switch class="switch" v-model="currConfig()['enableSemicolonMode']" label="分号相关"></v-switch>
+                <v-switch class="switch" v-model="currConfig()['enableSemicolonMode']" label="分号模式"></v-switch>
               </v-col>
               <v-col cols="3">
                 <v-switch class="switch" v-model="currConfig()['enableCapslockMode']" label="Caps 模式"></v-switch>
