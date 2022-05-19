@@ -133,8 +133,8 @@
           <pre class="tips">
 
  Tips: (1) <a target="_blank" href="SendKeyExample.html" style="color: green;">点此查看发送按键或文本的示例</a>
-       (2) 输入按键 abc 会受输入法中英文状态的影响,  输入文本 abc 则不会
-       (3) 所以想发送文本 abc 时,  建议给文本加 {text} 前缀, 比如 {text}abc</pre>
+       (2) ^c 表示 Ctrl+C,  ^+c 表示 Ctrl+Shift+C,  `; 表示分号键,  推荐看一下示例
+       (3) {text}abc 表示以文本模式输入 abc,  能避免输入法中英文状态的影响 </pre>
         </template>
 
         <template v-if="config.type === '可能会用到的内置函数'">

@@ -1136,14 +1136,14 @@ toggleSuspend()
 {
         Suspend, Toggle
         if (A_IsSuspended) {
-            tip("  暂停 MyKeymap  ", -500)
             Menu, Tray, Check, 暂停
             Menu, Tray, Icon, bin\logo2.ico,, 1
+            tip("  暂停 MyKeymap  ", -500)
         }
         else {
-            tip("  恢复 MyKeymap  ", -500)
             Menu, Tray, UnCheck, 暂停
             Menu, Tray, Icon, bin\logo.ico,, 1
+            tip("  恢复 MyKeymap  ", -500)
         }
 }
 
