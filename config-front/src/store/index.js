@@ -196,6 +196,11 @@ const s = new Vuex.Store({
           resp.data.SpecialKeys['Caps Up'] = resp.data.SpecialKeys['Caps Up'] || { type: "系统控制", label: "Capslock 指令框", value: "enterCapslockAbbr()" }
           resp.data.SpecialKeys['; Up'] = resp.data.SpecialKeys['; Up'] || { type: "系统控制", label: "缩写功能", value: "enterSemicolonAbbr()" }
 
+          // 记录当前使用哪个模式移动鼠标
+          if (resp.data.Settings.MouseMoveMode === undefined) {
+            resp.data.Settings.MouseMoveMode = "Capslock"
+          }
+
           // 从不支持分应用配置的版本升级
           if (resp.data.supportPerAppConfig === undefined) {
             upgrade(resp.data)

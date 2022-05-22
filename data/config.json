@@ -2814,7 +2814,8 @@
         "enableCapsF": true,
         "enableCapsSpace": true,
         "DotMode": true,
-        "enableDotMode": true
+        "enableDotMode": true,
+        "MouseMoveMode": "Capslock"
     },
     "CapslockSpace": {
         "0": {

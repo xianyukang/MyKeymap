@@ -451,7 +451,7 @@ space::
 {% endif %}
 
 #if SLOWMODE
-{% for key,value in Capslock.items()|sort(attribute="1.value") %}
+{% for key,value in MouseMoveMode.items()|sort(attribute="1.value") %}
     {% if value.value and value.type == "鼠标操作" %}
 {{{ value.prefix }}}{{{ escapeAhkHotkey(key) }}}::{{{ "rightClick(true)" if value.value == "rightClick()" else value.value | replace("fast", "slow") }}}
     {% endif %}

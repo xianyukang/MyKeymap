@@ -44,7 +44,7 @@ class CLayout
         Gui, +Resize +AlwaysOnTop -SysMenu
         ; Gui, Font,, Consolas
         Gui, Font, s12, Microsoft YaHei UI
-        Gui Add, Text,, % "连续复制后,  按空格复制下面的文本:                                                             "
+        Gui Add, Text,, % "连续复制后,  在本窗口内按空格复制下面的文本:                                                             "
     }
     show()
     {

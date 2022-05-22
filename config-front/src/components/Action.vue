@@ -192,6 +192,9 @@
               <v-col> </v-col>
             </v-row>
           </v-radio-group>
+          <pre>
+  <font color="blue">当前「 {{ mouseMoveMode }} 」是生效的鼠标移动模式</font>
+          </pre>
         </template>
 
         <template v-if="config.type === '窗口操作'">
@@ -290,6 +293,7 @@ import {
   currConfigMixin,
   escapeFuncString,
   executeScript,
+  getKeymapName,
   mapKeysToSend,
   notBlank,
   uniqueName,
@@ -451,9 +455,16 @@ export default {
 
       this.config.prefix = "*";
       this.config.value = map[newValue] || "";
+      // 只能用一个模式移动鼠标,  比如在 3 模式上配了鼠标操作,  那么 capslock 模式的鼠标操作会失效
+      if (this.config.value) {
+        this.$store.state.config.Settings.MouseMoveMode = this.$route.name
+      }
     },
   },
   computed: {
+    mouseMoveMode() {
+      return getKeymapName[this.$store.state.config.Settings.MouseMoveMode]
+    },
     config() {
       return this.$store.getters.config();
     },
@@ -481,7 +492,18 @@ export default {
         { text: "🖥️ 系统控制", value: "系统控制" },
         { text: "⚛️ 可能会用到的内置函数", value: "可能会用到的内置函数" },
       ];
-      if (this.$route.name !== "Capslock") {
+      const whiteList = [
+        'Capslock',
+        'CapslockF',
+        'CapslockSpace',
+        'Mode3',
+        'Mode9',
+        'TabMode',
+        'Semicolon',
+        'CommaMode',
+        'DotMode',
+      ]
+      if (!whiteList.includes(this.$route.name)) {
         result.splice(4, 1);
       }
       return result;
