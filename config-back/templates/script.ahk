@@ -523,14 +523,12 @@ space::return
 execSemicolonAbbr(typo) {
     switch typo 
     {
-{% if Settings.SemicolonMode %}
 {% for key,value in SemicolonAbbr.items()|sort(attribute="1.value") %}
     {% if value.value %}
         case {{{ key|ahkString }}}:
             {{{ value.value }}}
     {% endif %}
 {% endfor %}
-{% endif %}
         default: 
             return false
     }
