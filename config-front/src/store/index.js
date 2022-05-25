@@ -191,6 +191,9 @@ const s = new Vuex.Store({
           if (resp.data.Settings.enableCapsSpace === undefined) {
             resp.data.Settings.enableCapsSpace = true
           }
+          if (resp.data.Settings.showMouseMovePrompt === undefined) {
+            resp.data.Settings.showMouseMovePrompt = true
+          }
           // 升级时, 新增以前没有的特殊键
           resp.data.SpecialKeys = resp.data.SpecialKeys || {}
           resp.data.SpecialKeys['Caps Up'] = resp.data.SpecialKeys['Caps Up'] || { type: "系统控制", label: "Capslock 指令框", value: "enterCapslockAbbr()" }

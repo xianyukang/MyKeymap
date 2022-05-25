@@ -21,7 +21,7 @@
       <window-selector-config />
     </v-dialog>
 
-    <v-card min-height="570" :width="config.type === '文字处理' ? 1200 : 790" elevation="5" class="action-config">
+    <v-card min-height="570" :width="cardWidth" elevation="5" class="action-config">
       <v-card-title style="padding-bottom: 0">
         <v-row>
           <v-col cols="5">
@@ -140,18 +140,21 @@
         <template v-if="config.type === '可能会用到的内置函数'">
           <v-text-field
             autocomplete="off"
-            label="单行代码 (自定义的函数可以放到 data/custom_functions.ahk)"
+            label="单行代码"
             v-model="config.value"
           ></v-text-field>
           <v-text-field
             autocomplete="off"
-            label="自定义备注 (按 Caps 输入 help 可回顾配置)"
+            label="自定义备注"
             v-model="config.comment"
           ></v-text-field>
           <pre class="tips">
   几个可能用到的内置函数:
-  (1) 窗口居中并设置大小:           center_window_to_current_monitor(1200, 800)
+  (1) 窗口居中并设置大小: center_window_to_current_monitor(1200, 800)
   (2) 设置窗口位置、并且不修改大小: set_window_position_and_size(10, 10, "DEFAULT", "DEFAULT")
+
+  (3) 进程存在时发送热键、否则启动程序 (适合 QQ / Tim 这类能最小化到托盘的程序):
+      activate_it_by_hotkey_or_run("TIM.exe", "^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk")
           </pre>
         </template>
 
@@ -462,6 +465,11 @@ export default {
     },
   },
   computed: {
+    cardWidth() {
+      if (this.config.type === '文字处理') return 1200 
+      if (this.config.type === '可能会用到的内置函数') return 970
+      return 790
+    },
     mouseMoveMode() {
       return getKeymapName[this.$store.state.config.Settings.MouseMoveMode]
     },

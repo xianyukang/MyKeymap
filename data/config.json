@@ -502,8 +502,9 @@
         },
         ";": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "可能会用到的内置函数",
+                "value": "activate_it_by_hotkey_or_run(\"TIM.exe\", \"^!z\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\腾讯软件\\TIM\\TIM.lnk\")",
+                "comment": "如果存在 TIM.exe 进程则发送 Ctrl+Alt+Z 打开 Tim,  否则启动 Tim"
             }
         },
         "Z": {
@@ -2815,7 +2816,8 @@
         "enableCapsSpace": true,
         "DotMode": true,
         "enableDotMode": true,
-        "MouseMoveMode": "Capslock"
+        "MouseMoveMode": "Capslock",
+        "showMouseMovePrompt": true
     },
     "CapslockSpace": {
         "0": {

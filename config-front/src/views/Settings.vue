@@ -71,6 +71,11 @@
               label="管理员权限运行"
               messages="某窗口有管理员权限时, MyKeymap也要有相同的权限才能操作它"
             ></v-switch>
+            <v-switch
+              class="switch"
+              v-model="currConfig()['showMouseMovePrompt']"
+              label="提示目前处于鼠标模式: 🖱️"
+            ></v-switch>
           </v-card-text>
         </v-card>
       </v-col>

@@ -41,3 +41,12 @@ action_hold_down_shift_key()
     keywait, %key%
     send, {LShift up}
 }
+
+activate_it_by_hotkey_or_run(process_name, activation_hotkey, target, args:="", workingdir:="")
+{
+    if ProcessExist(process_name) {
+        send, %activation_hotkey%
+    } else {
+        ShellRun(target, args, workingdir)
+    }
+}

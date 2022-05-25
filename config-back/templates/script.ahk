@@ -44,6 +44,9 @@ scrollOnceLineCount := {{{ Settings.scrollOnceLineCount if Settings.scrollOnceLi
 scrollDelay1 = {{{ "T" + Settings.scrollDelay1 if Settings.scrollDelay1 else "T0.2" }}}
 scrollDelay2 = {{{ "T" + Settings.scrollDelay2 if Settings.scrollDelay2 else "T0.03" }}}
 
+{% if Settings.showMouseMovePrompt %}
+global mouseMovePrompt := newMouseMovePromptWindow()
+{% endif %}
 fastMoveSingle := {{{ Settings.fastMoveSingle if Settings.fastMoveSingle else 110 }}}
 fastMoveRepeat := {{{ Settings.fastMoveRepeat if Settings.fastMoveRepeat else 70 }}}
 slowMoveSingle := {{{ Settings.slowMoveSingle if Settings.slowMoveSingle else 10 }}}

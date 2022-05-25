@@ -535,12 +535,14 @@ showXianyukangWindow() {
 
 
 slowMoveMouse(key, direction_x, direction_y) {
-    global slowMoveSingle, slowMoveRepeat, moveDelay1, moveDelay2 
+    global slowMoveSingle, slowMoveRepeat, moveDelay1, moveDelay2
     one_x := direction_x * slowMoveSingle
     one_y := direction_y * slowMoveSingle
     repeat_x := direction_x * slowMoveRepeat
     repeat_y := direction_y * slowMoveRepeat
     mousemove, %one_x% , %one_y%, 0, R
+    if mouseMovePrompt
+        mouseMovePrompt.show("🖱️", 19, 17)
     keywait, %key%, %moveDelay1%
     while (errorlevel != 0)
     {
@@ -674,6 +676,8 @@ exitMouseMode()
     global SLOWMODE
     SLOWMODE := false
     send, {blind}{Lbutton up}
+    if mouseMovePrompt
+        mouseMovePrompt.hide()
 }
 
 centerMouse() 
@@ -682,30 +686,25 @@ centerMouse()
     mousemove % x + width/2, y + height/2, 0
 }
 
-lbuttonDown() 
-{
+lbuttonDown() {
     send, {Lbutton down}
 }
 
-myDoubleClick()
-{
+click_mouse_and_exit(keys) {
     global SLOWMODE
-    send,  {blind}{LButton 2}
+    send,  %keys%
     SLOWMODE := false
+    if mouseMovePrompt
+        mouseMovePrompt.hide()
 }
-
-myTrippleClick()
-{
-    global SLOWMODE
-    send,  {blind}{LButton 3}
-    SLOWMODE := false
+myDoubleClick() {
+    click_mouse_and_exit("{blind}{LButton 2}")
 }
-
-leftClick() 
-{
-    global SLOWMODE
-    send,  {blind}{LButton}
-    SLOWMODE := false
+myTrippleClick() {
+    click_mouse_and_exit("{blind}{LButton 3}")
+}
+leftClick() {
+    click_mouse_and_exit("{blind}{LButton}")
 }
 
 rightClick(tempDisableRButton := false) 
@@ -720,6 +719,8 @@ rightClick(tempDisableRButton := false)
         setHotkeyStatus("RButton", true)
     }
     SLOWMODE := false
+    if mouseMovePrompt
+        mouseMovePrompt.hide()
 }
 
 ShowCommandBar()
@@ -1006,42 +1007,50 @@ setColor(color := "#000000", fontFamily:= "Iosevka")
 
 class TypoTipWindow
 {
-    __New()
+    __New(initialText := "", fontSize := 12, marginX := 12, marginY := 2)
     {
-
-        text := "               "                       ; 初始化 text control 的宽度
-        fontSize := 12
+        ; 初始化 text control 的宽度
+        text := initialText ? initialText : "               "
         Font_Colour := 0x0 ;0x2879ff
         Back_Colour := 0xffffe1 ; 0x34495e
 
-        Gui, TYPO_TIP_WINDOW:New, +hwndhGui, ` 
+        Gui, New, +hwndhGui, ` 
         this.hwnd := hGui                           ; 保存 hwnd 目前没什么用
 
         Gui, +Owner +ToolWindow +Disabled -SysMenu -Caption +E0x20 +AlwaysOnTop +Border
-        GUI, Margin, %fontsize%, % fontsize / 5
+        GUI, Margin, %marginX%, %marginY%
         GUI, Color, % Back_Colour
-        GUI, Font, c%Font_Colour% s%fontsize%, Microsoft Sans Serif
+        GUI, Font, c%Font_Colour% s%fontSize%, Microsoft Sans Serif
 
         static ControlID                            ; 存储控件 ID,  不同于 Hwnd
         GUI, Add, Text, vControlID center, %text%
         GuiControlGet, OutputVar, Hwnd , ControlID  ; 获取 Hwnd
         this.textHwnd := OutputVar                  ; 保存到对象属性
 
-        Gui, TYPO_TIP_WINDOW:Show, Hide
+        Gui, Show, Hide
     }
 
-    show(text) {
+    show(text, offsetX := 10, offsetY := 7) {
+        hwnd := this.hwnd
+        Gui, %hwnd%:Default
         GuiControl, Text, % this.textHwnd, %text%
         MouseGetPos, xpos, ypos 
-        xpos += 10
-        ypos += 7
-        Gui, TYPO_TIP_WINDOW:Show, AutoSize Center NoActivate x%xpos% y%ypos%
+        xpos += offsetX
+        ypos += offsetY
+        Gui, Show, AutoSize Center NoActivate x%xpos% y%ypos%
     }
     
     hide() {
-        Gui, TYPO_TIP_WINDOW:Show, Hide
+        hwnd := this.hwnd
+        Gui, %hwnd%:Default
+        Gui, Show, Hide
     }
     
+}
+
+newMouseMovePromptWindow()
+{
+    return new TypoTipWindow("🖱️", 16, 4, 0)
 }
 
 myExit()

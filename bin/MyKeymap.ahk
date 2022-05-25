@@ -34,6 +34,7 @@ scrollOnceLineCount := 1
 scrollDelay1 = T0.2
 scrollDelay2 = T0.03
 
+global mouseMovePrompt := newMouseMovePromptWindow()
 fastMoveSingle := 110
 fastMoveRepeat := 70
 slowMoveSingle := 10
@@ -454,6 +455,7 @@ Esc::exitMouseMode()
 #if FMode
 f::return
 
+`;::activate_it_by_hotkey_or_run("TIM.exe", "^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk")
 B::ActivateOrRun("", "" A_ProgramsCommon "\Google Chrome.lnk", "", "")
 H::ActivateOrRun("- Microsoft Visual Studio", "" A_ProgramsCommon "\Visual Studio 2019.lnk", "", "")
 Z::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\", "", "")
