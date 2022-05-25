@@ -7,6 +7,10 @@ export const specialAction = {
         label: "绑定活动窗口到当前键",
         generateValue: (routeName, currentKey) => bindWindow(routeName, currentKey),
     },
+    unbindWindow: {
+        label: "取消当前窗口的键绑定",
+        value: "bindOrActivate_unbind()",
+    }
 }
 
 

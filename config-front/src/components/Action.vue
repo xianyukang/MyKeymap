@@ -232,6 +232,10 @@
                     :label="specialAction.bindWindowToCurrentKey.label"
                     :value="specialAction.bindWindowToCurrentKey.generateValue(this.$route.name, this.currentKey)"
                   ></v-radio>
+                  <v-radio
+                    :label="specialAction.unbindWindow.label"
+                    :value="specialAction.unbindWindow.value"
+                  ></v-radio>
                 </v-radio-group>
               </v-col>
 

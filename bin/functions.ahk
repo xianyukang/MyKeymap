@@ -1192,20 +1192,43 @@ moveCurrentWindow()
     SendInput, {right}
 }
 
+bindOrActivate_unbind()
+{
+    global bindOrActivate_map
+    id := WinExist("A")
+    if bindOrActivate_map[id] {
+        key := bindOrActivate_map[id]
+        bindOrActivate_map[id] := ""
+        tip("取消 " key " 键绑定", -400)
+    } else {
+        tip("无事发生", -400)
+    }
+}
+
 bindOrActivate(ByRef id)
 {
+    global bindOrActivate_map
+    bindOrActivate_map := bindOrActivate_map ? bindOrActivate_map : {}
     old := A_DetectHiddenWindows
     DetectHiddenWindows, 1
+
     if WinActive("ahk_id " id) {
-        ; id := ""
-        ; tip("取消绑定", -400)
+        centerMouse()
+        tip("--> 活动窗口 <--", -400)
     }
-    else if WinExist("ahk_id " id) {
-        WinActivate
+    else if bindOrActivate_map[id] && WinExist("ahk_id " id) {
+        WinShow, 
+        WinActivate,
     }
     else {
-        tip("绑定当前窗口到 " A_ThisHotkey " 键", -400)
-        id := WinExist("A")
+        active_window_id := WinExist("A")
+        if bindOrActivate_map[active_window_id] {
+            tip("这个窗口属于 " bindOrActivate_map[active_window_id] " 键", -400)
+        } else {
+            id := active_window_id
+            bindOrActivate_map[active_window_id] := A_ThisHotkey
+            tip("绑定当前窗口到 " A_ThisHotkey " 键", -400)
+        }
     }
     DetectHiddenWindows, %old%
 }

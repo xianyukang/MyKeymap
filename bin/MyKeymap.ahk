@@ -456,7 +456,6 @@ Esc::exitMouseMode()
 f::return
 
 `;::activate_it_by_hotkey_or_run("TIM.exe", "^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk")
-B::ActivateOrRun("", "" A_ProgramsCommon "\Google Chrome.lnk", "", "")
 H::ActivateOrRun("- Microsoft Visual Studio", "" A_ProgramsCommon "\Visual Studio 2019.lnk", "", "")
 Z::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\", "", "")
 Q::ActivateOrRun("ahk_class EVERYTHING", "" A_ProgramFiles "\Everything\Everything.exe", "", "")
@@ -477,6 +476,8 @@ A::ActivateOrRun("ahk_exe WindowsTerminal.exe", "shortcuts\Windows Terminal Prev
 O::ActivateOrRun("OneNote for Windows 10", "shortcuts\OneNote for Windows 10.lnk", "", "")
 M::bindOrActivate(CapslockF__M)
 N::bindOrActivate(CapslockF__N)
+/::bindOrActivate_unbind()
+B::winMinimizeIgnoreDesktop()
 
 #if CapslockSpaceMode
 space::return

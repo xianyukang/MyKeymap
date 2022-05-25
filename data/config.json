@@ -536,11 +536,8 @@
         },
         "B": {
             "2": {
-                "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"\", \"\" A_ProgramsCommon \"\\Google Chrome.lnk\", \"\", \"\")",
-                "toRun": "%A_ProgramsCommon%\\Google Chrome.lnk",
-                "toActivate": "",
-                "comment": "新开一个 Chrome 窗口"
+                "type": "窗口操作",
+                "value": "winMinimizeIgnoreDesktop()"
             }
         },
         "N": {
@@ -574,8 +571,8 @@
         },
         "/": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "窗口操作",
+                "value": "bindOrActivate_unbind()"
             }
         }
     },
