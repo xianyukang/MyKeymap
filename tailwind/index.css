@@ -1,3 +1,13 @@
+/* 因为关掉了 tailwind 的 preflight,  所以少了某些依赖样式,  这里补上 */
+.tailwind-scope * {
+  border-width: 0;
+  border-style: solid;
+}
+
+.tailwind-scope table {
+  border-collapse: collapse;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

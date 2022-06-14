@@ -1214,7 +1214,7 @@ bindOrActivate(ByRef id)
 
     if WinActive("ahk_id " id) {
         centerMouse()
-        tip("--> 活动窗口 <--", -400)
+        tip("活动窗口 ↑", -400)
     }
     else if bindOrActivate_map[id] && WinExist("ahk_id " id) {
         WinShow, 

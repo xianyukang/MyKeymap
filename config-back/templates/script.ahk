@@ -143,19 +143,9 @@ RAlt::LCtrl
     ; tip(A_TickCount - run_start)
     Return
 
-!+'::
-    Suspend, Permit
-    toggleSuspend()
-    return
-!'::
-    Suspend, Toggle
-    ReloadProgram()
-    return
+{{{ keymapToAhk(CustomHotkeys) }}}
 
 {% if Settings.CapslockMode %}
-!capslock::toggleCapslock()
-+capslock::toggleCapslock()
-
 *capslock::
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)

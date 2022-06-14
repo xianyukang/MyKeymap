@@ -191,14 +191,48 @@ const s = new Vuex.Store({
           if (resp.data.Settings.enableCapsSpace === undefined) {
             resp.data.Settings.enableCapsSpace = true
           }
+          if (resp.data.Settings.enableCustomHotkeys === undefined) {
+            resp.data.Settings.enableCustomHotkeys = true
+          }
           if (resp.data.Settings.showMouseMovePrompt === undefined) {
-            resp.data.Settings.showMouseMovePrompt = true
+            resp.data.Settings.showMouseMovePrompt = false
           }
           // 升级时, 新增以前没有的特殊键
           resp.data.SpecialKeys = resp.data.SpecialKeys || {}
           resp.data.SpecialKeys['Caps Up'] = resp.data.SpecialKeys['Caps Up'] || { type: "系统控制", label: "Capslock 指令框", value: "enterCapslockAbbr()" }
           resp.data.SpecialKeys['; Up'] = resp.data.SpecialKeys['; Up'] || { type: "系统控制", label: "缩写功能", value: "enterSemicolonAbbr()" }
 
+          // 自定义热键功能
+          resp.data.CustomHotkeys = resp.data.CustomHotkeys || {
+            "!'": {
+              "2": {
+                "type": "系统控制",
+                "value": "\nSuspend, Toggle\nReloadProgram()\nreturn",
+                "label": "重启 MyKeymap"
+              }
+            },
+            "+!'": {
+              "2": {
+                "type": "系统控制",
+                "value": "\nSuspend, Permit\ntoggleSuspend()\nreturn",
+                "label": "暂停 MyKeymap"
+              }
+            },
+            "!capslock": {
+              "2": {
+                "type": "系统控制",
+                "value": "toggleCapslock()",
+                "label": "切换 Capslock 状态"
+              }
+            },
+            "+capslock": {
+              "2": {
+                "type": "系统控制",
+                "value": "toggleCapslock()",
+                "label": "切换 Capslock 状态"
+              }
+            },
+          }
           // 记录当前使用哪个模式移动鼠标
           if (resp.data.Settings.MouseMoveMode === undefined) {
             resp.data.Settings.MouseMoveMode = "Capslock"

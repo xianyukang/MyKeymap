@@ -48,6 +48,9 @@
               <v-col cols="3">
                 <v-switch class="switch" v-model="currConfig()['enableDotMode']" label="句号模式"></v-switch>
               </v-col>
+              <!-- <v-col cols="3">
+                <v-switch class="switch" v-model="currConfig()['enableCustomHotkeys']" label="自定义热键"></v-switch>
+              </v-col> -->
             </v-row>
           </v-card-text>
         </v-card>
@@ -74,7 +77,7 @@
             <v-switch
               class="switch"
               v-model="currConfig()['showMouseMovePrompt']"
-              label="提示目前处于鼠标模式: 🖱️"
+              label="提示目前正在用键盘移动鼠标️"
             ></v-switch>
           </v-card-text>
         </v-card>

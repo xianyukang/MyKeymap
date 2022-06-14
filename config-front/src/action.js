@@ -4,7 +4,7 @@ import _, { join } from 'lodash'
 
 export const specialAction = {
     bindWindowToCurrentKey: {
-        label: "绑定活动窗口到当前键",
+        label: "绑定当前窗口到这个键",
         generateValue: (routeName, currentKey) => bindWindow(routeName, currentKey),
     },
     unbindWindow: {

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import CapslockF from '../views/CapslockF.vue'
+import CustomHotkeys from '../views/CustomHotkeys.vue'
 import Settings from '../views/Settings.vue'
 import CapslockAbbr from '../views/CapslockAbbr.vue'
 import { ALL_KEYMAPS, EMPTY_KEY } from '../util.js'
@@ -39,6 +40,11 @@ const routes = [
     component: Settings,
     props: route => ({
     })
+  },
+  {
+    path: '/CustomHotkeys',
+    name: 'CustomHotkeys',
+    component: CustomHotkeys,
   },
   {
     path: '/SemicolonAbbr',

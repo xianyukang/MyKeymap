@@ -129,12 +129,14 @@ const actionMap = [
     label: "切换「 自动隐藏任务栏 」",
     value: "toggleAutoHideTaskBar()",
   },
+  { group: 3, label: "缩写功能", value: "enterSemicolonAbbr()" },
+  { group: 3, label: "Capslock 指令框", value: "enterCapslockAbbr()" },
+  { group: 3, label: "切换 Capslock 状态", value: "toggleCapslock()" },
+  { group: 4, label: "暂停 MyKeymap", value: "\nSuspend, Permit\ntoggleSuspend()\nreturn" },
+  { group: 4, label: "重启 MyKeymap", value: "\nSuspend, Toggle\nReloadProgram()\nreturn" },
   { group: 4, label: "退出 MyKeymap", value: "quit(false)" },
   { group: 4, label: "打开 MyKeymap 设置", value: "openSettings()" },
   { group: 4, label: "回顾 MyKeymap 配置", value: "run, bin\\site\\help.html" },
-  { group: 4, label: "缩写功能", value: "enterSemicolonAbbr()" },
-  { group: 4, label: "Capslock 指令框", value: "enterCapslockAbbr()" },
-  { group: 4, label: "切换 Capslock 状态", value: "toggleCapslock()" },
 ];
 
 import {

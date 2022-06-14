@@ -34,7 +34,6 @@ scrollOnceLineCount := 1
 scrollDelay1 = T0.2
 scrollDelay2 = T0.03
 
-global mouseMovePrompt := newMouseMovePromptWindow()
 fastMoveSingle := 110
 fastMoveRepeat := 70
 slowMoveSingle := 10
@@ -46,7 +45,6 @@ SemicolonAbbrTip := true
 
 allHotkeys := []
 allHotkeys.Push("*3")
-allHotkeys.Push("*9")
 allHotkeys.Push("*.")
 allHotkeys.Push("*j")
 allHotkeys.Push("*capslock")
@@ -103,17 +101,17 @@ RAlt::LCtrl
     ; tip(A_TickCount - run_start)
     Return
 
-!+'::
-    Suspend, Permit
-    toggleSuspend()
-    return
++!'::
+Suspend, Permit
+toggleSuspend()
+return
 !'::
-    Suspend, Toggle
-    ReloadProgram()
-    return
-
+Suspend, Toggle
+ReloadProgram()
+return
 !capslock::toggleCapslock()
 +capslock::toggleCapslock()
+
 
 *capslock::
     thisHotkey := A_ThisHotkey
@@ -165,16 +163,6 @@ RAlt::LCtrl
     DigitMode := false
     if (A_PriorKey == "3" && (A_TickCount - start_tick < 250))
         send, {blind}3 
-    enableOtherHotkey(thisHotkey)
-    return
-*9::
-    thisHotkey := A_ThisHotkey
-    disableOtherHotkey(thisHotkey)
-    Mode9 := true
-    keywait 9 
-    Mode9 := false
-    if (A_PriorKey == "9" && A_TimeSinceThisHotkey < 350)
-        send, {blind}9 
     enableOtherHotkey(thisHotkey)
     return
 
@@ -346,17 +334,6 @@ k::enterJModeK()
 
 
 
-#if Mode9
-*E::Mode9__136()
-*T::Mode9__138()
-*U::Mode9__140()
-*S::Mode9__145()
-*D::Mode9__146()
-*F::Mode9__147()
-*G::Mode9__148()
-*X::Mode9__155()
-*C::Mode9__156()
-*V::Mode9__157()
 
 
 #if DotMode
@@ -424,13 +401,6 @@ f::
     FMode := false
     return
 
-space::
-    CapslockSpaceMode := true
-    CapslockMode := false
-    SLOWMODE := false
-    keywait space
-    CapslockSpaceMode := false
-    return
 
 #if SLOWMODE
 *I::slowMoveMouse("I", 0, -1)

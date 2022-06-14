@@ -50,6 +50,7 @@ export const KEYMAP_PLUS_ABBR = [
     ...ALL_KEYMAPS,
     'CapslockAbbr',
     'SemicolonAbbr',
+    'CustomHotkeys',
 ]
 
 
@@ -70,7 +71,8 @@ export const getKeymapName = {
     "Mode9": "9 模式",
     "LButtonMode": "鼠标左键",
     "RButtonMode": "鼠标右键",
-    "Settings": "开关/设置"
+    "Settings": "开关/设置",
+    "CustomHotkeys": "自定义热键",
 }
 
 

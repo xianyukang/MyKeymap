@@ -317,7 +317,7 @@ export default {
   components: { KeyValueConfig, WindowSelectorConfig, ExplorerAction },
   created() {},
   props: {
-    currentKey: { type: String },
+    currentKey: { type: String, required: true, },
   },
   watch: {},
   data() {

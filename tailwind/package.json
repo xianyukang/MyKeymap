@@ -4,12 +4,12 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "build-help-page-css": "postcss index.css -o ../bin/site/css/HelpPage.css",
-    "watch-help-page-css": "postcss index.css -o ../config-front/src/style/HelpPage.css --watch"
+    "build": "tailwind -i index.css -o ../config-front/src/style/tailwind.css",
+    "watch": "tailwind --watch -i index.css -o ../config-front/src/style/tailwind.css",
+    "build-help-page-css": "tailwind -c help_page.config.js -i help_page.css -o ../bin/site/css/HelpPage.css",
+    "watch-help-page-css": "tailwind -c help_page.config.js -i help_page.css -o ../config-front/src/style/HelpPage.css --watch"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.4",
-    "postcss-cli": "^9.1.0",
     "tailwindcss": "^3.0.23"
   }
 }

@@ -87,6 +87,9 @@ function parseConfig(config) {
       res[name] = []; // res[name] 表示 <某模式> 在 <某应用> 包含的按键映射
 
       for (const [key, keyConfig] of Object.entries(config[keymap])) {
+        if (!keyConfig) {
+          continue
+        }
         const desc = getDesc(keyConfig[sel.id]);
         if (desc) {
           res[name].push({ key, desc });
@@ -120,7 +123,7 @@ function getDesc(config) {
   }
 
   if (config.value.startsWith("bindOrActivate(")) {
-    return "绑定活动窗口到当前键";
+    return "绑定活动窗口到这个键";
   }
 
   return config.value;

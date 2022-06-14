@@ -1,5 +1,9 @@
 module.exports = {
-  content: ['../config-front/src/components/HelpPage.vue'],
+  important: '.tailwind-scope',
+  corePlugins: {
+    preflight: false,
+  },
+  content: ['../config-front/src/**/*.vue'],
   theme: {
     extend: {},
   },

@@ -2783,9 +2783,9 @@
         "enableCapslockMode": true,
         "enableSemicolonMode": true,
         "enableMode3": true,
-        "enableMode9": true,
+        "enableMode9": false,
         "Mode3": true,
-        "Mode9": true,
+        "Mode9": false,
         "JMode": true,
         "CapslockMode": true,
         "SemicolonMode": true,
@@ -2810,11 +2810,12 @@
         "CommaMode": false,
         "numKeyConfigurable": true,
         "enableCapsF": true,
-        "enableCapsSpace": true,
+        "enableCapsSpace": false,
         "DotMode": true,
         "enableDotMode": true,
         "MouseMoveMode": "Capslock",
-        "showMouseMovePrompt": true
+        "showMouseMovePrompt": false,
+        "enableCustomHotkeys": true
     },
     "CapslockSpace": {
         "0": {
@@ -3904,7 +3905,8 @@
             "CommaMode",
             "DotMode",
             "CapslockAbbr",
-            "SemicolonAbbr"
+            "SemicolonAbbr",
+            "CustomHotkeys"
         ]
     },
     "CommaMode": {
@@ -4462,6 +4464,36 @@
             "type": "系统控制",
             "label": "缩写功能",
             "value": "enterSemicolonAbbr()"
+        }
+    },
+    "CustomHotkeys": {
+        "+!'": {
+            "2": {
+                "type": "系统控制",
+                "value": "\nSuspend, Permit\ntoggleSuspend()\nreturn",
+                "label": "暂停 MyKeymap"
+            }
+        },
+        "!capslock": {
+            "2": {
+                "type": "系统控制",
+                "value": "toggleCapslock()",
+                "label": "切换 Capslock 状态"
+            }
+        },
+        "+capslock": {
+            "2": {
+                "type": "系统控制",
+                "value": "toggleCapslock()",
+                "label": "切换 Capslock 状态"
+            }
+        },
+        "!'": {
+            "2": {
+                "type": "系统控制",
+                "value": "\nSuspend, Toggle\nReloadProgram()\nreturn",
+                "label": "重启 MyKeymap"
+            }
         }
     }
 }
