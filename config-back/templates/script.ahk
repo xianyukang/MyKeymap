@@ -143,7 +143,11 @@ RAlt::LCtrl
     ; tip(A_TickCount - run_start)
     Return
 
-{{{ keymapToAhk(CustomHotkeys) }}}
+{% for key,value in CustomHotkeys.items()|sort(attribute="1.value") %}
+    {% if value.value %}
+{{{ escapeAhkHotkey(key) }}}::{{{ value.value }}}
+    {% endif %}
+{% endfor %}
 
 {% if Settings.CapslockMode %}
 *capslock::

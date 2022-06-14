@@ -34,6 +34,20 @@
       <div class="">
         <div class="flex flex-row">
           <v-card class="w-60 ml-5">
+            <v-card-title>简述</v-card-title>
+            <v-card-text class="">
+              <pre class="text-gray-700">
+如果想设置 Alt + C 这样的热键:
+(1) 点击添加一行
+(2) 在热键那一列里填 !c
+
+
+(英文感叹号 ! 用于表示 Alt 键
+</pre
+              >
+            </v-card-text>
+          </v-card>
+          <v-card class="w-60 ml-5">
             <v-card-title>例子1</v-card-title>
             <v-card-text class="">
               <pre class="text-gray-700">
@@ -51,10 +65,10 @@
             <v-card-title>例子2</v-card-title>
             <v-card-text class="">
               <pre class="text-gray-700">
-F1   表示  F1
-F11  表示  F11
-!F2  表示  Alt + F2
-+F2  表示  Shift + F2
+F11    表示  F11
+!F2    表示  Alt + F2
++F2    表示  Shift + F2
++space 表示  Shift + 空格
 
 (更多例子可以去群里问
 </pre
