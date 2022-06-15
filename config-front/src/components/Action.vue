@@ -60,19 +60,19 @@
           ></v-text-field>
           <v-text-field
             autocomplete="off"
-            label="窗口不存在时要启动的: 程序路径 / 文件夹 / URL"
+            label="当窗口不存在时要启动的: 程序路径 / 文件夹 / URL"
             v-model="config.toRun"
             @input="activateOrRun"
           ></v-text-field>
           <v-text-field
             autocomplete="off"
-            label="启动程序的命令行参数"
+            label="命令行参数"
             v-model="config.cmdArgs"
             @input="activateOrRun"
           ></v-text-field>
           <v-text-field
             autocomplete="off"
-            label="启动程序的工作目录"
+            label="工作目录"
             v-model="config.workingDir"
             @input="activateOrRun"
           ></v-text-field>
@@ -111,8 +111,8 @@
           </v-card-actions>
 
           <pre class="tips">
- Tips: (1) 如果不填窗口标识符就不会尝试激活窗口,  直接启动程序.
-       (2) 前两个参数至少选填一个、其他参数可以不填</pre
+ Tips: (1) 如果不填窗口标识符就不会尝试激活窗口,  直接启动程序
+       (2) 前两个参数至少选填一个、其他参数一般用不到可以不填</pre
           >
         </template>
 

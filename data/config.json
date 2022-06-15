@@ -983,7 +983,7 @@
             "3": {
                 "type": "系统控制",
                 "value": "sel := Explorer_GetSelection(), action_open_selected_with(\"\" A_ProgramFiles \"\\Everything\\Everything.exe\", \"-filename \" sel.selected \"\")",
-                "label": "用指定程序打开选中的文件 / 文件夹",
+                "label": "用指定程序打开选中的文件",
                 "toRun": "%A_ProgramFiles%\\Everything\\Everything.exe",
                 "cmdArgs": "-filename %selected%",
                 "comment": "用 Everything 搜索选中文件夹里的文件"
@@ -1024,7 +1024,7 @@
             "3": {
                 "type": "系统控制",
                 "value": "sel := Explorer_GetSelection(), action_open_selected_with(\"wt.exe\", \"-d \" sel.selected \"\")",
-                "label": "用指定程序打开选中的文件 / 文件夹",
+                "label": "用指定程序打开选中的文件",
                 "toRun": "wt.exe",
                 "comment": "用 Windows Terminal 打开选中的文件夹",
                 "cmdArgs": "-d %selected%"
@@ -1202,7 +1202,7 @@
             "3": {
                 "type": "系统控制",
                 "value": "sel := Explorer_GetSelection(), action_open_selected_with(\"C:\\Program Files\\7-Zip\\7z.exe\", \"x \" sel.selected \" -o\"\"\" sel.current \"\\\" sel.purename \"\"\"\")",
-                "label": "用指定程序打开选中的文件 / 文件夹",
+                "label": "用指定程序打开选中的文件",
                 "toRun": "C:\\Program Files\\7-Zip\\7z.exe",
                 "cmdArgs": "x %selected% -o\"%current%\\%purename%\"",
                 "comment": "用 7-Zip 解压选中的文件"
@@ -1216,7 +1216,7 @@
             "3": {
                 "type": "系统控制",
                 "value": "sel := Explorer_GetSelection(), action_open_selected_with(\"\" A_Programs \"\\Visual Studio Code\\Visual Studio Code.lnk\", \"\" sel.selected \"\")",
-                "label": "用指定程序打开选中的文件 / 文件夹",
+                "label": "用指定程序打开选中的文件",
                 "toRun": "%code%",
                 "cmdArgs": "%selected%",
                 "comment": "用 Visual Studio Code 打开选中的文件"

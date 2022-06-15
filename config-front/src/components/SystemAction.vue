@@ -23,7 +23,7 @@
     <v-divider></v-divider>
     <br />
 
-    <v-row v-if="config.label !== '用指定程序打开选中的文件 / 文件夹'">
+    <v-row v-if="config.label !== '用指定程序打开选中的文件'">
       <v-col>
         <v-radio
           v-for="action in otherFeatures3"
@@ -52,7 +52,7 @@
         ></v-text-field>
         <v-text-field
           autocomplete="off"
-          label="启动程序的命令行参数 (用 %selected% 表示选中文件的路径)"
+          label="命令行参数 (可用 %selected% 表示文件管理器中选中的文件的路径)"
           v-model="config.cmdArgs"
           @input="action_open_selected_with"
           placeholder="例如 %selected%"
@@ -116,7 +116,7 @@ const actionMap = [
   },
   {
     group: 2,
-    label: "用指定程序打开选中的文件 / 文件夹",
+    label: "用指定程序打开选中的文件",
     value: "",
   },
   {
