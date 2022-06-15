@@ -1098,7 +1098,20 @@ closeOldInstance()
 
 openSettings()
 {
+    if !FileExist("bin\ahk.exe") {
+        MsgBox, 程序不完整, 被安全管家误删了文件,  有两个办法`n(1)去隔离区恢复并信任被误删的 ahk.exe`n(2)暂时关掉安全管家,  然后重新解压 MyKeymap.7z
+        return
+    }
     run, bin\ahk.exe bin\openSettings.ahk
+}
+
+openHelpHtml()
+{
+    if !FileExist("bin\site\help.html") {
+        MsgBox, 帮助文件尚未生成,  需要打开设置点一下保存
+        return
+    }
+    run, bin\site\help.html   
 }
 
 setHotkeyStatus(theHotkey, enableHotkey)

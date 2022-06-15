@@ -136,7 +136,7 @@ const actionMap = [
   { group: 4, label: "重启 MyKeymap", value: "\nSuspend, Toggle\nReloadProgram()\nreturn" },
   { group: 4, label: "退出 MyKeymap", value: "quit(false)" },
   { group: 4, label: "打开 MyKeymap 设置", value: "openSettings()" },
-  { group: 4, label: "回顾 MyKeymap 配置", value: "run, bin\\site\\help.html" },
+  { group: 4, label: "回顾 MyKeymap 配置", value: "openHelpHtml()" },
 ];
 
 import {

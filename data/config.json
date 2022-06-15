@@ -2660,7 +2660,7 @@
         "help": {
             "2": {
                 "type": "系统控制",
-                "value": "run, bin\\site\\help.html",
+                "value": "openHelpHtml()",
                 "label": "回顾 MyKeymap 配置"
             }
         },

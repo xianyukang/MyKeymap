@@ -80,7 +80,7 @@ semiHook := InputHook("C", "{CapsLock}{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,
 semiHook.KeyOpt("{CapsLock}", "S")
 semiHook.OnChar := Func("onSemiHookChar")
 semiHook.OnEnd := Func("onSemiHookEnd")
-capsHook := InputHook("C", "{CapsLock}{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ,ex,ly,mm,ms")
+capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ,ex,ly,mm,ms")
 capsHook.KeyOpt("{CapsLock}", "S")
 capsHook.OnChar := Func("onCapsHookChar")
 capsHook.OnEnd := Func("onCapsHookEnd")
@@ -548,6 +548,8 @@ execCapslockAbbr(typo) {
            ActivateOrRun("记事本", "notepad.exe", "", "")
         case "sl":
            DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
+        case "help":
+           openHelpHtml()
         case "se":
            openSettings()
         case "ex":
@@ -556,8 +558,6 @@ execCapslockAbbr(typo) {
            restartExplorer()
         case "ld":
            run, bin\ahk.exe bin\changeBrightness.ahk
-        case "help":
-           run, bin\site\help.html
         case "dd":
            run, shell:downloads
         case "lj":

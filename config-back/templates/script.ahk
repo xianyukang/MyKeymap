@@ -120,7 +120,7 @@ semiHook := InputHook("C", "{CapsLock}{Space}{BackSpace}{Esc}", {{{ SemicolonAbb
 semiHook.KeyOpt("{CapsLock}", "S")
 semiHook.OnChar := Func("onSemiHookChar")
 semiHook.OnEnd := Func("onSemiHookEnd")
-capsHook := InputHook("C", "{CapsLock}{BackSpace}{Esc}", {{{ CapslockAbbrKeys|join(',')|ahkString }}})
+capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", {{{ CapslockAbbrKeys|join(',')|ahkString }}})
 capsHook.KeyOpt("{CapsLock}", "S")
 capsHook.OnChar := Func("onCapsHookChar")
 capsHook.OnEnd := Func("onCapsHookEnd")
