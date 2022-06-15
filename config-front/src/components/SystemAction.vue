@@ -132,21 +132,14 @@ const actionMap = [
   { group: 3, label: "缩写功能", value: "enterSemicolonAbbr()" },
   { group: 3, label: "Capslock 指令框", value: "enterCapslockAbbr()" },
   { group: 3, label: "切换 Capslock 状态", value: "toggleCapslock()" },
-  { group: 4, label: "暂停 MyKeymap", value: "\nSuspend, Permit\ntoggleSuspend()\nreturn" },
-  { group: 4, label: "重启 MyKeymap", value: "\nSuspend, Toggle\nReloadProgram()\nreturn" },
+  { group: 4, label: "暂停 MyKeymap", value: "\nSuspend, Permit\ntoggleSuspend()\nreturn", routeNames: ["CustomHotkeys"] },
+  { group: 4, label: "重启 MyKeymap", value: "\nSuspend, Toggle\nReloadProgram()\nreturn", routeNames: ["CustomHotkeys"] },
   { group: 4, label: "退出 MyKeymap", value: "quit(false)" },
   { group: 4, label: "打开 MyKeymap 设置", value: "openSettings()" },
   { group: 4, label: "回顾 MyKeymap 配置", value: "openHelpHtml()" },
 ];
 
-import {
-  bindWindow,
-  currConfigMixin,
-  escapeFuncString,
-  executeScript,
-  mapKeysToSend,
-  notBlank,
-} from "../util.js";
+import { bindWindow, currConfigMixin, escapeFuncString, executeScript, mapKeysToSend, notBlank } from "../util.js";
 export default {
   props: ["config"],
   data() {
@@ -164,19 +157,23 @@ export default {
       return actionMap.filter((x) => x.group === 3);
     },
     otherFeatures4() {
-      const res = actionMap.filter((x) => x.group === 4);
-      if (this.$store.state.selectedKey.includes(" Up")) {
-        return res;
-      } else {
-        return res;
-      }
+      const res = actionMap
+        .filter((x) => x.group === 4)
+        .filter((x) => {
+          if (!x.routeNames) return true;
+          else return x.routeNames.includes(this.$route.name);
+        });
+      return res;
+      // if (this.$store.state.selectedKey.includes(" Up")) {
+      //   return res;
+      // } else {
+      //   return res;
+      // }
     },
   },
   methods: {
     handleRadioChange() {
-      this.config.value = actionMap.find(
-        (x) => x.label === this.config.label
-      ).value;
+      this.config.value = actionMap.find((x) => x.label === this.config.label).value;
     },
     action_open_selected_with() {
       let toRun = escapeFuncString(this.config.toRun);
