@@ -132,9 +132,8 @@
           <!-- <v-checkbox v-model="config.useSendEvent" color="green" label="使用慢速模式发送按键 (速度慢些, 兼容性好些, 模拟按键不起作用时, 勾上这个试一试)"></v-checkbox> -->
           <pre class="tips">
 
- Tips: (1) <a target="_blank" href="SendKeyExample.html" style="color: green;">点此查看发送按键或文本的示例</a>
-       (2) ^c 表示 Ctrl+C,  ^+c 表示 Ctrl+Shift+C,  `; 表示分号键,  推荐看一下示例
-       (3) {text}abc 表示以文本模式输入 abc,  能避免输入法中英文状态的影响 </pre>
+ Tips: <a target="_blank" href="SendKeyExample.html" style="color: green;">推荐点此查看示例</a>
+       </pre>
         </template>
 
         <template v-if="config.type === '可能会用到的内置函数'">
