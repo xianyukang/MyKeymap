@@ -39,6 +39,11 @@ shutil.rmtree('MyKeymap', ignore_errors=True)
 os.mkdir('MyKeymap/')
 
 # 构建前端项目
+
+os.chdir('tailwind')
+os.system('npm run build')
+os.chdir('..')
+
 os.chdir('config-front')
 os.system('pnpm run build')
 os.chdir('..')

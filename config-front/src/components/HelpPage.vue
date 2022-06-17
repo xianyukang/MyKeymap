@@ -123,7 +123,10 @@ function getDesc(config) {
   }
 
   if (config.value.startsWith("bindOrActivate(")) {
-    return "绑定活动窗口到这个键";
+    return "绑定当前窗口到这个键";
+  }
+  if (config.value.startsWith("bindOrActivate_unbind(")) {
+    return "取消当前窗口的键绑定";
   }
 
   return config.value;
