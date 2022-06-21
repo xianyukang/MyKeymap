@@ -3873,18 +3873,18 @@
         },
         {
             "id": "4",
-            "key": "🔵 VS Code",
-            "value": "- Visual Studio Code"
+            "key": "",
+            "value": ""
         },
         {
             "id": "5",
-            "key": "🔵 Visual Studio",
-            "value": "- Microsoft Visual Studio"
+            "key": "",
+            "value": ""
         },
         {
             "id": "6",
-            "key": "🔵 JetBrains IDE",
-            "value": "ahk_class SunAwtFrame"
+            "key": "",
+            "value": ""
         }
     ],
     "supportPerAppConfig": true,

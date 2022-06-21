@@ -581,15 +581,15 @@ Mode9__136()
         sel := Explorer_GetSelection(), action_open_selected_with("" A_ProgramFiles "\Everything\Everything.exe", "-filename " sel.selected "")
         return
     }
-    if winactive("- Visual Studio Code") {
+    if winactive("") {
         send, {blind}+!{f5}
         return
     }
-    if winactive("- Microsoft Visual Studio") {
+    if winactive("") {
         send, {blind}+{f8}
         return
     }
-    if winactive("ahk_class SunAwtFrame") {
+    if winactive("") {
         send, {blind}+{f7}
         return
     }
@@ -603,29 +603,29 @@ Mode9__138()
 }
 Mode9__140()
 {
-    if winactive("- Microsoft Visual Studio") {
+    if winactive("") {
         send, {blind}^1s
         return
     }
 }
 Mode9__145()
 {
-    if winactive("- Microsoft Visual Studio") {
+    if winactive("") {
         send, {blind}^-
         return
     }
 }
 Mode9__146()
 {
-    if winactive("- Visual Studio Code") {
+    if winactive("") {
         send, {blind}!{f5}
         return
     }
-    if winactive("- Microsoft Visual Studio") {
+    if winactive("") {
         send, {blind}{f8}
         return
     }
-    if winactive("ahk_class SunAwtFrame") {
+    if winactive("") {
         send, {blind}{f7}
         return
     }
@@ -636,22 +636,22 @@ Mode9__147()
         action_copy_selected_file_path()
         return
     }
-    if winactive("- Microsoft Visual Studio") {
+    if winactive("") {
         send, {blind}^+-
         return
     }
 }
 Mode9__148()
 {
-    if winactive("- Visual Studio Code") {
+    if winactive("") {
         send, {blind}^+g
         return
     }
-    if winactive("- Microsoft Visual Studio") {
+    if winactive("") {
         send, {blind}^0^g
         return
     }
-    if winactive("ahk_class SunAwtFrame") {
+    if winactive("") {
         send, {blind}!9
         return
     }
@@ -672,7 +672,7 @@ Mode9__156()
 }
 Mode9__157()
 {
-    if winactive("- Microsoft Visual Studio") {
+    if winactive("") {
         send, {blind}+!.
         return
     }
