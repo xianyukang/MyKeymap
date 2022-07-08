@@ -76,11 +76,11 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{CapsLock}{Space}{BackSpace}{Esc}", "xk,ss,sk,zk,dk,gt,zh,gg,ver,fs,red,gre,blu,pur,pin,kg,jt")
+semiHook := InputHook("C", "{CapsLock}{Space}{BackSpace}{Esc}", "blu,dk,fs,gg,gre,gt,jt,kg,pin,pur,red,sk,ss,ver,xk,zh,zk")
 semiHook.KeyOpt("{CapsLock}", "S")
 semiHook.OnChar := Func("onSemiHookChar")
 semiHook.OnEnd := Func("onSemiHookEnd")
-capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "ss,sl,rb,dd,se,no,ld,we,st,bb,dm,rex,tm,sp,lj,help,bd ,ex,ly,mm,ms")
+capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "bb,bd ,dd,dm,ex,help,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,ss,st,tm,we")
 capsHook.KeyOpt("{CapsLock}", "S")
 capsHook.OnChar := Func("onCapsHookChar")
 capsHook.OnEnd := Func("onCapsHookEnd")
@@ -432,7 +432,6 @@ K::ActivateOrRun("ahk_class PotPlayer64", "" A_ProgramFiles "\DAUM\PotPlayer\Pot
 E::ActivateOrRun("ahk_class YXMainFrame", "C:\Program Files (x86)\Yinxiang Biji\印象笔记\Evernote.exe", "", "")
 W::ActivateOrRun("ahk_exe chrome.exe", "" A_ProgramsCommon "\Google Chrome.lnk", "", "")
 S::ActivateOrRun("ahk_exe Code.exe", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "", "")
-U::ActivateOrRun("ahk_exe datagrip64.exe", "" A_Programs "\JetBrains Toolbox\DataGrip.lnk", "", "")
 .::ActivateOrRun("ahk_exe datagrip64.exe", "" A_Programs "\JetBrains Toolbox\DataGrip.lnk", "", "")
 L::ActivateOrRun("ahk_exe EXCEL.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Excel.lnk", "", "")
 R::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe", "", "")
@@ -575,7 +574,29 @@ execCapslockAbbr(typo) {
 
 
 
-Mode9__136()
+Mode9__139()
+{
+    if winactive("ahk_exe explorer.exe") {
+        sel := Explorer_GetSelection(), action_open_selected_with("" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "" sel.selected "")
+        return
+    }
+}
+Mode9__140()
+{
+    if winactive("") {
+        send, {blind}!{f5}
+        return
+    }
+    if winactive("") {
+        send, {blind}{f8}
+        return
+    }
+    if winactive("") {
+        send, {blind}{f7}
+        return
+    }
+}
+Mode9__141()
 {
     if winactive("ahk_exe explorer.exe") {
         sel := Explorer_GetSelection(), action_open_selected_with("" A_ProgramFiles "\Everything\Everything.exe", "-filename " sel.selected "")
@@ -594,43 +615,7 @@ Mode9__136()
         return
     }
 }
-Mode9__138()
-{
-    if winactive("ahk_exe explorer.exe") {
-        sel := Explorer_GetSelection(), action_open_selected_with("wt.exe", "-d " sel.selected "")
-        return
-    }
-}
-Mode9__140()
-{
-    if winactive("") {
-        send, {blind}^1s
-        return
-    }
-}
-Mode9__145()
-{
-    if winactive("") {
-        send, {blind}^-
-        return
-    }
-}
-Mode9__146()
-{
-    if winactive("") {
-        send, {blind}!{f5}
-        return
-    }
-    if winactive("") {
-        send, {blind}{f8}
-        return
-    }
-    if winactive("") {
-        send, {blind}{f7}
-        return
-    }
-}
-Mode9__147()
+Mode9__142()
 {
     if winactive("ahk_exe explorer.exe") {
         action_copy_selected_file_path()
@@ -641,7 +626,7 @@ Mode9__147()
         return
     }
 }
-Mode9__148()
+Mode9__143()
 {
     if winactive("") {
         send, {blind}^+g
@@ -658,38 +643,40 @@ Mode9__148()
 }
 Mode9__155()
 {
-    if winactive("ahk_exe explorer.exe") {
-        sel := Explorer_GetSelection(), action_open_selected_with("C:\Program Files\7-Zip\7z.exe", "x " sel.selected " -o""" sel.current "\" sel.purename """")
-        return
-    }
-}
-Mode9__156()
-{
-    if winactive("ahk_exe explorer.exe") {
-        sel := Explorer_GetSelection(), action_open_selected_with("" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "" sel.selected "")
+    if winactive("") {
+        send, {blind}^-
         return
     }
 }
 Mode9__157()
+{
+    if winactive("ahk_exe explorer.exe") {
+        sel := Explorer_GetSelection(), action_open_selected_with("wt.exe", "-d " sel.selected "")
+        return
+    }
+}
+Mode9__158()
+{
+    if winactive("") {
+        send, {blind}^1s
+        return
+    }
+}
+Mode9__159()
 {
     if winactive("") {
         send, {blind}+!.
         return
     }
 }
+Mode9__161()
+{
+    if winactive("ahk_exe explorer.exe") {
+        sel := Explorer_GetSelection(), action_open_selected_with("C:\Program Files\7-Zip\7z.exe", "x " sel.selected " -o""" sel.current "\" sel.purename """")
+        return
+    }
+}
 
-SemicolonAbbr2__xk() {
-    send, {blind}{text}()
-    send, {blind}{left 1}
-}
-SemicolonAbbr2__ss() {
-    send, {blind}{text}""
-    send, {blind}{left}
-}
-SemicolonAbbr2__sk() {
-    send, {blind}{text}「  」
-    send, {blind}{left 2}
-}
 SemicolonAbbr2__dk() {
     send, {blind}{text}{}
     send, {blind}{left}
@@ -698,9 +685,21 @@ SemicolonAbbr2__gg() {
     send, {blind}{text}git add -A`; git commit -a -m ""`; git push origin (git branch --show-current)`;
     send, {blind}{left 47}
 }
+SemicolonAbbr2__sk() {
+    send, {blind}{text}「  」
+    send, {blind}{left 2}
+}
+SemicolonAbbr2__ss() {
+    send, {blind}{text}""
+    send, {blind}{left}
+}
 SemicolonAbbr2__ver() {
     send, {blind}#r
     sleep 700
     send, {blind}winver{enter}
+}
+SemicolonAbbr2__xk() {
+    send, {blind}{text}()
+    send, {blind}{left 1}
 }
 

@@ -24,7 +24,7 @@ print(base_dir)
 
 app = Flask(__name__, static_url_path='', static_folder=static_dir, template_folder=template_dir)
 CORS(app)
-app.config['JSON_SORT_KEYS'] = False
+# app.config['JSON_SORT_KEYS'] = False
 script = AhkScript()
 
 import logging
