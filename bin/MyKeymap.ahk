@@ -147,7 +147,7 @@ return
     keywait `; 
     PunctuationMode := false
     DisableCapslockKey := false
-    if (A_PriorKey == ";" && A_TimeSinceThisHotkey < 350) {
+    if (A_PriorKey == ";" && A_TimeSinceThisHotkey < 250) {
          enterSemicolonAbbr()       
     }
     enableOtherHotkey(thisHotkey)
