@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"os/exec"
 	"text/template"
 )
 
@@ -17,9 +18,9 @@ func main() {
 	router.Use(cors.Default())
 	router.Use(static.Serve("/", static.LocalFile("./site", false)))
 
-
 	router.GET("/config", GetConfigHandler)
 	router.PUT("/config", SaveConfigHandler)
+	router.POST("/execute", ExecuteHandler)
 
 	err := router.Run(":12333")
 	if err != nil {
@@ -33,6 +34,28 @@ func GetConfigHandler(c *gin.Context) {
 		panic(err)
 	}
 	c.Data(http.StatusOK, gin.MIMEJSON, data)
+}
+
+func ExecuteHandler(c *gin.Context) {
+	var command map[string]interface{}
+	if err := c.ShouldBindJSON(&command); err != nil {
+		panic(err)
+	}
+	if command["type"].(string) == "run-program" {
+		val := command["value"].([]interface{})
+		exe := "../" + val[0].(string)
+		arg := "../" + val[1].(string)
+		var c = exec.Command(exe, arg)
+		if len(val) == 3 {
+			arg2 := val[2].(string)
+			c = exec.Command(exe, arg, arg2)
+		}
+		err := c.Start()
+		if err != nil {
+			panic(err)
+		}
+	}
+	c.JSON(http.StatusOK, command)
 }
 
 func SaveConfigHandler(c *gin.Context) {
