@@ -2,32 +2,35 @@ package main
 
 import (
 	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	"github.com/goccy/go-json"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"os"
 	"text/template"
 )
 
 func main() {
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 	router.Use(cors.Default())
+	router.Use(static.Serve("/", static.LocalFile("./site", false)))
+
 
 	router.GET("/config", GetConfigHandler)
 	router.PUT("/config", SaveConfigHandler)
 
 	err := router.Run(":12333")
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 }
 
 func GetConfigHandler(c *gin.Context) {
 	data, err := ioutil.ReadFile("../data/config.json")
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	c.Data(http.StatusOK, gin.MIMEJSON, data)
 }
@@ -35,7 +38,7 @@ func GetConfigHandler(c *gin.Context) {
 func SaveConfigHandler(c *gin.Context) {
 	var config map[string]interface{}
 	if err := c.ShouldBindJSON(&config); err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
 	// 生成帮助文件
@@ -55,7 +58,7 @@ func SaveConfigHandler(c *gin.Context) {
 func saveConfigFile(config map[string]interface{}) {
 	f, err := os.Create("../data/config.json")
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	defer func(f *os.File) {
 		_ = f.Close()
@@ -65,7 +68,7 @@ func saveConfigFile(config map[string]interface{}) {
 	encoder.SetIndent("", "    ")
 	encoder.SetEscapeHTML(false)
 	if err := encoder.Encode(config); err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 }
 
@@ -73,7 +76,7 @@ func saveHelpPageHtml(html string) {
 
 	f, err := os.Create("../bin/site/help.html")
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	defer func(f *os.File) {
 		_ = f.Close()
@@ -85,10 +88,10 @@ func saveHelpPageHtml(html string) {
 
 	ts, err := template.ParseFiles(files...)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	err = ts.Execute(f, map[string]string{"helpPageHtml": html})
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 }

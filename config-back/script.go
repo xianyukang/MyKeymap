@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"sort"
 	"strings"
@@ -46,7 +45,7 @@ func saveMyKeymapAhk(data obj) {
 
 	f, err := os.Create("../bin/MyKeymap.ahk")
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	defer func(f *os.File) {
 		_ = f.Close()
@@ -58,14 +57,14 @@ func saveMyKeymapAhk(data obj) {
 
 	ts, err := template.New("script2.ahk").Funcs(templateFuncMap).ParseFiles(files...)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
 	// 先输出到一个字符串, 然后对换行符进行统一, 把 \n 改成 \r\n
 	builder := new(strings.Builder)
 	err = ts.Execute(builder, data)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	res := builder.String()
 	res = strings.ReplaceAll(res, "\r\n", "\n")

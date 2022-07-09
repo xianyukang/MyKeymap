@@ -6,6 +6,7 @@ bin/site
 bin/templates
 bin/mykeymap-settings-server
 bin/mykeymap-settings-server.exe
+bin/settings.exe
 *.7z
 todo.md
 .idea

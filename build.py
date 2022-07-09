@@ -23,6 +23,15 @@ arg = ''
 if (len(sys.argv) > 1):
     arg = sys.argv[1]
 
+if (arg == 'go'):
+    os.chdir('config-back')
+    os.system('go.exe build -ldflags "-s -w"')
+    os.chdir('..')
+    if os.path.isfile("bin/settings.exe"):
+        os.remove("bin/settings.exe")
+    shutil.move("config-back/settings.exe", "bin/")
+    sys.exit()
+
 # 构建后端项目
 shutil.rmtree('bin/mykeymap-settings-server', ignore_errors=True)
 os.chdir('config-back')
