@@ -8,6 +8,7 @@
 #include bin/actions.ahk
 
 
+
 StringCaseSense, On
 SetWorkingDir %A_ScriptDir%\..
 requireAdmin()
@@ -34,6 +35,8 @@ scrollOnceLineCount := 1
 scrollDelay1 = T0.2
 scrollDelay2 = T0.03
 
+
+
 fastMoveSingle := 110
 fastMoveRepeat := 70
 slowMoveSingle := 10
@@ -45,11 +48,16 @@ SemicolonAbbrTip := true
 
 allHotkeys := []
 allHotkeys.Push("*3")
+
+
 allHotkeys.Push("*.")
 allHotkeys.Push("*j")
 allHotkeys.Push("*capslock")
 allHotkeys.Push("*;")
+
 allHotkeys.Push("RButton")
+
+
 
 Menu, Tray, NoStandard
 Menu, Tray, Add, 暂停, trayMenuHandler
@@ -112,6 +120,7 @@ return
 !capslock::toggleCapslock()
 +capslock::toggleCapslock()
 
+
 *capslock::
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
@@ -123,6 +132,8 @@ return
     }
     enableOtherHotkey(thisHotkey)
     return
+
+
 
 
 *j::
@@ -139,6 +150,8 @@ return
     return
 
 
+
+
 *`;::
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
@@ -148,10 +161,12 @@ return
     PunctuationMode := false
     DisableCapslockKey := false
     if (A_PriorKey == ";" && A_TimeSinceThisHotkey < 250) {
-         enterSemicolonAbbr()       
+         enterSemicolonAbbr()
     }
     enableOtherHotkey(thisHotkey)
     return
+
+
 
 *3::
     start_tick := A_TickCount
@@ -165,6 +180,8 @@ return
     enableOtherHotkey(thisHotkey)
     return
 
+
+
 ; RAlt::
 ;     disableOtherHotkey(thisHotkey)
 ;     CommaMode := true
@@ -172,6 +189,8 @@ return
 ;     CommaMode := false
 ;     enableOtherHotkey(thisHotkey)
 ;     return
+
+
 
 *.::
     thisHotkey := A_ThisHotkey
@@ -183,6 +202,10 @@ return
         send, {blind}`. 
     enableOtherHotkey(thisHotkey)
     return
+
+
+
+
 
 
 
@@ -234,6 +257,7 @@ enterRButtonMode()
 
 
 
+
 #if JModeK
 k::return
 *D::send, {blind}+{down}
@@ -274,7 +298,9 @@ k::enterJModeK()
 *R::send, {blind}{tab}
 *E::send, {blind}{up}
 
-    
+
+
+
 
 #if PunctuationMode
 *U::send, {blind}$
@@ -301,6 +327,11 @@ k::enterJModeK()
 *O::send, {blind}{end};
 *V::send, {blind}|
 *T::send, {blind}~
+
+
+
+
+
 
 
 
@@ -335,6 +366,10 @@ k::enterJModeK()
 
 
 
+
+
+
+
 #if DotMode
 *,::action_hold_down_shift_key()
 *T::send, {blind}+{home}{bs}
@@ -360,10 +395,15 @@ k::enterJModeK()
 
 
 
-#if CapslockMode
 
-E::action_enter_task_switch_mode()
+
+#if CapslockMode
 V::ActivateOrRun("用剪切板收集文本", "bin\ahk.exe", "bin\CollectText.ahk")
+C::MyRun("SoundControl.exe")
+X::SmartCloseWindow()
+R::SwitchWindows()
+G::ToggleTopMost()
+E::action_enter_task_switch_mode()
 S::center_window_to_current_monitor(1200, 800)
 A::center_window_to_current_monitor(1370, 930)
 *I::fastMoveMouse("I", 0, -1)
@@ -373,7 +413,6 @@ A::center_window_to_current_monitor(1370, 930)
 *,::lbuttonDown()
 *N::leftClick()
 *.::moveCurrentWindow()
-C::MyRun("SoundControl.exe")
 *M::rightClick()
 *`;::scrollWheel(";", 4)
 *H::scrollWheel("H", 3)
@@ -381,15 +420,14 @@ C::MyRun("SoundControl.exe")
 *U::scrollWheel("U", 1)
 W::send, !{tab}
 D::send, #+{right}
-*T::send, {blind}#{left}
 Y::send, {LControl down}{LWin down}{Left}{LWin up}{LControl up}
 P::send, {LControl down}{LWin down}{Right}{LWin up}{LControl up}
+*T::send, {blind}#{left}
 0::set_window_position_and_size(10, 10, "DEFAULT", "DEFAULT")
-X::SmartCloseWindow()
-R::SwitchWindows()
-G::ToggleTopMost()
 Q::winMaximizeIgnoreDesktop()
 B::winMinimizeIgnoreDesktop()
+
+
 
 
 f::
@@ -401,51 +439,52 @@ f::
     return
 
 
+
+
 #if SLOWMODE
-*I::slowMoveMouse("I", 0, -1)
-*J::slowMoveMouse("J", -1, 0)
-*K::slowMoveMouse("K", 0, 1)
-*L::slowMoveMouse("L", 1, 0)
 *,::lbuttonDown()
 *N::leftClick()
 *.::moveCurrentWindow()
-*M::rightClick(true)
+*M::rightClick()
 *`;::scrollWheel(";", 4)
 *H::scrollWheel("H", 3)
 *O::scrollWheel("O", 2)
 *U::scrollWheel("U", 1)
-
+*I::slowMoveMouse("I", 0, -1)
+*J::slowMoveMouse("J", -1, 0)
+*K::slowMoveMouse("K", 0, 1)
+*L::slowMoveMouse("L", 1, 0)
 
 
 Esc::exitMouseMode()
 *Space::exitMouseMode()
 
-
 #if FMode
 f::return
-
-`;::activate_it_by_hotkey_or_run("TIM.exe", "^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk")
 H::ActivateOrRun("- Microsoft Visual Studio", "" A_ProgramsCommon "\Visual Studio 2019.lnk", "", "")
+O::ActivateOrRun("OneNote for Windows 10", "shortcuts\OneNote for Windows 10.lnk", "", "")
 Z::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\", "", "")
 Q::ActivateOrRun("ahk_class EVERYTHING", "" A_ProgramFiles "\Everything\Everything.exe", "", "")
 K::ActivateOrRun("ahk_class PotPlayer64", "" A_ProgramFiles "\DAUM\PotPlayer\PotPlayerMini64.exe", "", "")
 E::ActivateOrRun("ahk_class YXMainFrame", "C:\Program Files (x86)\Yinxiang Biji\印象笔记\Evernote.exe", "", "")
-W::ActivateOrRun("ahk_exe chrome.exe", "" A_ProgramsCommon "\Google Chrome.lnk", "", "")
 S::ActivateOrRun("ahk_exe Code.exe", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "", "")
-.::ActivateOrRun("ahk_exe datagrip64.exe", "" A_Programs "\JetBrains Toolbox\DataGrip.lnk", "", "")
 L::ActivateOrRun("ahk_exe EXCEL.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Excel.lnk", "", "")
 R::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe", "", "")
-,::ActivateOrRun("ahk_exe goland64.exe", "" A_Programs "\JetBrains Toolbox\GoLand.lnk", "", "")
-J::ActivateOrRun("ahk_exe idea64.exe", "" A_Programs "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk", "", "")
-D::ActivateOrRun("ahk_exe msedge.exe", "" A_ProgramsCommon "\Microsoft Edge.lnk", "", "")
 P::ActivateOrRun("ahk_exe POWERPNT.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk", "", "")
 I::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe", "", "")
 A::ActivateOrRun("ahk_exe WindowsTerminal.exe", "shortcuts\Windows Terminal Preview.lnk", "", "")
-O::ActivateOrRun("OneNote for Windows 10", "shortcuts\OneNote for Windows 10.lnk", "", "")
+W::ActivateOrRun("ahk_exe chrome.exe", "" A_ProgramsCommon "\Google Chrome.lnk", "", "")
+.::ActivateOrRun("ahk_exe datagrip64.exe", "" A_Programs "\JetBrains Toolbox\DataGrip.lnk", "", "")
+,::ActivateOrRun("ahk_exe goland64.exe", "" A_Programs "\JetBrains Toolbox\GoLand.lnk", "", "")
+J::ActivateOrRun("ahk_exe idea64.exe", "" A_Programs "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk", "", "")
+D::ActivateOrRun("ahk_exe msedge.exe", "" A_ProgramsCommon "\Microsoft Edge.lnk", "", "")
+`;::activate_it_by_hotkey_or_run("TIM.exe", "^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk")
 M::bindOrActivate(CapslockF__M)
 N::bindOrActivate(CapslockF__N)
 /::bindOrActivate_unbind()
 B::winMinimizeIgnoreDesktop()
+
+
 
 #if CapslockSpaceMode
 space::return
@@ -457,12 +496,18 @@ space::return
 *capslock up::return
 
 
+
+
+
 #if RButtonMode
 *LButton::send, {blind}^!{tab}
 *WheelUp::send, {blind}^+{tab}
 *WheelDown::send, {blind}^{tab}
 *C::send, {blind}{bs}
 *Space::send, {blind}{enter}
+
+
+
 
 
 #If TASK_SWITCH_MODE
@@ -472,6 +517,7 @@ space::return
 *F::send, {blind}{right}
 *X::send,  {blind}{del}
 *Space::send, {blind}{enter}
+
 #If
 
 
@@ -480,41 +526,41 @@ space::return
 execSemicolonAbbr(typo) {
     switch typo 
     {
-        case "zk":
+    case "zk":
                 send, {blind}[]{left}
-        case "zh":
+    case "zh":
                 send, {blind}{text} site:zhihu.com
-        case "fs":
+    case "fs":
                 send, {blind}{text}、
-        case "gt":
+    case "gt":
                 send, {blind}{text}🐶
-        case "kg":
-            actionAddSpaceBetweenEnglishChinese()
-        case "dk":
+    case "dk":
             SemicolonAbbr2__dk()
-        case "gg":
+    case "gg":
             SemicolonAbbr2__gg()
-        case "sk":
+    case "sk":
             SemicolonAbbr2__sk()
-        case "ss":
+    case "ss":
             SemicolonAbbr2__ss()
-        case "ver":
+    case "ver":
             SemicolonAbbr2__ver()
-        case "xk":
+    case "xk":
             SemicolonAbbr2__xk()
-        case "jt":
+    case "kg":
+            actionAddSpaceBetweenEnglishChinese()
+    case "jt":
             send, {blind}{text}➤` ` 
-        case "gre":
+    case "gre":
             setColor("#080")
-        case "blu":
+    case "blu":
             setColor("#2E66FF")
-        case "pur":
-            setColor("#b309bb")
-        case "red":
+    case "red":
             setColor("#D05")
-        case "pin":
+    case "pin":
             setColor("#FF00FF")
-        default: 
+    case "pur":
+            setColor("#b309bb")
+    default:
             return false
     }
     return true
@@ -523,49 +569,49 @@ execSemicolonAbbr(typo) {
 execCapslockAbbr(typo) {
     switch typo 
     {
-        case "dm":
-           ActivateOrRun("", ".\", "", "")
-        case "sp":
-           ActivateOrRun("", "https://open.spotify.com/", "", "")
-        case "bd ":
-           ActivateOrRun("", "https://www.baidu.com", "", "")
-        case "ly":
-           ActivateOrRun("", "ms-settings:bluetooth", "", "")
-        case "tm":
-           ActivateOrRun("", "taskmgr.exe", "", "")
-        case "bb":
-           ActivateOrRun("Bing 词典", "C:\Program Files\Google\Chrome\Application\chrome.exe", "--app=https://cn.bing.com/dict/search?q=nice", "")
-        case "st":
-           ActivateOrRun("Microsoft Store", "shortcuts\Store.lnk", "", "")
-        case "ms":
-           ActivateOrRun("my_site - Visual Studio Code", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\project\my_site", "")
-        case "mm":
-           ActivateOrRun("MyKeymap - Visual Studio Code", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\MyFiles\MyKeymap", "")
-        case "we":
-           ActivateOrRun("网易云音乐", "shortcuts\网易云音乐.lnk", "", "")
-        case "no":
-           ActivateOrRun("记事本", "notepad.exe", "", "")
-        case "sl":
-           DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
-        case "help":
-           openHelpHtml()
-        case "se":
-           openSettings()
-        case "ex":
-           quit(false)
-        case "rex":
-           restartExplorer()
-        case "ld":
-           run, bin\ahk.exe bin\changeBrightness.ahk
-        case "dd":
-           run, shell:downloads
-        case "lj":
-           run, shell:RecycleBinFolder
-        case "rb":
-           slideToReboot()
-        case "ss":
-           slideToShutdown()
-        default: 
+    case "dm":
+            ActivateOrRun("", ".\", "", "")
+    case "sp":
+            ActivateOrRun("", "https://open.spotify.com/", "", "")
+    case "bd ":
+            ActivateOrRun("", "https://www.baidu.com", "", "")
+    case "ly":
+            ActivateOrRun("", "ms-settings:bluetooth", "", "")
+    case "tm":
+            ActivateOrRun("", "taskmgr.exe", "", "")
+    case "bb":
+            ActivateOrRun("Bing 词典", "C:\Program Files\Google\Chrome\Application\chrome.exe", "--app=https://cn.bing.com/dict/search?q=nice", "")
+    case "st":
+            ActivateOrRun("Microsoft Store", "shortcuts\Store.lnk", "", "")
+    case "mm":
+            ActivateOrRun("MyKeymap - Visual Studio Code", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\MyFiles\MyKeymap", "")
+    case "ms":
+            ActivateOrRun("my_site - Visual Studio Code", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\project\my_site", "")
+    case "we":
+            ActivateOrRun("网易云音乐", "shortcuts\网易云音乐.lnk", "", "")
+    case "no":
+            ActivateOrRun("记事本", "notepad.exe", "", "")
+    case "sl":
+            DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
+    case "help":
+            openHelpHtml()
+    case "se":
+            openSettings()
+    case "ex":
+            quit(false)
+    case "rex":
+            restartExplorer()
+    case "ld":
+            run, bin\ahk.exe bin\changeBrightness.ahk
+    case "lj":
+            run, shell:RecycleBinFolder
+    case "dd":
+            run, shell:downloads
+    case "rb":
+            slideToReboot()
+    case "ss":
+            slideToShutdown()
+    default:
             return false
     }
     return true
@@ -574,105 +620,38 @@ execCapslockAbbr(typo) {
 
 
 
-Mode9__139()
+Mode9__130()
 {
     if winactive("ahk_exe explorer.exe") {
         sel := Explorer_GetSelection(), action_open_selected_with("" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "" sel.selected "")
         return
     }
 }
-Mode9__140()
-{
-    if winactive("") {
-        send, {blind}!{f5}
-        return
-    }
-    if winactive("") {
-        send, {blind}{f8}
-        return
-    }
-    if winactive("") {
-        send, {blind}{f7}
-        return
-    }
-}
-Mode9__141()
-{
-    if winactive("ahk_exe explorer.exe") {
-        sel := Explorer_GetSelection(), action_open_selected_with("" A_ProgramFiles "\Everything\Everything.exe", "-filename " sel.selected "")
-        return
-    }
-    if winactive("") {
-        send, {blind}+!{f5}
-        return
-    }
-    if winactive("") {
-        send, {blind}+{f8}
-        return
-    }
-    if winactive("") {
-        send, {blind}+{f7}
-        return
-    }
-}
-Mode9__142()
-{
-    if winactive("ahk_exe explorer.exe") {
-        action_copy_selected_file_path()
-        return
-    }
-    if winactive("") {
-        send, {blind}^+-
-        return
-    }
-}
-Mode9__143()
-{
-    if winactive("") {
-        send, {blind}^+g
-        return
-    }
-    if winactive("") {
-        send, {blind}^0^g
-        return
-    }
-    if winactive("") {
-        send, {blind}!9
-        return
-    }
-}
-Mode9__155()
-{
-    if winactive("") {
-        send, {blind}^-
-        return
-    }
-}
-Mode9__157()
+Mode9__144()
 {
     if winactive("ahk_exe explorer.exe") {
         sel := Explorer_GetSelection(), action_open_selected_with("wt.exe", "-d " sel.selected "")
         return
     }
 }
-Mode9__158()
+Mode9__151()
 {
-    if winactive("") {
-        send, {blind}^1s
+    if winactive("ahk_exe explorer.exe") {
+        action_copy_selected_file_path()
         return
     }
 }
-Mode9__159()
-{
-    if winactive("") {
-        send, {blind}+!.
-        return
-    }
-}
-Mode9__161()
+Mode9__154()
 {
     if winactive("ahk_exe explorer.exe") {
         sel := Explorer_GetSelection(), action_open_selected_with("C:\Program Files\7-Zip\7z.exe", "x " sel.selected " -o""" sel.current "\" sel.purename """")
+        return
+    }
+}
+Mode9__156()
+{
+    if winactive("ahk_exe explorer.exe") {
+        sel := Explorer_GetSelection(), action_open_selected_with("" A_ProgramFiles "\Everything\Everything.exe", "-filename " sel.selected "")
         return
     }
 }
@@ -702,4 +681,3 @@ SemicolonAbbr2__xk() {
     send, {blind}{text}()
     send, {blind}{left 1}
 }
-

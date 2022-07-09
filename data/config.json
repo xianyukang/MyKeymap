@@ -2821,27 +2821,6 @@
             "2": {
                 "type": "什么也不做",
                 "value": ""
-            },
-            "4": {
-                "comment": "Git - 下一处修改",
-                "keysToSend": "!{f5}",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}!{f5}"
-            },
-            "5": {
-                "comment": "Git - 下一处修改",
-                "keysToSend": "{f8}",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}{f8}"
-            },
-            "6": {
-                "comment": "Git - 下一处修改",
-                "keysToSend": "{f7}",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}{f7}"
             }
         },
         "E": {
@@ -2856,27 +2835,6 @@
                 "toRun": "%A_ProgramFiles%\\Everything\\Everything.exe",
                 "type": "系统控制",
                 "value": "sel := Explorer_GetSelection(), action_open_selected_with(\"\" A_ProgramFiles \"\\Everything\\Everything.exe\", \"-filename \" sel.selected \"\")"
-            },
-            "4": {
-                "comment": "Git - 上一处修改",
-                "keysToSend": "+!{f5}",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}+!{f5}"
-            },
-            "5": {
-                "comment": "Git - 上一处修改",
-                "keysToSend": "+{f8}",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}+{f8}"
-            },
-            "6": {
-                "comment": "Git - 上一处修改",
-                "keysToSend": "+{f7}",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}+{f7}"
             }
         },
         "F": {
@@ -2888,40 +2846,12 @@
                 "label": "复制选中文件的路径",
                 "type": "系统控制",
                 "value": "action_copy_selected_file_path()"
-            },
-            "5": {
-                "comment": "代码跳转 - 前进",
-                "keysToSend": "^+-",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}^+-"
             }
         },
         "G": {
             "2": {
                 "type": "什么也不做",
                 "value": ""
-            },
-            "4": {
-                "comment": "Git 面板",
-                "keysToSend": "^+g",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}^+g"
-            },
-            "5": {
-                "comment": "Git 面板",
-                "keysToSend": "^0^g",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}^0^g"
-            },
-            "6": {
-                "comment": "Git 面板",
-                "keysToSend": "!9",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}!9"
             }
         },
         "H": {
@@ -2994,13 +2924,6 @@
             "2": {
                 "type": "什么也不做",
                 "value": ""
-            },
-            "5": {
-                "comment": "代码跳转 - 回退",
-                "keysToSend": "^-",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}^-"
             }
         },
         "Space": {
@@ -3027,26 +2950,12 @@
             "2": {
                 "type": "什么也不做",
                 "value": ""
-            },
-            "5": {
-                "comment": "搜索 Symbol",
-                "keysToSend": "^1s",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}^1s"
             }
         },
         "V": {
             "2": {
                 "type": "什么也不做",
                 "value": ""
-            },
-            "5": {
-                "comment": "Shift + Alt + .",
-                "keysToSend": "+!.",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}+!."
             }
         },
         "W": {

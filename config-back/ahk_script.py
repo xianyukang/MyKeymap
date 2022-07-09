@@ -76,8 +76,6 @@ class AhkScript:
 
     def generate(self, data):
         self.processData(data)
-        data['SemicolonAbbrKeys'] = [ x.replace(",", ",,") for x in  data['SemicolonAbbrKeys']]
-        data['CapslockAbbrKeys'] = [ x.replace(",", ",,") for x in  data['CapslockAbbrKeys']]
         data['MouseMoveMode'] = data[data['Settings']['MouseMoveMode']]
         with open("../bin/MyKeymap.ahk", "w+", encoding="utf-8-sig") as f:
             template = self.env.get_template("script.ahk")

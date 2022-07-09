@@ -54,8 +54,8 @@ function get_send_key_functions(config, windowSelectorIds) {
 
 function processConfig(config) {
   const ids = ['2', ...config.windowSelectors.map(x => x.id)]
-  config['CapslockAbbrKeys'] = Object.keys(config.CapslockAbbr)
-  config['SemicolonAbbrKeys'] = Object.keys(config.SemicolonAbbr)
+  config['CapslockAbbrKeys'] = Object.keys(config.CapslockAbbr).map(x => x.replace(/,/g, ',,'))
+  config['SemicolonAbbrKeys'] = Object.keys(config.SemicolonAbbr).map(x => x.replace(/,/g, ',,'))
   // 逗号开头的放在前面
   config['CapslockAbbrKeys'] = _.concat(_.remove(config['CapslockAbbrKeys'], x => x.startsWith(',')), config['CapslockAbbrKeys'])
   config['SemicolonAbbrKeys'] = _.concat(_.remove(config['SemicolonAbbrKeys'], x => x.startsWith(',')), config['SemicolonAbbrKeys'])

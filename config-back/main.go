@@ -47,6 +47,7 @@ func SaveConfigHandler(c *gin.Context) {
 	saveConfigFile(config)
 
 	// 生成脚本文件
+	generateScript(config)
 
 	c.JSON(http.StatusOK, gin.H{"message": "ok"})
 }
