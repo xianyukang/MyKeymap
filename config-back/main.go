@@ -1,20 +1,45 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	"github.com/goccy/go-json"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"os/exec"
+	"strings"
 	"text/template"
+	"time"
 )
 
 func main() {
+
+	hasError := make(chan struct{})
+	errorLog := new(strings.Builder)
+
+	go server(errorLog, hasError)
+	matrix(hasError)
+
+	// 要等 gin 协程把错误日志打印完, 才能在这边读取错误日志
+	// 之前试了半天没发现是什么问题,  这就是并发程序的复杂性,  这里等 300ms 属于偷懒的办法
+	time.Sleep(300 * time.Millisecond)
+	fmt.Println(errorLog.String())
+
+	fmt.Println("发生了上述错误, 可以截图发给作者")
+	_, _ = fmt.Scanln()
+}
+
+func server(errorLog *strings.Builder, hasError chan<- struct{}) {
 	gin.SetMode(gin.ReleaseMode)
+	gin.DefaultWriter = io.Discard
+	gin.DefaultErrorWriter = errorLog
+
 	router := gin.Default()
+	router.Use(ErrorHandler(hasError))
 	router.Use(cors.Default())
 	router.Use(static.Serve("/", static.LocalFile("./site", false)))
 
@@ -34,6 +59,23 @@ func GetConfigHandler(c *gin.Context) {
 		panic(err)
 	}
 	c.Data(http.StatusOK, gin.MIMEJSON, data)
+}
+
+func ErrorHandler(hasError chan<- struct{}) gin.HandlerFunc {
+	// 参考这几篇教程
+	// https://juejin.cn/post/7064770224515448840
+	// https://segmentfault.com/a/1190000020358030
+	// https://stackoverflow.com/questions/69948784/how-to-handle-errors-in-gin-middleware
+	return func(c *gin.Context) {
+		defer func() {
+			if err := recover(); err != nil {
+				close(hasError)
+				panic(err)
+			}
+		}()
+
+		c.Next()
+	}
 }
 
 func ExecuteHandler(c *gin.Context) {
