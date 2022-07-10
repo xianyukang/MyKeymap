@@ -23,24 +23,25 @@ arg = ''
 if (len(sys.argv) > 1):
     arg = sys.argv[1]
 
+# 构建后端项目
+os.chdir('config-back')
+os.system('go.exe build -ldflags "-s -w"')
+os.chdir('..')
+if os.path.isfile("bin/settings.exe"):
+    os.remove("bin/settings.exe")
+shutil.move("config-back/settings.exe", "bin/")
 if (arg == 'go'):
-    os.chdir('config-back')
-    os.system('go.exe build -ldflags "-s -w"')
-    os.chdir('..')
-    if os.path.isfile("bin/settings.exe"):
-        os.remove("bin/settings.exe")
-    shutil.move("config-back/settings.exe", "bin/")
     sys.exit()
 
 # 构建后端项目
 shutil.rmtree('bin/mykeymap-settings-server', ignore_errors=True)
-os.chdir('config-back')
-os.system('pyinstaller.exe api.py -n mykeymap-settings-server -y --clean --icon icon.ico')
-os.chdir('..')
-os.system('cp -r config-back/dist/mykeymap-settings-server bin/')
+# os.chdir('config-back')
+# os.system('pyinstaller.exe api.py -n mykeymap-settings-server -y --clean --icon icon.ico')
+# os.chdir('..')
+# os.system('cp -r config-back/dist/mykeymap-settings-server bin/')
 
-if (arg == 'server'):
-    sys.exit()
+# if (arg == 'server'):
+#     sys.exit()
 
 
 # 清除老版本
@@ -66,7 +67,8 @@ os.chdir('..')
 if not os.path.isdir('bin/templates'):
     os.mkdir('bin/templates')
 shutil.copy('bin/site/index.html', 'bin/templates/index.html')
-shutil.copy('config-back/templates/script.ahk', 'bin/templates/script.ahk')
+# shutil.copy('config-back/templates/script.ahk', 'bin/templates/script.ahk')
+shutil.copy('config-back/templates/script2.ahk', 'bin/templates/script2.ahk')
 shutil.copy('config-back/templates/help.html', 'bin/templates/help.html')
 
 # 复制文件
@@ -95,6 +97,7 @@ shutil.copy('vcruntime140_1.dll', 'MyKeymap/bin/vcruntime140_1.dll')
 shutil.copy('MyKeymap.exe', 'MyKeymap/MyKeymap.exe')
 shutil.copy('SoundControl.exe', 'MyKeymap/SoundControl.exe')
 shutil.copy('font.ttf', 'MyKeymap/font.ttf')
+shutil.copy('设置程序.lnk', 'MyKeymap/设置程序.lnk')
 
 
 if arg == 'upload':

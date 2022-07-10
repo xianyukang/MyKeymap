@@ -27,6 +27,7 @@ func main() {
 	}
 
 	go server(errorLog, hasError, debug)
+	go openBrowser()
 	matrix(hasError)
 
 	// 要等 gin 协程把错误日志打印完, 才能在这边读取错误日志
@@ -58,6 +59,11 @@ func server(errorLog *strings.Builder, hasError chan<- struct{}, debug bool) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func openBrowser() {
+	time.Sleep(600 * time.Millisecond)
+	_ = exec.Command("cmd", "/c", "start", "http://127.0.0.1:12333").Start()
 }
 
 func GetConfigHandler(c *gin.Context) {
