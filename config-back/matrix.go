@@ -55,6 +55,19 @@ outer:
 			return n.Y < height+1
 		})
 
+		// 打印横幅
+		banner := []string{
+			"   ------------------------------------------------------------------",
+			"   1. 打 开 浏 览 器 访 问  http://127.0.0.1:12333 修 改  MyKeyamp 的 配 置      ",
+			"   2. 保 存 配 置 后 需 要 按  alt+' 重 启  MyKeymap (这 里 的 '是 单 引 号 键 )       ",
+			"   3. 修 改 完  MyKeymap 的 配 置 就 可 以 关 闭 本 窗 口                          ",
+			"   ------------------------------------------------------------------",
+		}
+		style := defStyle.Foreground(tcell.ColorWhite)
+		for index, line := range banner {
+			drawText(s, 17, 3+index, 100, 100, style, line)
+		}
+
 		// Update screen
 		s.Show()
 
@@ -73,6 +86,25 @@ outer:
 					quit()
 				}
 			}
+		}
+	}
+}
+
+func drawText(s tcell.Screen, x1, y1, x2, y2 int, style tcell.Style, text string) {
+	// To draw text more easily, define a render function.
+	row := y1
+	col := x1
+	for _, r := range []rune(text) {
+		s.SetContent(col, row, r, nil, style)
+		col++
+		// col 在 x2 处换行
+		if col >= x2 {
+			row++
+			col = x1
+		}
+		// 超出的文本不展示
+		if row > y2 {
+			break
 		}
 	}
 }
