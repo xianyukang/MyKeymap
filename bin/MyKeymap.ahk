@@ -351,14 +351,12 @@ k::enterJModeK()
 *P::send, {blind}{f11}
 *`;::send, {blind}{f12}
 *1::send, {blind}{f1}
-*Space::send, {blind}{f1}
 *2::send, {blind}{f2}
 *E::send, {blind}{f3}
 *4::send, {blind}{f4}
 *R::send, {blind}{f5}
 *T::send, {blind}{f6}
 *7::send, {blind}{f7}
-*Y::send, {blind}{f7}
 *8::send, {blind}{f8}
 *9::send, {blind}{f9}
 
@@ -620,38 +618,38 @@ execCapslockAbbr(typo) {
 
 
 
-Mode9__130()
+Mode9__2e6e9a795adc27785791624c565e44ba()
+{
+    if winactive("ahk_exe explorer.exe") {
+        sel := Explorer_GetSelection(), action_open_selected_with("" A_ProgramFiles "\Everything\Everything.exe", "-filename " sel.selected "")
+        return
+    }
+}
+Mode9__36f2b24e1f31861d69c006014c4c7120()
 {
     if winactive("ahk_exe explorer.exe") {
         sel := Explorer_GetSelection(), action_open_selected_with("" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "" sel.selected "")
         return
     }
 }
-Mode9__144()
+Mode9__4ebe991deeaeb7e93a3fef49609b5f9e()
 {
     if winactive("ahk_exe explorer.exe") {
         sel := Explorer_GetSelection(), action_open_selected_with("wt.exe", "-d " sel.selected "")
         return
     }
 }
-Mode9__151()
-{
-    if winactive("ahk_exe explorer.exe") {
-        action_copy_selected_file_path()
-        return
-    }
-}
-Mode9__154()
+Mode9__8a77e9cc039b4689f031f6bee239a0f2()
 {
     if winactive("ahk_exe explorer.exe") {
         sel := Explorer_GetSelection(), action_open_selected_with("C:\Program Files\7-Zip\7z.exe", "x " sel.selected " -o""" sel.current "\" sel.purename """")
         return
     }
 }
-Mode9__156()
+Mode9__db128ecefd649be402b6beb752f32b00()
 {
     if winactive("ahk_exe explorer.exe") {
-        sel := Explorer_GetSelection(), action_open_selected_with("" A_ProgramFiles "\Everything\Everything.exe", "-filename " sel.selected "")
+        action_copy_selected_file_path()
         return
     }
 }

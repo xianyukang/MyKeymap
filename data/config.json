@@ -2647,11 +2647,8 @@
         },
         "Space": {
             "2": {
-                "comment": "",
-                "keysToSend": "{f1}",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}{f1}"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "T": {
@@ -2692,11 +2689,8 @@
         },
         "Y": {
             "2": {
-                "comment": "F7 键",
-                "keysToSend": "{f7}",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}{f7}"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "Z": {

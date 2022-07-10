@@ -20,8 +20,13 @@ func main() {
 
 	hasError := make(chan struct{})
 	errorLog := new(strings.Builder)
+	debug := len(os.Args) == 2 && os.Args[1] == "debug"
 
-	go server(errorLog, hasError)
+	if debug {
+		server(errorLog, hasError, debug)
+	}
+
+	go server(errorLog, hasError, debug)
 	matrix(hasError)
 
 	// 要等 gin 协程把错误日志打印完, 才能在这边读取错误日志
@@ -33,10 +38,12 @@ func main() {
 	_, _ = fmt.Scanln()
 }
 
-func server(errorLog *strings.Builder, hasError chan<- struct{}) {
-	gin.SetMode(gin.ReleaseMode)
-	gin.DefaultWriter = io.Discard
-	gin.DefaultErrorWriter = errorLog
+func server(errorLog *strings.Builder, hasError chan<- struct{}, debug bool) {
+	if !debug {
+		gin.SetMode(gin.ReleaseMode)
+		gin.DefaultWriter = io.Discard
+		gin.DefaultErrorWriter = errorLog
+	}
 
 	router := gin.Default()
 	router.Use(ErrorHandler(hasError))

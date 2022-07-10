@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/md5"
 	"fmt"
 	"os"
 	"sort"
@@ -121,6 +122,9 @@ func toList(keymap obj) []item {
 	}
 
 	sort.Slice(res, func(i, j int) bool {
+		if res[i].Value == res[j].Value {
+			return res[i].Key < res[j].Key
+		}
 		return res[i].Value < res[j].Value
 	})
 
@@ -133,7 +137,6 @@ func concat(a, b string) string {
 
 func perAppConfigToFunction(config map[string]interface{}) {
 
-	id := 0
 	allAhkFuncs := make([]interface{}, 0)
 
 	// 加上全局生效这个 window selector
@@ -159,7 +162,7 @@ func perAppConfigToFunction(config map[string]interface{}) {
 				keymap[keyName] = keyConfig["2"]
 			} else {
 				// 如果按键有分应用配置,  则转成一个函数
-				funcName, funcDefinition := keyConfigToAhkFunc(keyConfig, keymapName, windowSelectors, id)
+				funcName, funcDefinition := keyConfigToAhkFunc(keyConfig, keymapName, windowSelectors)
 				if len(funcDefinition) > 0 {
 					keymap[keyName].(obj)["value"] = funcName + "()"
 					keymap[keyName].(obj)["prefix"] = "*"
@@ -168,13 +171,15 @@ func perAppConfigToFunction(config map[string]interface{}) {
 					keymap[keyName].(obj)["value"] = ""
 				}
 			}
-			id++
 		}
 	}
+	sort.Slice(allAhkFuncs, func(i, j int) bool {
+		return allAhkFuncs[i].(string) < allAhkFuncs[j].(string)
+	})
 	config["all_ahk_funcs"] = allAhkFuncs
 }
 
-func keyConfigToAhkFunc(keyConfig obj, keymapName string, windowSelectors []interface{}, id int) (string, string) {
+func keyConfigToAhkFunc(keyConfig obj, keymapName string, windowSelectors []interface{}) (string, string) {
 
 	branches := make([]string, 0)
 	for _, sel := range windowSelectors {
@@ -190,8 +195,8 @@ func keyConfigToAhkFunc(keyConfig obj, keymapName string, windowSelectors []inte
 			}
 		}
 	}
-	funcName := fmt.Sprintf("%s__%d", keymapName, id)
 	body := strings.Join(branches, "\n")
+	funcName := fmt.Sprintf("%s__%s", keymapName, MD5(body))
 	funcDefinition := fmt.Sprintf("%s()\n{\n%s\n}", funcName, body)
 	if len(body) == 0 {
 		funcDefinition = ""
@@ -217,4 +222,9 @@ func ifBranch(selId, selValue, value string) string {
 	}
 	return fmt.Sprintf("    if winactive(\"%s\") {\n%s\n        return\n    }", selValue, value)
 
+}
+
+func MD5(text string) string {
+	data := []byte(text)
+	return fmt.Sprintf("%x", md5.Sum(data))
 }

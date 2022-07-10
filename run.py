@@ -10,6 +10,6 @@ if (len(sys.argv) > 1):
 
 
 if (arg == 'server'):
-    os.system("cd config-back; python.exe api.py;")
+    os.system("cd config-back; go.exe run . debug;")
 elif (arg == 'client'):
     os.system("cd config-front; pnpm run serve;")
