@@ -216,6 +216,10 @@
   max-height: 20rem;
 }
 
+.tailwind-scope .w-full {
+  width: 100%;
+}
+
 .tailwind-scope .w-96 {
   width: 24rem;
 }
@@ -399,6 +403,11 @@
 .tailwind-scope .text-blue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
+.tailwind-scope .text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .tailwind-scope .shadow {

@@ -50,3 +50,10 @@ activate_it_by_hotkey_or_run(process_name, activation_hotkey, target, args:="", 
         ShellRun(target, args, workingdir)
     }
 }
+
+open_urls(urls*)
+{
+    for index,url in urls {
+        run, %url%
+    }
+}

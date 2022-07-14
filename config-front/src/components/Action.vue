@@ -147,13 +147,28 @@
             label="自定义备注"
             v-model="config.comment"
           ></v-text-field>
+          <div class="tailwind-scope">
+            <table class="w-full text-center text-black">
+              <th width="30%">功能</th>
+              <th>代码</th>
+              <tr>
+                <td>一次打开多个链接</td>
+                <td>open_urls("https://baidu.com", "https://bing.com")</td>
+              </tr>
+              <tr>
+                <td>窗口居中并设置大小</td>
+                <td>center_window_to_current_monitor(1200, 800)</td>
+              </tr>
+              <tr>
+                <td>设置窗口位置、保持默认大小</td>
+                <td>set_window_position_and_size(10, 10, "DEFAULT", "DEFAULT")</td>
+              </tr>
+            </table>
+          </div>
           <pre class="tips">
-  几个可能用到的内置函数:
-  (1) 窗口居中并设置大小: center_window_to_current_monitor(1200, 800)
-  (2) 设置窗口位置、并且不修改大小: set_window_position_and_size(10, 10, "DEFAULT", "DEFAULT")
 
-  (3) 进程存在时发送热键、否则启动程序 (适合 QQ / Tim 这类能最小化到托盘的程序):
-      activate_it_by_hotkey_or_run("TIM.exe", "^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk")
+  进程存在时发送热键、否则启动程序 (适合 QQ / Tim 这类能最小化到托盘的程序):
+  activate_it_by_hotkey_or_run("TIM.exe", "^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk")
           </pre>
         </template>
 
