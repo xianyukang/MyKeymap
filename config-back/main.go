@@ -57,7 +57,8 @@ func server(errorLog *strings.Builder, hasError chan<- struct{}, debug bool) {
 
 	err := router.Run(":12333")
 	if err != nil {
-		panic(err)
+		errorLog.WriteString(err.Error())
+		close(hasError)
 	}
 }
 

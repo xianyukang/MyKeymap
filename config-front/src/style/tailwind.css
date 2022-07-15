@@ -228,10 +228,6 @@
   width: 15rem;
 }
 
-.tailwind-scope .w-full {
-  width: 100%;
-}
-
 .tailwind-scope .min-w-full {
   min-width: 100%;
 }
@@ -380,6 +376,11 @@
   letter-spacing: 0.05em;
 }
 
+.tailwind-scope .text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
 .tailwind-scope .text-\[\#0d7a79\] {
   --tw-text-opacity: 1;
   color: rgb(13 122 121 / var(--tw-text-opacity));
@@ -403,11 +404,6 @@
 .tailwind-scope .text-blue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
-}
-
-.tailwind-scope .text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .tailwind-scope .shadow {
