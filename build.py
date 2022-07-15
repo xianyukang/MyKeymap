@@ -63,6 +63,12 @@ os.chdir('tailwind')
 os.system('npm run build-help-page-css')
 os.chdir('..')
 
+# 删除无用文件、减小打包体积
+os.system('rm bin/site/fonts/*.eot')
+os.system('rm bin/site/fonts/*.woff')
+os.system('rm bin/site/fonts/*.ttf')
+os.system('rm bin/site/js/*.map')
+
 # 复制 index.html 到 flask 的 templates 文件夹
 if not os.path.isdir('bin/templates'):
     os.mkdir('bin/templates')
