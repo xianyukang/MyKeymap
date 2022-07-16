@@ -163,6 +163,10 @@
                 <td>设置窗口位置、保持默认大小</td>
                 <td>set_window_position_and_size(10, 10, "DEFAULT", "DEFAULT")</td>
               </tr>
+              <tr>
+                <td>以管理员权限运行程序</td>
+                <td>Run *RunAs "C:\Windows\System32\cmd.exe"</td>
+              </tr>
             </table>
           </div>
           <pre class="tips">
