@@ -57,3 +57,8 @@ open_urls(urls*)
         run, %url%
     }
 }
+
+run_as_admin(path, args:="", working_dir:="")
+{
+    Run *RunAs %path% %args%, %working_dir%
+}

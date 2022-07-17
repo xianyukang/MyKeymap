@@ -165,7 +165,7 @@
               </tr>
               <tr>
                 <td>以管理员权限运行程序</td>
-                <td>Run *RunAs "C:\Windows\System32\cmd.exe"</td>
+                <td>run_as_admin("C:\Windows\System32\cmd.exe")</td>
               </tr>
             </table>
           </div>
