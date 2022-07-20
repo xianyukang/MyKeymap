@@ -76,6 +76,11 @@
             ></v-switch>
             <v-switch
               class="switch"
+              v-model="currConfig()['exitMouseModeAfterClick']"
+              label="点击鼠标后退出键盘移动鼠标"
+            ></v-switch>
+            <v-switch
+              class="switch"
               v-model="currConfig()['showMouseMovePrompt']"
               label="提示目前正在用键盘移动鼠标️"
             ></v-switch>

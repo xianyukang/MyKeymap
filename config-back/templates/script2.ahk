@@ -45,6 +45,7 @@ scrollDelay2 = {{ concat "T" .Settings.scrollDelay2 }}
 global mouseMovePrompt := newMouseMovePromptWindow()
 {{ end }}
 
+exitMouseModeAfterClick := {{ .Settings.exitMouseModeAfterClick }}
 fastMoveSingle := {{ .Settings.fastMoveSingle }}
 fastMoveRepeat := {{ .Settings.fastMoveRepeat }}
 slowMoveSingle := {{ .Settings.slowMoveSingle }}
@@ -92,7 +93,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{CapsLock}{Space}{BackSpace}{Esc}", {{ .SemicolonAbbrKeys|join ","|ahkString }})
+semiHook := InputHook("", "{CapsLock}{Space}{BackSpace}{Esc}", {{ .SemicolonAbbrKeys|join ","|ahkString }})
 semiHook.KeyOpt("{CapsLock}", "S")
 semiHook.OnChar := Func("onSemiHookChar")
 semiHook.OnEnd := Func("onSemiHookEnd")

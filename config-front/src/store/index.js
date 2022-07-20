@@ -194,6 +194,9 @@ const s = new Vuex.Store({
           if (resp.data.Settings.enableCustomHotkeys === undefined) {
             resp.data.Settings.enableCustomHotkeys = true
           }
+          if (resp.data.Settings.exitMouseModeAfterClick === undefined) {
+            resp.data.Settings.exitMouseModeAfterClick = true
+          }
           if (resp.data.Settings.showMouseMovePrompt === undefined) {
             resp.data.Settings.showMouseMovePrompt = false
           }

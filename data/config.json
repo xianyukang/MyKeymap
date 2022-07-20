@@ -3776,6 +3776,7 @@
         "enableSemicolonMode": true,
         "enableSpaceMode": false,
         "enableTabMode": false,
+        "exitMouseModeAfterClick": true,
         "fastMoveRepeat": "70",
         "fastMoveSingle": "110",
         "mapRAltToCtrl": true,

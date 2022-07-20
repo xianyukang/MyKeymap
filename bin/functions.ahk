@@ -689,9 +689,10 @@ lbuttonDown() {
 }
 
 click_mouse_and_exit(keys) {
-    global SLOWMODE
+    global SLOWMODE, exitMouseModeAfterClick
     send,  %keys%
-    SLOWMODE := false
+    if exitMouseModeAfterClick
+        SLOWMODE := false
     if mouseMovePrompt
         mouseMovePrompt.hide()
 }
@@ -704,21 +705,8 @@ myTrippleClick() {
 leftClick() {
     click_mouse_and_exit("{blind}{LButton}")
 }
-
-rightClick(tempDisableRButton := false) 
-{
-    global SLOWMODE
-    if (!tempDisableRButton)
-        send,  {blind}{RButton}
-    else {
-        setHotkeyStatus("RButton", false)
-        send,  {blind}{RButton}
-        sleep, 70
-        setHotkeyStatus("RButton", true)
-    }
-    SLOWMODE := false
-    if mouseMovePrompt
-        mouseMovePrompt.hide()
+rightClick() {
+    click_mouse_and_exit("{blind}{RButton}")
 }
 
 ShowCommandBar()

@@ -37,6 +37,7 @@ scrollDelay2 = T0.03
 
 
 
+exitMouseModeAfterClick := true
 fastMoveSingle := 110
 fastMoveRepeat := 70
 slowMoveSingle := 10
@@ -84,7 +85,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("C", "{CapsLock}{Space}{BackSpace}{Esc}", "blu,dk,fs,gg,gre,gt,jt,kg,pin,pur,red,sk,ss,ver,xk,zh,zk")
+semiHook := InputHook("", "{CapsLock}{Space}{BackSpace}{Esc}", "blu,dk,fs,gg,gre,gt,jt,kg,pin,pur,red,sk,ss,ver,xk,zh,zk")
 semiHook.KeyOpt("{CapsLock}", "S")
 semiHook.OnChar := Func("onSemiHookChar")
 semiHook.OnEnd := Func("onSemiHookEnd")
