@@ -167,12 +167,13 @@
                 <td>以管理员权限运行程序</td>
                 <td>run_as_admin("C:\Windows\System32\cmd.exe")</td>
               </tr>
+              <tr>
+                <td>进程存在时用热键激活、否则启动程序</td>
+                <td>activate_it_by_hotkey_or_run("TIM.exe", "^!z", "D:\TIM.lnk")</td>
+              </tr>
             </table>
           </div>
           <pre class="tips">
-
-  进程存在时发送热键、否则启动程序 (适合 QQ / Tim 这类能最小化到托盘的程序):
-  activate_it_by_hotkey_or_run("TIM.exe", "^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk")
 
   如何把右 Alt 重映射为 Ctrl 键:
   ①<a target="_blank" href="https://wyagd001.github.io/zh-cn/docs/commands/Send.htm#keynames" style="color: green; text-decoration: none">查阅此处得知右 Alt 的键名为 RAlt</a> 
