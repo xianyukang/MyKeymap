@@ -66,7 +66,7 @@
               @change="runOnStartup"
               messages="可能需要关掉再开启才能生效"
             ></v-switch>
-            <v-switch class="switch" v-model="currConfig()['mapRAltToCtrl']" label="右 Alt 映射为 Ctrl"></v-switch>
+            <!-- <v-switch class="switch" v-model="currConfig()['mapRAltToCtrl']" label="右 Alt 映射为 Ctrl"></v-switch> -->
             <!-- <v-switch class="switch" v-model="currConfig()['numKeyConfigurable']" label="让主键区上方的数字键可自定义"></v-switch> -->
             <v-switch
               class="switch"
@@ -77,7 +77,7 @@
             <v-switch
               class="switch"
               v-model="currConfig()['exitMouseModeAfterClick']"
-              label="点击鼠标后退出键盘移动鼠标"
+              label="用键盘点击鼠标后退出键盘移动鼠标"
             ></v-switch>
             <v-switch
               class="switch"

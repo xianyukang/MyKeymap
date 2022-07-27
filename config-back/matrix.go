@@ -33,7 +33,7 @@ outer:
 			break outer
 		default:
 			// 刷新率
-			time.Sleep(30 * time.Millisecond)
+			time.Sleep(24 * time.Millisecond)
 		}
 
 		for _, col := range columns {

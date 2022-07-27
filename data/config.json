@@ -1316,6 +1316,13 @@
                 "type": "系统控制",
                 "value": "toggleCapslock()"
             }
+        },
+        "RAlt": {
+            "2": {
+                "comment": "重映射为 Ctrl 键",
+                "type": "可能会用到的内置函数",
+                "value": "LCtrl"
+            }
         }
     },
     "DotMode": {
@@ -3779,7 +3786,7 @@
         "exitMouseModeAfterClick": true,
         "fastMoveRepeat": "70",
         "fastMoveSingle": "110",
-        "mapRAltToCtrl": true,
+        "mapRAltToCtrl": false,
         "moveDelay1": "0.13",
         "moveDelay2": "0.01",
         "numKeyConfigurable": true,
@@ -3890,7 +3897,7 @@
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}{del}"
+                "value": "send, {blind}^{bs}"
             }
         },
         "C": {
@@ -3939,7 +3946,7 @@
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}^x"
+                "value": "send, {blind}{enter}"
             }
         },
         "J": {
@@ -3981,7 +3988,7 @@
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}^c"
+                "value": "action_hold_down_shift_key()"
             }
         },
         "P": {
@@ -4034,8 +4041,9 @@
         },
         "V": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "prefix": "*",
+                "type": "文字处理",
+                "value": "send, {blind}^{right}"
             }
         },
         "W": {
@@ -4061,8 +4069,9 @@
         },
         "Z": {
             "2": {
+                "prefix": "*",
                 "type": "文字处理",
-                "value": ""
+                "value": "send, {blind}^{left}"
             }
         }
     },

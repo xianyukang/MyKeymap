@@ -97,7 +97,7 @@ capsHook.OnEnd := Func("onCapsHookEnd")
 #include data/custom_functions.ahk
 return
 
-RAlt::LCtrl
+
 
 !F21::
     Suspend, Permit
@@ -118,6 +118,7 @@ return
 Suspend, Toggle
 ReloadProgram()
 return
+RAlt::LCtrl
 !capslock::toggleCapslock()
 +capslock::toggleCapslock()
 
