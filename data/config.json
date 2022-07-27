@@ -1319,7 +1319,7 @@
         },
         "RAlt": {
             "2": {
-                "comment": "重映射为 Ctrl 键",
+                "comment": "重映射为左 Ctrl 键",
                 "type": "可能会用到的内置函数",
                 "value": "LCtrl"
             }

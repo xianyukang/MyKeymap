@@ -55,7 +55,7 @@ func server(errorLog *strings.Builder, hasError chan<- struct{}, debug bool) {
 	router.PUT("/config", SaveConfigHandler)
 	router.POST("/execute", ExecuteHandler)
 
-	err := router.Run(":12333")
+	err := router.Run("127.0.0.1:12333")
 	if err != nil {
 		errorLog.WriteString(err.Error())
 		close(hasError)
