@@ -3757,14 +3757,14 @@
         "CapslockMode": true,
         "CommaMode": false,
         "DotMode": true,
-        "JMode": true,
+        "JMode": false,
         "LButtonMode": false,
         "Mode3": true,
         "Mode9": false,
         "MouseMoveMode": "Capslock",
         "RButtonMode": true,
         "SemicolonMode": true,
-        "SpaceMode": false,
+        "SpaceMode": true,
         "TabMode": false,
         "enable3Mode": true,
         "enable9Mode": true,
@@ -3775,13 +3775,13 @@
         "enableCommaMode": false,
         "enableCustomHotkeys": true,
         "enableDotMode": true,
-        "enableJMode": true,
+        "enableJMode": false,
         "enableLButtonMode": false,
         "enableMode3": true,
         "enableMode9": false,
         "enableRButtonMode": true,
         "enableSemicolonMode": true,
-        "enableSpaceMode": false,
+        "enableSpaceMode": true,
         "enableTabMode": false,
         "exitMouseModeAfterClick": true,
         "fastMoveRepeat": "70",
@@ -3802,8 +3802,9 @@
     "SpaceMode": {
         ",": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "prefix": "*",
+                "type": "文字处理",
+                "value": "send, {blind}{del}"
             }
         },
         ".": {
@@ -3937,58 +3938,53 @@
         },
         "H": {
             "2": {
-                "prefix": "*",
-                "type": "文字处理",
-                "value": "send, {blind}{end}+{home}"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "I": {
             "2": {
-                "prefix": "*",
-                "type": "文字处理",
-                "value": "send, {blind}{enter}"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "J": {
             "2": {
-                "prefix": "*",
-                "type": "文字处理",
-                "value": "send, {blind}^{left}"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "K": {
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}{enter}"
+                "value": "action_hold_down_shift_key()"
             }
         },
         "L": {
             "2": {
-                "prefix": "*",
-                "type": "文字处理",
-                "value": "send, {blind}^{right}"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "M": {
             "2": {
-                "prefix": "*",
-                "type": "文字处理",
-                "value": "send, {blind}^{right}"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "N": {
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}{space}"
+                "value": "send, {blind}{enter}"
             }
         },
         "O": {
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "action_hold_down_shift_key()"
+                "value": "send, {blind}^c"
             }
         },
         "P": {
@@ -4034,9 +4030,8 @@
         },
         "U": {
             "2": {
-                "prefix": "*",
-                "type": "文字处理",
-                "value": "send, {blind}^z"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "V": {
@@ -4062,9 +4057,8 @@
         },
         "Y": {
             "2": {
-                "prefix": "*",
-                "type": "文字处理",
-                "value": "send, {blind}^y"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "Z": {

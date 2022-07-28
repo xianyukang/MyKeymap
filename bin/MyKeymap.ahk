@@ -52,12 +52,12 @@ allHotkeys.Push("*3")
 
 
 allHotkeys.Push("*.")
-allHotkeys.Push("*j")
+
 allHotkeys.Push("*capslock")
 allHotkeys.Push("*;")
 
 allHotkeys.Push("RButton")
-
+allHotkeys.Push("*Space")
 
 
 Menu, Tray, NoStandard
@@ -138,19 +138,6 @@ RAlt::LCtrl
 
 
 
-*j::
-    thisHotkey := A_ThisHotkey
-    disableOtherHotkey(thisHotkey)
-    JMode := true
-    DisableCapslockKey := true
-    keywait j
-    JMode := false
-    DisableCapslockKey := false
-    if (A_PriorKey == "j" && A_TimeSinceThisHotkey < 350)
-            send,  {blind}j
-    enableOtherHotkey(thisHotkey)
-    return
-
 
 
 
@@ -207,6 +194,17 @@ RAlt::LCtrl
 
 
 
+*Space::
+    thisHotkey := A_ThisHotkey
+    disableOtherHotkey(thisHotkey)
+    SpaceMode := true
+    keywait Space 
+    SpaceMode := false
+    if (A_PriorKey == "Space" && A_TimeSinceThisHotkey < 350)
+        send, {blind}{Space} 
+    enableOtherHotkey(thisHotkey)
+    return
+
 
 
 
@@ -260,48 +258,6 @@ enterRButtonMode()
 
 
 
-#if JModeK
-k::return
-*D::send, {blind}+{down}
-*G::send, {blind}+{end}
-*X::send, {blind}+{esc}
-*A::send, {blind}+{home}
-*S::send, {blind}+{left}
-*F::send, {blind}+{right}
-*E::send, {blind}+{up}
-*Z::send, {blind}^+{left}
-*V::send, {blind}^+{right}
-*C::send, {blind}{bs}
-
-
-#if JMode
-k::enterJModeK()
-*T::send, {blind}+{home}{bs}
-*W::send, {blind}+{tab}
-*2::send, {blind}^+{tab}
-*Y::send, {blind}^y
-*B::send, {blind}^{bs}
-*Z::send, {blind}^{left}
-*V::send, {blind}^{right}
-*3::send, {blind}^{tab}
-*I::send, {blind}ji
-*Q::send, {blind}{appskey}
-*C::send, {blind}{bs}
-*,::send, {blind}{del}
-*D::send, {blind}{down}
-*G::send, {blind}{end}
-*Space::send, {blind}{enter}
-*X::send, {blind}{esc}
-*A::send, {blind}{home}
-*L::send, {blind}{home}+{end}
-*.::send, {blind}{insert}
-*S::send, {blind}{left}
-*F::send, {blind}{right}
-*R::send, {blind}{tab}
-*E::send, {blind}{up}
-
-
-
 
 
 #if PunctuationMode
@@ -331,6 +287,32 @@ k::enterJModeK()
 *T::send, {blind}~
 
 
+
+
+
+#if SpaceMode
+*K::action_hold_down_shift_key()
+*T::send, {blind}+{home}{bs}
+*W::send, {blind}+{tab}
+*2::send, {blind}^+{tab}
+*O::send, {blind}^c
+*P::send, {blind}^v
+*B::send, {blind}^{bs}
+*Z::send, {blind}^{left}
+*V::send, {blind}^{right}
+*3::send, {blind}^{tab}
+*Q::send, {blind}{appskey}
+*C::send, {blind}{bs}
+*,::send, {blind}{del}
+*D::send, {blind}{down}
+*G::send, {blind}{end}
+*N::send, {blind}{enter}
+*X::send, {blind}{esc}
+*A::send, {blind}{home}
+*S::send, {blind}{left}
+*F::send, {blind}{right}
+*R::send, {blind}{tab}
+*E::send, {blind}{up}
 
 
 
