@@ -11,14 +11,15 @@ OnMessage(0x100, "handle_WM_KEYDOWN")
 SetTimer, onClipboardChange, 100
 Return
 
-resetGUI()
+resetGUI(title := "连续复制后、在本窗口内按空格键")
 {
     global
     lastText := Trim(Clipboard, " `t`r`n")
     Gui, Destroy
     layout := new CLayout()
-    layout.show()
+    layout.show(title)
     disableIME(layout.hwnd)
+    SetTimer, resetTitle, -5000
 }
 
 onClipboardChange()
@@ -49,13 +50,13 @@ class CLayout
         Gui, +Resize +AlwaysOnTop -SysMenu
         ; Gui, Font,, Consolas
         Gui, Font, s12, Microsoft YaHei UI
-        Gui Add, Text,, % "连续复制后,  在本窗口内按空格复制下面的文本:                                                             "
+        Gui Add, Text, y-20, % "连续复制后,  在本窗口内按空格复制下面的文本:                                                             "
     }
-    show()
+    show(title := "连续复制后、在本窗口内按空格键")
     {
         w := this.W
         h := this.H
-        Gui MyGui:Show, AutoSize NoActivate, 用剪切板收集文本
+        Gui MyGui:Show, AutoSize NoActivate, %title%
     }
 
     addItem(i)
@@ -85,7 +86,7 @@ handle_WM_KEYDOWN(wParam, lParam)
         if (res)
             clipboard := res
         SetTimer, onClipboardChange, Off
-        resetGUI()
+        resetGUI("已把收集到的 " layout.textList.Length() " 行文本挪入剪切板")
         SetTimer, onClipboardChange, On
     case "Escape":
         ExitApp
@@ -102,6 +103,12 @@ disableIME(hwnd)
     ControlGetFocus, controlName
     ControlGet, controlHwnd, Hwnd,, %controlName%
     DllCall("Imm32\ImmAssociateContext", "ptr", controlHwnd, "ptr", 0, "ptr")
+}
+
+
+resetTitle() {
+    global layout
+    layout.show()
 }
 
 MyGui_OnClose:
