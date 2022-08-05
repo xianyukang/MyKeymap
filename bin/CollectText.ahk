@@ -6,28 +6,33 @@ SetWorkingDir %A_ScriptDir%
 Menu, Tray, Icon, logo.ico
 SendMode Input
 
-layout := new CLayout()
-layout.show()
-disableIME(layout.hwnd)
-
+resetGUI()
 OnMessage(0x100, "handle_WM_KEYDOWN")
+SetTimer, onClipboardChange, 100
+Return
 
-lastText := Trim(Clipboard, " `t`r`n")
-
-while true
+resetGUI()
 {
-    ClipWait
+    global
+    lastText := Trim(Clipboard, " `t`r`n")
+    Gui, Destroy
+    layout := new CLayout()
+    layout.show()
+    disableIME(layout.hwnd)
+}
+
+onClipboardChange()
+{
+    global layout, lastText
     currText := Trim(Clipboard, " `t`r`n")
+
     if (currText && currText != lastText)
     {
         layout.addItem(currText)
         lastText := currText
         layout.show()
     }
-    Sleep, 100
 }
-
-Return
 
 class CLayout
 {
@@ -50,14 +55,14 @@ class CLayout
     {
         w := this.W
         h := this.H
-        Gui Show, AutoSize NoActivate, 用剪切板收集文本
+        Gui MyGui:Show, AutoSize NoActivate, 用剪切板收集文本
     }
 
     addItem(i)
     {
         this.textList.push(i)
         space := "y+6"
-        Gui Add, Text, %space% w700 +Wrap, % i
+        Gui MyGui:Add, Text, %space% w700 +Wrap, % i
     }
 
 }
@@ -79,6 +84,10 @@ handle_WM_KEYDOWN(wParam, lParam)
         res := Trim(Join("`n", layout.textList*), " `t`r`n")
         if (res)
             clipboard := res
+        SetTimer, onClipboardChange, Off
+        resetGUI()
+        SetTimer, onClipboardChange, On
+    case "Escape":
         ExitApp
     default: 
         ; sleep 500
