@@ -3757,14 +3757,14 @@
         "CapslockMode": true,
         "CommaMode": false,
         "DotMode": true,
-        "JMode": false,
+        "JMode": true,
         "LButtonMode": false,
         "Mode3": true,
         "Mode9": false,
         "MouseMoveMode": "Capslock",
         "RButtonMode": true,
         "SemicolonMode": true,
-        "SpaceMode": true,
+        "SpaceMode": false,
         "TabMode": false,
         "enable3Mode": true,
         "enable9Mode": true,
@@ -3775,13 +3775,13 @@
         "enableCommaMode": false,
         "enableCustomHotkeys": true,
         "enableDotMode": true,
-        "enableJMode": false,
+        "enableJMode": true,
         "enableLButtonMode": false,
         "enableMode3": true,
         "enableMode9": false,
         "enableRButtonMode": true,
         "enableSemicolonMode": true,
-        "enableSpaceMode": true,
+        "enableSpaceMode": false,
         "enableTabMode": false,
         "exitMouseModeAfterClick": true,
         "fastMoveRepeat": "70",
@@ -3944,8 +3944,9 @@
         },
         "I": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "prefix": "*",
+                "type": "文字处理",
+                "value": "send, {blind}{insert}"
             }
         },
         "J": {
@@ -3989,9 +3990,11 @@
         },
         "P": {
             "2": {
+                "comment": "Shift + Insert 表示粘贴",
+                "keysToSend": "+{insert}",
                 "prefix": "*",
-                "type": "文字处理",
-                "value": "send, {blind}^v"
+                "type": "输入文本或按键",
+                "value": "send, {blind}+{insert}"
             }
         },
         "Q": {

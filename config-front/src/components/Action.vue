@@ -82,7 +82,7 @@
             v-model="config.comment"
             @input="activateOrRun"
           ></v-text-field>
-          <v-card-actions>
+          <v-card-actions class="card-actions">
             <v-btn
               class="action-button"
               color="purple"
@@ -112,7 +112,8 @@
 
           <pre class="tips">
  Tips: (1) 如果不填窗口标识符就不会尝试激活窗口,  直接启动程序
-       (2) 前两个参数至少选填一个、其他参数一般用不到可以不填</pre
+       (2) 前两个参数至少选填一个、其他参数一般用不到可以不填
+       (3) 备注以「 管理员 」开头,  则表示用管理员权限启动程序</pre
           >
         </template>
 
@@ -412,6 +413,7 @@ export default {
       let toRun = escapeFuncString(this.config.toRun);
       let cmdArgs = escapeFuncString(this.config.cmdArgs);
       let workingDir = escapeFuncString(this.config.workingDir);
+      let admin = this.config.comment && this.config.comment.startsWith("管理员")
 
       if (!toActivate) {
         this.config.toActivate = "";
@@ -437,7 +439,7 @@ export default {
       workingDir = workingDir.replace(/%(\w+)%/g, `" $1 "`);
 
       if (notBlank(toRun) || notBlank(toActivate)) {
-        this.config.value = `ActivateOrRun("${toActivate}", "${toRun}", "${cmdArgs}", "${workingDir}")`;
+        this.config.value = `ActivateOrRun("${toActivate}", "${toRun}", "${cmdArgs}", "${workingDir}", ${admin})`;
       } else {
         this.config.value = "";
       }
@@ -568,8 +570,13 @@ div.v-radio.v-item--active label.v-label {
   margin-top: -20px;
   color: orangered;
 }
+
+.card-actions {
+  margin-top: -6px;
+}
+
 .tips {
-  margin: 10px;
+  margin: 8px 10px -6px 10px;
   color: black;
 }
 .action-select .v-select__selection {

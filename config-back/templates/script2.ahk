@@ -116,7 +116,7 @@ RAlt::LCtrl
     Return
 !F22::
     Suspend, Permit
-    ActivateOrRun2(run_to_activate, run_target, run_args, run_workingdir)
+    ActivateOrRun2(run_to_activate, run_target, run_args, run_workingdir, run_run_as_admin)
     ; tip(A_TickCount - run_start)
     Return
 

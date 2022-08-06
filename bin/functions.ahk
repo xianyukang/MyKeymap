@@ -235,12 +235,13 @@ MyRun2(target, args := "", workingdir := "")
 
 ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:=false)
 {
-    global run_to_activate, run_target, run_args, run_workingdir, run_start
+    global run_to_activate, run_target, run_args, run_workingdir, run_start, run_run_as_admin
     run_start := A_TickCount
     run_to_activate := to_activate
     run_target := target
     run_args := args
     run_workingdir := workingdir
+    run_run_as_admin := RunAsAdmin
     send, !{F22}
 }
 
@@ -261,7 +262,7 @@ ActivateOrRun2(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin
             {
                 if (substr(target, 1, 1) == "\")
                     target := substr(target, 2, strlen(target) - 1)
-                Run, "%target%" %args%, %WorkingDir%
+                Run, *RunAs "%target%" %args%, %WorkingDir%
             }
 
         else
