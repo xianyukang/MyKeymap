@@ -83,6 +83,9 @@ function parseConfig(config) {
     }
 
     for (const sel of windowSelectorList(config)) {
+      if (!getKeymapName[keymap]) {
+        continue
+      }
       const name = getKeymapName[keymap] + ` ${sel.key}`;
       res[name] = []; // res[name] 表示 <某模式> 在 <某应用> 包含的按键映射
 

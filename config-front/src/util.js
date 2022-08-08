@@ -51,6 +51,7 @@ export const KEYMAP_PLUS_ABBR = [
     'CapslockAbbr',
     'SemicolonAbbr',
     'CustomHotkeys',
+    'SpecialKeys',
 ]
 
 

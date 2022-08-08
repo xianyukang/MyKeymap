@@ -61,7 +61,7 @@ function processConfig(config) {
   config['SemicolonAbbrKeys'] = _.concat(_.remove(config['SemicolonAbbrKeys'], x => x.startsWith(',')), config['SemicolonAbbrKeys'])
   // 路径变量不要空行
   config['pathVariables'] = _.filter(config['pathVariables'], x => x.key && x.value)
-  // 如果发送按键时写了多行,  则生成一个函数包起来
+  // 收集发送按键的函数 (如果发送按键时写了多行,  会生成一个 ahk 函数包起来)
   config['send_key_functions'] = get_send_key_functions(config, ids)
 
 
@@ -125,17 +125,19 @@ const s = new Vuex.Store({
 
       keyName = keyName ? keyName : state.selectedKey;
 
+      // 当前键不存在,  比如键盘里新增了 WheelUp、F1 之类的键时
+      let keymap = state.config[state.routeName]
+
       // 处理 Caps Up 之类的特殊键
       if (state.config.SpecialKeys[keyName]) {
-        return state.config.SpecialKeys[keyName]
+        keymap = state.config.SpecialKeys
       }
 
-      // 当前键不存在,  比如键盘里新增了 WheelUp、F1 之类的键时
-      if (!state.config[state.routeName][keyName]) {
-        Vue.set(state.config[state.routeName], keyName, {})
+      if (!keymap[keyName]) {
+        Vue.set(keymap, keyName, {})
       }
 
-      const currentKey = state.config[state.routeName][keyName]
+      const currentKey = keymap[keyName]
 
       // 在某个窗口选择器下当前键没有配置,  则新增空白配置
       if (!currentKey[state.windowSelector]) {

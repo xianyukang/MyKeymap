@@ -569,9 +569,9 @@
             "2": {
                 "comment": "召唤 Windows Terminal",
                 "toActivate": "ahk_exe WindowsTerminal.exe",
-                "toRun": "shortcuts\\Windows Terminal Preview.lnk",
+                "toRun": "wt.exe",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_exe WindowsTerminal.exe\", \"shortcuts\\Windows Terminal Preview.lnk\", \"\", \"\")"
+                "value": "ActivateOrRun(\"ahk_exe WindowsTerminal.exe\", \"wt.exe\", \"\", \"\", false)"
             }
         },
         "B": {
@@ -4074,14 +4074,18 @@
     },
     "SpecialKeys": {
         "; Up": {
-            "label": "缩写功能",
-            "type": "系统控制",
-            "value": "enterSemicolonAbbr()"
+            "2": {
+                "label": "缩写功能",
+                "type": "系统控制",
+                "value": "enterSemicolonAbbr()"
+            }
         },
         "Caps Up": {
-            "label": "Capslock 指令框",
-            "type": "系统控制",
-            "value": "enterCapslockAbbr()"
+            "2": {
+                "label": "Capslock 指令框",
+                "type": "系统控制",
+                "value": "enterCapslockAbbr()"
+            }
         }
     },
     "TabMode": {
@@ -4350,7 +4354,8 @@
             "DotMode",
             "CapslockAbbr",
             "SemicolonAbbr",
-            "CustomHotkeys"
+            "CustomHotkeys",
+            "SpecialKeys"
         ]
     },
     "pathVariables": [

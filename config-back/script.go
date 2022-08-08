@@ -158,7 +158,7 @@ func perAppConfigToFunction(config map[string]interface{}) {
 			keyConfig := keymap[keyName].(obj)
 
 			if len(keyConfig) == 1 {
-				// 如果按键没有分应用配置, 则使用全局配置中的 value
+				// 如果按键没有分应用配置, 往上提一层: { "A": { 2: config } } -> { "A": config }
 				keymap[keyName] = keyConfig["2"]
 			} else {
 				// 如果按键有分应用配置,  则转成一个函数
@@ -166,6 +166,7 @@ func perAppConfigToFunction(config map[string]interface{}) {
 				if len(funcDefinition) > 0 {
 					keymap[keyName].(obj)["value"] = funcName + "()"
 					keymap[keyName].(obj)["prefix"] = "*"
+					keymap[keyName].(obj)["type"] = "function"
 					allAhkFuncs = append(allAhkFuncs, funcDefinition)
 				} else {
 					keymap[keyName].(obj)["value"] = ""
