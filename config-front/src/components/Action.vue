@@ -153,10 +153,6 @@
               <th width="30%">功能</th>
               <th>代码</th>
               <tr>
-                <td>一次打开多个链接</td>
-                <td>open_urls("https://baidu.com", "https://bing.com")</td>
-              </tr>
-              <tr>
                 <td>窗口居中并设置大小</td>
                 <td>center_window_to_current_monitor(1200, 800)</td>
               </tr>
@@ -167,6 +163,10 @@
               <tr>
                 <td>以管理员权限运行程序</td>
                 <td>run_as_admin("C:\Windows\System32\cmd.exe")</td>
+              </tr>
+              <tr>
+                <td>一次打开多个链接或程序</td>
+                <td>launch_multiple("https://baidu.com", "https://bing.com", "cmd.exe")</td>
               </tr>
               <tr>
                 <td>进程存在时用热键激活、否则启动程序</td>

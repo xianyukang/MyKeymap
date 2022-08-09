@@ -51,10 +51,10 @@ activate_it_by_hotkey_or_run(process_name, activation_hotkey, target, args:="", 
     }
 }
 
-open_urls(urls*)
+launch_multiple(urls*)
 {
     for index,url in urls {
-        run, %url%
+        ShellRun(url)
     }
 }
 
