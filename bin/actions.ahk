@@ -47,7 +47,7 @@ activate_it_by_hotkey_or_run(process_name, activation_hotkey, target, args:="", 
     if ProcessExist(process_name) {
         send, %activation_hotkey%
     } else {
-        ShellRun(target, args, workingdir)
+        ActivateOrRun2("", target, args, workingdir)
     }
 }
 

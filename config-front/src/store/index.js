@@ -99,10 +99,24 @@ function processConfig(config) {
 }
 
 function upgrade(config) {
-  // 把所有老配置放成全局生效
-  for (const keymap of KEYMAP_PLUS_ABBR) {
-    for (const [key, value] of Object.entries(config[keymap])) {
-      config[keymap][key] = { '2': value }
+  let keyConfig = config.SpecialKeys["Caps Up"]
+  if (!keyConfig["2"] && keyConfig.value ===  "enterCapslockAbbr()") {
+    config.SpecialKeys["Caps Up"] = {
+      "2": {
+          "label": "Capslock 指令框",
+          "type": "系统控制",
+          "value": "enterCapslockAbbr()"
+      }
+    }
+  }
+  keyConfig = config.SpecialKeys["; Up"]
+  if (!keyConfig["2"] && keyConfig.value ===  "enterSemicolonAbbr()") {
+    config.SpecialKeys["; Up"] = {
+      "2": {
+          "label": "缩写功能",
+          "type": "系统控制",
+          "value": "enterSemicolonAbbr()"
+      }
     }
   }
 }
@@ -243,12 +257,8 @@ const s = new Vuex.Store({
             resp.data.Settings.MouseMoveMode = "Capslock"
           }
 
-          // 从不支持分应用配置的版本升级
-          if (resp.data.supportPerAppConfig === undefined) {
-            upgrade(resp.data)
-            resp.data.supportPerAppConfig = true
-          }
-
+          // 升级逻辑
+          upgrade(resp.data)
           store.commit('SET_CONFIG', resp.data)
         })
         .catch(error => {

@@ -79,8 +79,9 @@
         },
         "9": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "label": "复制选中文件的路径",
+                "type": "系统控制",
+                "value": "action_copy_selected_file_path()"
             }
         },
         ";": {
@@ -562,7 +563,7 @@
             "2": {
                 "comment": "如果存在 TIM.exe 进程则发送 Ctrl+Alt+Z 打开 Tim,  否则启动 Tim",
                 "type": "可能会用到的内置函数",
-                "value": "activate_it_by_hotkey_or_run(\"TIM.exe\", \"^!z\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\腾讯软件\\TIM\\TIM.lnk\")"
+                "value": "activate_it_by_hotkey_or_run(\"TIM.exe\", \"^!z\", \"shortcuts\\TIM.lnk\")"
             }
         },
         "A": {
@@ -3496,11 +3497,11 @@
         },
         "Q": {
             "2": {
-                "comment": "符号 (",
-                "keysToSend": "(",
+                "comment": "一对小括号",
+                "keysToSend": "(){left}",
                 "prefix": "*",
                 "type": "输入文本或按键",
-                "value": "send, {blind}("
+                "value": "send, {blind}(){left}"
             }
         },
         "R": {

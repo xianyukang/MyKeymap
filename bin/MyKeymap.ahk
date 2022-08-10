@@ -307,7 +307,7 @@ k::enterJModeK()
 #if PunctuationMode
 *U::send, {blind}$
 *R::send, {blind}&
-*Q::send, {blind}(
+*Q::send, {blind}(){left}
 *A::send, {blind}*
 *M::send, {blind}-
 *C::send, {blind}.
@@ -403,6 +403,7 @@ C::MyRun("SoundControl.exe")
 X::SmartCloseWindow()
 R::SwitchWindows()
 G::ToggleTopMost()
+9::action_copy_selected_file_path()
 E::action_enter_task_switch_mode()
 S::center_window_to_current_monitor(1200, 800)
 A::center_window_to_current_monitor(1370, 930)
@@ -478,7 +479,7 @@ W::ActivateOrRun("ahk_exe chrome.exe", "" A_ProgramsCommon "\Google Chrome.lnk",
 ,::ActivateOrRun("ahk_exe goland64.exe", "" A_Programs "\JetBrains Toolbox\GoLand.lnk", "", "")
 J::ActivateOrRun("ahk_exe idea64.exe", "" A_Programs "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk", "", "")
 D::ActivateOrRun("ahk_exe msedge.exe", "" A_ProgramsCommon "\Microsoft Edge.lnk", "", "")
-`;::activate_it_by_hotkey_or_run("TIM.exe", "^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk")
+`;::activate_it_by_hotkey_or_run("TIM.exe", "^!z", "shortcuts\TIM.lnk")
 M::bindOrActivate(CapslockF__M)
 N::bindOrActivate(CapslockF__N)
 /::bindOrActivate_unbind()
