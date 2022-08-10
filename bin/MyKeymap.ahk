@@ -97,8 +97,6 @@ capsHook.OnEnd := Func("onCapsHookEnd")
 #include data/custom_functions.ahk
 return
 
-
-
 !F21::
     Suspend, Permit
     MyRun2(run_target, run_args, run_workingdir)
