@@ -1117,8 +1117,8 @@ setHotkeyStatus(theHotkey, enableHotkey)
 
 disableOtherHotkey(thisHotkey)
 {
-    global allHotkeys
-    ; ToolTip, % thisHotkey
+    global allHotkeys, keymapIsActive
+    keymapIsActive := true
     for index,value in allHotkeys
     {
         if (value != thisHotkey) {
@@ -1130,8 +1130,8 @@ disableOtherHotkey(thisHotkey)
 
 enableOtherHotkey(thisHotkey)
 {
-    global allHotkeys
-    ; ToolTip, % thisHotkey
+    global allHotkeys, keymapIsActive
+    keymapIsActive := false
     for index,value in allHotkeys
     {
         if (value != thisHotkey) {

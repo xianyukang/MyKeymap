@@ -85,7 +85,7 @@ export default {
       { title: 'Capslock + Space', icon: 'mdi-alpha-c-box', to: 'CapslockSpace', color: 'purple' },
       { title: 'Capslock 指令', icon: 'mdi-rocket-launch', to: 'CapslockAbbr', color: 'deep-orange' },
       { title: '缩写功能', icon: 'mdi-format-text-variant-outline', to: 'SemicolonAbbr', color: 'deep-orange' },
-      { title: '自定义热键', icon: 'mdi-square-edit-outline', to: 'CustomHotkeys', color: 'deep-orange' },
+      { title: '自定义热键', icon: 'mdi-keyboard', to: 'CustomHotkeys', color: 'blue' },
       { title: 'Tab 模式', icon: 'mdi-alpha-t-box', to: 'TabMode', color: '#d05' },
       { title: '空格模式', icon: 'mdi-alpha-s-box', to: 'SpaceMode', color: '#d05' },
       { title: 'J 模式', icon: 'mdi-alpha-j-box', to: 'JMode', color: '#d05' },

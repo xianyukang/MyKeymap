@@ -121,13 +121,7 @@ function upgrade(config) {
   }
   if (config.Settings.mapRAltToCtrl) {
     config.Settings.mapRAltToCtrl = false
-    config.CustomHotkeys.RAlt = {
-      "2": {
-          "comment": "重映射为左 Ctrl 键",
-          "type": "可能会用到的内置函数",
-          "value": "LCtrl"
-      }
-    }
+    config.Settings.KeyMapping = "RAlt::LCtrl"
   }
 }
 

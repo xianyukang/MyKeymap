@@ -174,12 +174,6 @@
               </tr>
             </table>
           </div>
-          <pre class="tips">
-
-  如何把右 Alt 重映射为 Ctrl 键:
-  ①<a target="_blank" href="https://wyagd001.github.io/zh-cn/docs/commands/Send.htm#keynames" style="color: green; text-decoration: none">查阅此处得知右 Alt 的键名为 RAlt</a> 
-  ②在自定义热键中添加一行, 热键处填 RAlt, 单行代码处填 LCtrl
-          </pre>
         </template>
 
         <template v-if="config.type === '鼠标操作'">
@@ -529,19 +523,12 @@ export default {
         { text: "🖥️ 系统控制", value: "系统控制" },
         { text: "⚛️ 可能会用到的内置函数", value: "可能会用到的内置函数" },
       ];
-      const whiteList = [
-        'Capslock',
-        'CapslockF',
-        'CapslockSpace',
-        'Mode3',
-        'Mode9',
-        'TabMode',
-        'Semicolon',
-        'CommaMode',
-        'DotMode',
-      ]
-      if (!whiteList.includes(this.$route.name)) {
-        result.splice(4, 1);
+
+      if (![ 'Capslock', 'CapslockF', 'CapslockSpace', 'Mode3', 'Mode9', 'TabMode', 'Semicolon', 'CommaMode', 'DotMode'].includes(this.$route.name)) {
+        const index = result.findIndex(x => x.value === '鼠标操作')
+        if (index > 0) {
+          result.splice(index, 1);
+        }
       }
       return result;
     },

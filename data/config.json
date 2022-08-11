@@ -1317,13 +1317,6 @@
                 "type": "系统控制",
                 "value": "toggleCapslock()"
             }
-        },
-        "RAlt": {
-            "2": {
-                "comment": "重映射为左 Ctrl 键",
-                "type": "可能会用到的内置函数",
-                "value": "LCtrl"
-            }
         }
     },
     "DotMode": {
@@ -3759,6 +3752,7 @@
         "CommaMode": false,
         "DotMode": true,
         "JMode": true,
+        "KeyMapping": "RAlt::LCtrl",
         "LButtonMode": false,
         "Mode3": true,
         "Mode9": false,

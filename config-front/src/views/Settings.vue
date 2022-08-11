@@ -91,6 +91,18 @@
     <v-row>
       <v-col cols="4">
         <v-card class="settings-card">
+          <v-card-title>按键重映射</v-card-title>
+          <v-card-text style="padding-bottom: 0;">
+            <pre style="color: black;">
+<a target="_blank" href="https://wyagd001.github.io/zh-cn/docs/KeyList.htm#keyboard" style="color: green; text-decoration: none">键名可以查阅此处</a>, 如果想把右 Alt 重映射为左 Ctrl 键:
+①在下面添加一行 <code style="color: #d05; border: 1px solid #ddd; padding: 1px 6px;">RAlt::LCtrl</code> 就行  ②删掉对应的行则取消映射
+          </pre>
+          <v-textarea v-model="currConfig()['KeyMapping']" autocomplete="off" outlined ></v-textarea>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="3">
+        <v-card class="settings-card">
           <v-card-title>滚轮滑动参数</v-card-title>
           <v-card-text>
             <v-text-field

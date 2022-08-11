@@ -116,9 +116,7 @@ return
     ; tip(A_TickCount - run_start)
     Return
 
-{{ range toList .CustomHotkeys -}}
-{{ escapeAhkHotkey .Key }}::{{ .Value }}
-{{ end }}
+{{ .Settings.KeyMapping }}
 
 {{ if .Settings.CapslockMode -}}
 *capslock::
@@ -193,13 +191,6 @@ return
     return
 {{ end }}
 
-; RAlt::
-;     disableOtherHotkey(thisHotkey)
-;     CommaMode := true
-;     keywait RAlt
-;     CommaMode := false
-;     enableOtherHotkey(thisHotkey)
-;     return
 {{ if .Settings.CommaMode }}
 *,::
     thisHotkey := A_ThisHotkey
@@ -415,6 +406,11 @@ space::return
 *F::send, {blind}{right}
 *X::send,  {blind}{del}
 *Space::send, {blind}{enter}
+{{ end }}
+
+#if !keymapIsActive
+{{ range toList .CustomHotkeys -}}
+{{ escapeAhkHotkey .Key }}::{{ .Value }}
 {{ end }}
 #If
 

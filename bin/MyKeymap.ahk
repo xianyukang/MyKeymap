@@ -108,18 +108,7 @@ return
     ; tip(A_TickCount - run_start)
     Return
 
-+!'::
-Suspend, Permit
-toggleSuspend()
-return
-!'::
-Suspend, Toggle
-ReloadProgram()
-return
 RAlt::LCtrl
-!capslock::toggleCapslock()
-+capslock::toggleCapslock()
-
 
 *capslock::
     thisHotkey := A_ThisHotkey
@@ -182,13 +171,6 @@ RAlt::LCtrl
 
 
 
-; RAlt::
-;     disableOtherHotkey(thisHotkey)
-;     CommaMode := true
-;     keywait RAlt
-;     CommaMode := false
-;     enableOtherHotkey(thisHotkey)
-;     return
 
 
 
@@ -516,6 +498,19 @@ space::return
 *F::send, {blind}{right}
 *X::send,  {blind}{del}
 *Space::send, {blind}{enter}
+
+
+#if !keymapIsActive
++!'::
+Suspend, Permit
+toggleSuspend()
+return
+!'::
+Suspend, Toggle
+ReloadProgram()
+return
+!capslock::toggleCapslock()
++capslock::toggleCapslock()
 
 #If
 
