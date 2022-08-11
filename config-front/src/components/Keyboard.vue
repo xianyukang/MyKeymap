@@ -115,7 +115,17 @@ export default {
           { key: '.', disableAt: ['Mode9', 'DotMode'] },
           { key: '/', disableAt: ['Semicolon', 'Mode9'] },
         ],
-        [{ key: 'Space', disableAt: this.enableCapsSpace ? ['CapslockSpace', 'Capslock', 'SpaceMode'] : ['SpaceMode'] }],
+        [
+          { key: 'Space', disableAt: this.enableCapsSpace ? ['CapslockSpace', 'Capslock', 'SpaceMode'] : ['SpaceMode'] },
+          { key: '-', disableAt: [] },
+          { key: '=', disableAt: [] },
+          { key: 'BS', disableAt: [] },
+          { key: '[', disableAt: [] },
+          { key: ']', disableAt: [] },
+          { key: "\\", disableAt: [] },
+          { key: "'", disableAt: [] },
+          { key: "Enter", disableAt: [] },
+        ],
       ]
 
       const lastLine = lns[lns.length - 1]
