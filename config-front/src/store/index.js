@@ -119,6 +119,10 @@ function upgrade(config) {
       }
     }
   }
+
+  if (config.Settings.KeyMapping === undefined) {
+    config.Settings.KeyMapping = ""
+  }
   if (config.Settings.mapRAltToCtrl) {
     config.Settings.mapRAltToCtrl = false
     config.Settings.KeyMapping = "RAlt::LCtrl"
