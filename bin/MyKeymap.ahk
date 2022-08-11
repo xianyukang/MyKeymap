@@ -108,6 +108,7 @@ return
     ; tip(A_TickCount - run_start)
     Return
 
+RAlt::LCtrl
 
 
 *capslock::
