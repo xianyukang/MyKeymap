@@ -1925,7 +1925,8 @@
         },
         ";": {
             "2": {
-                "type": "可能会用到的内置函数",
+                "label": "自定义的文件菜单",
+                "type": "系统控制",
                 "value": "RealShellRun(A_WorkingDir \"\\bin\\ahk.exe\", A_WorkingDir \"\\bin\\CustomShellMenu.ahk\")"
             }
         },
@@ -3210,14 +3211,6 @@
             "2": {
                 "type": "什么也不做",
                 "value": ""
-            },
-            "3": {
-                "cmdArgs": "%selected%",
-                "comment": "用 Visual Studio Code 打开选中的文件",
-                "label": "用指定程序打开选中的文件",
-                "toRun": "%code%",
-                "type": "系统控制",
-                "value": "sel := Explorer_GetSelection(), action_open_selected_with(\"\" A_Programs \"\\Visual Studio Code\\Visual Studio Code.lnk\", \"\" sel.selected \"\")"
             }
         },
         "D": {
@@ -3230,14 +3223,6 @@
             "2": {
                 "type": "什么也不做",
                 "value": ""
-            },
-            "3": {
-                "cmdArgs": "-filename %selected%",
-                "comment": "用 Everything 搜索选中文件夹里的文件",
-                "label": "用指定程序打开选中的文件",
-                "toRun": "%A_ProgramFiles%\\Everything\\Everything.exe",
-                "type": "系统控制",
-                "value": "sel := Explorer_GetSelection(), action_open_selected_with(\"\" A_ProgramFiles \"\\Everything\\Everything.exe\", \"-filename \" sel.selected \"\")"
             }
         },
         "Enter": {
@@ -3250,11 +3235,6 @@
             "2": {
                 "type": "什么也不做",
                 "value": ""
-            },
-            "3": {
-                "label": "复制选中文件的路径",
-                "type": "系统控制",
-                "value": "action_copy_selected_file_path()"
             }
         },
         "G": {
@@ -3345,14 +3325,6 @@
             "2": {
                 "type": "什么也不做",
                 "value": ""
-            },
-            "3": {
-                "cmdArgs": "-d %selected%",
-                "comment": "用 Windows Terminal 打开选中的文件夹",
-                "label": "用指定程序打开选中的文件",
-                "toRun": "wt.exe",
-                "type": "系统控制",
-                "value": "sel := Explorer_GetSelection(), action_open_selected_with(\"wt.exe\", \"-d \" sel.selected \"\")"
             }
         },
         "U": {
@@ -3377,14 +3349,6 @@
             "2": {
                 "type": "什么也不做",
                 "value": ""
-            },
-            "3": {
-                "cmdArgs": "x %selected% -o\"%current%\\%purename%\"",
-                "comment": "用 7-Zip 解压选中的文件",
-                "label": "用指定程序打开选中的文件",
-                "toRun": "C:\\Program Files\\7-Zip\\7z.exe",
-                "type": "系统控制",
-                "value": "sel := Explorer_GetSelection(), action_open_selected_with(\"C:\\Program Files\\7-Zip\\7z.exe\", \"x \" sel.selected \" -o\"\"\" sel.current \"\\\" sel.purename \"\"\"\")"
             }
         },
         "Y": {
@@ -4278,6 +4242,7 @@
     "Settings": {
         "CapslockMode": true,
         "CommaMode": false,
+        "CustomShellMenu": "\nargs = {file}\nexe = %A_Programs%\\Visual Studio Code\\Visual Studio Code.lnk\nadd_menu_item(\"C\", \"在 Code 中打开\", \"icons\\vscode.ico\", exe, args)\n\nargs = -filename {file}\nexe = C:\\Program Files\\Everything\\Everything.exe\nadd_menu_item(\"E\", \"在 Everything 中搜索\", \"icons\\everything.png\", exe, args)\n\nargs = -d {file}\nexe = wt.exe\nadd_menu_item(\"T\", \"在 Windows Termianl 中打开\", \"icons\\terminal.png\", exe, args)\n\nargs = a {file}.7z {file}\nexe = C:\\Program Files\\7-Zip\\7z.exe\nadd_menu_item(\"Z\", \"用 7-Zip 压缩\", \"icons\\7z.ico\", exe, args)\n\nargs = x {file} -o{dir}\\{filenameNoExt}\nexe = C:\\Program Files\\7-Zip\\7z.exe\nadd_menu_item(\"X\", \"用 7-Zip 解压缩\", \"icons\\7z.ico\", exe, args)\n",
         "DotMode": true,
         "JMode": true,
         "KeyMapping": "RAlt::LCtrl\n",

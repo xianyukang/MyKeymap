@@ -1,4 +1,4 @@
-#NoEnv
+﻿#NoEnv
 #SingleInstance Force
 #MaxHotkeysPerInterval 70
 #NoTrayIcon

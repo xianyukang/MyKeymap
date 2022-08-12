@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"fmt"
 	"os"
+	"path/filepath"
 	"sort"
 	"strings"
 	"text/template"
@@ -31,7 +32,8 @@ func generateScript(data obj) {
 	}
 	data["MouseMoveMode"] = SlowMoveMode
 
-	saveMyKeymapAhk(data)
+	saveAhk(data, "./templates/script2.ahk", "../bin/MyKeymap.ahk")
+	saveAhk(data, "./templates/CustomShellMenu.ahk", "../bin/CustomShellMenu.ahk")
 }
 
 type obj = map[string]interface{}
@@ -42,9 +44,9 @@ type item struct {
 	Prefix string
 }
 
-func saveMyKeymapAhk(data obj) {
+func saveAhk(data obj, templateFile, outputFile string) {
 
-	f, err := os.Create("../bin/MyKeymap.ahk")
+	f, err := os.Create(outputFile)
 	if err != nil {
 		panic(err)
 	}
@@ -53,10 +55,10 @@ func saveMyKeymapAhk(data obj) {
 	}(f)
 
 	files := []string{
-		"./templates/script2.ahk",
+		templateFile,
 	}
 
-	ts, err := template.New("script2.ahk").Funcs(templateFuncMap).ParseFiles(files...)
+	ts, err := template.New(filepath.Base(templateFile)).Funcs(templateFuncMap).ParseFiles(files...)
 	if err != nil {
 		panic(err)
 	}
@@ -71,9 +73,8 @@ func saveMyKeymapAhk(data obj) {
 	res = strings.ReplaceAll(res, "\r\n", "\n")
 	res = strings.ReplaceAll(res, "\n", "\r\n")
 
-	// 先写入 utf-8 的 BOM (0xefbbbf)
-	// (唉,  golang 还是不如 python 方便,  还得自己处理 BOM、CRLF 之类的问题
-	_, _ = f.Write([]byte{0xef, 0xbb, 0xbf})
+	// 因为模板文件就是 UTF-8 with BOM,  所以输出文件也是 UTF-8 with BOM
+	//_, _ = f.Write([]byte{0xef, 0xbb, 0xbf}) // 写入 utf-8 的 BOM (0xefbbbf)
 	_, _ = f.Write([]byte(res))
 }
 

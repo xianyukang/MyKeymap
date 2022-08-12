@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios';
-import { host, executeScript, emptyKeymap, ALL_KEYMAPS, NEW_CONFIGURABLE_KEYS, KEYMAP_PLUS_ABBR, EMPTY_KEY, emptyKeyConfig } from '../util.js';
+import { host, executeScript, emptyKeymap, ALL_KEYMAPS, NEW_CONFIGURABLE_KEYS, KEYMAP_PLUS_ABBR, EMPTY_KEY, emptyKeyConfig, DefaultCustomShellMenu } from '../util.js';
 import _ from 'lodash'
 
 
@@ -126,6 +126,9 @@ function upgrade(config) {
   if (config.Settings.mapRAltToCtrl) {
     config.Settings.mapRAltToCtrl = false
     config.Settings.KeyMapping = "RAlt::LCtrl"
+  }
+  if (config.Settings.CustomShellMenu === undefined) {
+    config.Settings.CustomShellMenu = DefaultCustomShellMenu
   }
 }
 

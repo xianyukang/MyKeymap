@@ -258,3 +258,25 @@ export function emptyKeymap(supportPerAppConfig) {
 
     return km
 }
+
+export const DefaultCustomShellMenu = `
+args = {file}
+exe = %A_Programs%\\Visual Studio Code\\Visual Studio Code.lnk
+add_menu_item("C", "在 Code 中打开", "icons\\vscode.ico", exe, args)
+
+args = -filename {file}
+exe = C:\\Program Files\\Everything\\Everything.exe
+add_menu_item("E", "在 Everything 中搜索", "icons\\everything.png", exe, args)
+
+args = -d {file}
+exe = wt.exe
+add_menu_item("T", "在 Windows Termianl 中打开", "icons\\terminal.png", exe, args)
+
+args = a {file}.7z {file}
+exe = C:\\Program Files\\7-Zip\\7z.exe
+add_menu_item("Z", "用 7-Zip 压缩", "icons\\7z.ico", exe, args)
+
+args = x {file} -o{dir}\\{filenameNoExt}
+exe = C:\\Program Files\\7-Zip\\7z.exe
+add_menu_item("X", "用 7-Zip 解压缩", "icons\\7z.ico", exe, args)
+`

@@ -23,7 +23,40 @@
     <v-divider></v-divider>
     <br />
 
-    <v-row v-if="config.label !== '用指定程序打开选中的文件'">
+    <v-row v-if="config.label === '用指定程序打开选中的文件'">
+      <v-col>
+        <v-text-field
+          autocomplete="off"
+          label="程序路径"
+          v-model="config.toRun"
+          @input="action_open_selected_with"
+          placeholder="例如 code.exe"
+        ></v-text-field>
+        <v-text-field
+          autocomplete="off"
+          label="命令行参数 (用 {file} 表示文件路径)"
+          v-model="config.cmdArgs"
+          @input="action_open_selected_with"
+          placeholder=""
+        ></v-text-field>
+        <v-text-field
+          autocomplete="off"
+          label="自定义备注 (按 Caps 输入 help 可回顾配置)"
+          v-model="config.comment"
+        ></v-text-field>
+      </v-col>
+    </v-row>
+
+    <v-row v-else-if="config.label === '自定义的文件菜单'">
+      <v-col>
+        <div style="margin-bottom: 8px;">
+          <a target="_blank" href="CustomShellMenu.html" style="color: green; text-decoration: none;">➤ 点此查看介绍</a>
+        </div>
+          <v-textarea v-model="$store.state.config.Settings.CustomShellMenu" autocomplete="off" outlined height="600" hide-details no-resize></v-textarea>
+      </v-col>
+    </v-row>
+
+    <v-row v-else>
       <v-col>
         <v-radio
           v-for="action in otherFeatures3"
@@ -39,29 +72,6 @@
           :label="`${action.label}`"
           :value="action.label"
         ></v-radio>
-      </v-col>
-    </v-row>
-    <v-row v-else>
-      <v-col>
-        <v-text-field
-          autocomplete="off"
-          label="程序路径"
-          v-model="config.toRun"
-          @input="action_open_selected_with"
-          placeholder="例如 code.exe"
-        ></v-text-field>
-        <v-text-field
-          autocomplete="off"
-          label="命令行参数 (可用 %selected% 表示文件管理器中选中的文件的路径)"
-          v-model="config.cmdArgs"
-          @input="action_open_selected_with"
-          placeholder="例如 %selected%"
-        ></v-text-field>
-        <v-text-field
-          autocomplete="off"
-          label="自定义备注 (按 Caps 输入 help 可回顾配置)"
-          v-model="config.comment"
-        ></v-text-field>
       </v-col>
     </v-row>
   </v-radio-group>
@@ -108,6 +118,11 @@ const actionMap = [
     group: 2,
     label: "打开「 下载 」文件夹",
     value: "run, shell:downloads",
+  },
+  {
+    group: 2,
+    label: "自定义的文件菜单",
+    value: 'RealShellRun(A_WorkingDir "\\bin\\ahk.exe", A_WorkingDir "\\bin\\CustomShellMenu.ahk")',
   },
   {
     group: 2,
@@ -189,7 +204,7 @@ export default {
         }
       }
       toRun = toRun.replace(/%(\w+)%/g, `" $1 "`);
-      cmdArgs = cmdArgs.replace(/%selected%/g, `" sel.selected "`);
+      cmdArgs = cmdArgs.replace(/{file}/g, `" sel.selected "`);
       cmdArgs = cmdArgs.replace(/%current%/g, `" sel.current "`);
       cmdArgs = cmdArgs.replace(/%filename%/g, `" sel.filename "`);
       cmdArgs = cmdArgs.replace(/%purename%/g, `" sel.purename "`);
