@@ -158,7 +158,7 @@ function ahkText(s) {
 // 映射一行要发送的按键
 export function mapKeysToSend(line) {
     line = _.trimStart(line)
-    if (line.startsWith(';') || line.startsWith('sleep') || line.startsWith('Sleep')) {
+    if (line.startsWith(';') || line.startsWith('sleep') || line.startsWith('sendevent,')) {
         return '    ' + line
     }
     if (line.startsWith('{text}') || line.startsWith('{Text}')) {

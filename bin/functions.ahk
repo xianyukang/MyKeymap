@@ -30,7 +30,11 @@ https://autohotkey.com/boards/viewtopic.php?t=4334
 ShellRun(prms*)
 {
     MakeExplorerForegroundProcess()
+    RealShellRun(prms*)
+}
 
+RealShellRun(prms*)
+{
     try {
 
         shellWindows := ComObjCreate("Shell.Application").Windows

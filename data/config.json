@@ -1925,8 +1925,8 @@
         },
         ";": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "type": "可能会用到的内置函数",
+                "value": "RealShellRun(A_WorkingDir \"\\bin\\ahk.exe\", A_WorkingDir \"\\bin\\CustomShellMenu.ahk\")"
             }
         },
         "=": {

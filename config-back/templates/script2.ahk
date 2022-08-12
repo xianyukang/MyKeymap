@@ -118,6 +118,12 @@ return
 
 {{ .Settings.KeyMapping }}
 
+{{ range toList .CustomHotkeys -}}
+{{ if or (contains .Value "toggleSuspend()") (contains .Value "ReloadProgram()") -}}
+{{ escapeAhkHotkey .Key }}::{{ .Value }}
+{{- end }}
+{{ end }}
+
 {{ if .Settings.CapslockMode -}}
 *capslock::
     thisHotkey := A_ThisHotkey
@@ -410,7 +416,9 @@ space::return
 
 #if !keymapIsActive
 {{ range toList .CustomHotkeys -}}
+{{ if not (or (contains .Value "toggleSuspend()") (contains .Value "ReloadProgram()")) -}}
 {{ escapeAhkHotkey .Key }}::{{ .Value }}
+{{- end }}
 {{ end }}
 #If
 

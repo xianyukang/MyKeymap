@@ -78,6 +78,7 @@ func saveMyKeymapAhk(data obj) {
 }
 
 var templateFuncMap = template.FuncMap{
+	"contains":        strings.Contains,
 	"toList":          toList,
 	"concat":          concat,
 	"join":            join,

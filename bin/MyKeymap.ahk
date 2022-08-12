@@ -111,6 +111,18 @@ return
 RAlt::LCtrl
 
 
++!'::
+Suspend, Permit
+toggleSuspend()
+return
+!'::
+Suspend, Toggle
+ReloadProgram()
+return
+
+
+
+
 *capslock::
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
@@ -257,6 +269,7 @@ k::return
 
 #if JMode
 k::enterJModeK()
+`;::RealShellRun(A_WorkingDir "\bin\ahk.exe", A_WorkingDir "\bin\CustomShellMenu.ahk")
 *T::send, {blind}+{home}{bs}
 *W::send, {blind}+{tab}
 *2::send, {blind}^+{tab}
@@ -502,14 +515,8 @@ space::return
 
 
 #if !keymapIsActive
-+!'::
-Suspend, Permit
-toggleSuspend()
-return
-!'::
-Suspend, Toggle
-ReloadProgram()
-return
+
+
 !capslock::toggleCapslock()
 +capslock::toggleCapslock()
 
