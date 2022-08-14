@@ -91,17 +91,21 @@
       }
 
       const lines = this.textBefore.split("\n")
+      // 确定分隔符左边的字符串应该有多长
       const maxLength = lines.reduce((acc, val) => {
-        const length = val.indexOf(deli)
+        const i = val.indexOf(deli)
+        const length = i === -1 ? -1 : val.substring(0, i).trim().length
         return acc > length ? acc : length
       }, -1)
 
       const linesAfter = lines.map(line => {
         const i = line.indexOf(deli)
-        if (i !== -1 && i < maxLength) {
-          const left = line.substring(0, i)
+        if (i !== -1) {
+          const left = line.substring(0, i).trim()
           const right = line.substring(i + deli.length)
-          return left + ' '.repeat(maxLength - i) + deli + right
+          if (left.length <= maxLength) {
+            return left + ' '.repeat(maxLength - left.length + 3) + deli + right
+          }
         }
         return line
       })
