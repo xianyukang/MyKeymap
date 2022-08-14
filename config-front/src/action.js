@@ -63,6 +63,7 @@ export const textFeatures1 = [
     { label: "把选中的文字设为粉色", value: 'setColor("#FF00FF")' },
     { label: "把选中的文字设为蓝色", value: 'setColor("#2E66FF")' },
     { label: "把选中的文字设为绿色", value: 'setColor("#080")' },
+    { label: "对齐选中的文本", value: 'action_align_text()', },
     { label: "在中英文之间添加空格", value: "actionAddSpaceBetweenEnglishChinese()", },
     { label: "用剪切板收集文本", value: 'ActivateOrRun("用剪切板收集文本", "bin\\ahk.exe", "bin\\CollectText.ahk")', },
 ]

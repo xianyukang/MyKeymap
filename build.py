@@ -58,9 +58,10 @@ os.chdir('config-front')
 os.system('pnpm run build')
 os.chdir('..')
 
-# 构建帮助页 css
+# 构建 tailwind css
 os.chdir('tailwind')
 os.system('npm run build-help-page-css')
+os.system('npm run build-html-tools-css')
 os.chdir('..')
 
 # 删除无用文件、减小打包体积
@@ -75,6 +76,7 @@ if not os.path.isdir('bin/templates'):
 shutil.copy('bin/site/index.html', 'bin/templates/index.html')
 # shutil.copy('config-back/templates/script.ahk', 'bin/templates/script.ahk')
 shutil.copy('config-back/templates/script2.ahk', 'bin/templates/script2.ahk')
+shutil.copy('config-back/templates/CustomShellMenu.ahk', 'bin/templates/CustomShellMenu.ahk')
 shutil.copy('config-back/templates/help.html', 'bin/templates/help.html')
 
 # 复制文件

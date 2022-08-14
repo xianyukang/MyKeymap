@@ -18,6 +18,13 @@ import (
 
 func main() {
 
+	if len(os.Args) == 2 {
+		if handler, ok := commandMap[os.Args[1]]; ok {
+			handler()
+			return
+		}
+	}
+
 	hasError := make(chan struct{})
 	errorLog := new(strings.Builder)
 	debug := len(os.Args) == 2 && os.Args[1] == "debug"

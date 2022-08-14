@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>文本对齐</title>
+  <link rel="icon" href="logo.ico" />
+  <link rel="stylesheet" href="tailwind.css" />
+  <script type="importmap">
+    {
+        "imports": {
+            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js"
+        }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Iosevka', 'Consolas', monospace;
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" class="w-full h-screen bg-gradient-to-r from-cyan-500 to-blue-500 text-center">
+    <div class="grid grid-cols-2 h-5/6">
+      <div class="flex items-center">
+        <div class="w-full h-96 m-6 relative">
+          <h1 class="absolute left-1/2 -translate-x-1/2 bottom-full text-4xl font-extrabold mb-1 text-yellow-300">
+            Before
+          </h1>
+          <textarea v-model="textBefore" @input="handleInput" class="w-full h-full p-4" wrap="off"
+            spellcheck="false"></textarea>
+        </div>
+      </div>
+      <div class="flex items-center">
+        <div class="w-full h-96 m-6 relative">
+          <h1 class="absolute left-1/2 -translate-x-1/2 bottom-full text-4xl font-extrabold mb-1 text-yellow-300">
+            After
+          </h1>
+          <textarea :value="textAfter" class="w-full h-full p-4" wrap="off" @focus="$event.target.select()"
+            @mouseup.stop="" spellcheck="false"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center h-24">
+      <div class="relative bg-green-200">
+        <h1 class="absolute left-1/2 -translate-x-1/2 bottom-full text-3xl font-extrabold mb-1 text-yellow-300">
+          分隔符
+        </h1>
+        <div class="w-72 h-full">
+          <input ref="delimiterInput" type="text" class="w-full h-full px-4 text-2xl" @input="handleInput"
+            spellcheck="false" v-model="delimiter" placeholder="推荐装 Iosevka 字体">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createApp } from "vue"
+
+    const text = `{% .Text %}`
+
+    function split2(str, delim) {
+      var p = str.indexOf(delim);
+      if (p !== -1) {
+        return [str.substring(0, p), str.substring(p + 1)];
+      } else {
+        return [str];
+      }
+    }
+
+    function handleInput() {
+      const deli = this.delimiter
+      if (deli.length === 0) {
+        return
+      }
+
+      const lines = this.textBefore.split("\n")
+      const maxLength = lines.reduce((acc, val) => {
+        const length = val.indexOf(deli)
+        return acc > length ? acc : length
+      }, -1)
+
+      const linesAfter = lines.map(line => {
+        const i = line.indexOf(deli)
+        if (i !== -1 && i < maxLength) {
+          const left = line.substring(0, i)
+          const right = line.substring(i + deli.length)
+          return left + ' '.repeat(maxLength - i) + deli + right
+        }
+        return line
+      })
+      this.textAfter = linesAfter.join('\n')
+    }
+
+    createApp({
+      data() {
+        return {
+          textBefore: text,
+          textAfter: '',
+          delimiter: '#',
+        }
+      },
+      methods: {
+        handleInput,
+      },
+      mounted() {
+        this.handleInput()
+        this.$refs.delimiterInput.focus()
+        window.resizeTo(1800, 720)
+      },
+    }).mount("#app")
+  </script>
+</body>
+
+</html>

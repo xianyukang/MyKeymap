@@ -3015,8 +3015,11 @@
         },
         "Space": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "comment": "F1 键可激活 IDE 的命令搜索框",
+                "keysToSend": "{f1}",
+                "prefix": "*",
+                "type": "输入文本或按键",
+                "value": "send, {blind}{f1}"
             }
         },
         "T": {
@@ -4094,6 +4097,12 @@
                 "value": "SemicolonAbbr2__dk()"
             }
         },
+        "dq": {
+            "2": {
+                "type": "文字处理",
+                "value": "action_align_text()"
+            }
+        },
         "fs": {
             "2": {
                 "comment": "输入中文顿号 、",
@@ -4223,6 +4232,7 @@
     "SemicolonAbbrKeys": [
         "blu",
         "dk",
+        "dq",
         "fs",
         "gg",
         "gre",
@@ -4242,7 +4252,7 @@
     "Settings": {
         "CapslockMode": true,
         "CommaMode": false,
-        "CustomShellMenu": "\nargs = {file}\nexe = %A_Programs%\\Visual Studio Code\\Visual Studio Code.lnk\nadd_menu_item(\"C\", \"在 Code 中打开\", \"icons\\vscode.ico\", exe, args)\n\nargs = -filename {file}\nexe = C:\\Program Files\\Everything\\Everything.exe\nadd_menu_item(\"E\", \"在 Everything 中搜索\", \"icons\\everything.png\", exe, args)\n\nargs = -d {file}\nexe = wt.exe\nadd_menu_item(\"T\", \"在 Windows Termianl 中打开\", \"icons\\terminal.png\", exe, args)\n\nargs = a {file}.7z {file}\nexe = C:\\Program Files\\7-Zip\\7z.exe\nadd_menu_item(\"Z\", \"用 7-Zip 压缩\", \"icons\\7z.ico\", exe, args)\n\nargs = x {file} -o{dir}\\{filenameNoExt}\nexe = C:\\Program Files\\7-Zip\\7z.exe\nadd_menu_item(\"X\", \"用 7-Zip 解压缩\", \"icons\\7z.ico\", exe, args)\n",
+        "CustomShellMenu": "args = {file}\nexe = %A_Programs%\\Visual Studio Code\\Visual Studio Code.lnk\nadd_menu_item(\"C\", \"在 Code 中打开\", \"icons\\vscode.ico\", exe, args)\n\nargs = -filename {file}\nexe = C:\\Program Files\\Everything\\Everything.exe\nadd_menu_item(\"E\", \"在 Everything 中搜索\", \"icons\\everything.png\", exe, args)\n\nargs = -d {file}\nexe = wt.exe\nadd_menu_item(\"T\", \"在 Windows Termianl 中打开\", \"icons\\terminal.png\", exe, args)\n\nargs = a {file}.7z {file}\nexe = C:\\Program Files\\7-Zip\\7z.exe\nadd_menu_item(\"Z\", \"用 7-Zip 压缩\", \"icons\\7z.ico\", exe, args)\n\nargs = x {file} -o{dir}\\{filenameNoExt}\nexe = C:\\Program Files\\7-Zip\\7z.exe\nadd_menu_item(\"X\", \"用 7-Zip 解压缩\", \"icons\\7z.ico\", exe, args)\n",
         "DotMode": true,
         "JMode": true,
         "KeyMapping": "RAlt::LCtrl\n",

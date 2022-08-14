@@ -18,7 +18,6 @@ Menu, MyMenu, Add, %name%, MenuHandler
 Menu, MyMenu, Icon, %name%, Shell32.dll, 135
 
 ; 自定义的
-
 args = {file}
 exe = %A_Programs%\Visual Studio Code\Visual Studio Code.lnk
 add_menu_item("C", "在 Code 中打开", "icons\vscode.ico", exe, args)

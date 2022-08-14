@@ -880,19 +880,17 @@ surroundWithSpace(message) {
 
 copySelectedText()
 {
-    ; old_clipboard := clipboardall
-    clipboard =
+    Clipboard := ""
     send, ^c
     ; send, ^{insert}
-    clipwait, 0.5, 1
+    clipwait, 0.5
 
-    if (errorlevel) {
-        tip("copy text failed", -700)
+    if ErrorLevel {
+        tip("没有获取到文本", -700)
         return ""
     }
 
-    r := rtrim(clipboard, "`n")
-    return r
+    return rtrim(clipboard, "`n")
 }
 
 addHtmlStyle(text, style )

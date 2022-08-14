@@ -85,7 +85,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("", "{CapsLock}{Space}{BackSpace}{Esc}", "blu,dk,fs,gg,gre,gt,jt,kg,pin,pur,red,sk,ss,ver,xk,zh,zk")
+semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", "blu,dk,dq,fs,gg,gre,gt,jt,kg,pin,pur,red,sk,ss,ver,xk,zh,zk")
 semiHook.KeyOpt("{CapsLock}", "S")
 semiHook.OnChar := Func("onSemiHookChar")
 semiHook.OnEnd := Func("onSemiHookEnd")
@@ -347,6 +347,7 @@ k::enterJModeK()
 *P::send, {blind}{f11}
 *`;::send, {blind}{f12}
 *1::send, {blind}{f1}
+*Space::send, {blind}{f1}
 *2::send, {blind}{f2}
 *E::send, {blind}{f3}
 *4::send, {blind}{f4}
@@ -550,6 +551,8 @@ execSemicolonAbbr(typo) {
             SemicolonAbbr2__xk()
     case "kg":
             actionAddSpaceBetweenEnglishChinese()
+    case "dq":
+            action_align_text()
     case "jt":
             send, {blind}{text}➤` ` 
     case "gre":

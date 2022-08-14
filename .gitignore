@@ -3,6 +3,8 @@ node_modules
 .pnpm-debug.log
 MyKeymap
 bin/site
+bin/html-tools/AlignText.html
+bin/html-tools/tailwind.css
 bin/templates
 bin/mykeymap-settings-server
 bin/mykeymap-settings-server.exe

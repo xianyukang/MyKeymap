@@ -10,6 +10,14 @@ action_open_selected_with(toRun, cmdArgs)
     ActivateOrRun("", toRun, cmdArgs) 
 }
 
+action_align_text()
+{
+    if (copySelectedText()) {
+        runwait, cmd.exe /c ahk.exe ClipboardPipe.ahk | settings.exe AlignText, bin\, Hide
+        RealShellRun("msedge.exe", "--app=" A_WorkingDir "\bin\html-tools\AlignText.html")
+    }
+}
+
 set_window_position_and_size(x, y, width, height)
 {
     if IsDesktopWindowActive()
