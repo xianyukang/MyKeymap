@@ -2,7 +2,7 @@
 
 #### ➤ 下载 & 文档
 
-- [MyKeymap 1.1.19](https://xianyukang.com/MyKeymap.html#mykeymap-%E7%AE%80%E4%BB%8B)
+- [MyKeymap 1.2.1](https://xianyukang.com/MyKeymap.html#mykeymap-%E7%AE%80%E4%BB%8B)
 
 
 #### ➤ b 站视频介绍
