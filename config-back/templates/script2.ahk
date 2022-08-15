@@ -93,7 +93,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", {{ .SemicolonAbbrKeys|join ","|ahkString }})
+semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", {{ .SemicolonAbbrKeys|join ","|ahkString }})
 semiHook.KeyOpt("{CapsLock}", "S")
 semiHook.OnChar := Func("onSemiHookChar")
 semiHook.OnEnd := Func("onSemiHookEnd")

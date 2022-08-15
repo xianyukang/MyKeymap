@@ -172,6 +172,10 @@
                 <td>进程存在时用热键激活、否则启动程序</td>
                 <td>activate_it_by_hotkey_or_run("TIM.exe", "^!z", "D:\TIM.lnk")</td>
               </tr>
+              <tr>
+                <td>包裹选中的文本</td>
+                <td>wrap_selected_text(&quot;&lt;font color='#D05'&gt;{text}&lt;/font&gt;&quot;)</td>
+              </tr>
             </table>
           </div>
         </template>
@@ -263,7 +267,7 @@
         </template>
 
         <template v-if="config.type === '系统控制'">
-          <ExplorerAction :config="config" />
+          <SystemAction :config="config" />
         </template>
         <template v-if="config.type === '文字处理'">
           <v-radio-group v-model="config.value" @change="onTextActionChanged">
@@ -311,10 +315,8 @@
 </template>
 
 <script>
-import Vue from "vue";
 import "../action";
 import {
-  bindWindow,
   currConfigMixin,
   escapeFuncString,
   executeScript,
@@ -323,21 +325,19 @@ import {
   notBlank,
   uniqueName,
 } from "../util.js";
-import { host, EMPTY_KEY } from "../util";
+import { EMPTY_KEY } from "../util";
 import _ from "lodash";
 import KeyValueConfig from "./KeyValueConfig.vue";
-import ExplorerAction from "./SystemAction.vue";
+import SystemAction from "./SystemAction.vue";
 import WindowSelectorConfig from "./WindowSelectorConfig.vue";
 import { windowActions1, windowActions2, specialAction, mouseActions, scrollActions, textFeatures1, textFeatures2, textFeatures3, textFeatures4,clickActions } from "../action";
 
 export default {
   mixins: [currConfigMixin],
-  components: { KeyValueConfig, WindowSelectorConfig, ExplorerAction },
-  created() {},
+  components: { KeyValueConfig, WindowSelectorConfig, SystemAction },
   props: {
     currentKey: { type: String, required: true, },
   },
-  watch: {},
   data() {
     return {
       showConfigPathVariableDialog: false,

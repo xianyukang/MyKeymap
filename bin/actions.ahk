@@ -18,6 +18,15 @@ action_align_text()
     }
 }
 
+wrap_selected_text(format)
+{
+    if (txt := copySelectedText()) {
+        Clipboard := StrReplace(format, "{text}", txt)
+        send, +{insert}
+        return
+    }
+}
+
 set_window_position_and_size(x, y, width, height)
 {
     if IsDesktopWindowActive()
