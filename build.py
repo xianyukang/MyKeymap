@@ -23,6 +23,9 @@ arg = ''
 if (len(sys.argv) > 1):
     arg = sys.argv[1]
 
+# 增加版本号
+os.system('go.exe run add-version.go')
+
 # 构建后端项目
 os.chdir('config-back')
 os.system('go.exe build -ldflags "-s -w"')
@@ -34,7 +37,7 @@ if (arg == 'go'):
     sys.exit()
 
 # 构建后端项目
-shutil.rmtree('bin/mykeymap-settings-server', ignore_errors=True)
+# shutil.rmtree('bin/mykeymap-settings-server', ignore_errors=True)
 # os.chdir('config-back')
 # os.system('pyinstaller.exe api.py -n mykeymap-settings-server -y --clean --icon icon.ico')
 # os.chdir('..')

@@ -10,14 +10,15 @@ import (
 func main() {
 	oldVersion, newVersion := getVersion()
 
+	// However, the notation [n] immediately before the verb indicates that the nth one-indexed argument is to be formatted instead.
 	tasks := []struct {
 		path   string
 		format string
 	}{
 		{"readme.md", `[MyKeymap %s](https://xianyukang.com/MyKeymap.html`},
-		{"config-back\\templates\\script.ahk", `Menu, Tray, Tip, MyKeymap %s by 咸鱼阿康`},
 		{"config-back\\templates\\script2.ahk", `Menu, Tray, Tip, MyKeymap %s by 咸鱼阿康`},
 		{"config-front\\src\\App.vue", `<v-list-item-subtitle> version: %s </v-list-item-subtitle>`},
+		{"D:\\project\\my_site\\docs\\MyKeymap.md", `下载地址: [MyKeymap %[1]s](https://static.xianyukang.com/MyKeymap-%[1]s.7z)`},
 	}
 
 	for _, t := range tasks {
