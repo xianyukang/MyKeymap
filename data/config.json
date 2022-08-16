@@ -1927,7 +1927,7 @@
             "2": {
                 "label": "自定义的文件菜单",
                 "type": "系统控制",
-                "value": "RealShellRun(A_WorkingDir \"\\bin\\ahk.exe\", A_WorkingDir \"\\bin\\CustomShellMenu.ahk\")"
+                "value": "RealShellRun(A_WorkingDir \"\\bin\\ahk.exe\", \"\"\"\" A_WorkingDir \"\\bin\\CustomShellMenu.ahk\" \"\"\"\")"
             }
         },
         "=": {

@@ -47,13 +47,22 @@ for index, item in menuItems {
         args := StrReplace(args, "{filename}", """" filename """")
         args := StrReplace(args, """{filenameNoExt}""", """" filenameNoExt """")
         args := StrReplace(args, "{filenameNoExt}", """" filenameNoExt """")
+
+        if (item.workingDir) {
+            wr := item.workingDir
+            wr := StrReplace(wr, "{file}", filePath)
+            wr := StrReplace(wr, "{dir}", fileDir)
+            run, %exe% %args%, %wr%
+            break
+        }
+
         run, %exe% %args%
         break
     }
 }
 return
 
-add_menu_item(key, name, icon := "", exe := "", args := "")
+add_menu_item(key, name, icon := "", exe := "", args := "", workingDir := "")
 {
     global menuItems
 
@@ -73,6 +82,7 @@ add_menu_item(key, name, icon := "", exe := "", args := "")
     obj := {}
     obj.exe := exe
     obj.args := args
+    obj.workingDir := workingDir
     obj.name := name
     menuItems.Push(obj)    
 }

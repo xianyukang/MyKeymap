@@ -50,7 +50,7 @@
     <v-row v-else-if="config.label === '自定义的文件菜单'">
       <v-col>
         <div style="margin-bottom: 8px;">
-          <a target="_blank" href="CustomShellMenu.html" style="color: green; text-decoration: none;">➤ 点此查看介绍</a>
+          <a target="_blank" href="CustomShellMenu.html" style="color: green; text-decoration: none;">➤ 点此查看介绍, 如果想到了其他实用的菜单项, 也欢迎反馈</a>
         </div>
           <v-textarea v-model="$store.state.config.Settings.CustomShellMenu" autocomplete="off" outlined height="600" hide-details no-resize></v-textarea>
       </v-col>
@@ -122,7 +122,7 @@ const actionMap = [
   {
     group: 2,
     label: "自定义的文件菜单",
-    value: 'RealShellRun(A_WorkingDir "\\bin\\ahk.exe", A_WorkingDir "\\bin\\CustomShellMenu.ahk")',
+    value: 'RealShellRun(A_WorkingDir "\\bin\\ahk.exe", """" A_WorkingDir "\\bin\\CustomShellMenu.ahk" """")',
   },
   {
     group: 2,

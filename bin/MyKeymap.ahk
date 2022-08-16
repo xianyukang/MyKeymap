@@ -269,7 +269,7 @@ k::return
 
 #if JMode
 k::enterJModeK()
-`;::RealShellRun(A_WorkingDir "\bin\ahk.exe", A_WorkingDir "\bin\CustomShellMenu.ahk")
+`;::RealShellRun(A_WorkingDir "\bin\ahk.exe", """" A_WorkingDir "\bin\CustomShellMenu.ahk" """")
 *T::send, {blind}+{home}{bs}
 *W::send, {blind}+{tab}
 *2::send, {blind}^+{tab}
