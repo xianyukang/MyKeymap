@@ -88,7 +88,7 @@ export default {
           { key: 'Y', disableAt: [] },
           { key: 'U', disableAt: [] },
           { key: 'I', disableAt: [] },
-          { key: 'O', disableAt: ['Mode9'] },
+          { key: 'O', disableAt: [] },
           { key: 'P', disableAt: ['Semicolon'] },
         ],
         [
@@ -100,8 +100,8 @@ export default {
           { key: 'H', disableAt: [] },
           { key: 'J', disableAt: ['JMode'] },
           { key: 'K', disableAt: ['JMode', 'JModeK'] },
-          { key: 'L', disableAt: ['Mode9'] },
-          { key: ';', disableAt: ['Semicolon', 'Mode9'] },
+          { key: 'L', disableAt: [] },
+          { key: ';', disableAt: ['Semicolon'] },
         ],
         [
           { key: 'Z', disableAt: [] },
@@ -111,9 +111,9 @@ export default {
           { key: 'B', disableAt: [] },
           { key: 'N', disableAt: [] },
           { key: 'M', disableAt: [] },
-          { key: ',', disableAt: ['Mode9', 'CommaMode'] },
-          { key: '.', disableAt: ['Mode9', 'DotMode'] },
-          { key: '/', disableAt: ['Semicolon', 'Mode9'] },
+          { key: ',', disableAt: ['CommaMode'] },
+          { key: '.', disableAt: ['DotMode'] },
+          { key: '/', disableAt: ['Semicolon', ] },
         ],
         [
           { key: 'Space', disableAt: this.enableCapsSpace ? ['CapslockSpace', 'Capslock', 'SpaceMode'] : ['SpaceMode'] },
