@@ -73,7 +73,7 @@ Menu, Tray, Add
 
 Menu, Tray, Icon
 Menu, Tray, Icon, bin\logo.ico,, 1
-Menu, Tray, Tip, MyKeymap 1.2.2 by 咸鱼阿康
+Menu, Tray, Tip, MyKeymap 1.2.3 by 咸鱼阿康
 ; processPath := getProcessPath()
 ; SetWorkingDir, %processPath%
 
@@ -89,7 +89,7 @@ semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "blu,dk,dq,fs,
 semiHook.KeyOpt("{CapsLock}", "S")
 semiHook.OnChar := Func("onSemiHookChar")
 semiHook.OnEnd := Func("onSemiHookEnd")
-capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "bb,bd ,dd,dm,ex,help,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,ss,st,tm,we")
+capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "acmd,bb,bd ,dd,dm,ex,help,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,ss,st,tm,we")
 capsHook.KeyOpt("{CapsLock}", "S")
 capsHook.OnChar := Func("onCapsHookChar")
 capsHook.OnEnd := Func("onCapsHookEnd")
@@ -459,10 +459,10 @@ Esc::exitMouseMode()
 f::return
 H::ActivateOrRun("- Microsoft Visual Studio", "" A_ProgramsCommon "\Visual Studio 2019.lnk", "", "")
 O::ActivateOrRun("OneNote for Windows 10", "shortcuts\OneNote for Windows 10.lnk", "", "")
-Z::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\", "", "")
+E::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\", "", "")
 Q::ActivateOrRun("ahk_class EVERYTHING", "" A_ProgramFiles "\Everything\Everything.exe", "", "")
 K::ActivateOrRun("ahk_class PotPlayer64", "" A_ProgramFiles "\DAUM\PotPlayer\PotPlayerMini64.exe", "", "")
-E::ActivateOrRun("ahk_class YXMainFrame", "C:\Program Files (x86)\Yinxiang Biji\印象笔记\Evernote.exe", "", "")
+Z::ActivateOrRun("ahk_class YXMainFrame", "C:\Program Files (x86)\Yinxiang Biji\印象笔记\Evernote.exe", "", "")
 S::ActivateOrRun("ahk_exe Code.exe", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "", "")
 L::ActivateOrRun("ahk_exe EXCEL.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Excel.lnk", "", "")
 R::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe", "", "")
@@ -592,6 +592,8 @@ execCapslockAbbr(typo) {
             ActivateOrRun("MyKeymap - Visual Studio Code", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\MyFiles\MyKeymap", "")
     case "ms":
             ActivateOrRun("my_site - Visual Studio Code", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\project\my_site", "")
+    case "acmd":
+            ActivateOrRun("管理员 ahk_exe cmd.exe", "cmd.exe", "", "", true)
     case "we":
             ActivateOrRun("网易云音乐", "shortcuts\网易云音乐.lnk", "", "")
     case "no":

@@ -407,7 +407,10 @@ export default {
       let toRun = escapeFuncString(this.config.toRun);
       let cmdArgs = escapeFuncString(this.config.cmdArgs);
       let workingDir = escapeFuncString(this.config.workingDir);
-      let admin = this.config.comment && this.config.comment.startsWith("管理员")
+
+      // 修复踩到的坑,  javascript 中 `a && b` 的返回值不是 true/false,  
+      // 而是 `a` 或 `b`, 当 `a` 为 truthy 时返回 `b`, 当 `a` 为 falsy 时返回 `a`
+      let admin = (this.config.comment && this.config.comment.startsWith("管理员")) ? true : false
 
       if (!toActivate) {
         this.config.toActivate = "";
@@ -433,7 +436,8 @@ export default {
       workingDir = workingDir.replace(/%(\w+)%/g, `" $1 "`);
 
       if (notBlank(toRun) || notBlank(toActivate)) {
-        this.config.value = `ActivateOrRun("${toActivate}", "${toRun}", "${cmdArgs}", "${workingDir}", ${admin})`;
+        const adminPart = admin ? `, ${admin}` : ""
+        this.config.value = `ActivateOrRun("${toActivate}", "${toRun}", "${cmdArgs}", "${workingDir}"${adminPart})`;
       } else {
         this.config.value = "";
       }

@@ -326,6 +326,16 @@
         }
     },
     "CapslockAbbr": {
+        "acmd": {
+            "2": {
+                "comment": "管理员 cmd.exe",
+                "toActivate": "管理员 ahk_exe cmd.exe",
+                "toRun": "cmd.exe",
+                "type": "启动程序或激活窗口",
+                "value": "ActivateOrRun(\"管理员 ahk_exe cmd.exe\", \"cmd.exe\", \"\", \"\", true)",
+                "workingDir": ""
+            }
+        },
         "bb": {
             "2": {
                 "cmdArgs": "--app=https://cn.bing.com/dict/search?q=nice",
@@ -501,6 +511,7 @@
         }
     },
     "CapslockAbbrKeys": [
+        "acmd",
         "bb",
         "bd ",
         "dd",
@@ -670,11 +681,11 @@
         },
         "E": {
             "2": {
-                "comment": "",
-                "toActivate": "ahk_class YXMainFrame",
-                "toRun": "C:\\Program Files (x86)\\Yinxiang Biji\\印象笔记\\Evernote.exe",
+                "comment": "召唤文件管理器",
+                "toActivate": "ahk_class CabinetWClass ahk_exe Explorer.EXE",
+                "toRun": "D:\\",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_class YXMainFrame\", \"C:\\Program Files (x86)\\Yinxiang Biji\\印象笔记\\Evernote.exe\", \"\", \"\")"
+                "value": "ActivateOrRun(\"ahk_class CabinetWClass ahk_exe Explorer.EXE\", \"D:\\\", \"\", \"\")"
             }
         },
         "Enter": {
@@ -843,11 +854,11 @@
         },
         "Z": {
             "2": {
-                "comment": "召唤文件管理器",
-                "toActivate": "ahk_class CabinetWClass ahk_exe Explorer.EXE",
-                "toRun": "D:\\",
+                "comment": "",
+                "toActivate": "ahk_class YXMainFrame",
+                "toRun": "C:\\Program Files (x86)\\Yinxiang Biji\\印象笔记\\Evernote.exe",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_class CabinetWClass ahk_exe Explorer.EXE\", \"D:\\\", \"\", \"\")"
+                "value": "ActivateOrRun(\"ahk_class YXMainFrame\", \"C:\\Program Files (x86)\\Yinxiang Biji\\印象笔记\\Evernote.exe\", \"\", \"\")"
             }
         },
         "[": {
