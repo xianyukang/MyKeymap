@@ -40,8 +40,18 @@ set_window_position_and_size(x, y, width, height)
 
 action_enter_task_switch_mode()
 {
-    global TASK_SWITCH_MODE, CapslockMode
+    global TASK_SWITCH_MODE, CapslockMode, TabMode, DigitMode, SpaceMode, Mode9, FMode, CapslockSpaceMode, PunctuationMode, CommaMode, DotMode
     CapslockMode := false
+    TabMode := false
+    DigitMode := false
+    SpaceMode := false
+    Mode9 := false
+    FMode := false
+    CapslockSpaceMode := false
+    PunctuationMode := false
+    CommaMode := false
+    DotMode := false
+
     TASK_SWITCH_MODE := true
     send, ^!{tab}
     WinWaitActive, ahk_group TASK_SWITCH_GROUP,, 0.5

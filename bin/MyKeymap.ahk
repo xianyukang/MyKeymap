@@ -505,7 +505,6 @@ space::return
 
 
 
-
 #If TASK_SWITCH_MODE
 *D::send, {blind}{down}
 *E::send, {blind}{up}
@@ -513,7 +512,6 @@ space::return
 *F::send, {blind}{right}
 *X::send,  {blind}{del}
 *Space::send, {blind}{enter}
-
 
 #if !keymapIsActive
 

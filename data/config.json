@@ -566,6 +566,7 @@
         },
         "/": {
             "2": {
+                "label": "取消当前窗口的键绑定",
                 "type": "窗口操作",
                 "value": "bindOrActivate_unbind()"
             }
@@ -752,12 +753,14 @@
         },
         "M": {
             "2": {
+                "label": "绑定当前窗口到这个键",
                 "type": "窗口操作",
                 "value": "bindOrActivate(CapslockF__M)"
             }
         },
         "N": {
             "2": {
+                "label": "绑定当前窗口到这个键",
                 "type": "窗口操作",
                 "value": "bindOrActivate(CapslockF__N)"
             }

@@ -375,12 +375,14 @@ space::
     CapslockSpaceMode := false
     return
 {{ end }}
+{{- end }}
 
 #if SLOWMODE
 {{ template "keymapToAhk" .MouseMoveMode }}
 Esc::exitMouseMode()
 *Space::exitMouseMode()
 
+{{ if .Settings.CapslockMode -}}
 #if FMode
 f::return
 {{ template "keymapToAhk" .CapslockF }}
@@ -404,7 +406,6 @@ space::return
 {{ template "keymapToAhk" .RButtonMode }}
 {{ end }}
 
-{{ if .Settings.CapslockMode }}
 #If TASK_SWITCH_MODE
 *D::send, {blind}{down}
 *E::send, {blind}{up}
@@ -412,7 +413,6 @@ space::return
 *F::send, {blind}{right}
 *X::send,  {blind}{del}
 *Space::send, {blind}{enter}
-{{ end }}
 
 #if !keymapIsActive
 {{ range toList .CustomHotkeys -}}

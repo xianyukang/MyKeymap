@@ -52,8 +52,8 @@
           <h1 class="absolute left-1/2 -translate-x-1/2 bottom-full text-4xl font-extrabold mb-1 text-yellow-300">
             After
           </h1>
-          <textarea :value="textAfter" class="w-full h-full p-4" wrap="off" @focus="$event.target.select()"
-            @mouseup.stop="" spellcheck="false"></textarea>
+          <textarea ref="textAfterInput" :value="textAfter" class="w-full h-full p-4" wrap="off"
+            @focus="$event.target.select()" @mouseup.stop="" spellcheck="false"></textarea>
         </div>
       </div>
     </div>
@@ -74,6 +74,7 @@
     import { createApp } from "vue"
 
     const text = `{% .Text %}`
+    const delimiter = text.indexOf('#') !== -1 ? '#' : '//'
 
     function split2(str, delim) {
       var p = str.indexOf(delim);
@@ -117,7 +118,7 @@
         return {
           textBefore: text,
           textAfter: '',
-          delimiter: '#',
+          delimiter: delimiter,
         }
       },
       methods: {
@@ -125,8 +126,12 @@
       },
       mounted() {
         this.handleInput()
-        this.$refs.delimiterInput.focus()
         window.resizeTo(1800, 720)
+        // 需要在 $nextTick 调用下面的代码,  因为现在 DOM 还没有被更新,  等到 $nextTick 输入框中才有文本
+        this.$nextTick(() => {
+          this.$refs.textAfterInput.focus()
+          this.$refs.textAfterInput.select()
+        });
       },
     }).mount("#app")
   </script>

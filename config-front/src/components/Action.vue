@@ -133,7 +133,9 @@
           <!-- <v-checkbox v-model="config.useSendEvent" color="green" label="使用慢速模式发送按键 (速度慢些, 兼容性好些, 模拟按键不起作用时, 勾上这个试一试)"></v-checkbox> -->
           <pre class="tips">
 
- Tips: <a target="_blank" href="SendKeyExample.html" style="color: green;">推荐点此查看示例</a>
+ Tips: 
+     (1) <a target="_blank" href="SendKeyExample.html" style="color: green;">推荐点此查看示例</a>
+     (2) 想输入 % ; , ` 这四个特殊符号时, 需要在前面加个反引号, 例如 `%
        </pre>
         </template>
 
@@ -251,12 +253,11 @@
               <v-col>
                 <v-radio-group v-model="config.value">
                   <v-radio
-                    :label="specialAction.bindWindowToCurrentKey.label"
-                    :value="specialAction.bindWindowToCurrentKey.generateValue(this.$route.name, this.currentKey)"
-                  ></v-radio>
-                  <v-radio
-                    :label="specialAction.unbindWindow.label"
-                    :value="specialAction.unbindWindow.value"
+                    v-for="sa in specialActions"
+                    :key="sa.label"
+                    :label="sa.label"
+                    :value="sa.generateValue($route.name, currentKey)"
+                    @click="onSpecialActionChange(sa.label)"
                   ></v-radio>
                 </v-radio-group>
               </v-col>
@@ -330,7 +331,7 @@ import _ from "lodash";
 import KeyValueConfig from "./KeyValueConfig.vue";
 import SystemAction from "./SystemAction.vue";
 import WindowSelectorConfig from "./WindowSelectorConfig.vue";
-import { windowActions1, windowActions2, specialAction, mouseActions, scrollActions, textFeatures1, textFeatures2, textFeatures3, textFeatures4,clickActions } from "../action";
+import { windowActions1, windowActions2, specialActions, mouseActions, scrollActions, textFeatures1, textFeatures2, textFeatures3, textFeatures4,clickActions } from "../action";
 
 export default {
   mixins: [currConfigMixin],
@@ -346,7 +347,7 @@ export default {
       mouseActions,
       scrollActions,
       clickActions,
-      specialAction,
+      specialActions,
       windowActions1,
       windowActions2,
       textFeatures1,
@@ -371,6 +372,9 @@ export default {
       if (_.startsWith(this.config.value, 'send') || _.startsWith(this.config.value, 'action_hold_down_shift_key')) {
         this.config.prefix = "*";
       }
+    },
+    onSpecialActionChange(label){
+      this.config.label = label
     },
     action_send_keys() {
       this.config.prefix = "*";

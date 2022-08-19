@@ -2,16 +2,16 @@
 import { bindWindow } from './util';
 import _, { join } from 'lodash'
 
-export const specialAction = {
-    bindWindowToCurrentKey: {
+export const specialActions = [
+    {
         label: "绑定当前窗口到这个键",
         generateValue: (routeName, currentKey) => bindWindow(routeName, currentKey),
     },
-    unbindWindow: {
+    {
         label: "取消当前窗口的键绑定",
-        value: "bindOrActivate_unbind()",
-    }
-}
+        generateValue: (routeName, currentKey) => "bindOrActivate_unbind()",
+    },
+]
 
 
 export const windowActions1 = [
