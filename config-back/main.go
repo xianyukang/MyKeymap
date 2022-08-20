@@ -8,6 +8,7 @@ import (
 	"github.com/goccy/go-json"
 	"io"
 	"io/ioutil"
+	"net"
 	"net/http"
 	"os"
 	"os/exec"
@@ -34,7 +35,6 @@ func main() {
 	}
 
 	go server(errorLog, hasError, debug)
-	go openBrowser()
 	matrix(hasError)
 
 	// 要等 gin 协程把错误日志打印完, 才能在这边读取错误日志
@@ -62,7 +62,17 @@ func server(errorLog *strings.Builder, hasError chan<- struct{}, debug bool) {
 	router.PUT("/config", SaveConfigHandler)
 	router.POST("/execute", ExecuteHandler)
 
-	err := router.Run("127.0.0.1:12333")
+	// 一个常见错误是端口已被占用,  除了检查字符串,  有没有什么预定义的 sentinel error 可以用?
+	ln, err := net.Listen("tcp", "127.0.0.1:12333")
+	if err != nil && strings.Index(err.Error(), "Only one usage of each socket address ") != -1 {
+		errorLog.WriteString("Error: 已经有一个程序占用了 12333 端口\n")
+		close(hasError)
+		return
+	}
+
+	go openBrowser()
+
+	err = router.RunListener(ln)
 	if err != nil {
 		errorLog.WriteString(err.Error())
 		close(hasError)
