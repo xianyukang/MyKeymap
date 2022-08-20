@@ -1119,8 +1119,9 @@ setHotkeyStatus(theHotkey, enableHotkey)
 
 disableOtherHotkey(thisHotkey)
 {
-    global allHotkeys, keymapIsActive
+    global allHotkeys, keymapIsActive, AltTabIsOpen
     keymapIsActive := true
+    AltTabIsOpen := false
     for index,value in allHotkeys
     {
         if (value != thisHotkey) {
@@ -1132,8 +1133,14 @@ disableOtherHotkey(thisHotkey)
 
 enableOtherHotkey(thisHotkey)
 {
-    global allHotkeys, keymapIsActive
+    global allHotkeys, keymapIsActive, AltTabIsOpen
     keymapIsActive := false
+
+    if (AltTabIsOpen) {
+        AltTabIsOpen := false
+        send, {enter}
+    }
+
     for index,value in allHotkeys
     {
         if (value != thisHotkey) {
@@ -1141,6 +1148,13 @@ enableOtherHotkey(thisHotkey)
         }
     }
     
+}
+
+SystemAltTab()
+{
+    global AltTabIsOpen
+    AltTabIsOpen := true
+    send, ^!{tab}
 }
 
 toggleSuspend()
