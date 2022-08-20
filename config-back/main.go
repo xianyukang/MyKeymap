@@ -56,6 +56,7 @@ func server(errorLog *strings.Builder, hasError chan<- struct{}, debug bool) {
 	router := gin.Default()
 	router.Use(ErrorHandler(hasError))
 	router.Use(cors.Default())
+	router.Use(IndexHandler())
 	router.Use(static.Serve("/", static.LocalFile("./site", false)))
 
 	router.GET("/config", GetConfigHandler)
@@ -70,7 +71,9 @@ func server(errorLog *strings.Builder, hasError chan<- struct{}, debug bool) {
 		return
 	}
 
-	go openBrowser()
+	if !debug {
+		go openBrowser()
+	}
 
 	err = router.RunListener(ln)
 	if err != nil {
@@ -82,6 +85,29 @@ func server(errorLog *strings.Builder, hasError chan<- struct{}, debug bool) {
 func openBrowser() {
 	time.Sleep(600 * time.Millisecond)
 	_ = exec.Command("cmd", "/c", "start", "http://127.0.0.1:12333").Start()
+}
+
+func IndexHandler() gin.HandlerFunc {
+
+	// File Server 返回文件时设置了 Last-Modified 响应头,  所以浏览器会使用缓存
+	// 从旧版本升级时,  比如从 MyKeymap 1.1 升级到了 1.2,  打开浏览器会发现版本依旧是 1.1
+	// 解决办法是不让 File Server 返回 index.html,  去掉 Last-Modified 响应头以关掉缓存机制
+
+	// 假设有这样一串中间件 A->B->C:
+	// (1) 首先无论加不加 c.Next() 中间件都会顺序执行
+	// (2) 其中的 A 想在 B、C 处理完成后,  做一些后续工作,  这时候才需要用到 c.Next()
+	// (3) 如果 A 像中断流程, 那么调用一下 c.Abort()
+
+	return func(c *gin.Context) {
+		if c.Request.URL.Path == "/" {
+			data, err := ioutil.ReadFile("./site/index.html")
+			if err != nil {
+				panic(err)
+			}
+			c.Data(http.StatusOK, "text/html; charset=utf-8", data)
+			c.Abort()
+		}
+	}
 }
 
 func GetConfigHandler(c *gin.Context) {
