@@ -19,7 +19,7 @@ export const windowActions1 = [
     { label: "切换到上一个窗口", value: "send, !{tab}" },
     { label: "模拟 Alt+Tab 热键", value: "SystemAltTab()" },
     { label: "在当前程序的窗口间切换", value: "SwitchWindows()" },
-    { label: "窗口管理器(EDSF切换、X关闭、空格选择)", value: "action_enter_task_switch_mode()", },
+    { label: "窗口管理器(EDSF切换、X关闭、空格选择)", value: "action_enter_task_switch_mode()", }, // 别改位置, 其他地方依赖 windowActions1[4]
     { label: "上一个虚拟桌面", value: "send, {LControl down}{LWin down}{Left}{LWin up}{LControl up}", },
     { label: "下一个虚拟桌面", value: "send, {LControl down}{LWin down}{Right}{LWin up}{LControl up}", },
     { label: "移动窗口到下一个显示器", value: "send, #+{right}" },

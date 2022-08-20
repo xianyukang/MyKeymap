@@ -506,8 +506,8 @@ space::return
 
 
 #If TASK_SWITCH_MODE
-*D::send, {blind}{down}
 *E::send, {blind}{up}
+*D::send, {blind}{down}
 *S::send, {blind}{left}
 *F::send, {blind}{right}
 *X::send,  {blind}{del}

@@ -407,12 +407,7 @@ space::return
 {{ end }}
 
 #If TASK_SWITCH_MODE
-*D::send, {blind}{down}
-*E::send, {blind}{up}
-*S::send, {blind}{left}
-*F::send, {blind}{right}
-*X::send,  {blind}{del}
-*Space::send, {blind}{enter}
+{{ .Settings.windowSwitcherKeymap }}
 
 #if !keymapIsActive
 {{ range toList .CustomHotkeys -}}

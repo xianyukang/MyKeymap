@@ -130,6 +130,15 @@ function upgrade(config) {
   if (config.Settings.CustomShellMenu === undefined) {
     config.Settings.CustomShellMenu = DefaultCustomShellMenu
   }
+  if (config.Settings.windowSwitcherKeys === undefined) {
+    config.Settings.windowSwitcherKeys = "E/D/S/F/X"
+    config.Settings.windowSwitcherKeymap = `*E::send, {blind}{up}
+*D::send, {blind}{down}
+*S::send, {blind}{left}
+*F::send, {blind}{right}
+*X::send,  {blind}{del}
+*Space::send, {blind}{enter}`
+  }
 }
 
 const s = new Vuex.Store({

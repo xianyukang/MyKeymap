@@ -4309,7 +4309,9 @@
         "scrollOnceLineCount": "1",
         "showMouseMovePrompt": false,
         "slowMoveRepeat": "13",
-        "slowMoveSingle": "10"
+        "slowMoveSingle": "10",
+        "windowSwitcherKeymap": "*E::send, {blind}{up}\n*D::send, {blind}{down}\n*S::send, {blind}{left}\n*F::send, {blind}{right}\n*X::send,  {blind}{del}\n*Space::send, {blind}{enter}",
+        "windowSwitcherKeys": "E/D/S/F/X"
     },
     "SpaceMode": {
         "'": {

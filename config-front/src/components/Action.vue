@@ -256,7 +256,15 @@
             <v-divider></v-divider>
             <br />
 
-            <v-row>
+            <v-row v-if="config.value === windowActions1[4].value">
+              <v-col>
+                <v-text-field autocomplete="off" 
+                label="自定义按键 (前四个字母表示上下左右、最后一个字母表示关闭)"  placeholder="例子: E/D/S/F/X" 
+                v-model="$store.state.config.Settings.windowSwitcherKeys" @input="setWindowSwitcherKeymap" ></v-text-field>
+              </v-col>
+            </v-row>
+
+            <v-row v-else>
               <v-col>
                 <v-radio-group v-model="config.value">
                   <v-radio
@@ -383,6 +391,21 @@ export default {
     },
     onSpecialActionChange(label){
       this.config.label = label
+    },
+    setWindowSwitcherKeymap() {
+      console.log()
+      const keys = this.$store.state.config.Settings.windowSwitcherKeys.split('/')
+      if (keys.length < 5) {
+        return
+      }
+      this.$store.state.config.Settings.windowSwitcherKeymap = `
+*${keys[0]}::send, {blind}{up}
+*${keys[1]}::send, {blind}{down}
+*${keys[2]}::send, {blind}{left}
+*${keys[3]}::send, {blind}{right}
+*${keys[4]}::send,  {blind}{del}
+*Space::send, {blind}{enter}
+`
     },
     action_send_keys() {
       this.config.prefix = "*";
