@@ -216,7 +216,14 @@
                   :value="action.label"
                 ></v-radio>
               </v-col>
-              <v-col> </v-col>
+              <v-col>
+                <v-radio
+                  v-for="action in mouseActions2"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.label"
+                ></v-radio>
+              </v-col>
             </v-row>
           </v-radio-group>
           <pre>
@@ -331,7 +338,7 @@ import _ from "lodash";
 import KeyValueConfig from "./KeyValueConfig.vue";
 import SystemAction from "./SystemAction.vue";
 import WindowSelectorConfig from "./WindowSelectorConfig.vue";
-import { windowActions1, windowActions2, specialActions, mouseActions, scrollActions, textFeatures1, textFeatures2, textFeatures3, textFeatures4,clickActions } from "../action";
+import { windowActions1, windowActions2, specialActions, mouseActions, mouseActions2, scrollActions, textFeatures1, textFeatures2, textFeatures3, textFeatures4,clickActions } from "../action";
 
 export default {
   mixins: [currConfigMixin],
@@ -345,6 +352,7 @@ export default {
       showWindowSelectorConfig: false,
       windowSelector: "2",
       mouseActions,
+      mouseActions2,
       scrollActions,
       clickActions,
       specialActions,
@@ -478,6 +486,12 @@ export default {
       map["鼠标下移"] = `fastMoveMouse("${key}", 0, 1)`;
       map["鼠标左移"] = `fastMoveMouse("${key}", -1, 0)`;
       map["鼠标右移"] = `fastMoveMouse("${key}", 1, 0)`;
+
+
+      map["鼠标左上移动"] = `fastMoveMouse("${key}", -1, -1)`;
+      map["鼠标右上移动"] = `fastMoveMouse("${key}", 1, -1)`;
+      map["鼠标左下移动"] = `fastMoveMouse("${key}", -1, 1)`;
+      map["鼠标右下移动"] = `fastMoveMouse("${key}", 1, 1)`;
 
       map["鼠标左键"] = `leftClick()`;
       map["鼠标右键"] = `rightClick()`;

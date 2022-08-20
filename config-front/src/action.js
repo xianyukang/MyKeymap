@@ -41,6 +41,13 @@ export const mouseActions = [
     { label: "鼠标左移", value: "鼠标左移" },
     { label: "鼠标右移", value: "鼠标右移" },
 ]
+
+export const mouseActions2 = [
+    { label: "鼠标左上移动", value: "鼠标左上移动" },
+    { label: "鼠标右上移动", value: "鼠标右上移动" },
+    { label: "鼠标左下移动", value: "鼠标左下移动" },
+    { label: "鼠标右下移动", value: "鼠标右下移动" },
+]
 export const scrollActions = [
     { label: "滚轮上滑", value: "滚轮上滑" },
     { label: "滚轮下滑", value: "滚轮下滑" },
