@@ -129,6 +129,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     CapslockMode := true
+    currentMode := "CapslockMode"
     keywait capslock
     CapslockMode := false
     if (A_ThisHotkey == "*capslock" && A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450) {
@@ -144,6 +145,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     JMode := true
+    currentMode := "JMode"
     DisableCapslockKey := true
     keywait j
     JMode := false
@@ -160,6 +162,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     PunctuationMode := true
+    currentMode := "PunctuationMode"
     DisableCapslockKey := true
     keywait `; 
     PunctuationMode := false
@@ -177,6 +180,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     DigitMode := true
+    currentMode := "DigitMode"
     keywait 3 
     DigitMode := false
     if (A_PriorKey == "3" && (A_TickCount - start_tick < 250))
@@ -189,6 +193,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     Mode9 := true
+    currentMode := "Mode9"
     keywait 9 
     Mode9 := false
     if (A_PriorKey == "9" && A_TimeSinceThisHotkey < 350)
@@ -202,6 +207,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     CommaMode := true
+    currentMode := "CommaMode"
     keywait `, 
     CommaMode := false
     if (A_PriorKey == "," && A_TimeSinceThisHotkey < 350)
@@ -215,6 +221,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     DotMode := true
+    currentMode := "DotMode"
     keywait `. 
     DotMode := false
     if (A_PriorKey == "." && A_TimeSinceThisHotkey < 350)
@@ -228,6 +235,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     SpaceMode := true
+    currentMode := "SpaceMode"
     keywait Space 
     SpaceMode := false
     if (A_PriorKey == "Space" && A_TimeSinceThisHotkey < 350)
@@ -241,6 +249,7 @@ $Tab::
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     TabMode := true
+    currentMode := "TabMode"
     keywait Tab 
     TabMode := false
     if (A_PriorKey == "Tab" && A_TimeSinceThisHotkey < 350)
@@ -363,6 +372,9 @@ f::
     SLOWMODE := false
     keywait f
     FMode := false
+    if lockCurrentMode {
+        CapslockMode := true
+    }
     return
 {{ end }}
 
@@ -373,6 +385,9 @@ space::
     SLOWMODE := false
     keywait space
     CapslockSpaceMode := false
+    if lockCurrentMode {
+        CapslockMode := true
+    }
     return
 {{ end }}
 {{- end }}

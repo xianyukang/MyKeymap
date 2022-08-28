@@ -95,14 +95,14 @@
       // 确定分隔符左边的字符串应该有多长
       const maxLength = lines.reduce((acc, val) => {
         const i = val.indexOf(deli)
-        const length = i === -1 ? -1 : val.substring(0, i).trim().length
+        const length = i === -1 ? -1 : val.substring(0, i).trimRight().length
         return acc > length ? acc : length
       }, -1)
 
       const linesAfter = lines.map(line => {
         const i = line.indexOf(deli)
         if (i !== -1) {
-          const left = line.substring(0, i).trim()
+          const left = line.substring(0, i).trimRight()
           const right = line.substring(i + deli.length)
           if (left.length <= maxLength) {
             return left + ' '.repeat(maxLength - left.length + 3) + deli + right

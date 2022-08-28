@@ -127,6 +127,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     CapslockMode := true
+    currentMode := "CapslockMode"
     keywait capslock
     CapslockMode := false
     if (A_ThisHotkey == "*capslock" && A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450) {
@@ -142,6 +143,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     JMode := true
+    currentMode := "JMode"
     DisableCapslockKey := true
     keywait j
     JMode := false
@@ -158,6 +160,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     PunctuationMode := true
+    currentMode := "PunctuationMode"
     DisableCapslockKey := true
     keywait `; 
     PunctuationMode := false
@@ -175,6 +178,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     DigitMode := true
+    currentMode := "DigitMode"
     keywait 3 
     DigitMode := false
     if (A_PriorKey == "3" && (A_TickCount - start_tick < 250))
@@ -191,6 +195,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     DotMode := true
+    currentMode := "DotMode"
     keywait `. 
     DotMode := false
     if (A_PriorKey == "." && A_TimeSinceThisHotkey < 350)
@@ -400,6 +405,7 @@ R::SwitchWindows()
 G::ToggleTopMost()
 9::action_copy_selected_file_path()
 E::action_enter_task_switch_mode()
+/::action_lock_current_mode()
 S::center_window_to_current_monitor(1200, 800)
 A::center_window_to_current_monitor(1370, 930)
 *I::fastMoveMouse("I", 0, -1)
@@ -408,7 +414,6 @@ A::center_window_to_current_monitor(1370, 930)
 *L::fastMoveMouse("L", 1, 0)
 *,::lbuttonDown()
 *N::leftClick()
-*.::moveCurrentWindow()
 *M::rightClick()
 *`;::scrollWheel(";", 4)
 *H::scrollWheel("H", 3)
@@ -432,6 +437,9 @@ f::
     SLOWMODE := false
     keywait f
     FMode := false
+    if lockCurrentMode {
+        CapslockMode := true
+    }
     return
 
 
@@ -440,7 +448,6 @@ f::
 #if SLOWMODE
 *,::lbuttonDown()
 *N::leftClick()
-*.::moveCurrentWindow()
 *M::rightClick()
 *`;::scrollWheel(";", 4)
 *H::scrollWheel("H", 3)

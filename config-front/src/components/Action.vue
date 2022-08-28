@@ -324,6 +324,11 @@
               </v-col>
             </v-row>
           </v-radio-group>
+        <pre class="tips">
+
+
+
+Tips: 此处没有列出的常用组合键,  比如 Ctrl+A、Ctrl+S 可通过「 输入文本或按键 」实现</pre>
         </template>
       </v-card-text>
     </v-card>
@@ -515,6 +520,7 @@ export default {
       map["鼠标右上移动"] = `fastMoveMouse("${key}", 1, -1)`;
       map["鼠标左下移动"] = `fastMoveMouse("${key}", -1, 1)`;
       map["鼠标右下移动"] = `fastMoveMouse("${key}", 1, 1)`;
+      map["切换慢速模式"] = `action_toggle_slow_mode()`;
 
       map["鼠标左键"] = `leftClick()`;
       map["鼠标右键"] = `rightClick()`;
@@ -569,7 +575,7 @@ export default {
         { text: "⚛️ 可能会用到的内置函数", value: "可能会用到的内置函数" },
       ];
 
-      if (![ 'Capslock', 'CapslockF', 'CapslockSpace', 'Mode3', 'Mode9', 'TabMode', 'Semicolon', 'CommaMode', 'DotMode'].includes(this.$route.name)) {
+      if (![ 'Capslock', 'CapslockF', 'CapslockSpace', 'Mode3', 'Mode9', 'TabMode', 'Semicolon', 'CommaMode', 'DotMode', 'SpaceMode', 'JMode'].includes(this.$route.name)) {
         const index = result.findIndex(x => x.value === '鼠标操作')
         if (index > 0) {
           result.splice(index, 1);

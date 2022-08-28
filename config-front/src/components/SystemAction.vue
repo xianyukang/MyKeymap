@@ -110,6 +110,11 @@ const actionMap = [
     value: "run, bin\\ahk.exe bin\\changeBrightness.ahk",
   },
   {
+    group: 1,
+    label: "切换「 自动隐藏任务栏 」",
+    value: "toggleAutoHideTaskBar()",
+  },
+  {
     group: 2,
     label: "打开「 回收站 」",
     value: "run, shell:RecycleBinFolder",
@@ -135,18 +140,14 @@ const actionMap = [
     value: "",
   },
   {
-    group: 3,
+    group: 2,
     label: "重启资源管理器",
     value: "restartExplorer()",
-  },
-  {
-    group: 3,
-    label: "切换「 自动隐藏任务栏 」",
-    value: "toggleAutoHideTaskBar()",
   },
   { group: 3, label: "缩写功能", value: "enterSemicolonAbbr()" },
   { group: 3, label: "Capslock 指令框", value: "enterCapslockAbbr()" },
   { group: 3, label: "切换 Capslock 状态", value: "toggleCapslock()" },
+  { group: 3, label: "锁定当前模式 (然后单键操作)", value: "action_lock_current_mode()" },
   { group: 4, label: "暂停 MyKeymap", value: "\nSuspend, Permit\ntoggleSuspend()\nreturn", routeNames: ["CustomHotkeys"] },
   { group: 4, label: "重启 MyKeymap", value: "\nSuspend, Toggle\nReloadProgram()\nreturn", routeNames: ["CustomHotkeys"] },
   { group: 4, label: "退出 MyKeymap", value: "quit(false)" },

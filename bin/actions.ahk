@@ -89,3 +89,24 @@ run_as_admin(path, args:="", working_dir:="")
 {
     Run *RunAs %path% %args%, %working_dir%
 }
+
+action_lock_current_mode()
+{
+    global lockCurrentMode, currentMode, SLOWMODE
+
+    if lockCurrentMode {
+        SLOWMODE := false
+        %currentMode% := false
+        tip("取消锁定", -400)
+    } else {
+        lockCurrentMode := true
+        tip("锁定当前模式", -400)
+    }
+
+}
+
+action_toggle_slow_mode()
+{
+    global SWITCH_TO_SLOWMODE
+    SWITCH_TO_SLOWMODE := !SWITCH_TO_SLOWMODE
+}

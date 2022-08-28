@@ -22,16 +22,15 @@
         },
         ".": {
             "2": {
-                "label": "让当前窗口进入拖动模式",
-                "prefix": "*",
-                "type": "鼠标操作",
-                "value": "moveCurrentWindow()"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "/": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "label": "锁定当前模式 (然后单键操作)",
+                "type": "系统控制",
+                "value": "action_lock_current_mode()"
             }
         },
         "0": {

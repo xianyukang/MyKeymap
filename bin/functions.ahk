@@ -555,7 +555,11 @@ slowMoveMouse(key, direction_x, direction_y) {
 }
 
 fastMoveMouse(key, direction_x, direction_y) {
-    global fastMoveSingle, fastMoveRepeat, moveDelay1, moveDelay2, SLOWMODE
+    global fastMoveSingle, fastMoveRepeat, moveDelay1, moveDelay2, SLOWMODE, SWITCH_TO_SLOWMODE
+    if SWITCH_TO_SLOWMODE {
+        slowMoveMouse(key, direction_x, direction_y)
+        return
+    }
     SLOWMODE := true
     one_x := direction_x *fastMoveSingle 
     one_y := direction_y *fastMoveSingle 
@@ -1119,9 +1123,11 @@ setHotkeyStatus(theHotkey, enableHotkey)
 
 disableOtherHotkey(thisHotkey)
 {
-    global allHotkeys, keymapIsActive, AltTabIsOpen
+    global allHotkeys, keymapIsActive, AltTabIsOpen, lockCurrentMode, SWITCH_TO_SLOWMODE
     keymapIsActive := true
     AltTabIsOpen := false
+    lockCurrentMode := false
+    SWITCH_TO_SLOWMODE := false
     for index,value in allHotkeys
     {
         if (value != thisHotkey) {
@@ -1133,12 +1139,16 @@ disableOtherHotkey(thisHotkey)
 
 enableOtherHotkey(thisHotkey)
 {
-    global allHotkeys, keymapIsActive, AltTabIsOpen
+    global allHotkeys, keymapIsActive, AltTabIsOpen, lockCurrentMode, currentMode
     keymapIsActive := false
 
     if (AltTabIsOpen) {
         AltTabIsOpen := false
         send, {enter}
+    }
+
+    if (lockCurrentMode) {
+        %currentMode% := true
     }
 
     for index,value in allHotkeys
