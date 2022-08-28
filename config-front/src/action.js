@@ -48,7 +48,6 @@ export const mouseActions2 = [
     { label: "鼠标右上移动", value: "鼠标右上移动" },
     { label: "鼠标左下移动", value: "鼠标左下移动" },
     { label: "鼠标右下移动", value: "鼠标右下移动" },
-    { label: "切换慢速模式", value: "切换慢速模式" },
 ]
 export const scrollActions = [
     { label: "滚轮上滑", value: "滚轮上滑" },

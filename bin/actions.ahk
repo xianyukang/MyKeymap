@@ -95,6 +95,7 @@ action_lock_current_mode()
     global lockCurrentMode, currentMode, SLOWMODE
 
     if lockCurrentMode {
+        lockCurrentMode := false
         SLOWMODE := false
         %currentMode% := false
         tip("取消锁定", -400)
@@ -103,10 +104,4 @@ action_lock_current_mode()
         tip("锁定当前模式", -400)
     }
 
-}
-
-action_toggle_slow_mode()
-{
-    global SWITCH_TO_SLOWMODE
-    SWITCH_TO_SLOWMODE := !SWITCH_TO_SLOWMODE
 }

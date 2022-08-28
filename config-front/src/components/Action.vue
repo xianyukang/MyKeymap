@@ -520,7 +520,6 @@ export default {
       map["鼠标右上移动"] = `fastMoveMouse("${key}", 1, -1)`;
       map["鼠标左下移动"] = `fastMoveMouse("${key}", -1, 1)`;
       map["鼠标右下移动"] = `fastMoveMouse("${key}", 1, 1)`;
-      map["切换慢速模式"] = `action_toggle_slow_mode()`;
 
       map["鼠标左键"] = `leftClick()`;
       map["鼠标右键"] = `rightClick()`;
