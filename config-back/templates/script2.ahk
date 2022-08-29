@@ -54,6 +54,7 @@ moveDelay1 = {{ concat "T" .Settings.moveDelay1 }}
 moveDelay2 = {{ concat "T" .Settings.moveDelay2 }}
 
 SemicolonAbbrTip := true
+keymapLockState := {}
 
 allHotkeys := []
 {{ if .Settings.Mode3 }}allHotkeys.Push("*3"){{ end }}
@@ -129,7 +130,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     CapslockMode := true
-    currentMode := "CapslockMode"
+    keymapLockState.currentMode := "CapslockMode"
     keywait capslock
     CapslockMode := false
     if (A_ThisHotkey == "*capslock" && A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450) {
@@ -145,7 +146,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     JMode := true
-    currentMode := "JMode"
+    keymapLockState.currentMode := "JMode"
     DisableCapslockKey := true
     keywait j
     JMode := false
@@ -161,11 +162,11 @@ return
 *`;::
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
-    PunctuationMode := true
-    currentMode := "PunctuationMode"
+    SemicolonMode := true
+    keymapLockState.currentMode := "SemicolonMode"
     DisableCapslockKey := true
     keywait `; 
-    PunctuationMode := false
+    SemicolonMode := false
     DisableCapslockKey := false
     if (A_PriorKey == ";" && A_TimeSinceThisHotkey < 250) {
          {{ (index .SpecialKeys "; Up").value }}
@@ -180,7 +181,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     DigitMode := true
-    currentMode := "DigitMode"
+    keymapLockState.currentMode := "DigitMode"
     keywait 3 
     DigitMode := false
     if (A_PriorKey == "3" && (A_TickCount - start_tick < 250))
@@ -193,7 +194,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     Mode9 := true
-    currentMode := "Mode9"
+    keymapLockState.currentMode := "Mode9"
     keywait 9 
     Mode9 := false
     if (A_PriorKey == "9" && A_TimeSinceThisHotkey < 350)
@@ -207,7 +208,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     CommaMode := true
-    currentMode := "CommaMode"
+    keymapLockState.currentMode := "CommaMode"
     keywait `, 
     CommaMode := false
     if (A_PriorKey == "," && A_TimeSinceThisHotkey < 350)
@@ -221,7 +222,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     DotMode := true
-    currentMode := "DotMode"
+    keymapLockState.currentMode := "DotMode"
     keywait `. 
     DotMode := false
     if (A_PriorKey == "." && A_TimeSinceThisHotkey < 350)
@@ -235,7 +236,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     SpaceMode := true
-    currentMode := "SpaceMode"
+    keymapLockState.currentMode := "SpaceMode"
     keywait Space 
     SpaceMode := false
     if (A_PriorKey == "Space" && A_TimeSinceThisHotkey < 350)
@@ -249,7 +250,7 @@ $Tab::
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     TabMode := true
-    currentMode := "TabMode"
+    keymapLockState.currentMode := "TabMode"
     keywait Tab 
     TabMode := false
     if (A_PriorKey == "Tab" && A_TimeSinceThisHotkey < 350)
@@ -327,7 +328,7 @@ k::enterJModeK()
 {{ end }}
 
 {{ if .Settings.SemicolonMode }}
-#if PunctuationMode
+#if SemicolonMode
 {{ template "keymapToAhk" .Semicolon }}
 {{ end }}
 
@@ -372,7 +373,7 @@ f::
     SLOWMODE := false
     keywait f
     FMode := false
-    if lockCurrentMode {
+    if keymapLockState.locked {
         CapslockMode := true
     }
     return
@@ -385,7 +386,7 @@ space::
     SLOWMODE := false
     keywait space
     CapslockSpaceMode := false
-    if lockCurrentMode {
+    if keymapLockState.locked {
         CapslockMode := true
     }
     return

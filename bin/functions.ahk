@@ -1119,10 +1119,10 @@ setHotkeyStatus(theHotkey, enableHotkey)
 
 disableOtherHotkey(thisHotkey)
 {
-    global allHotkeys, keymapIsActive, AltTabIsOpen, lockCurrentMode
+    global allHotkeys, keymapIsActive, AltTabIsOpen, keymapLockState
     keymapIsActive := true
     AltTabIsOpen := false
-    lockCurrentMode := false
+    keymapLockState.clear := true
     for index,value in allHotkeys
     {
         if (value != thisHotkey) {
@@ -1134,15 +1134,22 @@ disableOtherHotkey(thisHotkey)
 
 enableOtherHotkey(thisHotkey)
 {
-    global allHotkeys, keymapIsActive, AltTabIsOpen, lockCurrentMode, currentMode
+    global allHotkeys, keymapIsActive, AltTabIsOpen, keymapLockState
     keymapIsActive := false
+    currentMode := keymapLockState.currentMode
 
     if (AltTabIsOpen) {
         AltTabIsOpen := false
         send, {enter}
     }
 
-    if (lockCurrentMode) {
+    ; 已经锁定了 Capslock 模式,  再按一次 Capslock 相关的热键,  应该清空锁定状态
+    if (keymapLockState.clear) {
+        %currentMode% := false
+        keymapLockState.locked := false
+    }
+    else if (keymapLockState.locked) {
+        ; tip(currentMode)
         %currentMode% := true
     }
 

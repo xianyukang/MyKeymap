@@ -40,7 +40,7 @@ set_window_position_and_size(x, y, width, height)
 
 action_enter_task_switch_mode()
 {
-    global TASK_SWITCH_MODE, CapslockMode, TabMode, DigitMode, SpaceMode, Mode9, FMode, CapslockSpaceMode, PunctuationMode, CommaMode, DotMode
+    global TASK_SWITCH_MODE, keymapLockState, CapslockMode, TabMode, DigitMode, SpaceMode, Mode9, FMode, CapslockSpaceMode, SemicolonMode, CommaMode, DotMode
     CapslockMode := false
     TabMode := false
     DigitMode := false
@@ -48,7 +48,7 @@ action_enter_task_switch_mode()
     Mode9 := false
     FMode := false
     CapslockSpaceMode := false
-    PunctuationMode := false
+    SemicolonMode := false
     CommaMode := false
     DotMode := false
 
@@ -59,6 +59,11 @@ action_enter_task_switch_mode()
         WinWaitNotActive, ahk_group TASK_SWITCH_GROUP
     }
     TASK_SWITCH_MODE := false
+
+    if (keymapLockState.locked) {
+        currentMode := keymapLockState.currentMode
+        %currentMode% := true
+    }
 }
 
 action_hold_down_shift_key()
@@ -92,15 +97,18 @@ run_as_admin(path, args:="", working_dir:="")
 
 action_lock_current_mode()
 {
-    global lockCurrentMode, currentMode, SLOWMODE
+    global keymapLockState, SLOWMODE
 
-    if lockCurrentMode {
-        lockCurrentMode := false
+    currentMode := keymapLockState.currentMode
+    keymapLockState.clear := false
+
+    if keymapLockState.locked {
         SLOWMODE := false
         %currentMode% := false
+        keymapLockState.locked := false
         tip("取消锁定", -400)
     } else {
-        lockCurrentMode := true
+        keymapLockState.locked := true
         tip("锁定当前模式", -400)
     }
 
