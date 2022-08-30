@@ -2,20 +2,10 @@
   <v-radio-group v-model="config.label" @change="handleRadioChange">
     <v-row>
       <v-col>
-        <v-radio
-          v-for="action in otherFeatures1"
-          :key="action.label"
-          :label="`${action.label}`"
-          :value="action.label"
-        ></v-radio>
+        <v-radio v-for="action in otherFeatures1" :key="action.label" :label="`${action.label}`" :value="action.label"></v-radio>
       </v-col>
       <v-col>
-        <v-radio
-          v-for="action in otherFeatures2"
-          :key="action.label"
-          :label="`${action.label}`"
-          :value="action.label"
-        ></v-radio>
+        <v-radio v-for="action in otherFeatures2" :key="action.label" :label="`${action.label}`" :value="action.label"></v-radio>
       </v-col>
     </v-row>
 
@@ -25,53 +15,27 @@
 
     <v-row v-if="config.label === '用指定程序打开选中的文件'">
       <v-col>
-        <v-text-field
-          autocomplete="off"
-          label="程序路径"
-          v-model="config.toRun"
-          @input="action_open_selected_with"
-          placeholder="例如 code.exe"
-        ></v-text-field>
-        <v-text-field
-          autocomplete="off"
-          label="命令行参数 (用 {file} 表示文件路径)"
-          v-model="config.cmdArgs"
-          @input="action_open_selected_with"
-          placeholder=""
-        ></v-text-field>
-        <v-text-field
-          autocomplete="off"
-          label="自定义备注 (按 Caps 输入 help 可回顾配置)"
-          v-model="config.comment"
-        ></v-text-field>
+        <v-text-field autocomplete="off" label="程序路径" v-model="config.toRun" @input="action_open_selected_with" placeholder="例如 code.exe"></v-text-field>
+        <v-text-field autocomplete="off" label="命令行参数 (用 {file} 表示文件路径)" v-model="config.cmdArgs" @input="action_open_selected_with" placeholder=""></v-text-field>
+        <v-text-field autocomplete="off" label="自定义备注 (按 Caps 输入 help 可回顾配置)" v-model="config.comment"></v-text-field>
       </v-col>
     </v-row>
 
     <v-row v-else-if="config.label === '自定义的文件菜单'">
       <v-col>
-        <div style="margin-bottom: 8px;">
-          <a target="_blank" href="CustomShellMenu.html" style="color: green; text-decoration: none;">➤ 点此查看介绍, 如果想到了其他实用的菜单项, 也欢迎反馈</a>
+        <div style="margin-bottom: 8px">
+          <a target="_blank" href="CustomShellMenu.html" style="color: green; text-decoration: none">➤ 点此查看介绍, 如果想到了其他实用的菜单项, 也欢迎反馈</a>
         </div>
-          <v-textarea v-model="$store.state.config.Settings.CustomShellMenu" autocomplete="off" outlined height="600" hide-details no-resize></v-textarea>
+        <v-textarea v-model="$store.state.config.Settings.CustomShellMenu" autocomplete="off" outlined height="600" hide-details no-resize></v-textarea>
       </v-col>
     </v-row>
 
     <v-row v-else>
       <v-col>
-        <v-radio
-          v-for="action in otherFeatures3"
-          :key="action.label"
-          :label="`${action.label}`"
-          :value="action.label"
-        ></v-radio>
+        <v-radio v-for="action in otherFeatures3" :key="action.label" :label="`${action.label}`" :value="action.label"></v-radio>
       </v-col>
       <v-col>
-        <v-radio
-          v-for="action in otherFeatures4"
-          :key="action.label"
-          :label="`${action.label}`"
-          :value="action.label"
-        ></v-radio>
+        <v-radio v-for="action in otherFeatures4" :key="action.label" :label="`${action.label}`" :value="action.label"></v-radio>
       </v-col>
     </v-row>
   </v-radio-group>
@@ -147,7 +111,9 @@ const actionMap = [
   { group: 3, label: "缩写功能", value: "enterSemicolonAbbr()" },
   { group: 3, label: "Capslock 指令框", value: "enterCapslockAbbr()" },
   { group: 3, label: "切换 Capslock 状态", value: "toggleCapslock()" },
-  { group: 3, label: "锁定当前模式 (然后单键操作)", value: "action_lock_current_mode()" },
+  { group: 3, label: "锁定当前模式 (然后单键操作)", value: "action_lock_current_mode()", routeNames: [
+    "Capslock", "JMode", "Semicolon", "Mode3", "Mode9", "CommaMode", "DotMode", "TabMode", "SpaceMode"
+  ] },
   { group: 4, label: "暂停 MyKeymap", value: "\nSuspend, Permit\ntoggleSuspend()\nreturn", routeNames: ["CustomHotkeys"] },
   { group: 4, label: "重启 MyKeymap", value: "\nSuspend, Toggle\nReloadProgram()\nreturn", routeNames: ["CustomHotkeys"] },
   { group: 4, label: "退出 MyKeymap", value: "quit(false)" },
@@ -156,6 +122,12 @@ const actionMap = [
 ];
 
 import { bindWindow, currConfigMixin, escapeFuncString, executeScript, mapKeysToSend, notBlank } from "../util.js";
+
+function filterByRouteNames(x, routeName) {
+  if (!x.routeNames) return true;
+  else return x.routeNames.includes(routeName);
+}
+
 export default {
   props: ["config"],
   data() {
@@ -170,21 +142,10 @@ export default {
       return actionMap.filter((x) => x.group === 2);
     },
     otherFeatures3() {
-      return actionMap.filter((x) => x.group === 3);
+      return actionMap.filter((x) => x.group === 3).filter(x => filterByRouteNames(x, this.$route.name));
     },
     otherFeatures4() {
-      const res = actionMap
-        .filter((x) => x.group === 4)
-        .filter((x) => {
-          if (!x.routeNames) return true;
-          else return x.routeNames.includes(this.$route.name);
-        });
-      return res;
-      // if (this.$store.state.selectedKey.includes(" Up")) {
-      //   return res;
-      // } else {
-      //   return res;
-      // }
+      return actionMap.filter((x) => x.group === 4).filter(x => filterByRouteNames(x, this.$route.name));
     },
   },
   methods: {

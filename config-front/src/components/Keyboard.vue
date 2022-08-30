@@ -89,7 +89,7 @@ export default {
           { key: 'U', disableAt: [] },
           { key: 'I', disableAt: [] },
           { key: 'O', disableAt: [] },
-          { key: 'P', disableAt: ['Semicolon'] },
+          { key: 'P', disableAt: [] },
         ],
         [
           { key: 'A' },
@@ -113,7 +113,7 @@ export default {
           { key: 'M', disableAt: [] },
           { key: ',', disableAt: ['CommaMode'] },
           { key: '.', disableAt: ['DotMode'] },
-          { key: '/', disableAt: ['Semicolon', ] },
+          { key: '/', disableAt: [] },
         ],
         [
           { key: 'Space', disableAt: this.enableCapsSpace ? ['CapslockSpace', 'Capslock', 'SpaceMode'] : ['SpaceMode'] },
