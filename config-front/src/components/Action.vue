@@ -136,6 +136,10 @@
  Tips: 
      (1) <a target="_blank" href="SendKeyExample.html" style="color: green;">推荐点此查看示例</a>
      (2) 想输入 % ; , ` 这四个特殊符号时, 需要在前面加个反引号, 例如 `%
+     <template v-if="$route.name === 'CustomHotkeys'">
+     (3) 如果想用 Alt+D 来触发 Win+D,  那么得把 <span class="tips-code">#d</span> 改写成 <span class="tips-code">sendevent, #d</span>
+         这样才能避免 Alt+D 中的 Alt 键把输入的 Win+D 变成了 Alt+Win+D
+      </template>
        </pre>
         </template>
 
@@ -616,6 +620,12 @@ div.v-radio.v-item--active label.v-label {
   margin: 8px 10px -6px 10px;
   color: black;
 }
+.tips-code {
+  color: #d05;
+  background-color: #fffaf4;
+  padding: 1px 4px;
+}
+
 .action-select .v-select__selection {
   /* color: black; */
   /* font-size: 1.1em; */
