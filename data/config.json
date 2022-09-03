@@ -4183,6 +4183,15 @@
                 "value": "setColor(\"#D05\")"
             }
         },
+        "sj": {
+            "2": {
+                "comment": "输入当前时间",
+                "keysToSend": "%A_YYYY%-%A_MM%-%A_DD% %A_Hour%:%A_Min%",
+                "prefix": "*",
+                "type": "输入文本或按键",
+                "value": "send, {blind}%A_YYYY%-%A_MM%-%A_DD% %A_Hour%:%A_Min%"
+            }
+        },
         "sk": {
             "2": {
                 "comment": "输入一对 「  」",
@@ -4260,7 +4269,8 @@
         "ver",
         "xk",
         "zh",
-        "zk"
+        "zk",
+        "sj"
     ],
     "Settings": {
         "CapslockMode": true,
