@@ -337,12 +337,12 @@
         },
         "bb": {
             "2": {
-                "cmdArgs": "--app=https://cn.bing.com/dict/search?q=nice",
-                "comment": "Bing 词典",
+                "cmdArgs": "--app=https://cn.bing.com/dict/search?q={selected_text}",
+                "comment": "查询选中的单词 (低配版划词翻译)",
                 "toActivate": "Bing 词典",
                 "toRun": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"Bing 词典\", \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\", \"--app=https://cn.bing.com/dict/search?q=nice\", \"\")"
+                "value": "ActivateOrRun(\"Bing 词典\", \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\", \"--app=https://cn.bing.com/dict/search?q={selected_text}\", \"\")"
             }
         },
         "bd ": {
@@ -375,6 +375,15 @@
                 "label": "退出 MyKeymap",
                 "type": "系统控制",
                 "value": "quit(false)"
+            }
+        },
+        "gg": {
+            "2": {
+                "comment": "划词翻译: Google 选中的文本",
+                "toActivate": "",
+                "toRun": "https://google.com/search?q={selected_text}",
+                "type": "启动程序或激活窗口",
+                "value": "ActivateOrRun(\"\", \"https://google.com/search?q={selected_text}\", \"\", \"\")"
             }
         },
         "help": {
@@ -516,6 +525,7 @@
         "dd",
         "dm",
         "ex",
+        "gg",
         "help",
         "ld",
         "lj",
@@ -4264,13 +4274,13 @@
         "pin",
         "pur",
         "red",
+        "sj",
         "sk",
         "ss",
         "ver",
         "xk",
         "zh",
-        "zk",
-        "sj"
+        "zk"
     ],
     "Settings": {
         "CapslockMode": true,

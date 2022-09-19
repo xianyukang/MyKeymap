@@ -240,6 +240,20 @@ MyRun2(target, args := "", workingdir := "")
 ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:=false)
 {
     global run_to_activate, run_target, run_args, run_workingdir, run_start, run_run_as_admin
+
+    if InStr(args, "{selected_text}") || InStr(target, "{selected_text}") {
+        text := copySelectedText()
+        if !text {
+            return
+        }
+        if InStr(args, "://") || InStr(target, "://") {
+            text := encodeUriComponent(text)
+        }
+        args := strReplace(args, "{selected_text}", text)
+        target := strReplace(target, "{selected_text}", text)
+        tip(args)
+    }
+
     run_start := A_TickCount
     run_to_activate := to_activate
     run_target := target
@@ -890,7 +904,7 @@ copySelectedText()
         return ""
     }
 
-    return rtrim(clipboard, "`n")
+    return rtrim(clipboard, "`r`n")
 }
 
 addHtmlStyle(text, style )
@@ -1486,4 +1500,14 @@ enterCapslockAbbr()
     }
     if (ih.Match)
         execCapslockAbbr(ih.Match)
+}
+
+encodeUriComponent(uri)
+{
+    ; For Unicode strings, this should be the length times two
+    bufferSize := StrLen(uri) + 300
+    VarSetCapacity(buffer, bufferSize*2)
+    DllCall("shlwapi\UrlEscapeW", "Str",uri, "Str",buffer, "UInt*",bufferSize, "UInt",0x82000)
+    ; MsgBox, % bufferSize "`n" buffer
+    return buffer
 }

@@ -86,11 +86,11 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "blu,dk,dq,fs,gg,gre,gt,jt,kg,pin,pur,red,sk,ss,ver,xk,zh,zk,sj")
+semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "blu,dk,dq,fs,gg,gre,gt,jt,kg,pin,pur,red,sj,sk,ss,ver,xk,zh,zk")
 semiHook.KeyOpt("{CapsLock}", "S")
 semiHook.OnChar := Func("onSemiHookChar")
 semiHook.OnEnd := Func("onSemiHookEnd")
-capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "acmd,bb,bd ,dd,dm,ex,help,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,ss,st,tm,we")
+capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "acmd,bb,bd ,dd,dm,ex,gg,help,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,ss,st,tm,we")
 capsHook.KeyOpt("{CapsLock}", "S")
 capsHook.OnChar := Func("onCapsHookChar")
 capsHook.OnEnd := Func("onCapsHookEnd")
@@ -584,6 +584,8 @@ execCapslockAbbr(typo) {
     {
     case "dm":
             ActivateOrRun("", ".\", "", "")
+    case "gg":
+            ActivateOrRun("", "https://google.com/search?q={selected_text}", "", "")
     case "sp":
             ActivateOrRun("", "https://open.spotify.com/", "", "")
     case "bd ":
@@ -593,7 +595,7 @@ execCapslockAbbr(typo) {
     case "tm":
             ActivateOrRun("", "taskmgr.exe", "", "")
     case "bb":
-            ActivateOrRun("Bing 词典", "C:\Program Files\Google\Chrome\Application\chrome.exe", "--app=https://cn.bing.com/dict/search?q=nice", "")
+            ActivateOrRun("Bing 词典", "C:\Program Files\Google\Chrome\Application\chrome.exe", "--app=https://cn.bing.com/dict/search?q={selected_text}", "")
     case "st":
             ActivateOrRun("Microsoft Store", "shortcuts\Store.lnk", "", "")
     case "mm":
