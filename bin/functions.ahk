@@ -251,7 +251,6 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
         }
         args := strReplace(args, "{selected_text}", text)
         target := strReplace(target, "{selected_text}", text)
-        tip(args)
     }
 
     run_start := A_TickCount

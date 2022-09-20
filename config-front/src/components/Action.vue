@@ -137,7 +137,8 @@
      (1) <a target="_blank" href="SendKeyExample.html" style="color: green;">推荐点此查看示例</a>
      (2) 想输入 % ; , ` 这四个特殊符号时, 需要在前面加个反引号, 例如 `%
      <template v-if="$route.name === 'CustomHotkeys'">
-     (3) 如果想用 Alt+D 来触发 Win+D,  那么得把 <span class="tips-code">#d</span> 改写成 <span class="tips-code">sendevent, #d</span>
+     (3) 如果热键中包含 Ctrl、Alt、Win 那么得加上 <span class="tips-code">sendevent,</span> 前缀
+         比如想用 <span class="tips-code">Alt+D</span> (包含了 <span class="tips-code">Alt</span> 键) 来触发 <span class="tips-code">Win+D</span>,  那么得把 <span class="tips-code">#d</span> 改写成 <span class="tips-code">sendevent, #d</span>
          这样才能避免 Alt+D 中的 Alt 键把输入的 Win+D 变成了 Alt+Win+D
       </template>
        </pre>

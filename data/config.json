@@ -379,7 +379,7 @@
         },
         "gg": {
             "2": {
-                "comment": "划词翻译: Google 选中的文本",
+                "comment": "划词搜索: Google 选中的文本",
                 "toActivate": "",
                 "toRun": "https://google.com/search?q={selected_text}",
                 "type": "启动程序或激活窗口",
