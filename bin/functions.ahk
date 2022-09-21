@@ -265,11 +265,14 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
 ActivateOrRun2(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:=false) 
 {
     SetWinDelay, 0
-    if !workingdir
+    if !workingdir {
         workingdir := A_WorkingDir
+    }
     to_activate := Trim(to_activate)
-    ; WinShow, %to_activate%
-    ; if (to_activate && winexist(to_activate))
+    if (to_activate && shouldMinimizeCurrentWindow(to_activate)) {
+        WinMinimize, A
+        return
+    }
     if (to_activate && firstVisibleWindow(to_activate))
         MyGroupActivate(to_activate)
     else if (target != "")
@@ -1509,4 +1512,13 @@ encodeUriComponent(uri)
     DllCall("shlwapi\UrlEscapeW", "Str",uri, "Str",buffer, "UInt*",bufferSize, "UInt",0x82000)
     ; MsgBox, % bufferSize "`n" buffer
     return buffer
+}
+
+shouldMinimizeCurrentWindow(toActivate)
+{
+    WinGet, windowList, List, %toActivate%
+    if (windowList == 1 && WinActive("ahk_id " windowList1)) {
+        return true
+    }
+    return false
 }
