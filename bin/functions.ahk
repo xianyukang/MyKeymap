@@ -1515,8 +1515,32 @@ encodeUriComponent(uri)
 
 shouldMinimizeOrRestore(toActivate)
 {
-    WinGet, windowList, List, %toActivate%
-    if (windowList == 1 && WinActive("ahk_id " windowList1)) {
+    if !WinActive(toActivate) {
+        return false
+    }
+
+    WinGet, winList, List, %toActivate%
+    count := 0
+    windowID := ""
+    loop %winList%
+    {
+        item := winList%A_Index%
+        WinGetTitle, title, ahk_id %item%
+        if (Trim(title) == "") {
+            continue
+        }
+        ; WingetPos x, y, width, height, ahk_id %item%
+        ; if (height < 20 && width < 20) {
+        ;     continue
+        ; }
+        count := count + 1
+        windowID := item
+        if (count > 1) {
+            break
+        }
+    }
+
+    if (count == 1 && WinActive("ahk_id " windowID)) {
         WinGet, minmaxState, MinMax
         if (minmaxState == -1) {
             WinRestore,
