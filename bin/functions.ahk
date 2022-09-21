@@ -269,8 +269,7 @@ ActivateOrRun2(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin
         workingdir := A_WorkingDir
     }
     to_activate := Trim(to_activate)
-    if (to_activate && shouldMinimizeCurrentWindow(to_activate)) {
-        WinMinimize, A
+    if (to_activate && shouldMinimizeOrRestore(to_activate)) {
         return
     }
     if (to_activate && firstVisibleWindow(to_activate))
@@ -1514,10 +1513,16 @@ encodeUriComponent(uri)
     return buffer
 }
 
-shouldMinimizeCurrentWindow(toActivate)
+shouldMinimizeOrRestore(toActivate)
 {
     WinGet, windowList, List, %toActivate%
     if (windowList == 1 && WinActive("ahk_id " windowList1)) {
+        WinGet, minmaxState, MinMax
+        if (minmaxState == -1) {
+            WinRestore,
+        } else {
+            WinMinimize,
+        }
         return true
     }
     return false
