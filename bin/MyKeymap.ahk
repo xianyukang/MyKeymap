@@ -445,6 +445,17 @@ f::
 
 
 
+space::
+    CapslockSpaceMode := true
+    CapslockMode := false
+    SLOWMODE := false
+    keywait space
+    CapslockSpaceMode := false
+    if keymapLockState.locked {
+        CapslockMode := true
+    }
+    return
+
 
 #if SLOWMODE
 *,::lbuttonDown()
@@ -479,7 +490,6 @@ I::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe", "",
 A::ActivateOrRun("ahk_exe WindowsTerminal.exe", "wt.exe", "", "", false)
 W::ActivateOrRun("ahk_exe chrome.exe", "" A_ProgramsCommon "\Google Chrome.lnk", "", "")
 .::ActivateOrRun("ahk_exe datagrip64.exe", "" A_Programs "\JetBrains Toolbox\DataGrip.lnk", "", "")
-,::ActivateOrRun("ahk_exe goland64.exe", "" A_Programs "\JetBrains Toolbox\GoLand.lnk", "", "")
 J::ActivateOrRun("ahk_exe idea64.exe", "" A_Programs "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk", "", "")
 D::ActivateOrRun("ahk_exe msedge.exe", "" A_ProgramsCommon "\Microsoft Edge.lnk", "", "")
 `;::activate_it_by_hotkey_or_run("TIM.exe", "^!z", "shortcuts\TIM.lnk")
@@ -492,6 +502,7 @@ B::winMinimizeIgnoreDesktop()
 
 #if CapslockSpaceMode
 space::return
+L::ActivateOrRun("ahk_exe goland64.exe", "" A_Programs "\JetBrains Toolbox\GoLand.lnk", "", "")
 
 
 

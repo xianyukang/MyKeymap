@@ -552,11 +552,8 @@
         },
         ",": {
             "2": {
-                "comment": "",
-                "toActivate": "ahk_exe goland64.exe",
-                "toRun": "%A_Programs%\\JetBrains Toolbox\\GoLand.lnk",
-                "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_exe goland64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\GoLand.lnk\", \"\", \"\")"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "-": {
@@ -1075,8 +1072,11 @@
         },
         "L": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "comment": "GoLand",
+                "toActivate": "ahk_exe goland64.exe",
+                "toRun": "%A_Programs%\\JetBrains Toolbox\\GoLand.lnk",
+                "type": "启动程序或激活窗口",
+                "value": "ActivateOrRun(\"ahk_exe goland64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\GoLand.lnk\", \"\", \"\")"
             }
         },
         "M": {
@@ -4300,7 +4300,7 @@
         "enable3Mode": true,
         "enable9Mode": true,
         "enableCapsF": true,
-        "enableCapsSpace": false,
+        "enableCapsSpace": true,
         "enableCapslockAbbr": true,
         "enableCapslockMode": true,
         "enableCommaMode": false,
