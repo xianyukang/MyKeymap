@@ -532,6 +532,7 @@ export default {
       map["鼠标左键双击 (选中单词)"] = `myDoubleClick()`;
       map["鼠标左键三击 (选中一行)"] = `myTrippleClick()`;
       map["移动鼠标到窗口中心"] = `centerMouse()`;
+      map["移动鼠标到「 输入焦点 」"] = `run, bin\\ahk.exe bin\\moveMouseToCaret.ahk`;
       map["让当前窗口进入拖动模式"] = `moveCurrentWindow()`;
 
       this.config.prefix = "*";

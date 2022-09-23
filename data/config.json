@@ -22,8 +22,10 @@
         },
         ".": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "label": "移动鼠标到「 输入焦点 」",
+                "prefix": "*",
+                "type": "鼠标操作",
+                "value": "run, bin\\ahk.exe bin\\moveMouseToCaret.ahk"
             }
         },
         "/": {
