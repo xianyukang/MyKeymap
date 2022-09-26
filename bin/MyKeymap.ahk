@@ -398,6 +398,7 @@ k::enterJModeK()
 
 
 #if CapslockMode
+8::ActivateOrRun("", "ms-availablenetworks:", "", "")
 V::ActivateOrRun("用剪切板收集文本", "bin\ahk.exe", "bin\CollectText.ahk")
 C::MyRun("SoundControl.exe")
 X::SmartCloseWindow()
@@ -425,7 +426,7 @@ D::send, #+{right}
 Y::send, {LControl down}{LWin down}{Left}{LWin up}{LControl up}
 P::send, {LControl down}{LWin down}{Right}{LWin up}{LControl up}
 *T::send, {blind}#{left}
-0::set_window_position_and_size(10, 10, "DEFAULT", "DEFAULT")
+0::set_window_position_and_size(10, 10, 1000, 600)
 Q::winMaximizeIgnoreDesktop()
 B::winMinimizeIgnoreDesktop()
 

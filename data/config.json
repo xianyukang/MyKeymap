@@ -37,9 +37,9 @@
         },
         "0": {
             "2": {
-                "comment": "设置窗口位置、不修改大小",
+                "comment": "设置窗口位置和大小",
                 "type": "可能会用到的内置函数",
-                "value": "set_window_position_and_size(10, 10, \"DEFAULT\", \"DEFAULT\")"
+                "value": "set_window_position_and_size(10, 10, 1000, 600)"
             }
         },
         "1": {
@@ -86,8 +86,11 @@
         },
         "8": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "comment": "展示周围 Wi-Fi",
+                "toActivate": "",
+                "toRun": "ms-availablenetworks:",
+                "type": "启动程序或激活窗口",
+                "value": "ActivateOrRun(\"\", \"ms-availablenetworks:\", \"\", \"\")"
             }
         },
         "9": {
