@@ -25,6 +25,7 @@ if moveMouseToCaret("UIA", x, y, false) {
     ExitApp
 }
 
+CoordMode, Mouse, Screen
 WingetPos, x, y, width, height, A
 if moveMouseToCaret("Window", x + width/2, y + height/2) {
     ExitApp

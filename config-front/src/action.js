@@ -86,14 +86,15 @@ export const textFeatures2 = [
     { label: "光标移动 - 行尾 (End)", value: "send, {blind}{end}" },
     { label: "光标移动 - 上一个单词", value: "send, {blind}^{left}" },
     { label: "光标移动 - 下一个单词", value: "send, {blind}^{right}" },
-    { label: "删除 - 到行首", value: "send, {blind}+{home}{bs}" },
-    { label: "删除 - 一个单词", value: "send, {blind}^{bs}" },
+    { label: "删除 - 到行首", value: "sendevent, +{home}{bs}" },
+    { label: "删除 - 到行尾", value: "sendevent, +{end}{bs}" },
+    { label: "删除 - 一个单词", value: "sendevent, ^{bs}" },
 
 ]
 
 export const textFeatures3 = [
-    { label: "常用键 - 右键菜单", value: "send, {blind}{appskey}" },
-    { label: "常用键 - Esc", value: "send, {blind}{esc}" },
+    { label: "常用键 - 右键菜单", value: "send, {appskey}" },
+    { label: "常用键 - Esc", value: "send, {esc}" },
     { label: "常用键 - BackSpace", value: "send, {blind}{bs}" },
     { label: "常用键 - Enter", value: "send, {blind}{enter}" },
     { label: "常用键 - Space", value: "send, {blind}{space}" },
@@ -105,14 +106,14 @@ export const textFeatures3 = [
 ]
 
 export const textFeatures4 = [
-    { label: "选中当前行", value: "send, {blind}{home}+{end}" },
-    { label: "Ctrl + C (复制)", value: "send, {blind}^c" },
-    { label: "Ctrl + X (剪切)", value: "send, {blind}^x" },
-    { label: "Ctrl + V (粘贴)", value: "send, {blind}^v" },
-    { label: "Ctrl + Z (撤销)", value: "send, {blind}^z" },
-    { label: "Ctrl + Y (重做)", value: "send, {blind}^y" },
-    { label: "Ctrl + Tab", value: "send, {blind}^{tab}" },
-    { label: "Ctrl + Shift + Tab", value: "send, {blind}^+{tab}" },
+    { label: "选中当前行", value: "sendevent, {home}+{end}" },
+    { label: "Ctrl + C (复制)", value: "send, ^c" },
+    { label: "Ctrl + X (剪切)", value: "send, ^x" },
+    { label: "Ctrl + V (粘贴)", value: "send, ^v" },
+    { label: "Ctrl + Z (撤销)", value: "send, ^z" },
+    { label: "Ctrl + Y (重做)", value: "send, ^y" },
+    { label: "Ctrl + Tab", value: "send, ^{tab}" },
+    { label: "Ctrl + Shift + Tab", value: "send, ^+{tab}" },
 ]
 
 

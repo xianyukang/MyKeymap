@@ -67,7 +67,7 @@ export const getKeymapName = {
     "CommaMode": "逗号模式",
     "DotMode": "句号模式",
     "Semicolon": "分号模式",
-    "SemicolonAbbr": "分号缩写",
+    "SemicolonAbbr": "缩写功能",
     "Mode3": "3 模式",
     "Mode9": "9 模式",
     "LButtonMode": "鼠标左键",

@@ -1902,14 +1902,14 @@
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}^+{tab}"
+                "value": "send, ^+{tab}"
             }
         },
         "3": {
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}^{tab}"
+                "value": "send, ^{tab}"
             }
         },
         "4": {
@@ -1972,7 +1972,7 @@
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}^{bs}"
+                "value": "sendevent, ^{bs}"
             }
         },
         "BS": {
@@ -2053,7 +2053,7 @@
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}{home}+{end}"
+                "value": "sendevent, {home}+{end}"
             }
         },
         "M": {
@@ -2084,7 +2084,7 @@
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}{appskey}"
+                "value": "send, {appskey}"
             }
         },
         "R": {
@@ -2112,7 +2112,7 @@
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}+{home}{bs}"
+                "value": "sendevent, +{end}{bs}"
             }
         },
         "U": {
@@ -2139,14 +2139,13 @@
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}{esc}"
+                "value": "send, {esc}"
             }
         },
         "Y": {
             "2": {
-                "prefix": "*",
-                "type": "文字处理",
-                "value": "send, {blind}^y"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "Z": {

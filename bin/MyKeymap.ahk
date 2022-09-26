@@ -276,29 +276,28 @@ k::return
 #if JMode
 k::enterJModeK()
 `;::RealShellRun(A_WorkingDir "\bin\ahk.exe", """" A_WorkingDir "\bin\CustomShellMenu.ahk" """")
-*T::send, {blind}+{home}{bs}
+*2::send, ^+{tab}
+*3::send, ^{tab}
+*Q::send, {appskey}
 *W::send, {blind}+{tab}
-*2::send, {blind}^+{tab}
-*Y::send, {blind}^y
-*B::send, {blind}^{bs}
 *Z::send, {blind}^{left}
 *V::send, {blind}^{right}
-*3::send, {blind}^{tab}
 *I::send, {blind}ji
-*Q::send, {blind}{appskey}
 *C::send, {blind}{bs}
 *,::send, {blind}{del}
 *D::send, {blind}{down}
 *G::send, {blind}{end}
 *Space::send, {blind}{enter}
-*X::send, {blind}{esc}
 *A::send, {blind}{home}
-*L::send, {blind}{home}+{end}
 *.::send, {blind}{insert}
 *S::send, {blind}{left}
 *F::send, {blind}{right}
 *R::send, {blind}{tab}
 *E::send, {blind}{up}
+*X::send, {esc}
+*T::sendevent, +{end}{bs}
+*B::sendevent, ^{bs}
+*L::sendevent, {home}+{end}
 
 
 
