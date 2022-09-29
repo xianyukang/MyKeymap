@@ -1441,6 +1441,10 @@ enterSemicolonAbbr()
     ih := semiHook
     Suspend, On
 
+    if GetKeyState("LCtrl") {
+        send, {LCtrl up}
+    }
+
     typoTip.show("    ") 
     ih.Start()
     ih.Wait()
@@ -1478,6 +1482,11 @@ enterCapslockAbbr()
     HIDE_COMMAND_INPUT := WM_USER + 0x0002
     CANCEL_COMMAND_INPUT := WM_USER + 0x0003
     Suspend, On
+
+    ; RAlt 映射到 LCtrl 后,  按下 RAlt 再触发 Capslock 指令会导致 LCtrl 键一直处于按下状态
+    if GetKeyState("LCtrl") {
+        send, {LCtrl up}
+    }
 
     postMessageToTipWidnow(SHOW_COMMAND_INPUT)
     result := ""

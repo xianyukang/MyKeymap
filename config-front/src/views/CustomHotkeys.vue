@@ -66,7 +66,7 @@
             <v-card-text class="">
               <pre class="text-gray-700">
 F11    表示  F11
-!F2    表示  Alt + F2
+LWin   表示  左 Win 键
 +F2    表示  Shift + F2
 +space 表示  Shift + 空格
 
