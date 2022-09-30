@@ -161,6 +161,9 @@ export function mapKeysToSend(line) {
     if (line.startsWith(';') || line.startsWith('sleep') || line.startsWith('sendevent,')) {
         return '    ' + line
     }
+    if (line.startsWith('% ')) {
+        return '    send, ' + line
+    }
     if (line.startsWith('{text}') || line.startsWith('{Text}')) {
         line = ahkText(line)
     }

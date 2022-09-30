@@ -4246,6 +4246,15 @@
                 "value": "SemicolonAbbr2__xk()"
             }
         },
+        "year": {
+            "2": {
+                "comment": "明年是 ? 年",
+                "keysToSend": "% \"明年是\" . (A_YYYY + 1) . \"年\"",
+                "prefix": "*",
+                "type": "输入文本或按键",
+                "value": "send, % \"明年是\" . (A_YYYY + 1) . \"年\""
+            }
+        },
         "zh": {
             "2": {
                 "comment": "",
@@ -4283,6 +4292,7 @@
         "ss",
         "ver",
         "xk",
+        "year",
         "zh",
         "zk"
     ],
