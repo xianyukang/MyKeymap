@@ -348,6 +348,7 @@ k::enterJModeK()
 *B::send, {blind}7
 *N::send, {blind}8
 *M::send, {blind}9
+*5::send, {blind}^+s
 *0::send, {blind}{f10}
 *P::send, {blind}{f11}
 *`;::send, {blind}{f12}
@@ -491,7 +492,6 @@ P::ActivateOrRun("ahk_exe POWERPNT.EXE", "C:\ProgramData\Microsoft\Windows\Start
 I::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe", "", "")
 A::ActivateOrRun("ahk_exe WindowsTerminal.exe", "wt.exe", "", "", false)
 W::ActivateOrRun("ahk_exe chrome.exe", "" A_ProgramsCommon "\Google Chrome.lnk", "", "")
-.::ActivateOrRun("ahk_exe datagrip64.exe", "" A_Programs "\JetBrains Toolbox\DataGrip.lnk", "", "")
 J::ActivateOrRun("ahk_exe idea64.exe", "" A_Programs "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk", "", "")
 D::ActivateOrRun("ahk_exe msedge.exe", "" A_ProgramsCommon "\Microsoft Edge.lnk", "", "")
 `;::activate_it_by_hotkey_or_run("TIM.exe", "^!z", "shortcuts\TIM.lnk")
@@ -504,6 +504,7 @@ B::winMinimizeIgnoreDesktop()
 
 #if CapslockSpaceMode
 space::return
+D::ActivateOrRun("ahk_exe datagrip64.exe", "" A_Programs "\JetBrains Toolbox\DataGrip.lnk", "", "")
 L::ActivateOrRun("ahk_exe goland64.exe", "" A_Programs "\JetBrains Toolbox\GoLand.lnk", "", "")
 
 

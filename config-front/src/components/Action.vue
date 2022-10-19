@@ -60,7 +60,7 @@
           ></v-text-field>
           <v-text-field
             autocomplete="off"
-            label="当窗口不存在时要启动的: 程序路径 / 文件夹 / URL"
+            label="当窗口不存在时要启动的: 程序 / 文件夹 / URL"
             v-model="config.toRun"
             @input="activateOrRun"
           ></v-text-field>
@@ -137,7 +137,7 @@
      (1) <a target="_blank" href="SendKeyExample.html" style="color: green;">推荐点此查看示例</a>
      (2) 想输入 % ; , ` 这四个特殊符号时, 需要在前面加个反引号, 例如 `%
      <template v-if="$route.name === 'CustomHotkeys'">
-     (3) 如果热键中包含 Ctrl、Alt、Win 那么得加上 <span class="tips-code">sendevent,</span> 前缀
+     (3) 如果热键中包含 Ctrl、Alt、Win、Shift 那么得加上 <span class="tips-code">sendevent,</span> 前缀
          比如想用 <span class="tips-code">Alt+D</span> (包含了 <span class="tips-code">Alt</span> 键) 来触发 <span class="tips-code">Win+D</span>,  那么得把 <span class="tips-code">#d</span> 改写成 <span class="tips-code">sendevent, #d</span>
          这样才能避免 Alt+D 中的 Alt 键把输入的 Win+D 变成了 Alt+Win+D
       </template>
@@ -333,7 +333,7 @@
 
 
 
-Tips: 此处没有列出的常用组合键,  比如 Ctrl+A、Ctrl+S 可通过「 输入文本或按键 」实现</pre>
+Tips: 此处没有列出的常用组合键,  比如 Ctrl+A、Shift+Right 可通过「 输入文本或按键 」实现</pre>
         </template>
       </v-card-text>
     </v-card>
@@ -477,7 +477,9 @@ export default {
         }
       }
 
+      // 替换 %% 变量
       toRun = toRun.replace(/%(\w+)%/g, `" $1 "`);
+      cmdArgs = cmdArgs.replace(/%(\w+)%/g, `" $1 "`);
       workingDir = workingDir.replace(/%(\w+)%/g, `" $1 "`);
 
       if (notBlank(toRun) || notBlank(toActivate)) {

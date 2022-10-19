@@ -27,10 +27,12 @@ https://autohotkey.com/boards/viewtopic.php?t=4334
 
 
 
-ShellRun(prms*)
+ShellRun(target, args, workingdir, exeHasWindow)
 {
-    MakeExplorerForegroundProcess()
-    RealShellRun(prms*)
+    if (exeHasWindow) {
+        MakeExplorerForegroundProcess()
+    }
+    RealShellRun(target, args, workingdir)
 }
 
 RealShellRun(prms*)
@@ -291,12 +293,12 @@ ActivateOrRun2(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin
             if (target)
             {
                 if (SubStr(target, -3) != ".lnk")
-                    ShellRun(target, args, workingdir)
+                    ShellRun(target, args, workingdir, to_activate)
                 else {
                     ; 检查 lnk 是否损坏
                     FileGetShortcut, %target%, OutTarget
                     ; if FileExist(OutTarget)
-                    ShellRun(target, args, workingdir)
+                    ShellRun(target, args, workingdir, to_activate)
                 }
 
             } else {

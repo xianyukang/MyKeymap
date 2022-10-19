@@ -569,10 +569,8 @@
         },
         ".": {
             "2": {
-                "toActivate": "ahk_exe datagrip64.exe",
-                "toRun": "%A_Programs%\\JetBrains Toolbox\\DataGrip.lnk",
-                "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_exe datagrip64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\DataGrip.lnk\", \"\", \"\")"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "/": {
@@ -1023,8 +1021,11 @@
         },
         "D": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "comment": "DataGrip",
+                "toActivate": "ahk_exe datagrip64.exe",
+                "toRun": "%A_Programs%\\JetBrains Toolbox\\DataGrip.lnk",
+                "type": "启动程序或激活窗口",
+                "value": "ActivateOrRun(\"ahk_exe datagrip64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\DataGrip.lnk\", \"\", \"\")"
             }
         },
         "E": {
@@ -2826,8 +2827,11 @@
         },
         "5": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "comment": "Ctrl + Shift + S",
+                "keysToSend": "^+s",
+                "prefix": "*",
+                "type": "输入文本或按键",
+                "value": "send, {blind}^+s"
             }
         },
         "6": {

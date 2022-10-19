@@ -86,7 +86,7 @@ activate_it_by_hotkey_or_run(process_name, activation_hotkey, target, args:="", 
 launch_multiple(urls*)
 {
     for index,url in urls {
-        ShellRun(url)
+        RealShellRun(url)
     }
 }
 

@@ -12,7 +12,7 @@
 
 #### ➤ MyKeymap 的作用是什么?
 
-- MyKeymap 是 Windows 下的一款按键映射工具
+- MyKeymap 是 Windows 下的一款按键映射 / 快捷键增强工具
 - 对于`普通用户`  
   (1)能利用 caps 指令以一种新颖的方式启动程序  
   (2)能利用 caps + f 召唤窗口，解决高频的窗口切换  
