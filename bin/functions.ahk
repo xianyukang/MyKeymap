@@ -211,7 +211,7 @@ MyRun(target, args := "", workingdir := "")
     run_target := target
     run_args := args
     run_workingdir := workingdir
-    send, <+{F21}
+    send, +{F21}
     ; MyRun2(target, args, workingdir)
 }
 
@@ -262,7 +262,7 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
     run_args := args
     run_workingdir := workingdir
     run_run_as_admin := RunAsAdmin
-    send, <+{F22}
+    send, +{F22}
     ; ActivateOrRun2(to_activate, target, args, workingdir, RunAsAdmin)
 }
 
