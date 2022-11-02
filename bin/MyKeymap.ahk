@@ -401,8 +401,8 @@ k::enterJModeK()
 #if CapslockMode
 8::ActivateOrRun("", "ms-availablenetworks:", "", "")
 V::ActivateOrRun("用剪切板收集文本", "bin\ahk.exe", "bin\CollectText.ahk")
+*X::Capslock__5a4adaf5830ece7b49d35c2ecef1c335()
 C::MyRun("SoundControl.exe")
-X::SmartCloseWindow()
 R::SwitchWindows()
 G::ToggleTopMost()
 9::action_copy_selected_file_path()
@@ -653,7 +653,21 @@ execCapslockAbbr(typo) {
 
 
 
-
+Capslock__5a4adaf5830ece7b49d35c2ecef1c335()
+{
+    if winactive("ahk_exe chrome.exe") {
+        send, {blind}^w
+        return
+    }
+    if winactive("ahk_exe msedge.exe") {
+        send, {blind}^w
+        return
+    }
+    if (true) {
+        SmartCloseWindow()
+        return
+    }
+}
 
 SemicolonAbbr2__dk() {
     send, {blind}{text}{}

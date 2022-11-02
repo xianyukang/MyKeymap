@@ -296,6 +296,20 @@
             "2": {
                 "type": "窗口操作",
                 "value": "SmartCloseWindow()"
+            },
+            "4": {
+                "comment": "Ctrl + W 关闭标签",
+                "keysToSend": "^w",
+                "prefix": "*",
+                "type": "输入文本或按键",
+                "value": "send, {blind}^w"
+            },
+            "5": {
+                "comment": "Ctrl + W 关闭标签",
+                "keysToSend": "^w",
+                "prefix": "*",
+                "type": "输入文本或按键",
+                "value": "send, {blind}^w"
             }
         },
         "Y": {
@@ -5042,13 +5056,13 @@
         },
         {
             "id": "4",
-            "key": "",
-            "value": ""
+            "key": "🌐 Chrome",
+            "value": "ahk_exe chrome.exe"
         },
         {
             "id": "5",
-            "key": "",
-            "value": ""
+            "key": "🌐 Edge",
+            "value": "ahk_exe msedge.exe"
         },
         {
             "id": "6",
