@@ -200,7 +200,7 @@ return
     keywait `. 
     DotMode := false
     if (A_PriorKey == "." && A_TimeSinceThisHotkey < 350)
-        send, {blind}`. 
+        sendevent, {blind}`. 
     enableOtherHotkey(thisHotkey)
     return
 
@@ -282,7 +282,6 @@ k::enterJModeK()
 *W::send, {blind}+{tab}
 *Z::send, {blind}^{left}
 *V::send, {blind}^{right}
-*I::send, {blind}ji
 *C::send, {blind}{bs}
 *,::send, {blind}{del}
 *D::send, {blind}{down}
@@ -298,6 +297,7 @@ k::enterJModeK()
 *T::sendevent, +{end}{bs}
 *B::sendevent, ^{bs}
 *L::sendevent, {home}+{end}
+I::防止J模式误触("ji")
 
 
 
@@ -505,7 +505,7 @@ B::winMinimizeIgnoreDesktop()
 #if CapslockSpaceMode
 space::return
 D::ActivateOrRun("ahk_exe datagrip64.exe", "" A_Programs "\JetBrains Toolbox\DataGrip.lnk", "", "")
-L::ActivateOrRun("ahk_exe goland64.exe", "" A_Programs "\JetBrains Toolbox\GoLand.lnk", "", "")
+G::ActivateOrRun("ahk_exe goland64.exe", "" A_Programs "\JetBrains Toolbox\GoLand.lnk", "", "")
 
 
 

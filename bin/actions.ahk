@@ -130,3 +130,9 @@ toggle_dark_mode()
     ; tell the system it needs to refresh the user settings
     ; run,RUNDLL32.EXE USER32.DLL`, UpdatePerUserSystemParameters `,2 `,True
 }
+
+防止J模式误触(text) {
+    global JMode
+    JMode := false
+    send, %text%
+}

@@ -24,7 +24,7 @@ if (len(sys.argv) > 1):
     arg = sys.argv[1]
 
 # 增加版本号
-os.system('go.exe run add-version.go')
+# os.system('go.exe run add-version.go')
 
 # 构建后端项目
 os.chdir('config-back')

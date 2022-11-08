@@ -1062,8 +1062,11 @@
         },
         "G": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "comment": "GoLand",
+                "toActivate": "ahk_exe goland64.exe",
+                "toRun": "%A_Programs%\\JetBrains Toolbox\\GoLand.lnk",
+                "type": "启动程序或激活窗口",
+                "value": "ActivateOrRun(\"ahk_exe goland64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\GoLand.lnk\", \"\", \"\")"
             }
         },
         "H": {
@@ -1092,11 +1095,8 @@
         },
         "L": {
             "2": {
-                "comment": "GoLand",
-                "toActivate": "ahk_exe goland64.exe",
-                "toRun": "%A_Programs%\\JetBrains Toolbox\\GoLand.lnk",
-                "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_exe goland64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\GoLand.lnk\", \"\", \"\")"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "M": {
@@ -2049,10 +2049,8 @@
         "I": {
             "2": {
                 "comment": "防止连按 J+I 造成的误触",
-                "keysToSend": "ji",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}ji"
+                "type": "可能会用到的内置函数",
+                "value": "防止J模式误触(\"ji\")"
             }
         },
         "J": {

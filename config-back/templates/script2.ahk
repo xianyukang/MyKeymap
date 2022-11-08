@@ -226,7 +226,7 @@ return
     keywait `. 
     DotMode := false
     if (A_PriorKey == "." && A_TimeSinceThisHotkey < 350)
-        send, {blind}`. 
+        sendevent, {blind}`. 
     enableOtherHotkey(thisHotkey)
     return
 {{ end }}
