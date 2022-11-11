@@ -261,7 +261,7 @@
             <v-divider></v-divider>
             <br />
 
-            <v-row v-if="config.value === windowActions1[4].value">
+            <v-row v-if="config.value === 'action_enter_task_switch_mode()'">
               <v-col>
                 <v-text-field autocomplete="off" 
                 label="自定义按键 (前四个字母表示上下左右、最后一个字母表示关闭)"  placeholder="例子: E/D/S/F/X" 

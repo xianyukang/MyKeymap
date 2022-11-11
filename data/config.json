@@ -142,7 +142,7 @@
         "D": {
             "2": {
                 "type": "窗口操作",
-                "value": "send, #+{right}"
+                "value": "SystemAltTab()"
             }
         },
         "E": {
@@ -282,8 +282,8 @@
         },
         "V": {
             "2": {
-                "type": "文字处理",
-                "value": "ActivateOrRun(\"用剪切板收集文本\", \"bin\\ahk.exe\", \"bin\\CollectText.ahk\")"
+                "type": "窗口操作",
+                "value": "send, #+{right}"
             }
         },
         "W": {

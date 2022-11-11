@@ -400,10 +400,10 @@ I::防止J模式误触("ji")
 
 #if CapslockMode
 8::ActivateOrRun("", "ms-availablenetworks:", "", "")
-V::ActivateOrRun("用剪切板收集文本", "bin\ahk.exe", "bin\CollectText.ahk")
 *X::Capslock__5a4adaf5830ece7b49d35c2ecef1c335()
 C::MyRun("SoundControl.exe")
 R::SwitchWindows()
+D::SystemAltTab()
 G::ToggleTopMost()
 9::action_copy_selected_file_path()
 E::action_enter_task_switch_mode()
@@ -423,7 +423,7 @@ A::center_window_to_current_monitor(1370, 930)
 *O::scrollWheel("O", 2)
 *U::scrollWheel("U", 1)
 W::send, !{tab}
-D::send, #+{right}
+V::send, #+{right}
 Y::send, {LControl down}{LWin down}{Left}{LWin up}{LControl up}
 P::send, {LControl down}{LWin down}{Right}{LWin up}{LControl up}
 *T::send, {blind}#{left}

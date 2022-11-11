@@ -835,11 +835,20 @@ center_window_to_current_monitor(width, height)
     DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }
 
+activeWindowMaximizedOrMinimized()
+{
+    WinGet, state, MinMax, A
+    return state != 0
+}
+
 winMaximizeIgnoreDesktop()
 {
     if IsDesktopWindowActive()
         return
-    winmaximize, A
+    if activeWindowMaximizedOrMinimized()
+        WinRestore, A
+    else
+        WinMaximize, A
 }
 
 winMinimizeIgnoreDesktop() 
@@ -1186,6 +1195,13 @@ SystemAltTab()
     global AltTabIsOpen
     AltTabIsOpen := true
     send, ^!{tab}
+}
+
+SystemShiftAltTab()
+{
+    global AltTabIsOpen
+    AltTabIsOpen := true
+    send, ^+!{tab}
 }
 
 toggleSuspend()
