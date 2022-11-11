@@ -4687,14 +4687,14 @@
     "SpecialKeys": {
         "; Up": {
             "2": {
-                "label": "缩写功能",
+                "label": "触发缩写功能",
                 "type": "系统控制",
                 "value": "enterSemicolonAbbr()"
             }
         },
         "Caps Up": {
             "2": {
-                "label": "Capslock 指令框",
+                "label": "Capslock 命令框",
                 "type": "系统控制",
                 "value": "enterCapslockAbbr()"
             }
