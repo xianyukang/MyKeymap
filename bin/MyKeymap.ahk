@@ -506,6 +506,7 @@ B::winMinimizeIgnoreDesktop()
 space::return
 D::ActivateOrRun("ahk_exe datagrip64.exe", "" A_Programs "\JetBrains Toolbox\DataGrip.lnk", "", "")
 G::ActivateOrRun("ahk_exe goland64.exe", "" A_Programs "\JetBrains Toolbox\GoLand.lnk", "", "")
+T::activate_it_by_hotkey_or_run("TIM.exe", "^!z", "shortcuts\TIM.lnk")
 
 
 

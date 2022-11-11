@@ -109,7 +109,7 @@ const actionMap = [
     value: "restartExplorer()",
   },
   { group: 3, label: "缩写功能", value: "enterSemicolonAbbr()" },
-  { group: 3, label: "Capslock 指令框", value: "enterCapslockAbbr()" },
+  { group: 3, label: "Capslock 命令框", value: "enterCapslockAbbr()" },
   { group: 3, label: "切换 Capslock 状态", value: "toggleCapslock()" },
   { group: 3, label: "锁定当前模式 (然后单键操作)", value: "action_lock_current_mode()", routeNames: [
     "Capslock", "JMode", "Semicolon", "Mode3", "Mode9", "CommaMode", "DotMode", "TabMode", "SpaceMode"

@@ -83,7 +83,7 @@ export default {
       { title: 'Capslock', icon: 'mdi-alpha-c-box', to: 'Capslock', color: 'purple' },
       { title: 'Capslock + F', icon: 'mdi-alpha-c-box', to: 'CapslockF', color: 'purple' },
       { title: 'Capslock + Space', icon: 'mdi-alpha-c-box', to: 'CapslockSpace', color: 'purple' },
-      { title: 'Capslock 指令', icon: 'mdi-rocket-launch', to: 'CapslockAbbr', color: 'deep-orange' },
+      { title: 'Capslock 命令', icon: 'mdi-rocket-launch', to: 'CapslockAbbr', color: 'deep-orange' },
       { title: '缩写功能', icon: 'mdi-format-text-variant-outline', to: 'SemicolonAbbr', color: 'deep-orange' },
       { title: '自定义热键', icon: 'mdi-keyboard', to: 'CustomHotkeys', color: 'blue' },
       { title: 'Tab 模式', icon: 'mdi-alpha-t-box', to: 'TabMode', color: '#d05' },

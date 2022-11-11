@@ -1487,7 +1487,7 @@ enterCapslockAbbr()
     CANCEL_COMMAND_INPUT := WM_USER + 0x0003
     Suspend, On
 
-    ; RAlt 映射到 LCtrl 后,  按下 RAlt 再触发 Capslock 指令会导致 LCtrl 键一直处于按下状态
+    ; RAlt 映射到 LCtrl 后,  按下 RAlt 再触发 Capslock 命令会导致 LCtrl 键一直处于按下状态
     if GetKeyState("LCtrl") {
         send, {LCtrl up}
     }

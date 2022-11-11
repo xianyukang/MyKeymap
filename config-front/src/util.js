@@ -59,7 +59,7 @@ export const getKeymapName = {
     "Capslock": "Capslock",
     "CapslockF": "Capslock + F",
     "CapslockSpace": "Capslock + Space",
-    "CapslockAbbr": "Capslock 指令",
+    "CapslockAbbr": "Capslock 命令",
     "TabMode": "Tab 模式",
     "SpaceMode": "空格模式",
     "JMode": "J 模式",

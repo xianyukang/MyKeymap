@@ -103,7 +103,7 @@ function upgrade(config) {
   if (!keyConfig["2"] && keyConfig.value ===  "enterCapslockAbbr()") {
     config.SpecialKeys["Caps Up"] = {
       "2": {
-          "label": "Capslock 指令框",
+          "label": "Capslock 命令框",
           "type": "系统控制",
           "value": "enterCapslockAbbr()"
       }
@@ -238,7 +238,7 @@ const s = new Vuex.Store({
           }
           // 升级时, 新增以前没有的特殊键
           resp.data.SpecialKeys = resp.data.SpecialKeys || {}
-          resp.data.SpecialKeys['Caps Up'] = resp.data.SpecialKeys['Caps Up'] || { type: "系统控制", label: "Capslock 指令框", value: "enterCapslockAbbr()" }
+          resp.data.SpecialKeys['Caps Up'] = resp.data.SpecialKeys['Caps Up'] || { type: "系统控制", label: "Capslock 命令框", value: "enterCapslockAbbr()" }
           resp.data.SpecialKeys['; Up'] = resp.data.SpecialKeys['; Up'] || { type: "系统控制", label: "缩写功能", value: "enterSemicolonAbbr()" }
 
           // 自定义热键功能
