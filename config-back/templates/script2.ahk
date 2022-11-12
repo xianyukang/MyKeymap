@@ -120,7 +120,7 @@ return
 {{ .Settings.KeyMapping }}
 
 {{ range toList .CustomHotkeys -}}
-{{ if or (contains .Value "toggleSuspend()") (contains .Value "ReloadProgram()") -}}
+{{ if and .Key (or (contains .Value "toggleSuspend()") (contains .Value "ReloadProgram()")) -}}
 {{ escapeAhkHotkey .Key }}::{{ .Value }}
 {{- end }}
 {{ end }}
@@ -427,7 +427,7 @@ space::return
 
 #if !keymapIsActive
 {{ range toList .CustomHotkeys -}}
-{{ if not (or (contains .Value "toggleSuspend()") (contains .Value "ReloadProgram()")) -}}
+{{ if and .Key (not (or (contains .Value "toggleSuspend()") (contains .Value "ReloadProgram()"))) -}}
 {{ escapeAhkHotkey .Key }}::{{ .Value }}
 {{- end }}
 {{ end }}
