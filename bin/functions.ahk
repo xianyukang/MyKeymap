@@ -206,8 +206,7 @@ MakeSelfForegroundProcess()
 
 MyRun(target, args := "", workingdir := "")
 {
-    global run_target, run_args, run_workingdir, run_start
-    run_start := A_TickCount
+    global run_target, run_args, run_workingdir
     run_target := target
     run_args := args
     run_workingdir := workingdir
@@ -242,7 +241,7 @@ MyRun2(target, args := "", workingdir := "")
 
 ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:=false)
 {
-    global run_to_activate, run_target, run_args, run_workingdir, run_start, run_run_as_admin
+    global run_to_activate, run_target, run_args, run_workingdir, run_run_as_admin
 
     if InStr(args, "{selected_text}") || InStr(target, "{selected_text}") {
         text := copySelectedText()
@@ -256,7 +255,16 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
         target := strReplace(target, "{selected_text}", text)
     }
 
-    run_start := A_TickCount
+    SetWinDelay, 0
+    to_activate := Trim(to_activate)
+    if (to_activate && shouldMinimizeOrRestore(to_activate)) {
+        return
+    }
+    if (to_activate && firstVisibleWindow(to_activate)) {
+        MyGroupActivate(to_activate)
+        return
+    }
+
     run_to_activate := to_activate
     run_target := target
     run_args := args
@@ -268,19 +276,11 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
 
 ActivateOrRun2(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:=false) 
 {
-    SetWinDelay, 0
     if !workingdir {
         workingdir := A_WorkingDir
     }
-    to_activate := Trim(to_activate)
-    if (to_activate && shouldMinimizeOrRestore(to_activate)) {
-        return
-    }
-    if (to_activate && firstVisibleWindow(to_activate))
-        MyGroupActivate(to_activate)
-    else if (target != "")
+    if (target != "")
     {
-        ;showtip("not exist, try to start !")
         if (RunAsAdmin)
             {
                 if (substr(target, 1, 1) == "\")

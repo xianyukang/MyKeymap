@@ -101,12 +101,10 @@ return
 ^F21::
     Suspend, Permit
     MyRun2(run_target, run_args, run_workingdir)
-    ; tip(A_TickCount - run_start)
     Return
 ^F22::
     Suspend, Permit
     ActivateOrRun2(run_to_activate, run_target, run_args, run_workingdir, run_run_as_admin)
-    ; tip(A_TickCount - run_start)
     Return
 
 RAlt::LCtrl
