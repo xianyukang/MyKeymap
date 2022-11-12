@@ -19,14 +19,14 @@ Gui, New, hwndhGui AlwaysOnTop Resize MinSize
 Gui, Color, FFFFFF
 Gui, Font, s12 normal, 等线
 Gui, Add, Text, y+5, ` 
-Gui, Add, Text, y+5, 窗口标识符有下面三种, 可以单独使用:
-Gui, Add, Text, y+5, ▷ 窗口名:      记事本
+Gui, Add, Text, y+5, 窗口标识符有下面三种,  经常选择进程名:
+Gui, Add, Text, y+5, ▷ 窗口名:      无标题 - 记事本
 Gui, Add, Text, y+5, ▷ 进程名:      ahk_exe notepad.exe
 Gui, Add, Text, y+5, ▷ 窗口类名:   ahk_class Notepad
 Gui, Add, Text, y+5, ` 
-Gui, Add, Text, y+5, 也可以组合使用 (有时候这样更精确), 例如:
-Gui, Add, Text, y+5, ▷ 记事本 ahk_class Notepad
-Gui, Add, Text, y+5, ▷ 记事本 ahk_exe notepad.exe
+Gui, Add, Text, y+5, 更多例子:
+Gui, Add, Text, y+5, ▷ 使用部分窗口名: 记事
+Gui, Add, Text, y+5, ▷ 组合两个标识符: 记事 ahk_exe notepad.exe (偶尔这样更精确
 Gui, Add, Text, y+5, ` 
 Gui, Font, s12 Bold
 Gui, Add, Text, y+5, 当前活动窗口的标识符:
