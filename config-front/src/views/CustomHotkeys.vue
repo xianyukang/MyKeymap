@@ -70,7 +70,7 @@ LWin   表示  左 Win 键
 +F2    表示  Shift + F2
 +space 表示  Shift + 空格
 
-(更多例子可以去群里问
+(注意符号都必须用英文标点符号
 </pre
               >
             </v-card-text>

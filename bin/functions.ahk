@@ -211,7 +211,7 @@ MyRun(target, args := "", workingdir := "")
     run_target := target
     run_args := args
     run_workingdir := workingdir
-    send, +{F21}
+    send, ^{F21}
     ; MyRun2(target, args, workingdir)
 }
 
@@ -262,7 +262,7 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
     run_args := args
     run_workingdir := workingdir
     run_run_as_admin := RunAsAdmin
-    send, +{F22}
+    send, ^{F22}
     ; ActivateOrRun2(to_activate, target, args, workingdir, RunAsAdmin)
 }
 
@@ -888,8 +888,11 @@ scrollWheel(key, direction) {
 }
 
 toggleCapslock() {
-    ; 方案 2,  未测试
-    send, {Blind}{Lctrl}{LAlt UP}{CapsLock}
+    Hotkey, *capslock, off, UseErrorLevel
+    if GetKeyState("Alt", "P")
+        send, {blind}{LCtrl}{LAlt Up}
+    send, {blind}{CapsLock}
+    Hotkey, *capslock, on, UseErrorLevel
     
     ; 方案 1,  输入法大小写指示可能不对
     ; newState := !GetKeyState("CapsLock", "T")

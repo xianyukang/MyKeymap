@@ -37,9 +37,11 @@
         },
         "0": {
             "2": {
-                "comment": "设置窗口位置和大小",
-                "type": "可能会用到的内置函数",
-                "value": "set_window_position_and_size(10, 10, 1000, 600)"
+                "comment": "减音量",
+                "keysToSend": "{Volume_Down}",
+                "prefix": "*",
+                "type": "输入文本或按键",
+                "value": "send, {blind}{Volume_Down}"
             }
         },
         "1": {
@@ -80,8 +82,9 @@
         },
         "7": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "comment": "设置窗口位置 (10,10) 和大小 (宽1000高600)",
+                "type": "可能会用到的内置函数",
+                "value": "set_window_position_and_size(10, 10, 1000, 600)"
             }
         },
         "8": {
@@ -95,9 +98,11 @@
         },
         "9": {
             "2": {
-                "label": "复制选中文件的路径",
-                "type": "系统控制",
-                "value": "action_copy_selected_file_path()"
+                "comment": "加音量",
+                "keysToSend": "{Volume_Up}",
+                "prefix": "*",
+                "type": "输入文本或按键",
+                "value": "send, {blind}{Volume_Up}"
             }
         },
         ";": {

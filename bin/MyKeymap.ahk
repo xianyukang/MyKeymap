@@ -98,12 +98,12 @@ capsHook.OnEnd := Func("onCapsHookEnd")
 #include data/custom_functions.ahk
 return
 
-+F21::
+^F21::
     Suspend, Permit
     MyRun2(run_target, run_args, run_workingdir)
     ; tip(A_TickCount - run_start)
     Return
-+F22::
+^F22::
     Suspend, Permit
     ActivateOrRun2(run_to_activate, run_target, run_args, run_workingdir, run_run_as_admin)
     ; tip(A_TickCount - run_start)
@@ -405,7 +405,6 @@ C::MyRun("SoundControl.exe")
 R::SwitchWindows()
 D::SystemAltTab()
 G::ToggleTopMost()
-9::action_copy_selected_file_path()
 E::action_enter_task_switch_mode()
 /::action_lock_current_mode()
 S::center_window_to_current_monitor(1200, 800)
@@ -427,7 +426,9 @@ V::send, #+{right}
 Y::send, {LControl down}{LWin down}{Left}{LWin up}{LControl up}
 P::send, {LControl down}{LWin down}{Right}{LWin up}{LControl up}
 *T::send, {blind}#{left}
-0::set_window_position_and_size(10, 10, 1000, 600)
+*0::send, {blind}{Volume_Down}
+*9::send, {blind}{Volume_Up}
+7::set_window_position_and_size(10, 10, 1000, 600)
 Q::winMaximizeIgnoreDesktop()
 B::winMinimizeIgnoreDesktop()
 
