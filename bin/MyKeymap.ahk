@@ -86,7 +86,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "blu,dk,dq,fs,gg,gre,gt,jt,kg,pin,pur,red,sj,sk,ss,ver,xk,year,zh,zk")
+semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "blu,dk,dq,fs,gg,gre,gt,jt,kg,pin,pur,red,sj,sk,ss,ver,xk,year,zh,zk,dh")
 semiHook.KeyOpt("{CapsLock}", "S")
 semiHook.OnChar := Func("onSemiHookChar")
 semiHook.OnEnd := Func("onSemiHookEnd")
@@ -557,6 +557,8 @@ execSemicolonAbbr(typo) {
                 send, {blind}{text}、
     case "gt":
                 send, {blind}{text}🐶
+    case "dh":
+            SemicolonAbbr2__dh()
     case "dk":
             SemicolonAbbr2__dk()
     case "gg":
@@ -693,4 +695,9 @@ SemicolonAbbr2__ver() {
 SemicolonAbbr2__xk() {
     send, {blind}{text}()
     send, {blind}{left 1}
+}
+SemicolonAbbr2__dh() {
+    send, {blind}{home}
+    sleep 50
+    send, {blind}电话号码: 123456{enter}
 }

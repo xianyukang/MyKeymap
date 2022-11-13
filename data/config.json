@@ -4136,6 +4136,16 @@
                 "value": "setColor(\"#2E66FF\")"
             }
         },
+        "dh": {
+            "2": {
+                "comment": "插入一行电话号码",
+                "keysToSend": "{home}\nsleep 50\n电话号码: 123456{enter}",
+                "prefix": "*",
+                "send_key_function": "SemicolonAbbr2__dh() {\n    send, {blind}{home}\n    sleep 50\n    send, {blind}电话号码: 123456{enter}\n}",
+                "type": "输入文本或按键",
+                "value": "SemicolonAbbr2__dh()"
+            }
+        },
         "dk": {
             "2": {
                 "comment": "输入一对 {}",
@@ -4316,7 +4326,8 @@
         "xk",
         "year",
         "zh",
-        "zk"
+        "zk",
+        "dh"
     ],
     "Settings": {
         "CapslockMode": true,
@@ -5047,7 +5058,8 @@
         "SemicolonAbbr2__sk() {\n    send, {blind}{text}「  」\n    send, {blind}{left 2}\n}",
         "SemicolonAbbr2__ss() {\n    send, {blind}{text}\"\"\n    send, {blind}{left}\n}",
         "SemicolonAbbr2__ver() {\n    send, {blind}#r\n    sleep 700\n    send, {blind}winver{enter}\n}",
-        "SemicolonAbbr2__xk() {\n    send, {blind}{text}()\n    send, {blind}{left 1}\n}"
+        "SemicolonAbbr2__xk() {\n    send, {blind}{text}()\n    send, {blind}{left 1}\n}",
+        "SemicolonAbbr2__dh() {\n    send, {blind}{home}\n    sleep 50\n    send, {blind}电话号码: 123456{enter}\n}"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",
