@@ -2,7 +2,7 @@
 
 #### ➤ 下载 & 文档
 
-- [MyKeymap 1.2.5](https://xianyukang.com/MyKeymap.html#mykeymap-%E7%AE%80%E4%BB%8B)
+- [MyKeymap 1.2.6](https://xianyukang.com/MyKeymap.html#mykeymap-%E7%AE%80%E4%BB%8B)
 - 建议点击上面的链接下载,  如果从 GitHub 下载,  需要自己编译
 
 

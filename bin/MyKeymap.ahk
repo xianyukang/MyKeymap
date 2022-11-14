@@ -74,7 +74,7 @@ Menu, Tray, Add
 
 Menu, Tray, Icon
 Menu, Tray, Icon, bin\logo.ico,, 1
-Menu, Tray, Tip, MyKeymap 1.2.5 by 咸鱼阿康
+Menu, Tray, Tip, MyKeymap 1.2.6 by 咸鱼阿康
 ; processPath := getProcessPath()
 ; SetWorkingDir, %processPath%
 
@@ -86,7 +86,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "blu,dk,dq,fs,gg,gre,gt,jt,kg,pin,pur,red,sj,sk,ss,ver,xk,year,zh,zk,dh")
+semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "blu,dh,dk,dq,fs,gg,gre,gt,jt,kg,pin,pur,red,sj,sk,ss,ver,xk,year,zh,zk")
 semiHook.KeyOpt("{CapsLock}", "S")
 semiHook.OnChar := Func("onSemiHookChar")
 semiHook.OnEnd := Func("onSemiHookEnd")
@@ -671,6 +671,11 @@ Capslock__5a4adaf5830ece7b49d35c2ecef1c335()
     }
 }
 
+SemicolonAbbr2__dh() {
+    send, {blind}{home}
+    sleep 50
+    send, {blind}电话号码: 123456{enter}
+}
 SemicolonAbbr2__dk() {
     send, {blind}{text}{}
     send, {blind}{left}
@@ -695,9 +700,4 @@ SemicolonAbbr2__ver() {
 SemicolonAbbr2__xk() {
     send, {blind}{text}()
     send, {blind}{left 1}
-}
-SemicolonAbbr2__dh() {
-    send, {blind}{home}
-    sleep 50
-    send, {blind}电话号码: 123456{enter}
 }

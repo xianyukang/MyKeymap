@@ -4308,6 +4308,7 @@
     },
     "SemicolonAbbrKeys": [
         "blu",
+        "dh",
         "dk",
         "dq",
         "fs",
@@ -4326,8 +4327,7 @@
         "xk",
         "year",
         "zh",
-        "zk",
-        "dh"
+        "zk"
     ],
     "Settings": {
         "CapslockMode": true,
@@ -5053,13 +5053,13 @@
         }
     ],
     "send_key_functions": [
+        "SemicolonAbbr2__dh() {\n    send, {blind}{home}\n    sleep 50\n    send, {blind}电话号码: 123456{enter}\n}",
         "SemicolonAbbr2__dk() {\n    send, {blind}{text}{}\n    send, {blind}{left}\n}",
         "SemicolonAbbr2__gg() {\n    send, {blind}{text}git add -A`; git commit -a -m \"\"`; git push origin (git branch --show-current)`;\n    send, {blind}{left 47}\n}",
         "SemicolonAbbr2__sk() {\n    send, {blind}{text}「  」\n    send, {blind}{left 2}\n}",
         "SemicolonAbbr2__ss() {\n    send, {blind}{text}\"\"\n    send, {blind}{left}\n}",
         "SemicolonAbbr2__ver() {\n    send, {blind}#r\n    sleep 700\n    send, {blind}winver{enter}\n}",
-        "SemicolonAbbr2__xk() {\n    send, {blind}{text}()\n    send, {blind}{left 1}\n}",
-        "SemicolonAbbr2__dh() {\n    send, {blind}{home}\n    sleep 50\n    send, {blind}电话号码: 123456{enter}\n}"
+        "SemicolonAbbr2__xk() {\n    send, {blind}{text}()\n    send, {blind}{left 1}\n}"
     ],
     "snackbar": true,
     "snackbarText": "保存成功",
