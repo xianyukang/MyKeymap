@@ -494,6 +494,7 @@ A::ActivateOrRun("ahk_exe WindowsTerminal.exe", "wt.exe", "", "", false)
 W::ActivateOrRun("ahk_exe chrome.exe", "" A_ProgramsCommon "\Google Chrome.lnk", "", "")
 J::ActivateOrRun("ahk_exe idea64.exe", "" A_Programs "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk", "", "")
 D::ActivateOrRun("ahk_exe msedge.exe", "" A_ProgramsCommon "\Microsoft Edge.lnk", "", "")
+T::activate_it_by_hotkey_or_run("TIM.exe", "^!z", "C:\Program Files (x86)\Tencent\TIM\Bin\QQScLauncher.exe")
 `;::activate_it_by_hotkey_or_run("TIM.exe", "^!z", "shortcuts\TIM.lnk")
 M::bindOrActivate(CapslockF__M)
 N::bindOrActivate(CapslockF__N)
@@ -506,7 +507,7 @@ B::winMinimizeIgnoreDesktop()
 space::return
 D::ActivateOrRun("ahk_exe datagrip64.exe", "" A_Programs "\JetBrains Toolbox\DataGrip.lnk", "", "")
 G::ActivateOrRun("ahk_exe goland64.exe", "" A_Programs "\JetBrains Toolbox\GoLand.lnk", "", "")
-T::activate_it_by_hotkey_or_run("TIM.exe", "^!z", "shortcuts\TIM.lnk")
+T::activate_it_by_hotkey_or_run("TIM.exe", "^!z", "C:\Program Files (x86)\Tencent\TIM\Bin\QQScLauncher.exe")
 
 
 

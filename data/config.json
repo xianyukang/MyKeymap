@@ -846,8 +846,9 @@
         },
         "T": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "comment": "如果存在 TIM.exe 进程则按下 Ctrl+Alt+Z 激活/隐藏 Tim,  否则启动 Tim",
+                "type": "可能会用到的内置函数",
+                "value": "activate_it_by_hotkey_or_run(\"TIM.exe\", \"^!z\", \"C:\\Program Files (x86)\\Tencent\\TIM\\Bin\\QQScLauncher.exe\")"
             }
         },
         "U": {
@@ -1156,7 +1157,7 @@
             "2": {
                 "comment": "如果存在 TIM.exe 进程则按下 Ctrl+Alt+Z 激活/隐藏 Tim,  否则启动 Tim",
                 "type": "可能会用到的内置函数",
-                "value": "activate_it_by_hotkey_or_run(\"TIM.exe\", \"^!z\", \"shortcuts\\TIM.lnk\")"
+                "value": "activate_it_by_hotkey_or_run(\"TIM.exe\", \"^!z\", \"C:\\Program Files (x86)\\Tencent\\TIM\\Bin\\QQScLauncher.exe\")"
             }
         },
         "U": {
