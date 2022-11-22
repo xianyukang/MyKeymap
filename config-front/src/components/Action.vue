@@ -11,6 +11,24 @@
       <key-value-config @hideDialog="showConfigPathVariableDialog = false" />
     </v-dialog>
 
+    <v-dialog v-model="showPredefinedApps" overlay-opacity="0.30" max-width="1080" @click:outside="showPredefinedApps = !showPredefinedApps" >
+    <v-card min-height="700">
+      <v-card-title>
+        <h3 style="color: rgba(0, 0, 0, 0.7);">预定义的应用列表</h3>
+      </v-card-title>
+      <v-card-text style="color: black">
+        <p>注意: 程序路径不一定对,  可能还得自己改改</p>
+        <div v-for="(group,index1) in predefinedApps" :key="index1">
+          <h3 style="color: rgba(0, 0, 0, 0.7);">{{ group.name }}</h3>
+          <v-btn v-for="(item,index) in group.apps" :key="index" @click="fillActivateOrRun(item)"
+            color="purple" text style="text-transform: none;">
+            {{item.comment}}
+          </v-btn>
+        </div>
+      </v-card-text>
+    </v-card>
+    </v-dialog>
+
     <v-dialog
       persistent
       v-model="showWindowSelectorConfig"
@@ -106,7 +124,15 @@
               dark
               outlined
               @click="configPathVariable"
-              >⚙️配置路径变量</v-btn
+              >⚙️ 路径变量</v-btn
+            >
+            <v-btn
+              class="action-button"
+              color="purple"
+              dark
+              outlined
+              @click="showPredefinedApps = true"
+              >⭐ 应用列表 (推荐)</v-btn
             >
           </v-card-actions>
 
@@ -347,6 +373,7 @@ import {
   uniqueName,
 } from "../util.js";
 import { EMPTY_KEY } from "../util";
+import { predefinedApps } from "../predefinedApps";
 import _ from "lodash";
 import KeyValueConfig from "./KeyValueConfig.vue";
 import SystemAction from "./SystemAction.vue";
@@ -362,6 +389,7 @@ export default {
   data() {
     return {
       showConfigPathVariableDialog: false,
+      showPredefinedApps: false,
       showWindowSelectorConfig: false,
       windowSelector: "2",
       mouseActions,
@@ -375,6 +403,7 @@ export default {
       textFeatures2,
       textFeatures3,
       textFeatures4,
+      predefinedApps
     };
   },
   methods: {
@@ -441,6 +470,16 @@ export default {
 
       this.config.send_key_function = result.join("\n");
       this.config.value = `${funcName}()`;
+    },
+    fillActivateOrRun(item) {
+      const keys = ['toActivate', 'toRun', 'cmdArgs', 'workingDir', 'comment']
+      for (const k of keys) {
+        if (item[k]) {
+         this.config[k] = item[k]
+        }
+      }
+      this.activateOrRun()
+      this.showPredefinedApps = false
     },
     activateOrRun() {
       let toActivate = escapeFuncString(this.config.toActivate);

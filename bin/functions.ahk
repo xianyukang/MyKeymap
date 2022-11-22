@@ -243,6 +243,30 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
 {
     global run_to_activate, run_target, run_args, run_workingdir, run_run_as_admin
 
+    ; if_exist_then_send: TIM.exe, ^!z
+    prefix := "if_exist_then_send:"
+    if (InStr(to_activate, prefix) == 1) {
+        sub := SubStr(to_activate, 1 + StrLen(prefix))
+        split := StrSplit(sub, ",", " ", 2)
+        processName := split[1]
+        keyboardShortcut := split[2]
+        if ProcessExist(processName) {
+            send, %keyboardShortcut%
+            return
+        }
+    }
+    
+    ; detect_hidden_window: ahk_class OrpheusBrowserHost
+    prefix := "detect_hidden_window:"
+    if (InStr(to_activate, prefix) == 1) {
+        to_activate := SubStr(to_activate, 1 + StrLen(prefix))
+        DetectHiddenWindows, 1
+        if WinExist(to_activate) {
+            WinShow
+        }
+        DetectHiddenWindows, 0
+    }
+
     if InStr(args, "{selected_text}") || InStr(target, "{selected_text}") {
         text := copySelectedText()
         if !text {
