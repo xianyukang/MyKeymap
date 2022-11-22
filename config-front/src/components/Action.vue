@@ -476,6 +476,8 @@ export default {
       for (const k of keys) {
         if (item[k]) {
          this.config[k] = item[k]
+        } else {
+         this.config[k] = ""
         }
       }
       this.activateOrRun()

@@ -661,9 +661,8 @@
         },
         ";": {
             "2": {
-                "comment": "如果存在 TIM.exe 进程则发送 Ctrl+Alt+Z 打开 Tim,  否则启动 Tim",
-                "type": "可能会用到的内置函数",
-                "value": "activate_it_by_hotkey_or_run(\"TIM.exe\", \"^!z\", \"shortcuts\\TIM.lnk\")"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "=": {
@@ -674,17 +673,19 @@
         },
         "A": {
             "2": {
-                "comment": "召唤 Windows Terminal",
+                "cmdArgs": "",
+                "comment": "Windows Terminal",
                 "toActivate": "ahk_exe WindowsTerminal.exe",
                 "toRun": "wt.exe",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_exe WindowsTerminal.exe\", \"wt.exe\", \"\", \"\", false)"
+                "value": "ActivateOrRun(\"ahk_exe WindowsTerminal.exe\", \"wt.exe\", \"\", \"\")",
+                "workingDir": ""
             }
         },
         "B": {
             "2": {
-                "type": "窗口操作",
-                "value": "winMinimizeIgnoreDesktop()"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "BS": {
@@ -701,20 +702,24 @@
         },
         "D": {
             "2": {
-                "comment": "召唤 Edge",
+                "cmdArgs": "",
+                "comment": "Edge",
                 "toActivate": "ahk_exe msedge.exe",
-                "toRun": "%A_ProgramsCommon%\\Microsoft Edge.lnk",
+                "toRun": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Edge.lnk",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_exe msedge.exe\", \"\" A_ProgramsCommon \"\\Microsoft Edge.lnk\", \"\", \"\")"
+                "value": "ActivateOrRun(\"ahk_exe msedge.exe\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Edge.lnk\", \"\", \"\")",
+                "workingDir": ""
             }
         },
         "E": {
             "2": {
-                "comment": "召唤文件管理器",
+                "cmdArgs": "",
+                "comment": "文件管理器",
                 "toActivate": "ahk_class CabinetWClass ahk_exe Explorer.EXE",
                 "toRun": "D:\\",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_class CabinetWClass ahk_exe Explorer.EXE\", \"D:\\\", \"\", \"\")"
+                "value": "ActivateOrRun(\"ahk_class CabinetWClass ahk_exe Explorer.EXE\", \"D:\\\", \"\", \"\")",
+                "workingDir": ""
             }
         },
         "Enter": {
@@ -737,46 +742,53 @@
         },
         "H": {
             "2": {
-                "comment": "召唤 Visual Studio",
+                "cmdArgs": "",
+                "comment": "Visual Studio",
                 "toActivate": "- Microsoft Visual Studio",
-                "toRun": "%A_ProgramsCommon%\\Visual Studio 2019.lnk",
+                "toRun": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio 2019.lnk",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"- Microsoft Visual Studio\", \"\" A_ProgramsCommon \"\\Visual Studio 2019.lnk\", \"\", \"\")"
+                "value": "ActivateOrRun(\"- Microsoft Visual Studio\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio 2019.lnk\", \"\", \"\")",
+                "workingDir": ""
             }
         },
         "I": {
             "2": {
-                "comment": "召唤 Typora",
+                "cmdArgs": "",
+                "comment": "Typora",
                 "toActivate": "ahk_exe Typora.exe",
                 "toRun": "C:\\Program Files\\Typora\\Typora.exe",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_exe Typora.exe\", \"C:\\Program Files\\Typora\\Typora.exe\", \"\", \"\")"
+                "value": "ActivateOrRun(\"ahk_exe Typora.exe\", \"C:\\Program Files\\Typora\\Typora.exe\", \"\", \"\")",
+                "workingDir": ""
             }
         },
         "J": {
             "2": {
-                "comment": "召唤 IntelliJ IDEA",
+                "cmdArgs": "",
+                "comment": "IntelliJ IDEA",
                 "toActivate": "ahk_exe idea64.exe",
-                "toRun": "%idea%",
+                "toRun": "%A_Programs%\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_exe idea64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk\", \"\", \"\")"
+                "value": "ActivateOrRun(\"ahk_exe idea64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk\", \"\", \"\")",
+                "workingDir": ""
             }
         },
         "K": {
             "2": {
+                "comment": "PotPlayer",
                 "toActivate": "ahk_class PotPlayer64",
-                "toRun": "%A_ProgramFiles%\\DAUM\\PotPlayer\\PotPlayerMini64.exe",
+                "toRun": "%A_ProgramsCommon%\\Daum\\PotPlayer 64 bit\\PotPlayer 64 bit.lnk",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_class PotPlayer64\", \"\" A_ProgramFiles \"\\DAUM\\PotPlayer\\PotPlayerMini64.exe\", \"\", \"\")"
+                "value": "ActivateOrRun(\"ahk_class PotPlayer64\", \"\" A_ProgramsCommon \"\\Daum\\PotPlayer 64 bit\\PotPlayer 64 bit.lnk\", \"\", \"\")"
             }
         },
         "L": {
             "2": {
-                "comment": "召唤 Excel",
+                "comment": "Excel",
                 "toActivate": "ahk_exe EXCEL.EXE",
-                "toRun": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Excel.lnk",
+                "toRun": "%A_ProgramsCommon%\\Excel.lnk",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_exe EXCEL.EXE\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Excel.lnk\", \"\", \"\")"
+                "value": "ActivateOrRun(\"ahk_exe EXCEL.EXE\", \"\" A_ProgramsCommon \"\\Excel.lnk\", \"\", \"\")"
             }
         },
         "M": {
@@ -795,29 +807,30 @@
         },
         "O": {
             "2": {
-                "comment": "召唤 OneNote UWP",
-                "toActivate": "OneNote for Windows 10",
-                "toRun": "shortcuts\\OneNote for Windows 10.lnk",
-                "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"OneNote for Windows 10\", \"shortcuts\\OneNote for Windows 10.lnk\", \"\", \"\")"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "P": {
             "2": {
-                "comment": "召唤 PowerPoint",
+                "cmdArgs": "",
+                "comment": "PowerPoint",
                 "toActivate": "ahk_exe POWERPNT.EXE",
                 "toRun": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\PowerPoint.lnk",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_exe POWERPNT.EXE\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\PowerPoint.lnk\", \"\", \"\")"
+                "value": "ActivateOrRun(\"ahk_exe POWERPNT.EXE\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\PowerPoint.lnk\", \"\", \"\")",
+                "workingDir": ""
             }
         },
         "Q": {
             "2": {
+                "cmdArgs": "",
                 "comment": "Everything",
                 "toActivate": "ahk_class EVERYTHING",
-                "toRun": "%A_ProgramFiles%\\Everything\\Everything.exe",
+                "toRun": "C:\\Program Files\\Everything\\Everything.exe",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_class EVERYTHING\", \"\" A_ProgramFiles \"\\Everything\\Everything.exe\", \"\", \"\")"
+                "value": "ActivateOrRun(\"ahk_class EVERYTHING\", \"C:\\Program Files\\Everything\\Everything.exe\", \"\", \"\")",
+                "workingDir": ""
             }
         },
         "R": {
@@ -831,11 +844,13 @@
         },
         "S": {
             "2": {
-                "comment": "召唤 Visual Studio Code",
+                "cmdArgs": "",
+                "comment": "Visual Studio Code",
                 "toActivate": "ahk_exe Code.exe",
                 "toRun": "%A_Programs%\\Visual Studio Code\\Visual Studio Code.lnk",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_exe Code.exe\", \"\" A_Programs \"\\Visual Studio Code\\Visual Studio Code.lnk\", \"\", \"\")"
+                "value": "ActivateOrRun(\"ahk_exe Code.exe\", \"\" A_Programs \"\\Visual Studio Code\\Visual Studio Code.lnk\", \"\", \"\")",
+                "workingDir": ""
             }
         },
         "Space": {
@@ -846,11 +861,13 @@
         },
         "T": {
             "2": {
+                "cmdArgs": "",
                 "comment": "TIM",
                 "toActivate": "if_exist_then_send: TIM.exe, ^!z",
-                "toRun": "%A_ProgramsCommon%\\腾讯软件\\TIM\\TIM.lnk",
+                "toRun": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\腾讯软件\\TIM\\TIM.lnk",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"if_exist_then_send: TIM.exe, ^!z\", \"\" A_ProgramsCommon \"\\腾讯软件\\TIM\\TIM.lnk\", \"\", \"\")"
+                "value": "ActivateOrRun(\"if_exist_then_send: TIM.exe, ^!z\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\腾讯软件\\TIM\\TIM.lnk\", \"\", \"\")",
+                "workingDir": ""
             }
         },
         "U": {
@@ -867,11 +884,13 @@
         },
         "W": {
             "2": {
-                "comment": "召唤 Chrome",
+                "cmdArgs": "",
+                "comment": "Chrome",
                 "toActivate": "ahk_exe chrome.exe",
-                "toRun": "%A_ProgramsCommon%\\Google Chrome.lnk",
+                "toRun": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_exe chrome.exe\", \"\" A_ProgramsCommon \"\\Google Chrome.lnk\", \"\", \"\")"
+                "value": "ActivateOrRun(\"ahk_exe chrome.exe\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk\", \"\", \"\")",
+                "workingDir": ""
             }
         },
         "X": {
@@ -888,11 +907,8 @@
         },
         "Z": {
             "2": {
-                "comment": "",
-                "toActivate": "ahk_class YXMainFrame",
-                "toRun": "C:\\Program Files (x86)\\Yinxiang Biji\\印象笔记\\Evernote.exe",
-                "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_class YXMainFrame\", \"C:\\Program Files (x86)\\Yinxiang Biji\\印象笔记\\Evernote.exe\", \"\", \"\")"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "[": {
@@ -1178,11 +1194,8 @@
         },
         "W": {
             "2": {
-                "comment": "网易云音乐桌面版",
-                "toActivate": "detect_hidden_window: ahk_class OrpheusBrowserHost",
-                "toRun": "%A_ProgramsCommon%\\网易云音乐\\网易云音乐.lnk",
-                "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"detect_hidden_window: ahk_class OrpheusBrowserHost\", \"\" A_ProgramsCommon \"\\网易云音乐\\网易云音乐.lnk\", \"\", \"\")"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "X": {

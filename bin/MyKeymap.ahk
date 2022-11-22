@@ -479,27 +479,23 @@ Esc::exitMouseMode()
 
 #if FMode
 f::return
-H::ActivateOrRun("- Microsoft Visual Studio", "" A_ProgramsCommon "\Visual Studio 2019.lnk", "", "")
-O::ActivateOrRun("OneNote for Windows 10", "shortcuts\OneNote for Windows 10.lnk", "", "")
+H::ActivateOrRun("- Microsoft Visual Studio", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2019.lnk", "", "")
 E::ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\", "", "")
-Q::ActivateOrRun("ahk_class EVERYTHING", "" A_ProgramFiles "\Everything\Everything.exe", "", "")
-K::ActivateOrRun("ahk_class PotPlayer64", "" A_ProgramFiles "\DAUM\PotPlayer\PotPlayerMini64.exe", "", "")
-Z::ActivateOrRun("ahk_class YXMainFrame", "C:\Program Files (x86)\Yinxiang Biji\印象笔记\Evernote.exe", "", "")
+Q::ActivateOrRun("ahk_class EVERYTHING", "C:\Program Files\Everything\Everything.exe", "", "")
+K::ActivateOrRun("ahk_class PotPlayer64", "" A_ProgramsCommon "\Daum\PotPlayer 64 bit\PotPlayer 64 bit.lnk", "", "")
 S::ActivateOrRun("ahk_exe Code.exe", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "", "")
-L::ActivateOrRun("ahk_exe EXCEL.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Excel.lnk", "", "")
+L::ActivateOrRun("ahk_exe EXCEL.EXE", "" A_ProgramsCommon "\Excel.lnk", "", "")
 R::ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe", "", "")
 P::ActivateOrRun("ahk_exe POWERPNT.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk", "", "")
 I::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe", "", "")
-A::ActivateOrRun("ahk_exe WindowsTerminal.exe", "wt.exe", "", "", false)
-W::ActivateOrRun("ahk_exe chrome.exe", "" A_ProgramsCommon "\Google Chrome.lnk", "", "")
+A::ActivateOrRun("ahk_exe WindowsTerminal.exe", "wt.exe", "", "")
+W::ActivateOrRun("ahk_exe chrome.exe", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Google Chrome.lnk", "", "")
 J::ActivateOrRun("ahk_exe idea64.exe", "" A_Programs "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk", "", "")
-D::ActivateOrRun("ahk_exe msedge.exe", "" A_ProgramsCommon "\Microsoft Edge.lnk", "", "")
-T::ActivateOrRun("if_exist_then_send: TIM.exe, ^!z", "" A_ProgramsCommon "\腾讯软件\TIM\TIM.lnk", "", "")
-`;::activate_it_by_hotkey_or_run("TIM.exe", "^!z", "shortcuts\TIM.lnk")
+D::ActivateOrRun("ahk_exe msedge.exe", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk", "", "")
+T::ActivateOrRun("if_exist_then_send: TIM.exe, ^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk", "", "")
 M::bindOrActivate(CapslockF__M)
 N::bindOrActivate(CapslockF__N)
 /::bindOrActivate_unbind()
-B::winMinimizeIgnoreDesktop()
 
 
 
@@ -507,7 +503,6 @@ B::winMinimizeIgnoreDesktop()
 space::return
 D::ActivateOrRun("ahk_exe datagrip64.exe", "" A_Programs "\JetBrains Toolbox\DataGrip.lnk", "", "")
 G::ActivateOrRun("ahk_exe goland64.exe", "" A_Programs "\JetBrains Toolbox\GoLand.lnk", "", "")
-W::ActivateOrRun("detect_hidden_window: ahk_class OrpheusBrowserHost", "" A_ProgramsCommon "\网易云音乐\网易云音乐.lnk", "", "")
 T::ActivateOrRun("if_exist_then_send: TIM.exe, ^!z", "" A_ProgramsCommon "\腾讯软件\TIM\TIM.lnk", "", "")
 
 
