@@ -503,7 +503,8 @@ N::bindOrActivate(CapslockF__N)
 space::return
 D::ActivateOrRun("ahk_exe datagrip64.exe", "" A_Programs "\JetBrains Toolbox\DataGrip.lnk", "", "")
 G::ActivateOrRun("ahk_exe goland64.exe", "" A_Programs "\JetBrains Toolbox\GoLand.lnk", "", "")
-T::ActivateOrRun("if_exist_then_send: TIM.exe, ^!z", "" A_ProgramsCommon "\腾讯软件\TIM\TIM.lnk", "", "")
+T::ActivateOrRun("if_exist_then_send: TIM.exe, ^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk", "", "")
+W::ActivateOrRun("if_exist_then_send: WeChat.exe, ^!w", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\微信\微信.lnk", "", "")
 
 
 
@@ -602,8 +603,6 @@ execCapslockAbbr(typo) {
             ActivateOrRun("", ".\", "", "")
     case "gg":
             ActivateOrRun("", "https://google.com/search?q={selected_text}", "", "")
-    case "sp":
-            ActivateOrRun("", "https://open.spotify.com/", "", "")
     case "bd ":
             ActivateOrRun("", "https://www.baidu.com", "", "")
     case "ly":
@@ -616,6 +615,8 @@ execCapslockAbbr(typo) {
             ActivateOrRun("Microsoft Store", "shortcuts\Store.lnk", "", "")
     case "mm":
             ActivateOrRun("MyKeymap - Visual Studio Code", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\MyFiles\MyKeymap", "")
+    case "sp":
+            ActivateOrRun("Spotify", "https://open.spotify.com/", "", "")
     case "ms":
             ActivateOrRun("my_site - Visual Studio Code", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\project\my_site", "")
     case "acmd":

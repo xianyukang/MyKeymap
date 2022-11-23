@@ -52,6 +52,21 @@ export const predefinedApps = [
         toActivate: "if_exist_then_send: WXWork.exe, +!s",
         toRun: "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\企业微信\\企业微信.lnk",
       },
+      {
+        comment: "Telegram",
+        toActivate: "ahk_exe Telegram.exe",
+        toRun: "%A_Programs%\\Telegram Desktop\\Telegram.lnk",
+      },
+      {
+        comment: "Clash",
+        toActivate: "Clash for Windows",
+        toRun: "%A_Programs%\\Clash for Windows.lnk",
+      },
+      {
+        comment: "Steam",
+        toActivate: "ahk_exe steam.exe",
+        toRun: "C:\\Program Files (x86)\\Steam\\steam.exe",
+      },
     ],
   },
   {
@@ -75,8 +90,12 @@ export const predefinedApps = [
       {
         comment: "PotPlayer",
         toActivate: "ahk_class PotPlayer64",
-        toRun:
-          "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Daum\\PotPlayer 64 bit\\PotPlayer 64 bit.lnk",
+        toRun: "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Daum\\PotPlayer 64 bit\\PotPlayer 64 bit.lnk",
+      },
+      {
+        comment: "Spotify 网页",
+        toActivate: "Spotify",
+        toRun: "https://open.spotify.com/",
       },
     ],
   },
@@ -142,6 +161,11 @@ export const predefinedApps = [
         comment: "GoLand",
         toActivate: "ahk_exe goland64.exe",
         toRun: "%A_Programs%\\JetBrains Toolbox\\GoLand.lnk",
+      },
+      {
+        comment: "WebStorm",
+        toActivate: "ahk_exe webstorm64.exe",
+        toRun: "%A_Programs%\\JetBrains Toolbox\\WebStorm.lnk",
       },
       {
         comment: "DataGrip",

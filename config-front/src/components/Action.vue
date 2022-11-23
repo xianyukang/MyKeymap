@@ -132,7 +132,7 @@
               dark
               outlined
               @click="showPredefinedApps = true"
-              >⭐ 应用列表 (推荐)</v-btn
+              >⭐ 应用列表 ⭐</v-btn
             >
           </v-card-actions>
 
