@@ -1144,8 +1144,8 @@ openSettings()
 {
     if !WinExist("MyKeymap\bin\settings.exe") {
         if !FileExist("bin\ahk.exe") {
-            MsgBox, 程序不完整, 被安全管家误删了文件,  有两个办法`n(1)去隔离区恢复并信任被误删的 ahk.exe`n(2)暂时关掉安全管家,  然后重新解压 MyKeymap.7z
-            return
+            tip("程序不完整, 被安全管家误删了文件  `n(1) 部分功能将无法使用`n(2) 推荐去隔离区恢复被误删的 ahk.exe  ", -4000)
+            ; return
         }
         run, bin\settings.exe, bin\
         return
@@ -1617,4 +1617,46 @@ shouldMinimizeOrRestore(toActivate)
         return true
     }
     return false
+}
+
+
+GetWindowPositionOffset(hwnd)
+{
+    DWMWA_EXTENDED_FRAME_BOUNDS := 9
+
+    offset := {}
+    offset.x := 0
+    offset.y := 0
+    offset.width := 0
+    offset.height := 0
+
+    VarSetCapacity(RECT, 16, 0)
+    err := DllCall("dwmapi\DwmGetWindowAttribute"
+    ,"Ptr", hwnd
+    ,"UInt", DWMWA_EXTENDED_FRAME_BOUNDS
+    ,"Ptr", &RECT
+    ,"UInt", 16)
+    if err {
+        return offset
+    }
+    left := NumGet(RECT, 0, "Int")
+    top := NumGet(RECT, 4, "Int")
+    right := NumGet(RECT, 8, "Int")
+    bottom := NumGet(RECT, 12, "Int")
+
+    VarSetCapacity(RECT, 16, 0)
+    ok := DllCall("GetWindowRect", "Ptr", hwnd, "Ptr", &RECT)
+    if !ok {
+        return offset
+    }
+    left2 := NumGet(RECT, 0, "Int")
+    top2 := NumGet(RECT, 4, "Int")
+    right2 := NumGet(RECT, 8, "Int")
+    bottom2 := NumGet(RECT, 12, "Int")
+
+    offset.x := left2 - left
+    offset.y := top2 - top
+    offset.width := (right2 - left2) - (right - left)
+    offset.height := (bottom2 - top2) - (bottom - top)
+    return offset
 }

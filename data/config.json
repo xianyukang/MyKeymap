@@ -82,18 +82,16 @@
         },
         "7": {
             "2": {
-                "comment": "设置窗口位置 (10,10) 和大小 (宽1000高600)",
+                "comment": "设置窗口位置 (0,0) 和大小 (宽960高1080),  应该刚好占屏幕的一半",
                 "type": "可能会用到的内置函数",
-                "value": "set_window_position_and_size(10, 10, 1000, 600)"
+                "value": "set_window_position_and_size(0, 0, 960, 1080)"
             }
         },
         "8": {
             "2": {
-                "comment": "展示周围 Wi-Fi",
-                "toActivate": "",
-                "toRun": "ms-availablenetworks:",
-                "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"\", \"ms-availablenetworks:\", \"\", \"\")"
+                "comment": "设置窗口位置 (960,0) 和大小 (宽960高1080),  应该刚好占屏幕的一半",
+                "type": "可能会用到的内置函数",
+                "value": "set_window_position_and_size(960, 0, 960, 1080)"
             }
         },
         "9": {

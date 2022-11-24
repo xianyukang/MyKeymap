@@ -31,11 +31,12 @@ set_window_position_and_size(x, y, width, height)
 {
     if IsDesktopWindowActive()
         return
-    WinExist("A")
+    hwnd := WinExist("A")
     WinGet, state, MinMax
     if state
         WinRestore
-    WinMove, , , %x%, %y% , %width%, %height%
+    offset := GetWindowPositionOffset(hwnd)
+    WinMove, , , % x+offset.x, % y+offset.y , % width+offset.width, % height+offset.height
 }
 
 action_enter_task_switch_mode()

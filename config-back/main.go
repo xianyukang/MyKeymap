@@ -38,7 +38,7 @@ func main() {
 	matrix(hasError)
 
 	// 要等 gin 协程把错误日志打印完, 才能在这边读取错误日志
-	// 之前试了半天没发现是什么问题,  这就是并发程序的复杂性,  这里等 300ms 属于偷懒的办法
+	// 之前试了半天没发现是什么问题,  这里等 300ms 属于偷懒的办法
 	time.Sleep(300 * time.Millisecond)
 	fmt.Println(errorLog.String())
 
@@ -149,9 +149,10 @@ func ExecuteHandler(c *gin.Context) {
 			arg2 := val[2].(string)
 			c = exec.Command(exe, arg, arg2)
 		}
+		// 忽略错误
 		err := c.Start()
 		if err != nil {
-			panic(err)
+			// panic(err)
 		}
 	}
 	c.JSON(http.StatusOK, command)

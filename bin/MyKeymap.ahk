@@ -398,7 +398,6 @@ I::防止J模式误触("ji")
 
 
 #if CapslockMode
-8::ActivateOrRun("", "ms-availablenetworks:", "", "")
 *X::Capslock__5a4adaf5830ece7b49d35c2ecef1c335()
 C::MyRun("SoundControl.exe")
 R::SwitchWindows()
@@ -427,7 +426,8 @@ P::send, {LControl down}{LWin down}{Right}{LWin up}{LControl up}
 *T::send, {blind}#{left}
 *0::send, {blind}{Volume_Down}
 *9::send, {blind}{Volume_Up}
-7::set_window_position_and_size(10, 10, 1000, 600)
+7::set_window_position_and_size(0, 0, 960, 1080)
+8::set_window_position_and_size(960, 0, 960, 1080)
 Q::winMaximizeIgnoreDesktop()
 B::winMinimizeIgnoreDesktop()
 
