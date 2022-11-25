@@ -91,7 +91,7 @@ semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "blu,dh,dk,dq,
 semiHook.KeyOpt("{CapsLock}", "S")
 semiHook.OnChar := Func("onSemiHookChar")
 semiHook.OnEnd := Func("onSemiHookEnd")
-capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "acmd,bb,bd ,dd,dm,ex,gg,help,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,ss,st,tm,we")
+capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "acmd,bb,bd ,dd,dm,ex,gg,gj,help,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,st,tm,we")
 capsHook.KeyOpt("{CapsLock}", "S")
 capsHook.OnChar := Func("onCapsHookChar")
 capsHook.OnEnd := Func("onCapsHookEnd")
@@ -643,7 +643,7 @@ execCapslockAbbr(typo) {
             run, shell:downloads
     case "rb":
             slideToReboot()
-    case "ss":
+    case "gj":
             slideToShutdown()
     default:
             return false

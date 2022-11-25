@@ -408,6 +408,13 @@
                 "value": "ActivateOrRun(\"\", \"https://google.com/search?q={selected_text}\", \"\", \"\")"
             }
         },
+        "gj": {
+            "2": {
+                "label": "关机",
+                "type": "系统控制",
+                "value": "slideToShutdown()"
+            }
+        },
         "help": {
             "2": {
                 "label": "回顾 MyKeymap 配置",
@@ -507,13 +514,6 @@
                 "workingDir": ""
             }
         },
-        "ss": {
-            "2": {
-                "label": "关机",
-                "type": "系统控制",
-                "value": "slideToShutdown()"
-            }
-        },
         "st": {
             "2": {
                 "comment": "Windows 应用商店",
@@ -550,6 +550,7 @@
         "dm",
         "ex",
         "gg",
+        "gj",
         "help",
         "ld",
         "lj",
@@ -562,7 +563,6 @@
         "se",
         "sl",
         "sp",
-        "ss",
         "st",
         "tm",
         "we"
@@ -4364,7 +4364,7 @@
     "Settings": {
         "CapslockMode": true,
         "CommaMode": false,
-        "CustomShellMenu": "args = {file}\nexe = %A_Programs%\\Visual Studio Code\\Visual Studio Code.lnk\nadd_menu_item(\"C\", \"在 Code 中打开\", \"icons\\vscode.ico\", exe, args)\n\nargs = -filename {file}\nexe = C:\\Program Files\\Everything\\Everything.exe\nadd_menu_item(\"E\", \"在 Everything 中搜索\", \"icons\\everything.png\", exe, args)\n\nargs = -d {file}\nexe = wt.exe\nadd_menu_item(\"T\", \"在 Windows Termianl 中打开\", \"icons\\terminal.png\", exe, args)\n\nargs = a {file}.7z {file}\nexe = C:\\Program Files\\7-Zip\\7z.exe\nadd_menu_item(\"Z\", \"用 7-Zip 压缩\", \"icons\\7z.ico\", exe, args)\n\nargs = x {file} -o{dir}\\{filenameNoExt}\nexe = C:\\Program Files\\7-Zip\\7z.exe\nadd_menu_item(\"X\", \"用 7-Zip 解压缩\", \"icons\\7z.ico\", exe, args)\n",
+        "CustomShellMenu": "args = {file}\nexe = %A_Programs%\\Visual Studio Code\\Visual Studio Code.lnk\nadd_menu_item(\"C\", \"在 Code 中打开\", \"icons\\vscode.ico\", exe, args)\n\nargs = -filename {file}\nexe = C:\\Program Files\\Everything\\Everything.exe\nadd_menu_item(\"E\", \"在 Everything 中搜索\", \"icons\\everything.png\", exe, args)\n\nargs = -d {file}\nexe = wt.exe\nadd_menu_item(\"T\", \"在 Windows Termianl 中打开\", \"icons\\terminal.png\", exe, args)\n\nargs = smartArchiveZipFile\nexe = C:\\Program Files\\7-Zip\\7zg.exe\nadd_menu_item(\"Z\", \"用 7-Zip 压缩\", \"icons\\7z.ico\", exe, args)\n\nargs = smartExtractZipFile\nexe = C:\\Program Files\\7-Zip\\7z.exe\nadd_menu_item(\"X\", \"用 7-Zip 解压缩\", \"icons\\7z.ico\", exe, args)\n",
         "DotMode": true,
         "JMode": true,
         "KeyMapping": "RAlt::LCtrl\n",
@@ -4459,14 +4459,14 @@
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}^+{tab}"
+                "value": "send, ^+{tab}"
             }
         },
         "3": {
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}^{tab}"
+                "value": "send, ^{tab}"
             }
         },
         "4": {
@@ -4528,7 +4528,7 @@
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}^{bs}"
+                "value": "sendevent, ^{bs}"
             }
         },
         "BS": {
@@ -4625,9 +4625,8 @@
         },
         "O": {
             "2": {
-                "prefix": "*",
-                "type": "文字处理",
-                "value": "send, {blind}^c"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "P": {
@@ -4643,7 +4642,7 @@
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}{appskey}"
+                "value": "send, {appskey}"
             }
         },
         "R": {
@@ -4670,7 +4669,7 @@
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}+{home}{bs}"
+                "value": "sendevent, +{end}{bs}"
             }
         },
         "U": {
@@ -4697,7 +4696,7 @@
             "2": {
                 "prefix": "*",
                 "type": "文字处理",
-                "value": "send, {blind}{esc}"
+                "value": "send, {esc}"
             }
         },
         "Y": {

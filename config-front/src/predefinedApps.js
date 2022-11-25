@@ -53,16 +53,6 @@ export const predefinedApps = [
         toRun: "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\企业微信\\企业微信.lnk",
       },
       {
-        comment: "Telegram",
-        toActivate: "ahk_exe Telegram.exe",
-        toRun: "%A_Programs%\\Telegram Desktop\\Telegram.lnk",
-      },
-      {
-        comment: "Clash",
-        toActivate: "Clash for Windows",
-        toRun: "%A_Programs%\\Clash for Windows.lnk",
-      },
-      {
         comment: "Steam",
         toActivate: "ahk_exe steam.exe",
         toRun: "C:\\Program Files (x86)\\Steam\\steam.exe",

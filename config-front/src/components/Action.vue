@@ -205,6 +205,15 @@
                 <td>wrap_selected_text(&quot;&lt;font color='#D05'&gt;{text}&lt;/font&gt;&quot;)</td>
               </tr>
             </table>
+
+            <pre style="color: black;">
+
+
+
+
+
+
+  Tips: 自定义的函数可以放在 data\custom_functions.ahk,  然后在这里调用</pre>
           </div>
         </template>
 
