@@ -62,6 +62,8 @@ allHotkeys.Push("RButton")
 
 
 
+
+
 Menu, Tray, NoStandard
 Menu, Tray, Add, 暂停, trayMenuHandler
 Menu, Tray, Add, 退出, trayMenuHandler
@@ -202,6 +204,10 @@ return
         sendevent, {blind}`. 
     enableOtherHotkey(thisHotkey)
     return
+
+
+
+
 
 
 
@@ -397,6 +403,10 @@ I::防止J模式误触("ji")
 
 
 
+
+
+
+
 #if CapslockMode
 *X::Capslock__5a4adaf5830ece7b49d35c2ecef1c335()
 C::MyRun("SoundControl.exe")
@@ -404,7 +414,6 @@ R::SwitchWindows()
 D::SystemAltTab()
 G::ToggleTopMost()
 E::action_enter_task_switch_mode()
-/::action_lock_current_mode()
 S::center_window_to_current_monitor(1200, 800)
 A::center_window_to_current_monitor(1370, 930)
 *I::fastMoveMouse("I", 0, -1)
@@ -414,7 +423,6 @@ A::center_window_to_current_monitor(1370, 930)
 *,::lbuttonDown()
 *N::leftClick()
 *M::rightClick()
-*.::run, bin\ahk.exe bin\moveMouseToCaret.ahk
 *`;::scrollWheel(";", 4)
 *H::scrollWheel("H", 3)
 *O::scrollWheel("O", 2)
@@ -463,7 +471,6 @@ space::
 *,::lbuttonDown()
 *N::leftClick()
 *M::rightClick()
-*.::run, bin\ahk.exe bin\moveMouseToCaret.ahk
 *`;::scrollWheel(";", 4)
 *H::scrollWheel("H", 3)
 *O::scrollWheel("O", 2)

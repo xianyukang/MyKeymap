@@ -69,6 +69,8 @@ allHotkeys := []
 {{ if .Settings.RButtonMode }}allHotkeys.Push("RButton"){{ end }}
 {{ if .Settings.SpaceMode }}allHotkeys.Push("*Space"){{ end }}
 {{ if .Settings.TabMode }}allHotkeys.Push("$Tab"){{ end }}
+{{ if .Settings.AdditionalMode1 }}allHotkeys.Push("{{ .Settings.AdditionalMode1Info.Hotkey }}"){{ end }}
+{{ if .Settings.AdditionalMode2 }}allHotkeys.Push("{{ .Settings.AdditionalMode2Info.Hotkey }}"){{ end }}
 
 Menu, Tray, NoStandard
 Menu, Tray, Add, 暂停, trayMenuHandler
@@ -230,6 +232,34 @@ return
     return
 {{ end }}
 
+{{ if .Settings.AdditionalMode1 }}
+{{ .Settings.AdditionalMode1Info.Hotkey }}::
+    thisHotkey := A_ThisHotkey
+    disableOtherHotkey(thisHotkey)
+    AdditionalMode1 := true
+    keymapLockState.currentMode := "AdditionalMode1"
+    keywait {{ .Settings.AdditionalMode1Info.WaitKey }}
+    AdditionalMode1 := false
+    if (A_PriorKey == "{{ .Settings.AdditionalMode1Info.PriorKey }}" && A_TimeSinceThisHotkey < 350)
+        {{ .Settings.AdditionalMode1Info.Send }}
+    enableOtherHotkey(thisHotkey)
+    return
+{{ end }}
+
+{{ if .Settings.AdditionalMode2 }}
+{{ .Settings.AdditionalMode2Info.Hotkey }}::
+    thisHotkey := A_ThisHotkey
+    disableOtherHotkey(thisHotkey)
+    AdditionalMode2 := true
+    keymapLockState.currentMode := "AdditionalMode2"
+    keywait {{ .Settings.AdditionalMode2Info.WaitKey }}
+    AdditionalMode2 := false
+    if (A_PriorKey == "{{ .Settings.AdditionalMode2Info.PriorKey }}" && A_TimeSinceThisHotkey < 350)
+        {{ .Settings.AdditionalMode2Info.Send }}
+    enableOtherHotkey(thisHotkey)
+    return
+{{ end }}
+
 {{ if .Settings.SpaceMode }}
 *Space::
     thisHotkey := A_ThisHotkey
@@ -359,6 +389,18 @@ k::enterJModeK()
 {{ if .Settings.DotMode }}
 #if DotMode
 {{ template "keymapToAhk" .DotMode }}
+{{ end }}
+
+{{ if .Settings.AdditionalMode1 }}
+#if AdditionalMode1
+{{ .Settings.AdditionalMode1Info.WaitKey }}::return
+{{ template "keymapToAhk" .AdditionalMode1 }}
+{{ end }}
+
+{{ if .Settings.AdditionalMode2 }}
+#if AdditionalMode2
+{{ .Settings.AdditionalMode2Info.WaitKey }}::return
+{{ template "keymapToAhk" .AdditionalMode2 }}
 {{ end }}
 
 {{ if .Settings.CapslockMode }}

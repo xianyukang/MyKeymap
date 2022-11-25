@@ -99,6 +99,8 @@ export default {
       { title: '鼠标右键', icon: 'mdi-cursor-default', to: 'RButtonMode', color: '' },
       // { title: '使用说明', icon: 'mdi-help', to: 'About', color: 'light-green' },
       // { title: '关于作者', icon: 'mdi-exclamation-thick', to: 'About', color: 'light-green' },
+      { title: '额外模式 1', icon: 'mdi-rhombus', to: 'AdditionalMode1', color: 'green' },
+      { title: '额外模式 2', icon: 'mdi-rhombus', to: 'AdditionalMode2', color: 'green' },
       { title: '开关/设置', icon: 'mdi-toggle-switch', to: 'Settings', color: 'light-green' },
     ],
   }),

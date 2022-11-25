@@ -1,4 +1,548 @@
 {
+    "AdditionalMode1": {
+        "'": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        ",": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "-": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        ".": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "/": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "0": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "1": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "2": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "3": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "4": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "5": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "6": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "7": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "8": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "9": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        ";": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "=": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "A": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "B": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "BS": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "C": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "D": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "E": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "Enter": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "F": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "G": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "H": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "I": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "J": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "K": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "L": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "M": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "N": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "O": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "P": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "Q": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "R": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "S": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "Space": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "T": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "U": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "V": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "W": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "X": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "Y": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "Z": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "[": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "\\": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "]": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        }
+    },
+    "AdditionalMode2": {
+        ",": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        ".": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "/": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "0": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "1": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "2": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "3": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "4": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "5": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "6": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "7": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "8": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "9": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        ";": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "A": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "B": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "C": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "D": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "E": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "F": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "G": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "H": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "I": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "J": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "K": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "L": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "M": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "N": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "O": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "P": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "Q": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "R": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "S": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "Space": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "T": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "U": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "V": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "W": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "X": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "Y": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        },
+        "Z": {
+            "2": {
+                "type": "什么也不做",
+                "value": ""
+            }
+        }
+    },
     "Capslock": {
         "'": {
             "2": {
@@ -22,17 +566,14 @@
         },
         ".": {
             "2": {
-                "label": "移动鼠标到「 输入焦点 」",
-                "prefix": "*",
-                "type": "鼠标操作",
-                "value": "run, bin\\ahk.exe bin\\moveMouseToCaret.ahk"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "/": {
             "2": {
-                "label": "锁定当前模式 (然后单键操作)",
-                "type": "系统控制",
-                "value": "action_lock_current_mode()"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "0": {
@@ -4362,6 +4903,10 @@
         "zk"
     ],
     "Settings": {
+        "AdditionalMode1": false,
+        "AdditionalMode1Key": "",
+        "AdditionalMode2": false,
+        "AdditionalMode2Key": "",
         "CapslockMode": true,
         "CommaMode": false,
         "CustomShellMenu": "args = {file}\nexe = %A_Programs%\\Visual Studio Code\\Visual Studio Code.lnk\nadd_menu_item(\"C\", \"在 Code 中打开\", \"icons\\vscode.ico\", exe, args)\n\nargs = -filename {file}\nexe = C:\\Program Files\\Everything\\Everything.exe\nadd_menu_item(\"E\", \"在 Everything 中搜索\", \"icons\\everything.png\", exe, args)\n\nargs = -d {file}\nexe = wt.exe\nadd_menu_item(\"T\", \"在 Windows Termianl 中打开\", \"icons\\terminal.png\", exe, args)\n\nargs = smartArchiveZipFile\nexe = C:\\Program Files\\7-Zip\\7zg.exe\nadd_menu_item(\"Z\", \"用 7-Zip 压缩\", \"icons\\7z.ico\", exe, args)\n\nargs = smartExtractZipFile\nexe = C:\\Program Files\\7-Zip\\7z.exe\nadd_menu_item(\"X\", \"用 7-Zip 解压缩\", \"icons\\7z.ico\", exe, args)\n",
@@ -5059,6 +5604,8 @@
             "LButtonMode",
             "CommaMode",
             "DotMode",
+            "AdditionalMode1",
+            "AdditionalMode2",
             "CapslockAbbr",
             "SemicolonAbbr",
             "CustomHotkeys",

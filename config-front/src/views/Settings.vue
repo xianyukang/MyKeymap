@@ -48,9 +48,22 @@
               <v-col cols="3">
                 <v-switch class="switch" v-model="currConfig()['enableDotMode']" label="句号模式"></v-switch>
               </v-col>
-              <!-- <v-col cols="3">
-                <v-switch class="switch" v-model="currConfig()['enableCustomHotkeys']" label="自定义热键"></v-switch>
-              </v-col> -->
+              <v-col cols="4">
+                <v-select
+                  label="额外模式 1"
+                  v-model="currConfig()['AdditionalMode1Key']"
+                  :items="leaderKeys"
+                  @change="leaderKeyChange('AdditionalMode1')"
+                ></v-select>
+              </v-col>
+              <v-col cols="4">
+                <v-select
+                  label="额外模式 2"
+                  v-model="currConfig()['AdditionalMode2Key']"
+                  :items="leaderKeys"
+                  @change="leaderKeyChange('AdditionalMode2')"
+                ></v-select>
+              </v-col>
             </v-row>
           </v-card-text>
         </v-card>
@@ -216,9 +229,30 @@ export default {
         executeScript(['bin/other.ahk', 'disableRunOnStartup'])
       }
     },
+    leaderKeyChange(mode) {
+      const map = {
+        "/": { Hotkey: "*/", WaitKey: "/", PriorKey: "/", Send: "sendevent, {blind}/", ClearKey: '/'},
+        "RAlt": { Hotkey: "*RAlt", WaitKey: "RAlt", PriorKey: "RAlt", Send: "sendevent, {blind}{RAlt}", ClearKey: ''},
+        "<+f": { Hotkey: "<+f", WaitKey: "f", PriorKey: "f", Send: "sendevent, {blind}f", ClearKey: 'F'},
+        "<+space": { Hotkey: "<+space", WaitKey: "Space", PriorKey: "Space", Send: "sendevent, {blind}{space}", ClearKey: 'Space'},
+      }
+      const s = this.currConfig()
+      s[mode + 'Info'] = map[s[mode + 'Key']]
+    }
   },
   data() {
     return {}
+  },
+  computed: {
+    leaderKeys() {
+      return [
+              { text: "不需要", value: "" },
+              { text: "/", value: "/" },
+              { text: "RAlt", value: "RAlt" },
+              { text: "LShift + F", value: "<+f" },
+              { text: "LShift + Space", value: "<+space" },
+            ]
+    }
   },
 }
 </script>

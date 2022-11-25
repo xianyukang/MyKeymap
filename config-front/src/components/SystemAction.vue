@@ -111,9 +111,9 @@ const actionMap = [
   { group: 3, label: "触发缩写功能", value: "enterSemicolonAbbr()" },
   { group: 3, label: "Capslock 命令框", value: "enterCapslockAbbr()" },
   { group: 3, label: "切换 Capslock 状态", value: "toggleCapslock()" },
-  { group: 3, label: "锁定当前模式 (然后单键操作)", value: "action_lock_current_mode()", routeNames: [
-    "Capslock", "JMode", "Semicolon", "Mode3", "Mode9", "CommaMode", "DotMode", "TabMode", "SpaceMode"
-  ] },
+  // { group: 3, label: "锁定当前模式 (然后单键操作)", value: "action_lock_current_mode()", routeNames: [
+  //   "Capslock", "JMode", "Semicolon", "Mode3", "Mode9", "CommaMode", "DotMode", "TabMode", "SpaceMode"
+  // ] },
   { group: 4, label: "暂停 MyKeymap", value: "\nSuspend, Permit\ntoggleSuspend()\nreturn", routeNames: ["CustomHotkeys"] },
   { group: 4, label: "重启 MyKeymap", value: "\nSuspend, Toggle\nReloadProgram()\nreturn", routeNames: ["CustomHotkeys"] },
   { group: 4, label: "退出 MyKeymap", value: "quit(false)" },

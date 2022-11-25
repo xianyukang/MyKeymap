@@ -77,6 +77,23 @@ function processConfig(config) {
   s['TabMode'] = s.enableTabMode && contains_one_valid_key(config.TabMode, ids)
   s['CommaMode'] = s.enableCommaMode && contains_one_valid_key(config.CommaMode, ids)
   s['DotMode'] = s.enableDotMode && contains_one_valid_key(config.DotMode, ids)
+  if (s.AdditionalMode1Key === s.AdditionalMode2Key) { s.AdditionalMode2Key = "" }
+  if (s.AdditionalMode1Info && s.AdditionalMode1Info.ClearKey) { config.AdditionalMode1[s.AdditionalMode1Info.ClearKey] = emptyKeyConfig(true) }
+  if (s.AdditionalMode2Info && s.AdditionalMode2Info.ClearKey) { config.AdditionalMode2[s.AdditionalMode2Info.ClearKey] = emptyKeyConfig(true) }
+  s['AdditionalMode1'] = !!s.AdditionalMode1Key && contains_one_valid_key(config.AdditionalMode1, ids)
+  s['AdditionalMode2'] = !!s.AdditionalMode2Key && contains_one_valid_key(config.AdditionalMode2, ids)
+  
+  // 避免额外模式和按键重映射发生冲突
+    function filter(remap, key) {
+        if (!key || !remap) {
+            return true
+        }
+        key = key.toLowerCase()
+        remap = remap.toLowerCase()
+        return !remap.startsWith(key)
+    }
+    s.KeyMapping = s.KeyMapping.split("\n").filter(remap => filter(remap, s.AdditionalMode1Key)).join("\n")
+    s.KeyMapping = s.KeyMapping.split("\n").filter(remap => filter(remap, s.AdditionalMode2Key)).join("\n")
 
   // 如果开启了 Caps + F 模式,  那么 F 键的配置要清空
   if (s.enableCapsF) {
@@ -235,6 +252,12 @@ const s = new Vuex.Store({
           }
           if (resp.data.Settings.showMouseMovePrompt === undefined) {
             resp.data.Settings.showMouseMovePrompt = false
+          }
+          if (resp.data.Settings.AdditionalMode1Key === undefined) {
+            resp.data.Settings.AdditionalMode1Key = ""
+          }
+          if (resp.data.Settings.AdditionalMode2Key === undefined) {
+            resp.data.Settings.AdditionalMode2Key = ""
           }
           // 升级时, 新增以前没有的特殊键
           resp.data.SpecialKeys = resp.data.SpecialKeys || {}

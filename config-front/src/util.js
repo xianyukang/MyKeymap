@@ -44,6 +44,8 @@ export const ALL_KEYMAPS = [
     'LButtonMode',
     'CommaMode',
     'DotMode',
+    'AdditionalMode1',
+    'AdditionalMode2',
 ]
 // 所有的按键映射 + 缩写功能
 export const KEYMAP_PLUS_ABBR = [
@@ -66,6 +68,8 @@ export const getKeymapName = {
     "JModeK": "J + K 模式",
     "CommaMode": "逗号模式",
     "DotMode": "句号模式",
+    "AdditionalMode1": "额外模式 1",
+    "AdditionalMode2": "额外模式 2",
     "Semicolon": "分号模式",
     "SemicolonAbbr": "缩写功能",
     "Mode3": "3 模式",
@@ -122,6 +126,9 @@ export function isModeEnabled(mode, settings) {
     }
     if (mode.startsWith('DotMode')) {
         return settings['enableDotMode']
+    }
+    if (mode.startsWith('AdditionalMode')) {
+        return !!settings[mode + "Key"]
     }
     return true
 }
