@@ -138,25 +138,29 @@ getSelectedFilePath()
 
 smartExtractZipFile(exe, filepath)
 {
-    onlyOne := zipContainsOnlyOneItem(exe, filepath)
+    info := GetZipInfo(exe, filepath)
+    showDialog := info.encrypted ? "-ad" : ""
 
     SplitPath, exe, OutFileName, OutDir, OutExtension, OutNameNoExt
     exe := OutDir . "\7zg.exe"
 
     SplitPath, filepath, OutFileName, OutDir, OutExtension, OutNameNoExt
-    if onlyOne {
-        run, %exe% x "%filepath%" -o"%OutDir%"
+    if (info.containsOnlyOneFile) {
+        run, %exe% x %showDialog% "%filepath%" -o"%OutDir%"
     } else {
-        run, %exe% x "%filepath%" -o"%OutDir%\%OutNameNoExt%"
+        run, %exe% x %showDialog% "%filepath%" -o"%OutDir%\%OutNameNoExt%"
     }
 }
 
-zipContainsOnlyOneItem(exe,filepath)
+GetZipInfo(exe,filepath)
 {
-    cmdLine := """" exe """ l -ba -x!*\* " """" filepath """"
+    cmdLine := """" exe """ l -p123 -ba -x!*\* " """" filepath """"
     stdout := RunCMD(cmdLine)
     lines := StrSplit(stdout, "`n")
-    return lines.Length() == 2
+    zipInfo := {}
+    zipInfo.containsOnlyOneFile := lines.Length() == 2
+    zipInfo.encrypted := InStr(stdout, "Cannot open encrypted archive")
+    return zipInfo
 }
 
 
