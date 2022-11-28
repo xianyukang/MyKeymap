@@ -122,6 +122,11 @@ export const predefinedApps = [
         toActivate: "OneNote for Windows 10",
         toRun: "shortcuts\\OneNote for Windows 10.lnk",
       },
+      {
+        comment: "OneNote 桌面版",
+        toActivate: "ahk_exe ONENOTE.EXE",
+        toRun: "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\OneNote.lnk",
+      },
     ],
   },
   {

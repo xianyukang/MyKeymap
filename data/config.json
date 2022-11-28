@@ -1225,8 +1225,9 @@
         },
         "B": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "label": "绑定当前窗口到这个键",
+                "type": "窗口操作",
+                "value": "bindOrActivate(CapslockF__B)"
             }
         },
         "BS": {
@@ -1334,9 +1335,13 @@
         },
         "M": {
             "2": {
-                "label": "绑定当前窗口到这个键",
-                "type": "窗口操作",
-                "value": "bindOrActivate(CapslockF__M)"
+                "cmdArgs": "",
+                "comment": "TIM",
+                "toActivate": "if_exist_then_send: TIM.exe, ^!z",
+                "toRun": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\腾讯软件\\TIM\\TIM.lnk",
+                "type": "启动程序或激活窗口",
+                "value": "ActivateOrRun(\"if_exist_then_send: TIM.exe, ^!z\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\腾讯软件\\TIM\\TIM.lnk\", \"\", \"\")",
+                "workingDir": ""
             }
         },
         "N": {
@@ -1348,8 +1353,13 @@
         },
         "O": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "cmdArgs": "",
+                "comment": "OneNote 桌面版",
+                "toActivate": "ahk_exe ONENOTE.EXE",
+                "toRun": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\OneNote.lnk",
+                "type": "启动程序或激活窗口",
+                "value": "ActivateOrRun(\"ahk_exe ONENOTE.EXE\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\OneNote.lnk\", \"\", \"\")",
+                "workingDir": ""
             }
         },
         "P": {
@@ -1402,13 +1412,8 @@
         },
         "T": {
             "2": {
-                "cmdArgs": "",
-                "comment": "TIM",
-                "toActivate": "if_exist_then_send: TIM.exe, ^!z",
-                "toRun": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\腾讯软件\\TIM\\TIM.lnk",
-                "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"if_exist_then_send: TIM.exe, ^!z\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\腾讯软件\\TIM\\TIM.lnk\", \"\", \"\")",
-                "workingDir": ""
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "U": {

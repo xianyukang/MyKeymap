@@ -1314,8 +1314,7 @@ bindOrActivate(ByRef id)
     DetectHiddenWindows, 1
 
     if WinActive("ahk_id " id) {
-        centerMouse()
-        tip("活动窗口 ↑", -400)
+        WinMinimize
     }
     else if bindOrActivate_map[id] && WinExist("ahk_id " id) {
         WinShow, 
