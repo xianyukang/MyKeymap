@@ -37,6 +37,10 @@ settitlematchmode, 2
 ; win10、win11 任务切换、任务视图
 GroupAdd, TASK_SWITCH_GROUP, ahk_class MultitaskingViewFrame
 GroupAdd, TASK_SWITCH_GROUP, ahk_class XamlExplorerHostIslandWindow
+{{ range .windowSelectors -}}
+{{ if .groupCode}}{{ .groupCode }}
+{{ end }}
+{{- end }}
 
 scrollOnceLineCount := {{ .Settings.scrollOnceLineCount }}
 scrollDelay1 = {{ concat "T" .Settings.scrollDelay1 }}

@@ -146,6 +146,8 @@ func perAppConfigToFunction(config map[string]interface{}) {
 	windowSelectors = append(windowSelectors, obj{
 		"id":    "2",
 		"value": "USELESS",
+		"groupName": "USELESS",
+		"groupCode": "USELESS",
 	})
 
 	// 遍历每一个模式的每一个键的配置,  使用类型断言解析 json 确实挺麻烦的
@@ -188,13 +190,17 @@ func keyConfigToAhkFunc(keyConfig obj, keymapName string, windowSelectors []inte
 	for _, sel := range windowSelectors {
 		sel := sel.(obj)
 		selId := sel["id"].(string)
-		selValue := sel["value"].(string)
+		groupName := sel["groupName"].(string)
+		groupCode := sel["groupCode"].(string)
+		if len(groupCode) == 0 {
+			continue
+		}
 		config, ok := keyConfig[selId]
 		if ok {
 			config := config.(obj)
 			value := config["value"].(string)
 			if len(value) > 0 {
-				branches = append(branches, ifBranch(selId, selValue, value))
+				branches = append(branches, ifBranch(selId, "ahk_group " + groupName, value))
 			}
 		}
 	}

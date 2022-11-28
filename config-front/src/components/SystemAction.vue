@@ -16,7 +16,7 @@
     <v-row v-if="config.label === '用指定程序打开选中的文件'">
       <v-col>
         <v-text-field autocomplete="off" label="程序路径" v-model="config.toRun" @input="action_open_selected_with" placeholder="例如 code.exe"></v-text-field>
-        <v-text-field autocomplete="off" label="命令行参数 (用 {file} 表示文件路径)" v-model="config.cmdArgs" @input="action_open_selected_with" placeholder=""></v-text-field>
+        <v-text-field autocomplete="off" label="命令行参数 (用 {file} 表示选中文件的绝对路径)" v-model="config.cmdArgs" @input="action_open_selected_with" placeholder=""></v-text-field>
         <v-text-field autocomplete="off" label="自定义备注 (按 Caps 输入 help 可回顾配置)" v-model="config.comment"></v-text-field>
       </v-col>
     </v-row>

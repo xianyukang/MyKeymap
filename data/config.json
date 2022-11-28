@@ -5644,21 +5644,29 @@
     "supportPerAppConfig": true,
     "windowSelectors": [
         {
+            "groupCode": "GroupAdd, window_group_3, ahk_exe explorer.exe",
+            "groupName": "window_group_3",
             "id": "3",
             "key": "📁 文件管理器",
             "value": "ahk_exe explorer.exe"
         },
         {
+            "groupCode": "GroupAdd, window_group_4, ahk_exe chrome.exe\nGroupAdd, window_group_4, ahk_exe msedge.exe\nGroupAdd, window_group_4, ahk_exe firefox.exe",
+            "groupName": "window_group_4",
             "id": "4",
-            "key": "🌐 Chrome",
-            "value": "ahk_exe chrome.exe"
+            "key": "🌐 浏览器分组",
+            "value": "ahk_exe chrome.exe\nahk_exe msedge.exe\nahk_exe firefox.exe"
         },
         {
+            "groupCode": "",
+            "groupName": "window_group_5",
             "id": "5",
-            "key": "🌐 Edge",
-            "value": "ahk_exe msedge.exe"
+            "key": "",
+            "value": ""
         },
         {
+            "groupCode": "",
+            "groupName": "window_group_6",
             "id": "6",
             "key": "",
             "value": ""

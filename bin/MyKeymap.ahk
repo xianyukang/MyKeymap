@@ -31,6 +31,11 @@ settitlematchmode, 2
 ; win10、win11 任务切换、任务视图
 GroupAdd, TASK_SWITCH_GROUP, ahk_class MultitaskingViewFrame
 GroupAdd, TASK_SWITCH_GROUP, ahk_class XamlExplorerHostIslandWindow
+GroupAdd, window_group_3, ahk_exe explorer.exe
+GroupAdd, window_group_4, ahk_exe chrome.exe
+GroupAdd, window_group_4, ahk_exe msedge.exe
+GroupAdd, window_group_4, ahk_exe firefox.exe
+
 
 scrollOnceLineCount := 1
 scrollDelay1 = T0.2
@@ -408,7 +413,7 @@ I::防止J模式误触("ji")
 
 
 #if CapslockMode
-*X::Capslock__5a4adaf5830ece7b49d35c2ecef1c335()
+*X::Capslock__aa98672807c9102d3827b979e18f0299()
 C::MyRun("SoundControl.exe")
 R::SwitchWindows()
 D::SystemAltTab()
@@ -661,13 +666,9 @@ execCapslockAbbr(typo) {
 
 
 
-Capslock__5a4adaf5830ece7b49d35c2ecef1c335()
+Capslock__aa98672807c9102d3827b979e18f0299()
 {
-    if winactive("ahk_exe chrome.exe") {
-        send, {blind}^w
-        return
-    }
-    if winactive("ahk_exe msedge.exe") {
+    if winactive("ahk_group window_group_4") {
         send, {blind}^w
         return
     }

@@ -1144,7 +1144,7 @@ openSettings()
 {
     if !WinExist("MyKeymap\bin\settings.exe") {
         if !FileExist("bin\ahk.exe") {
-            tip("程序不完整, 被安全管家误删了文件  `n(1) 部分功能将无法使用`n(2) 推荐去隔离区恢复被误删的 ahk.exe  ", -4000)
+            tip("程序不完整, 被安全管家误删了文件  `n(1) 部分功能将无法使用`n(2) 推荐去隔离区恢复被误删的 ahk.exe  ", -6500)
             ; return
         }
         run, bin\settings.exe, bin\

@@ -259,6 +259,9 @@ const s = new Vuex.Store({
           if (resp.data.Settings.AdditionalMode2Key === undefined) {
             resp.data.Settings.AdditionalMode2Key = ""
           }
+          // 升级窗口标识符
+          upgradeWindowSelector(resp.data.windowSelectors)
+
           // 升级时, 新增以前没有的特殊键
           resp.data.SpecialKeys = resp.data.SpecialKeys || {}
           resp.data.SpecialKeys['Caps Up'] = resp.data.SpecialKeys['Caps Up'] || { type: "系统控制", label: "Capslock 命令框", value: "enterCapslockAbbr()" }
@@ -314,3 +317,16 @@ const s = new Vuex.Store({
 })
 s.dispatch('fetchConfig')
 export default s
+
+function upgradeWindowSelector(windowSelectors) {
+    for (const sel of windowSelectors) {
+        if (!sel.groupName) {
+            const name = "window_group_" + sel.id
+            sel.groupName = name
+            sel.groupCode = ""
+            if (sel.value.trim()) {
+                sel.groupCode = `GroupAdd, ${name}, ${sel.value}`
+            }
+        }
+    }
+}

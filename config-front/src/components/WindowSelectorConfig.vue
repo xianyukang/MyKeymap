@@ -23,16 +23,14 @@
           <v-text-field dense outlined label="" v-model="v.key"></v-text-field>
         </v-col>
         <v-col>
-          <v-text-field dense outlined label="" v-model="v.value"></v-text-field>
+          <v-textarea auto-grow dense rows="1" label="" v-model="v.value" @input="onInput(v)"></v-textarea>
         </v-col>
       </v-row>
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn class="btn" color="green" dark @click="addNewItem">添加一行</v-btn>
-      <v-btn class="action-button" color="purple" dark outlined @click="execute('bin/WindowSpy.ahk')"
-        >🔍 查看窗口标识符</v-btn
-      >
+      <v-btn class="action-button" color="purple" dark outlined @click="execute('bin/WindowSpy.ahk')">🔍 查看窗口标识符</v-btn>
       <!-- <v-btn class="btn" color="blue" dark @click="$emit('hideDialog')">确认</v-btn> -->
     </v-card-actions>
     <pre style="margin: 10px"></pre>
@@ -54,6 +52,16 @@ export default {
     },
     execute(arg) {
       executeScript(arg)
+    },
+    onInput(sel) {
+      if (!sel.groupName) {
+        sel.groupName = 'window_group_' + sel.id
+      }
+      sel.groupCode = sel.value
+        .split('\n')
+        .filter(line => line.trim())
+        .map(line => `GroupAdd, ${sel.groupName}, ${line.trim()}`)
+        .join('\n')
     },
   },
   data() {
