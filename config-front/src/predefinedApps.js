@@ -149,22 +149,22 @@ export const predefinedApps = [
       },
       {
         comment: "IntelliJ IDEA",
-        toActivate: "ahk_exe idea64.exe",
+        toActivate: "detect_hidden_window: ahk_exe idea64.exe",
         toRun: "%A_Programs%\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk",
       },
       {
         comment: "GoLand",
-        toActivate: "ahk_exe goland64.exe",
+        toActivate: "detect_hidden_window: ahk_exe goland64.exe",
         toRun: "%A_Programs%\\JetBrains Toolbox\\GoLand.lnk",
       },
       {
         comment: "WebStorm",
-        toActivate: "ahk_exe webstorm64.exe",
+        toActivate: "detect_hidden_window: ahk_exe webstorm64.exe",
         toRun: "%A_Programs%\\JetBrains Toolbox\\WebStorm.lnk",
       },
       {
         comment: "DataGrip",
-        toActivate: "ahk_exe datagrip64.exe",
+        toActivate: "detect_hidden_window: ahk_exe datagrip64.exe",
         toRun: "%A_Programs%\\JetBrains Toolbox\\DataGrip.lnk",
       },
     ],

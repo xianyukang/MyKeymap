@@ -260,11 +260,17 @@ ActivateOrRun(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin:
     prefix := "detect_hidden_window:"
     if (InStr(to_activate, prefix) == 1) {
         to_activate := SubStr(to_activate, 1 + StrLen(prefix))
-        DetectHiddenWindows, 1
-        if WinExist(to_activate) {
-            WinShow
+        if !WinExist(to_activate) {
+            DetectHiddenWindows, 1
+            id := firstHiddenVisibleWindow(to_activate)
+            if id {
+                WinShow, ahk_id %id%
+                WinActivate, ahk_id %id%
+                DetectHiddenWindows, 0
+                return
+            }
+            DetectHiddenWindows, 0
         }
-        DetectHiddenWindows, 0
     }
 
     if InStr(args, "{selected_text}") || InStr(target, "{selected_text}") {
@@ -436,6 +442,30 @@ activateFirstVisible(windowSelector)
     WinActivate, ahk_id %id%
 }
 
+firstHiddenVisibleWindow(windowSelector)
+{
+    ; 标题不为空、窗口大小大于400或最小化了、且包含最小化按钮
+    WS_MINIMIZEBOX := 0x20000
+    WS_MINIMIZE := 0x20000000
+    WinGet, winList, List, %windowSelector%
+    loop %winList%
+    {
+        item := winList%A_Index%
+        WinGetTitle, title, ahk_id %item%
+        if (Trim(title) == "") {
+            continue
+        }
+        WinGet, style, Style, ahk_id %item%
+        if !(style & WS_MINIMIZEBOX) {
+            continue
+        }
+        WingetPos x, y, width, height, ahk_id %item%
+        if ((height > 400 && width > 400) || (style & WS_MINIMIZE)) {
+            return item
+        }
+    }
+}
+
 firstVisibleWindow(windowSelector)
 {
     WinGet, winList, List, %windowSelector%
@@ -443,9 +473,7 @@ firstVisibleWindow(windowSelector)
     {
         item := winList%A_Index%
         WinGetTitle, title, ahk_id %item%
-        ; if (Trim(title) != "") {
         WingetPos x, y, width, height, ahk_id %item%
-        ; tip(width "-" height)
         if (Trim(title) != "" && (height > 20 || width > 20)) {
             return item
         }

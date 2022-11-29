@@ -1308,10 +1308,10 @@
             "2": {
                 "cmdArgs": "",
                 "comment": "IntelliJ IDEA",
-                "toActivate": "ahk_exe idea64.exe",
+                "toActivate": "detect_hidden_window: ahk_exe idea64.exe",
                 "toRun": "%A_Programs%\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_exe idea64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk\", \"\", \"\")",
+                "value": "ActivateOrRun(\"detect_hidden_window: ahk_exe idea64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk\", \"\", \"\")",
                 "workingDir": ""
             }
         },
@@ -1607,10 +1607,10 @@
             "2": {
                 "cmdArgs": "",
                 "comment": "DataGrip",
-                "toActivate": "ahk_exe datagrip64.exe",
+                "toActivate": "detect_hidden_window: ahk_exe datagrip64.exe",
                 "toRun": "%A_Programs%\\JetBrains Toolbox\\DataGrip.lnk",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_exe datagrip64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\DataGrip.lnk\", \"\", \"\")",
+                "value": "ActivateOrRun(\"detect_hidden_window: ahk_exe datagrip64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\DataGrip.lnk\", \"\", \"\")",
                 "workingDir": ""
             }
         },
@@ -1636,10 +1636,10 @@
             "2": {
                 "cmdArgs": "",
                 "comment": "GoLand",
-                "toActivate": "ahk_exe goland64.exe",
+                "toActivate": "detect_hidden_window: ahk_exe goland64.exe",
                 "toRun": "%A_Programs%\\JetBrains Toolbox\\GoLand.lnk",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"ahk_exe goland64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\GoLand.lnk\", \"\", \"\")",
+                "value": "ActivateOrRun(\"detect_hidden_window: ahk_exe goland64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\GoLand.lnk\", \"\", \"\")",
                 "workingDir": ""
             }
         },

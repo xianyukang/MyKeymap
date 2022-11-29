@@ -507,8 +507,8 @@ P::ActivateOrRun("ahk_exe POWERPNT.EXE", "C:\ProgramData\Microsoft\Windows\Start
 I::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe", "", "")
 A::ActivateOrRun("ahk_exe WindowsTerminal.exe", "wt.exe", "", "")
 W::ActivateOrRun("ahk_exe chrome.exe", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Google Chrome.lnk", "", "")
-J::ActivateOrRun("ahk_exe idea64.exe", "" A_Programs "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk", "", "")
 D::ActivateOrRun("ahk_exe msedge.exe", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk", "", "")
+J::ActivateOrRun("detect_hidden_window: ahk_exe idea64.exe", "" A_Programs "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk", "", "")
 M::ActivateOrRun("if_exist_then_send: TIM.exe, ^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk", "", "")
 B::bindOrActivate(CapslockF__B)
 N::bindOrActivate(CapslockF__N)
@@ -518,8 +518,8 @@ N::bindOrActivate(CapslockF__N)
 
 #if CapslockSpaceMode
 space::return
-D::ActivateOrRun("ahk_exe datagrip64.exe", "" A_Programs "\JetBrains Toolbox\DataGrip.lnk", "", "")
-G::ActivateOrRun("ahk_exe goland64.exe", "" A_Programs "\JetBrains Toolbox\GoLand.lnk", "", "")
+D::ActivateOrRun("detect_hidden_window: ahk_exe datagrip64.exe", "" A_Programs "\JetBrains Toolbox\DataGrip.lnk", "", "")
+G::ActivateOrRun("detect_hidden_window: ahk_exe goland64.exe", "" A_Programs "\JetBrains Toolbox\GoLand.lnk", "", "")
 T::ActivateOrRun("if_exist_then_send: TIM.exe, ^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk", "", "")
 W::ActivateOrRun("if_exist_then_send: WeChat.exe, ^!w", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\微信\微信.lnk", "", "")
 

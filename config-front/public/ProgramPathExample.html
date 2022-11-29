@@ -705,9 +705,23 @@ img {
 </style><title>程序路径的例子</title>
 </head>
 <body class='typora-export os-windows'><div class='typora-export-content'>
-<div id='write'  class=''><h3 id='快速获取程序路径的方法'><font color='#D05'><span>快速获取程序路径的方法</span></font></h3><p><img style="zoom: 57%" src="image-20211002150732101.png" referrerpolicy="no-referrer" alt="image-20211002150732101"></p><h3 id='使用相对路径'><font color='#D05'><span>使用相对路径</span></font></h3><p><span>按一下 Capslock 然后输入 dm 能打开 MyKeymap 的文件夹</span></p><p><span>其中的 </span><font color='#2E66FF'><span>tools</span></font><span> 可以放自己收集的小工具,  </span><font color='#2E66FF'><span>shorcuts</span></font><span> 可以放快捷方式,  然后通过相对路径启动它们,  比如:</span></p><p><span>    tools\重启资源管理器.exe</span></p><p><span>    shortcuts\OneNote for Windows 10.lnk</span></p><p><span>    ( 注意快捷方式都有 .lnk 后缀但在文件管理器中不会展示</span></p><p>&nbsp;</p><h3 id='uwp-应用需要借助快捷方式启动'><font color='#D05'><span>应用商店的 UWP 应用需要借助快捷方式启动</span></font></h3><p><span>UWP 应用没有程序路径,  所以需要先创建快捷方式,  然后借助快捷方式启动</span></p><p><img style="zoom: 40%" src="image-20211002144324656.png" referrerpolicy="no-referrer" alt="image-20211002144324656"></p><p>&nbsp;</p><h3 id='font-colord05几个路径变量font'><font color='#D05'><span>几个路径变量</span></font></h3><figure><table><thead><tr><th><span>变量名</span></th><th><span>表示的路径</span></th></tr></thead><tbody><tr><td><span>%Home%</span></td><td><span>用户根目录   </span><br><em><span>C:\Users\UserName</span></em></td></tr><tr><td><span>%A_Desktop%</span></td><td><span>桌面文件夹  </span><br><em><span>C:\Users\UserName\Desktop</span></em></td></tr><tr><td><span>%A_ProgramsCommon%</span></td><td><span>程序文件夹 1 </span><br><em><span>C:\ProgramData\Microsoft\Windows\Start Menu\Programs</span></em></td></tr><tr><td><span>%A_Programs%</span></td><td><span>程序文件夹 2 </span><br><em><span>C:\Users\UserName\AppData\Roaming\Microsoft\Windows\Start Menu\Programs</span></em></td></tr><tr><td><span>%A_AppData%</span></td><td><span>程序数据文件夹 </span><br><em><span>C:\Users\UserName\AppData\Roaming</span></em></td></tr></tbody></table></figure><p>&nbsp;</p>
+<div id='write'  class=''>
+  <h3 id='获取程序路径的方法'><font color='#D05'><span>获取程序路径的方法</span></font></h3>
+  <p><img style="zoom: 57%" src="image-20211002150732101.png" referrerpolicy="no-referrer" alt="image-20211002150732101"></p>
+  <h3 id='使用相对路径'><font color='#D05'><span>使用相对路径</span></font></h3><p><span>按一下 Capslock 然后输入 dm 能打开 MyKeymap 的文件夹</span></p><p><span>其中的 </span><font color='#2E66FF'><span>tools</span></font><span> 可以放自己收集的小工具,  </span><font color='#2E66FF'><span>shorcuts</span></font><span> 可以放快捷方式,  然后通过相对路径启动它们,  比如:</span></p><p><span>    tools\重启资源管理器.exe</span></p><p><span>    shortcuts\OneNote for Windows 10.lnk</span></p><p><span>    ( 注意快捷方式都有 .lnk 后缀但在文件管理器中不会展示</span></p><p>&nbsp;</p>
+  <h3 id='激活其他虚拟桌面的窗口'><font color='#D05'><span>激活其他虚拟桌面的窗口</span></font></h3>
+  <p><span>(1) MyKeymap 默认只会在当前虚拟桌面寻找窗口</span></p>
+  <p><span>(2) 如果当前虚拟桌面不存在目标窗口、就会启动程序</span></p>
+  <p><span>(3) 偶尔会想激活其他虚拟桌面的窗口,  可以像下图一样加个 <code>detect_hidden_window:</code> 前缀</span></p>
+  <p><img style="" src="activate-other-vd-window.jpg" referrerpolicy="no-referrer" alt="activate-other-vd-window></p>
+  <h3 id='uwp-应用需要借助快捷方式启动'><font color='#D05'><span>微软商店的 UWP 应用需要借助快捷方式启动</span></font></h3>
+  <p><span>UWP 应用没有程序路径,  所以需要先创建快捷方式,  然后借助快捷方式启动</span></p>
+  <p><span>(1) 可以按下图操作</span></p>
+  <p><span>(2) 也可以按下 Win+R 快捷键并输入 shell:appsfolder 然后用鼠标右击某个应用图标选择「 创建快捷方式 」,
+    再把桌面的、刚刚创建的、快捷方式移动到 MyKeymap\shortcuts 文件夹</span></p>
+  <p><img style="zoom: 40%" src="image-20211002144324656.png" referrerpolicy="no-referrer" alt="image-20211002144324656"></p><p>&nbsp;</p><h3 id='font-colord05几个路径变量font'><font color='#D05'><span>几个路径变量</span></font></h3><figure><table><thead><tr><th><span>变量名</span></th><th><span>表示的路径</span></th></tr></thead><tbody><tr><td><span>%Home%</span></td><td><span>用户根目录   </span><br><em><span>C:\Users\UserName</span></em></td></tr><tr><td><span>%A_Desktop%</span></td><td><span>桌面文件夹  </span><br><em><span>C:\Users\UserName\Desktop</span></em></td></tr><tr><td><span>%A_ProgramsCommon%</span></td><td><span>程序文件夹 1 </span><br><em><span>C:\ProgramData\Microsoft\Windows\Start Menu\Programs</span></em></td></tr><tr><td><span>%A_Programs%</span></td><td><span>程序文件夹 2 </span><br><em><span>C:\Users\UserName\AppData\Roaming\Microsoft\Windows\Start Menu\Programs</span></em></td></tr><tr><td><span>%A_AppData%</span></td><td><span>程序数据文件夹 </span><br><em><span>C:\Users\UserName\AppData\Roaming</span></em></td></tr></tbody></table></figure><p>&nbsp;</p>
 
-<h3><font color="#d05">补充一些命令行知识 (可不看)</font></h3>
+<h3><font color="#d05">补充一些命令行知识 (看不懂可不看)</font></h3>
 <h5>可以按 win+r 然后输入下面的代码测试:</h5>
 
 <pre>
