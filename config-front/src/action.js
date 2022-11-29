@@ -12,7 +12,7 @@ export const specialActions = [
         generateValue: (routeName, currentKey) => "bindOrActivate_unbind()",
     },
     {
-        label: "关闭同类窗口",
+        label: "关闭所有同类窗口",
         generateValue: (routeName, currentKey) => "close_same_class_window()",
     },
 ]

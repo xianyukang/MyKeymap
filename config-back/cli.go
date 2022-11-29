@@ -20,8 +20,9 @@ func AlignText() {
 		fmt.Println(err)
 		return
 	}
+	r := strings.NewReplacer("`", "\\`", "\\", "\\\\")
 	data := map[string]interface{}{
-		"Text": text,
+		"Text": r.Replace(text),
 	}
 	executeTemplate(data, "./html-tools/AlignText.tmpl.html", "./html-tools/AlignText.html")
 }

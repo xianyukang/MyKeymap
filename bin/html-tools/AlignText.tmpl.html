@@ -85,6 +85,15 @@
       }
     }
 
+
+    function stringWidth(str) {
+      let width = 0
+      for (let i = 0; i < str.length; i++) {
+        width += str.charCodeAt(i) > 127 ? 2 : 1
+      }
+      return width
+    }
+
     function handleInput() {
       const deli = this.delimiter
       if (deli.length === 0) {
@@ -95,7 +104,11 @@
       // 确定分隔符左边的字符串应该有多长
       const maxLength = lines.reduce((acc, val) => {
         const i = val.indexOf(deli)
-        const length = i === -1 ? -1 : val.substring(0, i).trimRight().length
+        if (i === -1) {
+          return acc
+        }
+        const str = val.substring(0, i).trimRight()
+        const length = stringWidth(str)
         return acc > length ? acc : length
       }, -1)
 
@@ -105,7 +118,7 @@
           const left = line.substring(0, i).trimRight()
           const right = line.substring(i + deli.length)
           if (left.length <= maxLength) {
-            return left + ' '.repeat(maxLength - left.length + 3) + deli + right
+            return left + ' '.repeat(maxLength - stringWidth(left) + 3) + deli + right
           }
         }
         return line
