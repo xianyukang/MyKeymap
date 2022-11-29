@@ -365,10 +365,10 @@ enterLButtonMode()
 
 {{ if .Settings.JMode }}
 #if JModeK
-k::return
+*k::return
 {{ template "keymapToAhk" .JModeK }}
 #if JMode
-k::enterJModeK()
+*k::enterJModeK()
 {{ template "keymapToAhk" .JMode }}
 {{ end }}
 

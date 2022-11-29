@@ -412,6 +412,9 @@ export default {
     };
   },
   methods: {
+    resetWindowSelector() {
+      this.windowSelector = "2"
+    },
     execute(arg) {
       executeScript(arg);
     },

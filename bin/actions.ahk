@@ -158,3 +158,48 @@ close_same_class_window()
         }
     }
 }
+
+onenote_up() 
+{
+    if WinActive("ahk_exe onenote.exe") {
+        if GetKeyState("Shift") {
+            send, ^+{up}
+        } else {
+            vk_up := 0x26
+            dllcall("keybd_event","UChar", vk_up, "UChar", 0, "UInt", 0, "Ptr", 0 )
+            dllcall("keybd_event","UChar", vk_up, "UChar", 0, "UInt", 0x0002, "Ptr", 0 )
+        }
+    } else {
+        send, {blind}{up}
+    }
+}
+onenote_shift_up() 
+{
+    if WinActive("ahk_exe onenote.exe") {
+        send, ^+{up}
+    } else {
+        send, {blind}+{up}
+    }
+}
+onenote_down() 
+{
+    if WinActive("ahk_exe onenote.exe") {
+        if GetKeyState("Shift") {
+            send, ^+{down}
+        } else {
+            vk_down := 0x28
+            dllcall("keybd_event","UChar", vk_down, "UChar", 0, "UInt", 0, "Ptr", 0 )
+            dllcall("keybd_event","UChar", vk_down, "UChar", 0, "UInt", 0x0002, "Ptr", 0 )
+        }
+    } else {
+        send, {blind}{down}
+    }
+}
+onenote_shift_down() 
+{
+    if WinActive("ahk_exe onenote.exe") {
+        send, ^+{down}
+    } else {
+        send, {blind}+{down}
+    }
+}

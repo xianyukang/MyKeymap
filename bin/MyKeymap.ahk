@@ -274,7 +274,7 @@ enterRButtonMode()
 
 
 #if JModeK
-k::return
+*k::return
 *D::send, {blind}+{down}
 *G::send, {blind}+{end}
 *X::send, {blind}+{esc}
@@ -288,7 +288,7 @@ k::return
 
 
 #if JMode
-k::enterJModeK()
+*k::enterJModeK()
 `;::RealShellRun(A_WorkingDir "\bin\ahk.exe", """" A_WorkingDir "\bin\CustomShellMenu.ahk" """")
 *2::send, ^+{tab}
 *3::send, ^{tab}

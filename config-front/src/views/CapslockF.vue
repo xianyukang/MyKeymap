@@ -1,7 +1,7 @@
 <template>
   <div class="my-container">
     <keyboard ref="kb" @clickKey="handleClickKey" />
-    <action :currentKey="currentKey"/>
+    <action ref="ac" :currentKey="currentKey"/>
   </div>
 </template>
 
@@ -15,6 +15,7 @@ export default {
     // note 两个路由共用一个组件时,  可能需要重置组件状态
     this.currentKey = EMPTY_KEY // 路由变化前,  重置当前 key 
     this.$refs.kb.reset()       // 重置键盘按下的键
+    this.$refs.ac.resetWindowSelector()
     next();
   },
   data() {

@@ -12,7 +12,7 @@
       <v-col><v-text-field label="或运行" v-model="item.value"></v-text-field></v-col>
     </v-row> -->
     <Abbr @clickKey="keyChanged" @delKey="deleteKey" @renameKey="renameKey" :currentKey="currentKey" />
-    <Action :currentKey="currentKey" />
+    <Action ref="ac" :currentKey="currentKey" />
   </div>
 </template>
 
@@ -26,6 +26,7 @@ export default {
   created() {},
   beforeRouteLeave(to, from, next) {
     this.currentKey = EMPTY_KEY // 路由变化前,  重置当前 key 
+    this.$refs.ac.resetWindowSelector()
     next();
   },
   methods: {
