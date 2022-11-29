@@ -11,6 +11,10 @@ export const specialActions = [
         label: "取消当前窗口的键绑定",
         generateValue: (routeName, currentKey) => "bindOrActivate_unbind()",
     },
+    {
+        label: "关闭同类窗口",
+        generateValue: (routeName, currentKey) => "close_same_class_window()",
+    },
 ]
 
 

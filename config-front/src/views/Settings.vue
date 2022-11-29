@@ -231,10 +231,11 @@ export default {
     },
     leaderKeyChange(mode) {
       const map = {
-        "/": { Hotkey: "*/", WaitKey: "/", PriorKey: "/", Send: "sendevent, {blind}/", ClearKey: '/'},
-        "RAlt": { Hotkey: "*RAlt", WaitKey: "RAlt", PriorKey: "RAlt", Send: "sendevent, {blind}{RAlt}", ClearKey: ''},
-        "<+f": { Hotkey: "<+f", WaitKey: "f", PriorKey: "f", Send: "sendevent, {blind}f", ClearKey: 'F'},
-        "<+space": { Hotkey: "<+space", WaitKey: "Space", PriorKey: "Space", Send: "sendevent, {blind}{space}", ClearKey: 'Space'},
+        "/": { Hotkey: "*/", WaitKey: "/", PriorKey: "/", Send: "send, {blind}/", ClearKey: '/'},
+        "RAlt": { Hotkey: "*RAlt", WaitKey: "RAlt", PriorKey: "RAlt", Send: "send, {blind}{RAlt}", ClearKey: ''},
+        "RControl": { Hotkey: "*RControl", WaitKey: "RControl", PriorKey: "RControl", Send: "send, {blind}{RControl}", ClearKey: ''},
+        "<+f": { Hotkey: "<+f", WaitKey: "f", PriorKey: "f", Send: "send, {blind}f", ClearKey: 'F'},
+        "<+space": { Hotkey: "<+space", WaitKey: "Space", PriorKey: "Space", Send: "send, {blind}{space}", ClearKey: 'Space'},
       }
       const s = this.currConfig()
       s[mode + 'Info'] = map[s[mode + 'Key']]
@@ -249,6 +250,7 @@ export default {
               { text: "不需要", value: "" },
               { text: "/", value: "/" },
               { text: "RAlt", value: "RAlt" },
+              { text: "RControl", value: "RControl" },
               { text: "LShift + F", value: "<+f" },
               { text: "LShift + Space", value: "<+space" },
             ]

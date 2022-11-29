@@ -131,13 +131,14 @@ return
 
 
 *capslock::
+    start_tick := A_TickCount
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     CapslockMode := true
     keymapLockState.currentMode := "CapslockMode"
     keywait capslock
     CapslockMode := false
-    if (A_ThisHotkey == "*capslock" && A_PriorKey == "CapsLock" && A_TimeSinceThisHotkey < 450) {
+    if (A_ThisHotkey == "*capslock" && A_PriorKey == "CapsLock" && (A_TickCount - start_tick < 350)) {
         enterCapslockAbbr()
     }
     enableOtherHotkey(thisHotkey)
@@ -147,6 +148,7 @@ return
 
 
 *j::
+    start_tick := A_TickCount
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     JMode := true
@@ -155,7 +157,7 @@ return
     keywait j
     JMode := false
     DisableCapslockKey := false
-    if (A_PriorKey == "j" && A_TimeSinceThisHotkey < 350)
+    if (A_PriorKey == "j" && (A_TickCount - start_tick < 300))
             send,  {blind}j
     enableOtherHotkey(thisHotkey)
     return
@@ -164,6 +166,7 @@ return
 
 
 *`;::
+    start_tick := A_TickCount
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     SemicolonMode := true
@@ -172,7 +175,7 @@ return
     keywait `; 
     SemicolonMode := false
     DisableCapslockKey := false
-    if (A_PriorKey == ";" && A_TimeSinceThisHotkey < 250) {
+    if (A_PriorKey == ";" && (A_TickCount - start_tick < 300)) {
          enterSemicolonAbbr()
     }
     enableOtherHotkey(thisHotkey)
@@ -188,7 +191,7 @@ return
     keymapLockState.currentMode := "DigitMode"
     keywait 3 
     DigitMode := false
-    if (A_PriorKey == "3" && (A_TickCount - start_tick < 250))
+    if (A_PriorKey == "3" && (A_TickCount - start_tick < 300))
         send, {blind}3 
     enableOtherHotkey(thisHotkey)
     return
@@ -199,14 +202,15 @@ return
 
 
 *.::
+    start_tick := A_TickCount
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     DotMode := true
     keymapLockState.currentMode := "DotMode"
     keywait `. 
     DotMode := false
-    if (A_PriorKey == "." && A_TimeSinceThisHotkey < 350)
-        sendevent, {blind}`. 
+    if (A_PriorKey == "." && (A_TickCount - start_tick < 300))
+        send, {blind}`. 
     enableOtherHotkey(thisHotkey)
     return
 

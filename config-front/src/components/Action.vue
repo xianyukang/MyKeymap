@@ -189,10 +189,6 @@
                 <td>set_window_position_and_size(10, 10, "DEFAULT", "DEFAULT")</td>
               </tr>
               <tr>
-                <td>以管理员权限运行程序</td>
-                <td>run_as_admin("C:\Windows\System32\cmd.exe")</td>
-              </tr>
-              <tr>
                 <td>一次打开多个链接或程序</td>
                 <td>launch_multiple("https://baidu.com", "https://bing.com", "cmd.exe")</td>
               </tr>

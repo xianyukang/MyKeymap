@@ -137,3 +137,16 @@ toggle_dark_mode()
     JMode := false
     send, %text%
 }
+
+close_same_class_window()
+{
+    ; 避免把桌面关了
+    if (WinActive("Program Manager ahk_class Progman") || WinActive("ahk_class WorkerW")) {
+        return
+    }
+
+    WinGetClass, className, A
+    While WinExist("ahk_class " className) {
+        WinClose
+    }
+}
