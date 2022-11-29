@@ -146,7 +146,15 @@ close_same_class_window()
     }
 
     WinGetClass, className, A
-    While WinExist("ahk_class " className) {
-        WinClose
+    WinGet, winList, List, ahk_class %className%
+
+    loop %winList%
+    {
+        id := winList%A_Index%
+        WinClose, ahk_id %id%
+        WinWaitClose, ahk_id %id%, , 0.1
+        if ErrorLevel {
+            break
+        }
     }
 }
