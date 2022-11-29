@@ -152,9 +152,9 @@ close_same_class_window()
     {
         id := winList%A_Index%
         WinClose, ahk_id %id%
-        WinWaitClose, ahk_id %id%, , 0.1
+        ; WinWaitClose, ahk_id %id%, , 0.1
         if ErrorLevel {
-            break
+            ; break
         }
     }
 }

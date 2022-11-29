@@ -19,6 +19,13 @@ def write_json(data, file_path):
         json.dump(data, f, indent=4, ensure_ascii=False)
         f.truncate()
 
+def get_version_info(file = "build.json"):
+    build = read_josn(file)
+    major = build['version']['major']
+    minor = build['version']['minor']
+    patch = build['version']['patch']
+    return major, minor, patch
+
 arg = ''
 if (len(sys.argv) > 1):
     arg = sys.argv[1]
@@ -48,7 +55,9 @@ if (arg == 'go'):
 
 
 # 清除老版本
-shutil.rmtree('MyKeymap', ignore_errors=True)
+major, minor, patch = get_version_info()
+new_folder_name = "MyKeymap-" + ".".join([str(major), str(minor), str(patch+1)])
+shutil.rmtree(new_folder_name, ignore_errors=True)
 os.mkdir('MyKeymap/')
 
 # 构建前端项目
@@ -111,22 +120,21 @@ shutil.copy('font.ttf', 'MyKeymap/font.ttf')
 shutil.copy('设置程序.lnk', 'MyKeymap/设置程序.lnk')
 
 
+os.rename("MyKeymap", new_folder_name)
+
 if arg == 'upload':
     # 读取 build 数据
     file_path = 'build.json'
     build = read_josn(file_path)
 
     # 新老文件名
-    major = build['version']['major']
-    minor = build['version']['minor']
-    patch = build['version']['patch']
     old_release_name = '.'.join(map(str, ['MyKeymap-' + str(major), minor, patch, '7z']))
     new_release_name = '.'.join(map(str, ['MyKeymap-' + str(major), minor, patch + 1, '7z']))
 
 
     print('打包 7z 文件...')
     os.system(f'rm {old_release_name}')
-    os.system(f'7z.exe a {new_release_name} MyKeymap\\')
+    os.system(f'7z.exe a {new_release_name} {new_folder_name}\\')
     
     print('上传文件到对象存储...')
     os.system(f'qshell fput static-x {new_release_name} {new_release_name} --overwrite')
