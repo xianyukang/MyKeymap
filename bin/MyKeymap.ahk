@@ -510,9 +510,6 @@ W::ActivateOrRun("ahk_exe chrome.exe", "C:\ProgramData\Microsoft\Windows\Start M
 D::ActivateOrRun("ahk_exe msedge.exe", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk", "", "")
 J::ActivateOrRun("detect_hidden_window: ahk_exe idea64.exe", "" A_Programs "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk", "", "")
 M::ActivateOrRun("if_exist_then_send: TIM.exe, ^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk", "", "")
-B::bindOrActivate(CapslockF__B)
-N::bindOrActivate(CapslockF__N)
-/::bindOrActivate_unbind()
 
 
 
