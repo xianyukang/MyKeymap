@@ -49,10 +49,10 @@ export const mouseActions = [
 ]
 
 export const mouseActions2 = [
-    { label: "鼠标左上移动", value: "鼠标左上移动" },
-    { label: "鼠标右上移动", value: "鼠标右上移动" },
-    { label: "鼠标左下移动", value: "鼠标左下移动" },
-    { label: "鼠标右下移动", value: "鼠标右下移动" },
+    // { label: "鼠标左上移动", value: "鼠标左上移动" },
+    // { label: "鼠标右上移动", value: "鼠标右上移动" },
+    // { label: "鼠标左下移动", value: "鼠标左下移动" },
+    // { label: "鼠标右下移动", value: "鼠标右下移动" },
     { label: "移动鼠标到窗口中心", value: "移动鼠标到窗口中心" },
     { label: "移动鼠标到「 输入焦点 」", value: "移动鼠标到「 输入焦点 」" },
 ]

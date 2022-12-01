@@ -1316,7 +1316,11 @@ trayMenuHandler(ItemName, ItemPos, MenuName)
 
 moveCurrentWindow()
 {
-    PostMessage, 0x0112, 0xF010, 0,, A
+    WinExist("A")
+    WinGet, state, MinMax
+    if state
+        WinRestore
+    PostMessage, 0x0112, 0xF010, 0
     sleep 50
     SendInput, {right}
 }

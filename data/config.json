@@ -566,8 +566,10 @@
         },
         ".": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "label": "让当前窗口进入拖动模式",
+                "prefix": "*",
+                "type": "鼠标操作",
+                "value": "moveCurrentWindow()"
             }
         },
         "/": {
