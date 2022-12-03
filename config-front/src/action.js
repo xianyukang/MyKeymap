@@ -117,8 +117,8 @@ export const textFeatures4 = [
     { label: "Ctrl + V (粘贴)", value: "send, ^v" },
     { label: "Ctrl + Z (撤销)", value: "send, ^z" },
     { label: "Ctrl + Y (重做)", value: "send, ^y" },
-    { label: "Ctrl + Tab", value: "send, ^{tab}" },
-    { label: "Ctrl + Shift + Tab", value: "send, ^+{tab}" },
+    { label: "Ctrl + Tab (切换标签)", value: "send, ^{tab}" },
+    { label: "Ctrl + Shift + Tab (同上)", value: "send, ^+{tab}" },
 ]
 
 

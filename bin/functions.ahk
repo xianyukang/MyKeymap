@@ -309,35 +309,25 @@ ActivateOrRun2(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin
     if !workingdir {
         workingdir := A_WorkingDir
     }
-    if (target != "")
-    {
-        if (RunAsAdmin)
-            {
-                if (substr(target, 1, 1) == "\")
-                    target := substr(target, 2, strlen(target) - 1)
-                Run, *RunAs "%target%" %args%, %WorkingDir%
-            }
-
-        else
-        {
-            oldTarget := target
-            target := WhereIs(target)
-            if (target)
-            {
-                if (SubStr(target, -3) != ".lnk")
-                    ShellRun(target, args, workingdir, to_activate)
-                else {
-                    ; 检查 lnk 是否损坏
-                    FileGetShortcut, %target%, OutTarget
-                    ; if FileExist(OutTarget)
-                    ShellRun(target, args, workingdir, to_activate)
-                }
-
-            } else {
-                MyRun2(oldTarget, args, workingdir)
-            }
+    if !target {
+        return
+    }
+    if (RunAsAdmin) {
+        if (substr(target, 1, 1) == "\")
+            target := substr(target, 2, strlen(target) - 1)
+        Run, *RunAs "%target%" %args%, %WorkingDir%
+        return
+    }
+    oldTarget := target
+    target := WhereIs(target)
+    if (target) {
+        if InStr(FileExist(target), "D") {
+            run, %target% ; 优化打开文件夹的速度
+            return
         }
-
+        ShellRun(target, args, workingdir, to_activate)
+    } else {
+        MyRun2(oldTarget, args, workingdir)
     }
 }
 
