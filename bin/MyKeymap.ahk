@@ -135,7 +135,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     CapslockMode := true
-    keymapLockState.currentMode := "CapslockMode"
+    ResetCurrentModeLockState("CapslockMode")
     keywait capslock
     CapslockMode := false
     if (A_ThisHotkey == "*capslock" && A_PriorKey == "CapsLock" && (A_TickCount - start_tick < 350)) {
@@ -152,7 +152,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     JMode := true
-    keymapLockState.currentMode := "JMode"
+    ResetCurrentModeLockState("JMode")
     DisableCapslockKey := true
     keywait j
     JMode := false
@@ -170,7 +170,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     SemicolonMode := true
-    keymapLockState.currentMode := "SemicolonMode"
+    ResetCurrentModeLockState("SemicolonMode")
     DisableCapslockKey := true
     keywait `; 
     SemicolonMode := false
@@ -187,10 +187,10 @@ return
     start_tick := A_TickCount
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
-    DigitMode := true
-    keymapLockState.currentMode := "DigitMode"
+    Mode3 := true
+    ResetCurrentModeLockState("Mode3")
     keywait 3 
-    DigitMode := false
+    Mode3 := false
     if (A_PriorKey == "3" && (A_TickCount - start_tick < 300))
         send, {blind}3 
     enableOtherHotkey(thisHotkey)
@@ -206,7 +206,7 @@ return
     thisHotkey := A_ThisHotkey
     disableOtherHotkey(thisHotkey)
     DotMode := true
-    keymapLockState.currentMode := "DotMode"
+    ResetCurrentModeLockState("DotMode")
     keywait `. 
     DotMode := false
     if (A_PriorKey == "." && (A_TickCount - start_tick < 300))
@@ -351,7 +351,8 @@ I::防止J模式误触("ji")
 
 
 
-#if DigitMode
+#if Mode3
+/::action_lock_current_mode()
 *H::send, {blind}0
 *J::send, {blind}1
 *K::send, {blind}2
@@ -364,8 +365,8 @@ I::防止J模式误触("ji")
 *M::send, {blind}9
 *5::send, {blind}^+s
 *0::send, {blind}{f10}
-*P::send, {blind}{f11}
-*`;::send, {blind}{f12}
+*,::send, {blind}{f11}
+*.::send, {blind}{f12}
 *1::send, {blind}{f1}
 *Space::send, {blind}{f1}
 *2::send, {blind}{f2}
@@ -623,8 +624,6 @@ execCapslockAbbr(typo) {
             ActivateOrRun("", "https://www.baidu.com", "", "")
     case "ly":
             ActivateOrRun("", "ms-settings:bluetooth", "", "")
-    case "tm":
-            ActivateOrRun("", "taskmgr.exe", "", "")
     case "bb":
             ActivateOrRun("Bing 词典", "C:\Program Files\Google\Chrome\Application\chrome.exe", "--app=https://cn.bing.com/dict/search?q={selected_text}", "")
     case "st":
@@ -633,6 +632,8 @@ execCapslockAbbr(typo) {
             ActivateOrRun("MyKeymap - Visual Studio Code", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\MyFiles\MyKeymap", "")
     case "sp":
             ActivateOrRun("Spotify", "https://open.spotify.com/", "", "")
+    case "tm":
+            ActivateOrRun("ahk_exe taskmgr.exe", "taskmgr.exe", "", "")
     case "ms":
             ActivateOrRun("my_site - Visual Studio Code", "" A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\project\my_site", "")
     case "acmd":

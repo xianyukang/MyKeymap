@@ -41,10 +41,10 @@ set_window_position_and_size(x, y, width, height)
 
 action_enter_task_switch_mode()
 {
-    global TASK_SWITCH_MODE, keymapLockState, CapslockMode, TabMode, DigitMode, SpaceMode, Mode9, FMode, CapslockSpaceMode, SemicolonMode, CommaMode, DotMode
+    global TASK_SWITCH_MODE, keymapLockState, CapslockMode, TabMode, Mode3, SpaceMode, Mode9, FMode, CapslockSpaceMode, SemicolonMode, CommaMode, DotMode
     CapslockMode := false
     TabMode := false
-    DigitMode := false
+    Mode3 := false
     SpaceMode := false
     Mode9 := false
     FMode := false
@@ -61,6 +61,7 @@ action_enter_task_switch_mode()
     }
     TASK_SWITCH_MODE := false
 
+    ; 全都关了,  得恢复一下
     if (keymapLockState.locked) {
         currentMode := keymapLockState.currentMode
         %currentMode% := true
@@ -96,21 +97,30 @@ run_as_admin(path, args:="", working_dir:="")
     Run *RunAs %path% %args%, %working_dir%
 }
 
+
+ResetCurrentModeLockState(currentMode)
+{
+    global keymapLockState
+    if keymapLockState.locked {
+        return
+    }
+    keymapLockState.currentMode := currentMode
+}
+
 action_lock_current_mode()
 {
     global keymapLockState, SLOWMODE
 
     currentMode := keymapLockState.currentMode
-    keymapLockState.clear := false
 
     if keymapLockState.locked {
         SLOWMODE := false
         %currentMode% := false
         keymapLockState.locked := false
-        tip("取消锁定", -400)
+        tip(" 取消锁定 ", -400)
     } else {
         keymapLockState.locked := true
-        tip("锁定当前模式", -400)
+        tip(" 锁定 → " Trim(currentMode, "Mode") " ", -400)
     }
 
 }

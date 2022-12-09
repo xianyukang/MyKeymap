@@ -1069,10 +1069,10 @@
         "tm": {
             "2": {
                 "comment": "Task Manager 任务管理器",
-                "toActivate": "",
+                "toActivate": "ahk_exe taskmgr.exe",
                 "toRun": "taskmgr.exe",
                 "type": "启动程序或激活窗口",
-                "value": "ActivateOrRun(\"\", \"taskmgr.exe\", \"\", \"\")"
+                "value": "ActivateOrRun(\"ahk_exe taskmgr.exe\", \"taskmgr.exe\", \"\", \"\")"
             }
         },
         "we": {
@@ -3356,8 +3356,11 @@
         },
         ",": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "comment": "F11 键",
+                "keysToSend": "{f11}",
+                "prefix": "*",
+                "type": "输入文本或按键",
+                "value": "send, {blind}{f11}"
             }
         },
         "-": {
@@ -3368,14 +3371,18 @@
         },
         ".": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "comment": "F12 键",
+                "keysToSend": "{f12}",
+                "prefix": "*",
+                "type": "输入文本或按键",
+                "value": "send, {blind}{f12}"
             }
         },
         "/": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "label": "锁定当前模式 (然后单键操作)",
+                "type": "系统控制",
+                "value": "action_lock_current_mode()"
             }
         },
         "0": {
@@ -3464,11 +3471,8 @@
         },
         ";": {
             "2": {
-                "comment": "F12 键",
-                "keysToSend": "{f12}",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}{f12}"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "=": {
@@ -3611,11 +3615,8 @@
         },
         "P": {
             "2": {
-                "comment": "F11 键",
-                "keysToSend": "{f11}",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}{f11}"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "Q": {
@@ -4866,7 +4867,7 @@
         },
         "zh": {
             "2": {
-                "comment": "",
+                "comment": "比如搜 「 知识  site:zhihu.com 」则只返回某站的内容",
                 "keysToSend": "{text} site:zhihu.com",
                 "prefix": "*",
                 "type": "输入文本或按键",

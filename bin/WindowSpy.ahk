@@ -29,7 +29,7 @@ Gui, Add, Text, y+5, ▷ 使用部分窗口名: 记事
 Gui, Add, Text, y+5, ▷ 组合两个标识符: 记事 ahk_exe notepad.exe (偶尔这样更精确
 Gui, Add, Text, y+5, ` 
 Gui, Font, s12 Bold
-Gui, Add, Text, y+5, 当前活动窗口的标识符:
+Gui, Add, Text, y+5, 当前活动窗口的三种标识符:
 Gui, Font, s11 Verdana normal
 Gui, Add, Edit, xm w320 r4 ReadOnly -Wrap vCtrl_Title
 Gui, Add, Checkbox, y+5 x5 Right vCtrl_FollowMouse, 检测鼠标下的窗口, 而不是活动窗口

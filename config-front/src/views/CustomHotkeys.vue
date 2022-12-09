@@ -66,8 +66,8 @@
             <v-card-text class="">
               <pre class="text-gray-700">
 F11     表示  F11
-Numpad0 表示  小键盘的 0 键
 !1      表示  Alt + 1
+!space  表示  Alt + Space
 +F2     表示  Shift + F2
 (更多特殊按键 <a target="_blank" href="https://wyagd001.github.io/zh-cn/docs/KeyList.htm#keyboard" style="color: green; text-decoration: none">参考这里</a>
 (注意符号不要用中文标点符号
@@ -145,6 +145,8 @@ export default {
   methods: {
     toComment: toComment,
     handleChange(key, newKey) {
+      newKey = newKey.replace(/}/g, '')
+      newKey = newKey.replace(/{/g, '')
       Vue.set(this.$store.state.config.CustomHotkeys, newKey, this.$store.state.config.CustomHotkeys[key]);
       this.handleClick(newKey); // 让 currentKey 和 selectedKey 切换到 newKey
       Vue.delete(this.$store.state.config.CustomHotkeys, key);

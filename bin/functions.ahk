@@ -319,7 +319,7 @@ ActivateOrRun2(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin
         return
     }
     oldTarget := target
-    target := WhereIs(target)
+    target := WhereIs(target) ; 避免 shellrun 遇到错误、弹出模态框
     if (target) {
         if InStr(FileExist(target), "D") {
             run, %target% ; 优化打开文件夹的速度
@@ -1206,7 +1206,13 @@ disableOtherHotkey(thisHotkey)
     global allHotkeys, keymapIsActive, AltTabIsOpen, keymapLockState
     keymapIsActive := true
     AltTabIsOpen := false
-    keymapLockState.clear := true
+
+    ; 比如锁定了 3, 但同时想用 9 模式的热键, 需要临时取消锁定
+    currentMode := keymapLockState.currentMode
+    if (keymapLockState.locked) {
+        %currentMode% := false
+    }
+
     for index,value in allHotkeys
     {
         if (value != thisHotkey) {
@@ -1220,20 +1226,15 @@ enableOtherHotkey(thisHotkey)
 {
     global allHotkeys, keymapIsActive, AltTabIsOpen, keymapLockState
     keymapIsActive := false
-    currentMode := keymapLockState.currentMode
 
     if (AltTabIsOpen) {
         AltTabIsOpen := false
         send, {enter}
     }
 
-    ; 已经锁定了 Capslock 模式,  再按一次 Capslock 相关的热键,  应该清空锁定状态
-    if (keymapLockState.clear) {
-        %currentMode% := false
-        keymapLockState.locked := false
-    }
-    else if (keymapLockState.locked) {
-        ; tip(currentMode)
+    ; 锁定当前模式
+    currentMode := keymapLockState.currentMode
+    if (keymapLockState.locked) {
         %currentMode% := true
     }
 
