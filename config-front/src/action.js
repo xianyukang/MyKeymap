@@ -40,6 +40,10 @@ export const windowActions2 = [
     { label: "模拟 Shift+Alt+Tab 热键", value: "SystemShiftAltTab()" },
 ]
 
+export const windowActions4 = [
+    { label: "关闭窗口 (直接杀进程)", value: "close_window_processes()" },
+]
+
 
 export const mouseActions = [
     { label: "鼠标上移", value: "鼠标上移" },

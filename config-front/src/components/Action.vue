@@ -307,8 +307,16 @@
                   ></v-radio>
                 </v-radio-group>
               </v-col>
-
-              <v-col> </v-col>
+              <v-col>
+                <v-radio-group v-model="config.value">
+                <v-radio
+                  v-for="action in windowActions4"
+                  :key="action.label"
+                  :label="`${action.label}`"
+                  :value="action.value"
+                ></v-radio>
+                </v-radio-group>
+              </v-col>
             </v-row>
           </v-radio-group>
         </template>
@@ -383,7 +391,7 @@ import _ from "lodash";
 import KeyValueConfig from "./KeyValueConfig.vue";
 import SystemAction from "./SystemAction.vue";
 import WindowSelectorConfig from "./WindowSelectorConfig.vue";
-import { windowActions1, windowActions2, specialActions, mouseActions, mouseActions2, scrollActions, textFeatures1, textFeatures2, textFeatures3, textFeatures4,clickActions } from "../action";
+import { windowActions1, windowActions2, windowActions4, specialActions, mouseActions, mouseActions2, scrollActions, textFeatures1, textFeatures2, textFeatures3, textFeatures4,clickActions } from "../action";
 
 export default {
   mixins: [currConfigMixin],
@@ -404,6 +412,7 @@ export default {
       specialActions,
       windowActions1,
       windowActions2,
+      windowActions4,
       textFeatures1,
       textFeatures2,
       textFeatures3,

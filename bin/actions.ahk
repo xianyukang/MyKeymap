@@ -213,3 +213,15 @@ onenote_shift_down()
         send, {blind}+{down}
     }
 }
+
+close_window_processes()
+{
+    if (WinActive("Program Manager ahk_class Progman") || WinActive("ahk_class WorkerW")) {
+        return
+    }
+    WinGet, pname, ProcessName, A
+    if (pname = "explorer.exe") {
+        return
+    }
+    run, taskkill /f /im "%pname%", , Hide
+}
