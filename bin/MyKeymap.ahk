@@ -10,7 +10,6 @@
 
 
 
-StringCaseSense, On
 SetWorkingDir %A_ScriptDir%\..
 requireAdmin()
 closeOldInstance()
@@ -138,7 +137,7 @@ return
     ResetCurrentModeLockState("CapslockMode")
     keywait capslock
     CapslockMode := false
-    if (A_ThisHotkey == "*capslock" && A_PriorKey == "CapsLock" && (A_TickCount - start_tick < 350)) {
+    if (A_ThisHotkey = "*capslock" && A_PriorKey = "CapsLock" && (A_TickCount - start_tick < 350)) {
         enterCapslockAbbr()
     }
     enableOtherHotkey(thisHotkey)
@@ -157,7 +156,7 @@ return
     keywait j
     JMode := false
     DisableCapslockKey := false
-    if (A_PriorKey == "j" && (A_TickCount - start_tick < 300))
+    if (A_PriorKey = "j" && (A_TickCount - start_tick < 300))
             send,  {blind}j
     enableOtherHotkey(thisHotkey)
     return
@@ -175,7 +174,7 @@ return
     keywait `; 
     SemicolonMode := false
     DisableCapslockKey := false
-    if (A_PriorKey == ";" && (A_TickCount - start_tick < 300)) {
+    if (A_PriorKey = ";" && (A_TickCount - start_tick < 300)) {
          enterSemicolonAbbr()
     }
     enableOtherHotkey(thisHotkey)
@@ -191,7 +190,7 @@ return
     ResetCurrentModeLockState("Mode3")
     keywait 3 
     Mode3 := false
-    if (A_PriorKey == "3" && (A_TickCount - start_tick < 300))
+    if (A_PriorKey = "3" && (A_TickCount - start_tick < 300))
         send, {blind}3 
     enableOtherHotkey(thisHotkey)
     return
@@ -209,7 +208,7 @@ return
     ResetCurrentModeLockState("DotMode")
     keywait `. 
     DotMode := false
-    if (A_PriorKey == "." && (A_TickCount - start_tick < 300))
+    if (A_PriorKey = "." && (A_TickCount - start_tick < 300))
         send, {blind}`. 
     enableOtherHotkey(thisHotkey)
     return

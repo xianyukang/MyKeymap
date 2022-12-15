@@ -14,7 +14,6 @@
 {{ end }}
 {{ end }}
 
-StringCaseSense, On
 SetWorkingDir %A_ScriptDir%\..
 {{ if .Settings.runAsAdmin -}}
 requireAdmin()
@@ -139,7 +138,7 @@ return
     ResetCurrentModeLockState("CapslockMode")
     keywait capslock
     CapslockMode := false
-    if (A_ThisHotkey == "*capslock" && A_PriorKey == "CapsLock" && (A_TickCount - start_tick < 350)) {
+    if (A_ThisHotkey = "*capslock" && A_PriorKey = "CapsLock" && (A_TickCount - start_tick < 350)) {
         {{ (index .SpecialKeys "Caps Up").value }}
     }
     enableOtherHotkey(thisHotkey)
@@ -158,7 +157,7 @@ return
     keywait j
     JMode := false
     DisableCapslockKey := false
-    if (A_PriorKey == "j" && (A_TickCount - start_tick < 300))
+    if (A_PriorKey = "j" && (A_TickCount - start_tick < 300))
             send,  {blind}j
     enableOtherHotkey(thisHotkey)
     return
@@ -176,7 +175,7 @@ return
     keywait `; 
     SemicolonMode := false
     DisableCapslockKey := false
-    if (A_PriorKey == ";" && (A_TickCount - start_tick < 300)) {
+    if (A_PriorKey = ";" && (A_TickCount - start_tick < 300)) {
          {{ (index .SpecialKeys "; Up").value }}
     }
     enableOtherHotkey(thisHotkey)
@@ -192,7 +191,7 @@ return
     ResetCurrentModeLockState("Mode3")
     keywait 3 
     Mode3 := false
-    if (A_PriorKey == "3" && (A_TickCount - start_tick < 300))
+    if (A_PriorKey = "3" && (A_TickCount - start_tick < 300))
         send, {blind}3 
     enableOtherHotkey(thisHotkey)
     return
@@ -206,7 +205,7 @@ return
     ResetCurrentModeLockState("Mode9")
     keywait 9 
     Mode9 := false
-    if (A_PriorKey == "9" && (A_TickCount - start_tick < 300))
+    if (A_PriorKey = "9" && (A_TickCount - start_tick < 300))
         send, {blind}9 
     enableOtherHotkey(thisHotkey)
     return
@@ -221,7 +220,7 @@ return
     ResetCurrentModeLockState("CommaMode")
     keywait `, 
     CommaMode := false
-    if (A_PriorKey == "," && (A_TickCount - start_tick < 300))
+    if (A_PriorKey = "," && (A_TickCount - start_tick < 300))
         send, {blind}`, 
     enableOtherHotkey(thisHotkey)
     return
@@ -236,7 +235,7 @@ return
     ResetCurrentModeLockState("DotMode")
     keywait `. 
     DotMode := false
-    if (A_PriorKey == "." && (A_TickCount - start_tick < 300))
+    if (A_PriorKey = "." && (A_TickCount - start_tick < 300))
         send, {blind}`. 
     enableOtherHotkey(thisHotkey)
     return
@@ -251,7 +250,7 @@ return
     ResetCurrentModeLockState("AdditionalMode1")
     keywait {{ .Settings.AdditionalMode1Info.WaitKey }}
     AdditionalMode1 := false
-    if (A_PriorKey == "{{ .Settings.AdditionalMode1Info.PriorKey }}" && (A_TickCount - start_tick < 300)) {
+    if (A_PriorKey = "{{ .Settings.AdditionalMode1Info.PriorKey }}" && (A_TickCount - start_tick < 300)) {
         {{ .Settings.AdditionalMode1Info.Send }}
     }
     enableOtherHotkey(thisHotkey)
@@ -267,7 +266,7 @@ return
     ResetCurrentModeLockState("AdditionalMode2")
     keywait {{ .Settings.AdditionalMode2Info.WaitKey }}
     AdditionalMode2 := false
-    if (A_PriorKey == "{{ .Settings.AdditionalMode2Info.PriorKey }}" && (A_TickCount - start_tick < 300)) {
+    if (A_PriorKey = "{{ .Settings.AdditionalMode2Info.PriorKey }}" && (A_TickCount - start_tick < 300)) {
         {{ .Settings.AdditionalMode2Info.Send }}
     }
     enableOtherHotkey(thisHotkey)
@@ -283,7 +282,7 @@ return
     ResetCurrentModeLockState("SpaceMode")
     keywait Space 
     SpaceMode := false
-    if (A_PriorKey == "Space" && (A_TickCount - start_tick < 300))
+    if (A_PriorKey = "Space" && (A_TickCount - start_tick < 300))
         send, {blind}{Space} 
     enableOtherHotkey(thisHotkey)
     return
@@ -298,7 +297,7 @@ $Tab::
     ResetCurrentModeLockState("TabMode")
     keywait Tab 
     TabMode := false
-    if (A_PriorKey == "Tab" && (A_TickCount - start_tick < 300))
+    if (A_PriorKey = "Tab" && (A_TickCount - start_tick < 300))
         send, {blind}{Tab} 
     enableOtherHotkey(thisHotkey)
     return
