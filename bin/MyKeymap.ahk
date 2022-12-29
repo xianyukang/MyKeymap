@@ -362,17 +362,14 @@ I::防止J模式误触("ji")
 *B::send, {blind}7
 *N::send, {blind}8
 *M::send, {blind}9
-*5::send, {blind}^+s
 *0::send, {blind}{f10}
-*,::send, {blind}{f11}
-*.::send, {blind}{f12}
+*E::send, {blind}{f11}
+*R::send, {blind}{f12}
 *1::send, {blind}{f1}
 *Space::send, {blind}{f1}
 *2::send, {blind}{f2}
-*E::send, {blind}{f3}
 *4::send, {blind}{f4}
-*R::send, {blind}{f5}
-*T::send, {blind}{f6}
+*5::send, {blind}{f5}
 *7::send, {blind}{f7}
 *8::send, {blind}{f8}
 *9::send, {blind}{f9}
@@ -431,7 +428,7 @@ A::center_window_to_current_monitor(1370, 930)
 *L::fastMoveMouse("L", 1, 0)
 *,::lbuttonDown()
 *N::leftClick()
-*.::moveCurrentWindow()
+*.::middleClick()
 *M::rightClick()
 *`;::scrollWheel(";", 4)
 *H::scrollWheel("H", 3)
@@ -480,7 +477,7 @@ space::
 #if SLOWMODE
 *,::lbuttonDown()
 *N::leftClick()
-*.::moveCurrentWindow()
+*.::middleClick()
 *M::rightClick()
 *`;::scrollWheel(";", 4)
 *H::scrollWheel("H", 3)
@@ -538,6 +535,7 @@ W::ActivateOrRun("if_exist_then_send: WeChat.exe, ^!w", "C:\ProgramData\Microsof
 *WheelDown::send, {blind}^{tab}
 *C::send, {blind}{bs}
 *Space::send, {blind}{enter}
+*X::send, {esc}
 
 
 

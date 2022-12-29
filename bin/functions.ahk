@@ -368,6 +368,11 @@ GroupAdd(ByRef GroupName, p1:="", p2:="", p3:="", p4:="", p5:="")
 
 MyGroupActivate(winFilter) 
 {
+    static win_group, last_winFilter, last_winID
+    if (winFilter != last_winFilter || last_winID != WinExist("A")) {
+        last_winFilter := winFilter
+        win_group := ""
+    }
 
     winFilter := Trim(winFilter)
     if (!winactive(winFilter))
@@ -376,36 +381,15 @@ MyGroupActivate(winFilter)
         return
     }
 
-    ; group 是窗口组对象, 这个对象无法获取内部状态, 所以用 win_group_array_form 来储存他的状态
-    global win_group
-    global win_group_array_form
-    global last_winFilter
-
-
-    ; 判断是否进入了新的窗口组
-    if (winFilter != last_winFilter)
-    {
-        last_winFilter := winFilter
-        win_group_array_form       := []
-        win_group := ""    ; 建立新的分组
-    }
-
-
-    ; 对比上一次的状态, 获取新的窗口, 然后把新窗口添加到 win_group_array_form 状态和 win_group
     curr_group := GetVisibleWindows(winFilter)
     loop % curr_group.Length()
     {
         val := curr_group[A_Index]
-        if (!HasVal(win_group_array_form, val))
-        {
-            win_group_array_form.push(val)
-            GroupAdd(win_group, "ahk_id " . val)
-        }
+        GroupAdd(win_group, "ahk_id " . val)
     }
 
-
-    ; showtip( "total:"  win_group_array_form.length())
     GroupActivate, %win_group%, R
+    last_winID := WinExist("A")
 }
 
 SwitchWindows()
@@ -773,6 +757,9 @@ leftClick() {
 }
 rightClick() {
     click_mouse_and_exit("{blind}{RButton}")
+}
+middleClick() {
+    click_mouse_and_exit("{blind}{MButton}")
 }
 
 ShowCommandBar()

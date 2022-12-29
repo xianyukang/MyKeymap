@@ -583,6 +583,7 @@ export default {
 
       map["鼠标左键"] = `leftClick()`;
       map["鼠标右键"] = `rightClick()`;
+      map["鼠标中键"] = `middleClick()`;
       map["鼠标左键按下"] = `lbuttonDown()`;
       map["鼠标左键双击 (选中单词)"] = `myDoubleClick()`;
       map["鼠标左键三击 (选中一行)"] = `myTrippleClick()`;

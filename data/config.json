@@ -566,10 +566,10 @@
         },
         ".": {
             "2": {
-                "label": "让当前窗口进入拖动模式",
+                "label": "鼠标中键",
                 "prefix": "*",
                 "type": "鼠标操作",
-                "value": "moveCurrentWindow()"
+                "value": "middleClick()"
             }
         },
         "/": {
@@ -3356,11 +3356,8 @@
         },
         ",": {
             "2": {
-                "comment": "F11 键",
-                "keysToSend": "{f11}",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}{f11}"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "-": {
@@ -3371,11 +3368,8 @@
         },
         ".": {
             "2": {
-                "comment": "F12 键",
-                "keysToSend": "{f12}",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}{f12}"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "/": {
@@ -3429,11 +3423,10 @@
         },
         "5": {
             "2": {
-                "comment": "Ctrl + Shift + S",
-                "keysToSend": "^+s",
+                "keysToSend": "{f5}",
                 "prefix": "*",
                 "type": "输入文本或按键",
-                "value": "send, {blind}^+s"
+                "value": "send, {blind}{f5}"
             }
         },
         "6": {
@@ -3516,11 +3509,11 @@
         },
         "E": {
             "2": {
-                "comment": "F3 键",
-                "keysToSend": "{f3}",
+                "comment": "F11 键",
+                "keysToSend": "{f11}",
                 "prefix": "*",
                 "type": "输入文本或按键",
-                "value": "send, {blind}{f3}"
+                "value": "send, {blind}{f11}"
             }
         },
         "Enter": {
@@ -3627,11 +3620,11 @@
         },
         "R": {
             "2": {
-                "comment": "F5 键",
-                "keysToSend": "{f5}",
+                "comment": "F12 键",
+                "keysToSend": "{f12}",
                 "prefix": "*",
                 "type": "输入文本或按键",
-                "value": "send, {blind}{f5}"
+                "value": "send, {blind}{f12}"
             }
         },
         "S": {
@@ -3651,11 +3644,8 @@
         },
         "T": {
             "2": {
-                "comment": "F6 键",
-                "keysToSend": "{f6}",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "send, {blind}{f6}"
+                "type": "什么也不做",
+                "value": ""
             }
         },
         "U": {
@@ -4304,8 +4294,9 @@
         },
         "X": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "prefix": "*",
+                "type": "文字处理",
+                "value": "send, {esc}"
             }
         },
         "Y": {
