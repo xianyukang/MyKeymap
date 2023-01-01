@@ -566,10 +566,10 @@
         },
         ".": {
             "2": {
-                "label": "鼠标中键",
+                "label": "让当前窗口进入拖动模式",
                 "prefix": "*",
                 "type": "鼠标操作",
-                "value": "middleClick()"
+                "value": "moveCurrentWindow()"
             }
         },
         "/": {
@@ -4699,6 +4699,15 @@
         }
     },
     "SemicolonAbbr": {
+        ".": {
+            "2": {
+                "comment": "因为在输入法中设置了「 中文状态下使用英文标点 」, 所以用这个输入中文句号",
+                "keysToSend": "。",
+                "prefix": "*",
+                "type": "输入文本或按键",
+                "value": "send, {blind}。"
+            }
+        },
         "blu": {
             "2": {
                 "type": "文字处理",
@@ -4896,7 +4905,8 @@
         "xk",
         "year",
         "zh",
-        "zk"
+        "zk",
+        "."
     ],
     "Settings": {
         "AdditionalMode1": false,

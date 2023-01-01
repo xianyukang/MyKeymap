@@ -308,6 +308,10 @@ ActivateOrRun2(to_activate:="", target:="", args:="", workingdir:="", RunAsAdmin
 {
     if !workingdir {
         workingdir := A_WorkingDir
+        if (StrLen(target) >= 4 && SubStr(target, 2, 1) == ":" && SubStr(target, -3) == ".exe") {
+            SplitPath, target,, dir
+            workingdir := dir
+        }
     }
     if !target {
         return

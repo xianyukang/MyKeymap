@@ -93,7 +93,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "blu,dh,dk,dq,fs,gg,gre,gt,jt,kg,pin,pur,red,sj,sk,ss,ver,xk,year,zh,zk")
+semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "blu,dh,dk,dq,fs,gg,gre,gt,jt,kg,pin,pur,red,sj,sk,ss,ver,xk,year,zh,zk,.")
 semiHook.KeyOpt("{CapsLock}", "S")
 semiHook.OnChar := Func("onSemiHookChar")
 semiHook.OnEnd := Func("onSemiHookEnd")
@@ -428,7 +428,7 @@ A::center_window_to_current_monitor(1370, 930)
 *L::fastMoveMouse("L", 1, 0)
 *,::lbuttonDown()
 *N::leftClick()
-*.::middleClick()
+*.::moveCurrentWindow()
 *M::rightClick()
 *`;::scrollWheel(";", 4)
 *H::scrollWheel("H", 3)
@@ -477,7 +477,7 @@ space::
 #if SLOWMODE
 *,::lbuttonDown()
 *N::leftClick()
-*.::middleClick()
+*.::moveCurrentWindow()
 *M::rightClick()
 *`;::scrollWheel(";", 4)
 *H::scrollWheel("H", 3)
@@ -594,6 +594,8 @@ execSemicolonAbbr(typo) {
             send, {blind}%A_YYYY%-%A_MM%-%A_DD% %A_Hour%:%A_Min%
     case "jt":
             send, {blind}{text}➤` ` 
+    case ".":
+            send, {blind}。
     case "gre":
             setColor("#080")
     case "blu":
