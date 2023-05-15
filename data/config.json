@@ -2135,6 +2135,13 @@
                 "type": "系统控制",
                 "value": "toggleCapslock()"
             }
+        },
+        "~+;": {
+            "2": {
+                "comment": "为了正常输入冒号",
+                "type": "可能会用到的内置函数",
+                "value": "return"
+            }
         }
     },
     "DotMode": {
@@ -4699,6 +4706,15 @@
         }
     },
     "SemicolonAbbr": {
+        ",": {
+            "2": {
+                "comment": "因为在输入法中设置了「 中文状态下使用英文标点 」, 所以用这个输入中文逗号",
+                "keysToSend": "，",
+                "prefix": "*",
+                "type": "输入文本或按键",
+                "value": "send, {blind}，"
+            }
+        },
         ".": {
             "2": {
                 "comment": "因为在输入法中设置了「 中文状态下使用英文标点 」, 所以用这个输入中文句号",
@@ -4706,6 +4722,15 @@
                 "prefix": "*",
                 "type": "输入文本或按键",
                 "value": "send, {blind}。"
+            }
+        },
+        "/": {
+            "2": {
+                "comment": "因为在输入法中设置了「 中文状态下使用英文标点 」, 所以用这个输入中文顿号",
+                "keysToSend": "、",
+                "prefix": "*",
+                "type": "输入文本或按键",
+                "value": "send, {blind}、"
             }
         },
         "blu": {
@@ -4885,6 +4910,9 @@
         }
     },
     "SemicolonAbbrKeys": [
+        ",,",
+        ".",
+        "/",
         "blu",
         "dh",
         "dk",
@@ -4905,8 +4933,7 @@
         "xk",
         "year",
         "zh",
-        "zk",
-        "."
+        "zk"
     ],
     "Settings": {
         "AdditionalMode1": false,

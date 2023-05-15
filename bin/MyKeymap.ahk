@@ -4,7 +4,6 @@
 #NoTrayIcon
 #WinActivateForce               ; 解决「 winactivate 最小化的窗口时不会把窗口放到顶层(被其他窗口遮住) 」
 #InstallKeybdHook               ; 可能是 ahk 自动卸载 hook 导致的丢失 hook,  如果用这行指令, ahk 是否就不会卸载 hook 了呢?
-#MenuMaskKey vkFF
 #include bin/functions.ahk
 #include bin/actions.ahk
 
@@ -93,7 +92,7 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "blu,dh,dk,dq,fs,gg,gre,gt,jt,kg,pin,pur,red,sj,sk,ss,ver,xk,year,zh,zk,.")
+semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", ",,,.,/,blu,dh,dk,dq,fs,gg,gre,gt,jt,kg,pin,pur,red,sj,sk,ss,ver,xk,year,zh,zk")
 semiHook.KeyOpt("{CapsLock}", "S")
 semiHook.OnChar := Func("onSemiHookChar")
 semiHook.OnEnd := Func("onSemiHookEnd")
@@ -125,6 +124,7 @@ return
 Suspend, Toggle
 ReloadProgram()
 return
+
 
 
 
@@ -551,6 +551,7 @@ W::ActivateOrRun("if_exist_then_send: WeChat.exe, ^!w", "C:\ProgramData\Microsof
 #if !keymapIsActive
 
 
+~+;::return
 !capslock::toggleCapslock()
 +capslock::toggleCapslock()
 
@@ -594,8 +595,12 @@ execSemicolonAbbr(typo) {
             send, {blind}%A_YYYY%-%A_MM%-%A_DD% %A_Hour%:%A_Min%
     case "jt":
             send, {blind}{text}➤` ` 
+    case "/":
+            send, {blind}、
     case ".":
             send, {blind}。
+    case ",":
+            send, {blind}，
     case "gre":
             setColor("#080")
     case "blu":
