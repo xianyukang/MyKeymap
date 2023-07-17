@@ -70,7 +70,7 @@ class CLayout
         Gui MyGui:New, +HwndGuiHwnd +Resize
         Gui MyGui:+LabelMyGui_On
         Gui, Font, s12, 等线
-        Gui Add, Text, x10 y280 w290 h20 +0x200, EDSF调节亮度、WR切换显示器、X退出
+        Gui Add, Text, x10 y280 w290 h20 +0x200, EDSF调节亮度、WR切换显示器、C退出
         Gui Add, Text, x10 y300 w490 h20 +0x200, 如果不起作用, 用 Win+P 断开并重连该显示器, 然后重启本程序试试
         
     }
@@ -221,7 +221,7 @@ WM_KEYDOWN(wParam, lParam)
         case "w": layout.prev()
         case "r": layout.next()
         case "Escape": ExitApp
-        case "x": ExitApp
+        case "c": ExitApp
         default: 
             ; sleep 500
         return 0
