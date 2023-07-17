@@ -28,7 +28,7 @@ while (ind < monCount + 1)
     brightness := ""
     ; 笔记本的内置显示器应该是 1 号显示器(我猜的),  笔记本内置显示器要用 wmi 操作亮度
     ; 只有 1 号显示器会尝试两种获取亮度的方式
-    if (ind == 1) {
+    if (ind == 1 && monCount != 1) {
         brightness := GetCurrentBrightNess()
         if (brightness != "") {
             layout.setUseWmi(ind, true)
@@ -221,6 +221,7 @@ WM_KEYDOWN(wParam, lParam)
         case "e": layout.incBrightness(10)
         case "w": layout.prev()
         case "r": layout.next()
+        case "Escape": ExitApp
         case "x": ExitApp
         default: 
             ; sleep 500
