@@ -1,0 +1,21 @@
+name: Build Page
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: pnpm/action-setup@v2.2.4
+        
+    - name: build
+      run: |
+        cd config-front
+        pnpm install
+        pnpm run build
+
+    - uses: actions/upload-artifact@master
+      with:
+        name: page
+        path: bin/site
