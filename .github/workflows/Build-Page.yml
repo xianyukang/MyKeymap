@@ -14,6 +14,7 @@ jobs:
         
     - name: build
       run: |
+        pwd
         cd config-front
         pnpm install
         pnpm run build
