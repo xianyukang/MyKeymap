@@ -26,18 +26,17 @@ ind := 1
 while (ind < monCount + 1)
 {
     brightness := ""
-    ; 笔记本的内置显示器应该是 1 号显示器(我猜的),  笔记本内置显示器要用 wmi 操作亮度
-    ; 只有 1 号显示器会尝试两种获取亮度的方式
-    if (ind == 1 && monCount != 1) {
+
+    ; 优先通过ddcci获取屏幕亮度，当ddcci获取不到时再尝试用wmi获取
+    brightness := Monitor.GetBrightness(ind)["Current"]
+
+    if (brightness == "") {
         brightness := GetCurrentBrightNess()
         if (brightness != "") {
             layout.setUseWmi(ind, true)
         }
     }
 
-    if (brightness == "") {
-        brightness := Monitor.GetBrightness(ind)["Current"]
-    }
     layout.setBrightnessText(ind, brightness)
     ind += 1
 }
