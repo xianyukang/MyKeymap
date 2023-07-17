@@ -8,6 +8,9 @@ jobs:
 
     steps:
     - uses: pnpm/action-setup@v2.2.4
+      with:
+          version: 6.0.2
+          run_install: false
         
     - name: build
       run: |
