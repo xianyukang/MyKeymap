@@ -1,0 +1,101 @@
+name: Build
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GOOS: "windows"
+      GOARCH: "amd64"
+      
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        submodules: recursive
+    
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+    - name: Install pnpm
+      uses: pnpm/action-setup@v2.2.4
+      with:
+          version: 7
+          run_install: false          
+          
+    - name: Install go
+      uses: actions/setup-go@v4
+      with:
+          go-version: '^1.13.1'
+          
+    - name: Install Tailwind CSS
+      run: npm install -D tailwindcss
+      
+    - name: go build
+      run: |
+        cd config-back
+        go env
+        go build -ldflags "-s -w"
+        ls
+        cp settings.exe ../bin
+        
+    - name: npm build
+      run: |
+        ls
+        echo "build tailwind js"
+        cd tailwind
+        npm run build
+        
+        echo "build vue"
+        cd ../config-front
+        pnpm install
+        npm run build
+        
+        echo "build tailwind css"
+        cd ../tailwind
+        npm run build-help-page-css
+        npm run build-html-tools-css
+        
+        echo "copy index.html to the templates folder of flask"
+        cd ..
+        mkdir bin/templates
+        cp bin/site/index.html bin/templates/
+        cp config-back/templates/script2.ahk bin/templates/
+        cp config-back/templates/CustomShellMenu.ahk bin/templates/
+        cp config-back/templates/help.html bin/templates/
+        
+
+        
+    - name: copy files
+      run: |
+        mkdir MyKeymap
+        cp -r data MyKeymap
+        cp -r bin MyKeymap/bin
+        cp -r shortcuts MyKeymap
+        cp -r tools MyKeymap/
+        cp AutoHotkey.dll MyKeymap/AutoHotkey.dll 
+        cp clip_dll.dll MyKeymap/clip_dll.dll 
+        cp concrt140.dll MyKeymap/concrt140.dll 
+        cp msvcp140.dll MyKeymap/msvcp140.dll 
+        cp msvcp140_1.dll MyKeymap/msvcp140_1.dll 
+        cp msvcp140_2.dll MyKeymap/msvcp140_2.dll 
+        cp msvcp140_atomic_wait.dll MyKeymap/msvcp140_atomic_wait.dll 
+        cp msvcp140_codecvt_ids.dll MyKeymap/msvcp140_codecvt_ids.dll 
+        cp vcamp140.dll MyKeymap/vcamp140.dll 
+        cp vccorlib140.dll MyKeymap/vccorlib140.dll 
+        cp vcomp140.dll MyKeymap/vcomp140.dll 
+        cp vcruntime140.dll MyKeymap/vcruntime140.dll 
+        cp vcruntime140_1.dll MyKeymap/vcruntime140_1.dll 
+        cp vcruntime140.dll MyKeymap/bin/vcruntime140.dll 
+        cp vcruntime140_1.dll MyKeymap/bin/vcruntime140_1.dll 
+
+        cp MyKeymap.exe MyKeymap/MyKeymap.exe 
+        cp SoundControl.exe MyKeymap/SoundControl.exe 
+        cp font.ttf MyKeymap/font.ttf 
+        cp 设置程序.lnk MyKeymap/设置程序.lnk 
+
+    - uses: actions/upload-artifact@master
+      with:
+        name: MyKeymap
+        path: MyKeymap
