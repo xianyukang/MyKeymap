@@ -341,6 +341,8 @@ I::防止J模式误触("ji")
 *B::send, {blind}7
 *N::send, {blind}8
 *M::send, {blind}9
+*W::send, {blind}{Volume_Down}
+*T::send, {blind}{Volume_Up}
 *0::send, {blind}{f10}
 *E::send, {blind}{f11}
 *R::send, {blind}{f12}

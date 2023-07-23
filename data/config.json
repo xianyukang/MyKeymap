@@ -3651,8 +3651,11 @@
         },
         "T": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "comment": "加音量",
+                "keysToSend": "{Volume_Up}",
+                "prefix": "*",
+                "type": "输入文本或按键",
+                "value": "send, {blind}{Volume_Up}"
             }
         },
         "U": {
@@ -3672,8 +3675,11 @@
         },
         "W": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "comment": "减音量",
+                "keysToSend": "{Volume_Down}",
+                "prefix": "*",
+                "type": "输入文本或按键",
+                "value": "send, {blind}{Volume_Down}"
             }
         },
         "X": {
@@ -4200,7 +4206,7 @@
         },
         "LButton": {
             "2": {
-                "comment": "打开窗口管理器",
+                "comment": "打开窗口切换器",
                 "keysToSend": "^!{tab}",
                 "prefix": "*",
                 "type": "输入文本或按键",
