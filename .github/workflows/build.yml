@@ -65,7 +65,16 @@ jobs:
         cp config-back/templates/CustomShellMenu.ahk bin/templates/
         cp config-back/templates/help.html bin/templates/
         
-
+    - name: modify changeBrightness window size
+      run: |
+        cd bin
+        sed -i -z 's/        this.Y := 50/        this.Y := 10/' changeBrightness.ahk
+        sed -i -z 's/        Gui Add, Text, x10 y280 w290 h20 +0x200/        Gui Add, Text, x10 y190 w290 h20 +0x200/' changeBrightness.ahk
+        sed -i -z 's/        Gui Add, Text, x10 y300 w290 h20 +0x200/        Gui Add, Text, x10 y220 w290 h20 +0x200/' changeBrightness.ahk
+        sed -i -z 's/        w :=  this.X + 70/        w :=  this.X + 50/' changeBrightness.ahk
+        sed -i -z 's/        h :=  320/        h :=  230/' changeBrightness.ahk
+        sed -i -z 's/        X += 58/        X += 65/' changeBrightness.ahk
+        sed -i -z 's/        Y += 60/        X += 43/' changeBrightness.ahk
         
     - name: copy files
       run: |
