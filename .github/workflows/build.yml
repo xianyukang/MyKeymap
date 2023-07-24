@@ -57,8 +57,15 @@ jobs:
         npm run build-help-page-css
         npm run build-html-tools-css
         
-        echo "copy index.html to the templates folder of flask"
+        echo "delete useless files"
         cd ..
+        rm -rf bin/site/fonts/*.eot
+        rm -rf bin/site/fonts/*.woff
+        rm -rf bin/site/fonts/*.ttf
+        rm -rf bin/site/fonts/*.ttf
+        rm -rf bin/site/js/*.map
+        
+        echo "copy index.html to the templates folder of flask"
         mkdir bin/templates
         cp bin/site/index.html bin/templates/
         cp config-back/templates/script2.ahk bin/templates/
