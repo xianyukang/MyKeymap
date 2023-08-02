@@ -76,6 +76,14 @@ action_hold_down_shift_key()
     send, {LShift up}
 }
 
+action_hold_down_Rshift_key()
+{
+    send, {RShift down}
+    key := LTrim(A_ThisHotkey, "*")
+    keywait, %key%
+    send, {RShift up}
+}
+
 activate_it_by_hotkey_or_run(process_name, activation_hotkey, target, args:="", workingdir:="")
 {
     if ProcessExist(process_name) {
