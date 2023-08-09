@@ -34,8 +34,36 @@ SetTitleMatchMode(2) ; WinTitle匹配时窗口标题只要包含就可以
 ; 多显示器不同缩放比例导致的问题,  https://www.autohotkey.com/boards/viewtopic.php?f=14&t=13810
 DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
-; 鼠标模式
-MouseMode := false
+; 自定义热键
+customHotKey := true
+; 已启动的热键
+activatedModes := []
+; 热键状态
+modeState := { currentName: "", currentRef: "", locked: false }
+; 当模拟ALT+TAB或Alt+shift+table时松手退出选择任务页面用
+altTabIsOpen := false
+
+; ===============      模式定义      ========================
+capslockMode := false
+jMode := false
+semicolonMode := false
+threeMode := false
+nincMode := false
+commaMode := false
+dotModel := false
+additionalMode1 := false
+additionalMode2 := false
+spaceMode := false
+tabMode := false
+rButtonMode := false
+lButtonMode := false
+
+capsFMode := false
+capsSpaceMode := false
+jKModel := false
+
+mouseMode := false
+TaskSwitchMode := false
 
 ; =============== 以下为读取的配置信息 =======================
 configVer := ""
@@ -54,7 +82,37 @@ slowMoveRepeat := 13
 moveDelay1 := "T0.2"
 moveDelay2 := "T0.01"
 
-#HotIf MouseMode
+activatedModes.Push("CapsLock")
+activatedModes.Push("Tab")
+
+CapsLock:: {
+  global capslockMode
+  EnableMode(&capslockMode, "capslockMode", 350, () => MsgBox("大小写"))
+}
+
+Tab:: {
+  global tabMode
+  EnableMode(&tabMode, "tabMode", 350, () => MsgBox("TAB模式"))
+}
+
+#HotIf capslockMode
+a:: MsgBox("Cpas模式")
+s:: MsgBox("Cpas模式")
+f:: {
+  global capslockMode, capsFMode
+  capslockMode := false
+  EnableMode(&capsFMode, "capsFMode", , , false)
+}
+z:: LockCurrentMode()
+
+#HotIf tabMode
+*a:: MsgBox("J模式")
+
+#HotIf capsFMode
+a:: MsgBox("CapsF 模式")
+
+
+#HotIf mouseMode
 */:: MouseToActiveWindowCenter()
 *,:: LbuttonDown()
 *N:: LbuttonClick()

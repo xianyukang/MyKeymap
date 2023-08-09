@@ -537,16 +537,16 @@ class Monitor {
 		throw Error("Unable to retreive values.`n`nError code: " Format("0x{:X}", A_LastError))
 	}	
 	
-	GetVCPFeatureAndVCPFeatureReply(hMonitor, VCPCode, vct := 0, CurrentValue := 0, MaximumValue := 0){
+	GetVCPFeatureAndVCPFeatureReply(hMonitor, VCPCode, vct := 0, currentRefue := 0, MaximumValue := 0){
 
 		static VCP_CODE_TYPE := Map(
 					0x00000000, "MC_MOMENTARY — Momentary VCP code. Sending a command of this type causes the monitor to initiate a self-timed operation and then revert to its original state. Examples include display tests and degaussing.",
 					0x00000001, "MC_SET_PARAMETER — Set Parameter VCP code. Sending a command of this type changes some aspect of the monitor's operation.")
 		
-		if (DllCall("dxva2\GetVCPFeatureAndVCPFeatureReply", "ptr", hMonitor, "ptr", VCPCode, "uint*", vct, "uint*", &CurrentValue, "uint*", &MaximumValue))
+		if (DllCall("dxva2\GetVCPFeatureAndVCPFeatureReply", "ptr", hMonitor, "ptr", VCPCode, "uint*", vct, "uint*", &currentRefue, "uint*", &MaximumValue))
 			return Map("VCPCode"    ,  Format("0x{:X}", VCPCode),
 					   "VCPCodeType",  VCP_CODE_TYPE[vct], 
-					   "Current"	,  CurrentValue, 
+					   "Current"	,  currentRefue, 
 					   "Maximum"	, (MaximumValue ? MaximumValue : "Undefined due to non-continuous (NC) VCP Code."))
 		throw Error("Unable to retreive values.`n`nError code: " Format("0x{:X}", A_LastError))
 	}

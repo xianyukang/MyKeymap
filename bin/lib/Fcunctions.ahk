@@ -75,7 +75,7 @@ SlowMoveMouse(key, directionX, directionY) {
 
 ; 快速移动鼠标并进入移动鼠标模式
 FastMoveMouse(key, directionX, directionY) {
-  global MouseMode := true
+  global mouseMode := true
   MoveMouse(key, directionX, directionY, fastMoveSingle, fastMoveRepeat)
 }
 
@@ -160,7 +160,7 @@ MouseMoveActiveWindowPos() {
 
 ; 退出鼠标移动模式
 ExitMouseMode() {
-  global MouseMode := false
+  global mouseMode := false
 
   Send("{Blind}{LButton up}")
 
@@ -174,3 +174,90 @@ MouseClickAndExit(key) {
   if (needExitMouseMode)
     ExitMouseMode()
 }
+
+; 冻结非指定的模式
+FreezeOtherMode(mode) {
+  global activatedModes, customHotKey, altTabIsOpen, modeState
+  customHotKey := true
+  altTabIsOpen := false
+
+  ; 比如锁定了 3, 但同时想用 9 模式的热键, 需要临时取消锁定
+  if (modeState.locked) {
+    %modeState.currentRef% := false
+  }
+
+  for index, value in activatedModes {
+    if (value != mode) {
+      Hotkey(value, "Off")
+    }
+  }
+}
+
+; 重置当前运行的热键
+ResetCurrentMode(modeName, &modeRef) {
+  global modeState
+  if (modeState.locked)
+    return
+
+  modeState.currentName := modeName
+  ; 指定其引用，不然后面无法改模式的状态
+  modeState.currentRef := &modeRef
+}
+
+; 优先解冻被锁定模式，如果没有被锁定模式则解冻全部
+UnfreezeMode(mode) {
+  global activatedModes, customHotKey, altTabIsOpen, modeState
+  customHotKey := false
+
+  if (altTabIsOpen) {
+    altTabIsOpen := false
+    Send("{Enter}")
+  }
+
+  ; 启动被锁定的模式
+  if (modeState.locked) {
+    %modeState.currentRef% := true
+    return
+  }
+
+  for index, value in activatedModes {
+    if (value != mode)
+      Hotkey(value, "On")
+  }
+
+}
+
+; 启动指定Mode
+EnableMode(&mode, modeName, mil?, func?, needFreezeOtherMode := true) {
+  statrtTick := A_TickCount
+  thisHotKey := A_ThisHotkey
+  mode := true
+  ; Caps F、Caps 空格之类的二级模式是不用触发冻结的
+  if (needFreezeOtherMode) {
+    FreezeOtherMode(ThisHotkey)
+    ResetCurrentMode(modeName, &mode)
+  }
+  KeyWait(thisHotKey)
+  mode := false
+  
+  if (IsSet(mil)) 
+    if ((A_PriorKey != "" && A_PriorKey = thisHotkey) && A_TickCount - statrtTick < mil) 
+      if (IsSet(func))
+        func()
+
+  ; 因为没有触发冻结所以不需要解冻，但是如果锁定了某个模式还是需要到这个模式的
+  if (needFreezeOtherMode || modeState.locked) {
+    UnfreezeMode(ThisHotkey)
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
