@@ -15,25 +15,25 @@ TrayMenuHandler(ItemName, ItemPos, MyMenu) {
       Run("https://xianyukang.com/MyKeymap.html")
     case "查看窗口标识符":
       run("MyKeymap.exe bin\WindowSpy.ahk")
-      
+
   }
 }
 
 ; 关闭程序
 MyExit() {
-    thisPid := DllCall("GetCurrentProcessId")
-    ProcessClose(thisPid)
+  thisPid := DllCall("GetCurrentProcessId")
+  ProcessClose(thisPid)
 }
 
 ; 暂停
 ToggleSuspend() {
   Suspend(!A_IsSuspended)
   if (A_IsSuspended) {
-    TraySetIcon("./bin/icons/logo2.ico", ,1)
+    TraySetIcon("./bin/icons/logo2.ico", , 1)
     A_TrayMenu.Check("暂停")
     Tip("  暂停 MyKeymap  ", -500)
   } else {
-    TraySetIcon("./bin/icons/logo.ico", ,0)
+    TraySetIcon("./bin/icons/logo.ico", , 0)
     A_TrayMenu.UnCheck("暂停")
     Tip("  恢复 MyKeymap  ", -500)
   }
@@ -41,7 +41,7 @@ ToggleSuspend() {
 
 ; 打开设置
 OpenSettings() {
-  if(!WinExist("\bin\settings.exe"))
+  if (!WinExist("\bin\settings.exe"))
     Run("./bin/settings.exe ./bin")
 
   try {
@@ -70,7 +70,7 @@ GetMouseMovePromptWindow() {
 
 ; 慢速移动鼠标
 SlowMoveMouse(key, directionX, directionY) {
-  MoveMouse(key, directionX, directionY, slowMoveSingle, slowMoveRepeat, IsSet(mousemovePrompt))
+  MoveMouse(key, directionX, directionY, slowMoveSingle, slowMoveRepeat, mousemovePrompt ?? false)
 }
 
 ; 快速移动鼠标并进入移动鼠标模式
@@ -133,7 +133,7 @@ ScrollWheel(key, direction) {
 
 ; 滚轮滑动一次
 ScrollWheelOnce(direction, scrollCount := 1) {
-  switch(direction) {
+  switch (direction) {
     case 1: MouseClick("WheelUp", , , scrollCount)
     case 2: MouseClick("WheelDown", , , scrollCount)
     case 3: MouseClick("WheelLeft", , , scrollCount)
@@ -144,13 +144,13 @@ ScrollWheelOnce(direction, scrollCount := 1) {
 ; 移动鼠标到活动窗口中心
 MouseToActiveWindowCenter() {
   WinGetPos(&X, &Y, &W, &H, "A")
-  MouseMove(x + w/2, y + h/2)
+  MouseMove(x + w / 2, y + h / 2)
 }
 
 ; 移动活动窗口位置
 MouseMoveActiveWindowPos() {
   hwnd := WinExist("A")
-  if (WinGetMinMax("A")) 
+  if (WinGetMinMax("A"))
     WinRestore("A")
 
   PostMessage("0x0112", "0xF010", 0)
@@ -171,6 +171,6 @@ ExitMouseMode() {
 ; 鼠标点击后推出
 MouseClickAndExit(key) {
   Send("{blind}" key)
-  if(ClickExitMouseMoveMode)
+  if (needExitMouseMode)
     ExitMouseMode()
 }

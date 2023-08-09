@@ -36,10 +36,10 @@ class CLayout extends Gui {
       ; 计算MonIcoText要显示的位置
       ; 当显示器图标无法沾满窗口默认大小时,让显示器图标剧中
       padding := 0
-      if(this.monitorIcoSize * this.monCount < this.defaultGuiWidth)  {
+      if (this.monitorIcoSize * this.monCount < this.defaultGuiWidth) {
         padding := (this.defaultGuiWidth - (this.monitorIcoSize * this.monCount)) / 2
       }
-      x := this.monitorIcoSize * (monIndex-1) + padding
+      x := this.monitorIcoSize * (monIndex - 1) + padding
       monIco := super.Add("Text", "x" x " y0 w" this.monitorIcoSize " h" this.monitorIcoSize " 0x1", "🖥️")
       monIco.SetFont("s128 c000000")
 
@@ -72,7 +72,7 @@ class CLayout extends Gui {
       this.changeSelectedMonitor(this.currentIndex--)
     }
   }
-  
+
   ; 下一个显示屏
   Next() {
     if (this.currentIndex < this.monCount) {
@@ -83,7 +83,7 @@ class CLayout extends Gui {
   ; 加亮度
   IncBrightness(mon) {
     m := this.monitors.Get(this.currentIndex)
-    val := m["brightness"].Value+mon
+    val := m["brightness"].Value + mon
     if (val <= 100) {
       this.SetBrightness(val, this.currentIndex)
       m["brightness"].Value := val
@@ -112,8 +112,8 @@ class CLayout extends Gui {
       brightness := this.monitorCol.GetBrightness(monIndex)["Current"]
     } catch Error as e {
       ; 使用wmi获取亮度
-      For property in ComObjGet( "winmgmts:\\.\root\WMI" ).ExecQuery( "SELECT * FROM WmiMonitorBrightness" )
-        brightness := property.CurrentBrightness	
+      For property in ComObjGet("winmgmts:\\.\root\WMI").ExecQuery("SELECT * FROM WmiMonitorBrightness")
+        brightness := property.CurrentBrightness
     }
 
     return brightness
@@ -125,8 +125,8 @@ class CLayout extends Gui {
       this.monitorCol.setBrightness(brightness, monIndex)
     } catch Error as e {
       ; 使用wmi设置亮度
-      For property in ComObjGet( "winmgmts:\\.\root\WMI" ).ExecQuery( "SELECT * FROM WmiMonitorBrightnessMethods" )
-        property.WmiSetBrightness( timeout, brightness )
+      For property in ComObjGet("winmgmts:\\.\root\WMI").ExecQuery("SELECT * FROM WmiMonitorBrightnessMethods")
+        property.WmiSetBrightness(timeout, brightness)
     }
   }
 
@@ -142,21 +142,21 @@ layout.ShowGui()
 
 SetTimer(IfLoseFocusThenExit, 100)
 IfLoseFocusThenExit() {
-  if(not WinActive("ahk_id" layout.Hwnd)) {
+  if ( not WinActive("ahk_id" layout.Hwnd)) {
     ExitApp
   }
 }
 
 OnMessage(0x100, WM_KEYDOWN)
 WM_KEYDOWN(wParam, lParam, msg, hwnd) {
-  switch(GetKeyName(Format("vk{:x}", wparam))) {
+  switch (GetKeyName(Format("vk{:x}", wparam))) {
     case "w": layout.Previous()
     case "r": layout.Next()
     case "e": layout.IncBrightness(10)
     case "f": layout.IncBrightness(5)
     case "d": layout.DecBrightness(10)
     case "s": layout.DecBrightness(5)
-    case "c":  ExitApp
+    case "c": ExitApp
     case "Escape": ExitApp
   }
 

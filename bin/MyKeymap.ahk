@@ -1,5 +1,6 @@
 #SingleInstance Force
-#WinActivateForce ; 解决「 winactivate 最小化的窗口时不会把窗口放到顶层(被其他窗口遮住) 」
+; 解决「 winactivate 最小化的窗口时不会把窗口放到顶层(被其他窗口遮住)
+#WinActivateForce
 InstallKeybdHook ; 强制安装键盘钩子
 A_MaxHotkeysPerInterval := 70
 SetWorkingDir("../")
@@ -40,10 +41,8 @@ MouseMode := false
 configVer := ""
 
 
-
-
 ; 鼠标点击后退出鼠标模式
-ClickExitMouseMoveMode := true
+needExitMouseMode := true
 
 scrollOnceLineCount := 3
 scrollDelay1 := "T0.2"
@@ -56,20 +55,20 @@ moveDelay1 := "T0.2"
 moveDelay2 := "T0.01"
 
 #HotIf MouseMode
-*/::MouseToActiveWindowCenter()
-*,::LbuttonDown()
-*N::LbuttonClick()
-*.::MouseMoveActiveWindowPos()
-*M::RbuttonClick()
-*'::scrollWheel("'", 4)
-*I::scrollWheel("I", 3)
-*O::scrollWheel("O", 2)
-*U::scrollWheel("U", 1)
-*H::slowMoveMouse("H", -1, 0)
-*J::slowMoveMouse("J", 0, 1)
-*K::slowMoveMouse("K", 0, -1)
-*L::slowMoveMouse("L", 1, 0)
+*/:: MouseToActiveWindowCenter()
+*,:: LbuttonDown()
+*N:: LbuttonClick()
+*.:: MouseMoveActiveWindowPos()
+*M:: RbuttonClick()
+*':: scrollWheel("'", 4)
+*I:: scrollWheel("I", 3)
+*O:: scrollWheel("O", 2)
+*U:: scrollWheel("U", 1)
+*H:: slowMoveMouse("H", -1, 0)
+*J:: slowMoveMouse("J", 0, 1)
+*K:: slowMoveMouse("K", 0, -1)
+*L:: slowMoveMouse("L", 1, 0)
 
 
-Esc::exitMouseMode()
-*Space::exitMouseMode()
+Esc:: exitMouseMode()
+*Space:: exitMouseMode()
