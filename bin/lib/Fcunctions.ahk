@@ -157,7 +157,6 @@ UnfreezeMode(mode) {
   ; 启动被锁定的模式
   if (modeState.locked) {
     %modeState.currentRef% := true
-    return
   }
 
   for index, value in activatedModes {
@@ -185,8 +184,8 @@ EnableMode(&mode, modeName, mil?, func?, needFreezeOtherMode := true) {
       if (IsSet(func))
         func()
 
-  ; 因为没有触发冻结所以不需要解冻，但是如果锁定了某个模式还是需要到这个模式的
-  if (needFreezeOtherMode || modeState.locked) {
+  ; 因为没有触发冻结所以不需要解冻
+  if (needFreezeOtherMode) {
     UnfreezeMode(ThisHotkey)
   }
 }

@@ -102,11 +102,12 @@ f:: {
   global capslockMode, capsFMode
   capslockMode := false
   EnableMode(&capsFMode, "capsFMode", , , false)
+  capslockMode := true
 }
 z:: LockCurrentMode()
 
 #HotIf tabMode
-*a:: MsgBox("J模式")
+a:: MsgBox("J模式")
 
 #HotIf capsFMode
 a:: MsgBox("CapsF 模式")
