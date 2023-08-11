@@ -72,3 +72,61 @@ LockCurrentMode() {
     Tip(" 锁定 -> " modeState.currentName, -400)
   }
 }
+
+; 启动程序或切换到程序
+ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin := false, isHide := false) { ; 如果启动程序中或参数中有“选中的文本”, 则直接打开
+  ; 如果是程序或参数中带有“选中的文件” 则通过该程序打开该连接
+  if (InStr(target, "{selected_text}") || InStr(args, "{selected_text}")) {
+    ; 没有获取到文字直接返回
+    if not (ReplaceSelectedText(&target, &args))
+      return
+  }
+
+  ; 切换程序
+  winTitle := Trim(winTitle)
+  if (winTitle && activateWindow(winTitle, isHide))
+    return
+
+  ; 程序没有运行，运行程序
+  RunPrograms(target, args, workingDir, admin)
+}
+
+; 切换程序窗口
+SwitchWindows(winTitle?, hwnds?) {
+  ; 如果没有传句柄数组则获取当前窗口的
+  if not (IsSet(hwnds)) {
+    hwnds := FindWindows("A")
+  }
+
+  ; 只有一个窗口显示出来就行
+  if (hwnds.Length = 1) {
+    WinActivate(hwnds.Get(1))
+    return
+  }
+
+  ; 没有传winTitle时，则获取当前程序的名称
+  if not (IsSet(winTitle)) {
+    class := WinGetClass("A")
+    if (class == "ApplicationFrameWindow") {
+      winTitle := WinGetTitle("A") "  ahk_class ApplicationFrameWindow"
+    } else {
+      winTitle := "ahk_exe " GetProcessName()
+    }
+  }
+  winTitle := Trim(winTitle)
+
+  static winGroup, lastWinTitle := "", lastHwnd := "", gi := 0
+  if (winTitle != lastWinTitle || lastHwnd != WinExist("A")) {
+    lastWinTitle := winTitle
+    winGroup := "AutoName" gi++
+  }
+
+  ; 将所有的hwnd都添加到组里
+  for hwnd in hwnds {
+    GroupAdd(winGroup, "ahk_id" hwnd)
+  }
+
+  ; 切换
+  lastHwnd := GroupActivate(winGroup, "R")
+  return lastHwnd
+}

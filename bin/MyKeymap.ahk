@@ -33,6 +33,7 @@ CoordMode("Mouse", "Screen") ; 鼠标坐标相对于活动窗口
 SetTitleMatchMode(2) ; WinTitle匹配时窗口标题只要包含就可以
 ; 多显示器不同缩放比例导致的问题,  https://www.autohotkey.com/boards/viewtopic.php?f=14&t=13810
 DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
+SetWinDelay 0
 
 ; 自定义热键
 customHotKey := true
@@ -95,9 +96,19 @@ Tab:: {
   EnableMode(&tabMode, "tabMode", 350, () => MsgBox("TAB模式"))
 }
 
+#;:: Reload()
+
 #HotIf capslockMode
-a:: MsgBox("Cpas模式")
-s:: MsgBox("Cpas模式")
+a:: ActivateOrRun("微信 ahk_class WeChatMainWndForPC ahk_exe WeChat.exe", "shortcuts\微信.lnk")
+s:: ActivateOrRun("ahk_class MozillaWindowClass ahk_exe firefox.exe")
+d:: ActivateOrRun("", "shortcuts/WindowsTerminal.lnk", , , true)
+q:: ActivateOrRun("", "shortcuts/WindowsTerminal.lnk", , , false)
+w:: ActivateOrRun(, "ms-settings:autoplay", , , false)
+e:: ActivateOrRun("Bing 词典", "https://cn.bing.com/dict/search?q={selected_text}", "", "")
+r:: ActivateOrRun(, "D:\")
+t:: ActivateOrRun(, "fsdjk.exe")
+
+
 f:: {
   global capslockMode, capsFMode
   capslockMode := false
