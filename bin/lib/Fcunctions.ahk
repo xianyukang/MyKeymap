@@ -5,7 +5,7 @@
 TrayMenuHandler(ItemName, ItemPos, MyMenu) {
   switch ItemName {
     case "退出":
-      MyExit()
+      ExitApp
     case "暂停":
       ToggleSuspend()
     case "重启程序":
@@ -21,9 +21,9 @@ TrayMenuHandler(ItemName, ItemPos, MyMenu) {
 }
 
 ; 关闭程序
-MyExit() {
-  thisPid := DllCall("GetCurrentProcessId")
-  ProcessClose(thisPid)
+MyExit(ExitReason, ExitCode) {
+  if (capsAbbrWindowPid)
+    ProcessClose(capsAbbrWindowPid)
 }
 
 ; 暂停
@@ -56,6 +56,30 @@ OpenSettings() {
 ReloadPropram() {
   Tip("Reload")
   Run("MyKeymap.exe")
+}
+
+; 关闭所有模式
+CloseAllMode(Thrown, Mode) {
+  global capslockMode := false
+  global jMode := false
+  global semicolonMode := false
+  global threeMode := false
+  global nincMode := false
+  global commaMode := false
+  global dotModel := false
+  global additionalMode1 := false
+  global additionalMode2 := false
+  global spaceMode := false
+  global tabMode := false
+  global rButtonMode := false
+  global lButtonMode := false
+
+  global capsFMode := false
+  global capsSpaceMode := false
+  global jKModel := false
+
+  global mouseMode := false
+  global TaskSwitchMode := false
 }
 
 ; 自动关闭的提示窗口
@@ -410,4 +434,24 @@ URLEncode(Uri, encoding := "UTF-8") {
     pos++
   }
   return res
+}
+
+; 发送消息到命令提示框
+PostMessageToCpasAbbr(type, wParam := 0) {
+  temp := A_DetectHiddenWindows
+  DetectHiddenWindows(1)
+  PostMessage(type, wParam, 0, , "ahk_pid " capsAbbrWindowPid)
+  DetectHiddenWindows(temp)
+}
+
+; 关闭顶部命令提示框
+HideCaspAbbr() {
+  HIDE_COMMAND_INPUT := 0x0400 + 0x0002
+  PostMessageToCpasAbbr(HIDE_COMMAND_INPUT)
+}
+
+; 将键入的值发送到输入框
+PostCharToCaspAbbr(ih?, char?) {
+  static SEND_CHAR := 0x0102
+  PostMessageToCpasAbbr(SEND_CHAR, Ord(char))
 }

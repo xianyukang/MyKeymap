@@ -35,6 +35,8 @@ SetTitleMatchMode(2) ; WinTitle匹配时窗口标题只要包含就可以
 DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 SetWinDelay 0
 
+; 记录Caps缩写的Pid
+capsAbbrWindowPid := ""
 ; 自定义热键
 customHotKey := true
 ; 已启动的热键
@@ -66,10 +68,27 @@ jKModel := false
 mouseMode := false
 TaskSwitchMode := false
 
-; =============== 以下为读取的配置信息 =======================
+; ===============      模式定义      ========================
+OnExit(MyExit)
+; 当有异常时退出所有模式
+OnError(CloseAllMode)
+
+; ===============      添加监听      ========================
+; ===============    以下为配置信息    =======================
 configVer := ""
 
+; ===============      命令窗口      ========================
+; todo: 添加一个判断，如果选择了命令窗口则生成以下内容，否则不生成
+capsHook := InputHook(, "{Capslock}{BackSpace}{Esc}", "dd,df,se")
+capsHook.KeyOpt("{CapsLock}", "S")
+capsHook.OnChar := PostCharToCaspAbbr
+Run("bin\MyKeymap-CommandInput.exe", , , &capsAbbrWindowPid)
 
+semiHookAbbrWindow := TypoTipWindow()
+semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "dd")
+semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char)
+
+; ===============        热键        ========================
 ; 鼠标点击后退出鼠标模式
 needExitMouseMode := true
 
@@ -88,7 +107,12 @@ activatedModes.Push("Tab")
 
 CapsLock:: {
   global capslockMode
-  EnableMode(&capslockMode, "capslockMode", 350, () => MsgBox("大小写"))
+  EnableMode(&capslockMode, "capslockMode", 350, EnterCapslockAbbr)
+}
+
+`;:: {
+  global semicolonMode
+  EnableMode(&semicolonMode, "semicolonMode", 350, EnterSemicolonAbbr)
 }
 
 Tab:: {
@@ -142,3 +166,20 @@ a:: MsgBox("CapsF 模式")
 
 Esc:: exitMouseMode()
 *Space:: exitMouseMode()
+
+#HotIf
+
+ExecCapslockAbbr(command) {
+  switch command {
+    case "dd":
+      Run("shell:downloads")
+  }
+}
+
+ExecSemicolonAbbr(command) {
+  switch command {
+    case "dd":
+      Run("shell:downloads")
+  }
+}
+

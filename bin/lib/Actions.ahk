@@ -130,3 +130,60 @@ SwitchWindows(winTitle?, hwnds?) {
   lastHwnd := GroupActivate(winGroup, "R")
   return lastHwnd
 }
+
+; CapsLock缩写框
+EnterCapslockAbbr() {
+  static WM_USER := 0x0400
+  static SHOW_COMMAND_INPUT := WM_USER + 0x0001
+  static HIDE_COMMAND_INPUT := WM_USER + 0x0002
+  static CANCEL_COMMAND_INPUT := WM_USER + 0x0003
+  ; 显示命令框窗口
+  PostMessageToCpasAbbr(SHOW_COMMAND_INPUT)
+
+  endReason := StartInputHook(capsHook)
+  if (InStr(endReason, "Match")) {
+    char := SubStr(capsHook.Match, StrLen(capsHook.Match) - 1)
+    PostCharToCaspAbbr(, char)
+    SetTimer(HideCaspAbbr, -1)
+  } else {
+    if (InStr(endReason, "EndKey")) {
+      PostMessageToCpasAbbr(CANCEL_COMMAND_INPUT)
+    } else {
+      PostMessageToCpasAbbr(HIDE_COMMAND_INPUT)
+    }
+  }
+
+  if (capsHook.Match) {
+    ExecCapslockAbbr(capsHook.Match)
+  }
+}
+
+; semi缩写框
+EnterSemicolonAbbr() {
+  semiHookAbbrWindow.Show("    ")
+  endReason := StartInputHook(semiHook)
+  semiHookAbbrWindow.Hide
+
+  if (semiHook.Match)
+    ExecSemicolonAbbr(semiHook.Match)
+}
+
+; 启动InputHook，并返回EndReason
+StartInputHook(ih) {
+  ; 禁用所有热键
+  Suspend(true)
+
+  ; RAlt 映射到 LCtrl 后,  按下 RAlt 再触发 Capslock 命令会导致 LCtrl 键一直处于按下状态
+  if GetKeyState("LCtrl") {
+    Send("{LCtrl Up}")
+  }
+
+  ; 启动监听等待输入匹配后关闭监听
+  ih.Start()
+  endReason := ih.Wait()
+  ih.Stop()
+  ; 恢复所有热键
+  Suspend(false)
+
+  return endReason
+}
