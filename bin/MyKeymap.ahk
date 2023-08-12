@@ -46,6 +46,10 @@ modeState := { currentName: "", currentRef: "", locked: false }
 ; 当模拟ALT+TAB或Alt+shift+table时松手退出选择任务页面用
 altTabIsOpen := false
 
+; Windows10、Windows11的任务切换视图类名
+GroupAdd("taskSwitchGroup", "ahk_class MultitaskingViewFrame")
+GroupAdd("taskSwitchGroup", "ahk_class XamlExplorerHostIslandWindow")
+
 ; ===============      模式定义      ========================
 capslockMode := false
 jMode := false
@@ -73,7 +77,6 @@ OnExit(MyExit)
 ; 当有异常时退出所有模式
 OnError(CloseAllMode)
 
-; ===============      添加监听      ========================
 ; ===============    以下为配置信息    =======================
 configVer := ""
 
@@ -84,9 +87,9 @@ capsHook.KeyOpt("{CapsLock}", "S")
 capsHook.OnChar := PostCharToCaspAbbr
 Run("bin\MyKeymap-CommandInput.exe", , , &capsAbbrWindowPid)
 
-semiHookAbbrWindow := TypoTipWindow()
 semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "dd")
 semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char)
+semiHookAbbrWindow := TypoTipWindow()
 
 ; ===============        热键        ========================
 ; 鼠标点击后退出鼠标模式
@@ -110,11 +113,6 @@ CapsLock:: {
   EnableMode(&capslockMode, "capslockMode", 350, EnterCapslockAbbr)
 }
 
-`;:: {
-  global semicolonMode
-  EnableMode(&semicolonMode, "semicolonMode", 350, EnterSemicolonAbbr)
-}
-
 Tab:: {
   global tabMode
   EnableMode(&tabMode, "tabMode", 350, () => MsgBox("TAB模式"))
@@ -123,15 +121,14 @@ Tab:: {
 #;:: Reload()
 
 #HotIf capslockMode
-a:: ActivateOrRun("微信 ahk_class WeChatMainWndForPC ahk_exe WeChat.exe", "shortcuts\微信.lnk")
+a:: CenterAndResizeWindow(500, 500)
 s:: ActivateOrRun("ahk_class MozillaWindowClass ahk_exe firefox.exe")
 d:: ActivateOrRun("", "shortcuts/WindowsTerminal.lnk", , , true)
 q:: ActivateOrRun("", "shortcuts/WindowsTerminal.lnk", , , false)
 w:: ActivateOrRun(, "ms-settings:autoplay", , , false)
-e:: ActivateOrRun("Bing 词典", "https://cn.bing.com/dict/search?q={selected_text}", "", "")
+e:: EnableTaskSwitchMode()
 r:: ActivateOrRun(, "D:\")
 t:: ActivateOrRun(, "fsdjk.exe")
-
 
 f:: {
   global capslockMode, capsFMode
@@ -143,9 +140,18 @@ z:: LockCurrentMode()
 
 #HotIf tabMode
 a:: MsgBox("J模式")
+s:: LockCurrentMode()
 
 #HotIf capsFMode
 a:: MsgBox("CapsF 模式")
+
+#HotIf TaskSwitchMode
+e:: send("{blind}{up}")
+d:: send("{blind}{down}")
+s:: send("{blind}{left}")
+f:: send("{blind}{right}")
+x:: send("{blind}{del}")
+Space:: send("{blind}{enter}")
 
 
 #HotIf mouseMode
@@ -182,4 +188,3 @@ ExecSemicolonAbbr(command) {
       Run("shell:downloads")
   }
 }
-

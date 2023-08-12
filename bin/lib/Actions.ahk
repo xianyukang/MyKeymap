@@ -74,7 +74,7 @@ LockCurrentMode() {
 }
 
 ; 启动程序或切换到程序
-ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin := false, isHide := false) { ; 如果启动程序中或参数中有“选中的文本”, 则直接打开
+ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin := false, isHide := false) {
   ; 如果是程序或参数中带有“选中的文件” 则通过该程序打开该连接
   if (InStr(target, "{selected_text}") || InStr(args, "{selected_text}")) {
     ; 没有获取到文字直接返回
@@ -186,4 +186,73 @@ StartInputHook(ih) {
   Suspend(false)
 
   return endReason
+}
+
+; 智能的关闭窗口
+SmartCloseWindow() {
+  if IsDesktopWindowActive()
+    return
+
+  class := WinGetClass("A")
+  name := GetProcessName()
+  if (WinActive("- Microsoft Visual Studio ahk_exe devenv.exe")) {
+    Send("^{F4}")
+  } else {
+    if (class == "ApplicationFrameWindow" || name == "explorer.exe") {
+      Send("^{F4}")
+    } else {
+      PostMessage(0x112, 0xF060, , , "A")
+    }
+  }
+}
+
+; 开启任务切换模式
+EnableTaskSwitchMode() {
+  global TaskSwitchMode, modeState
+  ; 关闭所有模式
+  CloseAllMode()
+
+  TaskSwitchMode := true
+  send("^!{tab}")
+  ; 等待选择完程序
+  if (WinWaitActive("ahk_group taskSwitchGroup", , 0.5)) {
+    WinWaitNotActive("ahk_group taskSwitchGroup")
+  }
+  TaskSwitchMode := false
+
+  ; 恢复被锁定的模式
+  if (modeState.locked) {
+    %modeState.currentRef% := true
+  }
+
+}
+
+; 窗口居中并修改其大小
+CenterAndResizeWindow(width, height) {
+  if (IsDesktopWindowActive())
+    return
+
+  ; 在 mousemove 时需要 PER_MONITOR_AWARE (-3), 否则当两个显示器有不同的缩放比例时, mousemove 会有诡异的漂移
+  ; 在 winmove 时需要 UNAWARE (-1), 这样即使写死了窗口大小为 1200x800, 系统会帮你缩放到合适的大小
+  DllCall("SetThreadDpiAwarenessContext", "ptr", -1, "ptr")
+
+  WinExist("A")
+  state := WinGetMinMax()
+  if (state) 
+    WinRestore
+
+  WinGetPos &x, &y, &w, &h
+
+  ms := GetMonitorAt(x+w/2, y+h/2)
+  MonitorGetWorkArea(ms, &l, &t, &r, &b)
+  w := r-l
+  h := b-t
+
+  winW := Min(width, w)
+  winH := Min(height, h)
+  winX := l + (w -winW) / 2
+  winY := t + (h -winH) / 2
+
+  WinMove(winX, winY, winW, winH)
+  DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }

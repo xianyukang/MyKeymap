@@ -59,7 +59,9 @@ ReloadPropram() {
 }
 
 ; 关闭所有模式
-CloseAllMode(Thrown, Mode) {
+CloseAllMode(Thrown?, Mode?) {
+  customHotKey := true
+
   global capslockMode := false
   global jMode := false
   global semicolonMode := false
@@ -454,4 +456,20 @@ HideCaspAbbr() {
 PostCharToCaspAbbr(ih?, char?) {
   static SEND_CHAR := 0x0102
   PostMessageToCpasAbbr(SEND_CHAR, Ord(char))
+}
+
+; 判断当前窗口是不是桌面
+IsDesktopWindowActive() {
+  return WinActive("Program Manager ahk_class Progman") || WinActive("ahk_class WorkerW")
+}
+
+; 获取当前焦点在哪个显示器上
+GetMonitorAt(x, y, default := 1) {
+  m := SysGet(80)
+  loop m {
+    MonitorGet(A_Index, &l, &t, &r, &b)
+    if (x >= l && x <= r && y >= t && y <= b) 
+      return A_Index
+  }
+  return default
 }
