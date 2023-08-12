@@ -919,6 +919,15 @@
                 "value": "ActivateOrRun(\"\", \"https://www.baidu.com\", \"\", \"\")"
             }
         },
+        "by": {
+            "2": {
+                "comment": "Bing 搜索选中的文本",
+                "toActivate": "",
+                "toRun": "https://www.bing.com/search?q={selected_text}",
+                "type": "启动程序或激活窗口",
+                "value": "ActivateOrRun(\"\", \"https://www.bing.com/search?q={selected_text}\", \"\", \"\")"
+            }
+        },
         "dd": {
             "2": {
                 "label": "打开「 下载 」文件夹",
@@ -1083,12 +1092,23 @@
                 "type": "启动程序或激活窗口",
                 "value": "ActivateOrRun(\"网易云音乐\", \"shortcuts\\网易云音乐.lnk\", \"\", \"\")"
             }
+        },
+        "wt": {
+            "2": {
+                "cmdArgs": "-d \"{selected_text}\"",
+                "comment": "让 Windows Terminal 在选中的文件夹打开",
+                "toActivate": "",
+                "toRun": "wt.exe",
+                "type": "启动程序或激活窗口",
+                "value": "ActivateOrRun(\"\", \"wt.exe\", \"-d \"\"{selected_text}\"\"\", \"\")"
+            }
         }
     },
     "CapslockAbbrKeys": [
         "acmd",
         "bb",
         "bd ",
+        "by",
         "dd",
         "dm",
         "ex",
@@ -1108,7 +1128,8 @@
         "sp",
         "st",
         "tm",
-        "we"
+        "we",
+        "wt"
     ],
     "CapslockF": {
         "'": {
@@ -1346,8 +1367,11 @@
         },
         "N": {
             "2": {
-                "type": "什么也不做",
-                "value": ""
+                "comment": "GoLand",
+                "toActivate": "ahk_exe goland64.exe",
+                "toRun": "%A_Programs%\\JetBrains Toolbox\\GoLand.lnk",
+                "type": "启动程序或激活窗口",
+                "value": "ActivateOrRun(\"ahk_exe goland64.exe\", \"\" A_Programs \"\\JetBrains Toolbox\\GoLand.lnk\", \"\", \"\")"
             }
         },
         "O": {
@@ -4771,15 +4795,6 @@
                 "value": "action_align_text()"
             }
         },
-        "fs": {
-            "2": {
-                "comment": "输入中文顿号 、",
-                "keysToSend": "{text}、",
-                "prefix": "*",
-                "type": "输入文本或按键",
-                "value": "    send, {blind}{text}、"
-            }
-        },
         "gg": {
             "2": {
                 "comment": "一键 git 提交",
@@ -4923,7 +4938,6 @@
         "dh",
         "dk",
         "dq",
-        "fs",
         "gg",
         "gre",
         "gt",

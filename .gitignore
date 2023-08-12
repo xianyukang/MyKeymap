@@ -12,4 +12,4 @@ bin/settings.exe
 *.7z
 todo.md
 .idea
-MyKeymap-*
+MyKeymap-*/

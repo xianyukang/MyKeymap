@@ -92,11 +92,11 @@ DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 
 global typoTip := new TypoTipWindow()
 
-semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", ",,,.,/,blu,dh,dk,dq,fs,gg,gre,gt,jt,kg,pin,pur,red,sj,sk,ss,ver,xk,year,zh,zk")
+semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", ",,,.,/,blu,dh,dk,dq,gg,gre,gt,jt,kg,pin,pur,red,sj,sk,ss,ver,xk,year,zh,zk")
 semiHook.KeyOpt("{CapsLock}", "S")
 semiHook.OnChar := Func("onSemiHookChar")
 semiHook.OnEnd := Func("onSemiHookEnd")
-capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "acmd,bb,bd ,dd,dm,ex,gg,gj,help,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,st,tm,we")
+capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "acmd,bb,bd ,by,dd,dm,ex,gg,gj,help,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,st,tm,we,wt")
 capsHook.KeyOpt("{CapsLock}", "S")
 capsHook.OnChar := Func("onCapsHookChar")
 capsHook.OnEnd := Func("onCapsHookEnd")
@@ -487,6 +487,7 @@ P::ActivateOrRun("ahk_exe POWERPNT.EXE", "C:\ProgramData\Microsoft\Windows\Start
 I::ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe", "", "")
 A::ActivateOrRun("ahk_exe WindowsTerminal.exe", "wt.exe", "", "")
 W::ActivateOrRun("ahk_exe chrome.exe", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Google Chrome.lnk", "", "")
+N::ActivateOrRun("ahk_exe goland64.exe", "" A_Programs "\JetBrains Toolbox\GoLand.lnk", "", "")
 D::ActivateOrRun("ahk_exe msedge.exe", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk", "", "")
 J::ActivateOrRun("detect_hidden_window: ahk_exe idea64.exe", "" A_Programs "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk", "", "")
 M::ActivateOrRun("if_exist_then_send: TIM.exe, ^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk", "", "")
@@ -548,8 +549,6 @@ execSemicolonAbbr(typo) {
                 send, {blind}[]{left}
     case "zh":
                 send, {blind}{text} site:zhihu.com
-    case "fs":
-                send, {blind}{text}、
     case "gt":
                 send, {blind}{text}🐶
     case "dh":
@@ -607,8 +606,12 @@ execCapslockAbbr(typo) {
             ActivateOrRun("", "https://google.com/search?q={selected_text}", "", "")
     case "bd ":
             ActivateOrRun("", "https://www.baidu.com", "", "")
+    case "by":
+            ActivateOrRun("", "https://www.bing.com/search?q={selected_text}", "", "")
     case "ly":
             ActivateOrRun("", "ms-settings:bluetooth", "", "")
+    case "wt":
+            ActivateOrRun("", "wt.exe", "-d ""{selected_text}""", "")
     case "bb":
             ActivateOrRun("Bing 词典", "C:\Program Files\Google\Chrome\Application\chrome.exe", "--app=https://cn.bing.com/dict/search?q={selected_text}", "")
     case "st":
