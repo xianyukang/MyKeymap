@@ -459,7 +459,7 @@ PostCharToCaspAbbr(ih?, char?) {
 }
 
 ; 判断当前窗口是不是桌面
-IsDesktopWindowActive() {
+IsDesktop() {
   return WinActive("Program Manager ahk_class Progman") || WinActive("ahk_class WorkerW")
 }
 
@@ -468,8 +468,13 @@ GetMonitorAt(x, y, default := 1) {
   m := SysGet(80)
   loop m {
     MonitorGet(A_Index, &l, &t, &r, &b)
-    if (x >= l && x <= r && y >= t && y <= b) 
+    if (x >= l && x <= r && y >= t && y <= b)
       return A_Index
   }
   return default
+}
+
+; 当前窗口是最大化还是最小化
+WindowMaxOrMin(winTitle := "A") {
+  return WinGetMinMax(winTitle)
 }

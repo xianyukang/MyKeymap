@@ -122,9 +122,9 @@ Tab:: {
 
 #HotIf capslockMode
 a:: CenterAndResizeWindow(500, 500)
-s:: ActivateOrRun("ahk_class MozillaWindowClass ahk_exe firefox.exe")
-d:: ActivateOrRun("", "shortcuts/WindowsTerminal.lnk", , , true)
-q:: ActivateOrRun("", "shortcuts/WindowsTerminal.lnk", , , false)
+s:: MouseMoveActiveWindowPos()
+d:: WindowMaximize()
+q:: WindowMinimize()
 w:: ActivateOrRun(, "ms-settings:autoplay", , , false)
 e:: EnableTaskSwitchMode()
 r:: ActivateOrRun(, "D:\")

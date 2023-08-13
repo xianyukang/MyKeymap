@@ -50,7 +50,7 @@ MouseToActiveWindowCenter() {
 ; 移动活动窗口位置
 MouseMoveActiveWindowPos() {
   hwnd := WinExist("A")
-  if (WinGetMinMax("A"))
+  if (WindowMaxOrMin())
     WinRestore("A")
 
   PostMessage("0x0112", "0xF010", 0)
@@ -190,7 +190,7 @@ StartInputHook(ih) {
 
 ; 智能的关闭窗口
 SmartCloseWindow() {
-  if IsDesktopWindowActive()
+  if IsDesktop()
     return
 
   class := WinGetClass("A")
@@ -229,7 +229,7 @@ EnableTaskSwitchMode() {
 
 ; 窗口居中并修改其大小
 CenterAndResizeWindow(width, height) {
-  if (IsDesktopWindowActive())
+  if (IsDesktop())
     return
 
   ; 在 mousemove 时需要 PER_MONITOR_AWARE (-3), 否则当两个显示器有不同的缩放比例时, mousemove 会有诡异的漂移
@@ -237,22 +237,41 @@ CenterAndResizeWindow(width, height) {
   DllCall("SetThreadDpiAwarenessContext", "ptr", -1, "ptr")
 
   WinExist("A")
-  state := WinGetMinMax()
-  if (state) 
+  if (WindowMaxOrMin())
     WinRestore
 
   WinGetPos &x, &y, &w, &h
 
-  ms := GetMonitorAt(x+w/2, y+h/2)
+  ms := GetMonitorAt(x + w / 2, y + h / 2)
   MonitorGetWorkArea(ms, &l, &t, &r, &b)
-  w := r-l
-  h := b-t
+  w := r - l
+  h := b - t
 
   winW := Min(width, w)
   winH := Min(height, h)
-  winX := l + (w -winW) / 2
-  winY := t + (h -winH) / 2
+  winX := l + (w - winW) / 2
+  winY := t + (h - winH) / 2
 
   WinMove(winX, winY, winW, winH)
   DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
+}
+
+; 窗口最大化
+WindowMaximize() {
+  if IsDesktop()
+    return
+
+  if WindowMaxOrMin() {
+    WinRestore("A")
+  } else {
+    WinMaximize("A")
+  }
+}
+
+; 窗口最小化
+WindowMinimize() {
+  if (IsDesktop() || WinGetProcessName("A") == "Rainmeter.exe")
+    return
+
+  WinMinimize("A")
 }
