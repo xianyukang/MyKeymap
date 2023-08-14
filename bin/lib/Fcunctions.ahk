@@ -499,12 +499,15 @@ FindHiddenWindows(winTitle) {
  */
 FindWindows(winTitle, predicate?) {
   temps := WinGetList(winTitle)
-  hwnds := []
+  ; 不需要做任何匹配直接返回
+  if not (IsSet(predicate)) {
+    return temps
+  }
 
-  for hwnd in temps {
-    hwnd := temps.Get(A_Index)
+  hwnds := []
+  for i, hwnd in temps {
     ; 当有谓词条件且满足时添加这个hwnd
-    if (IsSet(predicate) && (predicate(hwnd))) {
+    if predicate(hwnd) {
       hwnds.Push(hwnd)
     }
   }
@@ -741,4 +744,16 @@ HtmlEncode(text) {
   text := strReplace(text, "" "", "&quot;")
   text := strReplace(text, " ", "&nbsp;")
   return text
+}
+
+/**
+ * Map根据值找到键
+ * @param m Map
+ * @param value 值
+ */
+MapFindKey(m, targetValue) {
+  for key, value in m {
+    if (value == targetValue)
+      return key
+  }
 }

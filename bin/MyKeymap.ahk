@@ -45,6 +45,8 @@ activatedModes := []
 modeState := { currentName: "", currentRef: "", locked: false }
 ; 当模拟ALT+TAB或Alt+shift+table时松手退出选择任务页面用
 altTabIsOpen := false
+; 含有绑定key 和ahk_id 的对应关系
+bindWindowMap := Map()
 
 ; Windows10、Windows11的任务切换视图类名
 GroupAdd("taskSwitchGroup", "ahk_class MultitaskingViewFrame")
@@ -125,10 +127,10 @@ Tab:: {
 #;:: Reload()
 
 #HotIf capslockMode
-a:: InsertSpaceBetweenZHAndEn()
-s:: changeTextStyle("#d82c2c")
-d:: HoldDownLShiftKey()
-q:: WindowMinimize()
+a:: BindOrActivate("Capslock A")
+s:: BindOrActivate("Capslock S")
+d:: UnBindWindow()
+q:: CloseSameClassWindows()
 w:: ActivateOrRun(, "ms-settings:autoplay", , , false)
 e:: EnableTaskSwitchMode()
 r:: ActivateOrRun(, "D:\")

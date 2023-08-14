@@ -410,3 +410,57 @@ HoldDownRShiftKey() {
   keywait(key)
   send("{RShift up}")
 }
+
+/**
+ * 绑定当前窗口到当前键上
+ * @param key 当前键
+ * @returns {void} 
+ */
+BindOrActivate(key) {
+  ; 判断当前Map中有没有这个Key的对应关系
+  id := bindWindowMap.Get(key, 0)
+  ; 没有绑定任何窗口将于绑定一下
+  if id {
+    ; 有绑定直接显示出来
+    WinActivate("ahk_id " id)
+    return
+  }
+
+  id := WinGetID("A")
+  ; 防止重复绑定
+  mkey := MapFindKey(bindWindowMap, id)
+  if mkey {
+    Tip("当前窗口已绑定到 " mkey " 键上，无需重复绑定")
+    return
+  }
+
+  bindWindowMap.Set(key, id)
+  Tip("当前窗口已绑定到 " key " 键上")
+}
+
+/**
+ * 解绑定当前窗口
+ */
+UnBindWindow() {
+  id := WinGetID("A")
+  mkey := MapFindKey(bindWindowMap, id)
+  if mkey {
+    bindWindowMap.Delete(mkey)
+    Tip("当前窗口已被解除绑定")
+  } else {
+    Tip("当前窗口未被绑定")
+  }
+}
+
+/**
+ * 关闭同应用的所有窗口
+ */
+CloseSameClassWindows() {
+  if IsDesktop()
+    return 
+  
+  exe := WinGetProcessName("A")
+  for i, hwnd in FindWindows("ahk_exe " exe) {
+    WinClose(hwnd)
+  }
+}
