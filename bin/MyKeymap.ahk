@@ -127,10 +127,9 @@ Tab:: {
 #;:: Reload()
 
 #HotIf capslockMode
-a:: toggleCapslock()
+a:: ProcessExistSendKeyOrRun("QQ.exe", "^+!{End}", "shortcuts\QQ.lnk")
 s:: BindOrActivate("Capslock S")
 d:: UnBindWindow()
-q:: CloseSameClassWindows()
 w:: ActivateOrRun(, "ms-settings:autoplay", , , false)
 e:: EnableTaskSwitchMode()
 r:: ActivateOrRun(, "D:\")

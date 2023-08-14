@@ -377,8 +377,7 @@ changeTextStyle(color := "#000000", fontFamily := "Iosevka") {
     text := FormatHtmlStyle(text, color, fontFamily)
   }
 
-  A_Clipboard := text
-  Send("{LShift down}{Insert down}{Insert up}{LShift up}")
+  PasteToPrograms(text)
 }
 
 /**
@@ -386,9 +385,8 @@ changeTextStyle(color := "#000000", fontFamily := "Iosevka") {
  */
 InsertSpaceBetweenZHAndEn() {
   text := GetSelectedText()
-  result := RegExReplace(text, "([\x{4e00}-\x{9fa5}])(?=[a-zA-Z])|([a-zA-Z])(?=[\x{4e00}-\x{9fa5}])", "$0 ")
-  A_Clipboard := result
-  Send("{LShift down}{Insert down}{Insert up}{LShift up}")
+  text := RegExReplace(text, "([\x{4e00}-\x{9fa5}])(?=[a-zA-Z])|([a-zA-Z])(?=[\x{4e00}-\x{9fa5}])", "$0 ")
+  PasteToPrograms(text)
 }
 
 /**
@@ -495,7 +493,7 @@ SlideToReboot() {
  */
 toggleCapslock() {
   if GetKeyState("Alt", "P")
-      send("{blind}{LCtrl}{LAlt Up}")
+    send("{blind}{LCtrl}{LAlt Up}")
   send("{blind}{CapsLock}")
 }
 
@@ -507,5 +505,64 @@ openHelpHtml() {
     Run("bin\site\help.html")
   } else {
     MsgBox("帮助文件未生成，需要打开设置点一下保存")
+  }
+}
+
+/**
+ * 设置窗口位置
+ * @param x 窗口左上角X轴
+ * @param y 窗口左上角Y轴
+ * @param width 窗口宽度
+ *   default: 不做修改
+ * @param height 窗口高度
+ *   default: 不做修改
+ */
+SetWindowPositionAndSize(x, y, width, height) {
+  if IsDesktop()
+    return
+
+  hwnd := WinExist("A")
+  statie := WinGetMinMax()
+  if statie
+    WinRestore
+
+  if (width == "default" || height == "default") {
+    offset := GetWindowPositionOffset(hwnd)
+    width := width == "default" ? offset.w : width
+    height := height == "default" ? offset.h : height
+  }
+
+  WinMove(x, y, width, height)
+}
+
+/**
+ * 一次打开多个链接或程序
+ * @param urls 链接或程序 
+ */
+LaunchMultiple(urls*) {
+    for index,url in urls {
+      ShellRun(url)
+    }
+}
+
+/**
+ * 进程存在时用热键激活、否则启动程序
+ */
+ProcessExistSendKeyOrRun(process, key, target) {
+  if (FindHiddenWindows("ahk_exe " process).Length) {
+    Send(key)
+  } else {
+    RunPrograms(target)
+  }
+}
+
+/**
+ * 包裹选中的文本
+ * @param Format 格式
+ */
+WrapSelectedText(Format) {
+  text := GetSelectedText()
+  if text {
+    PasteToPrograms(StrReplace(format, "{text}", text))
   }
 }

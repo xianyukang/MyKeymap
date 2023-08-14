@@ -470,17 +470,13 @@ FindHiddenWindows(winTitle) {
   WS_MINIMIZE := 0x20000000
 
   ; 窗口过滤条件
-  ; 标题不为空、窗口大小大于400包含最小化按钮或被最小化了
+  ; 标题不为空、包含最小化按钮
   Predicate(hwnd) {
     if (WinGetTitle(hwnd) = "")
       return false
 
     style := WinGetStyle(hwnd)
-    if not (style & WS_MINIMIZEBOX)
-      return false
-
-    WinGetPos(&x, &y, &windth, &height, hwnd)
-    return (height > 400 && windth > 400) || (style & WS_MINIMIZE)
+    return style & WS_MINIMIZEBOX
   }
 
   ; 开启可以查找到隐藏窗口
@@ -756,4 +752,45 @@ MapFindKey(m, targetValue) {
     if (value == targetValue)
       return key
   }
+}
+
+/**
+ * 获取活动窗口的位置和宽高
+ * @param hwnd 窗口句柄
+ */
+GetWindowPositionOffset(hwnd) {
+  rect := Buffer(16, 0)
+  er := DllCall("dwmapi\DwmGetWindowAttribute"
+    , "UPtr", hwnd  ; HWND  hwnd
+    , "UInt", 9     ; DWORD dwAttribute (DWMWA_EXTENDED_FRAME_BOUNDS)
+    , "UPtr", rect.Ptr ; PVOID pvAttribute
+    , "UInt", rect.size  ; DWORD cbAttribute
+    , "UInt")       ; HRESULT
+  If er
+    DllCall("GetWindowRect", "UPtr", hwnd, "UPtr", rect.Ptr, "UInt")
+
+  r := Object()
+  ; 窗口左到屏幕左边
+  r.x1 := NumGet(rect, 0, "Int")
+  ; 窗口上到屏幕上边
+  r.y1 := NumGet(rect, 4, "Int")
+  ; 窗口左到屏幕右边
+  r.x2 := NumGet(rect, 8, "Int")
+  ; 窗口上到屏幕下边
+  r.y2 := NumGet(rect, 12, "Int")
+  ; 窗口宽度
+  r.w := Abs(max(r.x1, r.x2) - min(r.x1, r.x2))
+  ; 窗口长度
+  r.h := Abs(max(r.y1, r.y2) - min(r.y1, r.y2))
+
+  return r
+}
+
+/**
+ * 将文本粘贴到当前程序中
+ * @param text 文本
+ */
+PasteToPrograms(text) {
+  A_Clipboard := text
+  Send("{LShift down}{Insert down}{Insert up}{LShift up}")
 }
