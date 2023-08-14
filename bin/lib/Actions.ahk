@@ -1,53 +1,74 @@
-; 慢速移动鼠标
+/**
+ *慢速移动鼠标 
+ * @param key 按下的键
+ * @param directionX 向左-1 向右1
+ * @param directionY 向上-1 向下1
+ */
 SlowMoveMouse(key, directionX, directionY) {
   MoveMouse(key, directionX, directionY, slowMoveSingle, slowMoveRepeat, mousemovePrompt ?? false)
 }
 
-; 快速移动鼠标并进入移动鼠标模式
+/**
+ * 快速移动鼠标并进入移动鼠标模式
+ * @param key 按下的键
+ * @param directionX 向左-1 向右1
+ * @param directionY 向上-1 向下1
+ */
 FastMoveMouse(key, directionX, directionY) {
   global mouseMode := true
   MoveMouse(key, directionX, directionY, fastMoveSingle, fastMoveRepeat)
 }
 
-; 左键按下
+/**
+ * 左键按下
+ */
 LbuttonDown() => MouseClickAndExit("{LButton Down}")
 
-; 左键点击
+/**
+ * 左键点击
+ */
 LbuttonClick() => MouseClickAndExit("{Lbutton}")
 
-; 左键双击
+/**
+ * 左键双击
+ */
 LbuttonDoubleClick() => MouseClickAndExit("{Lbutton 2}")
 
-; 左键三击
+/**
+ * 左键三击
+ */
 LbuttonTrippleClick() => MouseClickAndExit("{Lbutton 3}")
 
-; 右键点击
+/**
+ * 右键点击
+ */
 RbuttonClick() => MouseClickAndExit("{Rbutton}")
 
-; 滚轮滑动
+/**
+ * 滚轮滑动
+ * @param key 按下的Key
+ * @param direction 方向
+ *   1:上
+ *   2:下
+ *   3:左
+ *   4:右
+ */
 ScrollWheel(key, direction) {
   ScrollWheelOnce(direction, scrollOnceLineCount)
-
   WhileKeyWait(key, scrollDelay1, scrollDelay2, () => ScrollWheelOnce(direction, scrollOnceLineCount))
 }
 
-; 滚轮滑动一次
-ScrollWheelOnce(direction, scrollCount := 1) {
-  switch (direction) {
-    case 1: MouseClick("WheelUp", , , scrollCount)
-    case 2: MouseClick("WheelDown", , , scrollCount)
-    case 3: MouseClick("WheelLeft", , , scrollCount)
-    case 4: MouseClick("WheelRight", , , scrollCount)
-  }
-}
-
-; 移动鼠标到活动窗口中心
+/**
+ * 移动鼠标到活动窗口中心
+ */
 MouseToActiveWindowCenter() {
   WinGetPos(&X, &Y, &W, &H, "A")
   MouseMove(x + w / 2, y + h / 2)
 }
 
-; 移动活动窗口位置
+/**
+ * 移动活动窗口位置
+ */
 MouseMoveActiveWindowPos() {
   hwnd := WinExist("A")
   if (WindowMaxOrMin())
@@ -58,7 +79,9 @@ MouseMoveActiveWindowPos() {
   SendInput("{Right}")
 }
 
-; 锁定当前模式
+/**
+ * 锁定当前模式
+ */
 LockCurrentMode() {
   global modeState, mouseMode
 
@@ -73,7 +96,16 @@ LockCurrentMode() {
   }
 }
 
-; 启动程序或切换到程序
+/**
+ * 启动程序或切换到程序
+ * @param {string} winTitle AHK中的WinTitle
+ * @param {string} target 程序的路径
+ * @param {string} args 参数
+ * @param {string} workingDir 工作文件夹
+ * @param {bool} admin 是否为管理员启动
+ * @param {bool} isHide 窗口是否为隐藏窗口
+ * @returns {void} 
+ */
 ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin := false, isHide := false) {
   ; 如果是程序或参数中带有“选中的文件” 则通过该程序打开该连接
   if (InStr(target, "{selected_text}") || InStr(args, "{selected_text}")) {
@@ -91,7 +123,12 @@ ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin 
   RunPrograms(target, args, workingDir, admin)
 }
 
-; 切换程序窗口
+/**
+ * 切换程序窗口
+ * @param winTitle AHK中的WinTitle
+ * @param hwnds 活动窗口的句柄数组
+ * @returns {void|number} 
+ */
 SwitchWindows(winTitle?, hwnds?) {
   ; 如果没有传句柄数组则获取当前窗口的
   if not (IsSet(hwnds)) {
@@ -131,7 +168,9 @@ SwitchWindows(winTitle?, hwnds?) {
   return lastHwnd
 }
 
-; CapsLock缩写框
+/**
+ * CapsLock缩写框
+ */
 EnterCapslockAbbr() {
   static WM_USER := 0x0400
   static SHOW_COMMAND_INPUT := WM_USER + 0x0001
@@ -158,7 +197,9 @@ EnterCapslockAbbr() {
   }
 }
 
-; semi缩写框
+/**
+ * semi缩写框
+ */
 EnterSemicolonAbbr() {
   semiHookAbbrWindow.Show("    ")
   endReason := StartInputHook(semiHook)
@@ -168,27 +209,9 @@ EnterSemicolonAbbr() {
     ExecSemicolonAbbr(semiHook.Match)
 }
 
-; 启动InputHook，并返回EndReason
-StartInputHook(ih) {
-  ; 禁用所有热键
-  Suspend(true)
-
-  ; RAlt 映射到 LCtrl 后,  按下 RAlt 再触发 Capslock 命令会导致 LCtrl 键一直处于按下状态
-  if GetKeyState("LCtrl") {
-    Send("{LCtrl Up}")
-  }
-
-  ; 启动监听等待输入匹配后关闭监听
-  ih.Start()
-  endReason := ih.Wait()
-  ih.Stop()
-  ; 恢复所有热键
-  Suspend(false)
-
-  return endReason
-}
-
-; 智能的关闭窗口
+/**
+ * 智能的关闭窗口
+ */
 SmartCloseWindow() {
   if IsDesktop()
     return
@@ -206,7 +229,9 @@ SmartCloseWindow() {
   }
 }
 
-; 开启任务切换模式
+/**
+ * 开启任务切换模式
+ */
 EnableTaskSwitchMode() {
   global TaskSwitchMode, modeState
   ; 关闭所有模式
@@ -227,7 +252,12 @@ EnableTaskSwitchMode() {
 
 }
 
-; 窗口居中并修改其大小
+/**
+ * 窗口居中并修改其大小
+ * @param width 窗口宽度
+ * @param height 窗口高度
+ * @returns {void} 
+ */
 CenterAndResizeWindow(width, height) {
   if (IsDesktop())
     return
@@ -240,7 +270,7 @@ CenterAndResizeWindow(width, height) {
   if (WindowMaxOrMin())
     WinRestore
 
-  WinGetPos &x, &y, &w, &h
+  WinGetPos(&x, &y, &w, &h)
 
   ms := GetMonitorAt(x + w / 2, y + h / 2)
   MonitorGetWorkArea(ms, &l, &t, &r, &b)
@@ -256,7 +286,9 @@ CenterAndResizeWindow(width, height) {
   DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }
 
-; 窗口最大化
+/**
+ * 窗口最大化
+ */
 WindowMaximize() {
   if IsDesktop()
     return
@@ -268,7 +300,9 @@ WindowMaximize() {
   }
 }
 
-; 窗口最小化
+/**
+ * 窗口最小化
+ */
 WindowMinimize() {
   if (IsDesktop() || WinGetProcessName("A") == "Rainmeter.exe")
     return
@@ -276,18 +310,24 @@ WindowMinimize() {
   WinMinimize("A")
 }
 
-; 窗口置顶
+/**
+ * 窗口置顶
+ */
 WindowTop() {
   WinSetAlwaysOnTop(!(WinGetExStyle("A") & 0x8), "A")
 }
 
-; 模拟 Alt+Tab 热键
+/**
+ * 模拟 Alt+Tab 热键
+ */
 SystemAltTab() {
   global altTabIsOpen := true
   send("^!{Tab}")
 }
 
-; 模拟 Shift+Alt+Tab 热键
+/**
+ * 模拟 Shift+Alt+Tab 热键
+ */
 SystemShiftAltTab() {
   global altTabIsOpen := true
   send("^+!{Tab}")

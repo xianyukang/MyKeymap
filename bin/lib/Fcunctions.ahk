@@ -1,7 +1,12 @@
 #Include TypoTipWindow.ahk
 #Include TempFocusGui.ahk
 
-; 托盘菜单被点击
+/**
+ * 托盘菜单被点击
+ * @param ItemName 
+ * @param ItemPos 
+ * @param MyMenu 
+ */
 TrayMenuHandler(ItemName, ItemPos, MyMenu) {
   switch ItemName {
     case "退出":
@@ -20,13 +25,19 @@ TrayMenuHandler(ItemName, ItemPos, MyMenu) {
   }
 }
 
-; 关闭程序
+/**
+ * 退出程序
+ * @param ExitReason 退出原因
+ * @param ExitCode 传递给 Exit 或 ExitApp 的退出代码.
+ */
 MyExit(ExitReason, ExitCode) {
   if (capsAbbrWindowPid)
     ProcessClose(capsAbbrWindowPid)
 }
 
-; 暂停
+/**
+ * 暂停
+ */
 ToggleSuspend() {
   Suspend(!A_IsSuspended)
   if (A_IsSuspended) {
@@ -40,7 +51,9 @@ ToggleSuspend() {
   }
 }
 
-; 打开设置
+/**
+ * 打开设置
+ */
 OpenSettings() {
   if (!WinExist("\bin\settings.exe"))
     Run("./bin/settings.exe ./bin")
@@ -52,13 +65,19 @@ OpenSettings() {
   }
 }
 
-; 重启程序
+/**
+ * 重启程序
+ */
 ReloadPropram() {
   Tip("Reload")
   Run("MyKeymap.exe")
 }
 
-; 关闭所有模式
+/**
+ * 关闭所有模式
+ * @param Thrown 抛出的值, 通常为 Error 对象
+ * @param Mode 错误的模式: Return, Exit 或 ExitApp
+ */
 CloseAllMode(Thrown?, Mode?) {
   global customHotKey := true
 
@@ -87,18 +106,32 @@ CloseAllMode(Thrown?, Mode?) {
   modeState.locked := false
 }
 
-; 自动关闭的提示窗口
+/**
+ * 自动关闭的提示窗口 
+ * @param message 要提示的文本
+ * @param {number} time 超时后关闭
+ */
 Tip(message, time := -1500) {
   ToolTip(message)
   SetTimer(() => ToolTip(), time)
 }
 
-; 获取鼠标移动时的提示窗口
+/**
+ * 获取鼠标移动时的提示窗口
+ */
 GetMouseMovePromptWindow() {
   return TypoTipWindow("🖱", 16, 4, 0)
 }
 
-; 移动鼠标
+/**
+ * 移动鼠标
+ * @param key 按下的值
+ * @param directionX 向左-1 向右1
+ * @param directionY 向上-1 向下1
+ * @param moveSingle 首次移动的步长
+ * @param moveRepeat 移动的步长
+ * @param {number} showTip 是否提示当前为鼠标模式
+ */
 MoveMouse(key, directionX, directionY, moveSingle, moveRepeat, showTip := false) {
   oneX := directionX * moveSingle
   oneY := directionY * moveSingle
@@ -118,7 +151,13 @@ MoveMouse(key, directionX, directionY, moveSingle, moveRepeat, showTip := false)
   WhileKeyWait(key, moveDelay1, moveDelay2, f)
 }
 
-; 当按键等待时执行的操作
+/**
+ * 当按键等待时执行的操作
+ * @param key 按下的值
+ * @param delay1 首次等待的时间
+ * @param delay2 等待的时间
+ * @param func 当超过等待时间执行的方法
+ */
 WhileKeyWait(key, delay1, delay2, func) {
   i := KeyWait(key, delay1)
   while (!i) {
@@ -128,7 +167,9 @@ WhileKeyWait(key, delay1, delay2, func) {
   }
 }
 
-; 退出鼠标移动模式
+/**
+ * 退出鼠标移动模式
+ */
 ExitMouseMode() {
   global mouseMode := false
 
@@ -138,15 +179,39 @@ ExitMouseMode() {
     mousemovePrompt.show
 }
 
-; 鼠标点击后推出
+/**
+ * 模拟鼠标点击后推出
+ * @param key 模拟鼠标的键
+ */
 MouseClickAndExit(key) {
   Send("{blind}" key)
   if (needExitMouseMode)
     ExitMouseMode()
 }
 
-; 冻结非指定的模式
-FreezeOtherMode(mode) {
+/**
+ * 滚轮滑动一次
+ * @param direction 方向
+ *   1:上
+ *   2:下
+ *   3:左
+ *   4:右
+ * @param {number} scrollCount 滑动次数
+ */
+ScrollWheelOnce(direction, scrollCount := 1) {
+  switch (direction) {
+    case 1: MouseClick("WheelUp", , , scrollCount)
+    case 2: MouseClick("WheelDown", , , scrollCount)
+    case 3: MouseClick("WheelLeft", , , scrollCount)
+    case 4: MouseClick("WheelRight", , , scrollCount)
+  }
+}
+
+/**
+ * 冻结非指定的模式
+ * @param modeName 模式名称
+ */
+FreezeOtherMode(modeName) {
   global activatedModes, customHotKey, altTabIsOpen, modeState
   customHotKey := true
   altTabIsOpen := false
@@ -157,13 +222,18 @@ FreezeOtherMode(mode) {
   }
 
   for index, value in activatedModes {
-    if (value != mode) {
+    if (value != modeName) {
       Hotkey(value, "Off")
     }
   }
 }
 
-; 重置当前运行的热键
+/**
+ * 重置当前运行的热键
+ * @param modeName 模式的名称
+ * @param modeRef 模式变量的引用
+ * @returns {void} 
+ */
 ResetCurrentMode(modeName, &modeRef) {
   global modeState
   if (modeState.locked)
@@ -174,8 +244,11 @@ ResetCurrentMode(modeName, &modeRef) {
   modeState.currentRef := &modeRef
 }
 
-; 优先解冻被锁定模式，如果没有被锁定模式则解冻全部
-UnfreezeMode(mode) {
+/**
+ * 解冻非指定的模式
+ * @param modeName 模式名称
+ */
+UnfreezeMode(modeName) {
   global activatedModes, customHotKey, altTabIsOpen, modeState
   customHotKey := false
 
@@ -190,24 +263,31 @@ UnfreezeMode(mode) {
   }
 
   for index, value in activatedModes {
-    if (value != mode)
+    if (value != modeName)
       Hotkey(value, "On")
   }
 
 }
 
-; 启动指定Mode
-EnableMode(&mode, modeName, mil?, func?, needFreezeOtherMode := true) {
+/**
+ * 启动指定Mode
+ * @param modeRef 模式变量的引用
+ * @param modeName 模式的名称
+ * @param mil 超时时间
+ * @param func 非超时执行的操作
+ * @param {number} needFreezeOtherMode 是否需要解冻其他模式，二级模式不需要解冻，比如CaspF模式、CapsSpace模式等。
+ */
+EnableMode(&modeRef, modeName, mil?, func?, needFreezeOtherMode := true) {
   statrtTick := A_TickCount
   thisHotKey := A_ThisHotkey
-  mode := true
+  modeRef := true
   ; Caps F、Caps 空格之类的二级模式是不用触发冻结的
   if (needFreezeOtherMode) {
     FreezeOtherMode(ThisHotkey)
-    ResetCurrentMode(modeName, &mode)
+    ResetCurrentMode(modeName, &modeRef)
   }
   KeyWait(thisHotKey)
-  mode := false
+  modeRef := false
 
   if (IsSet(mil))
     if ((A_PriorKey != "" && A_PriorKey = thisHotkey) && A_TickCount - statrtTick < mil)
@@ -220,9 +300,12 @@ EnableMode(&mode, modeName, mil?, func?, needFreezeOtherMode := true) {
   }
 }
 
-; 获取程序名称
-; 自带的WinGetProcessName无法获取到uwp应用的名称
-; https://www.autohotkey.com/boards/viewtopic.php?style=7&t=112906
+/**
+ * 获取当前程序名称
+ * 自带的WinGetProcessName无法获取到uwp应用的名称
+ * 来源：https://www.autohotkey.com/boards/viewtopic.php?style=7&t=112906
+ * @returns {string} 
+ */
 GetProcessName() {
   fn := (winTitle) => (WinGetProcessName(winTitle) == 'ApplicationFrameHost.exe')
 
@@ -236,18 +319,22 @@ GetProcessName() {
   return WinGetProcessName(winTitle)
 }
 
-; 从环境中补全程序的绝对路径
-; https://autohotkey.com/board/topic/20807-fileexist-in-path-environment/
-CompleteProgramPath(fileName) {
+/**
+ * 从环境中补全程序的绝对路径
+ * 来源: https://autohotkey.com/board/topic/20807-fileexist-in-path-environment/
+ * @param target 程序路径 
+ * @returns {string|any} 
+ */
+CompleteProgramPath(target) {
 
   ; 工作目录下的程序
-  PathName := A_WorkingDir "\" fileName
+  PathName := A_WorkingDir "\" target
   if FileExist(PathName)
     return PathName
 
   ; 本身便是绝对路径
-  if FileExist(fileName)
-    return fileName
+  if FileExist(target)
+    return target
 
   ; 从环境变量 PATH 中获取
   DosPath := EnvGet("PATH")
@@ -255,26 +342,38 @@ CompleteProgramPath(fileName) {
     if (A_LoopField)
       continue
 
-    if FileExist(A_LoopField "\" fileName)
-      return A_LoopField "\" fileName
+    if FileExist(A_LoopField "\" target)
+      return A_LoopField "\" target
   }
 
   ; 从安装的程序中获取
   try {
-    PathName := RegRead("HKLM", "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\" fileName)
+    PathName := RegRead("HKLM", "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\" target)
     if FileExist(PathName)
       return PathName
   }
 }
 
-; 通过命令行去启动程序，即使脚本以管理员模式启动也不会造成软件也是以管理员启动的问题
-ShellRun(filePath, arguments?, directory?, operation?, show?) {
+/**
+ * 通过命令行去启动程序，防止会导致以管理员启动软件的问题
+ * @param target 程序路径 
+ * @param arguments 参数
+ * @param directory 工作目录
+ * @param operation 选项
+ * @param show 是否显示
+ */
+ShellRun(target, arguments?, directory?, operation?, show?) {
   static VT_UI4 := 0x13, SWC_DESKTOP := ComValue(VT_UI4, 0x8)
   ComObject("Shell.Application").Windows.Item(SWC_DESKTOP).Document.Application
-    .ShellExecute(filePath, arguments?, directory?, operation?, show?)
+    .ShellExecute(target, arguments?, directory?, operation?, show?)
 }
 
-; 以管理员权限打开软件
+/**
+ * 以管理员权限打开软件
+ * @param target 程序路径
+ * @param args 参数
+ * @param workingDir 工作目录
+ */
 RunAsAdmin(target, args, workingDir) {
   try {
     Run("*RunAs " target " " args, workingDir)
@@ -283,7 +382,14 @@ RunAsAdmin(target, args, workingDir) {
   }
 }
 
-; 运行程序或打开目录，用于解决打开的程序无法获取焦点的问题
+/**
+ * 运行程序或打开目录，用于解决打开的程序无法获取焦点的问题
+ * @param target 程序路径
+ * @param {string} args 参数
+ * @param {string} workingDir 工作目录
+ * @param {number} admin 是否为管理员启动
+ * @returns {void} 
+ */
 RunPrograms(target, args := "", workingDir := "", admin := false) {
   ; 记录当前窗口的hwnd，当软件启动失败时还原焦点
   currentHwnd := WinExist("A")
@@ -319,12 +425,17 @@ RunPrograms(target, args := "", workingDir := "", admin := false) {
   }
 }
 
-; 激活窗口
+/**
+ * 激活窗口
+ * @param winTitle AHK中的WinTitle
+ * @param {number} isHide 窗口是否为隐藏窗口
+ * @returns {number} 
+ */
 ActivateWindow(winTitle := "", isHide := false) {
   ; 如果匹配不到窗口且认为窗口为隐藏窗口时查找隐藏窗口
   hwnds := FindWindows(winTitle, (hwnd) => WinGetTitle(hwnd) != "")
   if ((!hwnds.Length) && isHide) {
-    hwnd := FindHiddenWindow(winTitle)
+    hwnd := FindHiddenWindows(winTitle)
   }
 
   ; 如果匹配到则跳转，匹配不到返回0
@@ -349,8 +460,12 @@ ActivateWindow(winTitle := "", isHide := false) {
   return 1
 }
 
-; 查找隐藏窗口返回窗口的HWND
-FindHiddenWindow(winTitle) {
+/**
+ * 查找隐藏窗口返回窗口的Hwnd 
+ * @param winTitle AHK中的WinTitle
+ * @returns {array} 
+ */
+FindHiddenWindows(winTitle) {
   WS_MINIMIZEBOX := 0x00020000
   WS_MINIMIZE := 0x20000000
 
@@ -376,7 +491,12 @@ FindHiddenWindow(winTitle) {
   return hwnds
 }
 
-; 返回与指定条件匹配的所有窗口
+/**
+ * 返回与指定条件匹配的所有窗口
+ * @param winTitle AHK中的WinTitle
+ * @param predicate 过滤窗口方法，传过Hwnd，返回bool
+ * @returns {array} 
+ */
 FindWindows(winTitle, predicate?) {
   temps := WinGetList(winTitle)
   hwnds := []
@@ -391,7 +511,12 @@ FindWindows(winTitle, predicate?) {
   return hwnds
 }
 
-; 将参数中的{selected_text} 替换为被选中的文字
+/**
+ *  将程序路径或参数中的{selected_text} 替换为选中的文字
+ * @param target 程序路径的引用
+ * @param args 参数的引用
+ * @returns {void|number} 
+ */
 ReplaceSelectedText(&target, &args) {
   text := GetSelectedText()
   if not (text) {
@@ -407,7 +532,10 @@ ReplaceSelectedText(&target, &args) {
   return 1
 }
 
-; 获取选中的文字
+/**
+ * 获取选中的文字
+ * @returns {void|string} 
+ */
 GetSelectedText() {
   temp := A_Clipboard
   ; 清空剪贴板
@@ -424,8 +552,13 @@ GetSelectedText() {
   return RTrim(text, "`r`n")
 }
 
-; url 编码
-; https://www.autohotkey.com/boards/viewtopic.php?t=112741
+/**
+ * url 编码
+ * 来源: https://www.autohotkey.com/boards/viewtopic.php?t=112741
+ * @param Uri 需要编码的文本
+ * @param {string} encoding 编码格式
+ * @returns {string} 
+ */
 URLEncode(Uri, encoding := "UTF-8") {
   var := Buffer(StrPut(Uri, encoding), 0)
   StrPut(Uri, var, encoding)
@@ -441,32 +574,74 @@ URLEncode(Uri, encoding := "UTF-8") {
   return res
 }
 
-; 发送消息到命令提示框
-PostMessageToCpasAbbr(type, wParam := 0) {
+/**
+ * 启动InputHook，并返回EndReason
+ * @param ih InputHook对象
+ * @returns {void} 
+ */
+StartInputHook(ih) {
+  ; 禁用所有热键
+  Suspend(true)
+
+  ; RAlt 映射到 LCtrl 后,  按下 RAlt 再触发 Capslock 命令会导致 LCtrl 键一直处于按下状态
+  if GetKeyState("LCtrl") {
+    Send("{LCtrl Up}")
+  }
+
+  ; 启动监听等待输入匹配后关闭监听
+  ih.Start()
+  endReason := ih.Wait()
+  ih.Stop()
+  ; 恢复所有热键
+  Suspend(false)
+
+  return endReason
+}
+
+/**
+ * 发送消息到命令提示框
+ * @param msg 消息编号
+ * @param {number} wParam 消息参数
+ */
+PostMessageToCpasAbbr(msg, wParam := 0) {
   temp := A_DetectHiddenWindows
   DetectHiddenWindows(1)
-  PostMessage(type, wParam, 0, , "ahk_pid " capsAbbrWindowPid)
+  PostMessage(msg, wParam, 0, , "ahk_pid " capsAbbrWindowPid)
   DetectHiddenWindows(temp)
 }
 
-; 关闭顶部命令提示框
+/**
+ * 关闭顶部命令提示框
+ */
 HideCaspAbbr() {
   HIDE_COMMAND_INPUT := 0x0400 + 0x0002
   PostMessageToCpasAbbr(HIDE_COMMAND_INPUT)
 }
 
-; 将键入的值发送到输入框
+/**
+ *  将键入的值发送到输入框
+ * @param ih InputHook 对象
+ * @param char 发送的字符
+ */
 PostCharToCaspAbbr(ih?, char?) {
   static SEND_CHAR := 0x0102
   PostMessageToCpasAbbr(SEND_CHAR, Ord(char))
 }
 
-; 判断当前窗口是不是桌面
+/**
+ * 判断当前窗口是不是桌面
+ */
 IsDesktop() {
   return WinActive("Program Manager ahk_class Progman") || WinActive("ahk_class WorkerW")
 }
 
-; 获取当前焦点在哪个显示器上
+/**
+ * 获取当前焦点在哪个显示器上
+ * @param x 窗口X轴的长度
+ * @param y 窗口y轴的长度
+ * @param {number} default 显示器下标
+ * @returns {string|number} 匹配的显示器下标
+ */
 GetMonitorAt(x, y, default := 1) {
   m := SysGet(80)
   loop m {
@@ -477,7 +652,11 @@ GetMonitorAt(x, y, default := 1) {
   return default
 }
 
-; 当前窗口是最大化还是最小化
+/**
+ * 当前窗口是最大化还是最小化
+ * @param {string} winTitle AHK中的WinTitle
+ * @returns {number} 
+ */
 WindowMaxOrMin(winTitle := "A") {
   return WinGetMinMax(winTitle)
 }
