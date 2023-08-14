@@ -121,9 +121,9 @@ Tab:: {
 #;:: Reload()
 
 #HotIf capslockMode
-a:: CenterAndResizeWindow(500, 500)
-s:: MouseMoveActiveWindowPos()
-d:: WindowMaximize()
+a:: WindowTop()
+s:: CloseWindowProcesses()
+d:: MouseMoveToCare()
 q:: WindowMinimize()
 w:: ActivateOrRun(, "ms-settings:autoplay", , , false)
 e:: EnableTaskSwitchMode()

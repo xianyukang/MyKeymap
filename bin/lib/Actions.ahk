@@ -275,3 +275,44 @@ WindowMinimize() {
 
   WinMinimize("A")
 }
+
+; 窗口置顶
+WindowTop() {
+  WinSetAlwaysOnTop(!(WinGetExStyle("A") & 0x8), "A")
+}
+
+; 模拟 Alt+Tab 热键
+SystemAltTab() {
+  global altTabIsOpen := true
+  send("^!{Tab}")
+}
+
+; 模拟 Shift+Alt+Tab 热键
+SystemShiftAltTab() {
+  global altTabIsOpen := true
+  send("^+!{Tab}")
+}
+
+/**
+ * 关闭窗口（直接杀进程）
+ * @returns  
+ */
+CloseWindowProcesses() {
+  if IsDesktop()
+    return
+
+  name := WinGetProcessName("A")
+  ; 如果删了explorer会导致桌面白屏
+  if (name == "explorer.exe")
+    return
+
+  Run("taskkill /f /im " name, , "Hide")
+}
+
+/**
+ * 将鼠标移动到光标的位置
+ */
+MouseMoveToCare() {
+  GetCaretPos(&x, &y)
+  (StrLen(x) | StrLen(y)) ? MouseMove(x, y) : MouseToActiveWindowCenter()
+}
