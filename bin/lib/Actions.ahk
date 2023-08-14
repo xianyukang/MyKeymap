@@ -464,3 +464,28 @@ CloseSameClassWindows() {
     WinClose(hwnd)
   }
 }
+
+/**
+ * 锁屏
+ */
+SystemLockScreen() {
+  Sleep 300
+  DllCall("LockWorkStation")
+}
+
+/**
+ * 关机
+ */
+SlideToShutDown() {
+  Run(SlideToShutDown)
+  sleep(1300)
+  MouseClick("Left", 100, 100)
+}
+
+/**
+ * 重启
+ */
+SlideToReboot() {
+  Shutdown(2)
+}
+
