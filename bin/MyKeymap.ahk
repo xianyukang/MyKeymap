@@ -127,7 +127,7 @@ Tab:: {
 #;:: Reload()
 
 #HotIf capslockMode
-a:: BindOrActivate("Capslock A")
+a:: toggleCapslock()
 s:: BindOrActivate("Capslock S")
 d:: UnBindWindow()
 q:: CloseSameClassWindows()

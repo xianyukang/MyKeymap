@@ -457,8 +457,8 @@ UnBindWindow() {
  */
 CloseSameClassWindows() {
   if IsDesktop()
-    return 
-  
+    return
+
   exe := WinGetProcessName("A")
   for i, hwnd in FindWindows("ahk_exe " exe) {
     WinClose(hwnd)
@@ -489,3 +489,23 @@ SlideToReboot() {
   Shutdown(2)
 }
 
+
+/**
+ * 切换Capslock状态
+ */
+toggleCapslock() {
+  if GetKeyState("Alt", "P")
+      send("{blind}{LCtrl}{LAlt Up}")
+  send("{blind}{CapsLock}")
+}
+
+/**
+ * 查看帮助
+ */
+openHelpHtml() {
+  if FileExist("bin\site\help.html") {
+    Run("bin\site\help.html")
+  } else {
+    MsgBox("帮助文件未生成，需要打开设置点一下保存")
+  }
+}
