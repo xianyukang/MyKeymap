@@ -1,5 +1,6 @@
 #SingleInstance Force
 #NoTrayIcon
+SetWorkingDir(A_ScriptDir)
 TraySetIcon("./icons/logo.ico")
 
 #Include ./lib/Monitor.ahk

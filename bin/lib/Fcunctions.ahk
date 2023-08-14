@@ -524,7 +524,7 @@ ReplaceSelectedText(&target, &args) {
   }
 
   if InStr(args, "://") || InStr(target, "://") {
-    text := URLEncode(text)
+    text := URIEncode(text)
   }
   args := strReplace(args, "{selected_text}", text)
   target := strReplace(target, "{selected_text}", text)
@@ -559,7 +559,7 @@ GetSelectedText() {
  * @param {string} encoding 编码格式
  * @returns {string} 
  */
-URLEncode(Uri, encoding := "UTF-8") {
+URIEncode(Uri, encoding := "UTF-8") {
   var := Buffer(StrPut(Uri, encoding), 0)
   StrPut(Uri, var, encoding)
   pos := 1
@@ -706,4 +706,39 @@ GetCaretPos(&X?, &Y?, &W?, &H?) {
   CoordMode "Caret", "Screen"
   CaretGetPos(&X, &Y)
   CoordMode "Caret", savedCaret
+}
+
+/**
+ * 将文本转换为Html
+ * @param text 需要转换的文本
+ * @param color HEX颜色值
+ * @param fontFamily 字体
+ * @returns {string} 
+ */
+FormatHtmlStyle(text, color, fontFamily) {
+  style := "Color: '" color "'; font-fontFamily: '" fontFamily ";"
+
+  text := HtmlEncode(text)
+  html := "<HTML> <head><meta http-equiv='Content-type' content='text/html;charset=UTF-8'></head> <body> <!--StartFragment-->"
+  if (InStr(text, "`n")) {
+    html .= "<span style='" style "'><pre>" text "</pre></span>"
+  } else {
+    html .= "<span style='" style "'>" text "</span>"
+  }
+  html .= "<!--EndFragment--></body></HTML>"
+  return html
+}
+
+/**
+ * Html编码
+ * @param text 需要编码的文本
+ * @returns {void} 
+ */
+HtmlEncode(text) {
+  text := strReplace(text, "&", "&amp;")
+  text := strReplace(text, "<", "&lt;")
+  text := strReplace(text, ">", "&gt;")
+  text := strReplace(text, "" "", "&quot;")
+  text := strReplace(text, " ", "&nbsp;")
+  return text
 }

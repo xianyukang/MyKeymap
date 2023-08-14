@@ -9,7 +9,7 @@ SetWorkingDir("../")
 #Include lib/Actions.ahk
 
 ; 托盘菜单
-A_TrayMenu.Delete
+A_TrayMenu.Delete()
 A_TrayMenu.Add("暂停", TrayMenuHandler)
 A_TrayMenu.Add("退出", TrayMenuHandler)
 A_TrayMenu.Add("重启程序", TrayMenuHandler)
@@ -22,18 +22,18 @@ A_TrayMenu.ClickCount := 1
 A_IconTip := "MyKeymap 2.0.0 by 咸鱼阿康"
 TraySetIcon("./bin/icons/logo.ico")
 
-ListLines false ; 不记录日志
-ProcessSetPriority "High" ; 高线程响应
+ListLines(false) ; 不记录日志
+ProcessSetPriority("High") ; 高线程响应
 ; 使用 sendinput 时,  通过 alt+3+j 输入 alt+1 时,  会发送 ctrl+alt
-SendMode "Input"
+SendMode("Input")
 
-SetMouseDelay 0 ; 发送完一个鼠标后不会sleep
-SetDefaultMouseSpeed 0 ; 设置鼠标移动的速度
+SetMouseDelay(0) ; 发送完一个鼠标后不会sleep
+SetDefaultMouseSpeed(0) ; 设置鼠标移动的速度
 CoordMode("Mouse", "Screen") ; 鼠标坐标相对于活动窗口
 SetTitleMatchMode(2) ; WinTitle匹配时窗口标题只要包含就可以
 ; 多显示器不同缩放比例导致的问题,  https://www.autohotkey.com/boards/viewtopic.php?f=14&t=13810
 DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
-SetWinDelay 0
+SetWinDelay(0)
 
 ; 记录Caps缩写的Pid
 capsAbbrWindowPid := ""
@@ -91,6 +91,10 @@ semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "dd")
 semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char)
 semiHookAbbrWindow := TypoTipWindow()
 
+; ===============       内置组       ========================
+GroupAdd("makrdownGroup", "ahk_exe Obsidian.exe")
+
+
 ; ===============        热键        ========================
 ; 鼠标点击后退出鼠标模式
 needExitMouseMode := true
@@ -121,9 +125,9 @@ Tab:: {
 #;:: Reload()
 
 #HotIf capslockMode
-a:: WindowTop()
-s:: CloseWindowProcesses()
-d:: MouseMoveToCare()
+a:: InsertSpaceBetweenZHAndEn()
+s:: changeTextStyle("#d82c2c")
+d:: HoldDownLShiftKey()
 q:: WindowMinimize()
 w:: ActivateOrRun(, "ms-settings:autoplay", , , false)
 e:: EnableTaskSwitchMode()

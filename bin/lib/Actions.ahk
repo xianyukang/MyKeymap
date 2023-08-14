@@ -1,5 +1,5 @@
 /**
- *慢速移动鼠标 
+ * 慢速移动鼠标 
  * @param key 按下的键
  * @param directionX 向左-1 向右1
  * @param directionY 向上-1 向下1
@@ -355,4 +355,58 @@ CloseWindowProcesses() {
 MouseMoveToCare() {
   GetCaretPos(&x, &y)
   (StrLen(x) | StrLen(y)) ? MouseMove(x, y) : MouseToActiveWindowCenter()
+}
+
+/**
+ * 修改文本颜色字体
+ * @param {string} color HEX颜色值
+ * @param {string} fontFamily 字体
+ */
+changeTextStyle(color := "#000000", fontFamily := "Iosevka") {
+  text := GetSelectedText()
+  loop StrLen(text) {
+    Send("{Del}")
+  }
+  if not (text) {
+    return
+  }
+
+  if (WinActive("ahk_group makrdownGroup")) {
+    text := "<font color='" color "'>" text "</font>"
+  } else {
+    text := FormatHtmlStyle(text, color, fontFamily)
+  }
+
+  A_Clipboard := text
+  Send("{LShift down}{Insert down}{Insert up}{LShift up}")
+}
+
+/**
+ * 中英文之间添加空格
+ */
+InsertSpaceBetweenZHAndEn() {
+  text := GetSelectedText()
+  result := RegExReplace(text, "([\x{4e00}-\x{9fa5}])(?=[a-zA-Z])|([a-zA-Z])(?=[\x{4e00}-\x{9fa5}])", "$0 ")
+  A_Clipboard := result
+  Send("{LShift down}{Insert down}{Insert up}{LShift up}")
+}
+
+/**
+ * 按住左Shift
+ */
+HoldDownLShiftKey() {
+  send("{LShift down}")
+  key := LTrim(A_ThisHotkey, "*")
+  keywait(key)
+  send("{LShift up}")
+}
+
+/**
+ * 按住右Shift
+ */
+HoldDownRShiftKey() {
+  send("{RShift down}")
+  key := LTrim(A_ThisHotkey, "*")
+  keywait(key)
+  send("{RShift up}")
 }
