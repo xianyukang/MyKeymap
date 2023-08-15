@@ -314,40 +314,27 @@ HoldDownRShiftKey() {
  * @param key 当前键
  * @returns {void} 
  */
-BindOrActivate(key) {
-  ; 判断当前Map中有没有这个Key的对应关系
-  id := bindWindowMap.Get(key, 0)
-  ; 没有绑定任何窗口将于绑定一下
-  if id {
-    ; 有绑定直接显示出来
-    WinActivate("ahk_id " id)
-    return
+BindWindow() {
+  window := false
+  handler(thisHotKey) {
+    waitkey := KeymapManager.ExtractWaitKey(thisHotKey)
+    startTick := A_TickCount
+    KeyWait(waitkey)
+    if (A_TickCount - startTick > 300) {
+      ; 绑定窗口
+      window := WinGetID("A")
+      Tip("已绑定当前窗口")
+      return
+    }
+
+    if (window && WinExist("ahk_id " window)) {
+      WinActivate(window)
+    } else {
+      Tip("请长按绑定窗口")
+    }
   }
 
-  id := WinGetID("A")
-  ; 防止重复绑定
-  mkey := MapFindKey(bindWindowMap, id)
-  if mkey {
-    Tip("当前窗口已绑定到 " mkey " 键上，无需重复绑定")
-    return
-  }
-
-  bindWindowMap.Set(key, id)
-  Tip("当前窗口已绑定到 " key " 键上")
-}
-
-/**
- * 解绑定当前窗口
- */
-UnBindWindow() {
-  id := WinGetID("A")
-  mkey := MapFindKey(bindWindowMap, id)
-  if mkey {
-    bindWindowMap.Delete(mkey)
-    Tip("当前窗口已被解除绑定")
-  } else {
-    Tip("当前窗口未被绑定")
-  }
+  return handler
 }
 
 /**
@@ -440,9 +427,9 @@ SetWindowPositionAndSize(x, y, width, height) {
  * @param urls 链接或程序 
  */
 LaunchMultiple(urls*) {
-    for index,url in urls {
-      ShellRun(url)
-    }
+  for index, url in urls {
+    ShellRun(url)
+  }
 }
 
 /**
