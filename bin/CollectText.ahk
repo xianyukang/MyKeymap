@@ -1,116 +1,82 @@
-﻿#NoEnv
-#SingleInstance, force
+#SingleInstance Force
 #NoTrayIcon
-ListLines Off
-SetWorkingDir %A_ScriptDir%
-Menu, Tray, Icon, logo.ico
-SendMode Input
 
-resetGUI()
-OnMessage(0x100, "handle_WM_KEYDOWN")
-SetTimer, onClipboardChange, 100
-Return
+ListLines(false)
+SetWorkingDir(A_ScriptDir)
+TraySetIcon("./icons/logo.ico")
+SendMode("Input")
 
-resetGUI(title := "连续复制后、在本窗口内按空格键")
-{
-    global
-    lastText := Trim(Clipboard, " `t`r`n")
-    Gui, Destroy
-    layout := new CLayout()
-    layout.show(title)
-    disableIME(layout.hwnd)
-    SetTimer, resetTitle, -5000
-}
+class CLayout {
+  X := 10
+  Y := 10
+  W := 700
+  H := 180
+  textList := []
 
-onClipboardChange()
-{
-    global layout, lastText
-    currText := Trim(Clipboard, " `t`r`n")
+  __New() {
+    this.myGui := Gui("+resize +AlwaysOnTop -SysMenu")
+    this.hwnd := this.myGUI.hwnd
+    this.myGUI.SetFont("s12", "Microsoft YaHei Ui")
+    this.myGUI.Add("text", "y-20", "连续复制后，在本窗口按空格键复制下面的文本")
+  }
 
-    if (currText && currText != lastText)
-    {
-        layout.addItem(currText)
-        lastText := currText
-        layout.show()
-    }
-}
+  ShowGui(title := "连续复制后，在本窗口按空格键") {
+    this.myGui.Title := title
+    this.myGUI.Show("AutoSize NoActivate W" this.W)
+  }
 
-class CLayout
-{
-    __New() 
-    {
-        this.X := 10
-        this.Y := 10
-        this.W := 600
-        this.H := 180
-        this.textList := []
-        Gui MyGui:New, +HwndGuiHwnd
-        Gui MyGui:+LabelMyGui_On
-        this.hwnd := GuiHwnd
-        Gui, +Resize +AlwaysOnTop -SysMenu
-        ; Gui, Font,, Consolas
-        Gui, Font, s12, Microsoft YaHei UI
-        Gui Add, Text, y-20, % "连续复制后,  在本窗口内按空格复制下面的文本:                                                             "
-    }
-    show(title := "连续复制后、在本窗口内按空格键")
-    {
-        w := this.W
-        h := this.H
-        Gui MyGui:Show, AutoSize NoActivate, %title%
-    }
+  AddItem(text) {
+    this.textList.Push(text)
+    space := "y+6"
+    this.myGUI.Add("text", "y+6 w700 +wrap", text)
+  }
 
-    addItem(i)
-    {
-        this.textList.push(i)
-        space := "y+6"
-        Gui MyGui:Add, Text, %space% w700 +Wrap, % i
-    }
+  Restart() {
+    this.myGui.Destroy()
+    this.__New
+    this.ShowGui("已把收集到的" this.textList.Length " 行挪入剪切版")
+    this.textList := []
+    SetTimer(() => this.ShowGui(), -5000)
+  }
 
 }
 
-Join(sep, params*) {
-    for index,param in params
-        str .= sep . param
-    return SubStr(str, StrLen(sep)+1)
+layout := CLayout()
+layout.showGui()
+
+join(sep, params*) {
+  str := ""
+
+  for index, param in params
+    str .= sep . param
+
+  return SubStr(str, StrLen(sep) + 1)
 }
 
-
-handle_WM_KEYDOWN(wParam, lParam)
-{
-    global layout
-    ; tooltip, % GetKeyName(Format("vk{:x}", wParam))
-    switch (GetKeyName(Format("vk{:x}", wParam)))
-    {
+OnMessage(0x100, WM_KEYDOWN)
+WM_KEYDOWN(wParam, lParam, msg, hwnd) {
+  switch (GetKeyName(Format("vk{:x}", wparam))) {
     case "Space":
-        res := Trim(Join("`n", layout.textList*), " `t`r`n")
-        if (res)
-            clipboard := res
-        SetTimer, onClipboardChange, Off
-        resetGUI("已把收集到的 " layout.textList.Length() " 行文本挪入剪切板")
-        SetTimer, onClipboardChange, On
+      ; 临时取消监听
+      OnClipboardChange(ClipboardChangeCallbakc, 0)
+      res := Trim(join("`n", layout.textList*), " \n\r\n")
+      if res {
+        A_Clipboard := res
+      }
+      layout.Restart()
+      ; 启动监听
+      OnClipboardChange(ClipboardChangeCallbakc)
     case "Escape":
-        ExitApp
-    default: 
-        ; sleep 500
-    return 0
-}
-return 0
+      ExitApp
+  }
+  return 0
 }
 
-disableIME(hwnd)
-{
-    WinExist("ahk_id " hwnd)
-    ControlGetFocus, controlName
-    ControlGet, controlHwnd, Hwnd,, %controlName%
-    DllCall("Imm32\ImmAssociateContext", "ptr", controlHwnd, "ptr", 0, "ptr")
+OnClipboardChange(ClipboardChangeCallbakc)
+ClipboardChangeCallbakc(type) {
+  if (type != 1)
+    return
+
+  layout.AddItem(A_Clipboard)
+  layout.ShowGui()
 }
-
-
-resetTitle() {
-    global layout
-    layout.show()
-}
-
-MyGui_OnClose:
-ExitApp
-return
