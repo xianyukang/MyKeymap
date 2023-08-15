@@ -7,6 +7,7 @@ SetWorkingDir("../")
 
 #Include lib/Fcunctions.ahk
 #Include lib/Actions.ahk
+#Include lib/KeymapManager.ahk
 
 ; 托盘菜单
 A_TrayMenu.Delete()
@@ -35,56 +36,20 @@ SetTitleMatchMode(2) ; WinTitle匹配时窗口标题只要包含就可以
 DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 SetWinDelay(0)
 
+OnExit(MyExit)
 ; 记录Caps缩写的Pid
 capsAbbrWindowPid := ""
-; 自定义热键
-customHotKey := true
-; 已启动的热键
-activatedModes := []
-; 热键状态
-modeState := { currentName: "", currentRef: "", locked: false }
-; 当模拟ALT+TAB或Alt+shift+table时松手退出选择任务页面用
-altTabIsOpen := false
+Run("bin\MyKeymap-CommandInput.exe", , , &capsAbbrWindowPid)
 ; 含有绑定key 和ahk_id 的对应关系
 bindWindowMap := Map()
 
-; Windows10、Windows11的任务切换视图类名
-GroupAdd("taskSwitchGroup", "ahk_class MultitaskingViewFrame")
-GroupAdd("taskSwitchGroup", "ahk_class XamlExplorerHostIslandWindow")
-
-; ===============      模式定义      ========================
-capslockMode := false
-jMode := false
-semicolonMode := false
-threeMode := false
-nincMode := false
-commaMode := false
-dotModel := false
-additionalMode1 := false
-additionalMode2 := false
-spaceMode := false
-tabMode := false
-rButtonMode := false
-lButtonMode := false
-
-capsFMode := false
-capsSpaceMode := false
-jKModel := false
-
-mouseMode := false
-TaskSwitchMode := false
-
-; ===============      模式定义      ========================
-OnExit(MyExit)
-; 当有异常时退出所有模式
-OnError(CloseAllMode)
+; ===============       内置组       ========================
+GroupAdd("makrdownGroup", "ahk_exe Obsidian.exe")
 
 ; ===============    以下为配置信息    =======================
 configVer := ""
-
-; ===============      命令窗口      ========================
 ; todo: 添加一个判断，如果选择了命令窗口则生成以下内容，否则不生成
-capsHook := InputHook(, "{Capslock}{BackSpace}{Esc}", "dd,df,se")
+capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "dd,df,se")
 capsHook.KeyOpt("{CapsLock}", "S")
 capsHook.OnChar := PostCharToCaspAbbr
 Run("bin\MyKeymap-CommandInput.exe", , , &capsAbbrWindowPid)
@@ -93,92 +58,96 @@ semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "dd")
 semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char)
 semiHookAbbrWindow := TypoTipWindow()
 
-; ===============       内置组       ========================
-GroupAdd("makrdownGroup", "ahk_exe Obsidian.exe")
-
-
+; EnableMode(&capslockMode, "capslockMode", 350, EnterCapslockAbbr)
 ; ===============        热键        ========================
-; 鼠标点击后退出鼠标模式
-needExitMouseMode := true
+Caps := KeymapManager.NewKeymap("*capslock")
+caps.Map("*a", Caps.ToggleLock)
+Caps.Map("*c", arg => Run("bin/SoundControl.exe"))
+Caps.Map("*x", arg => CloseSameClassWindows())
+Caps.Map("*d", arg => Run("MyKeymap.exe bin/CustomShellMenu.ahk"))
+; Caps.Map("*m", arg => BindOrActivate(arg))
+; Caps.Map("*n", arg => BindOrActivate(arg))
+; Caps.Map("*v", arg => UnBindWindow())
+Caps.SendKeys("*w", "!{tab}")
 
-scrollOnceLineCount := 3
-scrollDelay1 := "T0.2"
-scrollDelay2 := "T0.01"
-fastMoveSingle := 110
-fastMoveRepeat := 70
-slowMoveSingle := 10
-slowMoveRepeat := 13
-moveDelay1 := "T0.2"
-moveDelay2 := "T0.01"
+CapsF := KeymapManager.AddSubKeymap(Caps, "*f")
+CapsF.Map("*f", NoOperation)
+CapsF.Map("*n", arg => Run("notepad.exe"))
+CapsF.Map("*m", arg => BindOrActivate(arg))
 
-activatedModes.Push("CapsLock")
-activatedModes.Push("Tab")
+CapsSpace := KeymapManager.AddSubKeymap(Caps, "*space")
+CapsSpace.Map("*space", NoOperation)
 
-CapsLock:: {
-  global capslockMode
-  EnableMode(&capslockMode, "capslockMode", 350, EnterCapslockAbbr)
-}
+; Win10 和 Win11 的 Alt-Tab 任务切换视图
+TaskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "x", "space")
+Caps.Map("*e", arg => Send("^!{tab}"), TaskSwitch)
 
-Tab:: {
-  global tabMode
-  EnableMode(&tabMode, "tabMode", 350, () => MsgBox("TAB模式"))
-}
+; 可以自定义模式
+m := KeymapManager.NewKeymap("!f")
+m.Map("*n", arg => Run("notepad.exe"))
+m := KeymapManager.NewKeymap("f1 & f2")
+m.Map("*n", arg => Run("notepad.exe"))
 
-#;:: Reload()
+; 鼠标模式相关
+Fast := MouseKeymap(110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.ClearLock)
+Slow := MouseKeymap(10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.UnLock)
 
-#HotIf capslockMode
-a:: ProcessExistSendKeyOrRun("QQ.exe", "^+!{End}", "shortcuts\QQ.lnk")
-s:: BindOrActivate("Capslock S")
-d:: UnBindWindow()
-w:: ActivateOrRun(, "ms-settings:autoplay", , , false)
-e:: EnableTaskSwitchMode()
-r:: ActivateOrRun(, "D:\")
-t:: ActivateOrRun(, "fsdjk.exe")
+Caps.Map("*i", Fast.MoveMouseUp, Slow)
+Caps.Map("*k", Fast.MoveMouseDown, Slow)
+Caps.Map("*j", Fast.MoveMouseLeft, Slow)
+Caps.Map("*l", Fast.MoveMouseRight, Slow)
 
-f:: {
-  global capslockMode, capsFMode
-  capslockMode := false
-  EnableMode(&capsFMode, "capsFMode", , , false)
-  capslockMode := true
-}
-z:: LockCurrentMode()
+Slow.Map("*i", Slow.MoveMouseUp)
+Slow.Map("*k", Slow.MoveMouseDown)
+Slow.Map("*j", Slow.MoveMouseLeft)
+Slow.Map("*l", Slow.MoveMouseRight)
 
-#HotIf tabMode
-a:: MsgBox("J模式")
-s:: LockCurrentMode()
+Caps.Map("*u", Fast.ScrollWheelUp)
+Caps.Map("*o", Fast.ScrollWheelDown)
+Caps.Map("*h", Fast.ScrollWheelLeft)
+Caps.Map("*;", Fast.ScrollWheelRight)
 
-#HotIf capsFMode
-a:: MsgBox("CapsF 模式")
+Slow.Map("*u", Slow.ScrollWheelUp)
+Slow.Map("*o", Slow.ScrollWheelDown)
+Slow.Map("*h", Slow.ScrollWheelLeft)
+Slow.Map("*;", Slow.ScrollWheelRight)
 
-#HotIf TaskSwitchMode
-e:: send("{blind}{up}")
-d:: send("{blind}{down}")
-s:: send("{blind}{left}")
-f:: send("{blind}{right}")
-x:: send("{blind}{del}")
-Space:: send("{blind}{enter}")
+Caps.Map("*n", Fast.LButton())
+Caps.Map("*m", Fast.RButton())
+Caps.Map("*,", Fast.LButtonDown())
+Fast.Map("*space", Fast.LButtonUp())
 
+Slow.Map("*n", Slow.LButton())
+Slow.Map("*m", Slow.RButton())
+Slow.Map("*,", Slow.LButtonDown())
+Slow.Map("*space", Slow.LButtonUp())
+; slow.Map("*esc", Slow.ExitMouseKeyMap())
 
-#HotIf mouseMode
-*/:: MouseToActiveWindowCenter()
-*,:: LbuttonDown()
-*N:: LbuttonClick()
-*.:: MouseMoveActiveWindowPos()
-*M:: RbuttonClick()
-*':: scrollWheel("'", 4)
-*I:: scrollWheel("I", 3)
-*O:: scrollWheel("O", 2)
-*U:: scrollWheel("U", 1)
-*H:: slowMoveMouse("H", -1, 0)
-*J:: slowMoveMouse("J", 0, 1)
-*K:: slowMoveMouse("K", 0, -1)
-*L:: slowMoveMouse("L", 1, 0)
+; 单按 3 锁定 3 模式
+Three := KeymapManager.NewKeymap("*3")
+Three.MapSinglePress(Three.ToggleLock)
 
+Three.RemapKey("h", "0")
+Three.RemapKey("j", "1")
+Three.RemapKey("k", "2")
+Three.RemapKey("l", "3")
+Three.RemapKey("u", "4")
+Three.RemapKey("i", "5")
+Three.RemapKey("o", "6")
+Three.RemapKey("b", "7")
+Three.RemapKey("n", "8")
+Three.RemapKey("m", "9")
+Three.RemapKey("w", "volume_down")
+Three.RemapKey("t", "volume_up")
+Three.RemapKey("space", "f1")
+Three.RemapKey("2", "f2")
+Three.RemapKey("4", "f4")
+Three.RemapKey("5", "f5")
+Three.RemapKey("9", "f9")
+Three.RemapKey("0", "f10")
+Three.RemapKey("e", "f11")
+Three.RemapKey("r", "f12")
 
-Esc:: exitMouseMode()
-*Space:: exitMouseMode()
-
-#HotIf
 
 ExecCapslockAbbr(command) {
   switch command {

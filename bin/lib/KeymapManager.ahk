@@ -338,6 +338,14 @@ class MouseKeymap extends Keymap {
     }
     return handler
   }
+
+  ExitMouseKeyMap() {
+    handler(thisHotkey) {
+      this.lockHandler()
+    }
+    return handler
+  }
+
 }
 
 

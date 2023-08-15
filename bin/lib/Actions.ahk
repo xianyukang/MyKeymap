@@ -1,64 +1,4 @@
 /**
- * 慢速移动鼠标 
- * @param key 按下的键
- * @param directionX 向左-1 向右1
- * @param directionY 向上-1 向下1
- */
-SlowMoveMouse(key, directionX, directionY) {
-  MoveMouse(key, directionX, directionY, slowMoveSingle, slowMoveRepeat, mousemovePrompt ?? false)
-}
-
-/**
- * 快速移动鼠标并进入移动鼠标模式
- * @param key 按下的键
- * @param directionX 向左-1 向右1
- * @param directionY 向上-1 向下1
- */
-FastMoveMouse(key, directionX, directionY) {
-  global mouseMode := true
-  MoveMouse(key, directionX, directionY, fastMoveSingle, fastMoveRepeat)
-}
-
-/**
- * 左键按下
- */
-LbuttonDown() => MouseClickAndExit("{LButton Down}")
-
-/**
- * 左键点击
- */
-LbuttonClick() => MouseClickAndExit("{Lbutton}")
-
-/**
- * 左键双击
- */
-LbuttonDoubleClick() => MouseClickAndExit("{Lbutton 2}")
-
-/**
- * 左键三击
- */
-LbuttonTrippleClick() => MouseClickAndExit("{Lbutton 3}")
-
-/**
- * 右键点击
- */
-RbuttonClick() => MouseClickAndExit("{Rbutton}")
-
-/**
- * 滚轮滑动
- * @param key 按下的Key
- * @param direction 方向
- *   1:上
- *   2:下
- *   3:左
- *   4:右
- */
-ScrollWheel(key, direction) {
-  ScrollWheelOnce(direction, scrollOnceLineCount)
-  WhileKeyWait(key, scrollDelay1, scrollDelay2, () => ScrollWheelOnce(direction, scrollOnceLineCount))
-}
-
-/**
  * 移动鼠标到活动窗口中心
  */
 MouseToActiveWindowCenter() {
@@ -77,23 +17,6 @@ MouseMoveActiveWindowPos() {
   PostMessage("0x0112", "0xF010", 0)
   Sleep 50
   SendInput("{Right}")
-}
-
-/**
- * 锁定当前模式
- */
-LockCurrentMode() {
-  global modeState, mouseMode
-
-  if (modeState.locked) {
-    mouseMode := false
-    %modeState.currentRef% := false
-    modeState.locked := false
-    Tip(" 取消锁定 ", -400)
-  } else {
-    modeState.locked := true
-    Tip(" 锁定 -> " modeState.currentName, -400)
-  }
 }
 
 /**
@@ -227,29 +150,6 @@ SmartCloseWindow() {
       PostMessage(0x112, 0xF060, , , "A")
     }
   }
-}
-
-/**
- * 开启任务切换模式
- */
-EnableTaskSwitchMode() {
-  global TaskSwitchMode, modeState
-  ; 关闭所有模式
-  CloseAllMode()
-
-  TaskSwitchMode := true
-  send("^!{tab}")
-  ; 等待选择完程序
-  if (WinWaitActive("ahk_group taskSwitchGroup", , 0.5)) {
-    WinWaitNotActive("ahk_group taskSwitchGroup")
-  }
-  TaskSwitchMode := false
-
-  ; 恢复被锁定的模式
-  if (modeState.locked) {
-    %modeState.currentRef% := true
-  }
-
 }
 
 /**
