@@ -1,35 +1,29 @@
 ﻿class KeymapManager {
-  static M := Map()
   static Locked := false
+  static GlobalKeymap := Keymap("GlobalKeymap")
+  static Stack := Array(this.GlobalKeymap)
 
   static NewKeymap(globalHotkey) {
-    ; 创建 keymap, 并注册它的全局触发热键
-    waitKey := this.ExtractWaitKey(globalHotkey)
-    km := Keymap(globalHotkey, waitKey)
-    Hotkey(globalHotkey, km.Handler, "On")
-
-    ; keymap 激活时可能会改掉全局热键的功能
-    ; 所以要记住全局热键的功能, 以便在 Activate 方法返回前恢复全局热键
-    this.M[globalHotkey] := km
-    return km
+    ; 分配全局热键激活指定 keymap
+    return this.AddSubKeymap(this.GlobalKeymap, globalHotkey)
   }
 
-  static Activate(keymap) {
-    ; 临时关掉锁定, 避免两个模式同时启用
-    ; 如果同时存在 *a 和 a 两个热键, 执行哪个是未定义的
-    if KeymapManager.Locked {
-      KeymapManager.Locked.Disable()
+  static AddSubKeymap(parent, hk) {
+    waitKey := this.ExtractWaitKey(hk)
+    subKeymap := Keymap(hk, waitKey)
+    handler(thisHotkey) {
+      this.Activate(subKeymap)
+      this._postHandler()
     }
+    parent.Map(hk, handler)
+    return subKeymap
+  }
 
-    keymap.Enable()
-    startTick := A_TickCount
-    KeyWait(keymap.WaitKey)
-    if (A_PriorKey = keymap.WaitKey && (A_TickCount - startTick < 300)) {
-      keymap.SinglePressAction()
+  static _postHandler() {
+    ; 等松开全部按钮时才处理锁定逻辑
+    if this.Stack.Length != 1 {
+      return
     }
-    keymap.Disable()
-    KeymapManager.RestoreGlobalHotkey()
-
     ; 比如直接锁定 3 模式
     ; 比如锁住 3 模式然后使用 9 模式热键, 9 模式退出前要恢复 3 模式
     if KeymapManager.Locked {
@@ -42,45 +36,16 @@
     }
   }
 
-  static AddSubKeymap(parent, theHotkey, subKeymap := false) {
-    waitKey := this.ExtractWaitKey(theHotkey)
-    if !subKeymap {
-      subKeymap := Keymap(theHotkey, waitKey)
+  static Activate(keymap) {
+    this.Stack.Push(keymap)
+    keymap.Enable()
+    startTick := A_TickCount
+    KeyWait(keymap.WaitKey)
+    if (A_PriorKey = keymap.WaitKey && (A_TickCount - startTick < 300)) {
+      keymap.SinglePressAction()
     }
-
-    ; 进入子模式时执行如下代码
-    handler(arg) {
-      startTick := A_TickCount
-      parent.Disable()
-      KeymapManager.RestoreGlobalHotkey()
-      subKeymap.Enable()
-      KeyWait(subKeymap.WaitKey)
-      if (A_PriorKey = subKeymap.WaitKey && (A_TickCount - startTick < 300)) {
-        subKeymap.SinglePressAction()
-      }
-      if KeymapManager.Locked == subKeymap {
-        return
-      }
-      subKeymap.Disable()
-      parent.Enable()
-    }
-
-    ; 在 parent 中添加一个 theHotkey, 用来激活 sub keymap
-    parent.Map(theHotkey, handler)
-    return subKeymap
-  }
-
-  static EndInit() {
-    ; 在按住 Caps 模式的情况下, 临时使用 3 模式输入数字, 当 3 模式退出时应该还原到 Caps 模式
-    ; 具体做法是让 3 成为 Caps 的子模式 ( 如果 Caps 模式已经分配了 3 键, 则不做这个处理 )
-    for hk, km in this.M {
-      for hk2, km2 in this.M {
-        if km == km2 || km.M.Has(hk2) {
-          continue
-        }
-        this.AddSubKeymap(km, hk2, km2)
-      }
-    }
+    this.Stack.Pop().Disable()
+    this.Stack.Get(-1).Enable() ; 退出前, 恢复上一个模式
   }
 
   static LockKeymap(toLock, toggle, show) {
@@ -101,16 +66,19 @@
     }
     ; 锁定了别的模式, 那么切换成锁定自己
     this.ShowToolTip("锁定切换: " KeymapManager.Locked.Name " -> " toLock.Name, show)
+    KeymapManager.Locked.Disable()
+    KeymapManager.GlobalKeymap.Enable()
     KeymapManager.Locked := toLock
   }
 
   static UnLock() {
     if KeymapManager.Locked {
       KeymapManager.Locked.Disable()
-      KeymapManager.RestoreGlobalHotkey()
+      KeymapManager.GlobalKeymap.Enable()
       KeymapManager.Locked := false
     }
   }
+
   static ClearLock() {
     KeymapManager.Locked := false
   }
@@ -122,13 +90,6 @@
       waitKey := Trim(sp[2])
     }
     return waitKey
-  }
-
-  static RestoreGlobalHotkey() {
-    ; 恢复全局热键
-    for globalHotkey, km in this.M {
-      Hotkey(globalHotkey, km.Handler, "On")
-    }
   }
 
   static ShowToolTip(msg, show := true) {
@@ -148,11 +109,6 @@ class Keymap {
     this.M := Map()
     this.ToggleLock := this._lockOrUnlock.Bind(this)
     this.AfterLocked := false
-    this.Handler := this._handler.Bind(this)
-  }
-
-  _handler(thisHotkey) {
-    KeymapManager.Activate(this)
   }
 
   Map(hotkeyName, handler, keymapToLock := false, toggle := false) {
@@ -162,6 +118,11 @@ class Keymap {
         return
       }
       KeymapManager.LockKeymap(keymapToLock, false, false)
+
+      ; 锁住后直接执行热键, 没有按下任何引导键 ( 比如先锁住 Caps 然后直接按 E )
+      if KeymapManager.Stack.Length == 1 {
+        KeymapManager._postHandler()
+      }
     }
     if hotkeyName == "SinglePress" {
       this.SinglePressAction := wrapper
