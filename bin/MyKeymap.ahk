@@ -8,6 +8,9 @@ SetWorkingDir("../")
 #Include lib/Fcunctions.ahk
 #Include lib/Actions.ahk
 #Include lib/KeymapManager.ahk
+#Include lib/TypoTipWindow.ahk
+#Include lib/TempFocusGui.ahk
+#Include lib/Utils.ahk
 
 ; 托盘菜单
 A_TrayMenu.Delete()
@@ -39,9 +42,6 @@ SetWinDelay(0)
 OnExit(MyExit)
 ; 记录Caps缩写的Pid
 capsAbbrWindowPid := ""
-Run("bin\MyKeymap-CommandInput.exe", , , &capsAbbrWindowPid)
-; 含有绑定key 和ahk_id 的对应关系
-bindWindowMap := Map()
 
 ; ===============       内置组       ========================
 GroupAdd("makrdownGroup", "ahk_exe Obsidian.exe")
@@ -65,15 +65,12 @@ caps.Map("*a", Caps.ToggleLock)
 Caps.Map("*c", arg => Run("bin/SoundControl.exe"))
 Caps.Map("*x", arg => CloseSameClassWindows())
 Caps.Map("*d", arg => Run("MyKeymap.exe bin/CustomShellMenu.ahk"))
-; Caps.Map("*m", arg => BindOrActivate(arg))
-; Caps.Map("*n", arg => BindOrActivate(arg))
-; Caps.Map("*v", arg => UnBindWindow())
 Caps.SendKeys("*w", "!{tab}")
 
 CapsF := KeymapManager.AddSubKeymap(Caps, "*f")
 CapsF.Map("*f", NoOperation)
 CapsF.Map("*n", arg => Run("notepad.exe"))
-CapsF.Map("*m", arg => BindOrActivate(arg))
+CapsF.Map("*m", bindWindow())
 
 CapsSpace := KeymapManager.AddSubKeymap(Caps, "*space")
 CapsSpace.Map("*space", NoOperation)
@@ -121,7 +118,7 @@ Slow.Map("*n", Slow.LButton())
 Slow.Map("*m", Slow.RButton())
 Slow.Map("*,", Slow.LButtonDown())
 Slow.Map("*space", Slow.LButtonUp())
-; slow.Map("*esc", Slow.ExitMouseKeyMap())
+slow.Map("*esc", Slow.ExitMouseKeyMap())
 
 ; 单按 3 锁定 3 模式
 Three := KeymapManager.NewKeymap("*3")
@@ -162,3 +159,5 @@ ExecSemicolonAbbr(command) {
       Run("shell:downloads")
   }
 }
+
+KeymapManager.GlobalKeymap.Enable()

@@ -96,7 +96,7 @@
     if !show {
       return
     }
-    ToolTip(msg)
+    Tip(msg)
   }
 }
 
