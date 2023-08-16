@@ -34,21 +34,21 @@ if (len(sys.argv) > 1):
 # os.system('go.exe run add-version.go')
 
 # 构建后端项目
-os.chdir('config-back')
+os.chdir('config-server')
 os.system('go.exe build -ldflags "-s -w"')
 os.chdir('..')
 if os.path.isfile("bin/settings.exe"):
     os.remove("bin/settings.exe")
-shutil.move("config-back/settings.exe", "bin/")
+shutil.move("config-server/settings.exe", "bin/")
 if (arg == 'go'):
     sys.exit()
 
 # 构建后端项目
 # shutil.rmtree('bin/mykeymap-settings-server', ignore_errors=True)
-# os.chdir('config-back')
+# os.chdir('config-server')
 # os.system('pyinstaller.exe api.py -n mykeymap-settings-server -y --clean --icon icon.ico')
 # os.chdir('..')
-# os.system('cp -r config-back/dist/mykeymap-settings-server bin/')
+# os.system('cp -r config-server/dist/mykeymap-settings-server bin/')
 
 # if (arg == 'server'):
 #     sys.exit()
@@ -66,7 +66,7 @@ os.chdir('tailwind')
 os.system('npm run build')
 os.chdir('..')
 
-os.chdir('config-front')
+os.chdir('config-ui')
 os.system('pnpm run build')
 os.chdir('..')
 
@@ -86,10 +86,10 @@ os.system('rm bin/site/js/*.map')
 if not os.path.isdir('bin/templates'):
     os.mkdir('bin/templates')
 shutil.copy('bin/site/index.html', 'bin/templates/index.html')
-# shutil.copy('config-back/templates/script.ahk', 'bin/templates/script.ahk')
-shutil.copy('config-back/templates/script2.ahk', 'bin/templates/script2.ahk')
-shutil.copy('config-back/templates/CustomShellMenu.ahk', 'bin/templates/CustomShellMenu.ahk')
-shutil.copy('config-back/templates/help.html', 'bin/templates/help.html')
+# shutil.copy('config-server/templates/script.ahk', 'bin/templates/script.ahk')
+shutil.copy('config-server/templates/script2.ahk', 'bin/templates/script2.ahk')
+shutil.copy('config-server/templates/CustomShellMenu.ahk', 'bin/templates/CustomShellMenu.ahk')
+shutil.copy('config-server/templates/help.html', 'bin/templates/help.html')
 
 # 复制文件
 os.system('cp -r data MyKeymap/')

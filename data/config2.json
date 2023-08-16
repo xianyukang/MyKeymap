@@ -1,0 +1,23 @@
+{
+  "lastEdit": "2.0.0#1",
+  "keymaps": [
+    {
+      "id": "1",
+      "name": "3 模式",
+      "enable": true,
+      "hotkey": "*3",
+      "parentID": null,
+      "hotkeys": {
+        "*j": [
+          {
+            "windowID": "2",
+            "actionTypeID": "输入文本或按键",
+            "comment": "数字 1 键",
+            "keysToSend": "1",
+            "ahkCode": "send, {blind}1"
+          }
+        ]
+      }
+    }
+  ]
+}

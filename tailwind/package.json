@@ -4,10 +4,10 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "build": "tailwind -i index.css -o ../config-front/src/style/tailwind.css",
-    "watch": "tailwind --watch -i index.css -o ../config-front/src/style/tailwind.css",
+    "build": "tailwind -i index.css -o ../config-ui/src/style/tailwind.css",
+    "watch": "tailwind --watch -i index.css -o ../config-ui/src/style/tailwind.css",
     "build-help-page-css": "tailwind -c help_page.config.js -i help_page.css -o ../bin/site/css/HelpPage.css",
-    "watch-help-page-css": "tailwind -c help_page.config.js -i help_page.css -o ../config-front/src/style/HelpPage.css --watch",
+    "watch-help-page-css": "tailwind -c help_page.config.js -i help_page.css -o ../config-ui/src/style/HelpPage.css --watch",
     "build-html-tools-css": "tailwind -c html-tools.config.js -i help_page.css -o ../bin/site/css/tailwind.css",
     "watch-html-tools-css": "tailwind -c html-tools.config.js -i help_page.css -o ../bin/html-tools/tailwind.css --watch"
   },

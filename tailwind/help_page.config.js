@@ -1,5 +1,5 @@
 module.exports = {
-  content: ['../config-front/src/components/HelpPage.vue'],
+  content: ['../config-ui/src/components/HelpPage.vue'],
   theme: {
     extend: {},
   },
