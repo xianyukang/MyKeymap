@@ -315,23 +315,29 @@ HoldDownRShiftKey() {
  * @returns {void} 
  */
 BindWindow() {
-  window := false
+  windowID := false
+  windowTitle := false
   handler(thisHotKey) {
     waitkey := KeymapManager.ExtractWaitKey(thisHotKey)
-    startTick := A_TickCount
-    KeyWait(waitkey)
-    if (A_TickCount - startTick > 300) {
+    if not (KeyWait(waitkey, "T0.3")) {
       ; 绑定窗口
-      window := WinGetID("A")
+      windowID := WinGetID("A")
+      windowTitle := WinGetTitle("A")
       Tip("已绑定当前窗口")
       return
     }
 
-    if (window && WinExist("ahk_id " window)) {
-      WinActivate(window)
-    } else {
-      Tip("请长按绑定窗口")
+    if (windowID && WinExist("ahk_id " windowID)) {
+      WinActivate(windowID)
+      return
     }
+
+    if (windowTitle && WinExist(windowTitle)) {
+      WinActivate(windowTitle)
+      return
+    }
+
+    Tip("窗口或已关闭，请长按绑定窗口")
   }
 
   return handler

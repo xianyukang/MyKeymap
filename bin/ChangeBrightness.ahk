@@ -4,6 +4,7 @@ SetWorkingDir(A_ScriptDir)
 TraySetIcon("./icons/logo.ico")
 
 #Include ./lib/Monitor.ahk
+#Include ./lib/Utils.ahk
 
 class CLayout extends Gui {
   monitors := []
@@ -104,7 +105,7 @@ class CLayout extends Gui {
   ; 显示GUI
   ShowGui() {
     super.Show()
-    this.disableIME(super.Hwnd)
+    disableIME(super.Hwnd)
   }
 
   ; 获取屏幕亮度
@@ -129,12 +130,6 @@ class CLayout extends Gui {
       For property in ComObjGet("winmgmts:\\.\root\WMI").ExecQuery("SELECT * FROM WmiMonitorBrightnessMethods")
         property.WmiSetBrightness(timeout, brightness)
     }
-  }
-
-  DisableIME(hwnd) {
-    controlName := ControlGetFocus(hwnd)
-    controlHwnd := ControlGetHwnd(controlName)
-    DllCall("Imm32\ImmAssociateContext", "ptr", controlHwnd, "ptr", 0, "ptr")
   }
 }
 
