@@ -111,24 +111,32 @@ class Keymap {
     this.AfterLocked := false
   }
 
-  Map(hotkeyName, handler, keymapToLock := false, toggle := false) {
+  Map(hotkeyName, handler, keymapToLock := false, winTitle := "") {
+    wrapper := Keymap._wrapHandler(handler, keymapToLock)
+    if hotkeyName == "SinglePress" {
+      this.SinglePressAction := wrapper
+      return
+    }
+    ; 热键不允许重复所以应该用 map 存储
+    this.M[hotkeyName "/@/" winTitle] := { hotkeyName: hotkeyName, winTitle: winTitle, handler: wrapper }
+  }
+
+
+  static _wrapHandler(handler, keymapToLock) {
     wrapper(thisHotkey) {
       handler(thisHotkey)
+      ; 执行完热键动作后, 可能要锁定某个 keymap
       if !keymapToLock {
         return
       }
       KeymapManager.LockKeymap(keymapToLock, false, false)
 
-      ; 锁住后直接执行热键, 没有按下任何引导键 ( 比如先锁住 Caps 然后直接按 E )
+      ; 这种情况是, 锁住后直接执行热键, 没有按下任何引导键 ( 比如先锁住 Caps 然后直接按 E )
       if KeymapManager.Stack.Length == 1 {
         KeymapManager._postHandler()
       }
     }
-    if hotkeyName == "SinglePress" {
-      this.SinglePressAction := wrapper
-      return
-    }
-    this.M[hotkeyName] := wrapper
+    return wrapper
   }
 
   MapSinglePress(handler) {
@@ -136,14 +144,26 @@ class Keymap {
   }
 
   Enable() {
-    for hotkeyName, handler in this.M {
-      Hotkey(hotkeyName, handler, "On")
+    for _, hk in this.M {
+      if hk.winTitle {
+        HotIfWinactive(hk.winTitle)
+        Hotkey(hk.hotkeyName, hk.handler, "On")
+        HotIfWinactive()
+      } else {
+        Hotkey(hk.hotkeyName, hk.handler, "On")
+      }
     }
   }
 
   Disable() {
-    for hotkeyName, handler in this.M {
-      Hotkey(hotkeyName, "Off")
+    for _, hk in this.M {
+      if hk.winTitle {
+        HotIfWinactive(hk.winTitle)
+        Hotkey(hk.hotkeyName, "Off")
+        HotIfWinactive()
+      } else {
+        Hotkey(hk.hotkeyName, "Off")
+      }
     }
   }
 
