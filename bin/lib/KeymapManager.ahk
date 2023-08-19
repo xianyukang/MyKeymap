@@ -111,14 +111,14 @@ class Keymap {
     this.AfterLocked := false
   }
 
-  Map(hotkeyName, handler, keymapToLock := false, winTitle := "") {
+  Map(hotkeyName, handler, keymapToLock := false, winTitle := "", conditionType := 1) {
     wrapper := Keymap._wrapHandler(handler, keymapToLock)
-    if hotkeyName == "SinglePress" {
+    if hotkeyName == "singlePress" {
       this.SinglePressAction := wrapper
       return
     }
     ; 热键不允许重复所以应该用 map 存储
-    this.M[hotkeyName "/@/" winTitle] := { hotkeyName: hotkeyName, winTitle: winTitle, handler: wrapper }
+    this.M[hotkeyName "/@/" winTitle] := { hotkeyName: hotkeyName, winTitle: winTitle, handler: wrapper, conditionType: conditionType }
   }
 
 
@@ -140,29 +140,67 @@ class Keymap {
   }
 
   MapSinglePress(handler) {
-    this.Map("SinglePress", handler)
+    this.Map("singlePress", handler)
   }
 
   Enable() {
     for _, hk in this.M {
-      if hk.winTitle {
-        HotIfWinactive(hk.winTitle)
+      if !hk.winTitle {
         Hotkey(hk.hotkeyName, hk.handler, "On")
-        HotIfWinactive()
-      } else {
-        Hotkey(hk.hotkeyName, hk.handler, "On")
+        continue
+      }
+      switch hk.conditionType {
+        case 1:
+          HotIfWinactive(hk.winTitle)
+          Hotkey(hk.hotkeyName, hk.handler, "On")
+          HotIfWinactive()
+        case 2:
+          HotIfWinExist(hk.winTitle)
+          Hotkey(hk.hotkeyName, hk.handler, "On")
+          HotIfWinExist()
+        case 3:
+          HotIfWinNotactive(hk.winTitle)
+          Hotkey(hk.hotkeyName, hk.handler, "On")
+          HotIfWinNotactive()
+        case 4:
+          HotIfWinNotExist(hk.winTitle)
+          Hotkey(hk.hotkeyName, hk.handler, "On")
+          HotIfWinNotExist()
+        case 5:
+          HotIf(hk.winTitle)
+          Hotkey(hk.hotkeyName, hk.handler, "On")
+          HotIf()
       }
     }
   }
 
   Disable() {
     for _, hk in this.M {
-      if hk.winTitle {
-        HotIfWinactive(hk.winTitle)
+      if !hk.winTitle {
         Hotkey(hk.hotkeyName, "Off")
-        HotIfWinactive()
-      } else {
-        Hotkey(hk.hotkeyName, "Off")
+        continue
+      }
+      switch hk.conditionType {
+        case 1:
+          HotIfWinactive(hk.winTitle)
+          Hotkey(hk.hotkeyName, "Off")
+          HotIfWinactive()
+        case 2:
+          HotIfWinExist(hk.winTitle)
+          Hotkey(hk.hotkeyName, "Off")
+          HotIfWinExist()
+        case 3:
+          HotIfWinNotactive(hk.winTitle)
+          Hotkey(hk.hotkeyName, "Off")
+          HotIfWinNotactive()
+        case 4:
+          HotIfWinNotExist(hk.winTitle)
+          Hotkey(hk.hotkeyName, "Off")
+          HotIfWinNotExist()
+        case 5:
+          HotIf(hk.winTitle)
+          Hotkey(hk.hotkeyName, "Off")
+          HotIf()
       }
     }
   }
@@ -171,22 +209,22 @@ class Keymap {
     KeymapManager.LockKeymap(this, true, true)
   }
 
-  RemapKey(a, b) {
+  RemapKey(a, b, winTitle := "", conditionType := 1) {
     downHandler(thisHotkey) {
       Send "{Blind}{" b " DownR}"
     }
     upHandler(thisHotkey) {
       Send "{Blind}{" b " Up}"
     }
-    this.Map("*" a, downHandler)
-    this.Map("*" a " up", upHandler)
+    this.Map("*" a, downHandler, , winTitle, conditionType)
+    this.Map("*" a " up", upHandler, , winTitle, conditionType)
   }
 
-  SendKeys(hk, keys) {
+  SendKeys(hk, keys, winTitle := "", conditionType := 1) {
     handler(thisHotkey) {
       Send(keys)
     }
-    this.Map(hk, handler)
+    this.Map(hk, handler, , winTitle, conditionType)
   }
 }
 
