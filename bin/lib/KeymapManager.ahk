@@ -111,7 +111,7 @@ class Keymap {
     this.AfterLocked := false
   }
 
-  Map(hotkeyName, handler, keymapToLock := false, winTitle := "", conditionType := 1) {
+  Map(hotkeyName, handler, keymapToLock := false, winTitle := "", conditionType := 0) {
     wrapper := Keymap._wrapHandler(handler, keymapToLock)
     if hotkeyName == "singlePress" {
       this.SinglePressAction := wrapper
@@ -150,23 +150,23 @@ class Keymap {
         continue
       }
       switch hk.conditionType {
-        case 1:
+        case 0:
           HotIfWinactive(hk.winTitle)
           Hotkey(hk.hotkeyName, hk.handler, "On")
           HotIfWinactive()
-        case 2:
+        case 1:
           HotIfWinExist(hk.winTitle)
           Hotkey(hk.hotkeyName, hk.handler, "On")
           HotIfWinExist()
-        case 3:
+        case 2:
           HotIfWinNotactive(hk.winTitle)
           Hotkey(hk.hotkeyName, hk.handler, "On")
           HotIfWinNotactive()
-        case 4:
+        case 3:
           HotIfWinNotExist(hk.winTitle)
           Hotkey(hk.hotkeyName, hk.handler, "On")
           HotIfWinNotExist()
-        case 5:
+        case 4:
           HotIf(hk.winTitle)
           Hotkey(hk.hotkeyName, hk.handler, "On")
           HotIf()
@@ -181,23 +181,23 @@ class Keymap {
         continue
       }
       switch hk.conditionType {
-        case 1:
+        case 0:
           HotIfWinactive(hk.winTitle)
           Hotkey(hk.hotkeyName, "Off")
           HotIfWinactive()
-        case 2:
+        case 1:
           HotIfWinExist(hk.winTitle)
           Hotkey(hk.hotkeyName, "Off")
           HotIfWinExist()
-        case 3:
+        case 2:
           HotIfWinNotactive(hk.winTitle)
           Hotkey(hk.hotkeyName, "Off")
           HotIfWinNotactive()
-        case 4:
+        case 3:
           HotIfWinNotExist(hk.winTitle)
           Hotkey(hk.hotkeyName, "Off")
           HotIfWinNotExist()
-        case 5:
+        case 4:
           HotIf(hk.winTitle)
           Hotkey(hk.hotkeyName, "Off")
           HotIf()
@@ -209,7 +209,7 @@ class Keymap {
     KeymapManager.LockKeymap(this, true, true)
   }
 
-  RemapKey(a, b, winTitle := "", conditionType := 1) {
+  RemapKey(a, b, winTitle := "", conditionType := 0) {
     downHandler(thisHotkey) {
       Send "{Blind}{" b " DownR}"
     }
@@ -220,7 +220,7 @@ class Keymap {
     this.Map("*" a " up", upHandler, , winTitle, conditionType)
   }
 
-  SendKeys(hk, keys, winTitle := "", conditionType := 1) {
+  SendKeys(hk, keys, winTitle := "", conditionType := 0) {
     handler(thisHotkey) {
       Send(keys)
     }
