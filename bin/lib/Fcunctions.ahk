@@ -27,8 +27,7 @@ TrayMenuHandler(ItemName, ItemPos, MyMenu) {
  * @param ExitCode 传递给 Exit 或 ExitApp 的退出代码.
  */
 MyExit(ExitReason, ExitCode) {
-  if (capsAbbrWindowPid)
-    ProcessClose(capsAbbrWindowPid)
+  ProcessClose("MyKeymap-CommandInput.exe")
 }
 
 /**
@@ -372,9 +371,13 @@ StartInputHook(ih) {
  * @param {number} wParam 消息参数
  */
 PostMessageToCpasAbbr(msg, wParam := 0) {
+  static capsAbbrWindowHwnd := false
   temp := A_DetectHiddenWindows
   DetectHiddenWindows(1)
-  PostMessage(msg, wParam, 0, , "ahk_pid " capsAbbrWindowPid)
+  if !capsAbbrWindowHwnd {
+    capsAbbrWindowHwnd := WinExist("ahk_class MyKeymap_Command_Input ahk_exe MyKeymap-CommandInput.exe")
+  }
+  PostMessage(msg, wParam, 0, , "ahk_id " capsAbbrWindowHwnd)
   DetectHiddenWindows(temp)
 }
 

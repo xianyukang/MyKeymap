@@ -150,23 +150,23 @@ class Keymap {
         continue
       }
       switch hk.conditionType {
-        case 0:
+        case 1:
           HotIfWinactive(hk.winTitle)
           Hotkey(hk.hotkeyName, hk.handler, "On")
           HotIfWinactive()
-        case 1:
+        case 2:
           HotIfWinExist(hk.winTitle)
           Hotkey(hk.hotkeyName, hk.handler, "On")
           HotIfWinExist()
-        case 2:
+        case 3:
           HotIfWinNotactive(hk.winTitle)
           Hotkey(hk.hotkeyName, hk.handler, "On")
           HotIfWinNotactive()
-        case 3:
+        case 4:
           HotIfWinNotExist(hk.winTitle)
           Hotkey(hk.hotkeyName, hk.handler, "On")
           HotIfWinNotExist()
-        case 4:
+        case 5:
           HotIf(hk.winTitle)
           Hotkey(hk.hotkeyName, hk.handler, "On")
           HotIf()
@@ -181,23 +181,23 @@ class Keymap {
         continue
       }
       switch hk.conditionType {
-        case 0:
+        case 1:
           HotIfWinactive(hk.winTitle)
           Hotkey(hk.hotkeyName, "Off")
           HotIfWinactive()
-        case 1:
+        case 2:
           HotIfWinExist(hk.winTitle)
           Hotkey(hk.hotkeyName, "Off")
           HotIfWinExist()
-        case 2:
+        case 3:
           HotIfWinNotactive(hk.winTitle)
           Hotkey(hk.hotkeyName, "Off")
           HotIfWinNotactive()
-        case 3:
+        case 4:
           HotIfWinNotExist(hk.winTitle)
           Hotkey(hk.hotkeyName, "Off")
           HotIfWinNotExist()
-        case 4:
+        case 5:
           HotIf(hk.winTitle)
           Hotkey(hk.hotkeyName, "Off")
           HotIf()
@@ -397,4 +397,20 @@ class TaskSwitchKeymap extends Keymap {
 }
 
 NoOperation(thisHotkey) {
+}
+
+matchWinTitleCondition(winTitle, conditionType) {
+  switch conditionType {
+    case 1:
+      return WinActive(winTitle)
+    case 2:
+      return WinExist(winTitle)
+    case 3:
+      return !WinActive(winTitle)
+    case 4:
+      return !WinExist(winTitle)
+    case 5:
+      return winTitle
+  }
+  return false
 }

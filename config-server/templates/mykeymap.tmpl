@@ -1,0 +1,101 @@
+﻿#Requires AutoHotkey v2.0
+#SingleInstance Force
+#UseHook true
+
+#Include lib/Fcunctions.ahk
+#Include lib/Actions.ahk
+#Include lib/KeymapManager.ahk
+#Include lib/TypoTipWindow.ahk
+#Include lib/TempFocusGui.ahk
+#Include lib/Utils.ahk
+
+; #WinActivateForce   ; 先关了遇到相关问题再打开试试
+; InstallKeybdHook    ; 这个可以重装 keyboard hook, 提高自己的 hook 优先级, 以后可能会用到
+; ListLines False     ; 也许能提升一点点性能 ( 别抱期待 ), 当有这个需求时再打开试试
+; #Warn All, Off      ; 也许能提升一点点性能 ( 别抱期待 ), 当有这个需求时再打开试试
+
+DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr") ; 多显示器不同缩放比例会导致问题: https://www.autohotkey.com/boards/viewtopic.php?f=14&t=13810
+SetMouseDelay 0                                           ; SendInput 可能会降级为 SendEvent, 此时会有 10ms 的默认 delay
+SetWinDelay 0                                             ; 默认会在 activate, maximize, move 等窗口操作后睡眠 100ms
+ProcessSetPriority "High"
+SetWorkingDir("../")
+InitTrayMenu()
+InitKeymap()
+OnExit(MyExit)
+#include ../data/custom_functions.ahk
+
+RAlt::LCtrl
+!e:: ExitApp
+!r::
+{
+  SoundBeep
+  Reload
+}
+
+InitKeymap()
+{
+  taskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "x", "space")
+  fast := MouseKeymap(110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.ClearLock)
+  slow := MouseKeymap(10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.UnLock)
+{{ if .CapsAbbrEnabled }}
+  capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "{{ .CapsAbbrKeys }}")
+  capsHook.KeyOpt("{CapsLock}", "S")
+  capsHook.OnChar := PostCharToCaspAbbr
+  Run("bin\MyKeymap-CommandInput.exe", , , &capsAbbrWindowPid)
+{{ end }}
+{{- if .SemicolonAbbrEnabled }}
+  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "{{ .SemicolonAbbrKeys }}")
+  semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char)
+  semiHookAbbrWindow := TypoTipWindow()
+{{ end }}
+  ; 如果在系统设置中交换了左右键,  那么需要发送左键才能打开右键菜单
+  theRealRButton := SysGet(23) ? "{LButton}" : "{RButton}"
+
+{{range .Keymaps}}{{template "renderKeymap" .}}{{end}}
+
+  KeymapManager.GlobalKeymap.Enable()
+}
+
+{{define "renderKeymap"}}
+  ; {{.Name}}
+  {{ if not .ParentID }}km{{ .ID }} := KeymapManager.NewKeymap("{{ .Hotkey }}"){{ else }}km{{ .ID }} := KeymapManager.AddSubKeymap(km{{ .ParentID }}, "{{ .Hotkey }}"){{ end }}
+  km := km{{ .ID -}}
+{{ range $index, $action := sortHotkeys .Hotkeys }}
+  {{ actionToHotkey $action }}
+{{- end }}
+{{ end }}
+
+{{- if .CapsAbbrEnabled -}}
+ExecCapslockAbbr(command) {
+  switch command {
+{{ abbrToCode .Options.CapsAbbr }}  }
+}
+{{- else -}}
+ExecCapslockAbbr(command) {
+}
+{{- end }}
+
+{{ if .SemicolonAbbrEnabled -}}
+ExecSemicolonAbbr(command) {
+  switch command {
+{{ abbrToCode .Options.SemicolonAbbr }}  }
+}
+{{- else -}}
+ExecSemicolonAbbr(command) {
+}
+{{- end }}
+
+InitTrayMenu() {
+  A_TrayMenu.Delete()
+  A_TrayMenu.Add("暂停", TrayMenuHandler)
+  A_TrayMenu.Add("退出", TrayMenuHandler)
+  A_TrayMenu.Add("重启程序", TrayMenuHandler)
+  A_TrayMenu.Add("打开设置", TrayMenuHandler)
+  A_TrayMenu.Add("帮助文档", TrayMenuHandler)
+  A_TrayMenu.Add("查看窗口标识符", TrayMenuHandler)
+  A_TrayMenu.Default := "暂停"
+  A_TrayMenu.ClickCount := 1
+
+  A_IconTip := "MyKeymap 2.0.0 created by 咸鱼阿康"
+  TraySetIcon("./bin/icons/logo.ico")
+}

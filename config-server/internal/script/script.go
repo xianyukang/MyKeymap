@@ -1,4 +1,4 @@
-package main
+package script
 
 import (
 	"crypto/md5"
@@ -11,29 +11,17 @@ import (
 	"unicode"
 )
 
-func generateScript(data obj) {
+func GenerateScripts(config *Config) {
 	// 把分应用配置转成一个函数
-	perAppConfigToFunction(data)
+	// TODO
+	// perAppConfigToFunction(config)
 
-	// 鼠标的慢速移动, 筛选出鼠标操作,  然后把函数名中的 fast 替换为 slow
-	SlowMoveMode := make(map[string]interface{})
-	for key, keyConfig := range data[data["Settings"].(obj)["MouseMoveMode"].(string)].(obj) {
-		keyConfig := keyConfig.(obj)
-		t := keyConfig["type"].(string)
-		v := keyConfig["value"].(string)
-		if len(v) > 0 && t == "鼠标操作" {
-			value := strings.Replace(v, "fast", "slow", 1)
-			prefix, _ := keyConfig["prefix"].(string)
-			SlowMoveMode[key] = map[string]interface{}{
-				"value":  value,
-				"prefix": prefix,
-			}
-		}
+	if err := SaveAHK(config, "./templates/script2.ahk", "../bin/MyKeymap.ahk"); err != nil {
+		panic(err)
 	}
-	data["MouseMoveMode"] = SlowMoveMode
-
-	saveAhk(data, "./templates/script2.ahk", "../bin/MyKeymap.ahk")
-	saveAhk(data, "./templates/CustomShellMenu.ahk", "../bin/CustomShellMenu.ahk")
+	if err := SaveAHK(config, "./templates/CustomShellMenu.ahk", "../bin/CustomShellMenu.ahk"); err != nil {
+		panic(err)
+	}
 }
 
 type obj = map[string]interface{}
@@ -44,47 +32,50 @@ type item struct {
 	Prefix string
 }
 
-func saveAhk(data obj, templateFile, outputFile string) {
-
-	f, err := os.Create(outputFile)
-	if err != nil {
-		panic(err)
-	}
-	defer func(f *os.File) {
-		_ = f.Close()
-	}(f)
-
+func SaveAHK(data *Config, templateFile, outputFile string) error {
 	files := []string{
 		templateFile,
 	}
 
-	ts, err := template.New(filepath.Base(templateFile)).Funcs(templateFuncMap).ParseFiles(files...)
+	ts, err := template.New(filepath.Base(templateFile)).Funcs(TemplateFuncMap).ParseFiles(files...)
 	if err != nil {
-		panic(err)
+		return err
 	}
 
+	// 用 Go 代码生成 AHK 脚本时会使用 \n 导致换行符不统一
 	// 先输出到一个字符串, 然后对换行符进行统一, 把 \n 改成 \r\n
 	builder := new(strings.Builder)
 	err = ts.Execute(builder, data)
 	if err != nil {
-		panic(err)
+		return err
 	}
 	res := builder.String()
 	res = strings.ReplaceAll(res, "\r\n", "\n")
 	res = strings.ReplaceAll(res, "\n", "\r\n")
 
+	f, err := os.Create(outputFile)
+	if err != nil {
+		return err
+	}
+	//goland:noinspection GoUnhandledErrorResult
+	defer f.Close()
+
 	// 因为模板文件就是 UTF-8 with BOM,  所以输出文件也是 UTF-8 with BOM
-	//_, _ = f.Write([]byte{0xef, 0xbb, 0xbf}) // 写入 utf-8 的 BOM (0xefbbbf)
-	_, _ = f.Write([]byte(res))
+	// _, _ = f.Write([]byte{0xef, 0xbb, 0xbf}) // 写入 utf-8 的 BOM (0xefbbbf)
+	_, err = f.Write([]byte(res))
+	return err
 }
 
-var templateFuncMap = template.FuncMap{
+var TemplateFuncMap = template.FuncMap{
 	"contains":        strings.Contains,
 	"toList":          toList,
 	"concat":          concat,
 	"join":            join,
 	"ahkString":       ahkString,
 	"escapeAhkHotkey": escapeAhkHotkey,
+	"actionToHotkey":  actionToHotkey,
+	"abbrToCode":      abbrToCode,
+	"sortHotkeys":     sortHotkeys,
 }
 
 func join(sep string, elems []interface{}) string {
@@ -144,8 +135,8 @@ func perAppConfigToFunction(config map[string]interface{}) {
 	// 加上全局生效这个 window selector
 	windowSelectors := config["windowSelectors"].([]interface{})
 	windowSelectors = append(windowSelectors, obj{
-		"id":    "2",
-		"value": "USELESS",
+		"id":        "2",
+		"value":     "USELESS",
 		"groupName": "USELESS",
 		"groupCode": "USELESS",
 	})
@@ -200,7 +191,7 @@ func keyConfigToAhkFunc(keyConfig obj, keymapName string, windowSelectors []inte
 			config := config.(obj)
 			value := config["value"].(string)
 			if len(value) > 0 {
-				branches = append(branches, ifBranch(selId, "ahk_group " + groupName, value))
+				branches = append(branches, ifBranch(selId, "ahk_group "+groupName, value))
 			}
 		}
 	}
@@ -236,4 +227,29 @@ func ifBranch(selId, selValue, value string) string {
 func MD5(text string) string {
 	data := []byte(text)
 	return fmt.Sprintf("%x", md5.Sum(data))
+}
+
+func sortHotkeys(hotkeyMap map[string][]Action) []Action {
+	res := make([]Action, 0, len(hotkeyMap))
+	for hotkey, actions := range hotkeyMap {
+		for _, action := range actions {
+			action.Hotkey = hotkey
+			res = append(res, action)
+		}
+	}
+
+	sort.Slice(res, func(i, j int) bool {
+		// 先根据 action type 排, 然后根据 hotkey 的长度和字典序来排序
+		if res[i].TypeID != res[j].TypeID {
+			return res[i].TypeID < res[j].TypeID
+		}
+
+		if len(res[i].Hotkey) != len(res[j].Hotkey) {
+			return len(res[i].Hotkey) < len(res[j].Hotkey)
+		}
+
+		return res[i].Hotkey < res[j].Hotkey
+	})
+
+	return res
 }

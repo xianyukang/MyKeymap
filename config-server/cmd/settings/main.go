@@ -12,6 +12,8 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"settings/internal/command"
+	"settings/internal/matrix"
 	"strings"
 	"text/template"
 	"time"
@@ -19,8 +21,8 @@ import (
 
 func main() {
 
-	if len(os.Args) == 2 {
-		if handler, ok := commandMap[os.Args[1]]; ok {
+	if len(os.Args) >= 2 {
+		if handler, ok := command.Map[os.Args[1]]; ok {
 			handler()
 			return
 		}
@@ -35,7 +37,7 @@ func main() {
 	}
 
 	go server(errorLog, hasError, debug)
-	matrix(hasError)
+	matrix.DigitalRain(hasError)
 
 	// 要等 gin 协程把错误日志打印完, 才能在这边读取错误日志
 	// 之前试了半天没发现是什么问题,  这里等 300ms 属于偷懒的办法
@@ -173,12 +175,13 @@ func SaveConfigHandler(c *gin.Context) {
 	saveConfigFile(config)
 
 	// 生成脚本文件
-	generateScript(config)
+	// script.GenerateScript(config)
 
 	c.JSON(http.StatusOK, gin.H{"message": "ok"})
 }
 
 func saveConfigFile(config map[string]interface{}) {
+	// os.Create 会清空文件, 这一步应该放在最后, 避免遇错返回, 但文件却被清空了
 	f, err := os.Create("../data/config.json")
 	if err != nil {
 		panic(err)

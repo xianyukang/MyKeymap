@@ -1,4 +1,4 @@
-package main
+package matrix
 
 import (
 	"github.com/gdamore/tcell/v2"
@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func matrix(done <-chan struct{}) {
+func DigitalRain(done <-chan struct{}) {
 
 	// init screen
 	s, _ := tcell.NewScreen()
@@ -78,9 +78,9 @@ outer:
 			// Process event
 			switch ev := ev.(type) {
 			case *tcell.EventResize:
-				//s.Sync()
-				//width, height := s.Size()
-				//columns = initColumns(width, height)
+				// s.Sync()
+				// width, height := s.Size()
+				// columns = initColumns(width, height)
 			case *tcell.EventKey:
 				if ev.Key() == tcell.KeyEscape || ev.Key() == tcell.KeyCtrlC {
 					quit()

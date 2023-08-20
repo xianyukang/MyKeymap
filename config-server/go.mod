@@ -1,6 +1,6 @@
 module settings
 
-go 1.18
+go 1.21
 
 require (
 	github.com/gdamore/tcell/v2 v2.5.1

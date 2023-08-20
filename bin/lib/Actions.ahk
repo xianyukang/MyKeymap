@@ -94,7 +94,7 @@ SwitchWindows(winTitle?, hwnds?) {
 /**
  * CapsLock缩写框
  */
-EnterCapslockAbbr() {
+EnterCapslockAbbr(capsHook) {
   static WM_USER := 0x0400
   static SHOW_COMMAND_INPUT := WM_USER + 0x0001
   static HIDE_COMMAND_INPUT := WM_USER + 0x0002
@@ -123,7 +123,7 @@ EnterCapslockAbbr() {
 /**
  * semi缩写框
  */
-EnterSemicolonAbbr() {
+EnterSemicolonAbbr(semiHook, semiHookAbbrWindow) {
   semiHookAbbrWindow.Show("    ")
   endReason := StartInputHook(semiHook)
   semiHookAbbrWindow.Hide
@@ -145,7 +145,7 @@ SmartCloseWindow() {
     Send("^{F4}")
   } else {
     if (class == "ApplicationFrameWindow" || name == "explorer.exe") {
-      Send("^{F4}")
+      Send("!{F4}")
     } else {
       PostMessage(0x112, 0xF060, , , "A")
     }

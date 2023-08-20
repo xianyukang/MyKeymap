@@ -1,17 +1,40 @@
-package main
+package command
 
 import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"path/filepath"
+	"settings/internal/script"
 	"strings"
 	"text/template"
 )
 
-var commandMap = map[string]func(){
-	"AlignText": AlignText,
+var Map = map[string]func(){
+	"AlignText":   AlignText,
+	"GenerateAHK": GenerateAHK,
+}
+
+var logger = log.New(os.Stderr, "", 0)
+
+func GenerateAHK() {
+	if len(os.Args) < 5 {
+		logger.Fatal("GenerateAHK requires 3 arguments, for example: GenerateAHK ./config.json ./templates/script.ahk ./output.ahk")
+	}
+	configFile := os.Args[2]
+	templateFile := os.Args[3]
+	outputFile := os.Args[4]
+
+	config, err := script.ParseConfig(configFile)
+	if err != nil {
+		logger.Fatal(err)
+	}
+
+	if err := script.SaveAHK(config, templateFile, outputFile); err != nil {
+		logger.Fatal(err)
+	}
 }
 
 func AlignText() {
@@ -47,7 +70,7 @@ func readStdin() (string, error) {
 	return r, nil
 }
 
-func executeTemplate(data obj, templateFile, outputFile string) {
+func executeTemplate(data map[string]interface{}, templateFile, outputFile string) {
 
 	f, err := os.Create(outputFile)
 	if err != nil {
@@ -62,7 +85,7 @@ func executeTemplate(data obj, templateFile, outputFile string) {
 	}
 
 	ts, err := template.New(filepath.Base(templateFile)).
-		Funcs(templateFuncMap).Delims("{%", "%}").ParseFiles(files...)
+		Funcs(script.TemplateFuncMap).Delims("{%", "%}").ParseFiles(files...)
 	if err != nil {
 		panic(err)
 	}

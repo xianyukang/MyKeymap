@@ -1,9 +1,6 @@
+﻿#Requires AutoHotkey v2.0
 #SingleInstance Force
-; 解决「 winactivate 最小化的窗口时不会把窗口放到顶层(被其他窗口遮住)
-#WinActivateForce
-InstallKeybdHook ; 强制安装键盘钩子
-A_MaxHotkeysPerInterval := 70
-SetWorkingDir("../")
+#UseHook true
 
 #Include lib/Fcunctions.ahk
 #Include lib/Actions.ahk
@@ -12,152 +9,290 @@ SetWorkingDir("../")
 #Include lib/TempFocusGui.ahk
 #Include lib/Utils.ahk
 
-; 托盘菜单
-A_TrayMenu.Delete()
-A_TrayMenu.Add("暂停", TrayMenuHandler)
-A_TrayMenu.Add("退出", TrayMenuHandler)
-A_TrayMenu.Add("重启程序", TrayMenuHandler)
-A_TrayMenu.Add("打开设置", TrayMenuHandler)
-A_TrayMenu.Add("帮助文档", TrayMenuHandler)
-A_TrayMenu.Add("查看窗口标识符", TrayMenuHandler)
-A_TrayMenu.Default := "暂停"
-A_TrayMenu.ClickCount := 1
+; #WinActivateForce   ; 先关了遇到相关问题再打开试试
+; InstallKeybdHook    ; 这个可以重装 keyboard hook, 提高自己的 hook 优先级, 以后可能会用到
+; ListLines False     ; 也许能提升一点点性能 ( 别抱期待 ), 当有这个需求时再打开试试
+; #Warn All, Off      ; 也许能提升一点点性能 ( 别抱期待 ), 当有这个需求时再打开试试
 
-A_IconTip := "MyKeymap 2.0.0 by 咸鱼阿康"
-TraySetIcon("./bin/icons/logo.ico")
-
-ListLines(false) ; 不记录日志
-ProcessSetPriority("High") ; 高线程响应
-; 使用 sendinput 时,  通过 alt+3+j 输入 alt+1 时,  会发送 ctrl+alt
-SendMode("Input")
-
-SetMouseDelay(0) ; 发送完一个鼠标后不会sleep
-SetDefaultMouseSpeed(0) ; 设置鼠标移动的速度
-CoordMode("Mouse", "Screen") ; 鼠标坐标相对于活动窗口
-SetTitleMatchMode(2) ; WinTitle匹配时窗口标题只要包含就可以
-; 多显示器不同缩放比例导致的问题,  https://www.autohotkey.com/boards/viewtopic.php?f=14&t=13810
-DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
-SetWinDelay(0)
-
+DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr") ; 多显示器不同缩放比例会导致问题: https://www.autohotkey.com/boards/viewtopic.php?f=14&t=13810
+SetMouseDelay 0                                           ; SendInput 可能会降级为 SendEvent, 此时会有 10ms 的默认 delay
+SetWinDelay 0                                             ; 默认会在 activate, maximize, move 等窗口操作后睡眠 100ms
+ProcessSetPriority "High"
+SetWorkingDir("../")
+InitTrayMenu()
+InitKeymap()
 OnExit(MyExit)
-; 记录Caps缩写的Pid
-capsAbbrWindowPid := ""
+#include ../data/custom_functions.ahk
 
-; ===============       内置组       ========================
-GroupAdd("makrdownGroup", "ahk_exe Obsidian.exe")
+RAlt::LCtrl
+!e:: ExitApp
+!r::
+{
+  SoundBeep
+  Reload
+}
 
-; ===============    以下为配置信息    =======================
-configVer := ""
-; todo: 添加一个判断，如果选择了命令窗口则生成以下内容，否则不生成
-capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "dd,df,se")
-capsHook.KeyOpt("{CapsLock}", "S")
-capsHook.OnChar := PostCharToCaspAbbr
-Run("bin\MyKeymap-CommandInput.exe", , , &capsAbbrWindowPid)
+InitKeymap()
+{
+  taskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "x", "space")
+  fast := MouseKeymap(110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.ClearLock)
+  slow := MouseKeymap(10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.UnLock)
 
-semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "dd")
-semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char)
-semiHookAbbrWindow := TypoTipWindow()
+  capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "dd,dm")
+  capsHook.KeyOpt("{CapsLock}", "S")
+  capsHook.OnChar := PostCharToCaspAbbr
+  Run("bin\MyKeymap-CommandInput.exe", , , &capsAbbrWindowPid)
 
-; EnableMode(&capslockMode, "capslockMode", 350, EnterCapslockAbbr)
-; ===============        热键        ========================
-Caps := KeymapManager.NewKeymap("*capslock")
-caps.Map("*a", Caps.ToggleLock)
-Caps.Map("*c", arg => Run("bin/SoundControl.exe"))
-Caps.Map("*x", arg => CloseSameClassWindows())
-Caps.Map("*d", arg => Run("MyKeymap.exe bin/CustomShellMenu.ahk"))
-Caps.SendKeys("*w", "!{tab}")
+  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "dd,dm")
+  semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char)
+  semiHookAbbrWindow := TypoTipWindow()
 
-CapsF := KeymapManager.AddSubKeymap(Caps, "*f")
-CapsF.Map("*f", NoOperation)
-CapsF.Map("*n", arg => Run("notepad.exe"))
-CapsF.Map("*m", bindWindow())
+  ; 如果在系统设置中交换了左右键,  那么需要发送左键才能打开右键菜单
+  theRealRButton := SysGet(23) ? "{LButton}" : "{RButton}"
 
-CapsSpace := KeymapManager.AddSubKeymap(Caps, "*space")
-CapsSpace.Map("*space", NoOperation)
 
-; Win10 和 Win11 的 Alt-Tab 任务切换视图
-TaskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "x", "space")
-Caps.Map("*e", arg => Send("^!{tab}"), TaskSwitch)
+  ; J 模式
+  km0 := KeymapManager.NewKeymap("*j")
+  km := km0
+  km.RemapKey(",", "delete")
+  km.RemapKey(".", "insert")
+  km.RemapKey("a", "home")
+  km.RemapKey("c", "backspace")
+  km.RemapKey("d", "down")
+  km.RemapKey("e", "up")
+  km.RemapKey("f", "right")
+  km.RemapKey("g", "end")
+  km.RemapKey("q", "appskey")
+  km.RemapKey("r", "tab")
+  km.RemapKey("s", "left")
+  km.RemapKey("x", "esc")
+  km.SendKeys("*2", "{blind}^+{tab}")
+  km.SendKeys("*3", "{blind}^{tab}")
+  km.SendKeys("*b", "{blind}^{backspace}")
+  km.SendKeys("*v", "{blind}^{right}")
+  km.SendKeys("*w", "{blind}+{tab}")
+  km.SendKeys("*z", "{blind}^{left}")
+  km.SendKeys("*space", "{blind}{enter}")
+  km.SendKeys("singlePress", "{blind}{j}")
 
-; 可以自定义模式
-m := KeymapManager.NewKeymap("!f")
-m.Map("*n", arg => Run("notepad.exe"))
-m := KeymapManager.NewKeymap("f1 & f2")
-m.Map("*n", arg => Run("notepad.exe"))
+  ; J + K模式
+  km1 := KeymapManager.AddSubKeymap(km0, "*k")
+  km := km1
+  km.SendKeys("*a", "{blind}+{home}")
+  km.SendKeys("*c", "{blind}{backspace}")
+  km.SendKeys("*d", "{blind}+{down}")
+  km.SendKeys("*e", "{blind}+{up}")
+  km.SendKeys("*f", "{blind}+{right}")
+  km.SendKeys("*g", "{blind}+{end}")
+  km.SendKeys("*s", "{blind}+{left}")
+  km.SendKeys("*v", "{blind}^+{right}")
+  km.SendKeys("*x", "{blind}+{esc}")
+  km.SendKeys("*z", "{blind}^+{left}")
 
-; 鼠标模式相关
-Fast := MouseKeymap(110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.ClearLock)
-Slow := MouseKeymap(10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.UnLock)
+  ; 3 模式
+  km2 := KeymapManager.NewKeymap("*3")
+  km := km2
+  km.RemapKey("0", "f10")
+  km.RemapKey("2", "f2")
+  km.RemapKey("4", "f4")
+  km.RemapKey("5", "f5")
+  km.RemapKey("9", "f9")
+  km.RemapKey("b", "7")
+  km.RemapKey("e", "f11")
+  km.RemapKey("h", "0")
+  km.RemapKey("i", "5")
+  km.RemapKey("j", "1")
+  km.RemapKey("k", "2")
+  km.RemapKey("l", "3")
+  km.RemapKey("m", "9")
+  km.RemapKey("n", "8")
+  km.RemapKey("o", "6")
+  km.RemapKey("r", "f12")
+  km.RemapKey("t", "volume_up")
+  km.RemapKey("u", "4")
+  km.RemapKey("w", "volume_down")
+  km.RemapKey("space", "f1")
+  km.MapSinglePress(km.ToggleLock)
 
-Caps.Map("*i", Fast.MoveMouseUp, Slow)
-Caps.Map("*k", Fast.MoveMouseDown, Slow)
-Caps.Map("*j", Fast.MoveMouseLeft, Slow)
-Caps.Map("*l", Fast.MoveMouseRight, Slow)
+  ; 分号模式
+  km3 := KeymapManager.NewKeymap("*;")
+  km := km3
+  km.SendKeys("*a", "{blind}*")
+  km.SendKeys("*b", "{blind}%")
+  km.SendKeys("*c", "{blind}.")
+  km.SendKeys("*d", "{blind}=")
+  km.SendKeys("*e", "{blind}{^}")
+  km.SendKeys("*f", "{blind}>")
+  km.SendKeys("*g", "{blind}{!}")
+  km.SendKeys("*h", "{blind}{+}")
+  km.SendKeys("*i", "{blind}:")
+  km.SendKeys("*j", "{blind};")
+  km.SendKeys("*k", "{blind}``")
+  km.SendKeys("*m", "{blind}-")
+  km.SendKeys("*n", "{blind}/")
+  km.SendKeys("*r", "{blind}&")
+  km.SendKeys("*s", "{blind}<")
+  km.SendKeys("*t", "{blind}~")
+  km.SendKeys("*u", "{blind}$")
+  km.SendKeys("*v", "{blind}|")
+  km.SendKeys("*w", "{blind}{#}")
+  km.SendKeys("*x", "{blind}_")
+  km.SendKeys("*y", "{blind}@")
+  km.SendKeys("*z", "{blind}\")
+  km.Map("singlePress", _ => EnterSemicolonAbbr(semiHook, semiHookAbbrWindow))
 
-Slow.Map("*i", Slow.MoveMouseUp)
-Slow.Map("*k", Slow.MoveMouseDown)
-Slow.Map("*j", Slow.MoveMouseLeft)
-Slow.Map("*l", Slow.MoveMouseRight)
+  ; Capslock
+  km4 := KeymapManager.NewKeymap("*capslock")
+  km := km4
+  km.Map("singlePress", _ => EnterCapslockAbbr(capsHook))
+  km.Map("*,", fast.LButtonDown()), slow.Map("*,", slow.LButtonDown())
+  km.Map("*;", fast.ScrollWheelRight), slow.Map("*;", slow.ScrollWheelRight)
+  km.Map("*h", fast.ScrollWheelLeft), slow.Map("*h", slow.ScrollWheelLeft)
+  km.Map("*i", fast.MoveMouseUp, slow), slow.Map("*i", slow.MoveMouseUp)
+  km.Map("*j", fast.MoveMouseLeft, slow), slow.Map("*j", slow.MoveMouseLeft)
+  km.Map("*k", fast.MoveMouseDown, slow), slow.Map("*k", slow.MoveMouseDown)
+  km.Map("*l", fast.MoveMouseRight, slow), slow.Map("*l", slow.MoveMouseRight)
+  km.Map("*m", fast.RButton()), slow.Map("*m", slow.RButton())
+  km.Map("*n", fast.LButton()), slow.Map("*n", slow.LButton())
+  km.Map("*o", fast.ScrollWheelDown), slow.Map("*o", slow.ScrollWheelDown)
+  km.Map("*u", fast.ScrollWheelUp), slow.Map("*u", slow.ScrollWheelUp)
+  km.Map("*space", fast.LButtonUp()), slow.Map("*space", slow.LButtonUp())
+  km.Map("*a", _ => CenterAndResizeWindow(1370, 930))
+  km.Map("*b", _ => WindowMinimize())
+  km.Map("*e", _ => Send("^!{tab}"), taskSwitch)
+  km.Map("*p", _ => Send("^#{right}"))
+  km.Map("*q", _ => WindowMaximize())
+  km.Map("*r", _ => SwitchWindows())
+  km.Map("*s", _ => CenterAndResizeWindow(1200, 800))
+  km.Map("*v", _ => Send("#+{right}"))
+  km.Map("*w", _ => Send("!{tab}"))
+  km.Map("*x", _ => SmartCloseWindow())
+  km.Map("*y", _ => Send("^#{left}"))
+  km.Map("*c", _ => ActivateOrRun(, "bin\SoundControl.exe"))
 
-Caps.Map("*u", Fast.ScrollWheelUp)
-Caps.Map("*o", Fast.ScrollWheelDown)
-Caps.Map("*h", Fast.ScrollWheelLeft)
-Caps.Map("*;", Fast.ScrollWheelRight)
+  ; Capslock + F
+  km5 := KeymapManager.AddSubKeymap(km4, "*f")
+  km := km5
+  km.Map("*a", _ => ActivateOrRun("ahk_exe WindowsTerminal.exe", "wt.exe"))
+  km.Map("*d", _ => ActivateOrRun("ahk_exe msedge.exe", "msedge.exe"))
+  km.Map("*e", _ => ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\"))
+  km.Map("*h", _ => ActivateOrRun("- Microsoft Visual Studio", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2019.lnk"))
+  km.Map("*i", _ => ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe"))
+  km.Map("*j", _ => ActivateOrRun("ahk_exe idea64.exe", A_Programs "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk"))
+  km.Map("*k", _ => ActivateOrRun("ahk_class PotPlayer64", A_ProgramsCommon "\Daum\PotPlayer 64 bit\PotPlayer 64 bit.lnk"))
+  km.Map("*l", _ => ActivateOrRun("ahk_exe EXCEL.EXE", A_ProgramsCommon "\Excel.lnk"))
+  km.Map("*n", _ => ActivateOrRun("ahk_exe goland64.exe", A_Programs "\JetBrains Toolbox\GoLand.lnk"))
+  km.Map("*o", _ => ActivateOrRun("ahk_exe ONENOTE.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneNote.lnk"))
+  km.Map("*p", _ => ActivateOrRun("ahk_exe POWERPNT.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk"))
+  km.Map("*q", _ => ActivateOrRun("ahk_class EVERYTHING", "C:\Program Files\Everything\Everything.exe"))
+  km.Map("*r", _ => ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe"))
+  km.Map("*s", _ => ActivateOrRun("ahk_exe Code.exe", A_Programs "\Visual Studio Code\Visual Studio Code.lnk"))
+  km.Map("*w", _ => ActivateOrRun("ahk_exe chrome.exe", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Google Chrome.lnk"))
+  km.Map("*m", _ => ProcessExistSendKeyOrRun("TIM.exe", "^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk"))
 
-Slow.Map("*u", Slow.ScrollWheelUp)
-Slow.Map("*o", Slow.ScrollWheelDown)
-Slow.Map("*h", Slow.ScrollWheelLeft)
-Slow.Map("*;", Slow.ScrollWheelRight)
+  ; Capslock + Space
+  km6 := KeymapManager.AddSubKeymap(km4, "*space")
+  km := km6
+  km.Map("*n", _ => ActivateOrRun("ahk_exe datagrip64.exe", A_Programs "\JetBrains Toolbox\DataGrip.lnk"))
+  km.Map("*w", _ => ProcessExistSendKeyOrRun("WeChat.exe", "^!w", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\微信\微信.lnk"))
 
-Caps.Map("*n", Fast.LButton())
-Caps.Map("*m", Fast.RButton())
-Caps.Map("*,", Fast.LButtonDown())
-Fast.Map("*space", Fast.LButtonUp())
+  ; 鼠标右键
+  km7 := KeymapManager.NewKeymap("*rbutton")
+  km := km7
+  km.RemapKey("c", "backspace")
+  km.RemapKey("x", "esc")
+  km.SendKeys("*space", "{blind}{enter}")
+  km.SendKeys("*lbutton", "^!{tab}")
+  km.SendKeys("*wheelup", "^+{tab}")
+  km.SendKeys("*wheeldown", "^{tab}")
+  km.SendKeys("singlePress", "{blind}" theRealRButton)
 
-Slow.Map("*n", Slow.LButton())
-Slow.Map("*m", Slow.RButton())
-Slow.Map("*,", Slow.LButtonDown())
-Slow.Map("*space", Slow.LButtonUp())
-slow.Map("*esc", Slow.ExitMouseKeyMap())
+  ; 句号模式
+  km8 := KeymapManager.NewKeymap("*.")
+  km := km8
+  km.RemapKey(",", "delete")
+  km.RemapKey(".", "insert")
+  km.RemapKey("a", "home")
+  km.RemapKey("c", "backspace")
+  km.RemapKey("d", "down")
+  km.RemapKey("e", "up")
+  km.RemapKey("f", "right")
+  km.RemapKey("g", "end")
+  km.RemapKey("q", "appskey")
+  km.RemapKey("r", "tab")
+  km.RemapKey("s", "left")
+  km.RemapKey("x", "esc")
+  km.SendKeys("*2", "{blind}^+{tab}")
+  km.SendKeys("*3", "{blind}^{tab}")
+  km.SendKeys("*b", "{blind}^{backspace}")
+  km.SendKeys("*v", "{blind}^{right}")
+  km.SendKeys("*w", "{blind}+{tab}")
+  km.SendKeys("*z", "{blind}^{left}")
+  km.SendKeys("*space", "{blind}{enter}")
+  km.SendKeys("singlePress", "{blind}{.}")
 
-; 单按 3 锁定 3 模式
-Three := KeymapManager.NewKeymap("*3")
-Three.MapSinglePress(Three.ToggleLock)
+  ; 空格模式
+  km9 := KeymapManager.NewKeymap("*space")
+  km := km9
+  km.RemapKey(",", "delete")
+  km.RemapKey(".", "insert")
+  km.RemapKey("a", "home")
+  km.RemapKey("c", "backspace")
+  km.RemapKey("d", "down")
+  km.RemapKey("e", "up")
+  km.RemapKey("f", "right")
+  km.RemapKey("g", "end")
+  km.RemapKey("q", "appskey")
+  km.RemapKey("r", "tab")
+  km.RemapKey("s", "left")
+  km.RemapKey("x", "esc")
+  km.SendKeys("*2", "{blind}^+{tab}")
+  km.SendKeys("*3", "{blind}^{tab}")
+  km.SendKeys("*b", "{blind}^{backspace}")
+  km.SendKeys("*v", "{blind}^{right}")
+  km.SendKeys("*w", "{blind}+{tab}")
+  km.SendKeys("*z", "{blind}^{left}")
+  km.SendKeys("*space", "{blind}{enter}")
+  km.SendKeys("singlePress", "{blind}{space}")
 
-Three.RemapKey("h", "0")
-Three.RemapKey("j", "1")
-Three.RemapKey("k", "2")
-Three.RemapKey("l", "3")
-Three.RemapKey("u", "4")
-Three.RemapKey("i", "5")
-Three.RemapKey("o", "6")
-Three.RemapKey("b", "7")
-Three.RemapKey("n", "8")
-Three.RemapKey("m", "9")
-Three.RemapKey("w", "volume_down")
-Three.RemapKey("t", "volume_up")
-Three.RemapKey("space", "f1")
-Three.RemapKey("2", "f2")
-Three.RemapKey("4", "f4")
-Three.RemapKey("5", "f5")
-Three.RemapKey("9", "f9")
-Three.RemapKey("0", "f10")
-Three.RemapKey("e", "f11")
-Three.RemapKey("r", "f12")
+  ; Tab 模式
+  km10 := KeymapManager.NewKeymap("*tab")
+  km := km10
+  km.SendKeys("singlePress", "{blind}{tab}")
 
+
+  KeymapManager.GlobalKeymap.Enable()
+}
 
 ExecCapslockAbbr(command) {
   switch command {
     case "dd":
-      Run("shell:downloads")
+      ActivateOrRun("", "shell:downloads")
+    case "dm":
+      ActivateOrRun("", A_WorkingDir)
   }
 }
 
 ExecSemicolonAbbr(command) {
   switch command {
     case "dd":
-      Run("shell:downloads")
+      ActivateOrRun("", "shell:downloads")
+    case "dm":
+      ActivateOrRun("", A_WorkingDir)
   }
 }
 
-KeymapManager.GlobalKeymap.Enable()
+InitTrayMenu() {
+  A_TrayMenu.Delete()
+  A_TrayMenu.Add("暂停", TrayMenuHandler)
+  A_TrayMenu.Add("退出", TrayMenuHandler)
+  A_TrayMenu.Add("重启程序", TrayMenuHandler)
+  A_TrayMenu.Add("打开设置", TrayMenuHandler)
+  A_TrayMenu.Add("帮助文档", TrayMenuHandler)
+  A_TrayMenu.Add("查看窗口标识符", TrayMenuHandler)
+  A_TrayMenu.Default := "暂停"
+  A_TrayMenu.ClickCount := 1
+
+  A_IconTip := "MyKeymap 2.0.0 created by 咸鱼阿康"
+  TraySetIcon("./bin/icons/logo.ico")
+}
