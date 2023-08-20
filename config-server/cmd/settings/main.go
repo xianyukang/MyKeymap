@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/static"
@@ -56,7 +57,7 @@ func server(errorLog *strings.Builder, hasError chan<- struct{}, debug bool) {
 	}
 
 	router := gin.Default()
-	router.Use(ErrorHandler(hasError))
+	router.Use(PanicHandler(hasError))
 	router.Use(cors.Default())
 	router.Use(IndexHandler())
 	router.Use(static.Serve("/", static.LocalFile("./site", false)))
@@ -90,22 +91,13 @@ func openBrowser() {
 }
 
 func IndexHandler() gin.HandlerFunc {
-
-	// File Server 返回文件时设置了 Last-Modified 响应头,  所以浏览器会使用缓存
-	// 从旧版本升级时,  比如从 MyKeymap 1.1 升级到了 1.2,  打开浏览器会发现版本依旧是 1.1
-	// 解决办法是不让 File Server 返回 index.html,  去掉 Last-Modified 响应头以关掉缓存机制
-
-	// 假设有这样一串中间件 A->B->C:
-	// (1) 首先无论加不加 c.Next() 中间件都会顺序执行
-	// (2) 其中的 A 想在 B、C 处理完成后,  做一些后续工作,  这时候才需要用到 c.Next()
-	// (3) 如果 A 像中断流程, 那么调用一下 c.Abort()
-
 	return func(c *gin.Context) {
 		if c.Request.URL.Path == "/" {
 			data, err := ioutil.ReadFile("./site/index.html")
 			if err != nil {
 				panic(err)
 			}
+			c.Header("Cache-Control", "no-store")
 			c.Data(http.StatusOK, "text/html; charset=utf-8", data)
 			c.Abort()
 		}
@@ -120,11 +112,7 @@ func GetConfigHandler(c *gin.Context) {
 	c.Data(http.StatusOK, gin.MIMEJSON, data)
 }
 
-func ErrorHandler(hasError chan<- struct{}) gin.HandlerFunc {
-	// 参考这几篇教程
-	// https://juejin.cn/post/7064770224515448840
-	// https://segmentfault.com/a/1190000020358030
-	// https://stackoverflow.com/questions/69948784/how-to-handle-errors-in-gin-middleware
+func PanicHandler(hasError chan<- struct{}) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {
@@ -181,19 +169,16 @@ func SaveConfigHandler(c *gin.Context) {
 }
 
 func saveConfigFile(config map[string]interface{}) {
-	// os.Create 会清空文件, 这一步应该放在最后, 避免遇错返回, 但文件却被清空了
-	f, err := os.Create("../data/config.json")
-	if err != nil {
-		panic(err)
-	}
-	defer func(f *os.File) {
-		_ = f.Close()
-	}(f)
-
-	encoder := json.NewEncoder(f)
+	// 先写到缓冲区,  如果直接写文件的话, 当编码过程遇到错误时, 会导致文件损坏
+	buf := new(bytes.Buffer)
+	encoder := json.NewEncoder(buf)
 	encoder.SetIndent("", "    ")
 	encoder.SetEscapeHTML(false)
 	if err := encoder.Encode(config); err != nil {
+		panic(err)
+	}
+
+	if err := os.WriteFile("../data/config.json", buf.Bytes(), 0644); err != nil {
 		panic(err)
 	}
 }
