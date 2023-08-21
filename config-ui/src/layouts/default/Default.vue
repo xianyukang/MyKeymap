@@ -1,12 +1,13 @@
 <template>
-  <v-app>
-    <default-bar />
-
+  <v-app v-if="store.config">
+    <navigation-drawer />
     <default-view />
   </v-app>
 </template>
 
 <script lang="ts" setup>
-  import DefaultBar from './AppBar.vue'
-  import DefaultView from './View.vue'
+import { useConfigStore } from '@/store/config';
+import NavigationDrawer from './NavigationDrawer.vue';
+import DefaultView from './View.vue'
+const store = useConfigStore()
 </script>
