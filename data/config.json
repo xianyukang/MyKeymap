@@ -297,7 +297,7 @@
     {
       "id": 6,
       "name": "Tab 模式",
-      "enable": true,
+      "enable": false,
       "hotkey": "*tab",
       "parentID": null,
       "hotkeys": {
@@ -339,7 +339,7 @@
     {
       "id": 8,
       "name": "句号模式",
-      "enable": true,
+      "enable": false,
       "hotkey": "*.",
       "parentID": null,
       "hotkeys": {
@@ -369,7 +369,7 @@
     {
       "id": 9,
       "name": "空格模式",
-      "enable": true,
+      "enable": false,
       "hotkey": "*space",
       "parentID": null,
       "hotkeys": {
