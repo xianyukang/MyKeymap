@@ -8,27 +8,28 @@ export const useConfigStore = defineStore('config', () => {
   const { isFetching, data, error } = useFetch(url).json<Config>()
 
   const enabledKeymaps = computed(() => {
-    return data.value?.keymaps.filter(x => x.enable)
+    return data.value!.keymaps.filter(x => x.enable)
   })
 
   const route = useRoute()
   const keymap = computed(() => {
-    return data.value?.keymaps.find(x => x.id + '' === route.params.id)
+    return data.value!.keymaps.find(x => x.id + '' === route.params.id)!
   })
 
   // 根据选中的 hotkey 和 windowGroupID, 返回对应的 action
   const hotkey = ref("")
   const windowGroupID = ref(0)
-  const action = computed(() => getAction(keymap.value, hotkey.value, windowGroupID.value))
+  const action = computed(() => _getAction(keymap.value, hotkey.value, windowGroupID.value))
 
-  return { isFetching, config: data, error, enabledKeymaps, keymap, hotkey, windowGroupID, action }
+  function getAction(hotkey: string) {
+    return _getAction(keymap.value, hotkey, windowGroupID.value)
+  }
+
+  return { isFetching, config: data, error, enabledKeymaps, keymap, hotkey, windowGroupID, action, getAction }
 })
 
 
-function getAction(keymap: Keymap | undefined, hotkey: string, windowGroupID: number): Action | null {
-  if (!keymap || !hotkey) {
-    return null
-  }
+function _getAction(keymap: Keymap, hotkey: string, windowGroupID: number): Action {
   // keymap 中此热键还不存在, 那么初始化一下
   let actions = keymap.hotkeys[hotkey]
   if (!actions) {
@@ -51,18 +52,20 @@ interface Config {
   keymaps: Keymap[]
 }
 
-interface Keymap {
+export interface Keymap {
   id: number
   name: string
   enable: boolean
+  hotkey: string
   hotkeys: Hotkeys
+  extraHotkeys: string[]
 }
 
 interface Hotkeys {
   [key: string]: Action[]
 }
 
-interface Action {
+export interface Action {
   windowGroupID: number
   actionTypeID?: number
 }
