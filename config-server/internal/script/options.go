@@ -1,8 +1,8 @@
 package script
 
 type Options struct {
-	WindowGroup   []WindowGroup       `json:"windowGroup"`
-	CapsAbbr      map[string][]Action `json:"capsAbbr"`
+	WindowGroups  []WindowGroup       `json:"windowGroups"`
+	CapslockAbbr  map[string][]Action `json:"capslockAbbr"`
 	SemicolonAbbr map[string][]Action `json:"semicolonAbbr"`
 }
 

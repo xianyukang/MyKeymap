@@ -37,8 +37,8 @@ InitKeymap()
   taskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "x", "space")
   fast := MouseKeymap(110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.ClearLock)
   slow := MouseKeymap(10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.UnLock)
-{{ if .CapsAbbrEnabled }}
-  capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "{{ .CapsAbbrKeys }}")
+{{ if .CapslockAbbrEnabled }}
+  capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "{{ .CapslockAbbrKeys }}")
   capsHook.KeyOpt("{CapsLock}", "S")
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe", , , &capsAbbrWindowPid)
@@ -65,10 +65,10 @@ InitKeymap()
 {{- end }}
 {{ end }}
 
-{{- if .CapsAbbrEnabled -}}
+{{- if .CapslockAbbrEnabled -}}
 ExecCapslockAbbr(command) {
   switch command {
-{{ abbrToCode .Options.CapsAbbr }}  }
+{{ abbrToCode .Options.CapslockAbbr }}  }
 }
 {{- else -}}
 ExecCapslockAbbr(command) {

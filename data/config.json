@@ -414,7 +414,7 @@
     }
   ],
   "options": {
-    "capsAbbr": {
+    "capslockAbbr": {
       "dd": [
         {
           "windowGroupID": 0,

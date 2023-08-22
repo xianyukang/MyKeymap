@@ -63,7 +63,7 @@ func (c *Config) GetWinTitle(a Action) (winTitle string, conditionType int) {
 		return `""`, 0
 	}
 
-	for _, g := range c.Options.WindowGroup {
+	for _, g := range c.Options.WindowGroups {
 		if g.ID == a.WindowGroupID {
 			if g.ConditionType == 5 {
 				return fmt.Sprintf(`'%s'`, g.Value), 5
@@ -87,7 +87,7 @@ func (c *Config) GetHotkeyContext(a Action) string {
 	return fmt.Sprintf(", , %s, %d", winTitle, conditionType)
 }
 
-func (c *Config) CapsAbbrEnabled() bool {
+func (c *Config) CapslockAbbrEnabled() bool {
 	for _, km := range c.Keymaps {
 		for _, actions := range km.Hotkeys {
 			for _, a := range actions {
@@ -100,9 +100,9 @@ func (c *Config) CapsAbbrEnabled() bool {
 	return false
 }
 
-func (c *Config) CapsAbbrKeys() string {
+func (c *Config) CapslockAbbrKeys() string {
 	var keys []string
-	for key := range c.Options.CapsAbbr {
+	for key := range c.Options.CapslockAbbr {
 		keys = append(keys, key)
 	}
 	return strings.Join(keys, ",")

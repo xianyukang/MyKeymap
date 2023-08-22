@@ -51,99 +51,9 @@ InitKeymap()
   theRealRButton := SysGet(23) ? "{LButton}" : "{RButton}"
 
 
-  ; J 模式
-  km0 := KeymapManager.NewKeymap("*j")
-  km := km0
-  km.RemapKey(",", "delete")
-  km.RemapKey(".", "insert")
-  km.RemapKey("a", "home")
-  km.RemapKey("c", "backspace")
-  km.RemapKey("d", "down")
-  km.RemapKey("e", "up")
-  km.RemapKey("f", "right")
-  km.RemapKey("g", "end")
-  km.RemapKey("q", "appskey")
-  km.RemapKey("r", "tab")
-  km.RemapKey("s", "left")
-  km.RemapKey("x", "esc")
-  km.SendKeys("*2", "{blind}^+{tab}")
-  km.SendKeys("*3", "{blind}^{tab}")
-  km.SendKeys("*b", "{blind}^{backspace}")
-  km.SendKeys("*v", "{blind}^{right}")
-  km.SendKeys("*w", "{blind}+{tab}")
-  km.SendKeys("*z", "{blind}^{left}")
-  km.SendKeys("*space", "{blind}{enter}")
-  km.SendKeys("singlePress", "{blind}{j}")
-
-  ; J + K模式
-  km1 := KeymapManager.AddSubKeymap(km0, "*k")
-  km := km1
-  km.SendKeys("*a", "{blind}+{home}")
-  km.SendKeys("*c", "{blind}{backspace}")
-  km.SendKeys("*d", "{blind}+{down}")
-  km.SendKeys("*e", "{blind}+{up}")
-  km.SendKeys("*f", "{blind}+{right}")
-  km.SendKeys("*g", "{blind}+{end}")
-  km.SendKeys("*s", "{blind}+{left}")
-  km.SendKeys("*v", "{blind}^+{right}")
-  km.SendKeys("*x", "{blind}+{esc}")
-  km.SendKeys("*z", "{blind}^+{left}")
-
-  ; 3 模式
-  km2 := KeymapManager.NewKeymap("*3")
-  km := km2
-  km.RemapKey("0", "f10")
-  km.RemapKey("2", "f2")
-  km.RemapKey("4", "f4")
-  km.RemapKey("5", "f5")
-  km.RemapKey("9", "f9")
-  km.RemapKey("b", "7")
-  km.RemapKey("e", "f11")
-  km.RemapKey("h", "0")
-  km.RemapKey("i", "5")
-  km.RemapKey("j", "1")
-  km.RemapKey("k", "2")
-  km.RemapKey("l", "3")
-  km.RemapKey("m", "9")
-  km.RemapKey("n", "8")
-  km.RemapKey("o", "6")
-  km.RemapKey("r", "f12")
-  km.RemapKey("t", "volume_up")
-  km.RemapKey("u", "4")
-  km.RemapKey("w", "volume_down")
-  km.RemapKey("space", "f1")
-  km.MapSinglePress(km.ToggleLock)
-
-  ; 分号模式
-  km3 := KeymapManager.NewKeymap("*;")
-  km := km3
-  km.SendKeys("*a", "{blind}*")
-  km.SendKeys("*b", "{blind}%")
-  km.SendKeys("*c", "{blind}.")
-  km.SendKeys("*d", "{blind}=")
-  km.SendKeys("*e", "{blind}{^}")
-  km.SendKeys("*f", "{blind}>")
-  km.SendKeys("*g", "{blind}{!}")
-  km.SendKeys("*h", "{blind}{+}")
-  km.SendKeys("*i", "{blind}:")
-  km.SendKeys("*j", "{blind};")
-  km.SendKeys("*k", "{blind}``")
-  km.SendKeys("*m", "{blind}-")
-  km.SendKeys("*n", "{blind}/")
-  km.SendKeys("*r", "{blind}&")
-  km.SendKeys("*s", "{blind}<")
-  km.SendKeys("*t", "{blind}~")
-  km.SendKeys("*u", "{blind}$")
-  km.SendKeys("*v", "{blind}|")
-  km.SendKeys("*w", "{blind}{#}")
-  km.SendKeys("*x", "{blind}_")
-  km.SendKeys("*y", "{blind}@")
-  km.SendKeys("*z", "{blind}\")
-  km.Map("singlePress", _ => EnterSemicolonAbbr(semiHook, semiHookAbbrWindow))
-
   ; Capslock
-  km4 := KeymapManager.NewKeymap("*capslock")
-  km := km4
+  km0 := KeymapManager.NewKeymap("*capslock")
+  km := km0
   km.Map("singlePress", _ => EnterCapslockAbbr(capsHook))
   km.Map("*,", fast.LButtonDown()), slow.Map("*,", slow.LButtonDown())
   km.Map("*;", fast.ScrollWheelRight), slow.Map("*;", slow.ScrollWheelRight)
@@ -171,8 +81,8 @@ InitKeymap()
   km.Map("*c", _ => ActivateOrRun(, "bin\SoundControl.exe"))
 
   ; Capslock + F
-  km5 := KeymapManager.AddSubKeymap(km4, "*f")
-  km := km5
+  km1 := KeymapManager.AddSubKeymap(km0, "*f")
+  km := km1
   km.Map("*a", _ => ActivateOrRun("ahk_exe WindowsTerminal.exe", "wt.exe"))
   km.Map("*d", _ => ActivateOrRun("ahk_exe msedge.exe", "msedge.exe"))
   km.Map("*e", _ => ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\"))
@@ -191,21 +101,105 @@ InitKeymap()
   km.Map("*m", _ => ProcessExistSendKeyOrRun("TIM.exe", "^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk"))
 
   ; Capslock + Space
-  km6 := KeymapManager.AddSubKeymap(km4, "*space")
-  km := km6
+  km2 := KeymapManager.AddSubKeymap(km0, "*space")
+  km := km2
   km.Map("*n", _ => ActivateOrRun("ahk_exe datagrip64.exe", A_Programs "\JetBrains Toolbox\DataGrip.lnk"))
   km.Map("*w", _ => ProcessExistSendKeyOrRun("WeChat.exe", "^!w", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\微信\微信.lnk"))
 
-  ; 鼠标右键
-  km7 := KeymapManager.NewKeymap("*rbutton")
-  km := km7
+  ; J 模式
+  km3 := KeymapManager.NewKeymap("*j")
+  km := km3
+  km.RemapKey(",", "delete")
+  km.RemapKey(".", "insert")
+  km.RemapKey("a", "home")
   km.RemapKey("c", "backspace")
+  km.RemapKey("d", "down")
+  km.RemapKey("e", "up")
+  km.RemapKey("f", "right")
+  km.RemapKey("g", "end")
+  km.RemapKey("q", "appskey")
+  km.RemapKey("r", "tab")
+  km.RemapKey("s", "left")
   km.RemapKey("x", "esc")
+  km.SendKeys("*2", "{blind}^+{tab}")
+  km.SendKeys("*3", "{blind}^{tab}")
+  km.SendKeys("*b", "{blind}^{backspace}")
+  km.SendKeys("*v", "{blind}^{right}")
+  km.SendKeys("*w", "{blind}+{tab}")
+  km.SendKeys("*z", "{blind}^{left}")
   km.SendKeys("*space", "{blind}{enter}")
-  km.SendKeys("*lbutton", "^!{tab}")
-  km.SendKeys("*wheelup", "^+{tab}")
-  km.SendKeys("*wheeldown", "^{tab}")
-  km.SendKeys("singlePress", "{blind}" theRealRButton)
+  km.SendKeys("singlePress", "{blind}{j}")
+
+  ; J + K 模式
+  km4 := KeymapManager.AddSubKeymap(km3, "*k")
+  km := km4
+  km.SendKeys("*a", "{blind}+{home}")
+  km.SendKeys("*c", "{blind}{backspace}")
+  km.SendKeys("*d", "{blind}+{down}")
+  km.SendKeys("*e", "{blind}+{up}")
+  km.SendKeys("*f", "{blind}+{right}")
+  km.SendKeys("*g", "{blind}+{end}")
+  km.SendKeys("*s", "{blind}+{left}")
+  km.SendKeys("*v", "{blind}^+{right}")
+  km.SendKeys("*x", "{blind}+{esc}")
+  km.SendKeys("*z", "{blind}^+{left}")
+
+  ; 3 模式
+  km5 := KeymapManager.NewKeymap("*3")
+  km := km5
+  km.RemapKey("0", "f10")
+  km.RemapKey("2", "f2")
+  km.RemapKey("4", "f4")
+  km.RemapKey("5", "f5")
+  km.RemapKey("9", "f9")
+  km.RemapKey("b", "7")
+  km.RemapKey("e", "f11")
+  km.RemapKey("h", "0")
+  km.RemapKey("i", "5")
+  km.RemapKey("j", "1")
+  km.RemapKey("k", "2")
+  km.RemapKey("l", "3")
+  km.RemapKey("m", "9")
+  km.RemapKey("n", "8")
+  km.RemapKey("o", "6")
+  km.RemapKey("r", "f12")
+  km.RemapKey("t", "volume_up")
+  km.RemapKey("u", "4")
+  km.RemapKey("w", "volume_down")
+  km.RemapKey("space", "f1")
+  km.MapSinglePress(km.ToggleLock)
+
+  ; Tab 模式
+  km6 := KeymapManager.NewKeymap("*tab")
+  km := km6
+  km.SendKeys("singlePress", "{blind}{tab}")
+
+  ; 分号模式
+  km7 := KeymapManager.NewKeymap("*;")
+  km := km7
+  km.SendKeys("*a", "{blind}*")
+  km.SendKeys("*b", "{blind}%")
+  km.SendKeys("*c", "{blind}.")
+  km.SendKeys("*d", "{blind}=")
+  km.SendKeys("*e", "{blind}{^}")
+  km.SendKeys("*f", "{blind}>")
+  km.SendKeys("*g", "{blind}{!}")
+  km.SendKeys("*h", "{blind}{+}")
+  km.SendKeys("*i", "{blind}:")
+  km.SendKeys("*j", "{blind};")
+  km.SendKeys("*k", "{blind}``")
+  km.SendKeys("*m", "{blind}-")
+  km.SendKeys("*n", "{blind}/")
+  km.SendKeys("*r", "{blind}&")
+  km.SendKeys("*s", "{blind}<")
+  km.SendKeys("*t", "{blind}~")
+  km.SendKeys("*u", "{blind}$")
+  km.SendKeys("*v", "{blind}|")
+  km.SendKeys("*w", "{blind}{#}")
+  km.SendKeys("*x", "{blind}_")
+  km.SendKeys("*y", "{blind}@")
+  km.SendKeys("*z", "{blind}\")
+  km.Map("singlePress", _ => EnterSemicolonAbbr(semiHook, semiHookAbbrWindow))
 
   ; 句号模式
   km8 := KeymapManager.NewKeymap("*.")
@@ -255,10 +249,16 @@ InitKeymap()
   km.SendKeys("*space", "{blind}{enter}")
   km.SendKeys("singlePress", "{blind}{space}")
 
-  ; Tab 模式
-  km10 := KeymapManager.NewKeymap("*tab")
+  ; 鼠标右键
+  km10 := KeymapManager.NewKeymap("*rbutton")
   km := km10
-  km.SendKeys("singlePress", "{blind}{tab}")
+  km.RemapKey("c", "backspace")
+  km.RemapKey("x", "esc")
+  km.SendKeys("*space", "{blind}{enter}")
+  km.SendKeys("*lbutton", "^!{tab}")
+  km.SendKeys("*wheelup", "^+{tab}")
+  km.SendKeys("*wheeldown", "^{tab}")
+  km.SendKeys("singlePress", "{blind}" theRealRButton)
 
 
   KeymapManager.GlobalKeymap.Enable()
