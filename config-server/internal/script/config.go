@@ -91,7 +91,7 @@ func (c *Config) CapslockAbbrEnabled() bool {
 	for _, km := range c.Keymaps {
 		for _, actions := range km.Hotkeys {
 			for _, a := range actions {
-				if a.TypeID == 2 && a.ValueID == 1 {
+				if a.TypeID == 9 && a.ValueID == 1 {
 					return true
 				}
 			}
@@ -112,7 +112,7 @@ func (c *Config) SemicolonAbbrEnabled() bool {
 	for _, km := range c.Keymaps {
 		for _, actions := range km.Hotkeys {
 			for _, a := range actions {
-				if a.TypeID == 2 && a.ValueID == 2 {
+				if a.TypeID == 9 && a.ValueID == 2 {
 					return true
 				}
 			}

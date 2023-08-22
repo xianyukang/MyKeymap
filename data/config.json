@@ -8,33 +8,33 @@
       "hotkey": "*capslock",
       "parentID": null,
       "hotkeys": {
-        "singlePress": [{ "windowGroupID": 0, "actionTypeID": 2, "actionValueID": 1 }],
-        "*i": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 0 }],
-        "*k": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 1 }],
-        "*j": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 2 }],
-        "*l": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 3 }],
-        "*u": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 4 }],
-        "*o": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 5 }],
-        "*h": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 6 }],
-        "*;": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 7 }],
-        "*n": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 8 }],
-        "*m": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 9 }],
-        "*,": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 10 }],
-        "*space": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 11 }],
+        "singlePress": [{ "windowGroupID": 0, "actionTypeID": 9, "actionValueID": 1 }],
+        "*i": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 0 }],
+        "*k": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 1 }],
+        "*j": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 2 }],
+        "*l": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 3 }],
+        "*u": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 4 }],
+        "*o": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 5 }],
+        "*h": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 6 }],
+        "*;": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 7 }],
+        "*n": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 8 }],
+        "*m": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 9 }],
+        "*,": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 10 }],
+        "*space": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 11 }],
 
-        "*e": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 0 }],
-        "*x": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 1 }],
-        "*r": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 2 }],
-        "*s": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 3 }],
-        "*a": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 4 }],
-        "*w": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 5 }],
-        "*v": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 6 }],
-        "*y": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 7 }],
-        "*p": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 8 }],
-        "*q": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 9 }],
-        "*b": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 10 }],
+        "*e": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 0 }],
+        "*x": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 1 }],
+        "*r": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 2 }],
+        "*s": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 3 }],
+        "*a": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 4 }],
+        "*w": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 5 }],
+        "*v": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 6 }],
+        "*y": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 7 }],
+        "*p": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 8 }],
+        "*q": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 9 }],
+        "*b": [{ "windowGroupID": 0, "actionTypeID": 3, "actionValueID": 10 }],
 
-        "*c": [{ "windowGroupID": 0, "actionTypeID": 5, "actionValueID": 0 }]
+        "*c": [{ "windowGroupID": 0, "actionTypeID": 2, "actionValueID": 0 }]
       }
     },
     {
@@ -47,7 +47,7 @@
         "*w": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
+            "actionTypeID": 1,
             "winTitle": "ahk_exe chrome.exe",
             "target": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk",
             "comment": "Chrome"
@@ -56,7 +56,7 @@
         "*a": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
+            "actionTypeID": 1,
             "winTitle": "ahk_exe WindowsTerminal.exe",
             "target": "wt.exe",
             "comment": "Windows Terminal"
@@ -65,7 +65,7 @@
         "*d": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
+            "actionTypeID": 1,
             "winTitle": "ahk_exe msedge.exe",
             "target": "msedge.exe",
             "comment": "Edge"
@@ -74,7 +74,7 @@
         "*e": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
+            "actionTypeID": 1,
             "winTitle": "ahk_class CabinetWClass ahk_exe Explorer.EXE",
             "target": "D:\\",
             "comment": "File Explorer"
@@ -83,7 +83,7 @@
         "*h": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
+            "actionTypeID": 1,
             "winTitle": "- Microsoft Visual Studio",
             "target": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio 2019.lnk",
             "comment": "Visual Studio"
@@ -92,7 +92,7 @@
         "*i": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
+            "actionTypeID": 1,
             "winTitle": "ahk_exe Typora.exe",
             "target": "C:\\Program Files\\Typora\\Typora.exe",
             "comment": "Typora"
@@ -101,7 +101,7 @@
         "*j": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
+            "actionTypeID": 1,
             "winTitle": "ahk_exe idea64.exe",
             "target": "ahk-expression: A_Programs \"\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk\"",
             "comment": "IntelliJ IDEA"
@@ -110,7 +110,7 @@
         "*n": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
+            "actionTypeID": 1,
             "winTitle": "ahk_exe goland64.exe",
             "target": "ahk-expression: A_Programs \"\\JetBrains Toolbox\\GoLand.lnk\"",
             "comment": "GoLand"
@@ -119,7 +119,7 @@
         "*o": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
+            "actionTypeID": 1,
             "winTitle": "ahk_exe ONENOTE.EXE",
             "target": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\OneNote.lnk",
             "comment": "OneNote 桌面版"
@@ -128,7 +128,7 @@
         "*p": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
+            "actionTypeID": 1,
             "winTitle": "ahk_exe POWERPNT.EXE",
             "target": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\PowerPoint.lnk",
             "comment": "PowerPoint"
@@ -137,7 +137,7 @@
         "*q": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
+            "actionTypeID": 1,
             "winTitle": "ahk_class EVERYTHING",
             "target": "C:\\Program Files\\Everything\\Everything.exe",
             "comment": "Everything"
@@ -146,7 +146,7 @@
         "*r": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
+            "actionTypeID": 1,
             "winTitle": "ahk_exe FoxitReader.exe",
             "target": "D:\\install\\Foxit Reader\\FoxitReader.exe",
             "comment": "FoxitReader"
@@ -155,7 +155,7 @@
         "*k": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
+            "actionTypeID": 1,
             "winTitle": "ahk_class PotPlayer64",
             "target": "ahk-expression: A_ProgramsCommon \"\\Daum\\PotPlayer 64 bit\\PotPlayer 64 bit.lnk\"",
             "comment": "PotPlayer"
@@ -164,7 +164,7 @@
         "*l": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
+            "actionTypeID": 1,
             "winTitle": "ahk_exe EXCEL.EXE",
             "target": "ahk-expression: A_ProgramsCommon \"\\Excel.lnk\"",
             "comment": "Excel"
@@ -173,7 +173,7 @@
         "*m": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 7,
+            "actionTypeID": 8,
             "ahkCode": "ProcessExistSendKeyOrRun(\"TIM.exe\", \"^!z\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\腾讯软件\\TIM\\TIM.lnk\")",
             "comment": "TIM"
           }
@@ -181,7 +181,7 @@
         "*s": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
+            "actionTypeID": 1,
             "winTitle": "ahk_exe Code.exe",
             "target": "ahk-expression: A_Programs \"\\Visual Studio Code\\Visual Studio Code.lnk\"",
             "comment": "Visual Studio Code"
@@ -199,7 +199,7 @@
         "*n": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
+            "actionTypeID": 1,
             "winTitle": "ahk_exe datagrip64.exe",
             "target": "ahk-expression: A_Programs \"\\JetBrains Toolbox\\DataGrip.lnk\"",
             "comment": "DataGrip"
@@ -208,7 +208,7 @@
         "*w": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 7,
+            "actionTypeID": 8,
             "ahkCode": "ProcessExistSendKeyOrRun(\"WeChat.exe\", \"^!w\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\微信\\微信.lnk\")",
             "comment": "微信"
           }
@@ -222,27 +222,27 @@
       "hotkey": "*j",
       "parentID": null,
       "hotkeys": {
-        "*e": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "up" }],
-        "*d": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "down" }],
-        "*s": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "left" }],
-        "*f": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "right" }],
-        "*a": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "home" }],
-        "*g": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "end" }],
-        "*c": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "backspace" }],
-        "*x": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "esc" }],
-        "*r": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "tab" }],
-        "*q": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "appskey" }],
-        "*,": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "delete" }],
-        "*.": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "insert" }],
+        "*e": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "up" }],
+        "*d": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "down" }],
+        "*s": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "left" }],
+        "*f": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "right" }],
+        "*a": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "home" }],
+        "*g": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "end" }],
+        "*c": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "backspace" }],
+        "*x": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "esc" }],
+        "*r": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "tab" }],
+        "*q": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "appskey" }],
+        "*,": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "delete" }],
+        "*.": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "insert" }],
 
-        "*w": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}+{tab}" }],
-        "*b": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^{backspace}" }],
-        "*z": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^{left}" }],
-        "*v": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^{right}" }],
-        "*2": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^+{tab}" }],
-        "*3": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^{tab}" }],
-        "*space": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}{enter}" }],
-        "singlePress": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}{j}" }]
+        "*w": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}+{tab}" }],
+        "*b": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^{backspace}" }],
+        "*z": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^{left}" }],
+        "*v": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^{right}" }],
+        "*2": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^+{tab}" }],
+        "*3": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^{tab}" }],
+        "*space": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}{enter}" }],
+        "singlePress": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}{j}" }]
       }
     },
     {
@@ -252,16 +252,16 @@
       "hotkey": "*k",
       "parentID": 3,
       "hotkeys": {
-        "*e": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}+{up}" }],
-        "*d": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}+{down}" }],
-        "*s": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}+{left}" }],
-        "*f": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}+{right}" }],
-        "*a": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}+{home}" }],
-        "*g": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}+{end}" }],
-        "*x": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}+{esc}" }],
-        "*z": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^+{left}" }],
-        "*v": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^+{right}" }],
-        "*c": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}{backspace}" }]
+        "*e": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}+{up}" }],
+        "*d": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}+{down}" }],
+        "*s": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}+{left}" }],
+        "*f": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}+{right}" }],
+        "*a": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}+{home}" }],
+        "*g": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}+{end}" }],
+        "*x": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}+{esc}" }],
+        "*z": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^+{left}" }],
+        "*v": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^+{right}" }],
+        "*c": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}{backspace}" }]
       }
     },
     {
@@ -271,27 +271,27 @@
       "hotkey": "*3",
       "parentID": null,
       "hotkeys": {
-        "h": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "0" }],
-        "j": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "1" }],
-        "k": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "2" }],
-        "l": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "3" }],
-        "u": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "4" }],
-        "i": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "5" }],
-        "o": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "6" }],
-        "b": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "7" }],
-        "n": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "8" }],
-        "m": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "9" }],
-        "2": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "f2" }],
-        "4": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "f4" }],
-        "5": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "f5" }],
-        "9": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "f9" }],
-        "0": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "f10" }],
-        "e": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "f11" }],
-        "r": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "f12" }],
-        "w": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "volume_down" }],
-        "t": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "volume_up" }],
-        "space": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "f1" }],
-        "singlePress": [{ "windowGroupID": 0, "actionTypeID": 2, "actionValueID": 0 }]
+        "h": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "0" }],
+        "j": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "1" }],
+        "k": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "2" }],
+        "l": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "3" }],
+        "u": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "4" }],
+        "i": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "5" }],
+        "o": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "6" }],
+        "b": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "7" }],
+        "n": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "8" }],
+        "m": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "9" }],
+        "2": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "f2" }],
+        "4": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "f4" }],
+        "5": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "f5" }],
+        "9": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "f9" }],
+        "0": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "f10" }],
+        "e": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "f11" }],
+        "r": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "f12" }],
+        "w": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "volume_down" }],
+        "t": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "volume_up" }],
+        "space": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "f1" }],
+        "singlePress": [{ "windowGroupID": 0, "actionTypeID": 9, "actionValueID": 0 }]
       }
     },
     {
@@ -301,7 +301,7 @@
       "hotkey": "*tab",
       "parentID": null,
       "hotkeys": {
-        "singlePress": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}{tab}" }]
+        "singlePress": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}{tab}" }]
       }
     },
     {
@@ -311,29 +311,29 @@
       "hotkey": "*;",
       "parentID": null,
       "hotkeys": {
-        "*u": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}$" }],
-        "*r": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}&" }],
-        "*a": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}*" }],
-        "*m": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}-" }],
-        "*c": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}." }],
-        "*n": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}/" }],
-        "*i": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}:" }],
-        "*s": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}<" }],
-        "*d": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}=" }],
-        "*f": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}>" }],
-        "*y": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}@" }],
-        "*z": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}\\" }],
-        "*x": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}_" }],
-        "*b": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}%" }],
-        "*j": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind};" }],
-        "*k": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}``" }],
-        "*g": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}{!}" }],
-        "*w": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}{#}" }],
-        "*h": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}{+}" }],
-        "*e": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}{^}" }],
-        "*v": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}|" }],
-        "*t": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}~" }],
-        "singlePress": [{ "windowGroupID": 0, "actionTypeID": 2, "actionValueID": 2 }]
+        "*u": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}$" }],
+        "*r": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}&" }],
+        "*a": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}*" }],
+        "*m": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}-" }],
+        "*c": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}." }],
+        "*n": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}/" }],
+        "*i": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}:" }],
+        "*s": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}<" }],
+        "*d": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}=" }],
+        "*f": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}>" }],
+        "*y": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}@" }],
+        "*z": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}\\" }],
+        "*x": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}_" }],
+        "*b": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}%" }],
+        "*j": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind};" }],
+        "*k": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}``" }],
+        "*g": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}{!}" }],
+        "*w": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}{#}" }],
+        "*h": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}{+}" }],
+        "*e": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}{^}" }],
+        "*v": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}|" }],
+        "*t": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}~" }],
+        "singlePress": [{ "windowGroupID": 0, "actionTypeID": 9, "actionValueID": 2 }]
       }
     },
     {
@@ -343,27 +343,27 @@
       "hotkey": "*.",
       "parentID": null,
       "hotkeys": {
-        "*e": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "up" }],
-        "*d": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "down" }],
-        "*s": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "left" }],
-        "*f": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "right" }],
-        "*a": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "home" }],
-        "*g": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "end" }],
-        "*c": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "backspace" }],
-        "*x": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "esc" }],
-        "*r": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "tab" }],
-        "*q": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "appskey" }],
-        "*,": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "delete" }],
-        "*.": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "insert" }],
+        "*e": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "up" }],
+        "*d": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "down" }],
+        "*s": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "left" }],
+        "*f": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "right" }],
+        "*a": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "home" }],
+        "*g": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "end" }],
+        "*c": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "backspace" }],
+        "*x": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "esc" }],
+        "*r": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "tab" }],
+        "*q": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "appskey" }],
+        "*,": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "delete" }],
+        "*.": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "insert" }],
 
-        "*w": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}+{tab}" }],
-        "*b": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^{backspace}" }],
-        "*z": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^{left}" }],
-        "*v": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^{right}" }],
-        "*2": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^+{tab}" }],
-        "*3": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^{tab}" }],
-        "*space": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}{enter}" }],
-        "singlePress": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}{.}" }]
+        "*w": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}+{tab}" }],
+        "*b": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^{backspace}" }],
+        "*z": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^{left}" }],
+        "*v": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^{right}" }],
+        "*2": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^+{tab}" }],
+        "*3": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^{tab}" }],
+        "*space": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}{enter}" }],
+        "singlePress": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}{.}" }]
       }
     },
     {
@@ -373,27 +373,27 @@
       "hotkey": "*space",
       "parentID": null,
       "hotkeys": {
-        "*e": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "up" }],
-        "*d": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "down" }],
-        "*s": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "left" }],
-        "*f": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "right" }],
-        "*a": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "home" }],
-        "*g": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "end" }],
-        "*c": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "backspace" }],
-        "*x": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "esc" }],
-        "*r": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "tab" }],
-        "*q": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "appskey" }],
-        "*,": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "delete" }],
-        "*.": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "insert" }],
+        "*e": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "up" }],
+        "*d": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "down" }],
+        "*s": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "left" }],
+        "*f": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "right" }],
+        "*a": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "home" }],
+        "*g": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "end" }],
+        "*c": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "backspace" }],
+        "*x": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "esc" }],
+        "*r": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "tab" }],
+        "*q": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "appskey" }],
+        "*,": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "delete" }],
+        "*.": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "insert" }],
 
-        "*w": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}+{tab}" }],
-        "*b": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^{backspace}" }],
-        "*z": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^{left}" }],
-        "*v": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^{right}" }],
-        "*2": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^+{tab}" }],
-        "*3": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}^{tab}" }],
-        "*space": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}{enter}" }],
-        "singlePress": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}{space}" }]
+        "*w": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}+{tab}" }],
+        "*b": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^{backspace}" }],
+        "*z": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^{left}" }],
+        "*v": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^{right}" }],
+        "*2": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^+{tab}" }],
+        "*3": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}^{tab}" }],
+        "*space": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}{enter}" }],
+        "singlePress": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}{space}" }]
       }
     },
     {
@@ -403,22 +403,26 @@
       "hotkey": "*rbutton",
       "parentID": null,
       "hotkeys": {
-        "*x": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "esc" }],
-        "*c": [{ "windowGroupID": 0, "actionTypeID": 0, "remapToKey": "backspace" }],
-        "*space": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "{blind}{enter}" }],
-        "*lbutton": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "^!{tab}", "comment": "打开 Alt+Tab 窗口切换器" }],
-        "*wheelup": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "^+{tab}", "comment": "上一个标签" }],
-        "*wheeldown": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "^{tab}", "comment": "下一个标签" }],
-        "singlePress": [{ "windowGroupID": 0, "actionTypeID": 1, "keysToSend": "ahk-expression: \"{blind}\" theRealRButton" }]
+        "*x": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "esc" }],
+        "*c": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "backspace" }],
+        "*space": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}{enter}" }],
+        "*lbutton": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "^!{tab}", "comment": "打开 Alt+Tab 窗口切换器" }],
+        "*wheelup": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "^+{tab}", "comment": "上一个标签" }],
+        "*wheeldown": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "^{tab}", "comment": "下一个标签" }],
+        "singlePress": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "ahk-expression: \"{blind}\" theRealRButton" }]
       }
     }
   ],
   "options": {
+    "windowGroups": [
+      { "id": 0, "name": "全局生效" },
+      { "id": 1, "name": "浏览器", "value": "ahk_exe chrome.exe\nahk_exe msedge.exe\nahk_exe firefox.exe", "conditionType": 1 }
+    ],
     "capslockAbbr": {
       "dd": [
         {
           "windowGroupID": 0,
-          "actionTypeID": 6,
+          "actionTypeID": 1,
           "target": "shell:downloads",
           "comment": "打开「 下载 」文件夹"
         }
@@ -426,7 +430,7 @@
       "dm": [
         {
           "windowGroupID": 0,
-          "actionTypeID": 6,
+          "actionTypeID": 1,
           "target": "ahk-expression: A_WorkingDir",
           "comment": "打开「 MyKeymap 」文件夹"
         }
@@ -436,7 +440,7 @@
       "dd": [
         {
           "windowGroupID": 0,
-          "actionTypeID": 6,
+          "actionTypeID": 1,
           "target": "shell:downloads",
           "comment": "打开「 下载 」文件夹"
         }
@@ -444,7 +448,7 @@
       "dm": [
         {
           "windowGroupID": 0,
-          "actionTypeID": 6,
+          "actionTypeID": 1,
           "target": "ahk-expression: A_WorkingDir",
           "comment": "打开「 MyKeymap 」文件夹"
         }

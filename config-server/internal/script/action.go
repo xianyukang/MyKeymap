@@ -7,14 +7,15 @@ import (
 )
 
 var actionMap = map[int]func(Action, bool) string{
-	0: remapKey0,
-	1: sendKeys1,
-	2: mykeymapActions2,
-	3: mouseActions3,
-	4: windowActions4,
-	5: systemActions5,
-	6: launchAppOrActivateWindow6,
-	7: builtinFunctions7,
+	1: launchAppOrActivateWindow1,
+	2: systemActions2,
+	3: windowActions3,
+	4: mouseActions4,
+	5: remapKey5,
+	6: sendKeys6,
+	7: textFeatures7,
+	8: builtinFunctions8,
+	9: mykeymapActions9,
 }
 
 func actionToHotkey(action Action) string {
@@ -90,13 +91,13 @@ func toAHKFuncArg(val string) string {
 	return `"` + val + `"`
 }
 
-func remapKey0(a Action, inAbbrContext bool) string {
+func remapKey5(a Action, inAbbrContext bool) string {
 	key := strings.TrimLeft(a.Hotkey, "*")
 	ctx := Cfg.GetHotkeyContext(a)
 	return fmt.Sprintf(`km.RemapKey("%s", "%s"%s)`, key, a.RemapToKey, ctx)
 }
 
-func sendKeys1(a Action, inAbbrContext bool) string {
+func sendKeys6(a Action, inAbbrContext bool) string {
 	keys := toAHKFuncArg(a.KeysToSend)
 	if inAbbrContext {
 		return fmt.Sprintf(`Send(%s)`, keys)
@@ -105,7 +106,7 @@ func sendKeys1(a Action, inAbbrContext bool) string {
 	return fmt.Sprintf(`km.SendKeys("%s", %s%s)`, a.Hotkey, keys, ctx)
 }
 
-func mykeymapActions2(a Action, inAbbrContext bool) string {
+func mykeymapActions9(a Action, inAbbrContext bool) string {
 	ctx := Cfg.GetHotkeyContext(a)
 	switch a.ValueID {
 	case 0:
@@ -119,7 +120,7 @@ func mykeymapActions2(a Action, inAbbrContext bool) string {
 	}
 }
 
-func mouseActions3(a Action, inAbbrContext bool) string {
+func mouseActions4(a Action, inAbbrContext bool) string {
 	winTitle, conditionType := Cfg.GetWinTitle(a)
 	ctx := Cfg.GetHotkeyContext(a)
 	valueMap := map[int]string{
@@ -153,7 +154,7 @@ func mouseActions3(a Action, inAbbrContext bool) string {
 	return ""
 }
 
-func windowActions4(a Action, inAbbrContext bool) string {
+func windowActions3(a Action, inAbbrContext bool) string {
 	ctx := Cfg.GetHotkeyContext(a)
 	valueMap := map[int]string{
 		0:  `km.Map("%[1]s", _ => Send("^!{tab}"), taskSwitch%s)`,
@@ -174,7 +175,7 @@ func windowActions4(a Action, inAbbrContext bool) string {
 	return ""
 }
 
-func systemActions5(a Action, inAbbrContext bool) string {
+func systemActions2(a Action, inAbbrContext bool) string {
 	callMap := map[int]string{
 		0: `ActivateOrRun(, "bin\SoundControl.exe")`,
 	}
@@ -187,7 +188,7 @@ func systemActions5(a Action, inAbbrContext bool) string {
 	return ""
 }
 
-func launchAppOrActivateWindow6(a Action, inAbbrContext bool) string {
+func launchAppOrActivateWindow1(a Action, inAbbrContext bool) string {
 	ctx := Cfg.GetHotkeyContext(a)
 	winTitle := toAHKFuncArg(a.WinTitle)
 	target := toAHKFuncArg(a.Target)
@@ -206,9 +207,13 @@ func launchAppOrActivateWindow6(a Action, inAbbrContext bool) string {
 	return fmt.Sprintf(`km.Map("%[1]s", _ => %s%s)`, a.Hotkey, call, ctx)
 }
 
-func builtinFunctions7(a Action, inAbbrContext bool) string {
+func builtinFunctions8(a Action, inAbbrContext bool) string {
 	if inAbbrContext {
 		return a.AHKCode
 	}
 	return fmt.Sprintf(`km.Map("%[1]s", _ => %s%s)`, a.Hotkey, a.AHKCode, Cfg.GetHotkeyContext(a))
+}
+
+func textFeatures7(a Action, inAbbrContext bool) string {
+	return ""
 }
