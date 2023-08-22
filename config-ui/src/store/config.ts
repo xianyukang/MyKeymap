@@ -40,7 +40,7 @@ function _getAction(keymap: Keymap, hotkey: string, windowGroupID: number): Acti
   // 选择的 windowGroupID 还没有对应的 action, 那么初始化一下
   let found = actions.find(x => x.windowGroupID === windowGroupID)
   if (!found) {
-    found = { windowGroupID: windowGroupID }
+    found = { windowGroupID: windowGroupID, actionTypeID: 0 }
     actions.push(found)
   }
   return found
@@ -50,6 +50,7 @@ function _getAction(keymap: Keymap, hotkey: string, windowGroupID: number): Acti
 
 interface Config {
   keymaps: Keymap[]
+  options: Options
 }
 
 export interface Keymap {
@@ -68,4 +69,15 @@ interface Hotkeys {
 export interface Action {
   windowGroupID: number
   actionTypeID?: number
+}
+
+interface Options {
+  windowGroups: WindowGroup[]
+}
+
+interface WindowGroup {
+  id: number
+  name: string
+  value: string
+  conditionType: number
 }

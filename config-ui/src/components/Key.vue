@@ -21,7 +21,7 @@ function hotkeyColor(keymapHotkey: string, key: string, currentHotkey: string, a
   if (key === currentHotkey) {
     return { color: 'blue', dark: true }
   }
-  if (action.actionTypeID !== undefined) {
+  if (action.actionTypeID) {
     return { color: '#98FB98', dark: false }
   }
   return {}

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Action from "@/components/Action.vue";
+import Action from "@/actions/Action.vue";
 import Key from "@/components/Key.vue";
 import { useConfigStore } from "@/store/config";
 import { storeToRefs } from "pinia";
