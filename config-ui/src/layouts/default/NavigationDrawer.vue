@@ -60,7 +60,7 @@ const getIcon = (keymap: Keymap) => {
       <v-list-item-subtitle>version: 2.0.0</v-list-item-subtitle>
     </v-list-item>
 
-    <v-divider class="op-50"></v-divider>
+    <v-divider class="border-opacity-25"></v-divider>
 
     <v-list>
       <v-list-item v-for="(keymap, i) in enabledKeymaps" :key="i" :value="keymap"
@@ -73,7 +73,7 @@ const getIcon = (keymap: Keymap) => {
 
     </v-list>
 
-    <v-divider class="op-50"></v-divider>
+    <v-divider class="border-opacity-25"></v-divider>
   </v-navigation-drawer>
 </template>
 
