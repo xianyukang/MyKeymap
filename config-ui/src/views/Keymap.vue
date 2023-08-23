@@ -13,12 +13,9 @@ const keyboardRows = computed(() => {
     ["*q", "*w", "*e", "*r", "*t", "*y", "*u", "*i", "*o", "*p"],
     ["*a", "*s", "*d", "*f", "*g", "*h", "*j", "*k", "*l", "*;"],
     ["*z", "*x", "*c", "*v", "*b", "*n", "*m", "*,", "*.", "*/"],
-    ["*space", "*-", "*=", "*backspace", "*[", "*]", "*\\", "*'", "*enter"],
+    ["*space", "*-", "*=", "*backspace", "*[", "*]",  "*'", "*enter"],
   ];
-  if (keymap.value!.extraHotkeys) {
-    const lastRow = rows[rows.length - 1];
-    lastRow.push(...keymap.value!.extraHotkeys);
-  }
+  // TODO: 是鼠标右键则加上 *wheelup *wheeldown *lbutton 等热键
   return rows
 })
 
@@ -33,9 +30,14 @@ const keyboardRows = computed(() => {
         <Key :hotkey="hotkey" />
       </v-col>
     </v-row>
-    <Action />
+    <Action style="margin-top: 18px;" />
   </v-container>
   <div v-else>Error: keymap not found</div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.v-row+.v-row {
+  margin-top: 0px;
+}
+
+</style>
