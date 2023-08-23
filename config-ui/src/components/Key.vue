@@ -9,7 +9,7 @@ const props = defineProps<{
 }>();
 
 const keyText = computed(() => capitalize(trimStart(props.hotkey, '*')))
-const keyColor = computed(() => hotkeyColor(store.keymap.hotkey, props.hotkey, store.hotkey, store.getAction(props.hotkey)))
+const keyColor = computed(() => hotkeyColor(store.keymap!.hotkey, props.hotkey, store.hotkey, store.getAction(props.hotkey)))
 function click(hotkey: string) {
   store.hotkey = hotkey
 }
@@ -40,21 +40,19 @@ function disabled(keymapHotkey: string, hotkey: string): boolean {
 </script>
 
 <template>
-  <v-hover v-slot="{ isHovering, props }">
-    <v-card v-bind="props"
-            class="key"
-            height="53"
-            style="transition: none;"
-            elevation="4"
-            :width="width(keyText)"
-            :color="keyColor.color"
-            :dark="keyColor.dark"
-            :disabled="disabled(store.keymap.hotkey, hotkey)"
-            @click="click(hotkey)"
-            :class="['d-flex justify-center align-center']">
-      <div>{{ keyText }}</div>
-    </v-card>
-  </v-hover>
+  <v-card v-bind="props"
+          class="key"
+          height="53"
+          style="transition: none;"
+          elevation="4"
+          :width="width(keyText)"
+          :color="keyColor.color"
+          :dark="keyColor.dark"
+          :disabled="disabled(store.keymap!.hotkey, hotkey)"
+          @click="click(hotkey)"
+          :class="['d-flex justify-center align-center']">
+    <div>{{ keyText }}</div>
+  </v-card>
 </template>
 
 <style scoped>
