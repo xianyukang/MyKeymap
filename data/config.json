@@ -2,11 +2,11 @@
   "lastEdit": "2.0.0#1",
   "keymaps": [
     {
-      "id": 0,
+      "id": 5,
       "name": "Capslock",
       "enable": true,
       "hotkey": "*capslock",
-      "parentID": null,
+      "parentID": 0,
       "hotkeys": {
         "singlePress": [{ "windowGroupID": 0, "actionTypeID": 9, "actionValueID": 1 }],
         "*i": [{ "windowGroupID": 0, "actionTypeID": 4, "actionValueID": 0 }],
@@ -38,7 +38,7 @@
       }
     },
     {
-      "id": 1,
+      "id": 6,
       "name": "Capslock + F",
       "enable": true,
       "hotkey": "*f",
@@ -190,7 +190,7 @@
       }
     },
     {
-      "id": 2,
+      "id": 7,
       "name": "Capslock + Space",
       "enable": true,
       "hotkey": "*space",
@@ -216,11 +216,11 @@
       }
     },
     {
-      "id": 3,
+      "id": 8,
       "name": "J 模式",
       "enable": true,
       "hotkey": "*j",
-      "parentID": null,
+      "parentID": 0,
       "hotkeys": {
         "*e": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "up" }],
         "*d": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "down" }],
@@ -246,7 +246,7 @@
       }
     },
     {
-      "id": 4,
+      "id": 9,
       "name": "J + K 模式",
       "enable": true,
       "hotkey": "*k",
@@ -265,11 +265,11 @@
       }
     },
     {
-      "id": 5,
+      "id": 10,
       "name": "3 模式",
       "enable": true,
       "hotkey": "*3",
-      "parentID": null,
+      "parentID": 0,
       "hotkeys": {
         "h": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "0" }],
         "j": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "1" }],
@@ -295,21 +295,21 @@
       }
     },
     {
-      "id": 6,
+      "id": 11,
       "name": "Tab 模式",
       "enable": false,
       "hotkey": "*tab",
-      "parentID": null,
+      "parentID": 0,
       "hotkeys": {
         "singlePress": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}{tab}" }]
       }
     },
     {
-      "id": 7,
+      "id": 12,
       "name": "分号模式",
       "enable": true,
       "hotkey": "*;",
-      "parentID": null,
+      "parentID": 0,
       "hotkeys": {
         "*u": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}$" }],
         "*r": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}&" }],
@@ -337,11 +337,11 @@
       }
     },
     {
-      "id": 8,
+      "id": 13,
       "name": "句号模式",
       "enable": false,
       "hotkey": "*.",
-      "parentID": null,
+      "parentID": 0,
       "hotkeys": {
         "*e": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "up" }],
         "*d": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "down" }],
@@ -367,11 +367,11 @@
       }
     },
     {
-      "id": 9,
+      "id": 14,
       "name": "空格模式",
       "enable": false,
       "hotkey": "*space",
-      "parentID": null,
+      "parentID": 0,
       "hotkeys": {
         "*e": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "up" }],
         "*d": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "down" }],
@@ -397,11 +397,11 @@
       }
     },
     {
-      "id": 10,
+      "id": 15,
       "name": "鼠标右键",
       "enable": true,
       "hotkey": "*rbutton",
-      "parentID": null,
+      "parentID": 0,
       "hotkeys": {
         "*x": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "esc" }],
         "*c": [{ "windowGroupID": 0, "actionTypeID": 5, "remapToKey": "backspace" }],
@@ -411,6 +411,38 @@
         "*wheeldown": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "^{tab}", "comment": "下一个标签" }],
         "singlePress": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "ahk-expression: \"{blind}\" theRealRButton" }]
       }
+    },
+    {
+      "id": 1,
+      "name": "自定义热键",
+      "enable": true,
+      "hotkey": "customHotkeys",
+      "parentID": 0,
+      "hotkeys": null
+    },
+    {
+      "id": 2,
+      "name": "Cpaslock命令行",
+      "enable": true,
+      "hotkey": "cpasAbbr",
+      "parentID": 0,
+      "hotkeys": null
+    },
+    {
+      "id": 3,
+      "name": "缩写功能",
+      "enable": true,
+      "hotkey": "semicolonAbbr",
+      "parentID": 0,
+      "hotkeys": null
+    },
+    {
+      "id": 4,
+      "name": "设置",
+      "enable": true,
+      "hotkey": "settings",
+      "parentID": 0,
+      "hotkeys": null
     }
   ],
   "options": {
