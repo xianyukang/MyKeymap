@@ -13,10 +13,10 @@ const routes = [
         name: 'Home',
         component: Home,
       },
-      {
-        path: 'keymap/:id',
-        component: Keymap,
-      },
+      { path: "/keymap/:id", component: Keymap },
+      { path: "/settings", component: Home },
+      { path: "/customHotkeys", component: Home },
+      { path: "/:key(.*[aA]bbr)", component: Home },
     ],
   },
 ]
