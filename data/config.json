@@ -42,7 +42,7 @@
       "name": "Capslock + F",
       "enable": true,
       "hotkey": "*f",
-      "parentID": 0,
+      "parentID": 5,
       "hotkeys": {
         "*w": [
           {
@@ -194,7 +194,7 @@
       "name": "Capslock + Space",
       "enable": true,
       "hotkey": "*space",
-      "parentID": 0,
+      "parentID": 5,
       "hotkeys": {
         "*n": [
           {
@@ -250,7 +250,7 @@
       "name": "J + K 模式",
       "enable": true,
       "hotkey": "*k",
-      "parentID": 3,
+      "parentID": 8,
       "hotkeys": {
         "*e": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}+{up}" }],
         "*d": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}+{down}" }],

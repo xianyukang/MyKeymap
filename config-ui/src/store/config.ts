@@ -1,6 +1,6 @@
 import { defineStore } from "pinia"
 import { useFetch } from '@vueuse/core'
-import { computed, ref, watch } from "vue"
+import { computed, reactive, ref, watch } from "vue"
 import { useRoute } from "vue-router"
 
 export const useConfigStore = defineStore('config', () => {
@@ -10,7 +10,7 @@ export const useConfigStore = defineStore('config', () => {
   function initConfig() {
     const url = 'http://localhost:12333/config'
     const { data: config, error } = useFetch(url).json<Config>()
-    return config!
+    return reactive(config)
   }
 
   // 根据 url 返回对应的 keymap
@@ -31,7 +31,7 @@ export const useConfigStore = defineStore('config', () => {
   )
 
   const enabledKeymaps = computed(() => config.value!.keymaps.filter(x => x.enable))
-  const customKeymaps = computed(() => config.value!.keymaps.filter(x => x.id < 5))
+  const customKeymaps = computed(() => config.value!.keymaps.filter(x => canEditKeymap(x)))
 
   function getKeymapById(id: number) {
     if (id == 0 || id == null) {
@@ -45,12 +45,20 @@ export const useConfigStore = defineStore('config', () => {
       }
     }
 
-    return enabledKeymaps.value.find(k => k.id == id)!
+    return customKeymaps.value.find(k => k.id == id)!
+  }
+
+  function toggleKeymapEnable(keymap: Keymap) {
+    keymap.enable = !keymap.enable
+  }
+
+  function canEditKeymap(keymap: Keymap) {
+    return keymap.id > 4
   }
 
   return {
     config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps,
-    getKeymapById,
+    getKeymapById, toggleKeymapEnable, canEditKeymap,
     getAction: (hotkey: string) => _getAction(keymap.value, hotkey, windowGroupID.value),
   }
 })

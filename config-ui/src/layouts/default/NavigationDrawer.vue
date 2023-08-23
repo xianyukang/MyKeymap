@@ -3,7 +3,7 @@ import { useConfigStore } from '@/store/config';
 import { storeToRefs } from 'pinia';
 
 const { enabledKeymaps } = storeToRefs(useConfigStore())
-const { getKeymapById } = useConfigStore()
+const { getKeymapById, canEditKeymap } = useConfigStore()
 
 const getIcon = (keymap: Keymap) => {
   let icon = "mdi-"
@@ -64,7 +64,7 @@ const getIcon = (keymap: Keymap) => {
 
     <v-list>
       <v-list-item v-for="(keymap, i) in enabledKeymaps" :key="i" :value="keymap"
-                   :to="keymap.id < 5 ? '/' + keymap.hotkey : '/keymap/' + keymap.id">
+                   :to="canEditKeymap(keymap) ? '/keymap/' + keymap.id : '/' + keymap.hotkey">
         <template #prepend>
           <v-icon :icon="getIcon(keymap)" size=35></v-icon>
         </template>
