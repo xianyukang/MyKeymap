@@ -1,6 +1,15 @@
 <script lang="ts" setup>
 import { useConfigStore } from '@/store/config';
 import { storeToRefs } from 'pinia';
+import ActivateOrRun from '@/actions/ActivateOrRun.vue'
+import System from '@/actions/System.vue'
+import Window from '@/actions/Window.vue'
+import Mouse from '@/actions/Mouse.vue'
+import RemapKey from '@/actions/RemapKey.vue'
+import SendKey from '@/actions/SendKey.vue'
+import Text from '@/actions/Text.vue'
+import BuiltinFunction from '@/actions/BuiltinFunction.vue'
+import MyKeymap from '@/actions/MyKeymap.vue'
 
 
 const { config, action, windowGroupID, hotkey } = storeToRefs(useConfigStore())
@@ -18,12 +27,28 @@ const actionTypes = [
   { id: 9, name: "⚙️ MyKeymap 相关" },
 ]
 
-function onWindowGroupIDChange() {
-
+const components: any = {
+  1: ActivateOrRun,
+  2: System,
+  3: Window,
+  4: Mouse,
+  5: RemapKey,
+  6: SendKey,
+  7: Text,
+  8: BuiltinFunction,
+  9: MyKeymap,
 }
 
-function onActionTypeChange() {
 
+function onActionTypeChange(action: any) {
+  // 删掉除 windowGroupID 和 actionTypeID 之外的字段
+  for (const key of Object.keys(action)) {
+    if (key === "windowGroupID" || key === "actionTypeID") {
+      // skip
+    } else {
+      delete action[key];
+    }
+  }
 }
 
 
@@ -41,7 +66,6 @@ function onActionTypeChange() {
                         item-title="name"
                         item-value="id"
                         v-model="windowGroupID"
-                        @change="onWindowGroupIDChange"
                         variant="outlined"
                         :menu-props="{ maxHeight: 900 }"
                         :disabled="!hotkey"></v-select>
@@ -51,13 +75,17 @@ function onActionTypeChange() {
                         item-title="name"
                         item-value="id"
                         v-model="action.actionTypeID"
-                        @change="onActionTypeChange"
+                        @update:model-value="onActionTypeChange(action)"
                         variant="outlined"
                         :menu-props="{ maxHeight: 900 }"
                         :disabled="!hotkey"></v-select>
             </v-col>
           </v-row>
         </v-card-title>
+        <v-card-text>
+          {{ action }}
+          <component :is="components[action.actionTypeID!]" />
+        </v-card-text>
       </v-card>
     </v-col>
   </v-row>
