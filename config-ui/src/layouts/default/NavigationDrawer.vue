@@ -63,17 +63,23 @@ const getIcon = (keymap: Keymap) => {
     <v-divider class="border-opacity-25"></v-divider>
 
     <v-list>
-      <v-list-item v-for="(keymap, i) in enabledKeymaps" :key="i" :value="keymap"
-                   :to="canEditKeymap(keymap) ? '/keymap/' + keymap.id : '/' + keymap.hotkey">
-        <template #prepend>
-          <v-icon :icon="getIcon(keymap)" size=35></v-icon>
+      <v-virtual-scroll :items="enabledKeymaps" height="calc(100vh - 158px)">
+        <template #default="{ item: keymap, index }">
+          <v-list-item :key="index" :value="keymap"
+                       :to="canEditKeymap(keymap) ? '/keymap/' + keymap.id : '/' + keymap.hotkey">
+            <template #prepend>
+              <v-icon :icon="getIcon(keymap)" size=35></v-icon>
+            </template>
+            <v-list-item-title>{{ keymap.name }}</v-list-item-title>
+          </v-list-item>
         </template>
-        <v-list-item-title>{{ keymap.name }}</v-list-item-title>
-      </v-list-item>
-
+      </v-virtual-scroll>
     </v-list>
 
     <v-divider class="border-opacity-25"></v-divider>
+    <v-btn class="ma-3" width="90%" color="blue" prepend-icon="mdi-content-save-outline" variant="outlined">
+      保存配置（CTRL+S）
+    </v-btn>
   </v-navigation-drawer>
 </template>
 
