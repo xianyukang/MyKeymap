@@ -31,7 +31,7 @@ RAlt::LCtrl
   SoundBeep
   Reload
 }
-
+TODO: 渲染 config.keymaps 字段时要先排序, 把没有 parentID 的排在前面
 InitKeymap()
 {
   taskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "x", "space")
@@ -41,7 +41,7 @@ InitKeymap()
   capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "{{ .CapslockAbbrKeys }}")
   capsHook.KeyOpt("{CapsLock}", "S")
   capsHook.OnChar := PostCharToCaspAbbr
-  Run("bin\MyKeymap-CommandInput.exe", , , &capsAbbrWindowPid)
+  Run("bin\MyKeymap-CommandInput.exe")
 {{ end }}
 {{- if .SemicolonAbbrEnabled }}
   semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "{{ .SemicolonAbbrKeys }}")

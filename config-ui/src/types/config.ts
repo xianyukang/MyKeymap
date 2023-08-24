@@ -63,6 +63,6 @@ interface Options {
 interface Config {
   keymaps: Array<Keymap>
   options: Options
-  capsAbbr: Array<{ [key: string]: Array<Action> }>
+  capslockAbbr: Array<{ [key: string]: Array<Action> }>
   semicolonAbbr: Array<{ [key: string]: Array<Action> }>
 }
