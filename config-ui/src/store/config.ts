@@ -33,10 +33,12 @@ export const useConfigStore = defineStore('config', () => {
   )
   // TODO: 路由变化时把选中的 hotkey 清空
   const keymaps = computed(() => config.value!.keymaps)
+  const options = computed(() => config.value!.options)
 
   const enabledKeymaps = computed(() => keymaps.value.filter(x => x.enable))
   const customKeymaps = computed(() => keymaps.value.filter(x => canEditKeymap(x)))
   const customParentKeymaps = computed(() => customKeymaps.value.filter(x => x.parentID == 0))
+  const customSonKeymaps = computed(() => customKeymaps.value.filter(x => x.parentID != 0))
 
   function getKeymapById(id: number) {
     if (id == 0 || id == null) {
@@ -54,6 +56,11 @@ export const useConfigStore = defineStore('config', () => {
   }
 
   function toggleKeymapEnable(keymap: Keymap) {
+    // 开启的keymap有前置键连同前置键一块开启
+    if (!keymap.enable && keymap.parentID != 0) {
+      customParentKeymaps.value.find(k => k.id == keymap.parentID)!.enable = true
+    }
+
     keymap.enable = !keymap.enable
   }
 
@@ -62,7 +69,12 @@ export const useConfigStore = defineStore('config', () => {
   }
 
   function nextKeymapId() {
-    return customKeymaps.value[customKeymaps.value.length - 1].id + 1
+    const length = customKeymaps.value.length;
+    if (length == 0) {
+      return 5
+    }
+
+    return customKeymaps.value[length - 1].id + 1
   }
 
   function addKeymap() {
@@ -91,7 +103,7 @@ export const useConfigStore = defineStore('config', () => {
       return keymap.id
     }
     // 判断当前热键是否已存在，已存在删除当前模式
-    const f = keymaps.value.find(k => k.hotkey == keymap.hotkey)!
+    const f = keymaps.value.find(k => k.hotkey == keymap.hotkey && k.parentID == keymap.parentID)!
     if (f.id != keymap.id) {
       removeKeymap(keymap.id)
     }
@@ -99,8 +111,8 @@ export const useConfigStore = defineStore('config', () => {
   }
 
   return {
-    config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps,
-    getKeymapById, toggleKeymapEnable, canEditKeymap, customParentKeymaps, addKeymap, removeKeymap,
+    config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps, options,
+    getKeymapById, toggleKeymapEnable, canEditKeymap, customParentKeymaps, customSonKeymaps, addKeymap, removeKeymap,
     checkKeymapData,
     getAction: (hotkey: string) => _getAction(keymap.value, hotkey, windowGroupID.value),
   }
