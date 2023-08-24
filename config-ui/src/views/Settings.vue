@@ -4,7 +4,7 @@ import Table from "@/components/Table.vue";
 import { ref } from "vue";
 import { useConfigStore } from "@/store/config";
 
-const { customKeymaps, customParentKeymaps, options } = storeToRefs(useConfigStore())
+const { customKeymaps, customParentKeymaps, customSonKeymaps, options } = storeToRefs(useConfigStore())
 const { getKeymapById, toggleKeymapEnable, addKeymap, removeKeymap } = useConfigStore()
 
 const currId = ref(0);
@@ -13,6 +13,26 @@ const checkKeymapData = (keymap: Keymap) => {
   currId.value = useConfigStore().checkKeymapData(keymap)
 }
 
+const cantToggleKeymapEnable = (keymap: Keymap) => {
+  // 如果名称热键为空不允许启动
+  if (keymap.name == '' || keymap.hotkey == '') {
+    return true
+  }
+
+  // 当前模式作为前置键且有子键启动的情况不允许关闭
+  if (customKeymaps.value.filter(k => k.enable && k.parentID == keymap.id).length != 0) {
+    return true
+  }
+}
+
+const cantRemoveKeymap = (keymap: Keymap) => {
+  // 状态为启动时、被作为前置键不允许删除
+  if (keymap.enable) {
+    return true
+  }
+
+  return customSonKeymaps.value.findIndex(k => k.parentID == keymap.id) != -1
+}
 </script>
 
 <template>
@@ -48,17 +68,22 @@ const checkKeymapData = (keymap: Keymap) => {
             </td>
             <td class="w-25">
               <div class="d-flex justify-space-around align-center">
-                <v-tooltip :text="keymap.enable ? '停用该热键' : '启动该热键'">
-                  <template #activator>
-                    <v-switch hide-details color="primary" :model-value="keymap.enable"
-                              :disabled="keymap.name == '' || keymap.hotkey == ''"
-                              @click="toggleKeymapEnable(keymap)"></v-switch>
+                <v-tooltip :text="cantToggleKeymapEnable(keymap) ? '禁用子键后才可以关闭该热键' : keymap.enable ? '禁用该热键' : '启动该热键'">
+                  <template #activator="{props}">
+                    <div v-bind="props">
+                      <v-switch hide-details color="primary" :model-value="keymap.enable"
+                                :disabled="cantToggleKeymapEnable(keymap)"
+                                @click="toggleKeymapEnable(keymap)"></v-switch>
+                    </div>
                   </template>
                 </v-tooltip>
-                <v-tooltip text="删除当前模式">
-                  <template #activator>
+                <v-tooltip :text="cantRemoveKeymap(keymap) ? '删除子键或禁用该热键后再删除' : '删除当前热键'">
+                  <template #activator="{props}">
+                    <div v-bind="props">
                     <v-btn icon="mdi-delete-outline" variant="text" width="40" height="40"
+                           :disabled="cantRemoveKeymap(keymap)"
                            @click="removeKeymap(keymap.id)"></v-btn>
+                    </div>
                   </template>
                 </v-tooltip>
               </div>
