@@ -450,7 +450,7 @@
       { "id": 0, "name": "🌎 全局生效" },
       { "id": 1, "name": "浏览器", "value": "ahk_exe chrome.exe\nahk_exe msedge.exe\nahk_exe firefox.exe", "conditionType": 1 }
     ],
-    "capslockAbbr": {
+    "capsAbbr": {
       "dd": [
         {
           "windowGroupID": 0,
@@ -485,6 +485,20 @@
           "comment": "打开「 MyKeymap 」文件夹"
         }
       ]
+    },
+    "scroll": {
+      "delay1": "0.2",
+      "delay2": "0.03",
+      "onceLineCount": "1"
+    },
+    "mouse": {
+      "delay1": "0.2",
+      "delay2": "0.01",
+      "fastSingle": "110",
+      "fastRepeat": "70",
+      "slowSingle": "10",
+      "slowRepeat": "13"
     }
   }
+
 }

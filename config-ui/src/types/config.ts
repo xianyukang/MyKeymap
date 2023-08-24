@@ -33,8 +33,10 @@ interface Scroll {
 interface Mouse {
   delay1: string
   delay2: string
-  single: string
-  repeat: string
+  fastSingle: string
+  fastRepeat: string
+  slowSingle: string
+  slowRepeat: string
 }
 
 interface WindowGroup {
@@ -51,13 +53,14 @@ interface Path {
 
 interface Options {
   scroll: Scroll
-  fastMouse: Mouse
-  slowMouse: Mouse
+  mouse: Mouse
   windowGroups: Array<WindowGroup>
   path: Array<Path>
   customShellMenu: string
   startup: boolean
   keyMapping: string
+  capsAbbr: Array<{[key: string]: Array<Action>}>
+  semicolonAbbr: Array<{[key: string]: Array<Action>}>
 }
 
 interface Config {
