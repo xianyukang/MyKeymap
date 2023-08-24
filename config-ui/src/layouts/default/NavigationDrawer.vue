@@ -48,7 +48,7 @@ const getIcon = (keymap: Keymap) => {
 </script>
 
 <template>
-  <v-navigation-drawer>
+  <v-navigation-drawer :permanent="true">
     <v-list-item>
       <template #prepend>
         <v-avatar size="70">
