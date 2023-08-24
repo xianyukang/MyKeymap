@@ -2,6 +2,7 @@
 import Home from '@/views/Home.vue'
 import Keymap from '@/views/Keymap.vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import Settings from "@/views/Settings.vue";
 
 const routes = [
   {
@@ -14,7 +15,7 @@ const routes = [
         component: Home,
       },
       { path: "/keymap/:id", component: Keymap },
-      { path: "/settings", component: Home },
+      { path: "/settings", component: Settings },
       { path: "/customHotkeys", component: Home },
       { path: "/:key(.*[aA]bbr)", component: Home },
     ],

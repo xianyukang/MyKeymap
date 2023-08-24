@@ -29,9 +29,11 @@ export const useConfigStore = defineStore('config', () => {
     () => _getAction(keymap.value, hotkey.value, windowGroupID.value),
     (newValue) => action.value = newValue
   )
+  const keymaps = computed(() => config.value!.keymaps)
 
-  const enabledKeymaps = computed(() => config.value!.keymaps.filter(x => x.enable))
-  const customKeymaps = computed(() => config.value!.keymaps.filter(x => canEditKeymap(x)))
+  const enabledKeymaps = computed(() => keymaps.value.filter(x => x.enable))
+  const customKeymaps = computed(() => keymaps.value.filter(x => canEditKeymap(x)))
+  const customParentKeymaps = computed(() => customKeymaps.value.filter(x => x.parentID == 0))
 
   function getKeymapById(id: number) {
     if (id == 0 || id == null) {
@@ -56,9 +58,47 @@ export const useConfigStore = defineStore('config', () => {
     return keymap.id > 4
   }
 
+  function nextKeymapId() {
+    return customKeymaps.value[customKeymaps.value.length - 1].id + 1
+  }
+
+  function addKeymap() {
+    const newKeymap: Keymap = {
+      id: nextKeymapId(),
+      name: "",
+      enable: false,
+      hotkey: "",
+      parentID: 0,
+      hotkeys: {}
+    }
+
+    keymaps.value.splice(customKeymaps.value.length, 0, newKeymap)
+  }
+
+  function removeKeymap(id: number) {
+    removeKeymapByIndex(keymaps.value.findLastIndex(k => k.id == id))
+  }
+
+  function removeKeymapByIndex(index: number) {
+    keymaps.value.splice(index, 1)
+  }
+
+  function checkKeymapData(keymap: Keymap) {
+    if (keymap.hotkey == "") {
+      return keymap.id
+    }
+    // 判断当前热键是否已存在，已存在删除当前模式
+    const f = keymaps.value.find(k => k.hotkey == keymap.hotkey)!
+    if (f.id != keymap.id) {
+      removeKeymap(keymap.id)
+    }
+    return f.id
+  }
+
   return {
     config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps,
-    getKeymapById, toggleKeymapEnable, canEditKeymap,
+    getKeymapById, toggleKeymapEnable, canEditKeymap, customParentKeymaps, addKeymap, removeKeymap,
+    checkKeymapData,
     getAction: (hotkey: string) => _getAction(keymap.value, hotkey, windowGroupID.value),
   }
 })
