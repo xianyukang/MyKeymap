@@ -33,6 +33,7 @@ export const useConfigStore = defineStore('config', () => {
   )
   // TODO: 路由变化时把选中的 hotkey 清空
   const keymaps = computed(() => config.value!.keymaps)
+  const options = computed(() => config.value!.options)
 
   const enabledKeymaps = computed(() => keymaps.value.filter(x => x.enable))
   const customKeymaps = computed(() => keymaps.value.filter(x => canEditKeymap(x)))
@@ -91,7 +92,7 @@ export const useConfigStore = defineStore('config', () => {
       return keymap.id
     }
     // 判断当前热键是否已存在，已存在删除当前模式
-    const f = keymaps.value.find(k => k.hotkey == keymap.hotkey)!
+    const f = keymaps.value.find(k => k.hotkey == keymap.hotkey && k.parentID == keymap.parentID)!
     if (f.id != keymap.id) {
       removeKeymap(keymap.id)
     }
@@ -99,7 +100,7 @@ export const useConfigStore = defineStore('config', () => {
   }
 
   return {
-    config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps,
+    config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps, options,
     getKeymapById, toggleKeymapEnable, canEditKeymap, customParentKeymaps, addKeymap, removeKeymap,
     checkKeymapData,
     getAction: (hotkey: string) => _getAction(keymap.value, hotkey, windowGroupID.value),
