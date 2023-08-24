@@ -14,17 +14,17 @@ function click(hotkey: string) {
   store.hotkey = hotkey
 }
 
-function hotkeyColor(keymapHotkey: string, key: string, currentHotkey: string, action: Action): any {
+function hotkeyColor(keymapHotkey: string, key: string, currentHotkey: string, action: Action): string {
   if (disabled(keymapHotkey, key)) {
-    return { color: '#AAA', dark: true }
+    return '#AAA'
   }
   if (key === currentHotkey) {
-    return { color: 'blue', dark: true }
+    return 'blue'
   }
   if (action.actionTypeID) {
-    return { color: '#98FB98', dark: false }
+    return '#98FB98'
   }
-  return {}
+  return ''
 }
 
 function width(key: string): number {
@@ -40,25 +40,24 @@ function disabled(keymapHotkey: string, hotkey: string): boolean {
 </script>
 
 <template>
-  <v-card v-bind="props"
-          class="key"
-          height="53"
-          style="transition: none;"
-          elevation="4"
-          :width="width(keyText)"
-          :color="keyColor.color"
-          :dark="keyColor.dark"
-          :disabled="disabled(store.keymap!.hotkey, hotkey)"
-          @click="click(hotkey)"
-          :class="['d-flex justify-center align-center']">
-    <div>{{ keyText }}</div>
-  </v-card>
+  <v-hover v-slot:default="{ isHovering, props }">
+    <v-card v-bind="props"
+            height="53"
+            style="transition: none; font-size: 1.5rem;"
+            :elevation="isHovering ? 13 : 4"
+            :width="width(keyText) + (isHovering ? 1 : 0)"
+            :color="keyColor"
+            :disabled="disabled(store.keymap!.hotkey, hotkey)"
+            @click="click(hotkey)"
+            :class="['d-flex justify-center align-center']">
+      <div>{{ keyText }}</div>
+    </v-card>
+  </v-hover>
 </template>
 
 <style scoped>
-.key {
-  /* border: 1px solid #999; */
-  font-size: 1.5em;
-  cursor: pointer;
+/* 鼠标在 card 之上 hover 时 vuetify 会加一个变暗遮罩, 去掉这个东西 */
+:deep(.v-card__overlay) {
+  background-color: unset;
 }
 </style>

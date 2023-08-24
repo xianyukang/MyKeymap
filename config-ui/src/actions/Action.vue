@@ -58,7 +58,7 @@ function onActionTypeChange(action: any) {
 <template>
   <v-row>
     <v-col>
-      <v-card min-height="550" width="930" elevation="5" class="action-config">
+      <v-card min-height="550" width="800" elevation="5">
         <v-card-title style="padding-bottom: 0">
           <v-row>
             <v-col cols="5">
@@ -83,7 +83,6 @@ function onActionTypeChange(action: any) {
           </v-row>
         </v-card-title>
         <v-card-text>
-          {{ action }}
           <component :is="components[action.actionTypeID!]" />
         </v-card-text>
       </v-card>
@@ -91,4 +90,16 @@ function onActionTypeChange(action: any) {
   </v-row>
 </template>
 
-<style scoped></style>
+<style scoped>
+.v-card {
+  padding-top: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* 默认的 label 颜色那么灰, 看起来很难受, 调整成紫色 */
+:deep(.v-field--active:not(.v-field--focused) label) {
+  color: darkmagenta;
+  opacity: 1;
+}
+</style>

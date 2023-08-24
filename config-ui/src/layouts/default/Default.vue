@@ -1,5 +1,5 @@
 <template>
-  <v-app v-if="store.config">
+  <v-app v-if="store.config" class="ml-4">
     <navigation-drawer />
     <default-view />
   </v-app>
