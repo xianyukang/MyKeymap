@@ -30,15 +30,16 @@ type Action struct {
 	TypeID        int    `json:"actionTypeID"`
 	Comment       string `json:"comment"`
 	// 下面的字段因动作类型而异
-	KeysToSend string `json:"keysToSend"`
-	RemapToKey string `json:"remapToKey"`
-	ValueID    int    `json:"actionValueID"`
-	WinTitle   string `json:"winTitle"`
-	Target     string `json:"target"`
-	Args       string `json:"args"`
-	WorkingDir string `json:"workingDir"`
-	Admin      bool   `json:"admin"`
-	AHKCode    string `json:"ahkCode"`
+	KeysToSend         string `json:"keysToSend"`
+	RemapToKey         string `json:"remapToKey"`
+	ValueID            int    `json:"actionValueID"`
+	WinTitle           string `json:"winTitle"`
+	Target             string `json:"target"`
+	Args               string `json:"args"`
+	WorkingDir         string `json:"workingDir"`
+	RunAsAdmin         bool   `json:"runAsAdmin"`
+	DetectHiddenWindow bool   `json:"detectHiddenWindow"`
+	AHKCode            string `json:"ahkCode"`
 }
 
 var Cfg *Config

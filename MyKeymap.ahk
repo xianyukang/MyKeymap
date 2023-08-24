@@ -1,7 +1,7 @@
 ; 该脚本只能编译成Exe使用，只用做启动MyKeymap.ahk和AHk v2使用
 #SingleInstance Force
-;@Ahk2Exe-SetMainIcon ./bin/icons/logo.ico
-;@Ahk2Exe-ExeName "MyKeymap"
+;@Ahk2Exe-SetMainIcon ./bin/icons/logo3.ico
+;@Ahk2Exe-ExeName MyKeymap
 SetWorkingDir(A_ScriptDir)
 
 ; 以管理员权限运行

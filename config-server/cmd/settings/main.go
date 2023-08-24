@@ -13,6 +13,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"settings/internal/command"
 	"settings/internal/matrix"
 	"strings"
@@ -132,17 +133,32 @@ func ExecuteHandler(c *gin.Context) {
 	}
 	if command["type"].(string) == "run-program" {
 		val := command["value"].([]interface{})
-		exe := "../" + val[0].(string)
-		arg := "../" + val[1].(string)
+		exe := val[0].(string)
+		arg := val[1].(string)
+
+		// 切换到 parent 文件夹, 执行完 command 后再回来
+		// 程序工作目录算全局共享状态, 所以会影响到其他 goroutine
+		wd, err := os.Getwd()
+		if err == nil {
+			base := filepath.Base(wd)
+			fmt.Println(wd, base, exe, arg)
+			err := os.Chdir("../")
+			if err == nil {
+				defer func() {
+					_ = os.Chdir(base)
+				}()
+			}
+		}
+
 		var c = exec.Command(exe, arg)
 		if len(val) == 3 {
 			arg2 := val[2].(string)
 			c = exec.Command(exe, arg, arg2)
 		}
-		// 忽略错误
-		err := c.Start()
+		// 忽略执行错误
+		err = c.Start()
 		if err != nil {
-			// panic(err)
+
 		}
 	}
 	c.JSON(http.StatusOK, command)

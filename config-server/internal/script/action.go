@@ -7,7 +7,7 @@ import (
 )
 
 var actionMap = map[int]func(Action, bool) string{
-	1: launchAppOrActivateWindow1,
+	1: activateOrRun1,
 	2: systemActions2,
 	3: windowActions3,
 	4: mouseActions4,
@@ -88,6 +88,7 @@ func toAHKFuncArg(val string) string {
 		val = val[len(prefix):]
 		return strings.TrimSpace(val)
 	}
+	val = strings.ReplaceAll(val, "\"", "`\"")
 	return `"` + val + `"`
 }
 
@@ -188,15 +189,15 @@ func systemActions2(a Action, inAbbrContext bool) string {
 	return ""
 }
 
-func launchAppOrActivateWindow1(a Action, inAbbrContext bool) string {
+func activateOrRun1(a Action, inAbbrContext bool) string {
 	ctx := Cfg.GetHotkeyContext(a)
 	winTitle := toAHKFuncArg(a.WinTitle)
 	target := toAHKFuncArg(a.Target)
 	args := toAHKFuncArg(a.Args)
 	workingDir := toAHKFuncArg(a.WorkingDir)
 
-	call := fmt.Sprintf(`ActivateOrRun(%s, %s, %s, %s, %t)`, winTitle, target, args, workingDir, a.Admin)
-	if args == `""` && workingDir == `""` && !a.Admin {
+	call := fmt.Sprintf(`ActivateOrRun(%s, %s, %s, %s, %t)`, winTitle, target, args, workingDir, a.RunAsAdmin)
+	if args == `""` && workingDir == `""` && !a.RunAsAdmin {
 		call = fmt.Sprintf(`ActivateOrRun(%s, %s)`, winTitle, target)
 	}
 

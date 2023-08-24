@@ -1,7 +1,17 @@
 interface Action {
   windowGroupID: number
   actionTypeID: number
-  remapToKey: string
+  comment?: string
+
+  remapToKey?: string
+  
+  winTitle?: string
+  target?: string
+  args?: string
+  workingDir?: string
+  runAsAdmin?: boolean
+  detectHiddenWindow?: boolean
+
 }
 interface Keymap {
   id: number
@@ -53,6 +63,6 @@ interface Options {
 interface Config {
   keymaps: Array<Keymap>
   options: Options
-  capsAbbr: Array<{[key: string]: Array<Action>}>
-  semicolonAbbr: Array<{[key: string]: Array<Action>}>
+  capsAbbr: Array<{ [key: string]: Array<Action> }>
+  semicolonAbbr: Array<{ [key: string]: Array<Action> }>
 }
