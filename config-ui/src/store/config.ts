@@ -26,11 +26,12 @@ export const useConfigStore = defineStore('config', () => {
   // 根据选中的 hotkey 和 windowGroupID, 返回对应的 action
   const hotkey = ref("")
   const windowGroupID = ref(0)
-  const action = ref(emptyAction)
+  const action = ref({...emptyAction})
   watch(
     () => _getAction(keymap.value, hotkey.value, windowGroupID.value),
     (newValue) => action.value = newValue
   )
+  // TODO: 路由变化时把选中的 hotkey 清空
   const keymaps = computed(() => config.value!.keymaps)
 
   const enabledKeymaps = computed(() => keymaps.value.filter(x => x.enable))
@@ -113,7 +114,7 @@ const emptyAction: Action = {
 
 function _getAction(keymap: Keymap | undefined, hotkey: string, windowGroupID: number): Action {
   if (!keymap || !hotkey) {
-    return emptyAction
+    return {...emptyAction}
   }
 
   // keymap 中此热键还不存在, 那么初始化一下
@@ -126,7 +127,7 @@ function _getAction(keymap: Keymap | undefined, hotkey: string, windowGroupID: n
   // 选择的 windowGroupID 还没有对应的 action, 那么初始化一下
   let found = actions.find(x => x.windowGroupID === windowGroupID)
   if (!found) {
-    found = emptyAction
+    found = {...emptyAction}
     actions.push(found)
   }
   return found
