@@ -8,9 +8,11 @@ export const useConfigStore = defineStore('config', () => {
   const config = initConfig()
 
   function initConfig() {
+    const config = ref<Config>()
     const url = 'http://localhost:12333/config'
-    const { data: config, error } = useFetch(url).json<Config>()
-    return reactive(config)
+    const { data, error } = useFetch(url).json<Config>()
+    watch(data, (newValue) => config.value = newValue!)
+    return config
   }
 
   // 根据 url 返回对应的 keymap
