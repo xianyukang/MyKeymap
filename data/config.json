@@ -450,7 +450,7 @@
       { "id": 0, "name": "🌎 全局生效" },
       { "id": 1, "name": "浏览器", "value": "ahk_exe chrome.exe\nahk_exe msedge.exe\nahk_exe firefox.exe", "conditionType": 1 }
     ],
-    "capsAbbr": {
+    "capslockAbbr": {
       "dd": [
         {
           "windowGroupID": 0,

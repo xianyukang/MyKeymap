@@ -59,7 +59,7 @@ interface Options {
   customShellMenu: string
   startup: boolean
   keyMapping: string
-  capsAbbr: Array<{[key: string]: Array<Action>}>
+  capslockAbbr: Array<{[key: string]: Array<Action>}>
   semicolonAbbr: Array<{[key: string]: Array<Action>}>
 }
 
