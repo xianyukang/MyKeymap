@@ -153,7 +153,7 @@ const cantRemoveKeymap = (keymap: Keymap) => {
                                   label="快速模式步长(像素)"></v-text-field>
                   </v-col>
                   <v-col>
-                    <v-text-field :model-value="options.mouse.fastRepeat" variant="underlined"
+                    <v-text-field :model-value="options.mouse.fastSingle" variant="underlined"
                                   type="number"
                                   step="1" maxlength="5"
                                   label="快速模式首步长(像素)"></v-text-field>
