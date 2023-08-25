@@ -1,6 +1,6 @@
 import { defineStore } from "pinia"
 import { useFetch } from '@vueuse/core'
-import { computed, reactive, ref, watch } from "vue"
+import { computed, ref, watch } from "vue"
 import { useRoute } from "vue-router"
 
 export const useConfigStore = defineStore('config', () => {
@@ -37,22 +37,17 @@ export const useConfigStore = defineStore('config', () => {
 
   const enabledKeymaps = computed(() => keymaps.value.filter(x => x.enable))
   const customKeymaps = computed(() => keymaps.value.filter(x => canEditKeymap(x)))
-  const customParentKeymaps = computed(() => customKeymaps.value.filter(x => x.parentID == 0))
   const customSonKeymaps = computed(() => customKeymaps.value.filter(x => x.parentID != 0))
+  const customParentKeymaps = computed(() => {
+    const arr = customKeymaps.value.filter(x => x.parentID == 0)
+    arr.unshift({id: 0, name: "-", hotkey: "", parentID: 0, enable: true, hotkeys: {}})
+    return arr;
+  })
+
+  const customHotkey = computed(() => enabledKeymaps.value[enabledKeymaps.value.length - 4].hotkeys)
 
   function getKeymapById(id: number) {
-    if (id == 0 || id == null) {
-      return {
-        id: 0,
-        name: "-",
-        hotkey: "",
-        parentID: 0,
-        enable: true,
-        hotkeys: null
-      }
-    }
-
-    return customKeymaps.value.find(k => k.id == id)!
+    return customParentKeymaps.value.find(k => k.id == id)!
   }
 
   function toggleKeymapEnable(keymap: Keymap) {

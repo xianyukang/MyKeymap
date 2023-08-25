@@ -1,9 +1,17 @@
 <script setup lang="ts">
+defineProps<{
+  titles?: string[]
+}>()
 </script>
 
 <template>
   <div class="Table" >
     <table class="my-table">
+      <slot name="title">
+        <tr>
+          <th v-for="title in titles" :key="title">{{title}}</th>
+        </tr>
+      </slot>
       <slot></slot>
     </table>
   </div>
@@ -16,7 +24,7 @@ table {
   height: 3rem;
 }
 
-:slotted(th) {
+th, :slotted(th) {
   font-weight: 500;
   color: rgba(var(--v-theme-on-surface),var(--v-medium-emphasis-opacity));
 
