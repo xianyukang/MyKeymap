@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
 import Table from "@/components/Table.vue";
+import Tip from "@/components/Tip.vue";
+
+import { storeToRefs } from "pinia";
 import { ref } from "vue";
 import { useConfigStore } from "@/store/config";
 
 const { customKeymaps, customParentKeymaps, customSonKeymaps, options } = storeToRefs(useConfigStore())
-const { getKeymapById, toggleKeymapEnable, addKeymap, removeKeymap } = useConfigStore()
+const { toggleKeymapEnable, addKeymap, removeKeymap } = useConfigStore()
 
 const currId = ref(0);
 
@@ -13,24 +15,21 @@ const checkKeymapData = (keymap: Keymap) => {
   currId.value = useConfigStore().checkKeymapData(keymap)
 }
 
-const cantToggleKeymapEnable = (keymap: Keymap) => {
+const disabledKeymapEnable = (keymap: Keymap) => {
   // 如果名称热键为空不允许启动
   if (keymap.name == '' || keymap.hotkey == '') {
     return true
   }
 
   // 当前模式作为前置键且有子键启动的情况不允许关闭
-  if (customKeymaps.value.filter(k => k.enable && k.parentID == keymap.id).length != 0) {
-    return true
-  }
+  return customKeymaps.value.filter(k => k.enable && k.parentID == keymap.id).length != 0
 }
 
-const cantRemoveKeymap = (keymap: Keymap) => {
+const disabledKeymapOption = (keymap: Keymap) => {
   // 状态为启动时、被作为前置键不允许删除
   if (keymap.enable) {
     return true
   }
-
   return customSonKeymaps.value.findIndex(k => k.parentID == keymap.id) != -1
 }
 </script>
@@ -39,53 +38,38 @@ const cantRemoveKeymap = (keymap: Keymap) => {
   <v-row class="mt-2" justify="center" :dense="true">
     <v-col sm="auto">
       <v-card width="500">
-        <Table class="text-left">
-          <tr>
-            <th>名称</th>
-            <th>热键</th>
-            <th>前置键</th>
-            <th>选项</th>
-          </tr>
+        <Table class="text-left" :titles="['名称', '热键', '前置键', '选项']">
           <tr :class="currId == keymap.id ? 'bg-blue-lighten-4' : ''"
-              @click="currId = keymap.id"
-              v-for="keymap in customKeymaps" :key="keymap.name">
+              @click="currId = keymap.id" @blur="checkKeymapData(keymap)"
+              v-for="keymap in customKeymaps" :key="keymap.id">
             <td>
-              <v-text-field v-model="keymap.name" variant="plain"
+              <v-text-field v-model.lazy="keymap.name" variant="plain"
                             style="width: 6rem"></v-text-field>
             </td>
             <td>
-              <v-text-field v-model="keymap.hotkey" @blur="checkKeymapData(keymap)" variant="plain"
+              <v-text-field v-model.lazy="keymap.hotkey" variant="plain"
                             style="width: 4rem"></v-text-field>
             </td>
             <td>
-              <v-autocomplete v-model="keymap.parentID"
-                              :model-value="getKeymapById(keymap.parentID).name"
-                              :items="customParentKeymaps" :item-title="item => item.name"
-                              :item-value="item => item.id" @blur="checkKeymapData(keymap)"
-                              variant="plain" menu-icon="" style="width: 6rem">
-              </v-autocomplete>
-
+              <tip :text="disabledKeymapOption(keymap) ? '已启动或有子键不允许更改' : '更改前置键'">
+                <v-select v-model="keymap.parentID" :items="customParentKeymaps" :item-title="item => item.name"
+                          :item-value="item => item.id" :disabled="disabledKeymapOption(keymap)"
+                          variant="plain" style="width: 6rem">
+                </v-select>
+              </tip>
             </td>
             <td class="w-25">
               <div class="d-flex justify-space-around align-center">
-                <v-tooltip :text="cantToggleKeymapEnable(keymap) ? '禁用子键后才可以关闭该热键' : keymap.enable ? '禁用该热键' : '启动该热键'">
-                  <template #activator="{props}">
-                    <div v-bind="props">
-                      <v-switch hide-details color="primary" :model-value="keymap.enable"
-                                :disabled="cantToggleKeymapEnable(keymap)"
-                                @click="toggleKeymapEnable(keymap)"></v-switch>
-                    </div>
-                  </template>
-                </v-tooltip>
-                <v-tooltip :text="cantRemoveKeymap(keymap) ? '删除子键或禁用该热键后再删除' : '删除当前热键'">
-                  <template #activator="{props}">
-                    <div v-bind="props">
-                    <v-btn icon="mdi-delete-outline" variant="text" width="40" height="40"
-                           :disabled="cantRemoveKeymap(keymap)"
-                           @click="removeKeymap(keymap.id)"></v-btn>
-                    </div>
-                  </template>
-                </v-tooltip>
+                <tip :text="disabledKeymapEnable(keymap) ? keymap.enable ? '请禁用子键' : '请输入名称和热键' : keymap.enable ? '禁用该热键' : '启动该热键'">
+                  <v-switch hide-details color="primary" :model-value="keymap.enable"
+                            :disabled="disabledKeymapEnable(keymap)"
+                            @click="toggleKeymapEnable(keymap)"></v-switch>
+                </tip>
+                <tip :text="disabledKeymapOption(keymap) ? '请删除子键或禁用该热键' : '删除当前热键'">
+                  <v-btn icon="mdi-delete-outline" variant="text" width="40" height="40"
+                         :disabled="disabledKeymapOption(keymap)"
+                         @click="removeKeymap(keymap.id)"></v-btn>
+                </tip>
               </div>
             </td>
           </tr>
@@ -133,13 +117,13 @@ const cantRemoveKeymap = (keymap: Keymap) => {
               <v-card-text>
                 <v-row class="mouseRow" no-gutters>
                   <v-col class="pr-1">
-                    <v-text-field :model-value="options.mouse.delay1" variant="underlined"
+                    <v-text-field v-model="options.mouse.delay1" variant="underlined"
                                   type="number"
                                   step=".01" maxlength="5"
                                   label="进入连续移动前的延时(秒)"></v-text-field>
                   </v-col>
                   <v-col class="pl-1">
-                    <v-text-field :model-value="options.mouse.delay2" variant="underlined"
+                    <v-text-field v-model="options.mouse.delay2" variant="underlined"
                                   type="number"
                                   step=".01" maxlength="5"
                                   label="两次移动的间隔时间(秒)"></v-text-field>
@@ -147,13 +131,13 @@ const cantRemoveKeymap = (keymap: Keymap) => {
                 </v-row>
                 <v-row class="mouseRow" no-gutters>
                   <v-col>
-                    <v-text-field :model-value="options.mouse.fastRepeat" variant="underlined"
+                    <v-text-field v-model="options.mouse.fastRepeat" variant="underlined"
                                   type="number"
                                   step="1" maxlength="5"
                                   label="快速模式步长(像素)"></v-text-field>
                   </v-col>
                   <v-col>
-                    <v-text-field :model-value="options.mouse.fastSingle" variant="underlined"
+                    <v-text-field v-model="options.mouse.fastSingle" variant="underlined"
                                   type="number"
                                   step="1" maxlength="5"
                                   label="快速模式首步长(像素)"></v-text-field>
@@ -161,13 +145,13 @@ const cantRemoveKeymap = (keymap: Keymap) => {
                 </v-row>
                 <v-row class="mouseRow" no-gutters>
                   <v-col>
-                    <v-text-field :model-value="options.mouse.slowRepeat" variant="underlined"
+                    <v-text-field v-model="options.mouse.slowRepeat" variant="underlined"
                                   type="number"
                                   step="1" maxlength="5"
                                   label="慢速模式步长(像素)"></v-text-field>
                   </v-col>
                   <v-col>
-                    <v-text-field :model-value="options.mouse.slowSingle" variant="underlined"
+                    <v-text-field v-model="options.mouse.slowSingle" variant="underlined"
                                   type="number"
                                   step="1" maxlength="5"
                                   label="慢速模式首步长(像素)"></v-text-field>
@@ -179,15 +163,15 @@ const cantRemoveKeymap = (keymap: Keymap) => {
           <v-col>
             <v-card title="滚轮相关参数" min-width="200">
               <v-card-text>
-                <v-text-field :model-value="options.scroll.delay1" variant="underlined"
+                <v-text-field v-model="options.scroll.delay1" variant="underlined"
                               type="number"
                               step=".01" maxlength="5"
                               label="进入连续滚动前的延时 (秒)"></v-text-field>
-                <v-text-field :model-value="options.scroll.delay2" variant="underlined"
+                <v-text-field v-model="options.scroll.delay2" variant="underlined"
                               type="number"
                               step=".01" maxlength="5"
                               label="两次滚动的间隔时间 (越小滚动速度越快)"></v-text-field>
-                <v-text-field :model-value="options.scroll.onceLineCount" variant="underlined"
+                <v-text-field v-model="options.scroll.onceLineCount" variant="underlined"
                               type="number" step="1" maxlength="5"
                               label="单次滑动参数"></v-text-field>
               </v-card-text>
@@ -214,7 +198,7 @@ table .v-switch :deep(.v-selection-control) {
   min-height: auto;
 }
 
-table .v-autocomplete :deep(.v-field__input) {
+table .v-select :deep(.v-field__input) {
   padding: 0;
 }
 
@@ -233,9 +217,4 @@ table .v-autocomplete :deep(input) {
 .mouseRow .v-col:first-child {
   padding-right: 6px;
 }
-
-.mouseRow .v-col:last-child {
-  padding-lift: 6px;
-}
-
 </style>
