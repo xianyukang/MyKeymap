@@ -412,13 +412,18 @@
         "singlePress": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "ahk-expression: \"{blind}\" theRealRButton" }]
       }
     },
+
     {
       "id": 1,
       "name": "自定义热键",
       "enable": true,
       "hotkey": "customHotkeys",
       "parentID": 0,
-      "hotkeys": null
+      "hotkeys":  {
+        "!e": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}+{up}" }],
+        "#d": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}+{down}" }],
+        "^s": [{ "windowGroupID": 0, "actionTypeID": 6, "keysToSend": "{blind}+{left}" }]
+      }
     },
     {
       "id": 2,
