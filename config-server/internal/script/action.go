@@ -6,6 +6,9 @@ import (
 	"strings"
 )
 
+// Cfg 在 SaveAHK 中初始化, 会被下面的转换函数用到
+var Cfg *Config
+
 var actionMap = map[int]func(Action, bool) string{
 	1: activateOrRun1,
 	2: systemActions2,

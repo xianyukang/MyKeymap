@@ -26,7 +26,7 @@ export const useConfigStore = defineStore('config', () => {
   // 根据选中的 hotkey 和 windowGroupID, 返回对应的 action
   const hotkey = ref("")
   const windowGroupID = ref(0)
-  const action = ref({...emptyAction})
+  const action = ref({ ...emptyAction })
   watch(
     () => _getAction(keymap.value, hotkey.value, windowGroupID.value),
     (newValue) => action.value = newValue
@@ -40,7 +40,7 @@ export const useConfigStore = defineStore('config', () => {
   const customSonKeymaps = computed(() => customKeymaps.value.filter(x => x.parentID != 0))
   const customParentKeymaps = computed(() => {
     const arr = customKeymaps.value.filter(x => x.parentID == 0)
-    arr.unshift({id: 0, name: "-", hotkey: "", parentID: 0, enable: true, hotkeys: {}})
+    arr.unshift({ id: 0, name: "-", hotkey: "", parentID: 0, enable: true, hotkeys: {} })
     return arr;
   })
 
@@ -110,17 +110,19 @@ export const useConfigStore = defineStore('config', () => {
     getKeymapById, toggleKeymapEnable, canEditKeymap, customParentKeymaps, customSonKeymaps, addKeymap, removeKeymap,
     checkKeymapData,
     getAction: (hotkey: string) => _getAction(keymap.value, hotkey, windowGroupID.value),
+    saveConfig: () => _saveConfig(config.value),
   }
 })
 
 const emptyAction: Action = {
   windowGroupID: 0,
   actionTypeID: 0,
+  isEmpty: true,
 }
 
 function _getAction(keymap: Keymap | undefined, hotkey: string, windowGroupID: number): Action {
   if (!keymap || !hotkey) {
-    return {...emptyAction}
+    return { ...emptyAction }
   }
 
   // keymap 中此热键还不存在, 那么初始化一下
@@ -133,8 +135,27 @@ function _getAction(keymap: Keymap | undefined, hotkey: string, windowGroupID: n
   // 选择的 windowGroupID 还没有对应的 action, 那么初始化一下
   let found = actions.find(x => x.windowGroupID === windowGroupID)
   if (!found) {
-    found = {...emptyAction}
+    found = { ...emptyAction }
     actions.push(found)
   }
   return found
+}
+
+function _saveConfig(config: Config | undefined) {
+  if (!config) {
+    return
+  }
+  // 克隆一下, 然后删掉空的 action
+  config = JSON.parse(JSON.stringify(config))
+  for (const km of config!.keymaps) {
+    for (const [hk, actions] of Object.entries(km.hotkeys)) {
+      const filterd = actions.filter(x => !x.isEmpty)
+      if (filterd.length > 0) {
+        km.hotkeys[hk] = filterd
+      } else {
+        delete km.hotkeys[hk]
+      }
+    }
+  }
+  const { error } = useFetch("http://localhost:12333/config").put(config)
 }

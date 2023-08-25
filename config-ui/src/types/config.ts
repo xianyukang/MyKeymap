@@ -1,10 +1,13 @@
 interface Action {
+  isEmpty: boolean
   windowGroupID: number
   actionTypeID: number
   comment?: string
 
+  actionValueID?: number
+
   remapToKey?: string
-  
+
   winTitle?: string
   target?: string
   args?: string

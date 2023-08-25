@@ -1,14 +1,21 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import RadioGroup from './RadioGroup.vue';
 
+const group1 = [
+  { actionValueID: 1, label: "锁屏" },
+  { actionValueID: 2, label: "睡眠" },
+  { actionValueID: 3, label: "关机" },
+  { actionValueID: 4, label: "重启" },
+  { actionValueID: 5, label: "音量调节" },
+  { actionValueID: 6, label: "显示器亮度调节" },
+]
+const group2 = [
+  { actionValueID: 7, label: "重启文件资源管理器" },
+]
 </script>
 
 <template>
-  <div>
-    system control
-  </div>
+  <RadioGroup :group1="group1" :group2="group2" />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -10,9 +10,9 @@ import (
 // 卧槽刚刚发现 GoLand 可以直接把 JSON 字符串粘贴为「 结构体定义 」 一下省掉了好多工作
 
 type Config struct {
-	LastEdit string   `json:"lastEdit"`
-	Keymaps  []Keymap `json:"keymaps"`
-	Options  Options  `json:"options"`
+	LastEdit string   `json:"lastEdit,omitempty"`
+	Keymaps  []Keymap `json:"keymaps,omitempty"`
+	Options  Options  `json:"options,omitempty"`
 }
 
 type Keymap struct {
@@ -25,24 +25,22 @@ type Keymap struct {
 }
 
 type Action struct {
-	Hotkey        string `json:"hotkey"`
 	WindowGroupID int    `json:"windowGroupID"`
 	TypeID        int    `json:"actionTypeID"`
-	Comment       string `json:"comment"`
+	Comment       string `json:"comment,omitempty"`
+	Hotkey        string `json:"hotkey,omitempty"`
 	// 下面的字段因动作类型而异
-	KeysToSend         string `json:"keysToSend"`
-	RemapToKey         string `json:"remapToKey"`
-	ValueID            int    `json:"actionValueID"`
-	WinTitle           string `json:"winTitle"`
-	Target             string `json:"target"`
-	Args               string `json:"args"`
-	WorkingDir         string `json:"workingDir"`
-	RunAsAdmin         bool   `json:"runAsAdmin"`
-	DetectHiddenWindow bool   `json:"detectHiddenWindow"`
-	AHKCode            string `json:"ahkCode"`
+	KeysToSend         string `json:"keysToSend,omitempty"`
+	RemapToKey         string `json:"remapToKey,omitempty"`
+	ValueID            int    `json:"actionValueID,omitempty"`
+	WinTitle           string `json:"winTitle,omitempty"`
+	Target             string `json:"target,omitempty"`
+	Args               string `json:"args,omitempty"`
+	WorkingDir         string `json:"workingDir,omitempty"`
+	RunAsAdmin         bool   `json:"runAsAdmin,omitempty"`
+	DetectHiddenWindow bool   `json:"detectHiddenWindow,omitempty"`
+	AHKCode            string `json:"ahkCode,omitempty"`
 }
-
-var Cfg *Config
 
 func ParseConfig(file string) (*Config, error) {
 	data, err := os.ReadFile(file)
@@ -55,7 +53,6 @@ func ParseConfig(file string) (*Config, error) {
 	if err != nil {
 		return nil, fmt.Errorf("cannot parse config: %v", err)
 	}
-	Cfg = &config
 	return &config, nil
 }
 

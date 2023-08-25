@@ -16,6 +16,7 @@ import (
 	"path/filepath"
 	"settings/internal/command"
 	"settings/internal/matrix"
+	"settings/internal/script"
 	"strings"
 	"text/template"
 	"time"
@@ -165,30 +166,30 @@ func ExecuteHandler(c *gin.Context) {
 }
 
 func SaveConfigHandler(c *gin.Context) {
-	var config map[string]interface{}
+	var config script.Config
 	if err := c.ShouldBindJSON(&config); err != nil {
 		panic(err)
 	}
 
 	// 生成帮助文件
-	helpPageHtml := config["helpPageHtml"].(string)
-	delete(config, "helpPageHtml")
-	saveHelpPageHtml(helpPageHtml)
+	// helpPageHtml := config["helpPageHtml"].(string)
+	// delete(config, "helpPageHtml")
+	// saveHelpPageHtml(helpPageHtml)
 
 	// 保存配置文件
 	saveConfigFile(config)
 
 	// 生成脚本文件
-	// script.GenerateScript(config)
+	script.GenerateScripts(&config)
 
 	c.JSON(http.StatusOK, gin.H{"message": "ok"})
 }
 
-func saveConfigFile(config map[string]interface{}) {
+func saveConfigFile(config any) {
 	// 先写到缓冲区,  如果直接写文件的话, 当编码过程遇到错误时, 会导致文件损坏
 	buf := new(bytes.Buffer)
 	encoder := json.NewEncoder(buf)
-	encoder.SetIndent("", "    ")
+	encoder.SetIndent("", "  ")
 	encoder.SetEscapeHTML(false)
 	if err := encoder.Encode(config); err != nil {
 		panic(err)

@@ -12,16 +12,12 @@ import (
 )
 
 func GenerateScripts(config *Config) {
-	// 把分应用配置转成一个函数
-	// TODO
-	// perAppConfigToFunction(config)
-
-	if err := SaveAHK(config, "./templates/script2.ahk", "../bin/MyKeymap.ahk"); err != nil {
+	if err := SaveAHK(config, "./templates/MyKeymap.tmpl", "../bin/MyKeymap.ahk"); err != nil {
 		panic(err)
 	}
-	if err := SaveAHK(config, "./templates/CustomShellMenu.ahk", "../bin/CustomShellMenu.ahk"); err != nil {
-		panic(err)
-	}
+	// if err := SaveAHK(config, "./templates/CustomShellMenu.ahk", "../bin/CustomShellMenu.ahk"); err != nil {
+	// 	panic(err)
+	// }
 }
 
 type obj = map[string]interface{}
@@ -33,6 +29,7 @@ type item struct {
 }
 
 func SaveAHK(data *Config, templateFile, outputFile string) error {
+	Cfg = data
 	files := []string{
 		templateFile,
 	}

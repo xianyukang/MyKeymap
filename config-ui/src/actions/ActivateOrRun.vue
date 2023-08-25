@@ -2,6 +2,7 @@
 import { useConfigStore } from '@/store/config';
 import { useFetch } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
+import { watchEffect } from 'vue';
 
 // TODO: 修改文档和示例
 // TODO: 保存时删掉 action 配置中值为空字符串 "" 的字段
@@ -19,6 +20,10 @@ function executeScript(arg: string | string[]) {
     value
   })
 }
+
+watchEffect(() => {
+  action.value.isEmpty = !action.value.winTitle && !action.value.target
+})
 
 const label1 = "要激活的窗口 (窗口标识符)"
 const label2 = "当窗口不存在时要启动的: 程序 / 文件夹 / URL"
