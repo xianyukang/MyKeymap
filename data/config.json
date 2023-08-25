@@ -36,6 +36,14 @@
             "actionValueID": 10
           }
         ],
+        "*c": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "winTitle": "记事本",
+            "target": "notepad.exe"
+          }
+        ],
         "*e": [
           {
             "windowGroupID": 0,

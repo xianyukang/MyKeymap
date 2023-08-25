@@ -180,7 +180,7 @@ func SaveConfigHandler(c *gin.Context) {
 	saveConfigFile(config)
 
 	// 生成脚本文件
-	// script.GenerateScript(config)
+	script.GenerateScripts(&config)
 
 	c.JSON(http.StatusOK, gin.H{"message": "ok"})
 }

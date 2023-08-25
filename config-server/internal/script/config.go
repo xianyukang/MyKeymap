@@ -42,8 +42,6 @@ type Action struct {
 	AHKCode            string `json:"ahkCode,omitempty"`
 }
 
-var Cfg *Config
-
 func ParseConfig(file string) (*Config, error) {
 	data, err := os.ReadFile(file)
 	if err != nil {
@@ -55,7 +53,6 @@ func ParseConfig(file string) (*Config, error) {
 	if err != nil {
 		return nil, fmt.Errorf("cannot parse config: %v", err)
 	}
-	Cfg = &config
 	return &config, nil
 }
 
