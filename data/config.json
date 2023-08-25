@@ -422,11 +422,28 @@
     },
     {
       "id": 2,
-      "name": "Cpaslock命令行",
+      "name": "Capslock 命令",
       "enable": true,
-      "hotkey": "cpasAbbr",
+      "hotkey": "capslockAbbr",
       "parentID": 0,
-      "hotkeys": null
+      "hotkeys": {
+      "dd": [
+        {
+          "windowGroupID": 0,
+          "actionTypeID": 1,
+          "target": "shell:downloads",
+          "comment": "打开「 下载 」文件夹"
+        }
+      ],
+      "dm": [
+        {
+          "windowGroupID": 0,
+          "actionTypeID": 1,
+          "target": "ahk-expression: A_WorkingDir",
+          "comment": "打开「 MyKeymap 」文件夹"
+        }
+      ]
+    }
     },
     {
       "id": 3,
@@ -434,7 +451,24 @@
       "enable": true,
       "hotkey": "semicolonAbbr",
       "parentID": 0,
-      "hotkeys": null
+      "hotkeys": {
+      "dd": [
+        {
+          "windowGroupID": 0,
+          "actionTypeID": 1,
+          "target": "shell:downloads",
+          "comment": "打开「 下载 」文件夹"
+        }
+      ],
+      "dm": [
+        {
+          "windowGroupID": 0,
+          "actionTypeID": 1,
+          "target": "ahk-expression: A_WorkingDir",
+          "comment": "打开「 MyKeymap 」文件夹"
+        }
+      ]
+    }
     },
     {
       "id": 4,
@@ -450,42 +484,6 @@
       { "id": 0, "name": "🌎 全局生效" },
       { "id": 1, "name": "浏览器", "value": "ahk_exe chrome.exe\nahk_exe msedge.exe\nahk_exe firefox.exe", "conditionType": 1 }
     ],
-    "capslockAbbr": {
-      "dd": [
-        {
-          "windowGroupID": 0,
-          "actionTypeID": 1,
-          "target": "shell:downloads",
-          "comment": "打开「 下载 」文件夹"
-        }
-      ],
-      "dm": [
-        {
-          "windowGroupID": 0,
-          "actionTypeID": 1,
-          "target": "ahk-expression: A_WorkingDir",
-          "comment": "打开「 MyKeymap 」文件夹"
-        }
-      ]
-    },
-    "semicolonAbbr": {
-      "dd": [
-        {
-          "windowGroupID": 0,
-          "actionTypeID": 1,
-          "target": "shell:downloads",
-          "comment": "打开「 下载 」文件夹"
-        }
-      ],
-      "dm": [
-        {
-          "windowGroupID": 0,
-          "actionTypeID": 1,
-          "target": "ahk-expression: A_WorkingDir",
-          "comment": "打开「 MyKeymap 」文件夹"
-        }
-      ]
-    },
     "scroll": {
       "delay1": "0.2",
       "delay2": "0.03",

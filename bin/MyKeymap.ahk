@@ -41,7 +41,7 @@ InitKeymap()
   capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "dd,dm")
   capsHook.KeyOpt("{CapsLock}", "S")
   capsHook.OnChar := PostCharToCaspAbbr
-  Run("bin\MyKeymap-CommandInput.exe", , , &capsAbbrWindowPid)
+  Run("bin\MyKeymap-CommandInput.exe")
 
   semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "dd,dm")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char)
@@ -52,8 +52,8 @@ InitKeymap()
 
 
   ; Capslock
-  km0 := KeymapManager.NewKeymap("*capslock")
-  km := km0
+  km5 := KeymapManager.NewKeymap("*capslock")
+  km := km5
   km.Map("*c", _ => ActivateOrRun(, "bin\SoundControl.exe"))
   km.Map("*a", _ => CenterAndResizeWindow(1370, 930))
   km.Map("*b", _ => WindowMinimize())
@@ -81,8 +81,8 @@ InitKeymap()
   km.Map("singlePress", _ => EnterCapslockAbbr(capsHook))
 
   ; Capslock + F
-  km1 := KeymapManager.AddSubKeymap(km0, "*f")
-  km := km1
+  km6 := KeymapManager.AddSubKeymap(km5, "*f")
+  km := km6
   km.Map("*a", _ => ActivateOrRun("ahk_exe WindowsTerminal.exe", "wt.exe"))
   km.Map("*d", _ => ActivateOrRun("ahk_exe msedge.exe", "msedge.exe"))
   km.Map("*e", _ => ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\"))
@@ -101,14 +101,14 @@ InitKeymap()
   km.Map("*m", _ => ProcessExistSendKeyOrRun("TIM.exe", "^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk"))
 
   ; Capslock + Space
-  km2 := KeymapManager.AddSubKeymap(km0, "*space")
-  km := km2
+  km7 := KeymapManager.AddSubKeymap(km5, "*space")
+  km := km7
   km.Map("*n", _ => ActivateOrRun("ahk_exe datagrip64.exe", A_Programs "\JetBrains Toolbox\DataGrip.lnk"))
   km.Map("*w", _ => ProcessExistSendKeyOrRun("WeChat.exe", "^!w", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\微信\微信.lnk"))
 
   ; J 模式
-  km3 := KeymapManager.NewKeymap("*j")
-  km := km3
+  km8 := KeymapManager.NewKeymap("*j")
+  km := km8
   km.RemapKey(",", "delete")
   km.RemapKey(".", "insert")
   km.RemapKey("a", "home")
@@ -131,8 +131,8 @@ InitKeymap()
   km.SendKeys("singlePress", "{blind}{j}")
 
   ; J + K 模式
-  km4 := KeymapManager.AddSubKeymap(km3, "*k")
-  km := km4
+  km9 := KeymapManager.AddSubKeymap(km8, "*k")
+  km := km9
   km.SendKeys("*a", "{blind}+{home}")
   km.SendKeys("*c", "{blind}{backspace}")
   km.SendKeys("*d", "{blind}+{down}")
@@ -145,8 +145,8 @@ InitKeymap()
   km.SendKeys("*z", "{blind}^+{left}")
 
   ; 3 模式
-  km5 := KeymapManager.NewKeymap("*3")
-  km := km5
+  km10 := KeymapManager.NewKeymap("*3")
+  km := km10
   km.RemapKey("0", "f10")
   km.RemapKey("2", "f2")
   km.RemapKey("4", "f4")
@@ -169,14 +169,9 @@ InitKeymap()
   km.RemapKey("space", "f1")
   km.MapSinglePress(km.ToggleLock)
 
-  ; Tab 模式
-  km6 := KeymapManager.NewKeymap("*tab")
-  km := km6
-  km.SendKeys("singlePress", "{blind}{tab}")
-
   ; 分号模式
-  km7 := KeymapManager.NewKeymap("*;")
-  km := km7
+  km12 := KeymapManager.NewKeymap("*;")
+  km := km12
   km.SendKeys("*a", "{blind}*")
   km.SendKeys("*b", "{blind}%")
   km.SendKeys("*c", "{blind}.")
@@ -201,57 +196,9 @@ InitKeymap()
   km.SendKeys("*z", "{blind}\")
   km.Map("singlePress", _ => EnterSemicolonAbbr(semiHook, semiHookAbbrWindow))
 
-  ; 句号模式
-  km8 := KeymapManager.NewKeymap("*.")
-  km := km8
-  km.RemapKey(",", "delete")
-  km.RemapKey(".", "insert")
-  km.RemapKey("a", "home")
-  km.RemapKey("c", "backspace")
-  km.RemapKey("d", "down")
-  km.RemapKey("e", "up")
-  km.RemapKey("f", "right")
-  km.RemapKey("g", "end")
-  km.RemapKey("q", "appskey")
-  km.RemapKey("r", "tab")
-  km.RemapKey("s", "left")
-  km.RemapKey("x", "esc")
-  km.SendKeys("*2", "{blind}^+{tab}")
-  km.SendKeys("*3", "{blind}^{tab}")
-  km.SendKeys("*b", "{blind}^{backspace}")
-  km.SendKeys("*v", "{blind}^{right}")
-  km.SendKeys("*w", "{blind}+{tab}")
-  km.SendKeys("*z", "{blind}^{left}")
-  km.SendKeys("*space", "{blind}{enter}")
-  km.SendKeys("singlePress", "{blind}{.}")
-
-  ; 空格模式
-  km9 := KeymapManager.NewKeymap("*space")
-  km := km9
-  km.RemapKey(",", "delete")
-  km.RemapKey(".", "insert")
-  km.RemapKey("a", "home")
-  km.RemapKey("c", "backspace")
-  km.RemapKey("d", "down")
-  km.RemapKey("e", "up")
-  km.RemapKey("f", "right")
-  km.RemapKey("g", "end")
-  km.RemapKey("q", "appskey")
-  km.RemapKey("r", "tab")
-  km.RemapKey("s", "left")
-  km.RemapKey("x", "esc")
-  km.SendKeys("*2", "{blind}^+{tab}")
-  km.SendKeys("*3", "{blind}^{tab}")
-  km.SendKeys("*b", "{blind}^{backspace}")
-  km.SendKeys("*v", "{blind}^{right}")
-  km.SendKeys("*w", "{blind}+{tab}")
-  km.SendKeys("*z", "{blind}^{left}")
-  km.SendKeys("*space", "{blind}{enter}")
-  km.SendKeys("singlePress", "{blind}{space}")
-
   ; 鼠标右键
-  km10 := KeymapManager.NewKeymap("*rbutton")
-  km := km10
+  km15 := KeymapManager.NewKeymap("*rbutton")
+  km := km15
   km.RemapKey("c", "backspace")
   km.RemapKey("x", "esc")
   km.SendKeys("*space", "{blind}{enter}")
