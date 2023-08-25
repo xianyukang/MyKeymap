@@ -102,6 +102,7 @@ function onActionTypeChange(action: any) {
   color: darkmagenta;
   opacity: 1;
 }
+
 :deep(.v-checkbox label) {
   opacity: 0.9;
 }
