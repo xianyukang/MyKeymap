@@ -109,6 +109,7 @@ export const useConfigStore = defineStore('config', () => {
     config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps, options,
     getKeymapById, toggleKeymapEnable, canEditKeymap, customParentKeymaps, customSonKeymaps, addKeymap, removeKeymap,
     checkKeymapData,
+    disabledKeys: computed(() => _disabledKeys(enabledKeymaps.value)),
     getAction: (hotkey: string) => _getAction(keymap.value, hotkey, windowGroupID.value),
     saveConfig: () => _saveConfig(config.value),
   }
@@ -158,4 +159,21 @@ function _saveConfig(config: Config | undefined) {
     }
   }
   const { error } = useFetch("http://localhost:12333/config").put(config)
+}
+
+function _disabledKeys(keymaps: Keymap[]) {
+  // 返回值为各个 keymap 该禁用的热键, 比如 {1: {"*3": true} }
+  const m = {} as any
+  for (const km of keymaps) {
+    if (!m[km.id]) {
+      m[km.id] = {}
+    }
+    m[km.id][km.hotkey] = true
+
+    if (!m[km.parentID]) {
+      m[km.parentID] = {}
+    }
+    m[km.parentID][km.hotkey] = true
+  }
+  return m
 }
