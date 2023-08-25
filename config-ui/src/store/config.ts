@@ -117,6 +117,7 @@ export const useConfigStore = defineStore('config', () => {
 const emptyAction: Action = {
   windowGroupID: 0,
   actionTypeID: 0,
+  isEmpty: true,
 }
 
 function _getAction(keymap: Keymap | undefined, hotkey: string, windowGroupID: number): Action {
@@ -148,7 +149,7 @@ function _saveConfig(config: Config | undefined) {
   config = JSON.parse(JSON.stringify(config))
   for (const km of config!.keymaps) {
     for (const [hk, actions] of Object.entries(km.hotkeys)) {
-      const filterd = actions.filter(x => x.actionTypeID)
+      const filterd = actions.filter(x => !x.isEmpty)
       if (filterd.length > 0) {
         km.hotkeys[hk] = filterd
       } else {

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useConfigStore } from '@/store/config';
 import { storeToRefs } from 'pinia';
+import { watchEffect } from 'vue';
 const { action } = storeToRefs(useConfigStore())
 
 const props = defineProps<{
@@ -9,6 +10,11 @@ const props = defineProps<{
   group3?: { actionValueID: number, label: string }[]
   group4?: { actionValueID: number, label: string }[]
 }>()
+
+
+watchEffect(() => {
+  action.value.isEmpty = !action.value.actionValueID
+})
 
 </script>
 

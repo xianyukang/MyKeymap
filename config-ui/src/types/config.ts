@@ -1,4 +1,5 @@
 interface Action {
+  isEmpty: boolean
   windowGroupID: number
   actionTypeID: number
   comment?: string
