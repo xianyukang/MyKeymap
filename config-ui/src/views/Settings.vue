@@ -40,15 +40,21 @@ const disabledKeymapOption = (keymap: Keymap) => {
       <v-card width="500">
         <Table class="text-left" :titles="['名称', '热键', '前置键', '选项']">
           <tr :class="currId == keymap.id ? 'bg-blue-lighten-4' : ''"
-              @click="currId = keymap.id" @blur="checkKeymapData(keymap)"
+              @click="currId = keymap.id"
               v-for="keymap in customKeymaps" :key="keymap.id">
             <td>
-              <v-text-field v-model.lazy="keymap.name" variant="plain"
-                            style="width: 6rem"></v-text-field>
+              <tip :text="keymap.enable ? '已启动禁止修改' : '修改名称'">
+                <v-text-field v-model.lazy="keymap.name" @blur="checkKeymapData(keymap)"
+                              :disabled="keymap.enable" variant="plain"
+                              style="width: 6rem"></v-text-field>
+              </tip>
             </td>
             <td>
-              <v-text-field v-model.lazy="keymap.hotkey" variant="plain"
-                            style="width: 4rem"></v-text-field>
+              <tip :text="keymap.enable ? '已启动禁止修改' : '修改热键'">
+                <v-text-field v-model.lazy="keymap.hotkey" @blur="checkKeymapData(keymap)"
+                              :disabled="keymap.enable" variant="plain"
+                              style="width: 4rem"></v-text-field>
+              </tip>
             </td>
             <td>
               <tip :text="disabledKeymapOption(keymap) ? '已启动或有子键不允许更改' : '更改前置键'">
@@ -192,6 +198,10 @@ table .v-text-field :deep(input) {
 table .v-text-field :deep(.v-input__details) {
   min-height: auto;
   height: 0 !important;
+}
+
+table .v-text-field :deep(.v-field--disabled) {
+  opacity: 1 !important;
 }
 
 table .v-switch :deep(.v-selection-control) {
