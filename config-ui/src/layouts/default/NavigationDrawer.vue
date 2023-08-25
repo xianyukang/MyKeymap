@@ -16,10 +16,12 @@ const getIcon = (keymap: Keymap) => {
     return icon + "keyboard"
   }
 
+  // 去除热键中的符号
+  hotkey = hotkey.replace(/^[^!#^+\w]/, '')
   // 获取首字母
-  let key = hotkey.substring(1, 2)
+  let key = hotkey.substring(0, 1)
   if (/[LlRr]/.test(key)) {
-    key = hotkey.substring(2, 3)
+    key = hotkey.substring(1, 2)
   }
   key = key.toLowerCase()
 
