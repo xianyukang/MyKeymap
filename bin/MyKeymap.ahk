@@ -37,6 +37,7 @@ InitKeymap()
   taskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "x", "space")
   fast := MouseKeymap(110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.ClearLock)
   slow := MouseKeymap(10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.UnLock)
+  slow.Map("*space", slow.LButtonUp())
 
   capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "dd,dm")
   capsHook.KeyOpt("{CapsLock}", "S")
@@ -77,7 +78,6 @@ InitKeymap()
   km.Map("*n", fast.LButton()), slow.Map("*n", slow.LButton())
   km.Map("*o", fast.ScrollWheelDown), slow.Map("*o", slow.ScrollWheelDown)
   km.Map("*u", fast.ScrollWheelUp), slow.Map("*u", slow.ScrollWheelUp)
-  km.Map("*space", fast.LButtonUp()), slow.Map("*space", slow.LButtonUp())
   km.Map("singlePress", _ => EnterCapslockAbbr(capsHook))
 
   ; Capslock + F
