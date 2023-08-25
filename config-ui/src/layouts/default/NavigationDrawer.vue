@@ -3,11 +3,11 @@ import { useConfigStore } from '@/store/config';
 import { storeToRefs } from 'pinia';
 
 const { enabledKeymaps } = storeToRefs(useConfigStore())
-const { getKeymapById, canEditKeymap } = useConfigStore()
+const { getKeymapById, canEditKeymap, saveConfig } = useConfigStore()
 
 const getIcon = (keymap: Keymap) => {
   let icon = "mdi-"
-  let hotkey = keymap.parentID != 0 ? getKeymapById(keymap.parentID).hotkey : keymap.hotkey
+  let hotkey = keymap.parentID ? getKeymapById(keymap.parentID).hotkey : keymap.hotkey
 
   // 判断是设置还是自定义热键
   if (hotkey == "settings") {
@@ -79,7 +79,7 @@ const getIcon = (keymap: Keymap) => {
     </v-list>
 
     <v-divider class="border-opacity-25"></v-divider>
-    <v-btn class="ma-3" width="90%" color="blue" prepend-icon="mdi-content-save-outline" variant="outlined">
+    <v-btn class="ma-3" width="90%" color="blue" prepend-icon="mdi-content-save-outline" variant="outlined" @click="saveConfig">
       保存配置（CTRL+S）
     </v-btn>
   </v-navigation-drawer>
