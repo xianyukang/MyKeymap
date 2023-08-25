@@ -1,6 +1,9 @@
 package script
 
-import "strings"
+import (
+	"sort"
+	"strings"
+)
 
 func (c *Config) CapslockAbbr() map[string][]Action {
 	for _, km := range c.Keymaps {
@@ -41,6 +44,9 @@ func (c *Config) CapslockAbbrKeys() string {
 	for key := range c.CapslockAbbr() {
 		keys = append(keys, key)
 	}
+	sort.Slice(keys, func(i, j int) bool {
+		return keys[i] < keys[j]
+	})
 	return strings.Join(keys, ",")
 }
 
@@ -65,5 +71,8 @@ func (c *Config) SemicolonAbbrKeys() string {
 	for key := range c.SemicolonAbbr() {
 		keys = append(keys, key)
 	}
+	sort.Slice(keys, func(i, j int) bool {
+		return keys[i] < keys[j]
+	})
 	return strings.Join(keys, ",")
 }
