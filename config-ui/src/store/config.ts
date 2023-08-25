@@ -116,7 +116,6 @@ export const useConfigStore = defineStore('config', () => {
 const emptyAction: Action = {
   windowGroupID: 0,
   actionTypeID: 0,
-  remapToKey: ""
 }
 
 function _getAction(keymap: Keymap | undefined, hotkey: string, windowGroupID: number): Action {

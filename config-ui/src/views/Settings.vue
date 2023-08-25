@@ -3,11 +3,18 @@ import Table from "@/components/Table.vue";
 import Tip from "@/components/Tip.vue";
 
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useConfigStore } from "@/store/config";
 
 const { customKeymaps, customParentKeymaps, customSonKeymaps, options } = storeToRefs(useConfigStore())
 const { toggleKeymapEnable, addKeymap, removeKeymap } = useConfigStore()
+
+// TODO: 设置页面的加载时间似乎需要 150 - 200 ms
+// const time1 = Date.now()
+// onMounted(() => {
+//   const time2 = Date.now()
+//   console.log(time2 - time1)
+// })
 
 const currId = ref(0);
 

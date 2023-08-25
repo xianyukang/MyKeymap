@@ -6,6 +6,7 @@ import { storeToRefs } from 'pinia';
 // TODO: 修改文档和示例
 // TODO: 保存时删掉 action 配置中值为空字符串 "" 的字段
 // TODO: 修改 ActivateOrRun 函数把 detectHiddenWindow 参数加上
+// TODO: action 加个 isEmpty 字段, 比如 winTitle 和 target 都为空, 在保存前删掉这个 action
 const { action } = storeToRefs(useConfigStore())
 
 function executeScript(arg: string | string[]) {

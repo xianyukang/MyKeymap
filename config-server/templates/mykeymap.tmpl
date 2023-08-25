@@ -31,7 +31,7 @@ RAlt::LCtrl
   SoundBeep
   Reload
 }
-TODO: 渲染 config.keymaps 字段时要先排序, 把没有 parentID 的排在前面
+
 InitKeymap()
 {
   taskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "x", "space")
@@ -51,7 +51,7 @@ InitKeymap()
   ; 如果在系统设置中交换了左右键,  那么需要发送左键才能打开右键菜单
   theRealRButton := SysGet(23) ? "{LButton}" : "{RButton}"
 
-{{range .Keymaps}}{{template "renderKeymap" .}}{{end}}
+{{range .EnabledKeymaps}}{{template "renderKeymap" .}}{{end}}
 
   KeymapManager.GlobalKeymap.Enable()
 }
@@ -68,7 +68,7 @@ InitKeymap()
 {{- if .CapslockAbbrEnabled -}}
 ExecCapslockAbbr(command) {
   switch command {
-{{ abbrToCode .Options.CapslockAbbr }}  }
+{{ abbrToCode .CapslockAbbr }}  }
 }
 {{- else -}}
 ExecCapslockAbbr(command) {
@@ -78,7 +78,7 @@ ExecCapslockAbbr(command) {
 {{ if .SemicolonAbbrEnabled -}}
 ExecSemicolonAbbr(command) {
   switch command {
-{{ abbrToCode .Options.SemicolonAbbr }}  }
+{{ abbrToCode .SemicolonAbbr }}  }
 }
 {{- else -}}
 ExecSemicolonAbbr(command) {

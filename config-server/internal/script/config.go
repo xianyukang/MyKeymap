@@ -20,7 +20,7 @@ type Keymap struct {
 	Name     string              `json:"name"`
 	Enable   bool                `json:"enable"`
 	Hotkey   string              `json:"hotkey"`
-	ParentID *int                `json:"parentID"`
+	ParentID int                 `json:"parentID"`
 	Hotkeys  map[string][]Action `json:"hotkeys"`
 }
 
@@ -88,44 +88,29 @@ func (c *Config) GetHotkeyContext(a Action) string {
 	return fmt.Sprintf(", , %s, %d", winTitle, conditionType)
 }
 
-func (c *Config) CapslockAbbrEnabled() bool {
+func (c *Config) EnabledKeymaps() []Keymap {
+	var enabled []Keymap
 	for _, km := range c.Keymaps {
-		for _, actions := range km.Hotkeys {
-			for _, a := range actions {
-				if a.TypeID == 9 && a.ValueID == 1 {
-					return true
-				}
+		if km.ID >= 5 && km.Enable {
+			enabled = append(enabled, km)
+		}
+	}
+
+	// 对模式进行分组和排序
+	groups := make(map[int][]Keymap)
+	for _, km := range enabled {
+		if km.ParentID != 0 {
+			groups[km.ParentID] = append(groups[km.ParentID], km)
+		}
+	}
+	var res []Keymap
+	for _, km := range enabled {
+		if km.ParentID == 0 {
+			res = append(res, km)
+			if subKeymaps, ok := groups[km.ID]; ok {
+				res = append(res, subKeymaps...)
 			}
 		}
 	}
-	return false
-}
-
-func (c *Config) CapslockAbbrKeys() string {
-	var keys []string
-	for key := range c.Options.CapslockAbbr {
-		keys = append(keys, key)
-	}
-	return strings.Join(keys, ",")
-}
-
-func (c *Config) SemicolonAbbrEnabled() bool {
-	for _, km := range c.Keymaps {
-		for _, actions := range km.Hotkeys {
-			for _, a := range actions {
-				if a.TypeID == 9 && a.ValueID == 2 {
-					return true
-				}
-			}
-		}
-	}
-	return false
-}
-
-func (c *Config) SemicolonAbbrKeys() string {
-	var keys []string
-	for key := range c.Options.SemicolonAbbr {
-		keys = append(keys, key)
-	}
-	return strings.Join(keys, ",")
+	return res
 }
