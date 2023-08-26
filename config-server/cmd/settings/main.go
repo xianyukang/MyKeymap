@@ -66,7 +66,7 @@ func server(errorLog *strings.Builder, hasError chan<- struct{}, debug bool) {
 
 	router.GET("/config", GetConfigHandler)
 	router.PUT("/config", SaveConfigHandler)
-	router.POST("/execute", ExecuteHandler)
+	router.POST("/server/command/:id", ServerCommandHandler)
 
 	// 一个常见错误是端口已被占用,  除了检查字符串,  有没有什么预定义的 sentinel error 可以用?
 	ln, err := net.Listen("tcp", "127.0.0.1:12333")
@@ -127,42 +127,41 @@ func PanicHandler(hasError chan<- struct{}) gin.HandlerFunc {
 	}
 }
 
-func ExecuteHandler(c *gin.Context) {
-	var command map[string]interface{}
-	if err := c.ShouldBindJSON(&command); err != nil {
-		panic(err)
+func ServerCommandHandler(c *gin.Context) {
+	m := map[string]struct {
+		exe  string
+		args []string
+	}{
+		"2": {
+			exe:  "./MyKeymap.exe",
+			args: []string{"bin/WindowSpy.ahk"},
+		},
 	}
-	if command["type"].(string) == "run-program" {
-		val := command["value"].([]interface{})
-		exe := val[0].(string)
-		arg := val[1].(string)
+	if c, ok := m[c.Param("id")]; ok {
+		execCmd(c.exe, c.args...)
+	}
 
-		// 切换到 parent 文件夹, 执行完 command 后再回来
-		// 程序工作目录算全局共享状态, 所以会影响到其他 goroutine
-		wd, err := os.Getwd()
+	c.JSON(http.StatusOK, gin.H{})
+}
+
+func execCmd(exe string, args ...string) {
+	// 切换到 parent 文件夹, 执行完 command 后再回来
+	// 程序工作目录算全局共享状态, 所以会影响到其他 goroutine
+	wd, err := os.Getwd()
+	if err == nil {
+		base := filepath.Base(wd)
+		err := os.Chdir("../")
 		if err == nil {
-			base := filepath.Base(wd)
-			fmt.Println(wd, base, exe, arg)
-			err := os.Chdir("../")
-			if err == nil {
-				defer func() {
-					_ = os.Chdir(base)
-				}()
-			}
-		}
-
-		var c = exec.Command(exe, arg)
-		if len(val) == 3 {
-			arg2 := val[2].(string)
-			c = exec.Command(exe, arg, arg2)
-		}
-		// 忽略执行错误
-		err = c.Start()
-		if err != nil {
-
+			defer func() {
+				_ = os.Chdir(base)
+			}()
 		}
 	}
-	c.JSON(http.StatusOK, command)
+
+	var c = exec.Command(exe, args...)
+	err = c.Start()
+	if err != nil {
+	}
 }
 
 func SaveConfigHandler(c *gin.Context) {
@@ -176,11 +175,9 @@ func SaveConfigHandler(c *gin.Context) {
 	// delete(config, "helpPageHtml")
 	// saveHelpPageHtml(helpPageHtml)
 
-	// 保存配置文件
-	saveConfigFile(config)
-
-	// 生成脚本文件
-	script.GenerateScripts(&config)
+	saveConfigFile(config)          // 保存配置文件
+	script.GenerateScripts(&config) // 生成脚本文件
+	execCmd("./MyKeymap.exe")       // 重启程序
 
 	c.JSON(http.StatusOK, gin.H{"message": "ok"})
 }

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useConfigStore } from '@/store/config';
-import { useFetch } from '@vueuse/core';
+import { server } from '@/store/server';
 import { storeToRefs } from 'pinia';
 import { watchEffect } from 'vue';
 
@@ -9,17 +9,6 @@ import { watchEffect } from 'vue';
 // TODO: 修改 ActivateOrRun 函数把 detectHiddenWindow 参数加上
 // TODO: action 加个 isEmpty 字段, 比如 winTitle 和 target 都为空, 在保存前删掉这个 action
 const { action } = storeToRefs(useConfigStore())
-
-function executeScript(arg: string | string[]) {
-  let value = ['./MyKeymap.exe', arg]
-  if (Array.isArray(arg)) {
-    value = ['./MyKeymap.exe', ...arg]
-  }
-  useFetch('http://localhost:12333/execute').post({
-    type: 'run-program',
-    value
-  })
-}
 
 watchEffect(() => {
   action.value.isEmpty = !action.value.winTitle && !action.value.target
@@ -46,7 +35,7 @@ const label9 = "📗 查看例子"
   <v-card-actions class="card-actions">
     <v-checkbox :label="label6" color="secondary" v-model="action.runAsAdmin" />
     <v-checkbox :label="label7" color="secondary" v-model="action.detectHiddenWindow" />
-    <v-btn class="action-button" color="primary" variant="outlined" @click="executeScript('bin/WindowSpy.ahk')">{{ label8 }}</v-btn>
+    <v-btn class="action-button" color="primary" variant="outlined" @click="server.runWindowSpy">{{ label8 }}</v-btn>
     <v-btn class="action-button" color="primary" variant="outlined" target="_blank" href="/ProgramPathExample.html">{{ label9 }}</v-btn>
   </v-card-actions>
 </template>
