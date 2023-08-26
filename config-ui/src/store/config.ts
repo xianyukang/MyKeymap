@@ -103,8 +103,7 @@ export const useConfigStore = defineStore('config', () => {
     return f.id
   }
 
-  const customHotkeyIndex = computed(() => config.value!.keymaps.length - 4)
-  const customHotkey = computed(() => config.value!.keymaps[customHotkeyIndex.value].hotkeys)
+  const customHotkey = computed(() => keymap.value?.hotkeys!)
 
   function changeCustomHotkey(oldHotkey: string, newHotkey: string) {
     // 如果热键已存在且当前键的action.actionTypeID 为0删除当前热键,不为0删除之前的热键
@@ -118,7 +117,7 @@ export const useConfigStore = defineStore('config', () => {
     }
 
     // 如果直接替换会导致hotkey的位置在最下方
-    config.value!.keymaps[customHotkeyIndex.value].hotkeys = Object.keys(customHotkey.value).reduce((result: { [key: string]: Array<Action> }, key) => {
+    keymap.value!.hotkeys = Object.keys(customHotkey.value).reduce((result: { [key: string]: Array<Action> }, key) => {
       if (key == oldHotkey) {
         result[newHotkey] = customHotkey.value[key];
       } else {
@@ -133,7 +132,7 @@ export const useConfigStore = defineStore('config', () => {
   }
 
   function addCustomHotKey() {
-    config.value!.keymaps[customHotkeyIndex.value].hotkeys["此处修改"] = [{ ...emptyAction }]
+    keymap.value!.hotkeys["此处修改"] = [{ ...emptyAction }]
   }
 
   return {
