@@ -2,6 +2,7 @@ import { defineStore } from "pinia"
 import { useFetch } from '@vueuse/core'
 import { computed, ref, watch } from "vue"
 import { useRoute } from "vue-router"
+import { Config, Keymap, Action } from "@/types/config";
 
 export const useConfigStore = defineStore('config', () => {
 
@@ -20,7 +21,11 @@ export const useConfigStore = defineStore('config', () => {
   const keymap = ref<Keymap>()
   watch(
     () => config.value?.keymaps.find(x => x.id + '' === route.params.id),
-    (newValue) => keymap.value = newValue
+    (newValue) => {
+      keymap.value = newValue
+      // 防止串键, 会导致当前选择的键带到缩写模式中
+      hotkey.value = ""
+    }
   )
 
   // 根据选中的 hotkey 和 windowGroupID, 返回对应的 action
@@ -43,8 +48,6 @@ export const useConfigStore = defineStore('config', () => {
     arr.unshift({ id: 0, name: "-", hotkey: "", parentID: 0, enable: true, hotkeys: {} })
     return arr;
   })
-
-  const customHotkey = computed(() => enabledKeymaps.value[enabledKeymaps.value.length - 4].hotkeys)
 
   function getKeymapById(id: number) {
     return customParentKeymaps.value.find(k => k.id == id)!
@@ -105,10 +108,42 @@ export const useConfigStore = defineStore('config', () => {
     return f.id
   }
 
+  const hotkeys = computed(() => keymap.value?.hotkeys!)
+
+  function changeHotkey(oldHotkey: string, newHotkey: string) {
+    // 如果热键已存在且当前键的action.actionTypeID 为0删除当前热键,不为0删除之前的热键
+    if (newHotkey in hotkeys.value) {
+      if (hotkeys.value[oldHotkey][0].actionTypeID == 0) {
+        removeHotkey(oldHotkey)
+        return newHotkey
+      } else {
+        removeHotkey(newHotkey)
+      }
+    }
+
+    // 如果直接替换会导致hotkey的位置在最下方
+    keymap.value!.hotkeys = Object.keys(hotkeys.value).reduce((result: { [key: string]: Array<Action> }, key) => {
+      if (key == oldHotkey) {
+        result[newHotkey] = hotkeys.value[key];
+      } else {
+        result[key] = hotkeys.value[key];
+      }
+      return result;
+    }, {})
+  }
+
+  function removeHotkey(hotkey: string) {
+    delete hotkeys.value[hotkey]
+  }
+
+  function addHotKey(key: string = "此处修改") {
+    keymap.value!.hotkeys[key] = [{ ...emptyAction }]
+  }
+
   return {
-    config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps, options,
-    getKeymapById, toggleKeymapEnable, canEditKeymap, customParentKeymaps, customSonKeymaps, addKeymap, removeKeymap,
-    checkKeymapData,
+    config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps, options, hotkeys,
+    getKeymapById, toggleKeymapEnable, customParentKeymaps, customSonKeymaps, addKeymap, removeKeymap,
+    checkKeymapData, changeHotkey, removeHotkey, addHotKey,
     disabledKeys: computed(() => _disabledKeys(enabledKeymaps.value)),
     getAction: (hotkey: string) => _getAction(keymap.value, hotkey, windowGroupID.value),
     saveConfig: () => _saveConfig(config.value),

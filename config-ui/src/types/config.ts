@@ -1,4 +1,4 @@
-interface Action {
+export interface Action {
   isEmpty: boolean
   windowGroupID: number
   actionTypeID: number
@@ -16,7 +16,7 @@ interface Action {
   detectHiddenWindow?: boolean
 
 }
-interface Keymap {
+export interface Keymap {
   id: number
   name: string
   enable: boolean
@@ -27,13 +27,13 @@ interface Keymap {
   }
 }
 
-interface Scroll {
+export interface Scroll {
   delay1: string
   delay2: string
   onceLineCount: string;
 }
 
-interface Mouse {
+export interface Mouse {
   delay1: string
   delay2: string
   fastSingle: string
@@ -42,19 +42,19 @@ interface Mouse {
   slowRepeat: string
 }
 
-interface WindowGroup {
+export interface WindowGroup {
   id: number
   name: string
   value: string
   conditionType: number
 }
 
-interface Path {
+export interface Path {
   "key": string
   "value": string
 }
 
-interface Options {
+export interface Options {
   scroll: Scroll
   mouse: Mouse
   windowGroups: Array<WindowGroup>
@@ -64,7 +64,7 @@ interface Options {
   keyMapping: string
 }
 
-interface Config {
+export interface Config {
   keymaps: Array<Keymap>
   options: Options
 }
