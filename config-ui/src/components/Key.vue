@@ -6,6 +6,7 @@ import { useConfigStore } from "@/store/config";
 const store = useConfigStore()
 const props = defineProps<{
   hotkey: string;
+  laber?: string;
 }>();
 
 const keyText = computed(() => capitalize(trimStart(props.hotkey, '*')))
@@ -47,7 +48,7 @@ function width(key: string): number {
             :disabled="disabled"
             @click="click(hotkey)"
             :class="['d-flex justify-center align-center']">
-      <div>{{ keyText }}</div>
+      <div>{{ laber ?? keyText }}</div>
     </v-card>
   </v-hover>
 </template>

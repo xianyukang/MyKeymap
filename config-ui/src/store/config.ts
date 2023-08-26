@@ -20,7 +20,11 @@ export const useConfigStore = defineStore('config', () => {
   const keymap = ref<Keymap>()
   watch(
     () => config.value?.keymaps.find(x => x.id + '' === route.params.id),
-    (newValue) => keymap.value = newValue
+    (newValue) => {
+      keymap.value = newValue
+      // 防止串键, 会导致当前选择的键带到缩写模式中
+      hotkey.value = ""
+    }
   )
 
   // 根据选中的 hotkey 和 windowGroupID, 返回对应的 action
