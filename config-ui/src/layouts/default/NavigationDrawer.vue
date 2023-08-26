@@ -3,12 +3,12 @@ import { useConfigStore } from '@/store/config';
 import { storeToRefs } from 'pinia';
 import { Keymap } from "@/types/config";
 
-const { enabledKeymaps } = storeToRefs(useConfigStore())
-const { getKeymapById, saveConfig } = useConfigStore()
+const { enabledKeymaps, customParentKeymaps } = storeToRefs(useConfigStore())
+const { saveConfig } = useConfigStore()
 
 const getIcon = (keymap: Keymap) => {
   let icon = "mdi-"
-  let hotkey = keymap.parentID ? getKeymapById(keymap.parentID).hotkey : keymap.hotkey
+  let hotkey = keymap.parentID ? customParentKeymaps.value.find(k => k.id == keymap.parentID)!.hotkey : keymap.hotkey
 
   // 判断是设置还是自定义热键
   if (hotkey == "settings") {

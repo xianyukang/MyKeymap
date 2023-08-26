@@ -43,4 +43,13 @@ th, :slotted(th) {
   background: #E3F2FD;
 }
 
+th {
+  color: rgba(0, 0, 0, 1);
+  font-size: 1.1em;
+  background-color: rgb(245, 245, 245);
+}
+
+:deep(.v-select .v-field__append-inner i) {
+  visibility: hidden;
+}
 </style>

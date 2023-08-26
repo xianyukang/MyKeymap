@@ -5,26 +5,15 @@ import { useRoute } from "vue-router"
 import { Config, Keymap, Action } from "@/types/config";
 
 export const useConfigStore = defineStore('config', () => {
-
-  const config = initConfig()
-
-  function initConfig() {
-    const config = ref<Config>()
-    const url = 'http://localhost:12333/config'
-    const { data, error } = useFetch(url).json<Config>()
-    watch(data, (newValue) => config.value = newValue!)
-    return config
-  }
-
   // 根据 url 返回对应的 keymap
+  const config = fetchConfig()
   const route = useRoute()
   const keymap = ref<Keymap>()
   watch(
     () => config.value?.keymaps.find(x => x.id + '' === route.params.id),
     (newValue) => {
       keymap.value = newValue
-      // 防止串键, 会导致当前选择的键带到缩写模式中
-      hotkey.value = ""
+      hotkey.value = "" // 防止串键, 会导致当前选择的键带到缩写模式中
     }
   )
 
@@ -36,77 +25,19 @@ export const useConfigStore = defineStore('config', () => {
     () => _getAction(keymap.value, hotkey.value, windowGroupID.value),
     (newValue) => action.value = newValue
   )
-  // TODO: 路由变化时把选中的 hotkey 清空
+
   const keymaps = computed(() => config.value!.keymaps)
   const options = computed(() => config.value!.options)
 
   const enabledKeymaps = computed(() => keymaps.value.filter(x => x.enable))
-  const customKeymaps = computed(() => keymaps.value.filter(x => canEditKeymap(x)))
+  const customKeymaps = computed(() => keymaps.value.filter(x => x.id > 4))
   const customSonKeymaps = computed(() => customKeymaps.value.filter(x => x.parentID != 0))
   const customParentKeymaps = computed(() => {
     const arr = customKeymaps.value.filter(x => x.parentID == 0)
-    arr.unshift({ id: 0, name: "-", hotkey: "", parentID: 0, enable: true, hotkeys: {} })
+    arr.unshift({ id: 0, name: "无", hotkey: "", parentID: 0, enable: true, hotkeys: {} })
     return arr;
   })
 
-  function getKeymapById(id: number) {
-    return customParentKeymaps.value.find(k => k.id == id)!
-  }
-
-  function toggleKeymapEnable(keymap: Keymap) {
-    // 开启的keymap有前置键连同前置键一块开启
-    if (!keymap.enable && keymap.parentID != 0) {
-      customParentKeymaps.value.find(k => k.id == keymap.parentID)!.enable = true
-    }
-
-    keymap.enable = !keymap.enable
-  }
-
-  function canEditKeymap(keymap: Keymap) {
-    return keymap.id > 4
-  }
-
-  function nextKeymapId() {
-    const length = customKeymaps.value.length;
-    if (length == 0) {
-      return 5
-    }
-
-    return customKeymaps.value[length - 1].id + 1
-  }
-
-  function addKeymap() {
-    const newKeymap: Keymap = {
-      id: nextKeymapId(),
-      name: "",
-      enable: false,
-      hotkey: "",
-      parentID: 0,
-      hotkeys: {}
-    }
-
-    keymaps.value.splice(customKeymaps.value.length, 0, newKeymap)
-  }
-
-  function removeKeymap(id: number) {
-    removeKeymapByIndex(keymaps.value.findLastIndex(k => k.id == id))
-  }
-
-  function removeKeymapByIndex(index: number) {
-    keymaps.value.splice(index, 1)
-  }
-
-  function checkKeymapData(keymap: Keymap) {
-    if (keymap.hotkey == "") {
-      return keymap.id
-    }
-    // 判断当前热键是否已存在，已存在删除当前模式
-    const f = keymaps.value.find(k => k.hotkey == keymap.hotkey && k.parentID == keymap.parentID)!
-    if (f.id != keymap.id) {
-      removeKeymap(keymap.id)
-    }
-    return f.id
-  }
 
   const hotkeys = computed(() => keymap.value?.hotkeys!)
 
@@ -142,8 +73,8 @@ export const useConfigStore = defineStore('config', () => {
 
   return {
     config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps, options, hotkeys,
-    getKeymapById, toggleKeymapEnable, customParentKeymaps, customSonKeymaps, addKeymap, removeKeymap,
-    checkKeymapData, changeHotkey, removeHotkey, addHotKey,
+    customParentKeymaps, customSonKeymaps, keymaps,
+    changeHotkey, removeHotkey, addHotKey,
     disabledKeys: computed(() => _disabledKeys(enabledKeymaps.value)),
     getAction: (hotkey: string) => _getAction(keymap.value, hotkey, windowGroupID.value),
     saveConfig: () => _saveConfig(config.value),
@@ -211,4 +142,13 @@ function _disabledKeys(keymaps: Keymap[]) {
     m[km.parentID][km.hotkey] = true
   }
   return m
+}
+
+
+function fetchConfig() {
+  const config = ref<Config>()
+  const url = 'http://localhost:12333/config'
+  const { data, error } = useFetch(url).json<Config>()
+  watch(data, (newValue) => config.value = newValue!)
+  return config
 }

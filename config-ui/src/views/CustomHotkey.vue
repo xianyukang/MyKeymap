@@ -32,7 +32,7 @@ const removeCustomHotkey = (hotkey: string) => {
   <v-row class="mt-2" justify="center" :dense="true">
     <v-col sm="auto">
       <v-card width="400">
-        <Table class="text-left" :titles="['热键', '备注', '选项']">
+        <Table class="text-left" :titles="['热键', '备注', '']">
           <tr :class="currHotkey == hotkey ? 'bg-blue-lighten-4' : ''"
               @click="checkRow(hotkey as string)"
               v-for="(action, hotkey, index) in hotkeys" :key="index">

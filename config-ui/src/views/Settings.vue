@@ -7,8 +7,7 @@ import { onMounted, ref } from "vue";
 import { useConfigStore } from "@/store/config";
 import { Keymap } from "@/types/config";
 
-const { customKeymaps, customParentKeymaps, customSonKeymaps, options } = storeToRefs(useConfigStore())
-const { toggleKeymapEnable, addKeymap, removeKeymap } = useConfigStore()
+const { customKeymaps, customParentKeymaps, customSonKeymaps, options, keymaps } = storeToRefs(useConfigStore())
 
 // TODO: 设置页面的加载时间似乎需要 150 - 200 ms
 // const time1 = Date.now()
@@ -20,7 +19,7 @@ const { toggleKeymapEnable, addKeymap, removeKeymap } = useConfigStore()
 const currId = ref(0);
 
 const checkKeymapData = (keymap: Keymap) => {
-  currId.value = useConfigStore().checkKeymapData(keymap)
+  currId.value = checkKeymapData2(keymap)
 }
 
 const disabledKeymapEnable = (keymap: Keymap) => {
@@ -40,13 +39,66 @@ const disabledKeymapOption = (keymap: Keymap) => {
   }
   return customSonKeymaps.value.findIndex(k => k.parentID == keymap.id) != -1
 }
+
+function toggleKeymapEnable(keymap: Keymap) {
+  // 开启的keymap有前置键连同前置键一块开启
+  if (!keymap.enable && keymap.parentID != 0) {
+    customParentKeymaps.value.find(k => k.id == keymap.parentID)!.enable = true
+  }
+
+  keymap.enable = !keymap.enable
+}
+
+
+function nextKeymapId() {
+  const length = customKeymaps.value.length;
+  if (length == 0) {
+    return 5
+  }
+
+  return customKeymaps.value[length - 1].id + 1
+}
+
+function addKeymap() {
+  const newKeymap: Keymap = {
+    id: nextKeymapId(),
+    name: "",
+    enable: false,
+    hotkey: "",
+    parentID: 0,
+    hotkeys: {}
+  }
+
+  keymaps.value.splice(customKeymaps.value.length, 0, newKeymap)
+}
+
+function removeKeymap(id: number) {
+  removeKeymapByIndex(keymaps.value.findLastIndex(k => k.id == id))
+}
+
+function removeKeymapByIndex(index: number) {
+  keymaps.value.splice(index, 1)
+}
+
+function checkKeymapData2(keymap: Keymap) {
+  if (keymap.hotkey == "") {
+    return keymap.id
+  }
+  // 判断当前热键是否已存在，已存在删除当前模式
+  const f = keymaps.value.find(k => k.hotkey == keymap.hotkey && k.parentID == keymap.parentID)!
+  if (f.id != keymap.id) {
+    removeKeymap(keymap.id)
+  }
+  return f.id
+}
 </script>
 
 <template>
-  <v-row class="mt-2" justify="center" :dense="true">
+  <v-container>
+  <v-row class="mt-2">
     <v-col sm="auto">
-      <v-card width="500">
-        <Table class="text-left" :titles="['名称', '热键', '前置键', '选项']">
+      <v-card width="640" elevation="3">
+        <Table class="text-left" :titles="['名称', '触发键', '上层', '开关']">
           <tr :class="currId == keymap.id ? 'bg-blue-lighten-4' : ''"
               @click="currId = keymap.id"
               v-for="keymap in customKeymaps" :key="keymap.id">
@@ -54,43 +106,43 @@ const disabledKeymapOption = (keymap: Keymap) => {
               <tip :text="keymap.enable ? '已启动禁止修改' : '修改名称'">
                 <v-text-field v-model.lazy="keymap.name" @blur="checkKeymapData(keymap)"
                               :disabled="keymap.enable" variant="plain"
-                              style="width: 6rem"></v-text-field>
+                              style="width: 9rem"></v-text-field>
               </tip>
             </td>
             <td>
               <tip :text="keymap.enable ? '已启动禁止修改' : '修改热键'">
                 <v-text-field v-model.lazy="keymap.hotkey" @blur="checkKeymapData(keymap)"
                               :disabled="keymap.enable" variant="plain"
-                              style="width: 4rem"></v-text-field>
+                              style="width: 7rem"></v-text-field>
               </tip>
             </td>
             <td>
               <tip :text="disabledKeymapOption(keymap) ? '已启动或有子键不允许更改' : '更改前置键'">
                 <v-select v-model="keymap.parentID" :items="customParentKeymaps" :item-title="item => item.name"
                           :item-value="item => item.id" :disabled="disabledKeymapOption(keymap)"
-                          variant="plain" style="width: 6rem">
+                          variant="plain" style="width: 7rem">
                 </v-select>
               </tip>
             </td>
-            <td class="w-25">
+            <td>
               <div class="d-flex justify-space-around align-center">
                 <tip :text="disabledKeymapEnable(keymap) ? keymap.enable ? '请禁用子键' : '请输入名称和热键' : keymap.enable ? '禁用该热键' : '启动该热键'">
                   <v-switch hide-details color="primary" :model-value="keymap.enable"
                             :disabled="disabledKeymapEnable(keymap)"
                             @click="toggleKeymapEnable(keymap)"></v-switch>
                 </tip>
-                <tip :text="disabledKeymapOption(keymap) ? '请删除子键或禁用该热键' : '删除当前热键'">
+                <!-- <tip :text="disabledKeymapOption(keymap) ? '请删除子键或禁用该热键' : '删除当前热键'">
                   <v-btn icon="mdi-delete-outline" variant="text" width="40" height="40"
                          :disabled="disabledKeymapOption(keymap)"
                          @click="removeKeymap(keymap.id)"></v-btn>
-                </tip>
+                </tip> -->
               </div>
             </td>
           </tr>
         </Table>
 
         <div class="d-flex justify-end">
-          <v-btn class="ma-3" color="green" @click="addKeymap()">新增热键</v-btn>
+          <v-btn class="ma-3" color="green" @click="addKeymap()">新增一个</v-btn>
         </div>
       </v-card>
     </v-col>
@@ -195,6 +247,7 @@ const disabledKeymapOption = (keymap: Keymap) => {
       </div>
     </v-col>
   </v-row>
+  </v-container>
 </template>
 
 <style scoped>
