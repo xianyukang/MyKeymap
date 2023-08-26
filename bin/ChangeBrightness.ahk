@@ -110,6 +110,7 @@ class CLayout extends Gui {
 
   ; 获取屏幕亮度
   GetBrightness(monIndex) {
+    brightness := ""
     try {
       brightness := this.monitorCol.GetBrightness(monIndex)["Current"]
     } catch Error as e {

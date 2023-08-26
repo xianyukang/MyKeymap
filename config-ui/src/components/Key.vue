@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import { trimStart, capitalize } from 'lodash-es';
-import { Action, useConfigStore } from "@/store/config";
+import { useConfigStore } from "@/store/config";
 
 const store = useConfigStore()
 const props = defineProps<{
@@ -9,22 +9,22 @@ const props = defineProps<{
 }>();
 
 const keyText = computed(() => capitalize(trimStart(props.hotkey, '*')))
-const keyColor = computed(() => hotkeyColor(store.keymap!.hotkey, props.hotkey, store.hotkey, store.getAction(props.hotkey)))
-function click(hotkey: string) {
-  store.hotkey = hotkey
-}
-
-function hotkeyColor(keymapHotkey: string, key: string, currentHotkey: string, action: Action): string {
-  if (disabled(keymapHotkey, key)) {
-    return '#AAA'
-  }
-  if (key === currentHotkey) {
+const keyColor = computed(() => {
+  if (store.hotkey === props.hotkey) {
     return 'blue'
   }
-  if (action.actionTypeID) {
+  if (!store.getAction(props.hotkey).isEmpty) {
     return '#98FB98'
   }
   return ''
+})
+
+const disabled = computed(() => {
+  return store.disabledKeys[store.keymap!.id][props.hotkey]
+})
+
+function click(hotkey: string) {
+  store.hotkey = hotkey
 }
 
 function width(key: string): number {
@@ -34,9 +34,6 @@ function width(key: string): number {
   return 53;
 }
 
-function disabled(keymapHotkey: string, hotkey: string): boolean {
-  return keymapHotkey === hotkey
-}
 </script>
 
 <template>
@@ -46,8 +43,8 @@ function disabled(keymapHotkey: string, hotkey: string): boolean {
             style="transition: none; font-size: 1.5rem;"
             :elevation="isHovering ? 13 : 4"
             :width="width(keyText) + (isHovering ? 1 : 0)"
-            :color="keyColor"
-            :disabled="disabled(store.keymap!.hotkey, hotkey)"
+            :color="disabled ? '#AAA' : keyColor"
+            :disabled="disabled"
             @click="click(hotkey)"
             :class="['d-flex justify-center align-center']">
       <div>{{ keyText }}</div>

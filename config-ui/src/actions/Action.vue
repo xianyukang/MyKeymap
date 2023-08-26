@@ -40,14 +40,17 @@ const components: any = {
 }
 
 
-function onActionTypeChange(action: any) {
+function onActionTypeChange(action: Action) {
   // 删掉除 windowGroupID 和 actionTypeID 之外的字段
   for (const key of Object.keys(action)) {
     if (key === "windowGroupID" || key === "actionTypeID") {
       // skip
     } else {
-      delete action[key];
+      delete action[key as keyof Action];
     }
+  }
+  if (action.actionTypeID === 0) {
+    action.isEmpty = true
   }
 }
 
@@ -83,7 +86,7 @@ function onActionTypeChange(action: any) {
           </v-row>
         </v-card-title>
         <v-card-text>
-          <component :is="components[action.actionTypeID!]" />
+          <component :is="components[action.actionTypeID]" />
         </v-card-text>
       </v-card>
     </v-col>
