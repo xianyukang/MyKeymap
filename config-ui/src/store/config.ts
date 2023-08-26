@@ -103,42 +103,42 @@ export const useConfigStore = defineStore('config', () => {
     return f.id
   }
 
-  const customHotkey = computed(() => keymap.value?.hotkeys!)
+  const hotkeys = computed(() => keymap.value?.hotkeys!)
 
-  function changeCustomHotkey(oldHotkey: string, newHotkey: string) {
+  function changeHotkey(oldHotkey: string, newHotkey: string) {
     // 如果热键已存在且当前键的action.actionTypeID 为0删除当前热键,不为0删除之前的热键
-    if (newHotkey in customHotkey.value) {
-      if (customHotkey.value[oldHotkey][0].actionTypeID == 0) {
-        removeCustomHotkey(oldHotkey)
+    if (newHotkey in hotkeys.value) {
+      if (hotkeys.value[oldHotkey][0].actionTypeID == 0) {
+        removeHotkey(oldHotkey)
         return newHotkey
       } else {
-        removeCustomHotkey(newHotkey)
+        removeHotkey(newHotkey)
       }
     }
 
     // 如果直接替换会导致hotkey的位置在最下方
-    keymap.value!.hotkeys = Object.keys(customHotkey.value).reduce((result: { [key: string]: Array<Action> }, key) => {
+    keymap.value!.hotkeys = Object.keys(hotkeys.value).reduce((result: { [key: string]: Array<Action> }, key) => {
       if (key == oldHotkey) {
-        result[newHotkey] = customHotkey.value[key];
+        result[newHotkey] = hotkeys.value[key];
       } else {
-        result[key] = customHotkey.value[key];
+        result[key] = hotkeys.value[key];
       }
       return result;
     }, {})
   }
 
-  function removeCustomHotkey(hotkey: string) {
-    delete customHotkey.value[hotkey]
+  function removeHotkey(hotkey: string) {
+    delete hotkeys.value[hotkey]
   }
 
-  function addCustomHotKey() {
-    keymap.value!.hotkeys["此处修改"] = [{ ...emptyAction }]
+  function addHotKey(key: string = "此处修改") {
+    keymap.value!.hotkeys[key] = [{ ...emptyAction }]
   }
 
   return {
-    config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps, options, customHotkey,
+    config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps, options, hotkeys,
     getKeymapById, toggleKeymapEnable, customParentKeymaps, customSonKeymaps, addKeymap, removeKeymap,
-    checkKeymapData, changeCustomHotkey, removeCustomHotkey, addCustomHotKey,
+    checkKeymapData, changeHotkey, removeHotkey, addHotKey,
     disabledKeys: computed(() => _disabledKeys(enabledKeymaps.value)),
     getAction: (hotkey: string) => _getAction(keymap.value, hotkey, windowGroupID.value),
     saveConfig: () => _saveConfig(config.value),

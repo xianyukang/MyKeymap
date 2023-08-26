@@ -6,12 +6,11 @@ import { useConfigStore } from "@/store/config";
 import { ref } from "vue";
 import Action from "@/actions/Action.vue";
 
-const { customHotkey } = storeToRefs(useConfigStore())
-const { addCustomHotKey } = useConfigStore()
+const { hotkeys } = storeToRefs(useConfigStore())
 
 const currHotkey = ref<string>("")
 const changeCustomHotkey = (hotkey: string, newHotkey: string) => {
-  useConfigStore().changeCustomHotkey(hotkey, newHotkey)
+  useConfigStore().changeHotkey(hotkey, newHotkey)
   checkRow(newHotkey)
 }
 
@@ -21,7 +20,7 @@ const checkRow = (hotkey: string) => {
 }
 
 const removeCustomHotkey = (hotkey: string) => {
-  useConfigStore().removeCustomHotkey(hotkey);
+  useConfigStore().removeHotkey(hotkey);
   if (currHotkey.value == hotkey) {
     checkRow("")
   }
@@ -36,7 +35,7 @@ const removeCustomHotkey = (hotkey: string) => {
         <Table class="text-left" :titles="['热键', '备注', '选项']">
           <tr :class="currHotkey == hotkey ? 'bg-blue-lighten-4' : ''"
               @click="checkRow(hotkey as string)"
-              v-for="(action, hotkey, index) in customHotkey" :key="index">
+              v-for="(action, hotkey, index) in hotkeys" :key="index">
             <td style="width: 20%">
               <v-text-field :model-value="hotkey"
                             @change="changeCustomHotkey(hotkey as string, $event.target.value)"
@@ -51,7 +50,7 @@ const removeCustomHotkey = (hotkey: string) => {
         </Table>
 
         <div class="d-flex justify-end">
-          <v-btn class="ma-3" color="green" @click="addCustomHotKey()">新增热键</v-btn>
+          <v-btn class="ma-3" color="green" @click="useConfigStore().addHotKey()">新增热键</v-btn>
         </div>
       </v-card>
     </v-col>
