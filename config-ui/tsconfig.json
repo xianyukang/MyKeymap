@@ -15,7 +15,9 @@
     "lib": ["esnext", "dom"],
     "types": [
       "node",
-      "vuetify"
+      "vuetify",
+      // 不添加这个运行tsc --noEmit会抛出Cannot find name 'BluetoothLEScanFilter' 异常
+      "web-bluetooth"
     ],
     "paths": {
       "@/*": ["src/*"]

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useConfigStore } from '@/store/config';
 import { storeToRefs } from 'pinia';
+import { Keymap } from "@/types/config";
 
 const { enabledKeymaps } = storeToRefs(useConfigStore())
 const { getKeymapById, saveConfig } = useConfigStore()

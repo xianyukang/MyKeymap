@@ -5,6 +5,7 @@ import Tip from "@/components/Tip.vue";
 import { storeToRefs } from "pinia";
 import { onMounted, ref } from "vue";
 import { useConfigStore } from "@/store/config";
+import { Keymap } from "@/types/config";
 
 const { customKeymaps, customParentKeymaps, customSonKeymaps, options } = storeToRefs(useConfigStore())
 const { toggleKeymapEnable, addKeymap, removeKeymap } = useConfigStore()

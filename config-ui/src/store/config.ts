@@ -2,6 +2,7 @@ import { defineStore } from "pinia"
 import { useFetch } from '@vueuse/core'
 import { computed, ref, watch } from "vue"
 import { useRoute } from "vue-router"
+import { Config, Keymap, Action } from "@/types/config";
 
 export const useConfigStore = defineStore('config', () => {
 

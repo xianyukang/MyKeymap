@@ -10,6 +10,7 @@ import SendKey from '@/actions/SendKey.vue'
 import Text from '@/actions/Text.vue'
 import BuiltinFunction from '@/actions/BuiltinFunction.vue'
 import MyKeymap from '@/actions/MyKeymap.vue'
+import { Action } from "@/types/config";
 
 
 const { config, action, windowGroupID, hotkey } = storeToRefs(useConfigStore())
