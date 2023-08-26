@@ -44,8 +44,6 @@ export const useConfigStore = defineStore('config', () => {
     return arr;
   })
 
-  const customHotkey = computed(() => enabledKeymaps.value[enabledKeymaps.value.length - 4].hotkeys)
-
   function getKeymapById(id: number) {
     return customParentKeymaps.value.find(k => k.id == id)!
   }
@@ -105,10 +103,43 @@ export const useConfigStore = defineStore('config', () => {
     return f.id
   }
 
+  const customHotkeyIndex = computed(() => config.value!.keymaps.length - 4)
+  const customHotkey = computed(() => config.value!.keymaps[customHotkeyIndex.value].hotkeys)
+
+  function changeCustomHotkey(oldHotkey: string, newHotkey: string) {
+    // 如果热键已存在且当前键的action.actionTypeID 为0删除当前热键,不为0删除之前的热键
+    if (newHotkey in customHotkey.value) {
+      if (customHotkey.value[oldHotkey][0].actionTypeID == 0) {
+        removeCustomHotkey(oldHotkey)
+        return newHotkey
+      } else {
+        removeCustomHotkey(newHotkey)
+      }
+    }
+
+    // 如果直接替换会导致hotkey的位置在最下方
+    config.value!.keymaps[customHotkeyIndex.value].hotkeys = Object.keys(customHotkey.value).reduce((result: { [key: string]: Array<Action> }, key) => {
+      if (key == oldHotkey) {
+        result[newHotkey] = customHotkey.value[key];
+      } else {
+        result[key] = customHotkey.value[key];
+      }
+      return result;
+    }, {})
+  }
+
+  function removeCustomHotkey(hotkey: string) {
+    delete customHotkey.value[hotkey]
+  }
+
+  function addCustomHotKey() {
+    config.value!.keymaps[customHotkeyIndex.value].hotkeys["此处修改"] = [{ ...emptyAction }]
+  }
+
   return {
-    config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps, options,
-    getKeymapById, toggleKeymapEnable, canEditKeymap, customParentKeymaps, customSonKeymaps, addKeymap, removeKeymap,
-    checkKeymapData,
+    config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps, options, customHotkey,
+    getKeymapById, toggleKeymapEnable, customParentKeymaps, customSonKeymaps, addKeymap, removeKeymap,
+    checkKeymapData, changeCustomHotkey, removeCustomHotkey, addCustomHotKey,
     disabledKeys: computed(() => _disabledKeys(enabledKeymaps.value)),
     getAction: (hotkey: string) => _getAction(keymap.value, hotkey, windowGroupID.value),
     saveConfig: () => _saveConfig(config.value),

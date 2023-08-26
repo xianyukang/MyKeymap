@@ -3,7 +3,7 @@ import { useConfigStore } from '@/store/config';
 import { storeToRefs } from 'pinia';
 
 const { enabledKeymaps } = storeToRefs(useConfigStore())
-const { getKeymapById, canEditKeymap, saveConfig } = useConfigStore()
+const { getKeymapById, saveConfig } = useConfigStore()
 
 const getIcon = (keymap: Keymap) => {
   let icon = "mdi-"
@@ -68,7 +68,7 @@ const getIcon = (keymap: Keymap) => {
       <v-virtual-scroll :items="enabledKeymaps" height="calc(100vh - 158px)">
         <template #default="{ item: keymap, index }">
           <v-list-item :key="index" :value="keymap"
-                       :to="canEditKeymap(keymap) ? '/keymap/' + keymap.id : '/' + keymap.hotkey">
+                       :to="keymap.id != 4 ? '/keymap/' + keymap.id : '/' + keymap.hotkey">
             <template #prepend>
               <v-icon :icon="getIcon(keymap)" size=35></v-icon>
             </template>
