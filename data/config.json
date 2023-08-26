@@ -39,9 +39,8 @@
         "*c": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 1,
-            "winTitle": "记事本",
-            "target": "notepad.exe"
+            "actionTypeID": 2,
+            "actionValueID": 1
           }
         ],
         "*e": [

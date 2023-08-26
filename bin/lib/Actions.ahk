@@ -367,8 +367,8 @@ SystemLockScreen() {
 /**
  * 关机
  */
-SlideToShutDown() {
-  Run(SlideToShutDown)
+SystemShutdown() {
+  Run("SlideToShutDown.exe")
   sleep(1300)
   MouseClick("Left", 100, 100)
 }
@@ -376,8 +376,24 @@ SlideToShutDown() {
 /**
  * 重启
  */
-SlideToReboot() {
+SystemReboot() {
   Shutdown(2)
+}
+
+SystemSleep() {
+  DllCall("PowrProf\SetSuspendState")
+}
+
+SystemRestartExplorer() {
+  Run("tools\Rexplorer_x64.exe /I /R")
+}
+
+SoundControl() {
+  ActivateOrRun(, "bin\SoundControl.exe")
+}
+
+BrightnessControl() {
+  Run("MyKeymap.exe bin\ChangeBrightness.ahk")
 }
 
 

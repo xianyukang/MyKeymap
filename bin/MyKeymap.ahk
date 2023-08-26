@@ -55,7 +55,7 @@ InitKeymap()
   ; Capslock
   km5 := KeymapManager.NewKeymap("*capslock")
   km := km5
-  km.Map("*c", _ => ActivateOrRun("记事本", "notepad.exe"))
+  km.Map("*c", _ => SystemLockScreen())
   km.Map("*a", _ => CenterAndResizeWindow(1370, 930))
   km.Map("*b", _ => WindowMinimize())
   km.Map("*e", _ => Send("^!{tab}"), taskSwitch)
