@@ -118,7 +118,7 @@ class Keymap {
       return
     }
     ; 热键不允许重复所以应该用 map 存储
-    this.M[hotkeyName "/@/" winTitle] := { hotkeyName: hotkeyName, winTitle: winTitle, handler: wrapper, conditionType: conditionType }
+    this.M[hotkeyName "/@/" winTitle "/@/" conditionType] := { hotkeyName: hotkeyName, winTitle: winTitle, handler: wrapper, conditionType: conditionType }
   }
 
 

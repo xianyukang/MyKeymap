@@ -159,22 +159,28 @@ func mouseActions4(a Action, inAbbrContext bool) string {
 }
 
 func windowActions3(a Action, inAbbrContext bool) string {
-	ctx := Cfg.GetHotkeyContext(a)
-	valueMap := map[int]string{
-		0:  `km.Map("%[1]s", _ => Send("^!{tab}"), taskSwitch%s)`,
-		1:  `km.Map("%[1]s", _ => SmartCloseWindow()%s)`,
-		2:  `km.Map("%[1]s", _ => SwitchWindows()%s)`,
-		3:  `km.Map("%[1]s", _ => CenterAndResizeWindow(1200, 800)%s)`,
-		4:  `km.Map("%[1]s", _ => CenterAndResizeWindow(1370, 930)%s)`,
-		5:  `km.Map("%[1]s", _ => Send("!{tab}")%s)`,
-		6:  `km.Map("%[1]s", _ => Send("#+{right}")%s)`,
-		7:  `km.Map("%[1]s", _ => Send("^#{left}")%s)`,
-		8:  `km.Map("%[1]s", _ => Send("^#{right}")%s)`,
-		9:  `km.Map("%[1]s", _ => WindowMaximize()%s)`,
-		10: `km.Map("%[1]s", _ => WindowMinimize()%s)`,
+	if a.ValueID == 4 {
+		return fmt.Sprintf(`km.Map("%[1]s", _ => Send("^!{tab}"), taskSwitch%s)`, a.Hotkey, Cfg.GetHotkeyContext(a))
 	}
-	if format, ok := valueMap[a.ValueID]; ok {
-		return fmt.Sprintf(format, a.Hotkey, ctx)
+
+	callMap := map[int]string{
+		1:  `SmartCloseWindow()`,
+		2:  `GoToLastWindow()`,
+		3:  `LoopRelatedWindows()`,
+		5:  `GoToPreviousVirtualDesktop()`,
+		6:  `GoToNextVirtualDesktop()`,
+		7:  `MoveWindowToNextMonitor()`,
+		8:  `MinimizeWindow()`,
+		9:  `MaximizeWindow()`,
+		10: `CenterAndResizeWindow(1200, 800)`,
+		11: `CenterAndResizeWindow(1370, 930)`,
+		12: `ToggleWindowTopMost()`,
+	}
+	if call, ok := callMap[a.ValueID]; ok {
+		if inAbbrContext {
+			return call
+		}
+		return fmt.Sprintf(`km.Map("%[1]s", _ => %s%s)`, a.Hotkey, call, Cfg.GetHotkeyContext(a))
 	}
 	return ""
 }

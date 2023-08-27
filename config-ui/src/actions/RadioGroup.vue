@@ -1,16 +1,30 @@
 <script lang="ts" setup>
 import { useConfigStore } from '@/store/config';
+import { Keymap } from '@/types/config';
 import { storeToRefs } from 'pinia';
 import { watchEffect } from 'vue';
-const { action } = storeToRefs(useConfigStore())
+const { action, keymap } = storeToRefs(useConfigStore())
+
+interface Item {
+  actionValueID: number
+  label: string
+  hideInAbbr?: boolean
+}
 
 const props = defineProps<{
-  group1: { actionValueID: number, label: string }[]
-  group2?: { actionValueID: number, label: string }[]
-  group3?: { actionValueID: number, label: string }[]
-  group4?: { actionValueID: number, label: string }[]
+  group1: Item[]
+  group2?: Item[]
+  group3?: Item[]
+  group4?: Item[]
 }>()
 
+
+function filter(group: Item[] | undefined, keymap: Keymap | undefined): Item[] | undefined {
+  if (keymap?.hotkey.includes("Abbr")) {
+    return group?.filter(x => !x.hideInAbbr)
+  }
+  return group
+}
 
 watchEffect(() => {
   action.value.isEmpty = !action.value.actionValueID
@@ -22,7 +36,7 @@ watchEffect(() => {
   <v-row>
     <v-col>
       <v-radio-group density="comfortable" v-model="action.actionValueID" color="#d05">
-        <v-radio v-for="item in group1"
+        <v-radio v-for="item in filter(group1, keymap)"
                  :key="item.actionValueID"
                  :class="{ active: item.actionValueID == action.actionValueID }"
                  :label="item.label"
@@ -32,7 +46,7 @@ watchEffect(() => {
 
     <v-col>
       <v-radio-group density="comfortable" v-model="action.actionValueID" color="#d05">
-        <v-radio v-for="item in group2"
+        <v-radio v-for="item in filter(group2, keymap)"
                  :key="item.actionValueID"
                  :class="{ active: item.actionValueID == action.actionValueID }"
                  :label="item.label"
@@ -44,7 +58,7 @@ watchEffect(() => {
   <v-row>
     <v-col>
       <v-radio-group density="comfortable" v-model="action.actionValueID" color="#d05">
-        <v-radio v-for="item in group3"
+        <v-radio v-for="item in filter(group3, keymap)"
                  :key="item.actionValueID"
                  :class="{ active: item.actionValueID == action.actionValueID }"
                  :label="item.label"
@@ -54,7 +68,7 @@ watchEffect(() => {
 
     <v-col>
       <v-radio-group density="comfortable" v-model="action.actionValueID" color="#d05">
-        <v-radio v-for="item in group4"
+        <v-radio v-for="item in filter(group4, keymap)"
                  :key="item.actionValueID"
                  :class="{ active: item.actionValueID == action.actionValueID }"
                  :label="item.label"

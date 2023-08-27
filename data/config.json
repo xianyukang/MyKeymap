@@ -26,14 +26,14 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
-            "actionValueID": 4
+            "actionValueID": 11
           }
         ],
         "*b": [
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
-            "actionValueID": 10
+            "actionValueID": 8
           }
         ],
         "*c": [
@@ -46,7 +46,15 @@
         "*e": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 3
+            "actionTypeID": 3,
+            "actionValueID": 4
+          }
+        ],
+        "*g": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 3,
+            "actionValueID": 12
           }
         ],
         "*h": [
@@ -108,7 +116,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
-            "actionValueID": 8
+            "actionValueID": 6
           }
         ],
         "*q": [
@@ -122,14 +130,14 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
-            "actionValueID": 2
+            "actionValueID": 3
           }
         ],
         "*s": [
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
-            "actionValueID": 3
+            "actionValueID": 10
           }
         ],
         "*u": [
@@ -143,14 +151,14 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
-            "actionValueID": 6
+            "actionValueID": 7
           }
         ],
         "*w": [
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
-            "actionValueID": 5
+            "actionValueID": 2
           }
         ],
         "*x": [
@@ -164,7 +172,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
-            "actionValueID": 7
+            "actionValueID": 5
           }
         ],
         "singlePress": [

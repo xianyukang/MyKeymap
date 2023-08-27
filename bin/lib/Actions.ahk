@@ -47,12 +47,12 @@ ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin 
 }
 
 /**
- * 切换程序窗口
+ * 轮换程序窗口
  * @param winTitle AHK中的WinTitle
  * @param hwnds 活动窗口的句柄数组
  * @returns {void|number} 
  */
-SwitchWindows(winTitle?, hwnds?) {
+LoopRelatedWindows(winTitle?, hwnds?) {
   ; 如果没有传句柄数组则获取当前窗口的
   if not (IsSet(hwnds)) {
     hwnds := FindWindows("A")
@@ -189,7 +189,7 @@ CenterAndResizeWindow(width, height) {
 /**
  * 窗口最大化
  */
-WindowMaximize() {
+MaximizeWindow() {
   if IsDesktop()
     return
 
@@ -203,7 +203,7 @@ WindowMaximize() {
 /**
  * 窗口最小化
  */
-WindowMinimize() {
+MinimizeWindow() {
   if (IsDesktop() || WinGetProcessName("A") == "Rainmeter.exe")
     return
 
@@ -213,7 +213,7 @@ WindowMinimize() {
 /**
  * 窗口置顶
  */
-WindowTop() {
+ToggleWindowTopMost() {
   WinSetAlwaysOnTop(!(WinGetExStyle("A") & 0x8), "A")
 }
 
@@ -396,6 +396,21 @@ BrightnessControl() {
   Run("MyKeymap.exe bin\ChangeBrightness.ahk")
 }
 
+GoToLastWindow() {
+  Send("!{tab}")
+}
+
+GoToPreviousVirtualDesktop() {
+  Send("^#{left}")
+}
+
+GoToNextVirtualDesktop() {
+  Send("^#{right}")
+}
+
+MoveWindowToNextMonitor() {
+  Send("#+{right}")
+}
 
 /**
  * 切换Capslock状态

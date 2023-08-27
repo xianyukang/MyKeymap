@@ -222,7 +222,7 @@ ActivateWindow(winTitle := "", isHide := false) {
     }
   } else {
     ; 如果多个窗口则来回切换
-    SwitchWindows(winTitle, hwnds)
+    LoopRelatedWindows(winTitle, hwnds)
   }
 
   return 1
