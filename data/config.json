@@ -12,14 +12,14 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
-            "actionValueID": 10
+            "actionValueID": 12
           }
         ],
         "*;": [
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
-            "actionValueID": 7
+            "actionValueID": 8
           }
         ],
         "*a": [
@@ -61,55 +61,56 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
-            "actionValueID": 6
+            "actionValueID": 7
           }
         ],
         "*i": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 4
-          }
-        ],
-        "*j": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 4,
-            "actionValueID": 2
-          }
-        ],
-        "*k": [
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
             "actionValueID": 1
           }
         ],
-        "*l": [
+        "*j": [
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
             "actionValueID": 3
           }
         ],
+        "*k": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 4,
+            "actionValueID": 2
+          }
+        ],
+        "*l": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 4,
+            "actionValueID": 4
+          }
+        ],
         "*m": [
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
-            "actionValueID": 9
+            "actionValueID": 10
           }
         ],
         "*n": [
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
-            "actionValueID": 8
+            "actionValueID": 9
           }
         ],
         "*o": [
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
-            "actionValueID": 5
+            "actionValueID": 6
           }
         ],
         "*p": [
@@ -144,7 +145,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
-            "actionValueID": 4
+            "actionValueID": 5
           }
         ],
         "*v": [

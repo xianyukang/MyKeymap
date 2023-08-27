@@ -343,6 +343,14 @@ class MouseKeymap extends Keymap {
     return handler
   }
 
+  MButton() {
+    handler(thisHotkey) {
+      Send("{blind}{MButton}")
+      this.lockHandler()
+    }
+    return handler
+  }
+
   LButtonDown() {
     handler(thisHotkey) {
       Send("{blind}{LButton DownR}")
