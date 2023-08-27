@@ -10,23 +10,30 @@ import SendKey from '@/actions/SendKey.vue'
 import Text from '@/actions/Text.vue'
 import BuiltinFunction from '@/actions/BuiltinFunction.vue'
 import MyKeymap from '@/actions/MyKeymap.vue'
-import { Action } from "@/types/config";
+import { Action, Keymap } from "@/types/config";
 
 
-const { config, action, windowGroupID, hotkey } = storeToRefs(useConfigStore())
+const { config, keymap, action, windowGroupID, hotkey } = storeToRefs(useConfigStore())
 
 const actionTypes = [
   { id: 0, name: "⛔ 未配置" },
   { id: 1, name: "👾 启动程序或激活窗口" },
   { id: 2, name: "🖥️ 系统控制" },
   { id: 3, name: "🏠 窗口操作" },
-  { id: 4, name: "🖱️  鼠标操作" },
-  { id: 5, name: "🅰️ 重映射按键" },
+  { id: 4, name: "🖱️  鼠标操作", hideInAbbr: true },
+  { id: 5, name: "🅰️ 重映射按键", hideInAbbr: true },
   { id: 6, name: "🅰️ 输入文本或按键" },
   { id: 7, name: "📚 一些文字处理" },
   { id: 8, name: "⚛️ 一些内置函数" },
   { id: 9, name: "⚙️ MyKeymap 相关" },
 ]
+
+function filter(items: typeof actionTypes, keymap: Keymap | undefined): typeof actionTypes {
+  if (keymap && keymap.hotkey.includes("Abbr")) {
+    return items.filter(x => !x.hideInAbbr)
+  }
+  return items
+}
 
 const components: any = {
   1: ActivateOrRun,
@@ -75,7 +82,7 @@ function onActionTypeChange(action: Action) {
                         :disabled="!hotkey"></v-select>
             </v-col>
             <v-col cols="7">
-              <v-select :items="actionTypes"
+              <v-select :items="filter(actionTypes, keymap)"
                         item-title="name"
                         item-value="id"
                         v-model="action.actionTypeID"
