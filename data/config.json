@@ -1307,25 +1307,32 @@
       "hotkey": "customHotkeys",
       "parentID": 0,
       "hotkeys": {
+        "!c": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 9,
+            "actionValueID": 2
+          }
+        ],
         "!e": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}+{up}"
+            "actionTypeID": 9,
+            "actionValueID": 3
           }
         ],
-        "#d": [
+        "!s": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}+{down}"
+            "actionTypeID": 9,
+            "actionValueID": 1
           }
         ],
-        "^s": [
+        "RAlt": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}+{left}"
+            "actionTypeID": 5,
+            "remapToKey": "LCtrl"
           }
         ]
       }

@@ -88,6 +88,9 @@ func (c *Config) GetHotkeyContext(a Action) string {
 func (c *Config) EnabledKeymaps() []Keymap {
 	var enabled []Keymap
 	for _, km := range c.Keymaps {
+		if km.ID == 1 && km.Enable {
+			enabled = append(enabled, km)
+		}
 		if km.ID >= 5 && km.Enable {
 			enabled = append(enabled, km)
 		}

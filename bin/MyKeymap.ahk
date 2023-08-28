@@ -201,6 +201,14 @@ InitKeymap()
   km.Map("*wheeldown", _ => (Send("^{tab}")))
   km.Map("singlePress", _ => (Send("{blind}" theRealRButton)))
 
+  ; 自定义热键
+  km1 := KeymapManager.NewKeymap("customHotkeys")
+  km := km1
+  km.RemapKey("RAlt", "LCtrl")
+  km.Map("!c", _ => MyKeymapReload(), , , , "S")
+  km.Map("!e", _ => MyKeymapExit(), , , , "S")
+  km.Map("!s", _ => MyKeymapToggleSuspend(), , , , "S")
+
 
   KeymapManager.GlobalKeymap.Enable()
 }

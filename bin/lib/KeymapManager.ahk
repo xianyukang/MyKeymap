@@ -4,6 +4,10 @@
   static Stack := Array(this.GlobalKeymap)
 
   static NewKeymap(globalHotkey) {
+    if globalHotkey == "customHotkeys" {
+      return this.GlobalKeymap
+    }
+
     ; 分配全局热键激活指定 keymap
     return this.AddSubKeymap(this.GlobalKeymap, globalHotkey)
   }
