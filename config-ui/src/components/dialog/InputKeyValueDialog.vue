@@ -26,7 +26,7 @@ const save = () => {
 </script>
 
 <template>
-  <v-dialog :persistent="true" v-model="dialog" max-width="1400px">
+  <v-dialog :persistent="false" v-model="dialog" max-width="1400px">
     <template v-slot:activator=" { props } ">
       <slot :props="props"></slot>
     </template>
