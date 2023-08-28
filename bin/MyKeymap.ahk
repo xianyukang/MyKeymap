@@ -79,6 +79,7 @@ InitKeymap()
   km.Map("*n", fast.LButton()), slow.Map("*n", slow.LButton())
   km.Map("*o", fast.ScrollWheelDown), slow.Map("*o", slow.ScrollWheelDown)
   km.Map("*u", fast.ScrollWheelUp), slow.Map("*u", slow.ScrollWheelUp)
+  km.Map("*d", _ => CenterAndResizeWindow(1600, 1000))
   km.Map("singlePress", _ => EnterCapslockAbbr(capsHook))
 
   ; Capslock + F

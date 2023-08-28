@@ -43,6 +43,14 @@
             "actionValueID": 1
           }
         ],
+        "*d": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 8,
+            "comment": "窗口居中并设置大小为 1600x1000",
+            "ahkCode": "CenterAndResizeWindow(1600, 1000)"
+          }
+        ],
         "*e": [
           {
             "windowGroupID": 0,

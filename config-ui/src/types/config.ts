@@ -8,6 +8,7 @@ export interface Action {
 
   remapToKey?: string
   keysToSend?: string
+  ahkCode?: string
 
   winTitle?: string
   target?: string
