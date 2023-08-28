@@ -13,7 +13,7 @@ const keyboardRows = computed(() => {
     ["*q", "*w", "*e", "*r", "*t", "*y", "*u", "*i", "*o", "*p"],
     ["*a", "*s", "*d", "*f", "*g", "*h", "*j", "*k", "*l", "*;"],
     ["*z", "*x", "*c", "*v", "*b", "*n", "*m", "*,", "*.", "*/"],
-    ["*space", "*-", "*=", "*backspace", "*[", "*]",  "*'", "*enter"],
+    ["*space", "*enter", "*backspace", "*-", "*[", "*'", "singlePress"],
   ];
   // TODO: 是鼠标右键则加上 *wheelup *wheeldown *lbutton 等热键
   return rows
@@ -39,5 +39,4 @@ const keyboardRows = computed(() => {
 .v-row+.v-row {
   margin-top: 0px;
 }
-
 </style>

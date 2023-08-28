@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed } from "vue";
-import { trimStart, capitalize } from 'lodash-es';
+import { trimStart } from 'lodash-es';
 import { useConfigStore } from "@/store/config";
 
 const store = useConfigStore()
@@ -9,7 +9,10 @@ const props = defineProps<{
   laber?: string;
 }>();
 
-const keyText = computed(() => capitalize(trimStart(props.hotkey, '*')))
+const keyText = computed(() => {
+  const string = trimStart(props.hotkey, '*')
+  return string.charAt(0).toUpperCase() + string.slice(1)
+})
 const keyColor = computed(() => {
   if (store.hotkey === props.hotkey) {
     return 'blue'
