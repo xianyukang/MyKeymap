@@ -52,4 +52,13 @@ th {
 :deep(.v-select .v-field__append-inner i) {
   visibility: hidden;
 }
+
+:deep(tr) {
+  color: rgba(0, 0, 0, 0.96);
+}
+
+:deep(.v-field--disabled .v-select__selection) {
+  opacity: 0.5;
+}
+
 </style>

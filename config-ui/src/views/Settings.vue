@@ -38,6 +38,20 @@ const disabledKeymapOption = (keymap: Keymap) => {
   return customSonKeymaps.value.findIndex(k => k.parentID == keymap.id) != -1
 }
 
+const hasSubKeymap = (keymap: Keymap) => {
+  return customSonKeymaps.value.findIndex(k => k.parentID == keymap.id) != -1
+}
+
+const deleteBtnTip = (keymap: Keymap) => {
+  if (keymap.enable) {
+    return '开启时不允许删除'
+  }
+  if (customSonKeymaps.value.findIndex(k => k.parentID == keymap.id) != -1) {
+    return '被依赖时不允许删除'
+  }
+  return ''
+}
+
 function toggleKeymapEnable(keymap: Keymap) {
   // 开启的keymap有前置键连同前置键一块开启
   if (!keymap.enable && keymap.parentID != 0) {
@@ -90,7 +104,7 @@ function removeKeymapByIndex(index: number) {
       <v-col xl="6">
         <v-card width="640" elevation="3">
           <Table class="text-left" :titles="['名称', '触发键', '上层', '开关']">
-            <tr :class="currId == keymap.id ? 'bg-blue-lighten-4' : ''"
+            <tr :class="currId == keymap.id ? '' : ''"
                 @click="currId = keymap.id"
                 v-for="keymap in customKeymaps" :key="keymap.id">
               <td>
@@ -102,21 +116,16 @@ function removeKeymapByIndex(index: number) {
                               variant="plain" style="width: 7rem"></v-text-field>
               </td>
               <td>
-                <tip :text="disabledKeymapOption(keymap) ? '已启动或有子键不允许更改' : '更改前置键'">
                   <v-select v-model="keymap.parentID" :items="customParentKeymaps" :item-title="item => item.name"
-                            :item-value="item => item.id" :disabled="disabledKeymapOption(keymap)"
+                            :item-value="item => item.id" :disabled="hasSubKeymap(keymap)" item-color="red"
                             variant="plain" style="width: 7rem">
                   </v-select>
-                </tip>
               </td>
               <td>
                 <div class="d-flex justify-space-between align-center">
-                  <tip :text=" keymap.name == '' || keymap.hotkey == '' ?  '请输入名称和热键' : keymap.enable ? '禁用该热键' : '启动该热键'">
-                    <v-switch hide-details color="primary" :model-value="keymap.enable"
-                              @click="toggleKeymapEnable(keymap)"></v-switch>
-                  </tip>
-                  <tip
-                      :text="disabledKeymapOption(keymap) ? '请删除子键或禁用该热键' : '删除当前热键'">
+                  <v-switch hide-details color="primary" :model-value="keymap.enable"
+                            @click="toggleKeymapEnable(keymap)"></v-switch>
+                  <tip :text="deleteBtnTip(keymap)">
                     <v-btn icon="mdi-delete-outline" variant="text" width="40" height="40"
                            :disabled="disabledKeymapOption(keymap)"
                            @click="removeKeymap(keymap.id)"></v-btn>
