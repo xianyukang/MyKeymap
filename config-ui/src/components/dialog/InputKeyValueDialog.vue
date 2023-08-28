@@ -1,4 +1,4 @@
-<script setup lang="ts" generic="T extends { [key: string]: string }">
+<script setup lang="ts" generic="T extends { [key: string]: any }">
 import { ref } from "vue";
 
 const props = defineProps<{
@@ -26,7 +26,7 @@ const save = () => {
 </script>
 
 <template>
-  <v-dialog :persistent="true" v-model="dialog" max-width="1200px">
+  <v-dialog :persistent="true" v-model="dialog" max-width="1400px">
     <template v-slot:activator=" { props } ">
       <slot :props="props"></slot>
     </template>

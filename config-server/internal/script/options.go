@@ -12,8 +12,8 @@ type Options struct {
 type WindowGroup struct {
 	ID            int    `json:"id"`
 	Name          string `json:"name"`
-	Value         string `json:"value"`
-	ConditionType int    `json:"conditionType"`
+	Value         string `json:"value,omitempty"`
+	ConditionType int    `json:"conditionType,omitempty"`
 }
 
 type Mouse struct {

@@ -8,15 +8,12 @@ import { server } from "@/store/server";
 import { WindowGroup } from "@/types/config";
 
 const { options } = storeToRefs(useConfigStore())
-const windowGroupConditionTypes: { name: string; index: number }[] = [{
-  name: "是前台窗口", index: 1
-}, {
-  name: "窗口存在", index: 2
-}, {
-  name: "不是前台窗口", index: 3
-}, {
-  name: "窗口不存在", index: 4
-}]
+const windowGroupConditionTypes: { name: string; index: number }[] = [
+  { name: "条件: 是前台窗口", index: 1 },
+  { name: "条件: 这些窗口存在", index: 2 },
+  { name: "条件: 不是前台窗口", index: 3 },
+  { name: "条件: 这些窗口不存在", index: 4 }
+]
 
 const addItem = (dataObj: WindowGroup[]) => {
   dataObj.push({ id: dataObj.length + 1, name: "", value: "", conditionType: 1 })
@@ -33,12 +30,12 @@ const save = (dataObj: WindowGroup[]) => {
                           value-title-label="窗口标识符"
                           :data-obj="options.windowGroups"
                           @add="addItem" @save="save">
-    <template #default="{props}">
+    <template #default="{ props }">
       <v-btn class="mt-5" width="170" color="blue" v-bind="props" variant="outlined">编辑程序组</v-btn>
     </template>
 
-    <template #contents="{data}">
-      <v-col cols="2">
+    <template #contents="{ data }">
+      <v-col cols="3">
         <v-text-field v-model="data.name" variant="outlined"
                       :dense="true" :disabled="data.id == 0"></v-text-field>
       </v-col>
@@ -50,7 +47,7 @@ const save = (dataObj: WindowGroup[]) => {
       <v-col sm="2">
         <v-select v-model="data.conditionType" :items="windowGroupConditionTypes"
                   :item-title="item => item.name" :item-value="item => item.index"
-                  :disabled="data.id == 0" variant="plain" style="width: 8rem">
+                  :disabled="data.id == 0" variant="outlined" style="width: 14rem">
         </v-select>
       </v-col>
     </template>
@@ -62,6 +59,4 @@ const save = (dataObj: WindowGroup[]) => {
   </input-key-value-dialog>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

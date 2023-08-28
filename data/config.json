@@ -1447,9 +1447,7 @@
     "windowGroups": [
       {
         "id": 0,
-        "name": "🌎 全局生效",
-        "value": "",
-        "conditionType": 0
+        "name": "🌎 全局生效"
       },
       {
         "id": 1,
