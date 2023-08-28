@@ -1343,6 +1343,14 @@
             "comment": "打开「 MyKeymap 」文件夹",
             "target": "ahk-expression: A_WorkingDir"
           }
+        ],
+        "no": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "winTitle": "记事本",
+            "target": "notepad.exe"
+          }
         ]
       }
     },
@@ -1353,6 +1361,30 @@
       "hotkey": "semicolonAbbr",
       "parentID": 0,
       "hotkeys": {
+        ",": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "因为在输入法中设置了「 中文状态下使用英文标点 」, 所以用这个输入中文逗号",
+            "keysToSend": "，"
+          }
+        ],
+        ".": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "因为在输入法中设置了「 中文状态下使用英文标点 」, 所以用这个输入中文句号",
+            "keysToSend": "。"
+          }
+        ],
+        "/": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "因为在输入法中设置了「 中文状态下使用英文标点 」, 所以用这个输入中文顿号",
+            "keysToSend": "、"
+          }
+        ],
         "dd": [
           {
             "windowGroupID": 0,
@@ -1367,6 +1399,14 @@
             "actionTypeID": 1,
             "comment": "打开「 MyKeymap 」文件夹",
             "target": "ahk-expression: A_WorkingDir"
+          }
+        ],
+        "xk": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "输入一对小括号, 并把光标移到中间",
+            "keysToSend": "()\n{left}"
           }
         ]
       }

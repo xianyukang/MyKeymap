@@ -102,12 +102,19 @@ func remapKey5(a Action, inAbbrContext bool) string {
 }
 
 func sendKeys6(a Action, inAbbrContext bool) string {
-	keys := toAHKFuncArg(a.KeysToSend)
-	if inAbbrContext {
-		return fmt.Sprintf(`Send(%s)`, keys)
+	// 有多行, 每行转成一个 send 调用, 然后用逗号 , 连起来
+	var res []string
+	lines := strings.Split(a.KeysToSend, "\n")
+	for _, line := range lines {
+		line = toAHKFuncArg(line)
+		res = append(res, fmt.Sprintf(`Send(%s)`, line))
 	}
-	ctx := Cfg.GetHotkeyContext(a)
-	return fmt.Sprintf(`km.SendKeys("%s", %s%s)`, a.Hotkey, keys, ctx)
+	call := strings.Join(res, ", ")
+
+	if inAbbrContext {
+		return call
+	}
+	return fmt.Sprintf(`km.Map("%[1]s", _ => (%s)%s)`, a.Hotkey, call, Cfg.GetHotkeyContext(a))
 }
 
 func mykeymapActions9(a Action, inAbbrContext bool) string {

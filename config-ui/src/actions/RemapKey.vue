@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useConfigStore } from '@/store/config';
 import { storeToRefs } from 'pinia';
+import { watchEffect } from 'vue';
 const { action } = storeToRefs(useConfigStore())
 const label = "重映射为"
 const items = [
@@ -12,16 +13,21 @@ const items = [
   'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'f11', 'f12',
 ]
 
+watchEffect(() => {
+  action.value.isEmpty = !action.value.remapToKey
+})
+
 </script>
 
 <template>
   <!-- :menu-props="{ maxHeight: '390px' }" 可以调整下拉框高度 -->
-  <v-autocomplete class="input"
-                  :label="label"
-                  :items="items"
-                  :hide-no-data="true"
-                  v-model="action.remapToKey"
-                  variant="underlined"></v-autocomplete>
+  <v-combobox class="input"
+              color="primary"
+              :label="label"
+              :items="items"
+              :hide-no-data="true"
+              v-model="action.remapToKey"
+              variant="underlined"></v-combobox>
 </template>
 
 <style scoped>

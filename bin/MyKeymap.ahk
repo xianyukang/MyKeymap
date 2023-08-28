@@ -39,12 +39,12 @@ InitKeymap()
   slow := MouseKeymap(10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.UnLock)
   slow.Map("*space", slow.LButtonUp())
 
-  capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "dd,dm")
+  capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "dd,dm,no")
   capsHook.KeyOpt("{CapsLock}", "S")
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
 
-  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "dd,dm")
+  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", ",,,.,/,dd,dm,xk")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char)
   semiHookAbbrWindow := TypoTipWindow()
 
@@ -122,28 +122,28 @@ InitKeymap()
   km.RemapKey("r", "tab")
   km.RemapKey("s", "left")
   km.RemapKey("x", "esc")
-  km.SendKeys("*2", "{blind}^+{tab}")
-  km.SendKeys("*3", "{blind}^{tab}")
-  km.SendKeys("*b", "{blind}^{backspace}")
-  km.SendKeys("*v", "{blind}^{right}")
-  km.SendKeys("*w", "{blind}+{tab}")
-  km.SendKeys("*z", "{blind}^{left}")
-  km.SendKeys("*space", "{blind}{enter}")
-  km.SendKeys("singlePress", "{blind}{j}")
+  km.Map("*2", _ => (Send("{blind}^+{tab}")))
+  km.Map("*3", _ => (Send("{blind}^{tab}")))
+  km.Map("*b", _ => (Send("{blind}^{backspace}")))
+  km.Map("*v", _ => (Send("{blind}^{right}")))
+  km.Map("*w", _ => (Send("{blind}+{tab}")))
+  km.Map("*z", _ => (Send("{blind}^{left}")))
+  km.Map("*space", _ => (Send("{blind}{enter}")))
+  km.Map("singlePress", _ => (Send("{blind}{j}")))
 
   ; J + K 模式
   km9 := KeymapManager.AddSubKeymap(km8, "*k")
   km := km9
-  km.SendKeys("*a", "{blind}+{home}")
-  km.SendKeys("*c", "{blind}{backspace}")
-  km.SendKeys("*d", "{blind}+{down}")
-  km.SendKeys("*e", "{blind}+{up}")
-  km.SendKeys("*f", "{blind}+{right}")
-  km.SendKeys("*g", "{blind}+{end}")
-  km.SendKeys("*s", "{blind}+{left}")
-  km.SendKeys("*v", "{blind}^+{right}")
-  km.SendKeys("*x", "{blind}+{esc}")
-  km.SendKeys("*z", "{blind}^+{left}")
+  km.Map("*a", _ => (Send("{blind}+{home}")))
+  km.Map("*c", _ => (Send("{blind}{backspace}")))
+  km.Map("*d", _ => (Send("{blind}+{down}")))
+  km.Map("*e", _ => (Send("{blind}+{up}")))
+  km.Map("*f", _ => (Send("{blind}+{right}")))
+  km.Map("*g", _ => (Send("{blind}+{end}")))
+  km.Map("*s", _ => (Send("{blind}+{left}")))
+  km.Map("*v", _ => (Send("{blind}^+{right}")))
+  km.Map("*x", _ => (Send("{blind}+{esc}")))
+  km.Map("*z", _ => (Send("{blind}^+{left}")))
 
   ; 3 模式
   km10 := KeymapManager.NewKeymap("*3")
@@ -173,28 +173,28 @@ InitKeymap()
   ; 分号模式
   km12 := KeymapManager.NewKeymap("*;")
   km := km12
-  km.SendKeys("*a", "{blind}*")
-  km.SendKeys("*b", "{blind}%")
-  km.SendKeys("*c", "{blind}.")
-  km.SendKeys("*d", "{blind}=")
-  km.SendKeys("*e", "{blind}{^}")
-  km.SendKeys("*f", "{blind}>")
-  km.SendKeys("*g", "{blind}{!}")
-  km.SendKeys("*h", "{blind}{+}")
-  km.SendKeys("*i", "{blind}:")
-  km.SendKeys("*j", "{blind};")
-  km.SendKeys("*k", "{blind}``")
-  km.SendKeys("*m", "{blind}-")
-  km.SendKeys("*n", "{blind}/")
-  km.SendKeys("*r", "{blind}&")
-  km.SendKeys("*s", "{blind}<")
-  km.SendKeys("*t", "{blind}~")
-  km.SendKeys("*u", "{blind}$")
-  km.SendKeys("*v", "{blind}|")
-  km.SendKeys("*w", "{blind}{#}")
-  km.SendKeys("*x", "{blind}_")
-  km.SendKeys("*y", "{blind}@")
-  km.SendKeys("*z", "{blind}\")
+  km.Map("*a", _ => (Send("{blind}*")))
+  km.Map("*b", _ => (Send("{blind}%")))
+  km.Map("*c", _ => (Send("{blind}.")))
+  km.Map("*d", _ => (Send("{blind}=")))
+  km.Map("*e", _ => (Send("{blind}{^}")))
+  km.Map("*f", _ => (Send("{blind}>")))
+  km.Map("*g", _ => (Send("{blind}{!}")))
+  km.Map("*h", _ => (Send("{blind}{+}")))
+  km.Map("*i", _ => (Send("{blind}:")))
+  km.Map("*j", _ => (Send("{blind};")))
+  km.Map("*k", _ => (Send("{blind}``")))
+  km.Map("*m", _ => (Send("{blind}-")))
+  km.Map("*n", _ => (Send("{blind}/")))
+  km.Map("*r", _ => (Send("{blind}&")))
+  km.Map("*s", _ => (Send("{blind}<")))
+  km.Map("*t", _ => (Send("{blind}~")))
+  km.Map("*u", _ => (Send("{blind}$")))
+  km.Map("*v", _ => (Send("{blind}|")))
+  km.Map("*w", _ => (Send("{blind}{#}")))
+  km.Map("*x", _ => (Send("{blind}_")))
+  km.Map("*y", _ => (Send("{blind}@")))
+  km.Map("*z", _ => (Send("{blind}\")))
   km.Map("singlePress", _ => EnterSemicolonAbbr(semiHook, semiHookAbbrWindow))
 
   ; 鼠标右键
@@ -202,11 +202,11 @@ InitKeymap()
   km := km15
   km.RemapKey("c", "backspace")
   km.RemapKey("x", "esc")
-  km.SendKeys("*space", "{blind}{enter}")
-  km.SendKeys("*lbutton", "^!{tab}")
-  km.SendKeys("*wheelup", "^+{tab}")
-  km.SendKeys("*wheeldown", "^{tab}")
-  km.SendKeys("singlePress", "{blind}" theRealRButton)
+  km.Map("*space", _ => (Send("{blind}{enter}")))
+  km.Map("*lbutton", _ => (Send("^!{tab}")))
+  km.Map("*wheelup", _ => (Send("^+{tab}")))
+  km.Map("*wheeldown", _ => (Send("^{tab}")))
+  km.Map("singlePress", _ => (Send("{blind}" theRealRButton)))
 
 
   KeymapManager.GlobalKeymap.Enable()
@@ -218,15 +218,25 @@ ExecCapslockAbbr(command) {
       ActivateOrRun("", "shell:downloads")
     case "dm":
       ActivateOrRun("", A_WorkingDir)
+    case "no":
+      ActivateOrRun("记事本", "notepad.exe")
   }
 }
 
 ExecSemicolonAbbr(command) {
   switch command {
+    case ",":
+      Send("，")
+    case ".":
+      Send("。")
+    case "/":
+      Send("、")
     case "dd":
       ActivateOrRun("", "shell:downloads")
     case "dm":
       ActivateOrRun("", A_WorkingDir)
+    case "xk":
+      Send("()"), Send("{left}")
   }
 }
 

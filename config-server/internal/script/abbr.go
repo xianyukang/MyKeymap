@@ -42,7 +42,7 @@ func (c *Config) CapslockAbbrEnabled() bool {
 func (c *Config) CapslockAbbrKeys() string {
 	var keys []string
 	for key := range c.CapslockAbbr() {
-		keys = append(keys, key)
+		keys = append(keys, strings.ReplaceAll(key, ",", ",,"))
 	}
 	sort.Slice(keys, func(i, j int) bool {
 		return keys[i] < keys[j]
@@ -69,7 +69,7 @@ func (c *Config) SemicolonAbbrEnabled() bool {
 func (c *Config) SemicolonAbbrKeys() string {
 	var keys []string
 	for key := range c.SemicolonAbbr() {
-		keys = append(keys, key)
+		keys = append(keys, strings.ReplaceAll(key, ",", ",,"))
 	}
 	sort.Slice(keys, func(i, j int) bool {
 		return keys[i] < keys[j]

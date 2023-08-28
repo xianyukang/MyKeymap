@@ -7,6 +7,7 @@ export interface Action {
   actionValueID?: number
 
   remapToKey?: string
+  keysToSend?: string
 
   winTitle?: string
   target?: string
