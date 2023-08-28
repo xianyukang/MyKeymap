@@ -6,6 +6,8 @@ import { storeToRefs } from "pinia";
 import { ref } from "vue";
 import { useConfigStore } from "@/store/config";
 import { Keymap } from "@/types/config";
+import PathDialog from "@/components/dialog/PathDialog.vue";
+import WindowGroupDialog from "@/components/dialog/WindowGroupDialog.vue";
 
 const { customKeymaps, customParentKeymaps, customSonKeymaps, options, keymaps } = storeToRefs(useConfigStore())
 
@@ -81,7 +83,6 @@ function removeKeymap(id: number) {
 function removeKeymapByIndex(index: number) {
   keymaps.value.splice(index, 1)
 }
-
 </script>
 
 <template>
@@ -158,6 +159,9 @@ function removeKeymapByIndex(index: number) {
                   <v-switch label="开机自启" messages="可能需要关掉再开启才生效" color="primary"
                             :model-value="options.startup"
                             @change="options.startup = !options.startup"></v-switch>
+                  <path-dialog/>
+                  <br/>
+                  <window-group-dialog/>
                 </v-card-text>
               </v-card>
             </v-col>
