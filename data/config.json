@@ -1471,6 +1471,12 @@
       "delay2": "0.03",
       "onceLineCount": "1"
     },
+    "pathVariables": [
+      {
+        "name": "programs",
+        "value": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\"
+      }
+    ],
     "startup": false,
     "keyMapping": ""
   }

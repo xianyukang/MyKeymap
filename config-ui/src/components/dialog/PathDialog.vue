@@ -5,37 +5,38 @@ import InputKeyValueDialog from "@/components/dialog/InputKeyValueDialog.vue";
 
 import { useConfigStore } from "@/store/config";
 import { storeToRefs } from "pinia";
-import { Path } from "@/types/config";
+import { PathVariable } from "@/types/config";
 
 const { options } = storeToRefs(useConfigStore())
 
-const addItem = (dataObj: Path[]) => {
-  dataObj.push({ key: "", value: "" })
+const addItem = (dataObj: PathVariable[]) => {
+  dataObj.push({ name: "", value: "" })
+  options.value.pathVariables = dataObj
 }
 
-const save = (dataObj: Path[]) => {
-  options.value.path = dataObj
+const save = (dataObj: PathVariable[]) => {
+  options.value.pathVariables = dataObj
 }
 
 </script>
 
 <template>
-  <input-key-value-dialog title="编辑环境变量" key-title-label="变量名"
-                          value-title-label="变量值" :data-obj="options.path"
+  <input-key-value-dialog title="编辑路径变量" key-title-label="变量名"
+                          value-title-label="变量值" :data-obj="options.pathVariables"
                           @add="addItem" @save="save">
     <template #tips>
-      使用路径变量能缩短路径长度, 比如 <Code>%Home%\Documents</Code> 表示
-      <Code>C:\Users\YourUserName\Documents</Code>
+      <p>先定义一个 <Code>programs</Code> 变量，值为 <Code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\</Code>，然后就能在「 程序路径 」中<br></p>
+      <p>使用 <Code>ahk-expression: programs "Microsoft Edge.lnk"</Code> 表示 <Code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk</Code></p>
     </template>
     <template #default="{props}">
-      <v-btn class="mt-5" width="170" color="blue" v-bind="props">
+      <v-btn class="mt-5" width="170" color="blue" v-bind="props" variant="outlined">
         编辑路径变量
       </v-btn>
     </template>
 
     <template #contents="{data}">
-      <v-col cols="2">
-        <v-text-field v-model="data.key" variant="outlined"
+      <v-col cols="3">
+        <v-text-field v-model="data.name" variant="outlined"
                       :dense="true"></v-text-field>
       </v-col>
       <v-col>
@@ -47,5 +48,8 @@ const save = (dataObj: Path[]) => {
 </template>
 
 <style scoped>
-
+p {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
 </style>

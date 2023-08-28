@@ -51,16 +51,16 @@ export interface WindowGroup {
   conditionType: number
 }
 
-export interface Path {
-  "key": string
-  "value": string
+export type PathVariable = {
+  name: string
+  value: string
 }
 
 export interface Options {
   scroll: Scroll
   mouse: Mouse
   windowGroups: Array<WindowGroup>
-  path: Array<Path>
+  pathVariables: Array<PathVariable>
   customShellMenu: string
   startup: boolean
   keyMapping: string
