@@ -43,6 +43,13 @@ InitKeymap()
   ; 如果在系统设置中交换了左右键,  那么需要发送左键才能打开右键菜单
   theRealRButton := SysGet(23) ? "{LButton}" : "{RButton}"
 
+  ; 路径变量
+  programs := "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\"
+
+  ; 窗口组
+  GroupAdd("MY_WINDOW_GROUP_1", "ahk_exe chrome.exe")
+  GroupAdd("MY_WINDOW_GROUP_1", "ahk_exe msedge.exe")
+  GroupAdd("MY_WINDOW_GROUP_1", "ahk_exe firefox.exe")
 
   ; Capslock
   km5 := KeymapManager.NewKeymap("*capslock")

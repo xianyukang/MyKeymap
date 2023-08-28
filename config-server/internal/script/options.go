@@ -1,5 +1,10 @@
 package script
 
+import (
+	"fmt"
+	"strings"
+)
+
 type Options struct {
 	WindowGroups  []WindowGroup  `json:"windowGroups"`
 	Mouse         Mouse          `json:"mouse"`
@@ -32,4 +37,30 @@ type Scroll struct {
 type PathVariable struct {
 	Name  string `json:"name"`
 	Value string `json:"value"`
+}
+
+func (c *Config) PathVariables() string {
+	var s strings.Builder
+	for _, v := range c.Options.PathVariables {
+		s.WriteString("  ")
+		s.WriteString(v.Name)
+		s.WriteString(" := ")
+		s.WriteString(toAHKFuncArg(v.Value))
+		s.WriteString("\n")
+	}
+	return s.String()
+}
+
+func (c *Config) WindowGroups() string {
+	var s strings.Builder
+	for _, g := range c.Options.WindowGroups {
+		if trimmed := strings.TrimSpace(g.Value); strings.Index(trimmed, "\n") > 0 {
+			values := strings.Split(trimmed, "\n")
+			for _, v := range values {
+				s.WriteString(fmt.Sprintf("  GroupAdd(\"MY_WINDOW_GROUP_%d\", %s)\n", g.ID, toAHKFuncArg(v)))
+			}
+
+		}
+	}
+	return s.String()
 }

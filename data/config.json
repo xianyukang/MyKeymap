@@ -1454,6 +1454,12 @@
         "name": "浏览器",
         "value": "ahk_exe chrome.exe\nahk_exe msedge.exe\nahk_exe firefox.exe",
         "conditionType": 1
+      },
+      {
+        "id": 3,
+        "name": "文件资源管理器",
+        "value": "ahk_exe explorer.exe",
+        "conditionType": 1
       }
     ],
     "mouse": {

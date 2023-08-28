@@ -102,7 +102,7 @@ function _getAction(keymap: Keymap | undefined, hotkey: string, windowGroupID: n
   // 选择的 windowGroupID 还没有对应的 action, 那么初始化一下
   let found = actions.find(x => x.windowGroupID === windowGroupID)
   if (!found) {
-    found = { ...emptyAction }
+    found = { ...emptyAction, windowGroupID }
     actions.push(found)
   }
   return found

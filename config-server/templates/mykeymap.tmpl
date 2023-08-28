@@ -44,6 +44,11 @@ InitKeymap()
   ; 如果在系统设置中交换了左右键,  那么需要发送左键才能打开右键菜单
   theRealRButton := SysGet(23) ? "{LButton}" : "{RButton}"
 
+  ; 路径变量
+{{ .PathVariables }}
+  ; 窗口组
+{{ .WindowGroups -}}
+
 {{range .EnabledKeymaps}}{{template "renderKeymap" .}}{{end}}
 
   KeymapManager.GlobalKeymap.Enable()
