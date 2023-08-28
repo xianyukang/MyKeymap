@@ -1417,6 +1417,13 @@
             "target": "ahk-expression: A_WorkingDir"
           }
         ],
+        "sk": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "keysToSend": "{text}「  」\n{left 2}"
+          }
+        ],
         "xk": [
           {
             "windowGroupID": 0,

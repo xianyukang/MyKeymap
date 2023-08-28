@@ -36,7 +36,7 @@ InitKeymap()
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
 
-  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", ",,,.,/,dd,dm,xk")
+  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", ",,,.,/,dd,dm,sk,xk")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char)
   semiHookAbbrWindow := TypoTipWindow()
 
@@ -236,6 +236,8 @@ ExecSemicolonAbbr(command) {
       ActivateOrRun("", "shell:downloads")
     case "dm":
       ActivateOrRun("", A_WorkingDir)
+    case "sk":
+      Send("{text}「  」"), Send("{left 2}")
     case "xk":
       Send("()"), Send("{left}")
   }
