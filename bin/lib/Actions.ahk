@@ -415,7 +415,7 @@ MoveWindowToNextMonitor() {
 /**
  * 切换Capslock状态
  */
-toggleCapslock() {
+ToggleCapslock() {
   if GetKeyState("Alt", "P")
     send("{blind}{LCtrl}{LAlt Up}")
   send("{blind}{CapsLock}")

@@ -25,7 +25,7 @@ const actionTypes = [
   { id: 6, name: "🅰️ 输入文本或按键" },
   // { id: 7, name: "📚 一些文字处理" },
   { id: 8, name: "⚛️ 一些内置函数" },
-  { id: 9, name: "⚙️ MyKeymap 相关" },
+  { id: 9, name: "⚙️ MyKeymap 相关", hideInAbbr: true },
 ]
 
 function filter(items: typeof actionTypes, keymap: Keymap | undefined): typeof actionTypes {

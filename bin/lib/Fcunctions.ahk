@@ -9,11 +9,11 @@ TrayMenuHandler(ItemName, ItemPos, MyMenu) {
     case "退出":
       ExitApp
     case "暂停":
-      ToggleSuspend()
+      MyKeymapToggleSuspend()
     case "重启程序":
-      ReloadPropram()
+      MyKeymapReload()
     case "打开设置":
-      OpenSettings()
+      MyKeymapOpenSettings()
     case "帮助文档":
       Run("https://xianyukang.com/MyKeymap.html")
     case "查看窗口标识符":
@@ -33,7 +33,7 @@ MyExit(ExitReason, ExitCode) {
 /**
  * 暂停
  */
-ToggleSuspend() {
+MyKeymapToggleSuspend() {
   Suspend(!A_IsSuspended)
   if (A_IsSuspended) {
     TraySetIcon("./bin/icons/logo2.ico", , 1)
@@ -49,7 +49,7 @@ ToggleSuspend() {
 /**
  * 打开设置
  */
-OpenSettings() {
+MyKeymapOpenSettings() {
   if (!WinExist("\bin\settings.exe"))
     Run("./bin/settings.exe ./bin")
 
@@ -63,9 +63,13 @@ OpenSettings() {
 /**
  * 重启程序
  */
-ReloadPropram() {
+MyKeymapReload() {
   Tip("Reload")
   Run("MyKeymap.exe")
+}
+
+MyKeymapExit() {
+  ExitApp
 }
 
 /**

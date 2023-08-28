@@ -24,14 +24,6 @@ InitKeymap()
 OnExit(MyExit)
 #include ../data/custom_functions.ahk
 
-RAlt::LCtrl
-!e:: ExitApp
-!r::
-{
-  SoundBeep
-  Reload
-}
-
 InitKeymap()
 {
   taskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "x", "space")

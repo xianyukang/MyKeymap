@@ -119,13 +119,28 @@ func sendKeys6(a Action, inAbbrContext bool) string {
 
 func mykeymapActions9(a Action, inAbbrContext bool) string {
 	ctx := Cfg.GetHotkeyContext(a)
+	if ctx == "" {
+		if a.ValueID >= 1 && a.ValueID <= 4 {
+			ctx += ", , , "
+		}
+	}
 	switch a.ValueID {
-	case 0:
-		return `km.MapSinglePress(km.ToggleLock)`
 	case 1:
-		return fmt.Sprintf(`km.Map("%[1]s", _ => EnterCapslockAbbr(capsHook)%s)`, a.Hotkey, ctx)
+		return fmt.Sprintf(`km.Map("%[1]s", _ => MyKeymapToggleSuspend()%s, "S")`, a.Hotkey, ctx)
 	case 2:
+		return fmt.Sprintf(`km.Map("%[1]s", _ => MyKeymapReload()%s, "S")`, a.Hotkey, ctx)
+	case 3:
+		return fmt.Sprintf(`km.Map("%[1]s", _ => MyKeymapExit()%s, "S")`, a.Hotkey, ctx)
+	case 4:
+		return fmt.Sprintf(`km.Map("%[1]s", _ => MyKeymapOpenSettings()%s, "S")`, a.Hotkey, ctx)
+	case 5:
 		return fmt.Sprintf(`km.Map("%[1]s", _ => EnterSemicolonAbbr(semiHook, semiHookAbbrWindow)%s)`, a.Hotkey, ctx)
+	case 6:
+		return fmt.Sprintf(`km.Map("%[1]s", _ => EnterCapslockAbbr(capsHook)%s)`, a.Hotkey, ctx)
+	case 7:
+		return fmt.Sprintf(`km.Map("%[1]s", _ => ToggleCapslock()%s)`, a.Hotkey, ctx)
+	case 8:
+		return fmt.Sprintf(`km.Map("%[1]s", km.ToggleLock%s)`, a.Hotkey, ctx)
 	default:
 		return ""
 	}

@@ -188,7 +188,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 9,
-            "actionValueID": 1
+            "actionValueID": 6
           }
         ]
       }
@@ -749,7 +749,8 @@
         "singlePress": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 9
+            "actionTypeID": 9,
+            "actionValueID": 8
           }
         ]
       }
@@ -935,7 +936,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 9,
-            "actionValueID": 2
+            "actionValueID": 5
           }
         ]
       }

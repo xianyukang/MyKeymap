@@ -111,14 +111,14 @@ class Keymap {
     this.AfterLocked := false
   }
 
-  Map(hotkeyName, handler, keymapToLock := false, winTitle := "", conditionType := 0) {
+  Map(hotkeyName, handler, keymapToLock := false, winTitle := "", conditionType := 0, options := "") {
     wrapper := Keymap._wrapHandler(handler, keymapToLock)
     if hotkeyName == "singlePress" {
       this.SinglePressAction := wrapper
       return
     }
     ; 热键不允许重复所以应该用 map 存储
-    this.M[hotkeyName "/@/" winTitle "/@/" conditionType] := { hotkeyName: hotkeyName, winTitle: winTitle, handler: wrapper, conditionType: conditionType }
+    this.M[hotkeyName "/@/" winTitle "/@/" conditionType] := { hotkeyName: hotkeyName, winTitle: winTitle, handler: wrapper, conditionType: conditionType, options: options }
   }
 
 
@@ -139,36 +139,32 @@ class Keymap {
     return wrapper
   }
 
-  MapSinglePress(handler) {
-    this.Map("singlePress", handler)
-  }
-
   Enable() {
     for _, hk in this.M {
       if !hk.winTitle {
-        Hotkey(hk.hotkeyName, hk.handler, "On")
+        Hotkey(hk.hotkeyName, hk.handler, "On" hk.options)
         continue
       }
       switch hk.conditionType {
         case 1:
           HotIfWinactive(hk.winTitle)
-          Hotkey(hk.hotkeyName, hk.handler, "On")
+          Hotkey(hk.hotkeyName, hk.handler, "On" hk.options)
           HotIfWinactive()
         case 2:
           HotIfWinExist(hk.winTitle)
-          Hotkey(hk.hotkeyName, hk.handler, "On")
+          Hotkey(hk.hotkeyName, hk.handler, "On" hk.options)
           HotIfWinExist()
         case 3:
           HotIfWinNotactive(hk.winTitle)
-          Hotkey(hk.hotkeyName, hk.handler, "On")
+          Hotkey(hk.hotkeyName, hk.handler, "On" hk.options)
           HotIfWinNotactive()
         case 4:
           HotIfWinNotExist(hk.winTitle)
-          Hotkey(hk.hotkeyName, hk.handler, "On")
+          Hotkey(hk.hotkeyName, hk.handler, "On" hk.options)
           HotIfWinNotExist()
         case 5:
           HotIf(hk.winTitle)
-          Hotkey(hk.hotkeyName, hk.handler, "On")
+          Hotkey(hk.hotkeyName, hk.handler, "On" hk.options)
           HotIf()
       }
     }

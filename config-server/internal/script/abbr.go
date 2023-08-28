@@ -30,7 +30,7 @@ func (c *Config) CapslockAbbrEnabled() bool {
 		}
 		for _, actions := range km.Hotkeys {
 			for _, a := range actions {
-				if a.TypeID == 9 && a.ValueID == 1 {
+				if a.TypeID == 9 && a.ValueID == 6 {
 					return true
 				}
 			}
@@ -57,7 +57,7 @@ func (c *Config) SemicolonAbbrEnabled() bool {
 		}
 		for _, actions := range km.Hotkeys {
 			for _, a := range actions {
-				if a.TypeID == 9 && a.ValueID == 2 {
+				if a.TypeID == 9 && a.ValueID == 5 {
 					return true
 				}
 			}

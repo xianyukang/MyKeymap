@@ -24,14 +24,6 @@ InitKeymap()
 OnExit(MyExit)
 #include ../data/custom_functions.ahk
 
-RAlt::LCtrl
-!e:: ExitApp
-!r::
-{
-  SoundBeep
-  Reload
-}
-
 InitKeymap()
 {
   taskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "x", "space")
@@ -169,7 +161,7 @@ InitKeymap()
   km.RemapKey("u", "4")
   km.RemapKey("w", "volume_down")
   km.RemapKey("space", "f1")
-  km.MapSinglePress(km.ToggleLock)
+  km.Map("singlePress", km.ToggleLock)
 
   ; 分号模式
   km12 := KeymapManager.NewKeymap("*;")
