@@ -20,8 +20,7 @@ const save = (dataObj: PathVariable[]) => {
 </script>
 
 <template>
-  <input-key-value-dialog title="编辑路径变量" key-title-label="变量名"
-                          value-title-label="变量值" :data-obj="options.pathVariables"
+  <input-key-value-dialog title="编辑路径变量" :data-obj="options.pathVariables"
                           @add="addItem" @save="save">
     <template #tips>
       <p>先定义一个 <Code>programs</Code> 变量，值为 <Code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\</Code>，然后就能在「 程序路径 」中<br></p>
@@ -31,6 +30,11 @@ const save = (dataObj: PathVariable[]) => {
       <v-btn class="mt-5" width="170" color="blue" v-bind="props" variant="outlined">
         编辑路径变量
       </v-btn>
+    </template>
+
+    <template #contentsTitle>
+      <v-col cols="3">变量名</v-col>
+      <v-col>路径</v-col>
     </template>
 
     <template #contents="{data}">

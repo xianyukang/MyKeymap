@@ -3,8 +3,6 @@ import { ref } from "vue";
 
 const props = defineProps<{
   title?: string
-  keyTitleLabel: string
-  valueTitleLabel: string
   dataObj: Array<T>
 }>()
 
@@ -43,16 +41,7 @@ const save = () => {
 
       <v-card-text>
         <v-row class="font-weight-bold" :dense="true">
-          <v-col cols="3">
-            <div class="title">
-              {{ props.keyTitleLabel }}
-            </div>
-          </v-col>
-          <v-col>
-            <div class="title">
-              {{ props.valueTitleLabel }}
-            </div>
-          </v-col>
+          <slot name="contentsTitle"></slot>
         </v-row>
         <v-row v-for="(data, index) in dataList" :key="index" :dense="true">
           <slot name="contents" :data="data"></slot>
@@ -72,7 +61,7 @@ const save = () => {
 </template>
 
 <style scoped>
-.title {
-  margin-left: 2px;
+.v-row:first-child :slotted(.v-col) {
+  padding-left: 10px;
 }
 </style>
