@@ -6,9 +6,29 @@ import { Keymap } from "@/types/config";
 const { enabledKeymaps, customParentKeymaps } = storeToRefs(useConfigStore())
 const { saveConfig } = useConfigStore()
 
+
+// 初始颜色列表
+const colors = ["red", "pink", "purple", "brown", "indigo", "teal", "blue-grey"];
+
+function getHotkey(keymap: Keymap) {
+  return keymap.parentID ? customParentKeymaps.value.find(k => k.id == keymap.parentID)!.hotkey : keymap.hotkey;
+}
+
+const getColor = (keymap: Keymap) => {
+  // 获取首热键
+  let hotkey = getHotkey(keymap)
+
+  let hash = 0;
+  for (let i = 0; i < hotkey.length; i++) {
+    hash = hotkey.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  return colors[Math.abs(hash) % colors.length];
+}
+
 const getIcon = (keymap: Keymap) => {
   let icon = "mdi-"
-  let hotkey = keymap.parentID ? customParentKeymaps.value.find(k => k.id == keymap.parentID)!.hotkey : keymap.hotkey
+  let hotkey = getHotkey((keymap))
 
   // 判断是设置还是自定义热键
   if (hotkey == "settings") {
@@ -71,7 +91,7 @@ const getIcon = (keymap: Keymap) => {
           <v-list-item :key="index" :value="keymap"
                        :to="keymap.id != 4 ? '/keymap/' + keymap.id : '/' + keymap.hotkey">
             <template #prepend>
-              <v-icon :icon="getIcon(keymap)" size=35></v-icon>
+              <v-icon :icon="getIcon(keymap)" :color="getColor(keymap)" size=35></v-icon>
             </template>
             <v-list-item-title>{{ keymap.name }}</v-list-item-title>
           </v-list-item>
