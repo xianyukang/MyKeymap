@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends { [key: string]: any }">
 import { ref } from "vue";
 
 const props = defineProps<{
   title?: string
   keyTitleLabel: string
   valueTitleLabel: string
-  dataObj: Array<Object>
+  dataObj: Array<T>
 }>()
 
 const emit = defineEmits(["save", "add"])
