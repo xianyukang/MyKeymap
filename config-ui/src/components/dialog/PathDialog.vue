@@ -27,7 +27,7 @@ const save = (dataObj: PathVariable[]) => {
       <p>使用 <Code>ahk-expression: programs "Microsoft Edge.lnk"</Code> 表示 <Code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk</Code></p>
     </template>
     <template #default="{props}">
-      <v-btn class="mt-5" width="170" color="blue" v-bind="props" variant="outlined">
+      <v-btn class="mt-3" width="170" color="blue" v-bind="props" variant="outlined">
         编辑路径变量
       </v-btn>
     </template>

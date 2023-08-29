@@ -18,7 +18,9 @@ const { customKeymaps, customParentKeymaps, customSonKeymaps, options, keymaps }
 //   console.log(time2 - time1)
 // })
 
-const currId = ref(0);
+const currId = ref(0)
+
+const showMouseOption = ref(false)
 
 const checkKeymapData = (keymap: Keymap) => {
   if (keymap.hotkey == "") {
@@ -118,7 +120,7 @@ function removeKeymapByIndex(index: number) {
               </td>
               <td>
                   <v-select v-model="keymap.parentID" :items="customParentKeymaps" :item-title="item => item.name"
-                            :item-value="item => item.id" :disabled="hasSubKeymap(keymap)" item-color="red"
+                            :item-value="item => item.id" :disabled="hasSubKeymap(keymap)" item-color="blue"
                             variant="plain" style="width: 7rem">
                   </v-select>
               </td>
@@ -141,27 +143,9 @@ function removeKeymapByIndex(index: number) {
           </div>
         </v-card>
       </v-col>
-      <v-col xl="6">
+      <v-col class="ml-5 mr-3">
         <div class="otherSetting">
           <v-row :dense="true">
-            <v-col>
-              <v-card title="按键重映射" min-width="350">
-                <v-card-text>
-                  <a target="_blank" href="https://wyagd001.github.io/zh-cn/docs/KeyList.htm#keyboard"
-                     style="color: green; text-decoration: none">键名可以查阅此处</a>
-                  <p>如果想把右 Alt 重映射为左 Ctrl 键:</p>
-                  <p>①在下面添加一行 <code
-                      style="color: #d05; border: 1px solid #ddd; padding: 1px 6px;">RAlt::LCtrl</code>
-                    就行</p>
-                  <p>②删掉对应的行则取消映射</p>
-                  <p>③<a target="_blank" href="RemapKeyExample.html"
-                         style="color: green; text-decoration: none">能为不同软件设置不同的映射</a>
-                  </p>
-                  <v-textarea v-model="options.keyMapping" variant="outlined" shaped auto-grow
-                              rows="3"></v-textarea>
-                </v-card-text>
-              </v-card>
-            </v-col>
             <v-col>
               <v-card title="其他设置" min-width="180">
                 <v-card-text>
@@ -171,77 +155,73 @@ function removeKeymapByIndex(index: number) {
                   <path-dialog/>
                   <br/>
                   <window-group-dialog/>
+                  <br/>
+                  <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showMouseOption = !showMouseOption">修改鼠标移动参数</v-btn>
                 </v-card-text>
               </v-card>
             </v-col>
           </v-row>
-          <v-row :dense="true">
-            <v-col>
-              <v-card title="鼠标移动相关参数" min-width="350">
-                <v-card-text>
-                  <v-row class="mouseRow" no-gutters>
-                    <v-col>
-                      <v-text-field v-model="options.mouse.delay1" variant="underlined"
-                                    type="number"
-                                    step=".01" maxlength="5"
-                                    label="进入连续移动前的延时(秒)"></v-text-field>
-                    </v-col>
-                    <v-col>
-                      <v-text-field v-model="options.mouse.delay2" variant="underlined"
-                                    type="number"
-                                    step=".01" maxlength="5"
-                                    label="两次移动的间隔时间(秒)"></v-text-field>
-                    </v-col>
-                  </v-row>
-                  <v-row class="mouseRow" no-gutters>
-                    <v-col>
-                      <v-text-field v-model="options.mouse.fastRepeat" variant="underlined"
-                                    type="number"
-                                    step="1" maxlength="5"
-                                    label="快速模式步长(像素)"></v-text-field>
-                    </v-col>
-                    <v-col>
-                      <v-text-field v-model="options.mouse.fastSingle" variant="underlined"
-                                    type="number"
-                                    step="1" maxlength="5"
-                                    label="快速模式首步长(像素)"></v-text-field>
-                    </v-col>
-                  </v-row>
-                  <v-row class="mouseRow" no-gutters>
-                    <v-col>
-                      <v-text-field v-model="options.mouse.slowRepeat" variant="underlined"
-                                    type="number"
-                                    step="1" maxlength="5"
-                                    label="慢速模式步长(像素)"></v-text-field>
-                    </v-col>
-                    <v-col>
-                      <v-text-field v-model="options.mouse.slowSingle" variant="underlined"
-                                    type="number"
-                                    step="1" maxlength="5"
-                                    label="慢速模式首步长(像素)"></v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-card-text>
-              </v-card>
-            </v-col>
-            <v-col>
-              <v-card title="滚轮相关参数" min-width="180">
-                <v-card-text>
-                  <v-text-field v-model="options.scroll.delay1" variant="underlined"
-                                type="number"
-                                step=".01" maxlength="5"
-                                label="进入连续滚动前的延时 (秒)"></v-text-field>
-                  <v-text-field v-model="options.scroll.delay2" variant="underlined"
-                                type="number"
-                                step=".01" maxlength="5"
-                                label="两次滚动的间隔时间 (越小滚动速度越快)"></v-text-field>
-                  <v-text-field v-model="options.scroll.onceLineCount" variant="underlined"
-                                type="number" step="1" maxlength="5"
-                                label="单次滑动参数"></v-text-field>
-                </v-card-text>
-              </v-card>
-            </v-col>
-          </v-row>
+          <v-expand-transition>
+            <v-row :dense="true" v-show="showMouseOption">
+              <v-col>
+                <v-card title="鼠标移动相关参数" min-width="350">
+                  <v-card-text>
+                    <v-row class="mouseRow" no-gutters>
+                      <v-col>
+                        <v-text-field v-model="options.mouse.delay1" variant="underlined"
+                                      type="number" step=".01" maxlength="5" color="primary"
+                                      label="进入连续移动前的延时(秒)"></v-text-field>
+                      </v-col>
+                      <v-col>
+                        <v-text-field v-model="options.mouse.delay2" variant="underlined"
+                                      type="number" step=".01" maxlength="5" color="primary"
+                                      label="两次移动的间隔时间(秒)"></v-text-field>
+                      </v-col>
+                    </v-row>
+                    <v-row class="mouseRow" no-gutters>
+                      <v-col>
+                        <v-text-field v-model="options.mouse.fastRepeat" variant="underlined"
+                                      type="number" step="1" maxlength="5" color="primary"
+                                      label="快速模式步长(像素)"></v-text-field>
+                      </v-col>
+                      <v-col>
+                        <v-text-field v-model="options.mouse.fastSingle" variant="underlined"
+                                      type="number" step="1" maxlength="5" color="primary"
+                                      label="快速模式首步长(像素)"></v-text-field>
+                      </v-col>
+                    </v-row>
+                    <v-row class="mouseRow" no-gutters>
+                      <v-col>
+                        <v-text-field v-model="options.mouse.slowRepeat" variant="underlined"
+                                      type="number" step="1" maxlength="5" color="primary"
+                                      label="慢速模式步长(像素)"></v-text-field>
+                      </v-col>
+                      <v-col>
+                        <v-text-field v-model="options.mouse.slowSingle" variant="underlined"
+                                      type="number" step="1" maxlength="5" color="primary"
+                                      label="慢速模式首步长(像素)"></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col>
+                <v-card title="滚轮相关参数" min-width="180">
+                  <v-card-text>
+                    <v-text-field v-model="options.scroll.delay1" variant="underlined"
+                                  type="number" step=".01" maxlength="5" color="primary"
+                                  label="进入连续滚动前的延时 (秒)"></v-text-field>
+                    <v-text-field v-model="options.scroll.delay2" variant="underlined"
+                                  type="number" step=".01" maxlength="5" color="primary"
+                                  label="两次滚动的间隔时间 (越小滚动速度越快)"></v-text-field>
+                    <v-text-field v-model="options.scroll.onceLineCount" variant="underlined"
+                                  type="number" step="1" maxlength="5" color="primary"
+                                  label="单次滑动参数"></v-text-field>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-expand-transition>
         </div>
       </v-col>
     </v-row>
@@ -261,6 +241,11 @@ table .v-text-field :deep(.v-input__details) {
 
 table .v-text-field :deep(.v-field--disabled) {
   opacity: 1 !important;
+}
+
+.v-text-field :deep(label),.v-switch :deep(label) {
+  color: black;
+  opacity: 1;
 }
 
 table .v-switch :deep(.v-selection-control) {
