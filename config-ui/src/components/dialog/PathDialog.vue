@@ -11,7 +11,6 @@ const { options } = storeToRefs(useConfigStore())
 
 const addItem = (dataObj: PathVariable[]) => {
   dataObj.push({ name: "", value: "" })
-  options.value.pathVariables = dataObj
 }
 
 const save = (dataObj: PathVariable[]) => {

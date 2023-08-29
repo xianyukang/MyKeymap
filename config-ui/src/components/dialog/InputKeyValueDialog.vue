@@ -1,11 +1,11 @@
-<script setup lang="ts" generic="T extends { [key: string]: any }">
+<script setup lang="ts">
 import { ref } from "vue";
 
 const props = defineProps<{
   title?: string
   keyTitleLabel: string
   valueTitleLabel: string
-  dataObj: Array<T>
+  dataObj: Array<Object>
 }>()
 
 const emit = defineEmits(["save", "add"])
@@ -15,18 +15,21 @@ const dialog = ref(false)
 
 const closeDialog = () => {
   dialog.value = false
+}
+
+const resetDataList = () => {
   dataList.value = JSON.parse(JSON.stringify(props.dataObj))
 }
 
 const save = () => {
-  emit('save', dataList)
+  emit('save', dataList.value)
   closeDialog()
 }
 
 </script>
 
 <template>
-  <v-dialog :persistent="false" v-model="dialog" max-width="1400px">
+  <v-dialog v-model="dialog" @update:modelValue="resetDataList" max-width="1400px">
     <template v-slot:activator=" { props } ">
       <slot :props="props"></slot>
     </template>

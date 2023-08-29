@@ -39,12 +39,12 @@ const save = (dataObj: WindowGroup[]) => {
         <v-text-field v-model="data.name" variant="outlined"
                       :dense="true" :disabled="data.id == 0"></v-text-field>
       </v-col>
-      <v-col>
+      <v-col cols="6">
         <v-textarea v-model="data.value" auto-grow rows="1"
                     variant="outlined" :disabled="data.id == 0"></v-textarea>
       </v-col>
 
-      <v-col sm="2">
+      <v-col cols="2">
         <v-select v-model="data.conditionType" :items="windowGroupConditionTypes"
                   :item-title="item => item.name" :item-value="item => item.index"
                   :disabled="data.id == 0" variant="outlined" style="width: 14rem">
