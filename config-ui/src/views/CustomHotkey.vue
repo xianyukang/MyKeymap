@@ -37,7 +37,7 @@ const removeCustomHotkey = (hotkey: string) => {
               @click="checkRow(hotkey as string)"
               v-for="(action, hotkey, index) in hotkeys" :key="index">
             <td style="width: 20%">
-              <v-text-field :model-value="hotkey"
+              <v-text-field :model-value="hotkey" placeholder="此处修改"
                             @change="changeCustomHotkey(hotkey as string, $event.target.value)"
                             variant="plain" style="width: 6rem"></v-text-field>
             </td>

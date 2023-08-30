@@ -2,7 +2,7 @@
 import { useConfigStore } from '@/store/config';
 import { storeToRefs } from 'pinia';
 import { watchEffect } from 'vue';
-const { action } = storeToRefs(useConfigStore())
+const { action, hotkey } = storeToRefs(useConfigStore())
 const label = "重映射为"
 const items = [
   'up', 'down', 'left', 'right', 'home', 'end', 'backspace', 'delete',
@@ -12,6 +12,8 @@ const items = [
   '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
   'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'f11', 'f12',
 ]
+
+const errorMsg = "当前键不支持「 重映射 」，请使用「 输入文本或按键 」"
 
 watchEffect(() => {
   action.value.isEmpty = !action.value.remapToKey
@@ -26,8 +28,10 @@ watchEffect(() => {
               :label="label"
               :items="items"
               :hide-no-data="true"
+              :disabled="hotkey == 'singlePress'"
               v-model="action.remapToKey"
               variant="underlined"></v-combobox>
+  <v-card variant="outlined" :text="errorMsg" v-if="hotkey == 'singlePress'" color="red"></v-card>
 </template>
 
 <style scoped>

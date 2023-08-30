@@ -121,6 +121,11 @@ class Keymap {
       this.SinglePressAction := wrapper
       return
     }
+    ; If Action is a hotkey name, its original function is used; 
+    ; This is usually used to restore a hotkey's original function after having changed it
+    if handler == "handled_in_hot_if" {
+      wrapper := hotkeyName
+    }
     ; 热键不允许重复所以应该用 map 存储
     this.M[hotkeyName "/@/" winTitle "/@/" conditionType] := { hotkeyName: hotkeyName, winTitle: winTitle, handler: wrapper, conditionType: conditionType, options: options }
   }
@@ -211,9 +216,11 @@ class Keymap {
 
   RemapKey(a, b, winTitle := "", conditionType := 0) {
     downHandler(thisHotkey) {
+      SetKeyDelay -1
       Send "{Blind}{" b " DownR}"
     }
     upHandler(thisHotkey) {
+      SetKeyDelay -1
       Send "{Blind}{" b " Up}"
     }
     this.Map("*" a, downHandler, , winTitle, conditionType)
@@ -225,6 +232,17 @@ class Keymap {
       Send(keys)
     }
     this.Map(hk, handler, , winTitle, conditionType)
+  }
+
+  RemapInHotIf(a, b, winTitle := "", conditionType := 0) {
+    h := "handled_in_hot_if"
+    ; 如果 b 的名字不是键名, 那么不构成重映射
+    if GetKeyName(b) == "" {
+      this.Map(a, h, , winTitle, conditionType)
+    } else {
+      this.Map("*" a, h, , winTitle, conditionType)
+      this.Map("*" a " up", h, , winTitle, conditionType)
+    }
   }
 }
 

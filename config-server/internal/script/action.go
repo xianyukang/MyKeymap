@@ -9,16 +9,18 @@ import (
 // Cfg 在 SaveAHK 中初始化, 会被下面的转换函数用到
 var Cfg *Config
 
+const remapKey = 5
+
 var actionMap = map[int]func(Action, bool) string{
-	1: activateOrRun1,
-	2: systemActions2,
-	3: windowActions3,
-	4: mouseActions4,
-	5: remapKey5,
-	6: sendKeys6,
-	7: textFeatures7,
-	8: builtinFunctions8,
-	9: mykeymapActions9,
+	1:        activateOrRun1,
+	2:        systemActions2,
+	3:        windowActions3,
+	4:        mouseActions4,
+	remapKey: remapKey5,
+	6:        sendKeys6,
+	7:        textFeatures7,
+	8:        builtinFunctions8,
+	9:        mykeymapActions9,
 }
 
 func actionToHotkey(action Action) string {
@@ -98,7 +100,14 @@ func toAHKFuncArg(val string) string {
 func remapKey5(a Action, inAbbrContext bool) string {
 	key := strings.TrimLeft(a.Hotkey, "*")
 	ctx := Cfg.GetHotkeyContext(a)
-	return fmt.Sprintf(`km.RemapKey("%s", "%s"%s)`, key, a.RemapToKey, ctx)
+	if ctx != "" {
+		ctx = ctx[2:]
+	}
+	f := "RemapKey"
+	if a.RemapInHotIf {
+		f = "RemapInHotIf"
+	}
+	return fmt.Sprintf(`km.%s("%s", %s%s)`, f, key, toAHKFuncArg(a.RemapToKey), ctx)
 }
 
 func sendKeys6(a Action, inAbbrContext bool) string {

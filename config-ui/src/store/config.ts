@@ -67,7 +67,7 @@ export const useConfigStore = defineStore('config', () => {
     delete hotkeys.value[hotkey]
   }
 
-  function addHotKey(key: string = "此处修改") {
+  function addHotKey(key: string = "") {
     keymap.value!.hotkeys[key] = [{ ...emptyAction }]
   }
 

@@ -1307,21 +1307,14 @@
       "hotkey": "customHotkeys",
       "parentID": 0,
       "hotkeys": {
-        "!c": [
+        "!'": [
           {
             "windowGroupID": 0,
             "actionTypeID": 9,
             "actionValueID": 2
           }
         ],
-        "!e": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 9,
-            "actionValueID": 3
-          }
-        ],
-        "!s": [
+        "+!'": [
           {
             "windowGroupID": 0,
             "actionTypeID": 9,

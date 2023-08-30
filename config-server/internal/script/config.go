@@ -4,15 +4,17 @@ import (
 	"fmt"
 	"github.com/goccy/go-json"
 	"os"
+	"sort"
 	"strings"
 )
 
 // 卧槽刚刚发现 GoLand 可以直接把 JSON 字符串粘贴为「 结构体定义 」 一下省掉了好多工作
 
 type Config struct {
-	LastEdit string   `json:"lastEdit,omitempty"`
-	Keymaps  []Keymap `json:"keymaps,omitempty"`
-	Options  Options  `json:"options,omitempty"`
+	LastEdit   string   `json:"lastEdit,omitempty"`
+	Keymaps    []Keymap `json:"keymaps,omitempty"`
+	Options    Options  `json:"options,omitempty"`
+	KeyMapping string   `json:"-"`
 }
 
 type Keymap struct {
@@ -40,6 +42,8 @@ type Action struct {
 	RunAsAdmin         bool   `json:"runAsAdmin,omitempty"`
 	DetectHiddenWindow bool   `json:"detectHiddenWindow,omitempty"`
 	AHKCode            string `json:"ahkCode,omitempty"`
+
+	RemapInHotIf bool `json:"-"`
 }
 
 func ParseConfig(file string) (*Config, error) {
@@ -89,6 +93,7 @@ func (c *Config) EnabledKeymaps() []Keymap {
 	var enabled []Keymap
 	for _, km := range c.Keymaps {
 		if km.ID == 1 && km.Enable {
+			c.handleKeyRemapping(km)
 			enabled = append(enabled, km)
 		}
 		if km.ID >= 5 && km.Enable {
@@ -113,4 +118,58 @@ func (c *Config) EnabledKeymaps() []Keymap {
 		}
 	}
 	return res
+}
+
+func (c *Config) handleKeyRemapping(custom Keymap) {
+	// 把自定义热键中的按键重映射取出来, 这部分需要单独渲染
+	var list []Action
+	for hk, actions := range custom.Hotkeys {
+		for i, a := range actions {
+			if a.TypeID == remapKey {
+				a.Hotkey = hk
+				list = append(list, a)
+				a.RemapInHotIf = true
+				actions[i] = a
+			}
+		}
+	}
+
+	// 按照 windowGroupID 进行排序
+	sort.SliceStable(list, func(i, j int) bool {
+		return list[i].WindowGroupID < list[j].WindowGroupID
+	})
+
+	var s strings.Builder
+	lastGroup := -2233
+	for _, a := range list {
+		if lastGroup != a.WindowGroupID {
+			s.WriteString("\n")
+			s.WriteString(hotifHeader(c, a))
+			s.WriteString("\n")
+			lastGroup = a.WindowGroupID
+		}
+		s.WriteString(fmt.Sprintf("%s::%s\n", strings.TrimLeft(a.Hotkey, "*"), a.RemapToKey))
+	}
+	s.WriteString("\n#HotIf")
+	c.KeyMapping = s.String()
+}
+
+func hotifHeader(c *Config, a Action) string {
+	winTitle, conditionType := c.GetWinTitle(a)
+	if winTitle == `""` && conditionType == 0 {
+		return "#HotIf"
+	}
+	switch conditionType {
+	case 1:
+		return fmt.Sprintf("#HotIf WinActive(%s)", winTitle)
+	case 2:
+		return fmt.Sprintf("#HotIf WinExist(%s)", winTitle)
+	case 3:
+		return fmt.Sprintf("#HotIf !WinActive(%s)", winTitle)
+	case 4:
+		return fmt.Sprintf("#HotIf !WinExist(%s)", winTitle)
+	case 5:
+		return fmt.Sprintf("#HotIf %s ", winTitle)
+	}
+	return ""
 }

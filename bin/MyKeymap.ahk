@@ -211,10 +211,9 @@ InitKeymap()
   ; 自定义热键
   km1 := KeymapManager.NewKeymap("customHotkeys")
   km := km1
-  km.RemapKey("RAlt", "LCtrl")
-  km.Map("!c", _ => MyKeymapReload(), , , , "S")
-  km.Map("!e", _ => MyKeymapExit(), , , , "S")
-  km.Map("!s", _ => MyKeymapToggleSuspend(), , , , "S")
+  km.RemapInHotIf("RAlt", "LCtrl")
+  km.Map("!'", _ => MyKeymapReload(), , , , "S")
+  km.Map("+!'", _ => MyKeymapToggleSuspend(), , , , "S")
 
 
   KeymapManager.GlobalKeymap.Enable()
@@ -264,3 +263,9 @@ InitTrayMenu() {
   A_IconTip := "MyKeymap 2.0.0 created by 咸鱼阿康"
   TraySetIcon("./bin/icons/logo.ico")
 }
+
+
+#HotIf
+RAlt::LCtrl
+
+#HotIf
