@@ -71,7 +71,7 @@ const getIcon = (keymap: Keymap) => {
     key = "s"
   }
 
-  return icon + "alpha-" + key + "-box-outline"
+  return icon + "alpha-" + key + "-box"
 }
 
 </script>
