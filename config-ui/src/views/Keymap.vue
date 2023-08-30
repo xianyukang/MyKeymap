@@ -15,7 +15,9 @@ const keyboardRows = computed(() => {
     ["*z", "*x", "*c", "*v", "*b", "*n", "*m", "*,", "*.", "*/"],
     ["*space", "*enter", "*backspace", "*-", "*[", "*'", "singlePress"],
   ];
-  // TODO: 是鼠标右键则加上 *wheelup *wheeldown *lbutton 等热键
+  if (keymap.value?.hotkey.toLowerCase().includes("rbutton")) {
+    rows[rows.length-1].push("*LButton", "*WheelUp", "*WheelDown")
+  }
   return rows
 })
 
