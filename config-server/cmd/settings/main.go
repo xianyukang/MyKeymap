@@ -2,13 +2,12 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	"github.com/goccy/go-json"
 	"io"
-	"io/ioutil"
+	"log"
 	"net"
 	"net/http"
 	"os"
@@ -32,34 +31,24 @@ func main() {
 	}
 
 	hasError := make(chan struct{})
-	errorLog := new(strings.Builder)
+	rainDone := make(chan struct{})
 	debug := len(os.Args) == 2 && os.Args[1] == "debug"
 
-	if debug {
-		server(errorLog, hasError, debug)
+	if !debug {
+		go matrix.DigitalRain(hasError, rainDone)
 	}
 
-	go server(errorLog, hasError, debug)
-	matrix.DigitalRain(hasError)
-
-	// 要等 gin 协程把错误日志打印完, 才能在这边读取错误日志
-	// 之前试了半天没发现是什么问题,  这里等 300ms 属于偷懒的办法
-	time.Sleep(300 * time.Millisecond)
-	fmt.Println(errorLog.String())
-
-	fmt.Println("发生了上述错误, 可以截图发给作者")
-	_, _ = fmt.Scanln()
+	server(hasError, rainDone, debug)
 }
 
-func server(errorLog *strings.Builder, hasError chan<- struct{}, debug bool) {
+func server(hasError chan<- struct{}, rainDone <-chan struct{}, debug bool) {
 	if !debug {
 		gin.SetMode(gin.ReleaseMode)
 		gin.DefaultWriter = io.Discard
-		gin.DefaultErrorWriter = errorLog
 	}
 
 	router := gin.Default()
-	router.Use(PanicHandler(hasError))
+	router.Use(PanicHandler(hasError, rainDone))
 	router.Use(cors.Default())
 	router.Use(IndexHandler())
 	router.Use(static.Serve("/", static.LocalFile("./site", false)))
@@ -68,12 +57,12 @@ func server(errorLog *strings.Builder, hasError chan<- struct{}, debug bool) {
 	router.PUT("/config", SaveConfigHandler)
 	router.POST("/server/command/:id", ServerCommandHandler)
 
-	// 一个常见错误是端口已被占用,  除了检查字符串,  有没有什么预定义的 sentinel error 可以用?
+	// 一个常见错误是端口已被占用
 	ln, err := net.Listen("tcp", "127.0.0.1:12333")
 	if err != nil && strings.Index(err.Error(), "Only one usage of each socket address ") != -1 {
-		errorLog.WriteString("Error: 已经有一个程序占用了 12333 端口\n")
 		close(hasError)
-		return
+		<-rainDone
+		log.Fatal("Error: 已经有一个程序占用了 12333 端口\n")
 	}
 
 	if !debug {
@@ -82,8 +71,9 @@ func server(errorLog *strings.Builder, hasError chan<- struct{}, debug bool) {
 
 	err = router.RunListener(ln)
 	if err != nil {
-		errorLog.WriteString(err.Error())
 		close(hasError)
+		<-rainDone
+		log.Fatal(err)
 	}
 }
 
@@ -95,7 +85,7 @@ func openBrowser() {
 func IndexHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if c.Request.URL.Path == "/" {
-			data, err := ioutil.ReadFile("./site/index.html")
+			data, err := os.ReadFile("./site/index.html")
 			if err != nil {
 				panic(err)
 			}
@@ -107,18 +97,23 @@ func IndexHandler() gin.HandlerFunc {
 }
 
 func GetConfigHandler(c *gin.Context) {
-	data, err := ioutil.ReadFile("../data/config.json")
+	data, err := os.ReadFile("../data/config.json")
 	if err != nil {
 		panic(err)
 	}
 	c.Data(http.StatusOK, gin.MIMEJSON, data)
 }
 
-func PanicHandler(hasError chan<- struct{}) gin.HandlerFunc {
+func PanicHandler(hasError chan<- struct{}, rainDone <-chan struct{}) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {
-				close(hasError)
+				// 不允许重复 close channel
+				if hasError != nil {
+					close(hasError)
+					<-rainDone
+					hasError = nil
+				}
 				panic(err)
 			}
 		}()
@@ -182,7 +177,7 @@ func SaveConfigHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "ok"})
 }
 
-func saveConfigFile(config any) {
+func saveConfigFile(config script.Config) {
 	// 先写到缓冲区,  如果直接写文件的话, 当编码过程遇到错误时, 会导致文件损坏
 	buf := new(bytes.Buffer)
 	encoder := json.NewEncoder(buf)

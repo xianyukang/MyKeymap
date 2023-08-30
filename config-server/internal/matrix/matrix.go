@@ -7,7 +7,8 @@ import (
 	"time"
 )
 
-func DigitalRain(done <-chan struct{}) {
+func DigitalRain(hasError <-chan struct{}, rainDone chan<- struct{}) {
+	defer close(rainDone)
 
 	// init screen
 	s, _ := tcell.NewScreen()
@@ -28,7 +29,7 @@ func DigitalRain(done <-chan struct{}) {
 outer:
 	for {
 		select {
-		case <-done:
+		case <-hasError:
 			s.Fini()
 			break outer
 		default:
@@ -58,9 +59,9 @@ outer:
 		// 打印横幅
 		banner := []string{
 			"   ------------------------------------------------------------------",
-			"   1. 打 开 浏 览 器 访 问  http://127.0.0.1:12333 修 改  MyKeyamp 的 配 置      ",
-			"   2. 保 存 配 置 后 需 要 按  alt+' 重 启  MyKeymap (这 里 的 '是 单 引 号 键 )       ",
-			"   3. 修 改 完  MyKeymap 的 配 置 就 可 以 关 闭 本 窗 口                          ",
+			"                                                                     ",
+			"                 MyKeymap config server is running...                ",
+			"                                                                     ",
 			"   ------------------------------------------------------------------",
 		}
 		style := defStyle.Foreground(tcell.ColorWhite)
