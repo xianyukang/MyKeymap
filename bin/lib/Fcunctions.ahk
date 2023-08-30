@@ -283,7 +283,7 @@ FindWindows(winTitle, predicate?) {
 }
 
 /**
- *  将程序路径或参数中的{selected_text} 替换为选中的文字
+ *  将程序路径或参数中的{selected} 替换为选中的文字
  * @param target 程序路径的引用
  * @param args 参数的引用
  * @returns {void|number} 
@@ -297,8 +297,8 @@ ReplaceSelectedText(&target, &args) {
   if InStr(args, "://") || InStr(target, "://") {
     text := URIEncode(text)
   }
-  args := strReplace(args, "{selected_text}", text)
-  target := strReplace(target, "{selected_text}", text)
+  args := strReplace(args, "{selected}", text)
+  target := strReplace(target, "{selected}", text)
 
   return 1
 }

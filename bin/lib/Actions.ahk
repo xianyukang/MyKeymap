@@ -31,7 +31,7 @@ MouseMoveActiveWindowPos() {
  */
 ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin := false, isHide := false) {
   ; 如果是程序或参数中带有“选中的文件” 则通过该程序打开该连接
-  if (InStr(target, "{selected_text}") || InStr(args, "{selected_text}")) {
+  if (InStr(target, "{selected}") || InStr(args, "{selected}")) {
     ; 没有获取到文字直接返回
     if not (ReplaceSelectedText(&target, &args))
       return
