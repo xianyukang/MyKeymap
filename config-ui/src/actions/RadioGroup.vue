@@ -40,7 +40,8 @@ watchEffect(() => {
                  :key="item.actionValueID"
                  :class="{ active: item.actionValueID == action.actionValueID }"
                  :label="item.label"
-                 :value="item.actionValueID"></v-radio>
+                 :value="item.actionValueID"
+                 @click="useConfigStore().changeActionComment(item.label)"></v-radio>
       </v-radio-group>
     </v-col>
 
@@ -50,7 +51,8 @@ watchEffect(() => {
                  :key="item.actionValueID"
                  :class="{ active: item.actionValueID == action.actionValueID }"
                  :label="item.label"
-                 :value="item.actionValueID"></v-radio>
+                 :value="item.actionValueID"
+                 @click="useConfigStore().changeActionComment(item.label)"></v-radio>
       </v-radio-group>
     </v-col>
   </v-row>
@@ -62,7 +64,8 @@ watchEffect(() => {
                  :key="item.actionValueID"
                  :class="{ active: item.actionValueID == action.actionValueID }"
                  :label="item.label"
-                 :value="item.actionValueID"></v-radio>
+                 :value="item.actionValueID"
+                 @click="useConfigStore().changeActionComment(item.label)"></v-radio>
       </v-radio-group>
     </v-col>
 
@@ -72,7 +75,8 @@ watchEffect(() => {
                  :key="item.actionValueID"
                  :class="{ active: item.actionValueID == action.actionValueID }"
                  :label="item.label"
-                 :value="item.actionValueID"></v-radio>
+                 :value="item.actionValueID"
+                 @click="useConfigStore().changeActionComment(item.label)"></v-radio>
       </v-radio-group>
     </v-col>
   </v-row>

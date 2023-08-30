@@ -17,6 +17,10 @@ watchEffect(() => {
   action.value.isEmpty = !action.value.remapToKey
 })
 
+const changeComment = (key?: string) => {
+  useConfigStore().changeActionComment(key ? label + key : "")
+}
+
 </script>
 
 <template>
@@ -27,7 +31,9 @@ watchEffect(() => {
               :items="items"
               :hide-no-data="true"
               v-model="action.remapToKey"
-              variant="underlined"></v-combobox>
+              variant="underlined"
+              @update:modelValue="changeComment(action.remapToKey)"
+  ></v-combobox>
 </template>
 
 <style scoped>

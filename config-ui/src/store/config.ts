@@ -25,6 +25,9 @@ export const useConfigStore = defineStore('config', () => {
     () => _getAction(keymap.value, hotkey.value, windowGroupID.value),
     (newValue) => action.value = newValue
   )
+  const changeActionComment = (label: string) => {
+    action.value.comment = label
+  }
 
   const keymaps = computed(() => config.value!.keymaps)
   const options = computed(() => config.value!.options)
@@ -73,7 +76,7 @@ export const useConfigStore = defineStore('config', () => {
 
   return {
     config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps, options, hotkeys,
-    customParentKeymaps, customSonKeymaps, keymaps,
+    customParentKeymaps, customSonKeymaps, keymaps, changeActionComment,
     changeHotkey, removeHotkey, addHotKey,
     disabledKeys: computed(() => _disabledKeys(enabledKeymaps.value)),
     getAction: (hotkey: string) => _getAction(keymap.value, hotkey, windowGroupID.value),
