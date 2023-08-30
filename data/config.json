@@ -773,6 +773,155 @@
     },
     {
       "id": 12,
+      "name": "空格模式",
+      "enable": false,
+      "hotkey": "*space",
+      "parentID": 0,
+      "hotkeys": {
+        "*,": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 5,
+            "remapToKey": "delete"
+          }
+        ],
+        "*.": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 5,
+            "remapToKey": "insert"
+          }
+        ],
+        "*2": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "keysToSend": "{blind}^+{tab}"
+          }
+        ],
+        "*3": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "keysToSend": "{blind}^{tab}"
+          }
+        ],
+        "*a": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 5,
+            "remapToKey": "home"
+          }
+        ],
+        "*b": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "keysToSend": "{blind}^{backspace}"
+          }
+        ],
+        "*c": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 5,
+            "remapToKey": "backspace"
+          }
+        ],
+        "*d": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 5,
+            "remapToKey": "down"
+          }
+        ],
+        "*e": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 5,
+            "remapToKey": "up"
+          }
+        ],
+        "*f": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 5,
+            "remapToKey": "right"
+          }
+        ],
+        "*g": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 5,
+            "remapToKey": "end"
+          }
+        ],
+        "*q": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 5,
+            "remapToKey": "appskey"
+          }
+        ],
+        "*r": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 5,
+            "remapToKey": "tab"
+          }
+        ],
+        "*s": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 5,
+            "remapToKey": "left"
+          }
+        ],
+        "*space": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "keysToSend": "{blind}{enter}"
+          }
+        ],
+        "*v": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "keysToSend": "{blind}^{right}"
+          }
+        ],
+        "*w": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "keysToSend": "{blind}+{tab}"
+          }
+        ],
+        "*x": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 5,
+            "remapToKey": "esc"
+          }
+        ],
+        "*z": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "keysToSend": "{blind}^{left}"
+          }
+        ],
+        "singlePress": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "keysToSend": "{blind}{space}"
+          }
+        ]
+      }
+    },
+    {
+      "id": 13,
       "name": "分号模式",
       "enable": true,
       "hotkey": "*;",
@@ -942,7 +1091,7 @@
       }
     },
     {
-      "id": 13,
+      "id": 14,
       "name": "句号模式",
       "enable": false,
       "hotkey": "*.",
@@ -1086,155 +1235,6 @@
             "windowGroupID": 0,
             "actionTypeID": 6,
             "keysToSend": "{blind}{.}"
-          }
-        ]
-      }
-    },
-    {
-      "id": 14,
-      "name": "空格模式",
-      "enable": false,
-      "hotkey": "*space",
-      "parentID": 0,
-      "hotkeys": {
-        "*,": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "delete"
-          }
-        ],
-        "*.": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "insert"
-          }
-        ],
-        "*2": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^+{tab}"
-          }
-        ],
-        "*3": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^{tab}"
-          }
-        ],
-        "*a": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "home"
-          }
-        ],
-        "*b": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^{backspace}"
-          }
-        ],
-        "*c": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "backspace"
-          }
-        ],
-        "*d": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "down"
-          }
-        ],
-        "*e": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "up"
-          }
-        ],
-        "*f": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "right"
-          }
-        ],
-        "*g": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "end"
-          }
-        ],
-        "*q": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "appskey"
-          }
-        ],
-        "*r": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "tab"
-          }
-        ],
-        "*s": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "left"
-          }
-        ],
-        "*space": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}{enter}"
-          }
-        ],
-        "*v": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^{right}"
-          }
-        ],
-        "*w": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}+{tab}"
-          }
-        ],
-        "*x": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "esc"
-          }
-        ],
-        "*z": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^{left}"
-          }
-        ],
-        "singlePress": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}{space}"
           }
         ]
       }

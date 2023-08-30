@@ -171,8 +171,8 @@ InitKeymap()
   km.Map("singlePress", km.ToggleLock)
 
   ; 分号模式
-  km12 := KeymapManager.NewKeymap("*;")
-  km := km12
+  km13 := KeymapManager.NewKeymap("*;")
+  km := km13
   km.Map("*a", _ => (Send("{blind}*")))
   km.Map("*b", _ => (Send("{blind}%")))
   km.Map("*c", _ => (Send("{blind}.")))

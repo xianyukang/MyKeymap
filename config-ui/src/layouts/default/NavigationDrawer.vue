@@ -8,7 +8,7 @@ const { saveConfig } = useConfigStore()
 
 
 // 初始颜色列表
-const colors = ["red", "pink", "purple", "brown", "indigo", "teal", "blue-grey"];
+const colors = ["pink", "blue", "purple", "purple", "deep-orange", "purple", "blue"];
 
 function getHotkey(keymap: Keymap) {
   return keymap.parentID ? customParentKeymaps.value.find(k => k.id == keymap.parentID)!.hotkey : keymap.hotkey;
@@ -32,9 +32,15 @@ const getIcon = (keymap: Keymap) => {
 
   // 判断是设置还是自定义热键
   if (hotkey == "settings") {
-    return icon + "cog-box"
+    return icon + "cog-outline"
   } else if (hotkey == "customHotkeys") {
-    return icon + "keyboard"
+    return icon + "keyboard-outline"
+  } else if (hotkey == "capslockAbbr") {
+    return icon + 'rocket-launch-outline'
+  } else if (hotkey == "semicolonAbbr") {
+    return icon + 'format-text-variant-outline'
+  } else if (hotkey.toLowerCase().includes('button')) {
+    return icon + 'cursor-default-outline'
   }
 
   // 去除热键中的符号
@@ -52,7 +58,7 @@ const getIcon = (keymap: Keymap) => {
   }
 
   if (/\d/.test(key)) {
-    return icon + "numeric-" + key + "-box"
+    return icon + "numeric-" + key + "-box-outline"
   }
 
   if (key == "!") {
@@ -65,7 +71,7 @@ const getIcon = (keymap: Keymap) => {
     key = "s"
   }
 
-  return icon + "alpha-" + key + "-box"
+  return icon + "alpha-" + key + "-box-outline"
 }
 
 </script>
@@ -79,7 +85,7 @@ const getIcon = (keymap: Keymap) => {
         </v-avatar>
       </template>
 
-      <v-list-item-title class=" font-size-1.6em font-500 h-1.2em">MyKeymap</v-list-item-title>
+      <v-list-item-title class="text-h5 font-500 h-1.2em">MyKeymap</v-list-item-title>
       <v-list-item-subtitle>version: 2.0.0</v-list-item-subtitle>
     </v-list-item>
 
@@ -91,7 +97,7 @@ const getIcon = (keymap: Keymap) => {
           <v-list-item :key="index" :value="keymap"
                        :to="keymap.id != 4 ? '/keymap/' + keymap.id : '/' + keymap.hotkey">
             <template #prepend>
-              <v-icon :icon="getIcon(keymap)" :color="getColor(keymap)" size=35></v-icon>
+              <v-icon :icon="getIcon(keymap)" :color="getColor(keymap)" size=28></v-icon>
             </template>
             <v-list-item-title>{{ keymap.name }}</v-list-item-title>
           </v-list-item>
@@ -106,3 +112,8 @@ const getIcon = (keymap: Keymap) => {
   </v-navigation-drawer>
 </template>
 
+<style scoped>
+.v-navigation-drawer :deep(i) {
+  opacity: 0.94;
+}
+</style>
