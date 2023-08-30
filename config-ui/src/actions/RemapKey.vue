@@ -19,6 +19,10 @@ watchEffect(() => {
   action.value.isEmpty = !action.value.remapToKey
 })
 
+const changeComment = (key?: string) => {
+  useConfigStore().changeActionComment(key ? label + key : "")
+}
+
 </script>
 
 <template>
@@ -30,7 +34,9 @@ watchEffect(() => {
               :hide-no-data="true"
               :disabled="hotkey == 'singlePress'"
               v-model="action.remapToKey"
-              variant="underlined"></v-combobox>
+              variant="underlined"
+              @update:modelValue="changeComment(action.remapToKey)"
+  ></v-combobox>
   <v-card variant="outlined" :text="errorMsg" v-if="hotkey == 'singlePress'" color="red"></v-card>
 </template>
 
