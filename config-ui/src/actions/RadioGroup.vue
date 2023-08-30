@@ -30,48 +30,14 @@ watchEffect(() => {
   action.value.isEmpty = !action.value.actionValueID
 })
 
+const groups = [[props.group1, props.group2], [props.group3, props.group4]]
 </script>
 
 <template>
-  <v-row>
-    <v-col>
+  <v-row v-for="(group, index) in groups" :key="index">
+    <v-col v-for="(items, index) in group" :key="index">
       <v-radio-group density="comfortable" v-model="action.actionValueID" color="#d05">
-        <v-radio v-for="item in filter(group1, keymap)"
-                 :key="item.actionValueID"
-                 :class="{ active: item.actionValueID == action.actionValueID }"
-                 :label="item.label"
-                 :value="item.actionValueID"
-                 @click="useConfigStore().changeActionComment(item.label)"></v-radio>
-      </v-radio-group>
-    </v-col>
-
-    <v-col>
-      <v-radio-group density="comfortable" v-model="action.actionValueID" color="#d05">
-        <v-radio v-for="item in filter(group2, keymap)"
-                 :key="item.actionValueID"
-                 :class="{ active: item.actionValueID == action.actionValueID }"
-                 :label="item.label"
-                 :value="item.actionValueID"
-                 @click="useConfigStore().changeActionComment(item.label)"></v-radio>
-      </v-radio-group>
-    </v-col>
-  </v-row>
-
-  <v-row>
-    <v-col>
-      <v-radio-group density="comfortable" v-model="action.actionValueID" color="#d05">
-        <v-radio v-for="item in filter(group3, keymap)"
-                 :key="item.actionValueID"
-                 :class="{ active: item.actionValueID == action.actionValueID }"
-                 :label="item.label"
-                 :value="item.actionValueID"
-                 @click="useConfigStore().changeActionComment(item.label)"></v-radio>
-      </v-radio-group>
-    </v-col>
-
-    <v-col>
-      <v-radio-group density="comfortable" v-model="action.actionValueID" color="#d05">
-        <v-radio v-for="item in filter(group4, keymap)"
+        <v-radio v-for="item in filter(items, keymap)"
                  :key="item.actionValueID"
                  :class="{ active: item.actionValueID == action.actionValueID }"
                  :label="item.label"
