@@ -1311,6 +1311,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 9,
+            "comment": "重启 MyKeymap",
             "actionValueID": 2
           }
         ],
@@ -1318,6 +1319,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 9,
+            "comment": "暂停 MyKeymap",
             "actionValueID": 1
           }
         ],
@@ -1325,6 +1327,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 LCtrl",
             "remapToKey": "LCtrl"
           }
         ]

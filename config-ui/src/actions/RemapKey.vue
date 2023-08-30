@@ -3,7 +3,7 @@ import { useConfigStore } from '@/store/config';
 import { storeToRefs } from 'pinia';
 import { watchEffect } from 'vue';
 const { action, hotkey } = storeToRefs(useConfigStore())
-const label = "重映射为"
+const label = "重映射为 "
 const items = [
   'up', 'down', 'left', 'right', 'home', 'end', 'backspace', 'delete',
   'space', 'tab', 'enter', 'esc', 'insert', 'capslock', 'appskey', 'pgup', 'pgdn',
