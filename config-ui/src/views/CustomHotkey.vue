@@ -89,7 +89,7 @@ const removeCustomHotkey = (hotkey: string) => {
               <p>!space 表示 Alt + Space</p>
               <p>+F2 表示 Shift + F2</p>
               <p>(更多特殊按键 <a target="_blank"
-                                  href="https://wyagd001.github.io/zh-cn/docs/KeyList.htm#keyboard"
+                                  href="https://wyagd001.github.io/v2/docs/KeyList.htm#keyboard"
                                   style="color: green; text-decoration: none">参考这里</a></p>
               <p>(注意符号不要用中文标点符号</p>
             </v-card-text>
