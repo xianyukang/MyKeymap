@@ -1246,29 +1246,15 @@
       "hotkey": "*rbutton",
       "parentID": 0,
       "hotkeys": {
-        "*c": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "backspace"
-          }
-        ],
-        "*lbutton": [
+        "*LButton": [
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
-            "comment": "打开 Alt+Tab 窗口切换器",
+            "comment": "打开 Alt+Tab 窗口切换器 ( 可用鼠标中键关闭窗口 )",
             "keysToSend": "^!{tab}"
           }
         ],
-        "*space": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}{enter}"
-          }
-        ],
-        "*wheeldown": [
+        "*WheelDown": [
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
@@ -1276,12 +1262,26 @@
             "keysToSend": "^{tab}"
           }
         ],
-        "*wheelup": [
+        "*WheelUp": [
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
             "comment": "上一个标签",
             "keysToSend": "^+{tab}"
+          }
+        ],
+        "*c": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 5,
+            "remapToKey": "backspace"
+          }
+        ],
+        "*space": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "keysToSend": "{blind}{enter}"
           }
         ],
         "*x": [

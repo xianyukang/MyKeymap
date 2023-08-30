@@ -203,9 +203,9 @@ InitKeymap()
   km.RemapKey("c", "backspace")
   km.RemapKey("x", "esc")
   km.Map("*space", _ => (Send("{blind}{enter}")))
-  km.Map("*lbutton", _ => (Send("^!{tab}")))
-  km.Map("*wheelup", _ => (Send("^+{tab}")))
-  km.Map("*wheeldown", _ => (Send("^{tab}")))
+  km.Map("*LButton", _ => (Send("^!{tab}")))
+  km.Map("*WheelUp", _ => (Send("^+{tab}")))
+  km.Map("*WheelDown", _ => (Send("^{tab}")))
   km.Map("singlePress", _ => (Send("{blind}" theRealRButton)))
 
   ; 自定义热键
