@@ -36,7 +36,7 @@ InitKeymap()
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
 
-  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", ",,,.,/,dd,dm,sk,xk")
+  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", ",,,.,/,dk,gg,sk,xk,zk")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char)
   semiHookAbbrWindow := TypoTipWindow()
 
@@ -54,7 +54,7 @@ InitKeymap()
   ; Capslock
   km5 := KeymapManager.NewKeymap("*capslock")
   km := km5
-  km.Map("*c", _ => SystemLockScreen())
+  km.Map("*c", _ => SoundControl())
   km.Map("*a", _ => CenterAndResizeWindow(1370, 930))
   km.Map("*b", _ => MinimizeWindow())
   km.Map("*e", _ => Send("^!{tab}"), taskSwitch)
@@ -238,14 +238,16 @@ ExecSemicolonAbbr(command) {
       Send("。")
     case "/":
       Send("、")
-    case "dd":
-      ActivateOrRun("", "shell:downloads")
-    case "dm":
-      ActivateOrRun("", A_WorkingDir)
+    case "dk":
+      Send("{text}{}"), Send("{left}")
+    case "gg":
+      Send("{text}git add -A; git commit -a -m `"`"; git push origin (git branch --show-current);"), Send("{left 47}")
     case "sk":
-      Send("{text}「  」"), Send("{left 2}")
+      Send("「  」"), Send("{left 2}")
     case "xk":
-      Send("()"), Send("{left}")
+      Send("(){left}")
+    case "zk":
+      Send("[]{left}")
   }
 }
 
