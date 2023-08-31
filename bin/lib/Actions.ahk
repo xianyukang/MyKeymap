@@ -124,7 +124,7 @@ EnterCapslockAbbr(capsHook) {
  * semi缩写框
  */
 EnterSemicolonAbbr(semiHook, semiHookAbbrWindow) {
-  semiHookAbbrWindow.Show("    ")
+  semiHookAbbrWindow.Show(" ")
   endReason := StartInputHook(semiHook)
   semiHookAbbrWindow.Hide
 
