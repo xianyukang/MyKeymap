@@ -31,7 +31,7 @@ InitKeymap()
   slow := MouseKeymap(10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.UnLock)
   slow.Map("*space", slow.LButtonUp())
 
-  capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "dd,dm,no")
+  capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "dd,dm,lj,no")
   capsHook.KeyOpt("{CapsLock}", "S")
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
@@ -214,6 +214,7 @@ InitKeymap()
   km.RemapInHotIf("RAlt", "LCtrl")
   km.Map("!'", _ => MyKeymapReload(), , , , "S")
   km.Map("+!'", _ => MyKeymapToggleSuspend(), , , , "S")
+  km.Map("!capslock", _ => ToggleCapslock())
 
 
   KeymapManager.GlobalKeymap.Enable()
@@ -225,6 +226,8 @@ ExecCapslockAbbr(command) {
       ActivateOrRun("", "shell:downloads")
     case "dm":
       ActivateOrRun("", A_WorkingDir)
+    case "lj":
+      ActivateOrRun("", "shell:RecycleBinFolder")
     case "no":
       ActivateOrRun("记事本", "notepad.exe")
   }

@@ -1316,6 +1316,14 @@
             "actionValueID": 2
           }
         ],
+        "!capslock": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 9,
+            "comment": "切换 Capslock 大小写",
+            "actionValueID": 7
+          }
+        ],
         "+!'": [
           {
             "windowGroupID": 0,
@@ -1355,6 +1363,14 @@
             "actionTypeID": 1,
             "comment": "打开「 MyKeymap 」文件夹",
             "target": "ahk-expression: A_WorkingDir"
+          }
+        ],
+        "lj": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "comment": "打开「 回收站 」文件夹",
+            "target": "shell:RecycleBinFolder"
           }
         ],
         "no": [
