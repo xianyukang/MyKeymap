@@ -2,7 +2,7 @@
 
 import { useConfigStore } from "@/store/config";
 import { storeToRefs } from "pinia";
-import Action from "@/actions/Action.vue";
+import Action from "@/components/actions/Action.vue";
 import Key from "@/components/Key.vue";
 import { ref } from "vue";
 

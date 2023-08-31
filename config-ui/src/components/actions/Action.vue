@@ -1,15 +1,15 @@
 <script lang="ts" setup>
 import { useConfigStore } from '@/store/config';
 import { storeToRefs } from 'pinia';
-import ActivateOrRun from '@/actions/ActivateOrRun.vue'
-import System from '@/actions/System.vue'
-import Window from '@/actions/Window.vue'
-import Mouse from '@/actions/Mouse.vue'
-import RemapKey from '@/actions/RemapKey.vue'
-import SendKey from '@/actions/SendKey.vue'
-import Text from '@/actions/Text.vue'
-import BuiltinFunction from '@/actions/BuiltinFunction.vue'
-import MyKeymap from '@/actions/MyKeymap.vue'
+import ActivateOrRun from '@/components/actions/ActivateOrRun.vue'
+import System from '@/components/actions/System.vue'
+import Window from '@/components/actions/Window.vue'
+import Mouse from '@/components/actions/Mouse.vue'
+import RemapKey from '@/components/actions/RemapKey.vue'
+import SendKey from '@/components/actions/SendKey.vue'
+import Text from '@/components/actions/Text.vue'
+import BuiltinFunction from '@/components/actions/BuiltinFunction.vue'
+import MyKeymap from '@/components/actions/MyKeymap.vue'
 import { Action, Keymap } from "@/types/config";
 
 

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Action from "@/actions/Action.vue";
+import Action from "@/components/actions/Action.vue";
 import Key from "@/components/Key.vue";
 import { useConfigStore } from "@/store/config";
 import { storeToRefs } from "pinia";
@@ -27,8 +27,8 @@ const keyboardRows = computed(() => {
 
 <template>
   <v-container v-if="keymap">
-    <v-row justify="start" v-for="row in keyboardRows">
-      <v-col v-for="hotkey in row" cols="auto">
+    <v-row justify="start" v-for="(row, index) in keyboardRows" :key="index">
+      <v-col v-for="(hotkey, index) in row" :key="hotkey + index" cols="auto">
         <Key :hotkey="hotkey" />
       </v-col>
     </v-row>
@@ -39,6 +39,6 @@ const keyboardRows = computed(() => {
 
 <style scoped>
 .v-row+.v-row {
-  margin-top: 0px;
+  margin-top: 0;
 }
 </style>
