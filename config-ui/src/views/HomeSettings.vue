@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import Home from './Home.vue';
-import Settings from './Settings.vue';
+import Home from "@/views/Home.vue";
+import Settings from "@/views/Settings.vue";
+import { useRoute } from "vue-router";
 </script>
 
 <template>
-  <Home v-show="$route.path != '/settings'" />
-  <Settings v-show="$route.path == '/settings'" />
+  <Home v-show="useRoute().path == '/'" />
+  <Settings v-show="useRoute().path == '/settings'" />
 </template>

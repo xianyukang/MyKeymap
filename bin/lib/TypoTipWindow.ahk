@@ -16,12 +16,16 @@ Class TypoTipWindow {
     this.textCon := this.typoTip.Add("text", "Center", text)
   }
 
-  Show(text := "", offsetX := 9, offsetY := 7) {
+  Show(text := "", offsetX := 9, offsetY := 7, addition := false) {
     if (text) {
-      this.textCon.Value := text
+      if (addition) {
+        this.textCon.Value := this.textCon.Value text
+      } else {
+        this.textCon.Value := text
+      }
     }
 
-    MouseGetPos(&xpos, &ypos)
+    GetPosRelativeScreen(&xpos, &ypos, "Mouse")
     xpos += offsetX
     ypos += offsetY
     this.typoTip.Show("AutoSize Center NoActivate x" xpos " y" ypos)

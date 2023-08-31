@@ -59,8 +59,18 @@ GetCaretPos(&X?, &Y?, &W?, &H?) {
   }
 
   ; Default caret
-  savedCaret := A_CoordModeCaret, W := 4, H := 20
-  CoordMode "Caret", "Screen"
-  CaretGetPos(&X, &Y)
-  CoordMode "Caret", savedCaret
+  GetPosRelativeScreen(&X, &Y, "Caret")
+}
+
+/**
+ * 获取指定目标相对于屏幕的位置
+ * @param X 光标相对于屏幕X轴的位置
+ * @param Y 光标相对于屏幕Y轴的位置
+ * @param type Caret | Mouse
+ */
+GetPosRelativeScreen(&X, &Y, type) {
+  saved := type == "Caret" ? A_CoordModeCaret : A_CoordModeMouse
+  CoordMode type, "Screen"
+  type == "Caret" ? CaretGetPos(&X, &Y) : MouseGetPos(&X, &Y)
+  CoordMode type, saved
 }

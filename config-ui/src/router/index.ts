@@ -1,27 +1,35 @@
 // Composables
-import Home from '@/views/Home.vue'
-import Keymap from '@/views/Keymap.vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import Settings from "@/views/Settings.vue";
 import CustomHotkey from "@/views/CustomHotkey.vue";
 import Abbr from "@/views/Abbr.vue";
 import HomeSettings from '@/views/HomeSettings.vue';
+import Keymap from "@/views/Keymap.vue";
 
 const routes = [
   {
-    path: '/',
-    component: () => import('@/layouts/default/Default.vue'),
+    path: "/",
+    component: HomeSettings
+  },
+  {
+    path: "/settings",
+    component: HomeSettings
+  },
+  {
+    path: "/keymap",
     children: [
       {
-        path: '',
-        name: 'Home',
-        component: HomeSettings,
+        path: ':id(1)',
+        component: CustomHotkey
       },
-      { path: "/keymap/:id(1)", component: CustomHotkey },
-      { path: "/keymap/:id(2|3)", component: Abbr },
-      { path: "/keymap/:id", component: Keymap },
-      { path: "/settings", component: HomeSettings },
-    ],
+      {
+        path: ':id(2|3)',
+        component: Abbr
+      },
+      {
+        path: ':id',
+        component: Keymap
+      },
+    ]
   },
 ]
 

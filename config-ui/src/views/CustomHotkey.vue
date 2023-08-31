@@ -4,7 +4,7 @@ import Table from "@/components/Table.vue";
 import { storeToRefs } from "pinia";
 import { useConfigStore } from "@/store/config";
 import { ref } from "vue";
-import Action from "@/actions/Action.vue";
+import Action from "@/components/actions/Action.vue";
 
 const { hotkeys } = storeToRefs(useConfigStore())
 
