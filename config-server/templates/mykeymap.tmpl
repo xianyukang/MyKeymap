@@ -37,7 +37,7 @@ InitKeymap()
   Run("bin\MyKeymap-CommandInput.exe")
 {{ end }}
 {{- if .SemicolonAbbrEnabled }}
-  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", "{{ .SemicolonAbbrKeys }}")
+  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", "{{ .SemicolonAbbrKeys }}")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char, , , true)
   semiHookAbbrWindow := InputTipWindow()
 {{ end }}

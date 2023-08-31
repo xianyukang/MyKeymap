@@ -36,7 +36,7 @@ InitKeymap()
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
 
-  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", ",,,.,/,dk,gg,sk,xk,zk")
+  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", ",,,.,/,dk,gg,i love nia,sk,sz,xk,zk")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char, , , true)
   semiHookAbbrWindow := InputTipWindow()
 
@@ -242,8 +242,12 @@ ExecSemicolonAbbr(command) {
       Send("{text}{}"), Send("{left}")
     case "gg":
       Send("{text}git add -A; git commit -a -m `"`"; git push origin (git branch --show-current);"), Send("{left 47}")
+    case "i love nia":
+      Send("{text}我爱尼娅! "), Send("{text}( 还 有 大 家 )")
     case "sk":
       Send("「  」"), Send("{left 2}")
+    case "sz":
+      Send("{text} site:zhihu.com")
     case "xk":
       Send("(){left}")
     case "zk":

@@ -1414,12 +1414,28 @@
             "keysToSend": "{text}git add -A; git commit -a -m \"\"; git push origin (git branch --show-current);\n{left 47}"
           }
         ],
+        "i love nia": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "没错，缩写中可以包含空格，用del i love nia删掉这个示例",
+            "keysToSend": "{text}我爱尼娅! \n{text}( 还 有 大 家 )"
+          }
+        ],
         "sk": [
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
             "comment": "输入一对「」并把光标移动中间",
             "keysToSend": "「  」\n{left 2}"
+          }
+        ],
+        "sz": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "搜索时加上这个后缀，能让搜索引擎只搜某网站的内容",
+            "keysToSend": "{text} site:zhihu.com"
           }
         ],
         "xk": [
