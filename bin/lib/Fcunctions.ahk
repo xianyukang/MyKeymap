@@ -173,12 +173,8 @@ RunPrograms(target, args := "", workingDir := "", admin := false) {
     programPath := CompleteProgramPath(target)
     if not (programPath) {
       ; 没有找到程序，可能是ms-setting: 或shell:之类的连接，都可以使用shellRun来打开
-      if (target ~= "^[ms-setting|shell]:") {
-        programPat := target
-      } else {
-        Run(target "" args, workingDir)
-        return
-      }
+      Run(args ? target "" args : target, workingDir)
+      return 
     }
 
     ; 如果是文件夹直接打开
