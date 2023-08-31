@@ -400,7 +400,7 @@ HideCaspAbbr() {
  */
 PostCharToCaspAbbr(ih?, char?) {
   static SEND_CHAR := 0x0102
-  PostMessageToCpasAbbr(SEND_CHAR, Ord(char))
+  PostMessageToCpasAbbr(SEND_CHAR, Ord(SubStr(char, -1)))
 }
 
 /**
