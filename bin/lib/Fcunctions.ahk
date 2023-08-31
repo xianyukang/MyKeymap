@@ -172,9 +172,13 @@ RunPrograms(target, args := "", workingDir := "", admin := false) {
     ; 补全程序路径
     programPath := CompleteProgramPath(target)
     if not (programPath) {
-      ; 没有找到程序，可能是ms-setting: 之类的连接
-      Run(target " " args, workingDir)
-      return
+      ; 没有找到程序，可能是ms-setting: 或shell:之类的连接，都可以使用shellRun来打开
+      if (target ~= "^[ms-setting|shell]:") {
+        programPat := target
+      } else {
+        Run(target "" args, workingDir)
+        return
+      }
     }
 
     ; 如果是文件夹直接打开
