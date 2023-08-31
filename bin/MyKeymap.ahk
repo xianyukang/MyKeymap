@@ -5,7 +5,7 @@
 #Include lib/Fcunctions.ahk
 #Include lib/Actions.ahk
 #Include lib/KeymapManager.ahk
-#Include lib/TypoTipWindow.ahk
+#Include lib/InputTipWindow.ahk
 #Include lib/TempFocusGui.ahk
 #Include lib/Utils.ahk
 
@@ -38,7 +38,7 @@ InitKeymap()
 
   semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}{Space}", ",,,.,/,dk,gg,sk,xk,zk")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char, , , true)
-  semiHookAbbrWindow := TypoTipWindow()
+  semiHookAbbrWindow := InputTipWindow()
 
   ; 如果在系统设置中交换了左右键,  那么需要发送左键才能打开右键菜单
   theRealRButton := SysGet(23) ? "{LButton}" : "{RButton}"
