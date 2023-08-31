@@ -5,6 +5,7 @@ import { storeToRefs } from "pinia";
 import Action from "@/components/actions/Action.vue";
 import Key from "@/components/Key.vue";
 import { ref } from "vue";
+import trimEnd from "lodash-es/trimEnd";
 
 const { hotkeys } = storeToRefs(useConfigStore())
 const { removeHotkey, changeHotkey} = useConfigStore()
@@ -32,7 +33,8 @@ const runCmd = () => {
 }
 
 const formatSpace = (hotkey: string) => {
-  return hotkey.replace(/ /g, '◻️')
+  const trimmed = trimEnd(hotkey, ' ')
+  return trimmed + '◻️'.repeat(hotkey.length - trimmed.length)
 }
 
 </script>
