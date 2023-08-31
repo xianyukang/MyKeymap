@@ -8,6 +8,7 @@ import { useConfigStore } from "@/store/config";
 import { Keymap } from "@/types/config";
 import PathDialog from "@/components/dialog/PathDialog.vue";
 import WindowGroupDialog from "@/components/dialog/WindowGroupDialog.vue";
+import findLastIndex from "lodash-es/findLastIndex";
 
 const { customKeymaps, customParentKeymaps, customSonKeymaps, options, keymaps } = storeToRefs(useConfigStore())
 
@@ -93,7 +94,7 @@ function addKeymap() {
 }
 
 function removeKeymap(id: number) {
-  removeKeymapByIndex(keymaps.value.findLastIndex(k => k.id == id))
+  removeKeymapByIndex(findLastIndex(keymaps.value, k => k.id == id))
 }
 
 function removeKeymapByIndex(index: number) {
