@@ -1,4 +1,4 @@
-Class TypoTipWindow {
+Class InputTipWindow {
 
   __New(text := "                       ", fontSize := 12, marginX := 12, marginY := 2) {
     ; 字体颜色
