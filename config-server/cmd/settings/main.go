@@ -37,6 +37,9 @@ func main() {
 	if !debug {
 		go matrix.DigitalRain(hasError, rainDone)
 	}
+	if debug {
+		hasError = nil
+	}
 
 	server(hasError, rainDone, debug)
 }
@@ -50,9 +53,9 @@ func server(hasError chan<- struct{}, rainDone <-chan struct{}, debug bool) {
 	router := gin.Default()
 	router.Use(PanicHandler(hasError, rainDone))
 	router.Use(cors.Default())
-	router.Use(IndexHandler())
-	router.Use(static.Serve("/", static.LocalFile("./site", false)))
+	router.NoRoute(static.Serve("/", static.LocalFile("./site", false)), indexHandler)
 
+	router.GET("/", indexHandler)
 	router.GET("/config", GetConfigHandler)
 	router.PUT("/config", SaveConfigHandler)
 	router.POST("/server/command/:id", ServerCommandHandler)
@@ -82,18 +85,14 @@ func openBrowser() {
 	_ = exec.Command("cmd", "/c", "start", "http://127.0.0.1:12333").Start()
 }
 
-func IndexHandler() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		if c.Request.URL.Path == "/" {
-			data, err := os.ReadFile("./site/index.html")
-			if err != nil {
-				panic(err)
-			}
-			c.Header("Cache-Control", "no-store")
-			c.Data(http.StatusOK, "text/html; charset=utf-8", data)
-			c.Abort()
-		}
+func indexHandler(c *gin.Context) {
+	data, err := os.ReadFile("./site/index.html")
+	if err != nil {
+		panic(err)
 	}
+	// 设置 Cache-Control: no-store 禁用缓存
+	c.Header("Cache-Control", "no-store")
+	c.Data(http.StatusOK, "text/html; charset=utf-8", data)
 }
 
 func GetConfigHandler(c *gin.Context) {
