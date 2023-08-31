@@ -1,6 +1,6 @@
 Class TypoTipWindow {
 
-  __New(text := "               ", fontSize := 11, marginX := 12, marginY := 2) {
+  __New(text := "                       ", fontSize := 12, marginX := 12, marginY := 2) {
     ; 字体颜色
     FontColor := "000000"
     ; 背景颜色
@@ -11,7 +11,7 @@ Class TypoTipWindow {
 
     this.typoTip.MarginX := marginX
     this.typoTip.MarginY := marginY
-    this.typoTip.SetFont("c" FontColor " s" fontSize, "Microsoft Sans Serif")
+    this.typoTip.SetFont("c" FontColor " s" fontSize, "Microsoft YaHei Ui")
 
     this.textCon := this.typoTip.Add("text", "Center", text)
   }
