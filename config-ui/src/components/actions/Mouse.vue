@@ -19,12 +19,15 @@ const group3 = [
   { actionValueID: 11, label: "鼠标中键" },
   { actionValueID: 12, label: "鼠标左键按下 (之后按空格松开)" },
 ]
+const group4 = [
+  { actionValueID: 13, label: "移动鼠标到活动窗口" },
+]
 
 
 </script>
 
 <template>
-  <RadioGroup :group1="group1" :group2="group2" :group3="group3" />
+  <RadioGroup :group1="group1" :group2="group2" :group3="group3" :group4="group4" />
 </template>
 
 <style scoped></style>

@@ -179,6 +179,7 @@ func mouseActions4(a Action, inAbbrContext bool) string {
 		10: `km.Map("%[1]s", fast.RButton()%s), slow.Map("%[1]s", slow.RButton()%s)`,
 		11: `km.Map("%[1]s", fast.MButton()%s), slow.Map("%[1]s", slow.MButton()%s)`,
 		12: `km.Map("%[1]s", fast.LButtonDown()%s), slow.Map("%[1]s", slow.LButtonDown()%s)`,
+		13: `km.Map("%[1]s", _ => MoveMouseToCaret()%s), slow.Map("%[1]s", _ => MoveMouseToCaret()%s)`,
 	}
 	if format, ok := valueMap[a.ValueID]; ok {
 		if a.ValueID >= 5 {
@@ -199,7 +200,9 @@ func windowActions3(a Action, inAbbrContext bool) string {
 	if a.ValueID == 4 {
 		return fmt.Sprintf(`km.Map("%[1]s", _ => Send("^!{tab}"), taskSwitch%s)`, a.Hotkey, Cfg.GetHotkeyContext(a))
 	}
-
+	if a.ValueID == 14 {
+		return fmt.Sprintf(`km.Map("%[1]s", BindWindow()%s)`, a.Hotkey, Cfg.GetHotkeyContext(a))
+	}
 	callMap := map[int]string{
 		1:  `SmartCloseWindow()`,
 		2:  `GoToLastWindow()`,
@@ -212,6 +215,7 @@ func windowActions3(a Action, inAbbrContext bool) string {
 		10: `CenterAndResizeWindow(1200, 800)`,
 		11: `CenterAndResizeWindow(1370, 930)`,
 		12: `ToggleWindowTopMost()`,
+		13: `MakeWindowDraggable()`,
 	}
 	if call, ok := callMap[a.ValueID]; ok {
 		if inAbbrContext {

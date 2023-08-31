@@ -16,6 +16,8 @@ const group2 = [
   { actionValueID: 10, label: "窗口居中 (1200x800)" },
   { actionValueID: 11, label: "窗口居中 (1370x930)" },
   { actionValueID: 12, label: "切换窗口置顶状态" },
+  { actionValueID: 13, label: "让窗口随鼠标拖动" },
+  { actionValueID: 14, label: "绑定当前窗口 (长按绑定,短按激活", hideInAbbr: true },
 ]
 
 

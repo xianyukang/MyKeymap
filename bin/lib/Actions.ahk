@@ -9,7 +9,7 @@ MouseToActiveWindowCenter() {
 /**
  * 移动活动窗口位置
  */
-MouseMoveActiveWindowPos() {
+MakeWindowDraggable() {
   hwnd := WinExist("A")
   if (WindowMaxOrMin())
     WinRestore("A")
@@ -252,9 +252,16 @@ CloseWindowProcesses() {
 /**
  * 将鼠标移动到光标的位置
  */
-MouseMoveToCare() {
+MoveMouseToCaret() {
   GetCaretPos(&x, &y)
-  (StrLen(x) | StrLen(y)) ? MouseMove(x, y) : MouseToActiveWindowCenter()
+  if (StrLen(x) | StrLen(y)) {
+    ; Tip(A_SendMode "|" A_CoordModeMouse) ; 每次执行热键, 这两个都会重置为默认值
+    SendMode("Event")
+    CoordMode("Mouse", "Screen")
+    MouseMove(x, y, 100)
+  } else {
+    MouseToActiveWindowCenter()
+  }
 }
 
 /**
@@ -337,7 +344,7 @@ BindWindow() {
       return
     }
 
-    Tip("窗口或已关闭，请长按绑定窗口")
+    Tip("请长按绑定窗口")
   }
 
   return handler

@@ -15,6 +15,22 @@
             "actionValueID": 12
           }
         ],
+        "*.": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 3,
+            "comment": "让窗口随鼠标拖动",
+            "actionValueID": 13
+          }
+        ],
+        "*/": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 4,
+            "comment": "移动鼠标到窗口中心",
+            "actionValueID": 13
+          }
+        ],
         "*;": [
           {
             "windowGroupID": 0,
