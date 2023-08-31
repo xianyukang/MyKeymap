@@ -40,7 +40,8 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 2,
-            "actionValueID": 1
+            "comment": "音量调节",
+            "actionValueID": 5
           }
         ],
         "*d": [
@@ -1397,35 +1398,44 @@
             "keysToSend": "、"
           }
         ],
-        "dd": [
+        "dk": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 1,
-            "comment": "打开「 下载 」文件夹",
-            "target": "shell:downloads"
+            "actionTypeID": 6,
+            "comment": "输入一对 {} 并把光标移动中间",
+            "keysToSend": "{text}{}\n{left}"
           }
         ],
-        "dm": [
+        "gg": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 1,
-            "comment": "打开「 MyKeymap 」文件夹",
-            "target": "ahk-expression: A_WorkingDir"
+            "actionTypeID": 6,
+            "comment": "一键 Git 提交",
+            "keysToSend": "{text}git add -A; git commit -a -m \"\"; git push origin (git branch --show-current);\n{left 47}"
           }
         ],
         "sk": [
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
-            "keysToSend": "{text}「  」\n{left 2}"
+            "comment": "输入一对「」并把光标移动中间",
+            "keysToSend": "「  」\n{left 2}"
           }
         ],
         "xk": [
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
-            "comment": "输入一对小括号, 并把光标移到中间",
-            "keysToSend": "()\n{left}"
+            "comment": "输入一对 () 并把光标移到中间",
+            "keysToSend": "(){left}"
+          }
+        ],
+        "zk": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "输入一对 [] 并把光标移到中间",
+            "keysToSend": "[]{left}"
           }
         ]
       }
