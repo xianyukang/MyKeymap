@@ -172,7 +172,7 @@ RunPrograms(target, args := "", workingDir := "", admin := false) {
     ; 补全程序路径
     programPath := CompleteProgramPath(target)
     if not (programPath) {
-      ; 没有找到程序，可能是ms-setting: 或shell:之类的连接，都可以使用shellRun来打开
+      ; 没有找到程序，可能是ms-setting: 或shell:之类的连接
       Run(args ? target "" args : target, workingDir)
       return 
     }
