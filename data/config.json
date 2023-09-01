@@ -268,7 +268,7 @@
             "actionTypeID": 1,
             "comment": "IntelliJ IDEA",
             "winTitle": "ahk_exe idea64.exe",
-            "target": "ahk-expression: A_Programs \"\\JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk\""
+            "target": "JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk"
           }
         ],
         "*k": [
@@ -277,7 +277,7 @@
             "actionTypeID": 1,
             "comment": "PotPlayer",
             "winTitle": "ahk_class PotPlayer64",
-            "target": "ahk-expression: A_ProgramsCommon \"\\Daum\\PotPlayer 64 bit\\PotPlayer 64 bit.lnk\""
+            "target": "Daum\\PotPlayer 64 bit\\PotPlayer 64 bit.lnk"
           }
         ],
         "*l": [
@@ -286,7 +286,7 @@
             "actionTypeID": 1,
             "comment": "Excel",
             "winTitle": "ahk_exe EXCEL.EXE",
-            "target": "ahk-expression: A_ProgramsCommon \"\\Excel.lnk\""
+            "target": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Excel.lnk"
           }
         ],
         "*m": [
@@ -303,7 +303,7 @@
             "actionTypeID": 1,
             "comment": "GoLand",
             "winTitle": "ahk_exe goland64.exe",
-            "target": "ahk-expression: A_Programs \"\\JetBrains Toolbox\\GoLand.lnk\""
+            "target": "JetBrains Toolbox\\GoLand.lnk"
           }
         ],
         "*o": [
@@ -348,7 +348,7 @@
             "actionTypeID": 1,
             "comment": "Visual Studio Code",
             "winTitle": "ahk_exe Code.exe",
-            "target": "ahk-expression: A_Programs \"\\Visual Studio Code\\Visual Studio Code.lnk\""
+            "target": "Visual Studio Code\\Visual Studio Code.lnk"
           }
         ],
         "*w": [
@@ -369,13 +369,13 @@
       "hotkey": "*space",
       "parentID": 5,
       "hotkeys": {
-        "*n": [
+        "*d": [
           {
             "windowGroupID": 0,
             "actionTypeID": 1,
             "comment": "DataGrip",
             "winTitle": "ahk_exe datagrip64.exe",
-            "target": "ahk-expression: A_Programs \"\\JetBrains Toolbox\\DataGrip.lnk\""
+            "target": "JetBrains Toolbox\\DataGrip.lnk"
           }
         ],
         "*w": [
@@ -1313,6 +1313,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "输入鼠标右键",
             "keysToSend": "ahk-expression: \"{blind}\" theRealRButton"
           }
         ]
@@ -1446,7 +1447,7 @@
             "actionTypeID": 1,
             "comment": "个人常用项目 - MyKeymap",
             "winTitle": "MyKeymap2 - Visual Studio Code",
-            "target": "ahk-expression: A_Programs \"\\Visual Studio Code\\Visual Studio Code.lnk\"",
+            "target": "Visual Studio Code\\Visual Studio Code.lnk",
             "args": "D:\\MyFiles\\MyKeymap2"
           }
         ],
@@ -1456,7 +1457,7 @@
             "actionTypeID": 1,
             "comment": "个人常用项目 - My Site",
             "winTitle": "my_site - Visual Studio Code",
-            "target": "ahk-expression: A_Programs \"\\Visual Studio Code\\Visual Studio Code.lnk\"",
+            "target": "Visual Studio Code\\Visual Studio Code.lnk",
             "args": "D:\\project\\my_site"
           }
         ],

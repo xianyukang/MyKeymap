@@ -90,22 +90,22 @@ InitKeymap()
   km.Map("*e", _ => ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\"))
   km.Map("*h", _ => ActivateOrRun("- Microsoft Visual Studio", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2019.lnk"))
   km.Map("*i", _ => ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe"))
-  km.Map("*j", _ => ActivateOrRun("ahk_exe idea64.exe", A_Programs "\JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk"))
-  km.Map("*k", _ => ActivateOrRun("ahk_class PotPlayer64", A_ProgramsCommon "\Daum\PotPlayer 64 bit\PotPlayer 64 bit.lnk"))
-  km.Map("*l", _ => ActivateOrRun("ahk_exe EXCEL.EXE", A_ProgramsCommon "\Excel.lnk"))
-  km.Map("*n", _ => ActivateOrRun("ahk_exe goland64.exe", A_Programs "\JetBrains Toolbox\GoLand.lnk"))
+  km.Map("*j", _ => ActivateOrRun("ahk_exe idea64.exe", "JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk"))
+  km.Map("*k", _ => ActivateOrRun("ahk_class PotPlayer64", "Daum\PotPlayer 64 bit\PotPlayer 64 bit.lnk"))
+  km.Map("*l", _ => ActivateOrRun("ahk_exe EXCEL.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Excel.lnk"))
+  km.Map("*n", _ => ActivateOrRun("ahk_exe goland64.exe", "JetBrains Toolbox\GoLand.lnk"))
   km.Map("*o", _ => ActivateOrRun("ahk_exe ONENOTE.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneNote.lnk"))
   km.Map("*p", _ => ActivateOrRun("ahk_exe POWERPNT.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk"))
   km.Map("*q", _ => ActivateOrRun("ahk_class EVERYTHING", "C:\Program Files\Everything\Everything.exe"))
   km.Map("*r", _ => ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe"))
-  km.Map("*s", _ => ActivateOrRun("ahk_exe Code.exe", A_Programs "\Visual Studio Code\Visual Studio Code.lnk"))
+  km.Map("*s", _ => ActivateOrRun("ahk_exe Code.exe", "Visual Studio Code\Visual Studio Code.lnk"))
   km.Map("*w", _ => ActivateOrRun("ahk_exe chrome.exe", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Google Chrome.lnk"))
   km.Map("*m", _ => ProcessExistSendKeyOrRun("TIM.exe", "^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk"))
 
   ; Capslock + Space
   km7 := KeymapManager.AddSubKeymap(km5, "*space")
   km := km7
-  km.Map("*n", _ => ActivateOrRun("ahk_exe datagrip64.exe", A_Programs "\JetBrains Toolbox\DataGrip.lnk"))
+  km.Map("*d", _ => ActivateOrRun("ahk_exe datagrip64.exe", "JetBrains Toolbox\DataGrip.lnk"))
   km.Map("*w", _ => ProcessExistSendKeyOrRun("WeChat.exe", "^!w", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\微信\微信.lnk"))
 
   ; J 模式
@@ -242,9 +242,9 @@ ExecCapslockAbbr(command) {
     case "ly":
       ActivateOrRun("", "ms-settings:bluetooth")
     case "mm":
-      ActivateOrRun("MyKeymap2 - Visual Studio Code", A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\MyFiles\MyKeymap2", "", false)
+      ActivateOrRun("MyKeymap2 - Visual Studio Code", "Visual Studio Code\Visual Studio Code.lnk", "D:\MyFiles\MyKeymap2", "", false)
     case "ms":
-      ActivateOrRun("my_site - Visual Studio Code", A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\project\my_site", "", false)
+      ActivateOrRun("my_site - Visual Studio Code", "Visual Studio Code\Visual Studio Code.lnk", "D:\project\my_site", "", false)
     case "no":
       ActivateOrRun("记事本", "notepad.exe")
     case "rb":
