@@ -107,6 +107,16 @@ CompleteProgramPath(target) {
   if FileExist(target)
     return target
 
+  ; 从用户开始菜单中获取
+  PathName := A_Programs "\" target
+  if FileExist(PathName)
+    return PathName
+
+  ; 从系统开始菜单中获取
+  PathName := A_ProgramsCommon "\" target
+  if FileExist(PathName)
+    return PathName
+
   ; 从环境变量 PATH 中获取
   DosPath := EnvGet("PATH")
   loop parse DosPath, "`;" {
