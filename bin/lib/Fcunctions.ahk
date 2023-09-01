@@ -140,9 +140,12 @@ ShellRun(target, arguments?, directory?, operation?, show?) {
 }
 
 ActivateDesktop() {
-  if WinExist("Program Manager ahk_class Progman") || WinExist("ahk_class WorkerW") {
+  tmp := A_DetectHiddenWindows
+  DetectHiddenWindows true
+  if WinExist("ahk_class ForegroundStaging") {
     WinActivate
   }
+  DetectHiddenWindows tmp
 }
 
 /**
@@ -173,6 +176,7 @@ RunPrograms(target, args := "", workingDir := "", admin := false) {
   ; 通过一个界面先获取焦点再执行启动程序，当失去焦点时自己关闭
   ; TempFocusGui().ShowGui()
   ActivateDesktop()
+  return
 
   try {
     ; 补全程序路径
