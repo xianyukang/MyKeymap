@@ -19,29 +19,29 @@ WinSpyGui() {
     try TraySetIcon "./icons/logo.ico"
     DllCall("shell32\SetCurrentProcessExplicitAppUserModelID", "wstr", "AutoHotkey.WindowSpy")
     
-    oGui := Gui("AlwaysOnTop Resize MinSize +DPIScale","查看窗口标识符")
+    oGui := Gui("AlwaysOnTop Resize MinSize +DPIScale","")
     oGui.OnEvent("Close",WinSpyClose)
     oGui.OnEvent("Size",WinSpySize)
     
-    oGui.Add("Text",,"窗口标识符有下面三种,  经常选择进程名:")
+    oGui.BackColor := "FFFFFF"
+    oGui.SetFont("s11")
+    oGui.Add("Text",,"程序的窗口标识符有下面三种:")
     oGui.Add("Text",,"▷ 窗口名:      无标题 - 记事本")
     oGui.Add("Text",,"▷ 进程名:      ahk_exe notepad.exe")
     oGui.Add("Text",,"▷ 窗口类名:   ahk_class Notepad")
+    oGui.Add("Text",,"➤ 一般选进程名")
+    oGui.Add("Text",,"➤ 可以只使用部分窗口名: 记事")
+    oGui.Add("Text",,"➤ 也可以组合两个标识符: 记事 ahk_exe notepad.exe (更精确")
     oGui.Add("Text",, "")
 
-    oGui.Add("Text",,"更多例子:")
-    oGui.Add("Text",,"▷ 使用部分窗口名: 记事")
-    oGui.Add("Text",,"▷ 组合两个标识符: 记事 ahk_exe notepad.exe (偶然更精确")
-    oGui.Add("Text",, "")
-
-    oGui.Add("Text",,"当前活动窗口三种标识符:")
-    oGui.Add("Checkbox","yp-2 xp+200 h15 w120 Right vCtrl_FollowMouse","跟随鼠标")
-    oGui.Add("Edit","xm w320 r3 ReadOnly -Wrap vCtrl_Title")
-    oGui.Add("Text",,"鼠标位置:")
-    oGui.Add("Edit","w320 r4 ReadOnly vCtrl_MousePos")
-    oGui.Add("Text",,"活动窗口位置:")
-    oGui.Add("Edit","w320 r2 ReadOnly vCtrl_Pos")
-    oGui.Add("Text","w320 r1 vCtrl_Freeze",(txtNotFrozen := "(按CTRL 键暂停刷新)"))
+    oGui.Add("Text",,"当前窗口的三种标识符:")
+    oGui.Add("Edit","xm w640 r4 ReadOnly -Wrap vCtrl_Title")
+    ; oGui.Add("Text",,"当前鼠标位置:")
+    ; oGui.Add("Edit","w640 r4 ReadOnly vCtrl_MousePos")
+    ; oGui.Add("Text",,"当前窗口位置:")
+    ; oGui.Add("Edit","w640 r2 ReadOnly vCtrl_Pos")
+    oGui.Add("Text","w640 r1 vCtrl_Freeze",(txtNotFrozen := ""))
+    oGui.Add("Checkbox","yp+20 xp+400 h15 w240 Left vCtrl_FollowMouse","跟随鼠标 (可按 Ctrl 暂停刷新)")
     
     oGui.Show("NoActivate")
     WinGetClientPos(&x_temp, &y_temp2,,,"ahk_id " oGui.hwnd)
@@ -49,7 +49,7 @@ WinSpyGui() {
     ; oGui.horzMargin := x_temp*96//A_ScreenDPI - 320 ; now using oGui.MarginX
     
     oGui.txtNotFrozen := txtNotFrozen       ; create properties for futur use
-    oGui.txtFrozen    := "(松开刷新)"
+    oGui.txtFrozen    := ""
     
     SetTimer Update, 250
 }
