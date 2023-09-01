@@ -111,7 +111,7 @@ CompleteProgramPath(target) {
   ; 从环境变量 PATH 中获取
   DosPath := EnvGet("PATH")
   loop parse DosPath, "`;" {
-    if (A_LoopField)
+    if A_LoopField == ""
       continue
 
     if FileExist(A_LoopField "\" target)
@@ -166,7 +166,7 @@ RunPrograms(target, args := "", workingDir := "", admin := false) {
   ; 记录当前窗口的hwnd，当软件启动失败时还原焦点
   currentHwnd := WinExist("A")
   ; 通过一个界面先获取焦点再执行启动程序，当失去焦点时自己关闭
-  TempFocusGui().ShowGui()
+  ; TempFocusGui().ShowGui() ; 不加这一步似乎也没问题, 等遇到问题再把这个打开
 
   try {
     ; 补全程序路径
