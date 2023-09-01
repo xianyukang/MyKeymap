@@ -32,13 +32,19 @@ GetCaretPos(&X?, &Y?, &W?, &H?) {
   static IUIA := ComObject("{e22ad333-b25f-460c-83d0-0581107395c9}", "{34723aff-0c9d-49d0-9896-7ab52df8cd8a}")
   try {
     ComCall(8, IUIA, "ptr*", &FocusedEl := 0) ; GetFocusedElement
+    rect := Buffer(16)
+    ComCall(43, FocusedEl, "ptr", rect) ; CurrentBoundingRectangle
+    left   := NumGet(rect, 0, "int")
+    top    := NumGet(rect, 4, "int")
+    right  := NumGet(rect, 8, "int")
+    bottom := NumGet(rect, 12, "int")
     ComCall(16, FocusedEl, "int", 10024, "ptr*", &patternObject := 0), ObjRelease(FocusedEl) ; GetCurrentPattern. TextPatternElement2 = 10024
     if patternObject {
       ComCall(10, patternObject, "int*", &IsActive := 1, "ptr*", &caretRange := 0), ObjRelease(patternObject) ; GetCaretRange
       ComCall(10, caretRange, "ptr*", &boundingRects := 0), ObjRelease(caretRange) ; GetBoundingRectangles
       if (Rect := ComValue(0x2005, boundingRects)).MaxIndex() = 3 { ; VT_ARRAY | VT_R8
         X := Round(Rect[0]), Y := Round(Rect[1]), W := Round(Rect[2]), H := Round(Rect[3])
-        return
+        return "uia"
       }
     }
   }
@@ -54,12 +60,23 @@ GetCaretPos(&X?, &Y?, &W?, &H?) {
       oAcc.accLocation(ComValue(0x4003, x.ptr, 1), ComValue(0x4003, y.ptr, 1), ComValue(0x4003, w.ptr, 1), ComValue(0x4003, h.ptr, 1), 0)
       X := NumGet(x, 0, "int"), Y := NumGet(y, 0, "int"), W := NumGet(w, 0, "int"), H := NumGet(h, 0, "int")
       if (X | Y) != 0
-        return
+        return "acc"
     }
   }
 
-  ; Default caret
-  GetPosRelativeScreen(&X, &Y, "Caret")
+  ; ahk caret
+  savedCaret := A_CoordModeCaret
+  CoordMode "Caret", "Screen"
+  ok := CaretGetPos(&X, &Y)
+  CoordMode "Caret", savedCaret
+  if ok {
+    return "ahk"
+  }
+
+  ; uia focused element
+  X := left + (right-left)/2
+  Y := top + (bottom-top)/2
+  return "uia focused element"
 }
 
 /**

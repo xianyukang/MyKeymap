@@ -17,6 +17,9 @@ const keyColor = computed(() => {
   if (store.hotkey === props.hotkey) {
     return 'blue'
   }
+  if (store.keymap?.hotkey.includes("Abbr")) {
+    return ''
+  }
   if (!store.getAction(props.hotkey).isEmpty) {
     return '#98FB98'
   }

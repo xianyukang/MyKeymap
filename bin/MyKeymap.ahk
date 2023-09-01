@@ -31,7 +31,7 @@ InitKeymap()
   slow := MouseKeymap(10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.UnLock)
   slow.Map("*space", slow.LButtonUp())
 
-  capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "dd,dm,no")
+  capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "bb,cmd,dd,dm,ex,gj,ld,lj,ly,mm,ms,no,rb,se,sl,sp,tm,we,wf,wt")
   capsHook.KeyOpt("{CapsLock}", "S")
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
@@ -55,6 +55,7 @@ InitKeymap()
   km5 := KeymapManager.NewKeymap("*capslock")
   km := km5
   km.Map("*c", _ => SoundControl())
+  km.Map("*.", _ => MakeWindowDraggable())
   km.Map("*a", _ => CenterAndResizeWindow(1370, 930))
   km.Map("*b", _ => MinimizeWindow())
   km.Map("*e", _ => Send("^!{tab}"), taskSwitch)
@@ -68,6 +69,7 @@ InitKeymap()
   km.Map("*x", _ => SmartCloseWindow())
   km.Map("*y", _ => GoToPreviousVirtualDesktop())
   km.Map("*,", fast.LButtonDown()), slow.Map("*,", slow.LButtonDown())
+  km.Map("*/", _ => MoveMouseToCaret()), slow.Map("*/", _ => MoveMouseToCaret())
   km.Map("*;", fast.ScrollWheelRight), slow.Map("*;", slow.ScrollWheelRight)
   km.Map("*h", fast.ScrollWheelLeft), slow.Map("*h", slow.ScrollWheelLeft)
   km.Map("*i", fast.MoveMouseUp, slow), slow.Map("*i", slow.MoveMouseUp)
@@ -214,6 +216,7 @@ InitKeymap()
   km.RemapInHotIf("RAlt", "LCtrl")
   km.Map("!'", _ => MyKeymapReload(), , , , "S")
   km.Map("+!'", _ => MyKeymapToggleSuspend(), , , , "S")
+  km.Map("!capslock", _ => ToggleCapslock())
 
 
   KeymapManager.GlobalKeymap.Enable()
@@ -221,12 +224,46 @@ InitKeymap()
 
 ExecCapslockAbbr(command) {
   switch command {
+    case "bb":
+      ActivateOrRun("Bing 词典", "msedge.exe", "--app=https://www.bing.com/dict/search?q={selected}", "", false)
+    case "cmd":
+      ActivateOrRun("ahk_exe cmd.exe", "cmd.exe")
     case "dd":
       ActivateOrRun("", "shell:downloads")
     case "dm":
       ActivateOrRun("", A_WorkingDir)
+    case "ex":
+      MyKeymapExit()
+    case "gj":
+      SystemShutdown()
+    case "ld":
+      BrightnessControl()
+    case "lj":
+      ActivateOrRun("", "shell:RecycleBinFolder")
+    case "ly":
+      ActivateOrRun("", "ms-settings:bluetooth")
+    case "mm":
+      ActivateOrRun("MyKeymap2 - Visual Studio Code", A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\MyFiles\MyKeymap2", "", false)
+    case "ms":
+      ActivateOrRun("my_site - Visual Studio Code", A_Programs "\Visual Studio Code\Visual Studio Code.lnk", "D:\project\my_site", "", false)
     case "no":
       ActivateOrRun("记事本", "notepad.exe")
+    case "rb":
+      SystemReboot()
+    case "se":
+      MyKeymapOpenSettings()
+    case "sl":
+      SystemSleep()
+    case "sp":
+      ActivateOrRun("Spotify", "https://open.spotify.com/")
+    case "tm":
+      Send("^+{esc}")
+    case "we":
+      ActivateOrRun("网易云音乐", "shortcuts\网易云音乐.lnk")
+    case "wf":
+      ActivateOrRun("", "ms-availablenetworks:")
+    case "wt":
+      ActivateOrRun("", "wt.exe", "-d `"{selected}`"", "", false)
   }
 }
 
