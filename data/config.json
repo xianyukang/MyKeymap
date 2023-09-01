@@ -293,7 +293,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 8,
-            "comment": "TIM",
+            "comment": "TIM 进程存在则输入 Ctrl+Alt+Z 热键激活 TIM，否则启动 TIM",
             "ahkCode": "ProcessExistSendKeyOrRun(\"TIM.exe\", \"^!z\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\腾讯软件\\TIM\\TIM.lnk\")"
           }
         ],
@@ -767,6 +767,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 9,
+            "comment": "锁定当前模式 (免去按住触发键)",
             "actionValueID": 8
           }
         ]

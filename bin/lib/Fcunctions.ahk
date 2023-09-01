@@ -134,9 +134,16 @@ CompleteProgramPath(target) {
  * @param show 是否显示
  */
 ShellRun(target, arguments?, directory?, operation?, show?) {
+  ActivateDesktop()
   static VT_UI4 := 0x13, SWC_DESKTOP := ComValue(VT_UI4, 0x8)
   ComObject("Shell.Application").Windows.Item(SWC_DESKTOP).Document.Application
     .ShellExecute(target, arguments?, directory?, operation?, show?)
+}
+
+ActivateDesktop() {
+  if WinExist("Program Manager ahk_class Progman") || WinExist("ahk_class WorkerW") {
+    WinActivate
+  }
 }
 
 /**
@@ -165,7 +172,7 @@ RunPrograms(target, args := "", workingDir := "", admin := false) {
   ; 记录当前窗口的hwnd，当软件启动失败时还原焦点
   currentHwnd := WinExist("A")
   ; 通过一个界面先获取焦点再执行启动程序，当失去焦点时自己关闭
-  TempFocusGui().ShowGui()
+  ; TempFocusGui().ShowGui()
 
   try {
     ; 补全程序路径
@@ -173,7 +180,7 @@ RunPrograms(target, args := "", workingDir := "", admin := false) {
     if not (programPath) {
       ; 没有找到程序，可能是ms-setting: 或shell:之类的连接
       Run(args ? target " " args : target, workingDir)
-      return 
+      return
     }
 
     ; 如果是文件夹直接打开
