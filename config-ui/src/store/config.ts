@@ -138,11 +138,13 @@ function _disabledKeys(keymaps: Keymap[]) {
       m[km.id] = {}
     }
     m[km.id][km.hotkey] = true
+    m[km.id]['*' + km.hotkey] = true
 
     if (!m[km.parentID]) {
       m[km.parentID] = {}
     }
     m[km.parentID][km.hotkey] = true
+    m[km.parentID]['*' + km.hotkey] = true
   }
   return m
 }
