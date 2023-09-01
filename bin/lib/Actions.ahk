@@ -136,8 +136,9 @@ EnterSemicolonAbbr(semiHook, semiHookAbbrWindow) {
  * 智能的关闭窗口
  */
 SmartCloseWindow() {
-  if IsDesktop()
-    return
+  if NotActiveWin() {
+    return 
+  }
 
   class := WinGetClass("A")
   name := GetProcessName()
@@ -159,8 +160,9 @@ SmartCloseWindow() {
  * @returns {void} 
  */
 CenterAndResizeWindow(width, height) {
-  if (IsDesktop())
-    return
+  if NotActiveWin() {
+    return 
+  }
 
   ; 在 mousemove 时需要 PER_MONITOR_AWARE (-3), 否则当两个显示器有不同的缩放比例时, mousemove 会有诡异的漂移
   ; 在 winmove 时需要 UNAWARE (-1), 这样即使写死了窗口大小为 1200x800, 系统会帮你缩放到合适的大小
@@ -190,8 +192,9 @@ CenterAndResizeWindow(width, height) {
  * 窗口最大化
  */
 MaximizeWindow() {
-  if IsDesktop()
-    return
+  if NotActiveWin() {
+    return 
+  }
 
   if WindowMaxOrMin() {
     WinRestore("A")
@@ -204,7 +207,7 @@ MaximizeWindow() {
  * 窗口最小化
  */
 MinimizeWindow() {
-  if (IsDesktop() || WinGetProcessName("A") == "Rainmeter.exe")
+  if (NotActiveWin() || WinGetProcessName("A") == "Rainmeter.exe")
     return
 
   WinMinimize("A")
@@ -238,8 +241,9 @@ SystemShiftAltTab() {
  * @returns  
  */
 CloseWindowProcesses() {
-  if IsDesktop()
-    return
+  if NotActiveWin() {
+    return 
+  }
 
   name := WinGetProcessName("A")
   ; 如果删了explorer会导致桌面白屏
@@ -354,8 +358,9 @@ BindWindow() {
  * 关闭同应用的所有窗口
  */
 CloseSameClassWindows() {
-  if IsDesktop()
-    return
+  if NotActiveWin() {
+    return 
+  }
 
   exe := WinGetProcessName("A")
   for i, hwnd in FindWindows("ahk_exe " exe) {
@@ -449,8 +454,9 @@ openHelpHtml() {
  *   default: 不做修改
  */
 SetWindowPositionAndSize(x, y, width, height) {
-  if IsDesktop()
-    return
+  if NotActiveWin() {
+    return 
+  }
 
   hwnd := WinExist("A")
   statie := WinGetMinMax()
