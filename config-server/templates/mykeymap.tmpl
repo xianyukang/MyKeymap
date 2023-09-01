@@ -6,7 +6,6 @@
 #Include lib/Actions.ahk
 #Include lib/KeymapManager.ahk
 #Include lib/InputTipWindow.ahk
-#Include lib/TempFocusGui.ahk
 #Include lib/Utils.ahk
 
 ; #WinActivateForce   ; 先关了遇到相关问题再打开试试

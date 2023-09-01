@@ -173,10 +173,8 @@ RunAsAdmin(target, args, workingDir) {
 RunPrograms(target, args := "", workingDir := "", admin := false) {
   ; 记录当前窗口的hwnd，当软件启动失败时还原焦点
   currentHwnd := WinExist("A")
-  ; 通过一个界面先获取焦点再执行启动程序，当失去焦点时自己关闭
-  ; TempFocusGui().ShowGui()
+
   ActivateDesktop()
-  return
 
   try {
     ; 补全程序路径
