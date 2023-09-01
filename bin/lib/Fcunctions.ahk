@@ -134,7 +134,6 @@ CompleteProgramPath(target) {
  * @param show 是否显示
  */
 ShellRun(target, arguments?, directory?, operation?, show?) {
-  ActivateDesktop()
   static VT_UI4 := 0x13, SWC_DESKTOP := ComValue(VT_UI4, 0x8)
   ComObject("Shell.Application").Windows.Item(SWC_DESKTOP).Document.Application
     .ShellExecute(target, arguments?, directory?, operation?, show?)
@@ -173,6 +172,7 @@ RunPrograms(target, args := "", workingDir := "", admin := false) {
   currentHwnd := WinExist("A")
   ; 通过一个界面先获取焦点再执行启动程序，当失去焦点时自己关闭
   ; TempFocusGui().ShowGui()
+  ActivateDesktop()
 
   try {
     ; 补全程序路径
