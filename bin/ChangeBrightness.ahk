@@ -45,9 +45,15 @@ class CLayout extends Gui {
       monIco := super.Add("Text", "x" x " y0 w" this.monitorIcoSize " h" this.monitorIcoSize " 0x1", "🖥️")
       monIco.SetFont("s128 c000000")
 
+      ; 是 Windows 10 则使用不同的 y 坐标
+      y := 52
+      if InStr(A_OSVersion, "10") == 1 {
+        y := 66
+      }
+
       ; 计算显示器亮度要显示的位置
       x := x + 52
-      monBrightness := super.Add("Text", "x" x " y52 w65 h40 0x1", brightness)
+      monBrightness := super.Add("Text", "x" x " y" y " w65 h40 0x1", brightness)
       monBrightness.SetFont("s32 cffffff")
       monBrightness.Opt("+BackgroundTrans")
 
