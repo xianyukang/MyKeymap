@@ -1365,6 +1365,24 @@
       "hotkey": "capslockAbbr",
       "parentID": 0,
       "hotkeys": {
+        "bb": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "comment": "查询选中的单词 (低配版划词翻译)",
+            "winTitle": "Bing 词典",
+            "target": "msedge.exe",
+            "args": "--app=https://www.bing.com/dict/search?q={selected}"
+          }
+        ],
+        "cmd": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "winTitle": "ahk_exe cmd.exe",
+            "target": "cmd.exe"
+          }
+        ],
         "dd": [
           {
             "windowGroupID": 0,
@@ -1381,6 +1399,30 @@
             "target": "ahk-expression: A_WorkingDir"
           }
         ],
+        "ex": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 9,
+            "comment": "退出 MyKeymap",
+            "actionValueID": 3
+          }
+        ],
+        "gj": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 2,
+            "comment": "关机",
+            "actionValueID": 3
+          }
+        ],
+        "ld": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 2,
+            "comment": "显示器亮度调节",
+            "actionValueID": 6
+          }
+        ],
         "lj": [
           {
             "windowGroupID": 0,
@@ -1389,12 +1431,106 @@
             "target": "shell:RecycleBinFolder"
           }
         ],
+        "ly": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "comment": "打开蓝牙设置",
+            "target": "ms-settings:bluetooth"
+          }
+        ],
+        "mm": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "comment": "个人常用项目 - MyKeymap",
+            "winTitle": "MyKeymap2 - Visual Studio Code",
+            "target": "ahk-expression: A_Programs \"\\Visual Studio Code\\Visual Studio Code.lnk\"",
+            "args": "D:\\MyFiles\\MyKeymap2"
+          }
+        ],
+        "ms": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "comment": "个人常用项目 - My Site",
+            "winTitle": "my_site - Visual Studio Code",
+            "target": "ahk-expression: A_Programs \"\\Visual Studio Code\\Visual Studio Code.lnk\"",
+            "args": "D:\\project\\my_site"
+          }
+        ],
         "no": [
           {
             "windowGroupID": 0,
             "actionTypeID": 1,
             "winTitle": "记事本",
             "target": "notepad.exe"
+          }
+        ],
+        "rb": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 2,
+            "comment": "重启",
+            "actionValueID": 4
+          }
+        ],
+        "se": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 9,
+            "comment": "打开 MyKeymap 设置",
+            "actionValueID": 4
+          }
+        ],
+        "sl": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 2,
+            "comment": "睡眠",
+            "actionValueID": 2
+          }
+        ],
+        "sp": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "comment": "Spotify 网页",
+            "winTitle": "Spotify",
+            "target": "https://open.spotify.com/"
+          }
+        ],
+        "tm": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "Ctrl + Shift + Esc 打开任务管理器",
+            "keysToSend": "^+{esc}"
+          }
+        ],
+        "we": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "winTitle": "网易云音乐",
+            "target": "shortcuts\\网易云音乐.lnk"
+          }
+        ],
+        "wf": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "comment": "查看周围 WiFi",
+            "target": "ms-availablenetworks:"
+          }
+        ],
+        "wt": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "comment": "用 Windows Terminal 打开选中的文件夹",
+            "target": "wt.exe",
+            "args": "-d \"{selected}\""
           }
         ]
       }
