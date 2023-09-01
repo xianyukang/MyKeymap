@@ -51,7 +51,7 @@ MyKeymapToggleSuspend() {
  */
 MyKeymapOpenSettings() {
   if (!WinExist("\bin\settings.exe"))
-    Run("./bin/settings.exe ./bin")
+    Run("./bin/settings.exe", "./bin")
 
   try {
     WinActivate("MyKeymap Settings")
