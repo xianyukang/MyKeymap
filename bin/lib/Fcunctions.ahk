@@ -50,13 +50,12 @@ MyKeymapToggleSuspend() {
  * 打开设置
  */
 MyKeymapOpenSettings() {
-  if (!WinExist("\bin\settings.exe"))
-    Run("./bin/settings.exe ./bin")
-
-  try {
-    WinActivate("MyKeymap Settings")
-  } catch Error as e {
-    Run("http://127.0.0.1:12333")
+  if (!WinExist("\bin\settings.exe")) {
+    Run("./bin/settings.exe", "./bin")
+  } else if (WinExist("MyKeymap Setting")) {
+    WinActivate("MyKeymap Setting")
+  } else {
+    Run("http://127.0.0.1:12333/")
   }
 }
 
@@ -166,7 +165,7 @@ RunPrograms(target, args := "", workingDir := "", admin := false) {
   ; 记录当前窗口的hwnd，当软件启动失败时还原焦点
   currentHwnd := WinExist("A")
   ; 通过一个界面先获取焦点再执行启动程序，当失去焦点时自己关闭
-  ; TempFocusGui().ShowGui() ; 不加这一步似乎也没问题, 等遇到问题再把这个打开
+  TempFocusGui().ShowGui()
 
   try {
     ; 补全程序路径
@@ -522,4 +521,11 @@ GetWindowPositionOffset(hwnd) {
 PasteToPrograms(text) {
   A_Clipboard := text
   Send("{LShift down}{Insert down}{Insert up}{LShift up}")
+}
+
+/**
+ * 没有活动窗口或是桌面返回True 反之返回false
+ */
+NotActiveWin() {
+  return IsDesktop() || not WinExist("A")
 }

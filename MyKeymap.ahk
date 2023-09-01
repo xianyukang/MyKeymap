@@ -25,5 +25,8 @@ mainAhkFilePath := "./bin/MyKeymap.ahk"
 if (A_Args.Length) {
   Run("MyKeymap.exe /script " A_Args.Get(1))
 } else {
+  ; 通过配置文件生成脚本
+  RunWait("./bin/settings.exe GenerateAHK ./data/config.json ./bin/templates/mykeymap.tmpl ./bin/MyKeymap.ahk", ,"Hide")
+  ; 启动脚本
   Run("MyKeymap.exe /script " mainAhkFilePath)
 }
