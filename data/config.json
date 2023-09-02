@@ -398,134 +398,153 @@
         "*,": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "delete"
+            "actionTypeID": 7,
+            "comment": "Delete",
+            "actionValueID": 23
           }
         ],
         "*.": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "insert"
+            "actionTypeID": 7,
+            "comment": "Insert",
+            "actionValueID": 24
           }
         ],
         "*2": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^+{tab}"
+            "actionTypeID": 7,
+            "comment": "Ctrl+Shift+Tab",
+            "actionValueID": 28
           }
         ],
         "*3": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^{tab}"
+            "actionTypeID": 7,
+            "comment": "Ctrl + Tab",
+            "actionValueID": 26
           }
         ],
         "*a": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "home"
+            "actionTypeID": 7,
+            "comment": "光标 - 跳到行首",
+            "actionValueID": 5
           }
         ],
         "*b": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^{backspace}"
+            "actionTypeID": 7,
+            "comment": "删一个单词",
+            "actionValueID": 18
           }
         ],
         "*c": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "backspace"
+            "actionTypeID": 7,
+            "comment": "Backspace",
+            "actionValueID": 21
           }
         ],
         "*d": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "down"
+            "actionTypeID": 7,
+            "comment": "光标 - 下移",
+            "actionValueID": 2
           }
         ],
         "*e": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "up"
+            "actionTypeID": 7,
+            "comment": "光标 - 上移",
+            "actionValueID": 1
           }
         ],
         "*f": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "right"
+            "actionTypeID": 7,
+            "comment": "光标 - 右移",
+            "actionValueID": 4
           }
         ],
         "*g": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "end"
+            "actionTypeID": 7,
+            "comment": "光标 - 跳到行尾",
+            "actionValueID": 6
           }
         ],
         "*q": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "appskey"
+            "actionTypeID": 7,
+            "comment": "右键菜单",
+            "actionValueID": 17
           }
         ],
         "*r": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "tab"
+            "actionTypeID": 7,
+            "comment": "Tab",
+            "actionValueID": 25
           }
         ],
         "*s": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "left"
+            "actionTypeID": 7,
+            "comment": "光标 - 左移",
+            "actionValueID": 3
           }
         ],
         "*space": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}{enter}"
+            "actionTypeID": 7,
+            "comment": "Enter",
+            "actionValueID": 22
           }
         ],
         "*v": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^{right}"
+            "actionTypeID": 7,
+            "comment": "光标 - 下一单词",
+            "actionValueID": 8
           }
         ],
         "*w": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}+{tab}"
+            "actionTypeID": 7,
+            "comment": "Shift + Tab",
+            "actionValueID": 27
           }
         ],
         "*x": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "esc"
+            "actionTypeID": 7,
+            "comment": "Esc",
+            "actionValueID": 20
           }
         ],
         "*z": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^{left}"
+            "actionTypeID": 7,
+            "comment": "光标 - 上一单词",
+            "actionValueID": 7
           }
         ],
         "singlePress": [
@@ -547,71 +566,81 @@
         "*a": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}+{home}"
+            "actionTypeID": 7,
+            "comment": "选择 - 选到行首",
+            "actionValueID": 13
           }
         ],
         "*c": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}{backspace}"
+            "actionTypeID": 7,
+            "comment": "Backspace",
+            "actionValueID": 21
           }
         ],
         "*d": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}+{down}"
+            "actionTypeID": 7,
+            "comment": "选择 - 往下",
+            "actionValueID": 10
           }
         ],
         "*e": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}+{up}"
+            "actionTypeID": 7,
+            "comment": "选择 - 往上",
+            "actionValueID": 9
           }
         ],
         "*f": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}+{right}"
+            "actionTypeID": 7,
+            "comment": "选择 - 往右",
+            "actionValueID": 12
           }
         ],
         "*g": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}+{end}"
+            "actionTypeID": 7,
+            "comment": "选择 - 选到行尾",
+            "actionValueID": 14
           }
         ],
         "*s": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}+{left}"
+            "actionTypeID": 7,
+            "comment": "选择 - 往左",
+            "actionValueID": 11
           }
         ],
         "*v": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^+{right}"
+            "actionTypeID": 7,
+            "comment": "选择 - 下一单词",
+            "actionValueID": 16
           }
         ],
         "*x": [
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "输入 Shift + Esc",
             "keysToSend": "{blind}+{esc}"
           }
         ],
         "*z": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^+{left}"
+            "actionTypeID": 7,
+            "comment": "选择 - 上一单词",
+            "actionValueID": 15
           }
         ]
       }
@@ -766,9 +795,9 @@
         "singlePress": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 9,
-            "comment": "锁定当前模式 (免去按住触发键)",
-            "actionValueID": 8
+            "actionTypeID": 6,
+            "comment": "输入 3 键",
+            "keysToSend": "{blind}3"
           }
         ]
       }
@@ -799,99 +828,121 @@
         "*,": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "delete"
+            "actionTypeID": 7,
+            "comment": "Delete",
+            "actionValueID": 23
           }
         ],
         "*.": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "insert"
+            "actionTypeID": 7,
+            "comment": "Insert",
+            "actionValueID": 24
           }
         ],
         "*2": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^+{tab}"
+            "actionTypeID": 7,
+            "comment": "Ctrl+Shift+Tab",
+            "actionValueID": 28
           }
         ],
         "*3": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^{tab}"
+            "actionTypeID": 7,
+            "comment": "Ctrl + Tab",
+            "actionValueID": 26
           }
         ],
         "*a": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "home"
+            "actionTypeID": 7,
+            "comment": "光标 - 跳到行首",
+            "actionValueID": 5
           }
         ],
         "*b": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^{backspace}"
+            "actionTypeID": 7,
+            "comment": "删除一个单词",
+            "actionValueID": 18
           }
         ],
         "*c": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "backspace"
+            "actionTypeID": 7,
+            "comment": "Backspace",
+            "actionValueID": 21
           }
         ],
         "*d": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "down"
+            "actionTypeID": 7,
+            "comment": "光标 - 下移",
+            "actionValueID": 2
           }
         ],
         "*e": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "up"
+            "actionTypeID": 7,
+            "comment": "光标 - 上移",
+            "actionValueID": 1
           }
         ],
         "*f": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "right"
+            "actionTypeID": 7,
+            "comment": "光标 - 右移",
+            "actionValueID": 4
           }
         ],
         "*g": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "end"
+            "actionTypeID": 7,
+            "comment": "光标 - 跳到行尾",
+            "actionValueID": 6
+          }
+        ],
+        "*k": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "Shift 键",
+            "actionValueID": 19
           }
         ],
         "*q": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "appskey"
+            "actionTypeID": 7,
+            "comment": "右键菜单",
+            "actionValueID": 17
           }
         ],
         "*r": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "tab"
+            "actionTypeID": 7,
+            "comment": "Tab",
+            "actionValueID": 25
           }
         ],
         "*s": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "left"
+            "actionTypeID": 7,
+            "comment": "光标 - 左移",
+            "actionValueID": 3
           }
         ],
         "*space": [
@@ -904,29 +955,33 @@
         "*v": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^{right}"
+            "actionTypeID": 7,
+            "comment": "光标 - 下一单词",
+            "actionValueID": 8
           }
         ],
         "*w": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}+{tab}"
+            "actionTypeID": 7,
+            "comment": "Shift + Tab",
+            "actionValueID": 27
           }
         ],
         "*x": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "esc"
+            "actionTypeID": 7,
+            "comment": "Esc",
+            "actionValueID": 20
           }
         ],
         "*z": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^{left}"
+            "actionTypeID": 7,
+            "comment": "光标 - 上一单词",
+            "actionValueID": 7
           }
         ],
         "singlePress": [
@@ -1111,141 +1166,152 @@
     {
       "id": 14,
       "name": "句号模式",
-      "enable": false,
+      "enable": true,
       "hotkey": "*.",
       "parentID": 0,
       "hotkeys": {
         "*,": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "delete"
-          }
-        ],
-        "*.": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "insert"
+            "actionTypeID": 7,
+            "comment": "Shift",
+            "actionValueID": 19
           }
         ],
         "*2": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^+{tab}"
+            "actionTypeID": 7,
+            "comment": "Ctrl+Shift+Tab",
+            "actionValueID": 28
           }
         ],
         "*3": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^{tab}"
+            "actionTypeID": 7,
+            "comment": "Ctrl + Tab",
+            "actionValueID": 26
           }
         ],
         "*a": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "home"
+            "actionTypeID": 7,
+            "comment": "光标 - 跳到行首",
+            "actionValueID": 5
           }
         ],
         "*b": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^{backspace}"
+            "actionTypeID": 7,
+            "comment": "删一个单词",
+            "actionValueID": 18
           }
         ],
         "*c": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "backspace"
+            "actionTypeID": 7,
+            "comment": "Backspace",
+            "actionValueID": 21
           }
         ],
         "*d": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "down"
+            "actionTypeID": 7,
+            "comment": "光标 - 下移",
+            "actionValueID": 2
           }
         ],
         "*e": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "up"
+            "actionTypeID": 7,
+            "comment": "光标 - 上移",
+            "actionValueID": 1
           }
         ],
         "*f": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "right"
+            "actionTypeID": 7,
+            "comment": "光标 - 右移",
+            "actionValueID": 4
           }
         ],
         "*g": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "end"
+            "actionTypeID": 7,
+            "comment": "光标 - 跳到行尾",
+            "actionValueID": 6
           }
         ],
         "*q": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "appskey"
+            "actionTypeID": 7,
+            "comment": "右键菜单",
+            "actionValueID": 17
           }
         ],
         "*r": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "tab"
+            "actionTypeID": 7,
+            "comment": "Tab",
+            "actionValueID": 25
           }
         ],
         "*s": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "left"
+            "actionTypeID": 7,
+            "comment": "光标 - 左移",
+            "actionValueID": 3
           }
         ],
         "*space": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}{enter}"
+            "actionTypeID": 7,
+            "comment": "Enter",
+            "actionValueID": 22
           }
         ],
         "*v": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^{right}"
+            "actionTypeID": 7,
+            "comment": "光标 - 下一单词",
+            "actionValueID": 8
           }
         ],
         "*w": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}+{tab}"
+            "actionTypeID": 7,
+            "comment": "Shift + Tab",
+            "actionValueID": 27
           }
         ],
         "*x": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "esc"
+            "actionTypeID": 7,
+            "comment": "Esc",
+            "actionValueID": 20
           }
         ],
         "*z": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}^{left}"
+            "actionTypeID": 7,
+            "comment": "光标 - 上一单词",
+            "actionValueID": 7
           }
         ],
         "singlePress": [
@@ -1275,38 +1341,41 @@
         "*WheelDown": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "comment": "下一个标签",
-            "keysToSend": "^{tab}"
+            "actionTypeID": 7,
+            "comment": "Ctrl + Tab",
+            "actionValueID": 26
           }
         ],
         "*WheelUp": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "comment": "上一个标签",
-            "keysToSend": "^+{tab}"
+            "actionTypeID": 7,
+            "comment": "Ctrl+Shift+Tab",
+            "actionValueID": 28
           }
         ],
         "*c": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "backspace"
+            "actionTypeID": 7,
+            "comment": "Backspace",
+            "actionValueID": 21
           }
         ],
         "*space": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}{enter}"
+            "actionTypeID": 7,
+            "comment": "Enter",
+            "actionValueID": 22
           }
         ],
         "*x": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "remapToKey": "esc"
+            "actionTypeID": 7,
+            "comment": "Esc",
+            "actionValueID": 20
           }
         ],
         "singlePress": [
@@ -1334,20 +1403,20 @@
             "actionValueID": 2
           }
         ],
+        "!+'": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 9,
+            "comment": "暂停 MyKeymap",
+            "actionValueID": 1
+          }
+        ],
         "!capslock": [
           {
             "windowGroupID": 0,
             "actionTypeID": 9,
             "comment": "切换 Capslock 大小写",
             "actionValueID": 7
-          }
-        ],
-        "+!'": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 9,
-            "comment": "暂停 MyKeymap",
-            "actionValueID": 1
           }
         ],
         "RAlt": [
