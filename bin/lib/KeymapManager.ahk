@@ -1,20 +1,20 @@
 ﻿class KeymapManager {
-  static Locked := false
   static GlobalKeymap := Keymap("GlobalKeymap")
   static Stack := Array(this.GlobalKeymap)
+  static L := { toLock: false, locked: false, show: false, toggle: false }
 
-  static NewKeymap(globalHotkey) {
+  static NewKeymap(globalHotkey, name := "") {
     if globalHotkey == "customHotkeys" {
       return this.GlobalKeymap
     }
 
     ; 分配全局热键激活指定 keymap
-    return this.AddSubKeymap(this.GlobalKeymap, globalHotkey)
+    return this.AddSubKeymap(this.GlobalKeymap, globalHotkey, name)
   }
 
-  static AddSubKeymap(parent, hk) {
+  static AddSubKeymap(parent, hk, name := "") {
     waitKey := this.ExtractWaitKey(hk)
-    subKeymap := Keymap(hk, waitKey)
+    subKeymap := Keymap(name, waitKey, hk)
     handler(thisHotkey) {
       this.Activate(subKeymap)
       this._postHandler()
@@ -23,68 +23,88 @@
     return subKeymap
   }
 
-  static _postHandler() {
-    ; 等松开全部按钮时才处理锁定逻辑
-    if this.Stack.Length != 1 {
-      return
-    }
-    ; 比如直接锁定 3 模式
-    ; 比如锁住 3 模式然后使用 9 模式热键, 9 模式退出前要恢复 3 模式
-    if KeymapManager.Locked {
-      KeymapManager.Locked.Enable()
-
-      ; 在系统 AltTab 窗口中激活 TaskSwitch 模式, 等 AltTab 窗口关闭后要关闭 TaskSwitch 模式
-      if KeymapManager.Locked.AfterLocked {
-        SetTimer(KeymapManager.Locked.AfterLocked, -1)
-      }
-    }
-  }
-
   static Activate(keymap) {
-    this.Stack.Push(keymap)
-    keymap.Enable()
+    parent := this.Stack[-1]
+    ; 比如锁住 3 模式再按 3 键触发 3 模式应该没效果
+    if keymap != parent {
+      this.Stack.Push(keymap)
+      keymap.Enable(parent)
+    }
     startTick := A_TickCount
     KeyWait(keymap.WaitKey)
     if (A_PriorKey = keymap.WaitKey && (A_TickCount - startTick < 300)) {
       keymap.SinglePressAction()
     }
-    this.Stack.Pop().Disable()
-    this.Stack.Get(-1).Enable() ; 退出前, 恢复上一个模式
+    if keymap != parent {
+      this.Stack.Pop()
+      keymap.Disable()
+    }
   }
 
-  static LockKeymap(toLock, toggle, show) {
-    ; 未锁定
-    if !KeymapManager.Locked {
-      this.ShowToolTip("已锁定 " toLock.Name, show)
-      KeymapManager.Locked := toLock
+  static _postHandler() {
+    ; 等松开全部按钮时才处理锁定逻辑
+    if this.Stack.Length != 1 || !this.L.toLock {
       return
     }
+
+    ; 未锁定
+    if !this.L.locked {
+      this.ShowToolTip("已锁定 " this.L.toLock.Name, this.L.show)
+      this._lock()
+      ; 锁定时注册个函数, 用于自动关闭锁定, TaskSwitch 模式会用到这个
+      if this.L.locked.AfterLocked {
+        SetTimer(this.L.locked.AfterLocked, -1)
+      }
+      return
+    }
+
     ; 已经锁定了自己
-    if KeymapManager.Locked == toLock {
-      if !toggle {
+    if this.L.toLock == this.L.locked {
+      if !this.L.toggle {
         return
       }
-      this.ShowToolTip("取消锁定", show)
-      KeymapManager.UnLock()
+      this.ShowToolTip("取消锁定", this.L.show)
+      this.L.toLock := false
+      this.Unlock()
       return
     }
+
     ; 锁定了别的模式, 那么切换成锁定自己
-    this.ShowToolTip("锁定切换: " KeymapManager.Locked.Name " -> " toLock.Name, show)
-    KeymapManager.Locked.Disable()
-    KeymapManager.GlobalKeymap.Enable()
-    KeymapManager.Locked := toLock
+    if this.L.toLock != this.L.locked {
+      this.ShowToolTip("从 " this.L.locked.Name "`n切换到 " this.L.toLock.Name, this.L.show)
+      this.Unlock()
+      this._lock()
+      return
+    }
+
   }
 
-  static UnLock() {
-    if KeymapManager.Locked {
-      KeymapManager.Locked.Disable()
-      KeymapManager.GlobalKeymap.Enable()
-      KeymapManager.Locked := false
+  static SetLockRequest(toLock, toggle, show) {
+    this.L.toLock := toLock
+    this.L.toggle := toggle
+    this.L.show := show
+  }
+
+  static ClearLockRequest() {
+    KeymapManager.L.toLock := false
+  }
+
+  static _lock() {
+    if this.L.toLock {
+      this.Stack[1] := this.L.toLock
+      this.L.toLock.Enable(this.GlobalKeymap)
+      this.L.locked := this.L.toLock
+      this.L.toLock := false
     }
   }
 
-  static ClearLock() {
-    KeymapManager.Locked := false
+  static Unlock() {
+    ; 这里不好用 this, 因为 Unlock 函数会被取出来, 然后 this 指向会变
+    if KeymapManager.L.locked {
+      KeymapManager.L.locked.Disable()
+      KeymapManager.Stack[1] := KeymapManager.GlobalKeymap
+      KeymapManager.L.locked := false
+    }
   }
 
   static ExtractWaitKey(hotkey) {
@@ -106,13 +126,61 @@
 
 
 class Keymap {
-  __New(name := "", waitKey := "") {
+  __New(name := "", waitKey := "", hotkey := "") {
     this.Name := name
     this.WaitKey := waitKey
+    this.Hotkey := hotkey
     this.SinglePressAction := NoOperation
     this.M := Map()
     this.ToggleLock := this._lockOrUnlock.Bind(this)
     this.AfterLocked := false
+    this.parent := false
+    this.toRestore := Array()
+  }
+
+  class _Hotkey {
+    __New(name, handler, options, winTitle, conditionType) {
+      this.name := name
+      this.handler := handler
+      this.options := options
+      this.winTitle := winTitle
+      this.conditionType := conditionType
+      this.enabled := false
+    }
+
+    Enable() {
+      if this.enabled {
+        MsgBox "bug"
+      }
+      this.hotifContext(this.winTitle, this.conditionType)
+      Hotkey(this.name, this.handler, "On" this.options)
+      this.enabled := true
+      HotIf()
+    }
+
+    Disable() {
+      if !this.enabled {
+        MsgBox "bug"
+      }
+      this.hotifContext(this.winTitle, this.conditionType)
+      Hotkey(this.name, "Off")
+      this.enabled := false
+      HotIf()
+    }
+
+    hotifContext(winTitle, conditionType) {
+      if winTitle == "" {
+        return
+      }
+      switch conditionType {
+        case 0: return
+        case 1: HotIfWinactive(winTitle)
+        case 2: HotIfWinExist(winTitle)
+        case 3: HotIfWinNotactive(winTitle)
+        case 4: HotIfWinNotExist(winTitle)
+        case 5: HotIf(winTitle)
+      }
+    }
   }
 
   Map(hotkeyName, handler, keymapToLock := false, winTitle := "", conditionType := 0, options := "") {
@@ -121,13 +189,16 @@ class Keymap {
       this.SinglePressAction := wrapper
       return
     }
-    ; If Action is a hotkey name, its original function is used; 
+    ; If Action is a hotkey name, its original function is used;
     ; This is usually used to restore a hotkey's original function after having changed it
     if handler == "handled_in_hot_if" {
       wrapper := hotkeyName
     }
-    ; 热键不允许重复所以应该用 map 存储
-    this.M[hotkeyName "/@/" winTitle "/@/" conditionType] := { hotkeyName: hotkeyName, winTitle: winTitle, handler: wrapper, conditionType: conditionType, options: options }
+
+    if !this.M.Has(hotkeyName) {
+      this.M[hotkeyName] := Array()
+    }
+    this.M[hotkeyName].Push(Keymap._Hotkey(hotkeyName, wrapper, options, winTitle, conditionType))
   }
 
 
@@ -138,7 +209,7 @@ class Keymap {
       if !keymapToLock {
         return
       }
-      KeymapManager.LockKeymap(keymapToLock, false, false)
+      KeymapManager.SetLockRequest(keymapToLock, false, false)
 
       ; 这种情况是, 锁住后直接执行热键, 没有按下任何引导键 ( 比如先锁住 Caps 然后直接按 E )
       if KeymapManager.Stack.Length == 1 {
@@ -148,70 +219,76 @@ class Keymap {
     return wrapper
   }
 
-  Enable() {
-    for _, hk in this.M {
-      if !hk.winTitle {
-        Hotkey(hk.hotkeyName, hk.handler, "On" hk.options)
-        continue
+  _lockOrUnlock(thiHotkey) {
+    KeymapManager.SetLockRequest(this, true, true)
+  }
+
+  ; 启用 keymap
+  Enable(parent := false) {
+    if this.parent && parent {
+      MsgBox "bug"
+    }
+    this.parent := parent
+
+    ; 方案 1 直接禁用 parent 中所有热键 ( 这样就无法同时使用两个模式了 )
+    ; if parent {
+    ;   for name in parent.M {
+    ;     if name == this.hotkey {
+    ;       continue
+    ;     }
+    ;     parent.DisableHotkey(name)
+    ;     item := { keymap: parent, hotkey: name }
+    ;     this.toRestore.Push(item)
+    ;   }
+    ; }
+
+    for name in this.M {
+      ; 方案 2 只禁用同名热键
+      km := parent
+      while km {
+        ; 遍历祖先, 如果首个 km 存在同名热键, 那么禁用掉
+        if km.DisableHotkey(name) {
+          item := { keymap: km, hotkey: name }
+          this.toRestore.Push(item)
+          break
+        }
+        km := km.parent
       }
-      switch hk.conditionType {
-        case 1:
-          HotIfWinactive(hk.winTitle)
-          Hotkey(hk.hotkeyName, hk.handler, "On" hk.options)
-          HotIfWinactive()
-        case 2:
-          HotIfWinExist(hk.winTitle)
-          Hotkey(hk.hotkeyName, hk.handler, "On" hk.options)
-          HotIfWinExist()
-        case 3:
-          HotIfWinNotactive(hk.winTitle)
-          Hotkey(hk.hotkeyName, hk.handler, "On" hk.options)
-          HotIfWinNotactive()
-        case 4:
-          HotIfWinNotExist(hk.winTitle)
-          Hotkey(hk.hotkeyName, hk.handler, "On" hk.options)
-          HotIfWinNotExist()
-        case 5:
-          HotIf(hk.winTitle)
-          Hotkey(hk.hotkeyName, hk.handler, "On" hk.options)
-          HotIf()
-      }
+      this.EnableHotkey(name)
     }
   }
+
 
   Disable() {
-    for _, hk in this.M {
-      if !hk.winTitle {
-        Hotkey(hk.hotkeyName, "Off")
-        continue
-      }
-      switch hk.conditionType {
-        case 1:
-          HotIfWinactive(hk.winTitle)
-          Hotkey(hk.hotkeyName, "Off")
-          HotIfWinactive()
-        case 2:
-          HotIfWinExist(hk.winTitle)
-          Hotkey(hk.hotkeyName, "Off")
-          HotIfWinExist()
-        case 3:
-          HotIfWinNotactive(hk.winTitle)
-          Hotkey(hk.hotkeyName, "Off")
-          HotIfWinNotactive()
-        case 4:
-          HotIfWinNotExist(hk.winTitle)
-          Hotkey(hk.hotkeyName, "Off")
-          HotIfWinNotExist()
-        case 5:
-          HotIf(hk.winTitle)
-          Hotkey(hk.hotkeyName, "Off")
-          HotIf()
-      }
+    for name in this.M {
+      this.DisableHotkey(name)
+    }
+    while this.toRestore.Length > 0 {
+      item := this.toRestore.Pop()
+      item.keymap.EnableHotkey(item.hotkey)
+    }
+    this.parent := false
+  }
+
+  ; 启用 keymap 中所有名为 name 的热键
+  EnableHotkey(name) {
+    if !this.M.Has(name) {
+      return
+    }
+    for hk in this.M[name] {
+      hk.Enable()
     }
   }
 
-  _lockOrUnlock(thiHotkey) {
-    KeymapManager.LockKeymap(this, true, true)
+  DisableHotkey(name) {
+    hks := this.M.Get(name, false)
+    if !hks {
+      return
+    }
+    for hk in hks {
+      hk.Disable()
+    }
+    return hks.Length > 0
   }
 
   RemapKey(a, b, winTitle := "", conditionType := 0) {
@@ -248,8 +325,8 @@ class Keymap {
 
 class MouseKeymap extends Keymap {
 
-  __New(single, repeat, delay1, delay2, scrollOnceLineCount, scrollDelay1, scrollDelay2, lockHandler) {
-    super.__New()
+  __New(name, single, repeat, delay1, delay2, scrollOnceLineCount, scrollDelay1, scrollDelay2, lockHandler) {
+    super.__New(name)
     this.single := single
     this.repeat := repeat
     this.delay1 := delay1
@@ -345,6 +422,8 @@ class MouseKeymap extends Keymap {
     }
   }
 
+  ; todo 快速模式移动鼠标后, 并且没有进行过任何其他操作, 此时才进入两级变速
+  ; 换句话说, 快速模式除了上下左右之外, 全都得清空锁定状态
   LButton() {
     handler(thisHotkey) {
       Send("{blind}{LButton}")
@@ -397,7 +476,7 @@ class MouseKeymap extends Keymap {
 class TaskSwitchKeymap extends Keymap {
 
   __New(up, down, left, right, delete, enter) {
-    super.__New("TaskSwitchKeymap")
+    super.__New("Task Switch")
     this.RemapKey(up, "up")
     this.RemapKey(down, "down")
     this.RemapKey(left, "left")
@@ -416,8 +495,8 @@ class TaskSwitchKeymap extends Keymap {
       WinWaitNotActive("ahk_group TASK_SWITCH_GROUP")
     }
     ; 在 AltTab 窗口出现时, 把锁定的模式切换到 3 模式, 这种情况无需解锁
-    if KeymapManager.Locked == this {
-      KeymapManager.UnLock()
+    if KeymapManager.L.locked == this {
+      KeymapManager.Unlock()
     }
   }
 }
