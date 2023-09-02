@@ -91,8 +91,8 @@
 
   static _lock() {
     if this.L.toLock {
-      this.Stack[1] := this.L.toLock
       this.L.toLock.Enable(this.GlobalKeymap)
+      this.Stack[1] := this.L.toLock
       this.L.locked := this.L.toLock
       this.L.toLock := false
     }
@@ -230,15 +230,32 @@ class Keymap {
     }
     this.parent := parent
 
-    ; 方案 1 直接禁用 parent 中所有热键 ( 这样就无法同时使用两个模式了 )
+    ; 方案 1
     ; if parent {
-    ;   for name in parent.M {
-    ;     if name == this.hotkey {
-    ;       continue
+    ;   if parent == KeymapManager.Stack[1] {
+    ;     ; 只禁用同名的
+    ;     for name in this.M {
+    ;       km := parent
+    ;       while km {
+    ;         ; 遍历祖先, 如果首个 km 存在同名热键, 那么禁用掉
+    ;         if km.DisableHotkey(name) {
+    ;           item := { keymap: km, hotkey: name }
+    ;           this.toRestore.Push(item)
+    ;           break
+    ;         }
+    ;         km := km.parent
+    ;       }
     ;     }
-    ;     parent.DisableHotkey(name)
-    ;     item := { keymap: parent, hotkey: name }
-    ;     this.toRestore.Push(item)
+    ;   } else {
+    ;     ; 直接禁用 parent 中所有热键
+    ;     for name in parent.M {
+    ;       if name == this.hotkey {
+    ;         continue
+    ;       }
+    ;       parent.DisableHotkey(name)
+    ;       item := { keymap: parent, hotkey: name }
+    ;       this.toRestore.Push(item)
+    ;     }
     ;   }
     ; }
 
