@@ -26,8 +26,8 @@ OnExit(MyExit)
 InitKeymap()
 {
   taskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "x", "space")
-  fast := MouseKeymap(110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.ClearLock)
-  slow := MouseKeymap(10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.UnLock)
+  fast := MouseKeymap("fast mouse", 110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.ClearLockRequest)
+  slow := MouseKeymap("slow mouse", 10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03", KeymapManager.UnLock)
   slow.Map("*space", slow.LButtonUp())
 
   capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "bb,cmd,dd,dm,ex,gj,ld,lj,ly,mm,ms,no,rb,se,sl,sp,tm,we,wf,wt")
@@ -51,7 +51,7 @@ InitKeymap()
   GroupAdd("MY_WINDOW_GROUP_1", "ahk_exe firefox.exe")
 
   ; Capslock
-  km5 := KeymapManager.NewKeymap("*capslock")
+  km5 := KeymapManager.NewKeymap("*capslock", "Capslock", )
   km := km5
   km.Map("*c", _ => SoundControl())
   km.Map("*.", _ => MakeWindowDraggable())
@@ -83,7 +83,7 @@ InitKeymap()
   km.Map("singlePress", _ => EnterCapslockAbbr(capsHook))
 
   ; Capslock + F
-  km6 := KeymapManager.AddSubKeymap(km5, "*f")
+  km6 := KeymapManager.AddSubKeymap(km5, "*f", "Capslock + F")
   km := km6
   km.Map("*a", _ => ActivateOrRun("ahk_exe WindowsTerminal.exe", "wt.exe"))
   km.Map("*d", _ => ActivateOrRun("ahk_exe msedge.exe", "msedge.exe"))
@@ -103,13 +103,13 @@ InitKeymap()
   km.Map("*m", _ => ProcessExistSendKeyOrRun("TIM.exe", "^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk"))
 
   ; Capslock + Space
-  km7 := KeymapManager.AddSubKeymap(km5, "*space")
+  km7 := KeymapManager.AddSubKeymap(km5, "*space", "Capslock + Space")
   km := km7
   km.Map("*d", _ => ActivateOrRun("ahk_exe datagrip64.exe", "JetBrains Toolbox\DataGrip.lnk"))
   km.Map("*w", _ => ProcessExistSendKeyOrRun("WeChat.exe", "^!w", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\微信\微信.lnk"))
 
   ; J 模式
-  km8 := KeymapManager.NewKeymap("*j")
+  km8 := KeymapManager.NewKeymap("*j", "J 模式", )
   km := km8
   km.RemapKey(",", "delete")
   km.RemapKey(".", "insert")
@@ -133,7 +133,7 @@ InitKeymap()
   km.Map("singlePress", _ => (Send("{blind}{j}")))
 
   ; J + K 模式
-  km9 := KeymapManager.AddSubKeymap(km8, "*k")
+  km9 := KeymapManager.AddSubKeymap(km8, "*k", "J + K 模式")
   km := km9
   km.Map("*a", _ => (Send("{blind}+{home}")))
   km.Map("*c", _ => (Send("{blind}{backspace}")))
@@ -147,7 +147,7 @@ InitKeymap()
   km.Map("*z", _ => (Send("{blind}^+{left}")))
 
   ; 3 模式
-  km10 := KeymapManager.NewKeymap("*3")
+  km10 := KeymapManager.NewKeymap("*3", "3 模式", )
   km := km10
   km.RemapKey("0", "f10")
   km.RemapKey("2", "f2")
@@ -172,7 +172,7 @@ InitKeymap()
   km.Map("singlePress", km.ToggleLock)
 
   ; 分号模式
-  km13 := KeymapManager.NewKeymap("*;")
+  km13 := KeymapManager.NewKeymap("*;", "分号模式", )
   km := km13
   km.Map("*a", _ => (Send("{blind}*")))
   km.Map("*b", _ => (Send("{blind}%")))
@@ -199,7 +199,7 @@ InitKeymap()
   km.Map("singlePress", _ => EnterSemicolonAbbr(semiHook, semiHookAbbrWindow))
 
   ; 鼠标右键
-  km15 := KeymapManager.NewKeymap("*rbutton")
+  km15 := KeymapManager.NewKeymap("*rbutton", "鼠标右键", )
   km := km15
   km.RemapKey("c", "backspace")
   km.RemapKey("x", "esc")
@@ -210,7 +210,7 @@ InitKeymap()
   km.Map("singlePress", _ => (Send("{blind}" theRealRButton)))
 
   ; 自定义热键
-  km1 := KeymapManager.NewKeymap("customHotkeys")
+  km1 := KeymapManager.NewKeymap("customHotkeys", "自定义热键", )
   km := km1
   km.RemapInHotIf("RAlt", "LCtrl")
   km.Map("!'", _ => MyKeymapReload(), , , , "S")

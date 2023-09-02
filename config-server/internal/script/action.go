@@ -93,8 +93,7 @@ func toAHKFuncArg(val string) string {
 		val = val[len(prefix):]
 		return strings.TrimSpace(val)
 	}
-	val = strings.ReplaceAll(val, "\"", "`\"")
-	return `"` + val + `"`
+	return ahkString(val)
 }
 
 func remapKey5(a Action, inAbbrContext bool) string {
