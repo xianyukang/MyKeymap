@@ -305,7 +305,7 @@ InsertSpaceBetweenZHAndEn() {
  */
 HoldDownLShiftKey() {
   send("{LShift down}")
-  key := LTrim(A_ThisHotkey, "*")
+  key := ExtractWaitKey(A_ThisHotkey)
   keywait(key)
   send("{LShift up}")
 }

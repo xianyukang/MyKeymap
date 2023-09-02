@@ -13,7 +13,7 @@
   }
 
   static AddSubKeymap(parent, hk, name := "") {
-    waitKey := this.ExtractWaitKey(hk)
+    waitKey := ExtractWaitKey(hk)
     subKeymap := Keymap(name, waitKey, hk)
     handler(thisHotkey) {
       this.Activate(subKeymap)
@@ -107,14 +107,6 @@
     }
   }
 
-  static ExtractWaitKey(hotkey) {
-    waitKey := Trim(hotkey, " #!^+<>*~$")
-    if InStr(waitKey, "&") {
-      sp := StrSplit(waitKey, "&")
-      waitKey := Trim(sp[2])
-    }
-    return waitKey
-  }
 
   static ShowToolTip(msg, show := true) {
     if !show {
@@ -404,7 +396,7 @@ class MouseKeymap extends Keymap {
   }
 
   _moveMouse(directionX, directionY, thisHotkey) {
-    key := KeymapManager.ExtractWaitKey(thisHotkey)
+    key := ExtractWaitKey(thisHotkey)
     MouseMove(directionX * this.single, directionY * this.single, 0, "R")
     release := KeyWait(key, this.delay1)
     if release {
@@ -417,7 +409,7 @@ class MouseKeymap extends Keymap {
   }
 
   _scrollWheel(direction, thisHotkey) {
-    key := KeymapManager.ExtractWaitKey(thisHotkey)
+    key := ExtractWaitKey(thisHotkey)
     switch (direction) {
       case 1: MouseClick("WheelUp", , , this.scrollOnceLineCount)
       case 2: MouseClick("WheelDown", , , this.scrollOnceLineCount)
@@ -519,6 +511,15 @@ class TaskSwitchKeymap extends Keymap {
 }
 
 NoOperation(thisHotkey) {
+}
+
+ExtractWaitKey(hotkey) {
+  waitKey := Trim(hotkey, " #!^+<>*~$")
+  if InStr(waitKey, "&") {
+    sp := StrSplit(waitKey, "&")
+    waitKey := Trim(sp[2])
+  }
+  return waitKey
 }
 
 matchWinTitleCondition(winTitle, conditionType) {

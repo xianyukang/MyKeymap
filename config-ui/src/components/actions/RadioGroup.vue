@@ -16,6 +16,7 @@ const props = defineProps<{
   group2?: Item[]
   group3?: Item[]
   group4?: Item[]
+  horizontal?: boolean
 }>()
 
 
@@ -30,11 +31,14 @@ watchEffect(() => {
   action.value.isEmpty = !action.value.actionValueID
 })
 
-const groups = [[props.group1, props.group2], [props.group3, props.group4]]
+let groups = [[props.group1, props.group2], [props.group3, props.group4]]
+if (props.horizontal) {
+  groups = [[props.group1, props.group2, props.group3, props.group4]]
+}
 </script>
 
 <template>
-  <v-row v-for="(group, index) in groups" :key="index">
+  <v-row v-for="(group, index) in groups" :key="index" :class="{ 'horizontal': horizontal }">
     <v-col v-for="(items, index) in group" :key="index">
       <v-radio-group density="comfortable" v-model="action.actionValueID" color="#d05">
         <v-radio v-for="item in filter(items, keymap)"
@@ -58,5 +62,8 @@ const groups = [[props.group1, props.group2], [props.group3, props.group4]]
   color: #d05;
   font-size: 1.2em;
   transition: font-size 0.1s ease-out;
+}
+.horizontal :deep(.v-radio-group .active label) {
+  font-size: 0.97em;
 }
 </style>
