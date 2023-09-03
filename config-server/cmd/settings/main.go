@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
@@ -67,7 +68,10 @@ func server(hasError chan<- struct{}, rainDone <-chan struct{}, debug bool) {
 	if err != nil && strings.Index(err.Error(), "Only one usage of each socket address ") != -1 {
 		close(hasError)
 		<-rainDone
-		log.Fatal("Error: 已经有一个程序占用了 12333 端口\n")
+		fmt.Println("Error: 已经有一个程序占用了 12333 端口")
+		fmt.Println("可以关掉那个程序，或重启 Windows 解决此问题")
+		_, _ = fmt.Scanln()
+		os.Exit(1)
 	}
 
 	if !debug {
