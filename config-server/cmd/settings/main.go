@@ -21,6 +21,8 @@ import (
 	"time"
 )
 
+var MykeymapVersion string
+
 func main() {
 
 	if len(os.Args) >= 2 {
@@ -96,11 +98,12 @@ func indexHandler(c *gin.Context) {
 }
 
 func GetConfigHandler(c *gin.Context) {
-	data, err := os.ReadFile("../data/config.json")
+	config, err := script.ParseConfig("../data/config.json")
 	if err != nil {
 		panic(err)
 	}
-	c.Data(http.StatusOK, gin.MIMEJSON, data)
+	config.Options.MykeymapVersion = MykeymapVersion
+	c.JSON(http.StatusOK, config)
 }
 
 func PanicHandler(hasError chan<- struct{}, rainDone <-chan struct{}) gin.HandlerFunc {

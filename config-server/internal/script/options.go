@@ -6,12 +6,13 @@ import (
 )
 
 type Options struct {
-	WindowGroups  []WindowGroup  `json:"windowGroups"`
-	Mouse         Mouse          `json:"mouse"`
-	Scroll        Scroll         `json:"scroll"`
-	PathVariables []PathVariable `json:"pathVariables"`
-	Startup       bool           `json:"startup"`
-	KeyMapping    string         `json:"keyMapping"`
+	MykeymapVersion string         `json:"mykeymapVersion"`
+	WindowGroups    []WindowGroup  `json:"windowGroups"`
+	Mouse           Mouse          `json:"mouse"`
+	Scroll          Scroll         `json:"scroll"`
+	PathVariables   []PathVariable `json:"pathVariables"`
+	Startup         bool           `json:"startup"`
+	KeyMapping      string         `json:"keyMapping"`
 }
 
 type WindowGroup struct {

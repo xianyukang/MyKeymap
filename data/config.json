@@ -1705,6 +1705,7 @@
     }
   ],
   "options": {
+    "mykeymapVersion": "2.0.0",
     "windowGroups": [
       {
         "id": 0,

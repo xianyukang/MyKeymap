@@ -58,15 +58,15 @@ outer:
 
 		// 打印横幅
 		banner := []string{
-			"   ------------------------------------------------------------------",
-			"                                                                     ",
-			"                 MyKeymap config server is running...                ",
-			"                                                                     ",
-			"   ------------------------------------------------------------------",
+			" ------------------------------------------------------------------ ",
+			"                                                                    ",
+			"               MyKeymap config server is running...                 ",
+			"                                                                    ",
+			" ------------------------------------------------------------------ ",
 		}
 		style := defStyle.Foreground(tcell.ColorWhite)
 		for index, line := range banner {
-			drawText(s, 17, 3+index, 100, 100, style, line)
+			drawText(s, 24, 5+index, 100, 100, style, line)
 		}
 
 		// Update screen

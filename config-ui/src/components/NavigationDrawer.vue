@@ -3,7 +3,7 @@ import { useConfigStore } from '@/store/config';
 import { storeToRefs } from 'pinia';
 import { Keymap } from "@/types/config";
 
-const { enabledKeymaps, customParentKeymaps } = storeToRefs(useConfigStore())
+const { enabledKeymaps, customParentKeymaps, options } = storeToRefs(useConfigStore())
 const { saveConfig } = useConfigStore()
 
 
@@ -86,7 +86,7 @@ const getIcon = (keymap: Keymap) => {
       </template>
 
       <v-list-item-title class="text-h5 font-500 h-1.2em">MyKeymap</v-list-item-title>
-      <v-list-item-subtitle>version: 2.0.0</v-list-item-subtitle>
+      <v-list-item-subtitle>version: {{ options.mykeymapVersion }}</v-list-item-subtitle>
     </v-list-item>
 
     <v-divider class="border-opacity-25"></v-divider>

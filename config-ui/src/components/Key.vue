@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed } from "vue";
-import { trimStart } from 'lodash-es';
+import trimStart from "lodash-es/trimStart";
 import { useConfigStore } from "@/store/config";
 
 const store = useConfigStore()

@@ -57,6 +57,7 @@ export type PathVariable = {
 }
 
 export interface Options {
+  mykeymapVersion: string
   scroll: Scroll
   mouse: Mouse
   windowGroups: Array<WindowGroup>
