@@ -57,7 +57,7 @@ func server(hasError chan<- struct{}, rainDone <-chan struct{}, debug bool) {
 
 	router.GET("/", indexHandler)
 	router.GET("/config", GetConfigHandler)
-	router.PUT("/config", SaveConfigHandler)
+	router.PUT("/config", SaveConfigHandler(debug))
 	router.POST("/server/command/:id", ServerCommandHandler)
 
 	// 一个常见错误是端口已被占用
@@ -158,22 +158,29 @@ func execCmd(exe string, args ...string) {
 	}
 }
 
-func SaveConfigHandler(c *gin.Context) {
-	var config script.Config
-	if err := c.ShouldBindJSON(&config); err != nil {
-		panic(err)
+func SaveConfigHandler(debug bool) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var config script.Config
+		if err := c.ShouldBindJSON(&config); err != nil {
+			panic(err)
+		}
+
+		// 生成帮助文件
+		// helpPageHtml := config["helpPageHtml"].(string)
+		// delete(config, "helpPageHtml")
+		// saveHelpPageHtml(helpPageHtml)
+
+		saveConfigFile(config) // 保存配置文件
+
+		if debug {
+			script.GenerateScripts(&config)              // 生成脚本文件
+			execCmd("./MyKeymap.exe ./bin/MyKeymap.ahk") // 重启程序且跳过 ahk 脚本生成
+		} else {
+			execCmd("./MyKeymap.exe") // 重启程序, 此时 launcher 会重新生成脚本
+		}
+
+		c.JSON(http.StatusOK, gin.H{"message": "ok"})
 	}
-
-	// 生成帮助文件
-	// helpPageHtml := config["helpPageHtml"].(string)
-	// delete(config, "helpPageHtml")
-	// saveHelpPageHtml(helpPageHtml)
-
-	saveConfigFile(config)          // 保存配置文件
-	script.GenerateScripts(&config) // 生成脚本文件
-	execCmd("./MyKeymap.exe")       // 重启程序
-
-	c.JSON(http.StatusOK, gin.H{"message": "ok"})
 }
 
 func saveConfigFile(config script.Config) {
