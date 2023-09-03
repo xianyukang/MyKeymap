@@ -51,7 +51,7 @@ InitKeymap()
   GroupAdd("MY_WINDOW_GROUP_1", "ahk_exe firefox.exe")
 
   ; Capslock
-  km5 := KeymapManager.NewKeymap("*capslock", "Capslock", )
+  km5 := KeymapManager.NewKeymap("*capslock", "Capslock")
   km := km5
   km.Map("*c", _ => SoundControl())
   km.Map("*.", _ => MakeWindowDraggable())
@@ -109,7 +109,7 @@ InitKeymap()
   km.Map("*w", _ => ProcessExistSendKeyOrRun("WeChat.exe", "^!w", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\微信\微信.lnk"))
 
   ; J 模式
-  km8 := KeymapManager.NewKeymap("*j", "J 模式", )
+  km8 := KeymapManager.NewKeymap("*j", "J 模式")
   km := km8
   km.Map("singlePress", _ => (Send("{blind}{j}")))
   km.RemapKey(",", "delete")
@@ -147,7 +147,7 @@ InitKeymap()
   km.Map("*z", _ => (Send("^+{left}")))
 
   ; 3 模式
-  km10 := KeymapManager.NewKeymap("*3", "3 模式", )
+  km10 := KeymapManager.NewKeymap("*3", "3 模式")
   km := km10
   km.RemapKey("0", "f10")
   km.RemapKey("2", "f2")
@@ -172,7 +172,7 @@ InitKeymap()
   km.Map("singlePress", _ => (Send("{blind}3")))
 
   ; 分号模式
-  km13 := KeymapManager.NewKeymap("*;", "分号模式", )
+  km13 := KeymapManager.NewKeymap("*;", "分号模式")
   km := km13
   km.Map("*a", _ => (Send("{blind}*")))
   km.Map("*b", _ => (Send("{blind}%")))
@@ -199,7 +199,7 @@ InitKeymap()
   km.Map("singlePress", _ => EnterSemicolonAbbr(semiHook, semiHookAbbrWindow))
 
   ; 句号模式
-  km14 := KeymapManager.NewKeymap("*.", "句号模式", )
+  km14 := KeymapManager.NewKeymap("*.", "句号模式")
   km := km14
   km.Map("singlePress", _ => (Send("{blind}{.}")))
   km.Map("*,", _ => HoldDownLShiftKey())
@@ -222,7 +222,7 @@ InitKeymap()
   km.Map("*space", _ => (Send("{blind}{enter}")))
 
   ; 鼠标右键
-  km15 := KeymapManager.NewKeymap("*rbutton", "鼠标右键", )
+  km15 := KeymapManager.NewKeymap("*rbutton", "鼠标右键")
   km := km15
   km.Map("*LButton", _ => (Send("^!{tab}")))
   km.Map("singlePress", _ => (Send("{blind}" theRealRButton)))
@@ -233,7 +233,7 @@ InitKeymap()
   km.Map("*WheelDown", _ => (Send("^{tab}")))
 
   ; 自定义热键
-  km1 := KeymapManager.NewKeymap("customHotkeys", "自定义热键", )
+  km1 := KeymapManager.NewKeymap("customHotkeys", "自定义热键")
   km := km1
   km.RemapInHotIf("RAlt", "LCtrl")
   km.Map("!'", _ => MyKeymapReload(), , , , "S")
@@ -326,7 +326,7 @@ InitTrayMenu() {
   A_TrayMenu.ClickCount := 1
 
   A_IconTip := "MyKeymap 2.0.0 created by 咸鱼阿康"
-  TraySetIcon("./bin/icons/logo.ico")
+  TraySetIcon("./bin/icons/logo.ico", , true)
 }
 
 

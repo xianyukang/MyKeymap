@@ -36,11 +36,11 @@ MyExit(ExitReason, ExitCode) {
 MyKeymapToggleSuspend() {
   Suspend(!A_IsSuspended)
   if (A_IsSuspended) {
-    TraySetIcon("./bin/icons/logo2.ico", , 1)
+    TraySetIcon("./bin/icons/logo2.ico")
     A_TrayMenu.Check("暂停")
     Tip("  暂停 MyKeymap  ", -500)
   } else {
-    TraySetIcon("./bin/icons/logo.ico", , 0)
+    TraySetIcon("./bin/icons/logo.ico")
     A_TrayMenu.UnCheck("暂停")
     Tip("  恢复 MyKeymap  ", -500)
   }
