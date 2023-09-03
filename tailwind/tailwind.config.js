@@ -3,7 +3,7 @@ module.exports = {
   corePlugins: {
     preflight: false,
   },
-  content: ['../config-front/src/**/*.vue'],
+  content: ['../config-ui/src/**/*.vue'],
   theme: {
     extend: {},
   },

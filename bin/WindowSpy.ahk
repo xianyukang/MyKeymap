@@ -1,227 +1,225 @@
-﻿;
-; Window Spy
+; 
+; Window Spy for AHKv2
 ;
 
-#NoEnv
+#Requires AutoHotkey v2.0
+
 #NoTrayIcon
-#SingleInstance Force
-SetWorkingDir, %A_ScriptDir%
-SetBatchLines, -1
-CoordMode, Pixel, Screen
-Menu, Tray, Icon, logo.ico
+#SingleInstance force
+SetWorkingDir A_ScriptDir
+CoordMode "Pixel", "Screen"
 
-txtNotFrozen := "(按 Ctrl 键暂停刷新)"
-txtFrozen := "(Updates suspended)"
-txtMouseCtrl := "Control Under Mouse Position"
-txtFocusCtrl := "Focused Control"
+Global oGui
 
-Gui, New, hwndhGui AlwaysOnTop Resize MinSize
-Gui, Color, FFFFFF
-Gui, Font, s12 normal, 等线
-Gui, Add, Text, y+5, ` 
-Gui, Add, Text, y+5, 窗口标识符有下面三种,  经常选择进程名:
-Gui, Add, Text, y+5, ▷ 窗口名:      无标题 - 记事本
-Gui, Add, Text, y+5, ▷ 进程名:      ahk_exe notepad.exe
-Gui, Add, Text, y+5, ▷ 窗口类名:   ahk_class Notepad
-Gui, Add, Text, y+5, ` 
-Gui, Add, Text, y+5, 更多例子:
-Gui, Add, Text, y+5, ▷ 使用部分窗口名: 记事
-Gui, Add, Text, y+5, ▷ 组合两个标识符: 记事 ahk_exe notepad.exe (偶尔这样更精确
-Gui, Add, Text, y+5, ` 
-Gui, Font, s12 Bold
-Gui, Add, Text, y+5, 当前活动窗口的三种标识符:
-Gui, Font, s11 Verdana normal
-Gui, Add, Edit, xm w320 r4 ReadOnly -Wrap vCtrl_Title
-Gui, Add, Checkbox, y+5 x5 Right vCtrl_FollowMouse, 检测鼠标下的窗口, 而不是活动窗口
-; Gui, Add, Text,, Mouse Position:
-; Gui, Add, Edit, w320 r4 ReadOnly vCtrl_MousePos
-; Gui, Add, Text, w320 vCtrl_CtrlLabel, % txtFocusCtrl ":"
-; Gui, Add, Edit, w320 r4 ReadOnly vCtrl_Ctrl
-; Gui, Add, Text,, Active Window Position:
-; Gui, Add, Edit, w320 r2 ReadOnly vCtrl_Pos
-; Gui, Add, Text,, Status Bar Text:
-; Gui, Add, Edit, w320 r2 ReadOnly vCtrl_SBText
-; Gui, Add, Checkbox, vCtrl_IsSlow, Slow TitleMatchMode
-; Gui, Add, Text,, Visible Text:
-; Gui, Add, Edit, w320 r2 ReadOnly vCtrl_VisText
-; Gui, Add, Text,, All Text:
-; Gui, Add, Edit, w320 r2 ReadOnly vCtrl_AllText
-; Gui, Add, Text, w320 r1 vCtrl_Freeze, % txtNotFrozen
-Gui, Show, NoActivate w600 h360, 查看窗口标识符
-GetClientSize(hGui, temp)
-horzMargin := temp*96//A_ScreenDPI - 580
-SetTimer, Update, 250
-return
+WinSpyGui()
 
-GuiSize:
-Gui %hGui%:Default
-if !horzMargin
-	return
-SetTimer, Update, % A_EventInfo=1 ? "Off" : "On" ; Suspend on minimize
-ctrlW := A_GuiWidth - horzMargin
-list = Title,MousePos,Ctrl,Pos,SBText,VisText,AllText,Freeze
-Loop, Parse, list, `,
-	GuiControl, Move, Ctrl_%A_LoopField%, w%ctrlW%
-return
+WinSpyGui() {
+    Global oGui
+    
+    try TraySetIcon "./icons/logo.ico"
+    DllCall("shell32\SetCurrentProcessExplicitAppUserModelID", "wstr", "AutoHotkey.WindowSpy")
+    
+    oGui := Gui("AlwaysOnTop Resize MinSize +DPIScale","")
+    oGui.OnEvent("Close",WinSpyClose)
+    oGui.OnEvent("Size",WinSpySize)
+    
+    oGui.BackColor := "FFFFFF"
+    oGui.SetFont("s11")
+    oGui.Add("Text",,"程序的窗口标识符有下面三种:")
+    oGui.Add("Text",,"▷ 窗口名:      无标题 - 记事本")
+    oGui.Add("Text",,"▷ 进程名:      ahk_exe notepad.exe")
+    oGui.Add("Text",,"▷ 窗口类名:   ahk_class Notepad")
+    oGui.Add("Text",,"➤ 一般选进程名")
+    oGui.Add("Text",,"➤ 可以只使用部分窗口名: 记事")
+    oGui.Add("Text",,"➤ 也可以组合两个标识符: 记事 ahk_exe notepad.exe (更精确")
+    oGui.Add("Text",, "")
 
-Update:
-Gui %hGui%:Default
-GuiControlGet, Ctrl_FollowMouse
-CoordMode, Mouse, Screen
-MouseGetPos, msX, msY, msWin, msCtrl
-actWin := WinExist("A")
-if Ctrl_FollowMouse
-{
-	curWin := msWin
-	curCtrl := msCtrl
-	WinExist("ahk_id " curWin)
-}
-else
-{
-	curWin := actWin
-	ControlGetFocus, curCtrl
-}
-WinGetTitle, t1
-WinGetClass, t2
-if (curWin = hGui || t2 = "MultitaskingViewFrame") ; Our Gui || Alt-tab
-{
-	UpdateText("Ctrl_Freeze", txtFrozen)
-	return
-}
-UpdateText("Ctrl_Freeze", txtNotFrozen)
-WinGet, t3, ProcessName
-WinGet, t4, PID
-UpdateText("Ctrl_Title", t1 "`nahk_class " t2 "`nahk_exe " t3)
-CoordMode, Mouse, Relative
-MouseGetPos, mrX, mrY
-CoordMode, Mouse, Client
-MouseGetPos, mcX, mcY
-PixelGetColor, mClr, %msX%, %msY%, RGB
-mClr := SubStr(mClr, 3)
-UpdateText("Ctrl_MousePos", "Screen:`t" msX ", " msY " (less often used)`nWindow:`t" mrX ", " mrY " (default)`nClient:`t" mcX ", " mcY " (recommended)"
-	. "`nColor:`t" mClr " (Red=" SubStr(mClr, 1, 2) " Green=" SubStr(mClr, 3, 2) " Blue=" SubStr(mClr, 5) ")")
-UpdateText("Ctrl_CtrlLabel", (Ctrl_FollowMouse ? txtMouseCtrl : txtFocusCtrl) ":")
-if (curCtrl)
-{
-	ControlGetText, ctrlTxt, %curCtrl%
-	cText := "ClassNN:`t" curCtrl "`nText:`t" textMangle(ctrlTxt)
-    ControlGetPos cX, cY, cW, cH, %curCtrl%
-    cText .= "`n`tx: " cX "`ty: " cY "`tw: " cW "`th: " cH
-    WinToClient(curWin, cX, cY)
-	ControlGet, curCtrlHwnd, Hwnd,, % curCtrl
-    GetClientSize(curCtrlHwnd, cW, cH)
-    cText .= "`nClient:`tx: " cX "`ty: " cY "`tw: " cW "`th: " cH
-}
-else
-	cText := ""
-UpdateText("Ctrl_Ctrl", cText)
-WinGetPos, wX, wY, wW, wH
-GetClientSize(curWin, wcW, wcH)
-UpdateText("Ctrl_Pos", "`tx: " wX "`ty: " wY "`tw: " wW "`th: " wH "`nClient:`tx: 0`ty: 0`tw: " wcW "`th: " wcH)
-sbTxt := ""
-Loop
-{
-	StatusBarGetText, ovi, %A_Index%
-	if ovi =
-		break
-	sbTxt .= "(" A_Index "):`t" textMangle(ovi) "`n"
-}
-StringTrimRight, sbTxt, sbTxt, 1
-UpdateText("Ctrl_SBText", sbTxt)
-GuiControlGet, bSlow,, Ctrl_IsSlow
-if bSlow
-{
-	DetectHiddenText, Off
-	WinGetText, ovVisText
-	DetectHiddenText, On
-	WinGetText, ovAllText
-}
-else
-{
-	ovVisText := WinGetTextFast(false)
-	ovAllText := WinGetTextFast(true)
-}
-UpdateText("Ctrl_VisText", ovVisText)
-UpdateText("Ctrl_AllText", ovAllText)
-return
-
-GuiClose:
-ExitApp
-
-WinGetTextFast(detect_hidden)
-{
-	; WinGetText ALWAYS uses the "fast" mode - TitleMatchMode only affects
-	; WinText/ExcludeText parameters.  In Slow mode, GetWindowText() is used
-	; to retrieve the text of each control.
-	WinGet controls, ControlListHwnd
-	static WINDOW_TEXT_SIZE := 32767 ; Defined in AutoHotkey source.
-	VarSetCapacity(buf, WINDOW_TEXT_SIZE * (A_IsUnicode ? 2 : 1))
-	text := ""
-	Loop Parse, controls, `n
-	{
-		if !detect_hidden && !DllCall("IsWindowVisible", "ptr", A_LoopField)
-			continue
-		if !DllCall("GetWindowText", "ptr", A_LoopField, "str", buf, "int", WINDOW_TEXT_SIZE)
-			continue
-		text .= buf "`r`n"
-	}
-	return text
+    oGui.Add("Text",,"当前窗口的三种标识符:")
+    oGui.Add("Edit","xm w640 r4 ReadOnly -Wrap vCtrl_Title")
+    ; oGui.Add("Text",,"当前鼠标位置:")
+    ; oGui.Add("Edit","w640 r4 ReadOnly vCtrl_MousePos")
+    ; oGui.Add("Text",,"当前窗口位置:")
+    ; oGui.Add("Edit","w640 r2 ReadOnly vCtrl_Pos")
+    oGui.Add("Text","w640 r1 vCtrl_Freeze",(txtNotFrozen := ""))
+    oGui.Add("Checkbox","yp+20 xp+400 h15 w240 Left vCtrl_FollowMouse","跟随鼠标 (可按 Ctrl 暂停刷新)")
+    
+    oGui.Show("NoActivate")
+    WinGetClientPos(&x_temp, &y_temp2,,,"ahk_id " oGui.hwnd)
+    
+    ; oGui.horzMargin := x_temp*96//A_ScreenDPI - 320 ; now using oGui.MarginX
+    
+    oGui.txtNotFrozen := txtNotFrozen       ; create properties for futur use
+    oGui.txtFrozen    := ""
+    
+    SetTimer Update, 250
 }
 
-UpdateText(ControlID, NewText)
-{
-	; Unlike using a pure GuiControl, this function causes the text of the
-	; controls to be updated only when the text has changed, preventing periodic
-	; flickering (especially on older systems).
-	static OldText := {}
-	global hGui
-	if (OldText[ControlID] != NewText)
-	{
-		GuiControl, %hGui%:, % ControlID, % NewText
-		OldText[ControlID] := NewText
-	}
+WinSpySize(GuiObj, MinMax, Width, Height) {
+    Global oGui
+    
+    If !oGui.HasProp("txtNotFrozen") ; WinSpyGui() not done yet, return until it is
+        return
+    
+    SetTimer Update, (MinMax=0)?250:0 ; suspend updates on minimize
+    
+    ctrlW := Width - (oGui.MarginX * 2) ; ctrlW := Width - horzMargin
+    list := "Title,MousePos,Ctrl,Pos,SBText,VisText,AllText,Freeze"
 }
 
-GetClientSize(hWnd, ByRef w := "", ByRef h := "")
-{
-	VarSetCapacity(rect, 16)
-	DllCall("GetClientRect", "ptr", hWnd, "ptr", &rect)
-	w := NumGet(rect, 8, "int")
-	h := NumGet(rect, 12, "int")
+WinSpyClose(GuiObj) {
+    ExitApp
 }
 
-WinToClient(hWnd, ByRef x, ByRef y)
-{
-    WinGetPos wX, wY,,, ahk_id %hWnd%
-    x += wX, y += wY
-    VarSetCapacity(pt, 8), NumPut(y, NumPut(x, pt, "int"), "int")
-    if !DllCall("ScreenToClient", "ptr", hWnd, "ptr", &pt)
-        return false
-    x := NumGet(pt, 0, "int"), y := NumGet(pt, 4, "int")
-    return true
+Update() { ; timer, no params
+    Try TryUpdate() ; Try
 }
 
-textMangle(x)
-{
-	if pos := InStr(x, "`n")
-		x := SubStr(x, 1, pos-1), elli := true
-	if StrLen(x) > 40
-	{
-		StringLeft, x, x, 40
-		elli := true
-	}
-	if elli
-		x .= " (...)"
-	return x
+TryUpdate() {
+    Global oGui
+    
+    If !oGui.HasProp("txtNotFrozen") ; WinSpyGui() not done yet, return until it is
+        return
+    
+    Ctrl_FollowMouse := oGui["Ctrl_FollowMouse"].Value
+    CoordMode "Mouse", "Screen"
+    MouseGetPos &msX, &msY, &msWin, &msCtrl, 2 ; get ClassNN and hWindow
+    actWin := WinExist("A")
+    
+    if (Ctrl_FollowMouse) {
+        curWin := msWin, curCtrl := msCtrl
+        WinExist("ahk_id " curWin) ; updating LastWindowFound?
+    } else {
+        curWin := actWin
+        curCtrl := ControlGetFocus() ; get focused control hwnd from active win
+    }
+    curCtrlClassNN := ""
+    Try curCtrlClassNN := ControlGetClassNN(curCtrl)
+    
+    t1 := WinGetTitle(), t2 := WinGetClass()
+    if (curWin = oGui.hwnd || t2 = "MultitaskingViewFrame") { ; Our Gui || Alt-tab
+        UpdateText("Ctrl_Freeze", oGui.txtFrozen)
+        return
+    }
+    
+    UpdateText("Ctrl_Freeze", oGui.txtNotFrozen)
+    t3 := WinGetProcessName()
+    
+    WinDataText := t1 "`n" ; ZZZ
+                 . "ahk_class " t2 "`n"
+                 . "ahk_exe " t3 "`n"
+    
+    UpdateText("Ctrl_Title", WinDataText)
+    CoordMode "Mouse", "Window"
+    MouseGetPos &mrX, &mrY
+    CoordMode "Mouse", "Client"
+    MouseGetPos &mcX, &mcY
+    mClr := PixelGetColor(msX,msY,"RGB")
+    mClr := SubStr(mClr, 3)
+    
+    mpText := "Screen:`t" msX ", " msY "`n"
+            . "Window:`t" mrX ", " mrY "`n"
+            . "Client:`t" mcX ", " mcY " (default)`n"
+            . "Color:`t" mClr " (Red=" SubStr(mClr, 1, 2) " Green=" SubStr(mClr, 3, 2) " Blue=" SubStr(mClr, 5) ")"
+    
+    UpdateText("Ctrl_MousePos", mpText)
+    
+    wX := "", wY := "", wW := "", wH := ""
+    WinGetPos &wX, &wY, &wW, &wH, "ahk_id " curWin
+    WinGetClientPos(&wcX, &wcY, &wcW, &wcH, "ahk_id " curWin)
+    
+    wText := "Screen:`tx: " wX "`ty: " wY "`tw: " wW "`th: " wH "`n"
+           . "Client:`tx: " wcX "`ty: " wcY "`tw: " wcW "`th: " wcH
+    
+    UpdateText("Ctrl_Pos", wText)
+    sbTxt := ""
+    
+    Loop {
+        ovi := ""
+        Try ovi := StatusBarGetText(A_Index)
+        if (ovi = "")
+            break
+        sbTxt .= "(" A_Index "):`t" textMangle(ovi) "`n"
+    }
+    
+    sbTxt := SubStr(sbTxt,1,-1) ; StringTrimRight, sbTxt, sbTxt, 1
+    UpdateText("Ctrl_SBText", sbTxt)
+    bSlow := oGui["Ctrl_IsSlow"].Value ; GuiControlGet, bSlow,, Ctrl_IsSlow
+    
+    if (bSlow) {
+        DetectHiddenText False
+        ovVisText := WinGetText() ; WinGetText, ovVisText
+        DetectHiddenText True
+        ovAllText := WinGetText() ; WinGetText, ovAllText
+    } else {
+        ovVisText := WinGetTextFast(false)
+        ovAllText := WinGetTextFast(true)
+    }
+    
+    UpdateText("Ctrl_VisText", ovVisText)
+    UpdateText("Ctrl_AllText", ovAllText)
 }
 
-~*Ctrl::
+; ===========================================================================================
+; WinGetText ALWAYS uses the "slow" mode - TitleMatchMode only affects
+; WinText/ExcludeText parameters. In "fast" mode, GetWindowText() is used
+; to retrieve the text of each control.
+; ===========================================================================================
+WinGetTextFast(detect_hidden) {    
+    controls := WinGetControlsHwnd()
+    
+    static WINDOW_TEXT_SIZE := 32767 ; Defined in AutoHotkey source.
+    
+    buf := Buffer(WINDOW_TEXT_SIZE * 2,0)
+    
+    text := ""
+    
+    Loop controls.Length {
+        hCtl := controls[A_Index]
+        if !detect_hidden && !DllCall("IsWindowVisible", "ptr", hCtl)
+            continue
+        if !DllCall("GetWindowText", "ptr", hCtl, "Ptr", buf.ptr, "int", WINDOW_TEXT_SIZE)
+            continue
+        
+        text .= StrGet(buf) "`r`n" ; text .= buf "`r`n"
+    }
+    return text
+}
+
+; ===========================================================================================
+; Unlike using a pure GuiControl, this function causes the text of the
+; controls to be updated only when the text has changed, preventing periodic
+; flickering (especially on older systems).
+; ===========================================================================================
+UpdateText(vCtl, NewText) {
+    Global oGui
+    static OldText := {}
+    ctl := oGui[vCtl], hCtl := Integer(ctl.hwnd)
+    
+    if (!oldText.HasProp(hCtl) Or OldText.%hCtl% != NewText) {
+        ctl.Value := NewText
+        OldText.%hCtl% := NewText
+    }
+}
+
+textMangle(x) {
+    elli := false
+    if (pos := InStr(x, "`n"))
+        x := SubStr(x, 1, pos-1), elli := true
+    else if (StrLen(x) > 40)
+        x := SubStr(x,1,40), elli := true
+    if elli
+        x .= " (...)"
+    return x
+}
+
+suspend_timer() {
+    Global oGui
+    SetTimer Update, 0
+    UpdateText("Ctrl_Freeze", oGui.txtFrozen)
+}
+
 ~*Shift::
-SetTimer, Update, Off
-UpdateText("Ctrl_Freeze", txtFrozen)
-return
+~*Ctrl::suspend_timer()
 
 ~*Ctrl up::
-~*Shift up::
-SetTimer, Update, On
-return
+~*Shift up::SetTimer Update, 250
