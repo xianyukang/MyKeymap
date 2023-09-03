@@ -173,8 +173,8 @@ func SaveConfigHandler(debug bool) gin.HandlerFunc {
 		saveConfigFile(config) // 保存配置文件
 
 		if debug {
-			script.GenerateScripts(&config)              // 生成脚本文件
-			execCmd("./MyKeymap.exe ./bin/MyKeymap.ahk") // 重启程序且跳过 ahk 脚本生成
+			script.GenerateScripts(&config)                 // 生成脚本文件
+			execCmd("./MyKeymap.exe", "./bin/MyKeymap.ahk") // 重启程序且跳过 ahk 脚本生成
 		} else {
 			execCmd("./MyKeymap.exe") // 重启程序, 此时 launcher 会重新生成脚本
 		}
