@@ -210,7 +210,7 @@ RunPrograms(target, args := "", workingDir := "", admin := false) {
   } catch Error as e {
     Tip(e.Message)
     ; 还原窗口焦点
-    WinActivate(currentHwnd)
+    try WinActivate(currentHwnd)
     return
   }
 }
