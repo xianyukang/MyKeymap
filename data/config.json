@@ -1450,6 +1450,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 1,
+            "comment": "位于 PATH 环境变量中的命令可以直接启动，无需设置完整路径",
             "winTitle": "ahk_exe cmd.exe",
             "target": "cmd.exe"
           }
@@ -1669,6 +1670,14 @@
             "keysToSend": "{text}我爱尼娅! \n{text}( 还 有 大 家 )"
           }
         ],
+        "sj": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "输入当前时间",
+            "keysToSend": "ahk-expression: Format(\"{}年{}月{}日 {}:{}\", A_YYYY, A_MM, A_DD, A_Hour, A_Min)"
+          }
+        ],
         "sk": [
           {
             "windowGroupID": 0,
@@ -1681,8 +1690,8 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
-            "comment": "搜索时加上这个后缀，能让搜索引擎只搜某网站的内容",
-            "keysToSend": "{text} site:zhihu.com"
+            "comment": "搜索时加上这个 site: 选项，能让搜索引擎只搜某网站的内容",
+            "keysToSend": "{text}site:zhihu.com"
           }
         ],
         "xk": [
