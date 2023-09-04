@@ -55,7 +55,11 @@ ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin 
 LoopRelatedWindows(winTitle?, hwnds?) {
   ; 如果没有传句柄数组则获取当前窗口的
   if not (IsSet(hwnds)) {
-    hwnds := FindWindows("ahk_pid " WinGetPID("A"))
+    predicate := (hwnd) => WinGetTitle(hwnd) != ""
+    if (GetProcessName() == "explorer.exe") {
+      predicate := (hwnd) => WinGetClass(hwnd) = "CabinetWClass"
+    }
+    hwnds := FindWindows("ahk_pid " WinGetPID("A"), predicate)
   }
 
   ; 只有一个窗口显示出来就行
