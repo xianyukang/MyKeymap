@@ -5,6 +5,12 @@
 ;@Ahk2Exe-ExeName MyKeymap
 SetWorkingDir(A_ScriptDir)
 
+; 不提权直接运行
+if A_Args.Length == 2 && A_Args[1] == "WithoutAdmin" {
+  Run("MyKeymap.exe /script " A_Args.Get(2))
+  return
+}
+
 ; 以管理员权限运行
 full_command_line := DllCall("GetCommandLine", "str")
 if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)")) {
@@ -14,7 +20,7 @@ if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)")) {
   }
 
   try {
-    Run("*RunAs " A_ScriptFullPath " " otherArgs " /restart" )
+    Run("*RunAs " A_ScriptFullPath " " otherArgs " /restart")
     ExitApp
   } catch Error as e {
     hasTip := true
@@ -28,7 +34,7 @@ if (A_Args.Length) {
   Run("MyKeymap.exe /script " A_Args.Get(1))
 } else {
   ; 通过配置文件生成脚本
-  RunWait("./bin/settings.exe GenerateAHK ./data/config.json ./bin/templates/mykeymap.tmpl ./bin/MyKeymap.ahk", ,"Hide")
+  RunWait("./bin/settings.exe GenerateAHK ./data/config.json ./bin/templates/mykeymap.tmpl ./bin/MyKeymap.ahk", , "Hide")
   ; 启动脚本
   Run("MyKeymap.exe /script " mainAhkFilePath)
 }

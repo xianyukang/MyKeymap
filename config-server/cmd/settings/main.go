@@ -44,6 +44,7 @@ func main() {
 		hasError = nil
 	}
 
+	execCmd("./MyKeymap.exe", "WithoutAdmin", "./bin/GenerateShortcuts.ahk")
 	server(hasError, rainDone, debug)
 }
 
@@ -64,6 +65,7 @@ func server(hasError chan<- struct{}, rainDone <-chan struct{}, debug bool) {
 	router.GET("/config", GetConfigHandler)
 	router.PUT("/config", SaveConfigHandler(debug))
 	router.POST("/server/command/:id", ServerCommandHandler)
+	router.GET("/shortcuts", GetShortcutsHandler)
 
 	// 一个常见错误是端口已被占用
 	ln, err := net.Listen("tcp", "localhost:12333")
@@ -110,6 +112,30 @@ func GetConfigHandler(c *gin.Context) {
 	}
 	config.Options.MykeymapVersion = MykeymapVersion
 	c.JSON(http.StatusOK, config)
+}
+
+func GetShortcutsHandler(c *gin.Context) {
+	type shortcut struct {
+		Path string `json:"path"`
+	}
+	exe, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+	root := filepath.Dir(filepath.Dir(exe))
+	pattern := filepath.Join(root, "shortcuts", "*.lnk")
+
+	files, err := filepath.Glob(pattern)
+	if err != nil {
+		panic(err)
+	}
+	var data []shortcut
+	for _, f := range files {
+		data = append(data, shortcut{
+			Path: f[len(root)+1:],
+		})
+	}
+	c.JSON(http.StatusOK, data)
 }
 
 func PanicHandler(hasError chan<- struct{}, rainDone <-chan struct{}) gin.HandlerFunc {

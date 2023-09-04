@@ -223,7 +223,7 @@
             "actionTypeID": 1,
             "comment": "Windows Terminal",
             "winTitle": "ahk_exe WindowsTerminal.exe",
-            "target": "wt.exe"
+            "target": "shortcuts\\终端预览.lnk"
           }
         ],
         "*d": [
@@ -232,7 +232,7 @@
             "actionTypeID": 1,
             "comment": "Edge",
             "winTitle": "ahk_exe msedge.exe",
-            "target": "msedge.exe"
+            "target": "shortcuts\\Microsoft Edge.lnk"
           }
         ],
         "*e": [
@@ -250,7 +250,7 @@
             "actionTypeID": 1,
             "comment": "Visual Studio",
             "winTitle": "- Microsoft Visual Studio",
-            "target": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio 2019.lnk"
+            "target": "shortcuts\\Visual Studio 2019.lnk"
           }
         ],
         "*i": [
@@ -259,7 +259,7 @@
             "actionTypeID": 1,
             "comment": "Typora",
             "winTitle": "ahk_exe Typora.exe",
-            "target": "C:\\Program Files\\Typora\\Typora.exe"
+            "target": "shortcuts\\Typora.lnk"
           }
         ],
         "*j": [
@@ -268,7 +268,7 @@
             "actionTypeID": 1,
             "comment": "IntelliJ IDEA",
             "winTitle": "ahk_exe idea64.exe",
-            "target": "JetBrains Toolbox\\IntelliJ IDEA Ultimate.lnk"
+            "target": "shortcuts\\IntelliJ IDEA Ultimate.lnk"
           }
         ],
         "*k": [
@@ -277,7 +277,7 @@
             "actionTypeID": 1,
             "comment": "PotPlayer",
             "winTitle": "ahk_class PotPlayer64",
-            "target": "Daum\\PotPlayer 64 bit\\PotPlayer 64 bit.lnk"
+            "target": "shortcuts\\PotPlayer 64 bit.lnk"
           }
         ],
         "*l": [
@@ -286,7 +286,7 @@
             "actionTypeID": 1,
             "comment": "Excel",
             "winTitle": "ahk_exe EXCEL.EXE",
-            "target": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Excel.lnk"
+            "target": "shortcuts\\Excel.lnk"
           }
         ],
         "*m": [
@@ -294,7 +294,7 @@
             "windowGroupID": 0,
             "actionTypeID": 8,
             "comment": "TIM 进程存在则输入 Ctrl+Alt+Z 热键激活 TIM，否则启动 TIM",
-            "ahkCode": "ProcessExistSendKeyOrRun(\"TIM.exe\", \"^!z\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\腾讯软件\\TIM\\TIM.lnk\")"
+            "ahkCode": "ProcessExistSendKeyOrRun(\"TIM.exe\", \"^!z\", \"shortcuts\\TIM.lnk\")"
           }
         ],
         "*n": [
@@ -303,7 +303,7 @@
             "actionTypeID": 1,
             "comment": "GoLand",
             "winTitle": "ahk_exe goland64.exe",
-            "target": "JetBrains Toolbox\\GoLand.lnk"
+            "target": "shortcuts\\GoLand.lnk"
           }
         ],
         "*o": [
@@ -312,7 +312,7 @@
             "actionTypeID": 1,
             "comment": "OneNote 桌面版",
             "winTitle": "ahk_exe ONENOTE.EXE",
-            "target": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\OneNote.lnk"
+            "target": "shortcuts\\OneNote.lnk"
           }
         ],
         "*p": [
@@ -321,7 +321,7 @@
             "actionTypeID": 1,
             "comment": "PowerPoint",
             "winTitle": "ahk_exe POWERPNT.EXE",
-            "target": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\PowerPoint.lnk"
+            "target": "shortcuts\\PowerPoint.lnk"
           }
         ],
         "*q": [
@@ -330,7 +330,7 @@
             "actionTypeID": 1,
             "comment": "Everything",
             "winTitle": "ahk_class EVERYTHING",
-            "target": "C:\\Program Files\\Everything\\Everything.exe"
+            "target": "shortcuts\\Everything.lnk"
           }
         ],
         "*r": [
@@ -348,7 +348,7 @@
             "actionTypeID": 1,
             "comment": "Visual Studio Code",
             "winTitle": "ahk_exe Code.exe",
-            "target": "Visual Studio Code\\Visual Studio Code.lnk"
+            "target": "shortcuts\\Visual Studio Code.lnk"
           }
         ],
         "*w": [
@@ -357,7 +357,7 @@
             "actionTypeID": 1,
             "comment": "Chrome",
             "winTitle": "ahk_exe chrome.exe",
-            "target": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk"
+            "target": "shortcuts\\Google Chrome.lnk"
           }
         ]
       }
@@ -375,7 +375,7 @@
             "actionTypeID": 1,
             "comment": "DataGrip",
             "winTitle": "ahk_exe datagrip64.exe",
-            "target": "JetBrains Toolbox\\DataGrip.lnk"
+            "target": "shortcuts\\DataGrip.lnk"
           }
         ],
         "*w": [
@@ -383,7 +383,7 @@
             "windowGroupID": 0,
             "actionTypeID": 8,
             "comment": "微信",
-            "ahkCode": "ProcessExistSendKeyOrRun(\"WeChat.exe\", \"^!w\", \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\微信\\微信.lnk\")"
+            "ahkCode": "ProcessExistSendKeyOrRun(\"WeChat.exe\", \"^!w\", \"shortcuts\\微信.lnk\")"
           }
         ]
       }
@@ -1516,7 +1516,7 @@
             "actionTypeID": 1,
             "comment": "个人常用项目 - MyKeymap",
             "winTitle": "MyKeymap2 - Visual Studio Code",
-            "target": "Visual Studio Code\\Visual Studio Code.lnk",
+            "target": "shortcuts\\Visual Studio Code.lnk",
             "args": "D:\\MyFiles\\MyKeymap2"
           }
         ],
@@ -1526,7 +1526,7 @@
             "actionTypeID": 1,
             "comment": "个人常用项目 - My Site",
             "winTitle": "my_site - Visual Studio Code",
-            "target": "Visual Studio Code\\Visual Studio Code.lnk",
+            "target": "shortcuts\\Visual Studio Code.lnk",
             "args": "D:\\project\\my_site"
           }
         ],

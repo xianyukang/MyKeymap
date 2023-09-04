@@ -1,14 +1,15 @@
 <script lang="ts" setup>
 import { useConfigStore } from '@/store/config';
 import { server } from '@/store/server';
+import { useShortcutStore } from '@/store/shortcut';
 import { storeToRefs } from 'pinia';
 import { watchEffect } from 'vue';
 
 // TODO: 修改文档和示例
-// TODO: 保存时删掉 action 配置中值为空字符串 "" 的字段
 // TODO: 修改 ActivateOrRun 函数把 detectHiddenWindow 参数加上
-// TODO: action 加个 isEmpty 字段, 比如 winTitle 和 target 都为空, 在保存前删掉这个 action
 const { action } = storeToRefs(useConfigStore())
+const { shortcuts } = storeToRefs(useShortcutStore())
+
 
 watchEffect(() => {
   action.value.isEmpty = !action.value.winTitle && !action.value.target
@@ -28,7 +29,14 @@ const label9 = "📗 查看例子"
 
 <template>
   <v-text-field color="primary" autocomplete="off" variant="underlined" :label="label1" v-model="action.winTitle" />
-  <v-text-field color="primary" autocomplete="off" variant="underlined" :label="label2" v-model="action.target" />
+  <v-combobox class="input"
+              color="primary"
+              :label="label2"
+              :items="shortcuts"
+              :hide-no-data="true"
+              :menu-props="{ maxHeight: 150 }"
+              v-model="action.target"
+              variant="underlined"></v-combobox>
   <v-text-field color="primary" autocomplete="off" variant="underlined" :label="label3" v-model="action.args" />
   <v-text-field color="primary" autocomplete="off" variant="underlined" :label="label4" v-model="action.workingDir" />
   <v-text-field color="primary" autocomplete="off" variant="underlined" :label="label5" v-model="action.comment" />
@@ -49,5 +57,9 @@ const label9 = "📗 查看例子"
 .action-button {
   margin-top: -18px;
   margin-right: 17px;
+}
+
+.input :deep(i) {
+  visibility: hidden;
 }
 </style>

@@ -85,28 +85,28 @@ InitKeymap()
   ; Capslock + F
   km6 := KeymapManager.AddSubKeymap(km5, "*f", "Capslock + F")
   km := km6
-  km.Map("*a", _ => ActivateOrRun("ahk_exe WindowsTerminal.exe", "wt.exe"))
-  km.Map("*d", _ => ActivateOrRun("ahk_exe msedge.exe", "msedge.exe"))
+  km.Map("*a", _ => ActivateOrRun("ahk_exe WindowsTerminal.exe", "shortcuts\终端预览.lnk"))
+  km.Map("*d", _ => ActivateOrRun("ahk_exe msedge.exe", "shortcuts\Microsoft Edge.lnk"))
   km.Map("*e", _ => ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\"))
-  km.Map("*h", _ => ActivateOrRun("- Microsoft Visual Studio", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2019.lnk"))
-  km.Map("*i", _ => ActivateOrRun("ahk_exe Typora.exe", "C:\Program Files\Typora\Typora.exe"))
-  km.Map("*j", _ => ActivateOrRun("ahk_exe idea64.exe", "JetBrains Toolbox\IntelliJ IDEA Ultimate.lnk"))
-  km.Map("*k", _ => ActivateOrRun("ahk_class PotPlayer64", "Daum\PotPlayer 64 bit\PotPlayer 64 bit.lnk"))
-  km.Map("*l", _ => ActivateOrRun("ahk_exe EXCEL.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Excel.lnk"))
-  km.Map("*n", _ => ActivateOrRun("ahk_exe goland64.exe", "JetBrains Toolbox\GoLand.lnk"))
-  km.Map("*o", _ => ActivateOrRun("ahk_exe ONENOTE.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneNote.lnk"))
-  km.Map("*p", _ => ActivateOrRun("ahk_exe POWERPNT.EXE", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk"))
-  km.Map("*q", _ => ActivateOrRun("ahk_class EVERYTHING", "C:\Program Files\Everything\Everything.exe"))
+  km.Map("*h", _ => ActivateOrRun("- Microsoft Visual Studio", "shortcuts\Visual Studio 2019.lnk"))
+  km.Map("*i", _ => ActivateOrRun("ahk_exe Typora.exe", "shortcuts\Typora.lnk"))
+  km.Map("*j", _ => ActivateOrRun("ahk_exe idea64.exe", "shortcuts\IntelliJ IDEA Ultimate.lnk"))
+  km.Map("*k", _ => ActivateOrRun("ahk_class PotPlayer64", "shortcuts\PotPlayer 64 bit.lnk"))
+  km.Map("*l", _ => ActivateOrRun("ahk_exe EXCEL.EXE", "shortcuts\Excel.lnk"))
+  km.Map("*n", _ => ActivateOrRun("ahk_exe goland64.exe", "shortcuts\GoLand.lnk"))
+  km.Map("*o", _ => ActivateOrRun("ahk_exe ONENOTE.EXE", "shortcuts\OneNote.lnk"))
+  km.Map("*p", _ => ActivateOrRun("ahk_exe POWERPNT.EXE", "shortcuts\PowerPoint.lnk"))
+  km.Map("*q", _ => ActivateOrRun("ahk_class EVERYTHING", "shortcuts\Everything.lnk"))
   km.Map("*r", _ => ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe"))
-  km.Map("*s", _ => ActivateOrRun("ahk_exe Code.exe", "Visual Studio Code\Visual Studio Code.lnk"))
-  km.Map("*w", _ => ActivateOrRun("ahk_exe chrome.exe", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Google Chrome.lnk"))
-  km.Map("*m", _ => ProcessExistSendKeyOrRun("TIM.exe", "^!z", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\腾讯软件\TIM\TIM.lnk"))
+  km.Map("*s", _ => ActivateOrRun("ahk_exe Code.exe", "shortcuts\Visual Studio Code.lnk"))
+  km.Map("*w", _ => ActivateOrRun("ahk_exe chrome.exe", "shortcuts\Google Chrome.lnk"))
+  km.Map("*m", _ => ProcessExistSendKeyOrRun("TIM.exe", "^!z", "shortcuts\TIM.lnk"))
 
   ; Capslock + Space
   km7 := KeymapManager.AddSubKeymap(km5, "*space", "Capslock + Space")
   km := km7
-  km.Map("*d", _ => ActivateOrRun("ahk_exe datagrip64.exe", "JetBrains Toolbox\DataGrip.lnk"))
-  km.Map("*w", _ => ProcessExistSendKeyOrRun("WeChat.exe", "^!w", "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\微信\微信.lnk"))
+  km.Map("*d", _ => ActivateOrRun("ahk_exe datagrip64.exe", "shortcuts\DataGrip.lnk"))
+  km.Map("*w", _ => ProcessExistSendKeyOrRun("WeChat.exe", "^!w", "shortcuts\微信.lnk"))
 
   ; J 模式
   km8 := KeymapManager.NewKeymap("*j", "J 模式")
@@ -265,9 +265,9 @@ ExecCapslockAbbr(command) {
     case "ly":
       ActivateOrRun("", "ms-settings:bluetooth")
     case "mm":
-      ActivateOrRun("MyKeymap2 - Visual Studio Code", "Visual Studio Code\Visual Studio Code.lnk", "D:\MyFiles\MyKeymap2", "", false)
+      ActivateOrRun("MyKeymap2 - Visual Studio Code", "shortcuts\Visual Studio Code.lnk", "D:\MyFiles\MyKeymap2", "", false)
     case "ms":
-      ActivateOrRun("my_site - Visual Studio Code", "Visual Studio Code\Visual Studio Code.lnk", "D:\project\my_site", "", false)
+      ActivateOrRun("my_site - Visual Studio Code", "shortcuts\Visual Studio Code.lnk", "D:\project\my_site", "", false)
     case "no":
       ActivateOrRun("记事本", "notepad.exe")
     case "rb":
