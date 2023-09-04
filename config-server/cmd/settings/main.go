@@ -44,7 +44,7 @@ func main() {
 		hasError = nil
 	}
 
-	execCmd("./MyKeymap.exe", "WithoutAdmin", "./bin/GenerateShortcuts.ahk")
+	execCmd("./MyKeymap.exe", "WithoutAdmin", "./bin/MiscTools.ahk", "GenerateShortcuts")
 	server(hasError, rainDone, debug)
 }
 
@@ -164,6 +164,14 @@ func ServerCommandHandler(c *gin.Context) {
 		"2": {
 			exe:  "./MyKeymap.exe",
 			args: []string{"bin/WindowSpy.ahk"},
+		},
+		"3": {
+			exe:  "./MyKeymap.exe",
+			args: []string{"WithoutAdmin", "./bin/MiscTools.ahk", "RunAtStartup", "On"},
+		},
+		"4": {
+			exe:  "./MyKeymap.exe",
+			args: []string{"WithoutAdmin", "./bin/MiscTools.ahk", "RunAtStartup", "Off"},
 		},
 	}
 	if c, ok := m[c.Param("id")]; ok {

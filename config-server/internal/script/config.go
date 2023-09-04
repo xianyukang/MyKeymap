@@ -11,7 +11,6 @@ import (
 // 卧槽刚刚发现 GoLand 可以直接把 JSON 字符串粘贴为「 结构体定义 」 一下省掉了好多工作
 
 type Config struct {
-	LastEdit   string   `json:"lastEdit,omitempty"`
 	Keymaps    []Keymap `json:"keymaps,omitempty"`
 	Options    Options  `json:"options,omitempty"`
 	KeyMapping string   `json:"-"`

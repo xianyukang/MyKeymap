@@ -1,5 +1,4 @@
 {
-  "lastEdit": "2.0.0#1",
   "keymaps": [
     {
       "id": 5,
@@ -1742,7 +1741,7 @@
       }
     ],
     "mouse": {
-      "delay1": "0.2",
+      "delay1": "0.13",
       "delay2": "0.01",
       "fastSingle": "110",
       "fastRepeat": "70",

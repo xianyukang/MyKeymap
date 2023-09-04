@@ -6,8 +6,9 @@
 SetWorkingDir(A_ScriptDir)
 
 ; 不提权直接运行
-if A_Args.Length == 2 && A_Args[1] == "WithoutAdmin" {
-  Run("MyKeymap.exe /script " A_Args.Get(2))
+if A_Args.Length >= 2 && A_Args[1] == "WithoutAdmin" {
+  A_Args.RemoveAt(1)
+  Run("MyKeymap.exe /script " Join(" ", A_Args*))
   return
 }
 
@@ -41,4 +42,10 @@ if (A_Args.Length) {
 
 if IsSet(hasTip) {
   Sleep 7000
+}
+
+Join(sep, params*) {
+  for index, param in params
+    str .= sep . param
+  return SubStr(str, StrLen(sep) + 1)
 }

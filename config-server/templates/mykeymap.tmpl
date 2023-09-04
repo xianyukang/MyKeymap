@@ -26,8 +26,8 @@ OnExit(MyExit)
 InitKeymap()
 {
   taskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "x", "space")
-  slow := MouseKeymap("slow mouse", 10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03")
-  fast := MouseKeymap("fast mouse", 110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", slow)
+  slow := MouseKeymap("slow mouse", {{ .Options.Mouse.SlowSingle }}, {{ .Options.Mouse.SlowRepeat }}, "T{{ .Options.Mouse.Delay1 }}", "T{{ .Options.Mouse.Delay2 }}", {{ .Options.Scroll.OnceLineCount }}, "T{{ .Options.Scroll.Delay1 }}", "T{{ .Options.Scroll.Delay2 }}")
+  fast := MouseKeymap("fast mouse", {{ .Options.Mouse.FastSingle }}, {{ .Options.Mouse.FastRepeat }}, "T{{ .Options.Mouse.Delay1 }}", "T{{ .Options.Mouse.Delay2 }}", {{ .Options.Scroll.OnceLineCount }}, "T{{ .Options.Scroll.Delay1 }}", "T{{ .Options.Scroll.Delay2 }}", slow)
   slow.Map("*space", slow.LButtonUp())
 {{ if .CapslockAbbrEnabled }}
   capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "{{ .CapslockAbbrKeys }}")
