@@ -55,7 +55,7 @@ MyKeymapOpenSettings() {
   } else if (WinExist("MyKeymap Setting")) {
     WinActivate("MyKeymap Setting")
   } else {
-    Run("http://127.0.0.1:12333/")
+    Run("http://localhost:12333/")
   }
 }
 

@@ -30,7 +30,7 @@ InitKeymap()
   fast := MouseKeymap("fast mouse", 110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", slow)
   slow.Map("*space", slow.LButtonUp())
 
-  capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "bb,cmd,dd,dm,ex,gj,ld,lj,ly,mm,ms,no,rb,se,sl,sp,tm,we,wf,wt")
+  capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "bb,cmd,dd,dm,ex,gj,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,tm,we,wf,wt")
   capsHook.KeyOpt("{CapsLock}", "S")
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
@@ -272,6 +272,8 @@ ExecCapslockAbbr(command) {
       ActivateOrRun("记事本", "notepad.exe")
     case "rb":
       SystemReboot()
+    case "rex":
+      SystemRestartExplorer()
     case "se":
       MyKeymapOpenSettings()
     case "sl":
@@ -325,7 +327,7 @@ InitTrayMenu() {
   A_TrayMenu.Default := "暂停"
   A_TrayMenu.ClickCount := 1
 
-  A_IconTip := "MyKeymap 2.0.0 created by 咸鱼阿康"
+  A_IconTip := "MyKeymap 2.0-beta1 created by 咸鱼阿康"
   TraySetIcon("./bin/icons/logo.ico", , true)
 }
 

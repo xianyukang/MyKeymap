@@ -55,7 +55,9 @@ func server(hasError chan<- struct{}, rainDone <-chan struct{}, debug bool) {
 
 	router := gin.Default()
 	router.Use(PanicHandler(hasError, rainDone))
-	router.Use(cors.Default())
+	if debug {
+		router.Use(cors.Default())
+	}
 	router.NoRoute(static.Serve("/", static.LocalFile("./site", false)), indexHandler)
 
 	router.GET("/", indexHandler)
@@ -64,7 +66,7 @@ func server(hasError chan<- struct{}, rainDone <-chan struct{}, debug bool) {
 	router.POST("/server/command/:id", ServerCommandHandler)
 
 	// 一个常见错误是端口已被占用
-	ln, err := net.Listen("tcp", "127.0.0.1:12333")
+	ln, err := net.Listen("tcp", "localhost:12333")
 	if err != nil && strings.Index(err.Error(), "Only one usage of each socket address ") != -1 {
 		close(hasError)
 		<-rainDone
@@ -88,7 +90,7 @@ func server(hasError chan<- struct{}, rainDone <-chan struct{}, debug bool) {
 
 func openBrowser() {
 	time.Sleep(600 * time.Millisecond)
-	_ = exec.Command("cmd", "/c", "start", "http://127.0.0.1:12333").Start()
+	_ = exec.Command("cmd", "/c", "start", "http://localhost:12333").Start()
 }
 
 func indexHandler(c *gin.Context) {

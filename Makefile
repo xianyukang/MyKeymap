@@ -1,4 +1,4 @@
-version = 2.0.0
+version = 2.0-beta1
 ahkVersion = 2.0.7
 folder = MyKeymap-$(version)
 zip = $(folder).7z
@@ -14,6 +14,7 @@ buildClient:
 copyFiles:
 	rm -f -r $(folder)
 	mkdir $(folder)
+	mkdir $(folder)/shortcuts
 
 	rm -f -r bin/site
 	rm -f -r bin/templates
@@ -22,7 +23,6 @@ copyFiles:
 
 	cp -r data $(folder)/
 	cp -r bin $(folder)/
-	cp -r shortcuts $(folder)/
 	cp -r tools $(folder)/
 	cp MyKeymap.exe $(folder)/
 

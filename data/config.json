@@ -1546,6 +1546,14 @@
             "actionValueID": 4
           }
         ],
+        "rex": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 2,
+            "comment": "重启文件资源管理器",
+            "actionValueID": 7
+          }
+        ],
         "se": [
           {
             "windowGroupID": 0,
@@ -1705,7 +1713,7 @@
     }
   ],
   "options": {
-    "mykeymapVersion": "2.0.0",
+    "mykeymapVersion": "2.0-beta1",
     "windowGroups": [
       {
         "id": 0,
