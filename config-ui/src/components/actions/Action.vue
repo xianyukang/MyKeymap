@@ -17,7 +17,7 @@ const { config, keymap, action, windowGroupID, hotkey } = storeToRefs(useConfigS
 
 const actionTypes = [
   { id: 0, name: "⛔ 未配置" },
-  { id: 1, name: "👾 启动程序或激活窗口" },
+  { id: 1, name: "🚀 启动程序或激活窗口" },
   { id: 2, name: "🖥️ 系统控制" },
   { id: 3, name: "🏠 窗口操作" },
   { id: 4, name: "🖱️  鼠标操作", hideInAbbr: true },
