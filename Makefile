@@ -5,6 +5,8 @@ zip = $(folder).7z
 
 buildServer:
 	go.exe build -C ./config-server -ldflags "-s -w -X main.MykeymapVersion=$(version)" -o ../bin/settings.exe ./cmd/settings
+	rm -f -r bin/templates
+	cp -r config-server/templates bin/templates
 
 buildClient:
 	cd config-ui; npm run build
@@ -17,9 +19,7 @@ copyFiles:
 	mkdir $(folder)/shortcuts
 
 	rm -f -r bin/site
-	rm -f -r bin/templates
 	cp -r config-ui/dist bin/site
-	cp -r config-server/templates bin/templates
 
 	cp -r data $(folder)/
 	cp -r bin $(folder)/

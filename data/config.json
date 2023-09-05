@@ -204,6 +204,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 9,
+            "comment": "触发 Capslock 命令",
             "actionValueID": 6
           }
         ]
@@ -1380,9 +1381,9 @@
         "singlePress": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "comment": "输入鼠标右键",
-            "keysToSend": "ahk-expression: \"{blind}\" theRealRButton"
+            "actionTypeID": 4,
+            "comment": "鼠标右键",
+            "actionValueID": 10
           }
         ]
       }
