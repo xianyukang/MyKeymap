@@ -131,7 +131,7 @@ function onStartupChange() {
                               variant="plain" style="width: 7rem"></v-text-field>
               </td>
               <td>
-                <v-select v-model="keymap.parentID" :items="customParentKeymaps"
+                <v-select v-model="keymap.parentID" :items="customParentKeymaps.filter(c => c.id != keymap.id)"
                           :item-title="item => item.name"
                           :item-value="item => item.id" :disabled="hasSubKeymap(keymap)"
                           item-color="blue"
