@@ -17,7 +17,6 @@ import (
 	"settings/internal/command"
 	"settings/internal/matrix"
 	"settings/internal/script"
-	"strings"
 	"text/template"
 	"time"
 )
@@ -67,19 +66,22 @@ func server(hasError chan<- struct{}, rainDone <-chan struct{}, debug bool) {
 	router.POST("/server/command/:id", ServerCommandHandler)
 	router.GET("/shortcuts", GetShortcutsHandler)
 
-	// 一个常见错误是端口已被占用
+	// 先尝试 12333 端口, 失败了则用随机端口. 因为 12333 端口可能已被占用, 或者被禁:
+	// An attempt was made to access a socket in a way forbidden by its access permissions.
 	ln, err := net.Listen("tcp", "localhost:12333")
-	if err != nil && strings.Index(err.Error(), "Only one usage of each socket address ") != -1 {
-		close(hasError)
-		<-rainDone
-		fmt.Println("Error: 已经有一个程序占用了 12333 端口")
-		fmt.Println("可以关掉那个程序，或重启 Windows 解决此问题")
-		_, _ = fmt.Scanln()
-		os.Exit(1)
+	if err != nil {
+		ln, err = net.Listen("tcp", "localhost:0")
+		if err != nil {
+			close(hasError)
+			<-rainDone
+			fmt.Println("Error:", err.Error())
+			_, _ = fmt.Scanln()
+			os.Exit(1)
+		}
 	}
 
 	if !debug {
-		go openBrowser()
+		go openBrowser(ln.Addr())
 	}
 
 	err = router.RunListener(ln)
@@ -90,9 +92,10 @@ func server(hasError chan<- struct{}, rainDone <-chan struct{}, debug bool) {
 	}
 }
 
-func openBrowser() {
+func openBrowser(addr net.Addr) {
 	time.Sleep(600 * time.Millisecond)
-	_ = exec.Command("cmd", "/c", "start", "http://localhost:12333").Start()
+	//goland:noinspection HttpUrlsUsage
+	_ = exec.Command("cmd", "/c", "start", "http://"+addr.String()).Start()
 }
 
 func indexHandler(c *gin.Context) {

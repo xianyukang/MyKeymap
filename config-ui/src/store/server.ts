@@ -1,7 +1,12 @@
-import { useFetch } from "@vueuse/core"
+import { createFetch } from "@vueuse/core"
+
+export const useMyFetch = createFetch({
+  baseUrl: import.meta.env.MODE == 'development' ? 'http://localhost:12333' : '',
+})
+
 
 export const server = {
-  runWindowSpy: () => useFetch('http://localhost:12333/server/command/2').post(),
-  enableRunAtStartup: () => useFetch('http://localhost:12333/server/command/3').post(),
-  disableRunAtStartup: () => useFetch('http://localhost:12333/server/command/4').post(),
+  runWindowSpy: () => useMyFetch('/server/command/2').post(),
+  enableRunAtStartup: () => useMyFetch('/server/command/3').post(),
+  disableRunAtStartup: () => useMyFetch('/server/command/4').post(),
 }

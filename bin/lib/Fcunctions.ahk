@@ -55,7 +55,11 @@ MyKeymapOpenSettings() {
   } else if (WinExist("MyKeymap Setting")) {
     WinActivate("MyKeymap Setting")
   } else {
-    Run("http://localhost:12333/")
+    if WinExist("\bin\settings.exe") {
+      WinClose
+      WinWaitClose(, , 2)
+    }
+    Run("./bin/settings.exe", "./bin")
   }
 }
 

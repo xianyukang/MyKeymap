@@ -1,8 +1,8 @@
 import { defineStore } from "pinia"
-import { useFetch } from '@vueuse/core'
 import { computed, ref, watch } from "vue"
 import { useRoute } from "vue-router"
 import { Action, Config, Keymap } from "@/types/config";
+import { useMyFetch } from "./server";
 
 export const useConfigStore = defineStore('config', () => {
   // 根据 url 返回对应的 keymap
@@ -27,11 +27,11 @@ export const useConfigStore = defineStore('config', () => {
   )
 
   watch(() => [action.value.actionTypeID, action.value.actionValueID],
-      ([newTypeId, newValueId], [oldTypeid, oldValueId]) => {
-        if ((newTypeId == 9 || oldTypeid == 9) && (newValueId == 5 || oldValueId == 5 || newValueId == 6 || oldValueId == 6)) {
-          changeAbbrEnable()
-        }
+    ([newTypeId, newValueId], [oldTypeid, oldValueId]) => {
+      if ((newTypeId == 9 || oldTypeid == 9) && (newValueId == 5 || oldValueId == 5 || newValueId == 6 || oldValueId == 6)) {
+        changeAbbrEnable()
       }
+    }
   )
 
   function changeAbbrEnable() {
@@ -177,7 +177,7 @@ function _saveConfig(config: Config | undefined) {
       }
     }
   }
-  const { error } = useFetch("http://localhost:12333/config").put(config)
+  const { error } = useMyFetch("/config").put(config)
 }
 
 function _disabledKeys(keymaps: Keymap[]) {
@@ -201,8 +201,7 @@ function _disabledKeys(keymaps: Keymap[]) {
 
 function fetchConfig() {
   const config = ref<Config>()
-  const url = 'http://localhost:12333/config'
-  const { data, error } = useFetch(url).json<Config>()
+  const { data, error } = useMyFetch("/config").json<Config>()
   watch(data, (newValue) => config.value = newValue!)
   return config
 }
