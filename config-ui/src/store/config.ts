@@ -2,7 +2,7 @@ import { defineStore } from "pinia"
 import { useFetch } from '@vueuse/core'
 import { computed, ref, watch } from "vue"
 import { useRoute } from "vue-router"
-import { Config, Keymap, Action } from "@/types/config";
+import { Action, Config, Keymap } from "@/types/config";
 
 export const useConfigStore = defineStore('config', () => {
   // 根据 url 返回对应的 keymap
@@ -25,6 +25,53 @@ export const useConfigStore = defineStore('config', () => {
     () => _getAction(keymap.value, hotkey.value, windowGroupID.value),
     (newValue) => action.value = newValue
   )
+
+  watch(() => [action.value.actionTypeID, action.value.actionValueID],
+      ([newTypeId, newValueId], [oldTypeid, oldValueId]) => {
+        if ((newTypeId == 9 || oldTypeid == 9) && (newValueId == 5 || oldValueId == 5 || newValueId == 6 || oldValueId == 6)) {
+          // 获取缩写Keymap
+          const capsAbbr = config.value!.keymaps[config.value!.keymaps.length - 3]
+          const seemAbbr = config.value!.keymaps[config.value!.keymaps.length - 2]
+          // 默认为关闭状态
+          let capsAbbrEnable = false
+          let seemAbbrEnable = false
+
+          for (let km: Keymap of enabledKeymaps.value) {
+            // 不遍历缩写、设置
+            if (km.id >= 2 && km.id <= 4) {
+              console.log(km.id)
+              continue;
+            }
+
+            // 当两个缩写状态都为开启时不再遍历
+            if (capsAbbrEnable && seemAbbrEnable) {
+              break
+            }
+
+            for (let key: string in km.hotkeys) {
+              for (let act: Action of km.hotkeys[key]) {
+                // 有选择caps命令将命令状态设置为开启
+                if (act.actionTypeID == 9 && act.actionValueID == 6) {
+                  capsAbbrEnable = true
+                  continue
+                }
+
+                // 有选择缩写将缩写状态设置为开启
+                if (act.actionTypeID == 9 && act.actionValueID == 5) {
+                  seemAbbrEnable = true
+                }
+              }
+            }
+          }
+
+          // 设置缩写的状态
+          capsAbbr.enable = capsAbbrEnable
+          seemAbbr.enable = seemAbbrEnable
+        }
+      }
+  )
+
+
   const changeActionComment = (label: string) => {
     action.value.comment = label
   }
@@ -148,7 +195,6 @@ function _disabledKeys(keymaps: Keymap[]) {
   }
   return m
 }
-
 
 function fetchConfig() {
   const config = ref<Config>()
