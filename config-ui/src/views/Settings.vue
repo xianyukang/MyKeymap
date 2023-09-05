@@ -70,6 +70,7 @@ function toggleKeymapEnable(keymap: Keymap) {
   }
 
   keymap.enable = !keymap.enable
+  useConfigStore().changeAbbrEnable()
 }
 
 function nextKeymapId() {
@@ -130,8 +131,10 @@ function onStartupChange() {
                               variant="plain" style="width: 7rem"></v-text-field>
               </td>
               <td>
-                <v-select v-model="keymap.parentID" :items="customParentKeymaps" :item-title="item => item.name"
-                          :item-value="item => item.id" :disabled="hasSubKeymap(keymap)" item-color="blue"
+                <v-select v-model="keymap.parentID" :items="customParentKeymaps"
+                          :item-title="item => item.name"
+                          :item-value="item => item.id" :disabled="hasSubKeymap(keymap)"
+                          item-color="blue"
                           variant="plain" style="width: 7rem">
                 </v-select>
               </td>
