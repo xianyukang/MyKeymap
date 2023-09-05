@@ -35,7 +35,8 @@ InitKeymap()
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
 
-  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", ",,,.,/,dk,gg,i love nia,sj,sk,sz,xk,zk")
+  semiHook := InputHook("", "{Capslock}{BackSpace}{Esc}{;}", ",,,.,/,dk,gg,i love nia,sk,sz,xk,zk")
+  semiHook.KeyOpt("{CapsLock}", "S")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char, , , true)
   semiHookAbbrWindow := InputTipWindow()
 
