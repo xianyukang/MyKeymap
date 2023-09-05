@@ -9,7 +9,6 @@ import { Keymap } from "@/types/config";
 import PathDialog from "@/components/dialog/PathDialog.vue";
 import WindowGroupDialog from "@/components/dialog/WindowGroupDialog.vue";
 import findLastIndex from "lodash-es/findLastIndex";
-import { server } from "@/store/server";
 
 const { customKeymaps, customParentKeymaps, customSonKeymaps, options, keymaps } = storeToRefs(useConfigStore())
 
@@ -70,6 +69,7 @@ function toggleKeymapEnable(keymap: Keymap) {
   }
 
   keymap.enable = !keymap.enable
+  useConfigStore().changeAbbrEnable()
 }
 
 function nextKeymapId() {
@@ -101,15 +101,6 @@ function removeKeymap(id: number) {
 function removeKeymapByIndex(index: number) {
   keymaps.value.splice(index, 1)
 }
-
-function onStartupChange() {
-  options.value.startup = !options.value.startup
-  if (options.value.startup) {
-    server.enableRunAtStartup()
-  } else {
-    server.disableRunAtStartup()
-  }
-}
 </script>
 
 <template>
@@ -130,10 +121,10 @@ function onStartupChange() {
                               variant="plain" style="width: 7rem"></v-text-field>
               </td>
               <td>
-                <v-select v-model="keymap.parentID" :items="customParentKeymaps" :item-title="item => item.name"
-                          :item-value="item => item.id" :disabled="hasSubKeymap(keymap)" item-color="blue"
-                          variant="plain" style="width: 7rem">
-                </v-select>
+                  <v-select v-model="keymap.parentID" :items="customParentKeymaps" :item-title="item => item.name"
+                            :item-value="item => item.id" :disabled="hasSubKeymap(keymap)" item-color="blue"
+                            variant="plain" style="width: 7rem">
+                  </v-select>
               </td>
               <td>
                 <div class="d-flex justify-space-between align-center">
@@ -162,7 +153,7 @@ function onStartupChange() {
                 <v-card-text>
                   <v-switch label="开机自启" messages="可能需要关掉再开启才生效" color="primary"
                             :model-value="options.startup"
-                            @change="onStartupChange"></v-switch>
+                            @change="options.startup = !options.startup"></v-switch>
                   <path-dialog/>
                   <br/>
                   <window-group-dialog/>
@@ -227,7 +218,7 @@ function onStartupChange() {
                                   label="两次滚动的间隔时间 (越小滚动速度越快)"></v-text-field>
                     <v-text-field v-model="options.scroll.onceLineCount" variant="underlined"
                                   type="number" step="1" maxlength="5" color="primary"
-                                  label="一次滚动的行数"></v-text-field>
+                                  label="单次滑动参数"></v-text-field>
                   </v-card-text>
                 </v-card>
               </v-col>
@@ -236,7 +227,7 @@ function onStartupChange() {
         </div>
       </v-col>
     </v-row>
-  </v-container>
+    </v-container>
 </template>
 
 <style scoped>
