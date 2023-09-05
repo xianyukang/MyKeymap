@@ -30,18 +30,16 @@ InitKeymap()
   fast := MouseKeymap("fast mouse", 110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", slow)
   slow.Map("*space", slow.LButtonUp())
 
-  capsHook := InputHook("", "{Capslock}{BackSpace}{Esc}", "bb,cmd,dd,dm,ex,gj,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,tm,we,wf,wt")
+  capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "bb,cmd,dd,dm,ex,gj,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,tm,we,wf,wt")
   capsHook.KeyOpt("{CapsLock}", "S")
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
 
-  semiHook := InputHook("", "{Capslock}{BackSpace}{Esc}{;}", ",,,.,/,dk,gg,i love nia,sk,sz,xk,zk")
+  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", ",,,.,/,dk,gg,i love nia,sj,sk,sz,xk,zk")
   semiHook.KeyOpt("{CapsLock}", "S")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char, , , true)
   semiHookAbbrWindow := InputTipWindow()
 
-  ; 如果在系统设置中交换了左右键,  那么需要发送左键才能打开右键菜单
-  theRealRButton := SysGet(23) ? "{LButton}" : "{RButton}"
 
   ; 路径变量
   programs := "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\"
@@ -225,8 +223,8 @@ InitKeymap()
   ; 鼠标右键
   km15 := KeymapManager.NewKeymap("*rbutton", "鼠标右键")
   km := km15
+  km.Map("singlePress", fast.RButton()), slow.Map("singlePress", slow.RButton())
   km.Map("*LButton", _ => (Send("^!{tab}")))
-  km.Map("singlePress", _ => (Send("{blind}" theRealRButton)))
   km.RemapKey("c", "backspace")
   km.RemapKey("x", "esc")
   km.Map("*space", _ => (Send("{blind}{enter}")))
