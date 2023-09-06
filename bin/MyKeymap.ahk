@@ -171,7 +171,7 @@ InitKeymap()
   km.Map("singlePress", _ => (Send("{blind}3")))
 
   ; 分号模式
-  km13 := KeymapManager.NewKeymap("*;", "分号模式")
+  km13 := KeymapManager.NewKeymap(";", "分号模式")
   km := km13
   km.Map("*a", _ => (Send("{blind}*")))
   km.Map("*b", _ => (Send("{blind}%")))
@@ -198,7 +198,7 @@ InitKeymap()
   km.Map("singlePress", _ => EnterSemicolonAbbr(semiHook, semiHookAbbrWindow))
 
   ; 句号模式
-  km14 := KeymapManager.NewKeymap("*.", "句号模式")
+  km14 := KeymapManager.NewKeymap(".", "句号模式")
   km := km14
   km.Map("singlePress", _ => (Send("{blind}{.}")))
   km.Map("*,", _ => HoldDownLShiftKey())
@@ -221,7 +221,7 @@ InitKeymap()
   km.Map("*space", _ => (Send("{blind}{enter}")))
 
   ; 鼠标右键
-  km15 := KeymapManager.NewKeymap("*rbutton", "鼠标右键")
+  km15 := KeymapManager.NewKeymap("rbutton", "鼠标右键")
   km := km15
   km.Map("singlePress", fast.RButton()), slow.Map("singlePress", slow.RButton())
   km.Map("*LButton", _ => (Send("^!{tab}")))

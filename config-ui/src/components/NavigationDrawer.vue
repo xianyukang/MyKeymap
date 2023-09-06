@@ -71,7 +71,11 @@ const getIcon = (keymap: Keymap) => {
     key = "s"
   }
 
-  return icon + "alpha-" + key + "-box"
+  if (/[a-zA-Z]/.test(key)) {
+    return icon + "alpha-" + key + "-box"
+  } else {
+    return icon + "rhombus"
+  }
 }
 
 </script>

@@ -99,6 +99,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
+            "comment": "鼠标左移",
             "actionValueID": 3
           }
         ],
@@ -806,7 +807,7 @@
       "id": 11,
       "name": "Tab 模式",
       "enable": false,
-      "hotkey": "*tab",
+      "hotkey": "tab",
       "parentID": 0,
       "hotkeys": {
         "singlePress": [
@@ -822,7 +823,7 @@
       "id": 12,
       "name": "空格模式",
       "enable": false,
-      "hotkey": "*space",
+      "hotkey": "space",
       "parentID": 0,
       "hotkeys": {
         "*,": [
@@ -997,7 +998,7 @@
       "id": 13,
       "name": "分号模式",
       "enable": true,
-      "hotkey": "*;",
+      "hotkey": ";",
       "parentID": 0,
       "hotkeys": {
         "*a": [
@@ -1167,7 +1168,7 @@
       "id": 14,
       "name": "句号模式",
       "enable": true,
-      "hotkey": "*.",
+      "hotkey": ".",
       "parentID": 0,
       "hotkeys": {
         "*,": [
@@ -1327,7 +1328,7 @@
       "id": 15,
       "name": "鼠标右键",
       "enable": true,
-      "hotkey": "*rbutton",
+      "hotkey": "rbutton",
       "parentID": 0,
       "hotkeys": {
         "*LButton": [

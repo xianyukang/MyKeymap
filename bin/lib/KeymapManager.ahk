@@ -261,6 +261,12 @@ class Keymap {
           this.toRestore.Push(item)
           break
         }
+        name2 := LTrim(name, "*")
+        if km.DisableHotkey(name2) {
+          item := { keymap: km, hotkey: name2 }
+          this.toRestore.Push(item)
+          break
+        }
         km := km.parent
       }
       this.EnableHotkey(name)
