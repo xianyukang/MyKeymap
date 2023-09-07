@@ -231,7 +231,12 @@ ActivateWindow(winTitle := "", isHide := false) {
   ; 如果匹配不到窗口且认为窗口为隐藏窗口时查找隐藏窗口
   hwnds := FindWindows(winTitle, (hwnd) => WinGetTitle(hwnd) != "")
   if ((!hwnds.Length) && isHide) {
-    hwnd := FindHiddenWindows(winTitle)
+    hwnds := FindHiddenWindows(winTitle)
+    if hwnds.Length {
+      WinShow(hwnds.Get(1))
+      WinActivate(hwnds.Get(1))
+      return true
+    }
   }
 
   ; 如果匹配到则跳转，匹配不到返回0
@@ -246,7 +251,7 @@ ActivateWindow(winTitle := "", isHide := false) {
     if (WinExist("A") != hwnd || WinGetMinMax(hwnd) = -1) {
       WinActivate(hwnd)
     } else {
-      WinMinimize(hwnd)
+        WinMinimize(hwnd)
     }
   } else {
     ; 如果多个窗口则来回切换
