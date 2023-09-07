@@ -29,6 +29,8 @@ class CLayout extends Gui {
 
   ; 初始化已使用的显示器信息
   InitMonitors() {
+    isWin10 := StrCompare(A_OSVersion, "10.0.22000") < 0
+
     ; 获取已使用的显示器数量
     loop this.monCount {
       monIndex := A_Index
@@ -45,9 +47,9 @@ class CLayout extends Gui {
       monIco := super.Add("Text", "x" x " y0 w" this.monitorIcoSize " h" this.monitorIcoSize " 0x1", "🖥️")
       monIco.SetFont("s128 c000000")
 
-      ; 是 Windows 10 则使用不同的 y 坐标
       y := 52
-      if InStr(A_OSVersion, "10") == 1 {
+      ; 是 Windows 10 则使用不同的 y 坐标
+      if isWin10 {
         y := 66
       }
 
