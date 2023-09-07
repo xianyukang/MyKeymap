@@ -1363,6 +1363,14 @@
             "actionValueID": 21
           }
         ],
+        "*f": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "target": "D:\\project\\ahk\\zz.ahk",
+            "runInBackground": true
+          }
+        ],
         "*space": [
           {
             "windowGroupID": 0,

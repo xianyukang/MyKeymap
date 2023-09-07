@@ -251,8 +251,8 @@ func activateOrRun1(a Action, inAbbrContext bool) string {
 	args := toAHKFuncArg(a.Args)
 	workingDir := toAHKFuncArg(a.WorkingDir)
 
-	call := fmt.Sprintf(`ActivateOrRun(%s, %s, %s, %s, %t)`, winTitle, target, args, workingDir, a.RunAsAdmin)
-	if args == `""` && workingDir == `""` && !a.RunAsAdmin {
+	call := fmt.Sprintf(`ActivateOrRun(%s, %s, %s, %s, %t, %t, %t)`, winTitle, target, args, workingDir, a.RunAsAdmin, a.DetectHiddenWindow, a.RunInBackground)
+	if args == `""` && workingDir == `""` && !a.RunAsAdmin && !a.DetectHiddenWindow && !a.RunInBackground {
 		call = fmt.Sprintf(`ActivateOrRun(%s, %s)`, winTitle, target)
 	}
 

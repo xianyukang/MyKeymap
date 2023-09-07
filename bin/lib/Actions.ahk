@@ -29,7 +29,7 @@ MakeWindowDraggable() {
  * @param {bool} isHide 窗口是否为隐藏窗口
  * @returns {void} 
  */
-ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin := false, isHide := false) {
+ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin := false, isHide := false, runInBackground := false) {
   ; 如果是程序或参数中带有“选中的文件” 则通过该程序打开该连接
   if (InStr(target, "{selected}") || InStr(args, "{selected}")) {
     ; 没有获取到文字直接返回
@@ -43,7 +43,7 @@ ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin 
     return
 
   ; 程序没有运行，运行程序
-  RunPrograms(target, args, workingDir, admin)
+  RunPrograms(target, args, workingDir, admin, runInBackground)
 }
 
 /**

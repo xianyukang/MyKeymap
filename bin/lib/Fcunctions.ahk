@@ -144,7 +144,7 @@ CompleteProgramPath(target) {
  * @param target 程序路径 
  * @param arguments 参数
  * @param directory 工作目录
- * @param operation 选项
+ * @param operation 选项 (runas/open/edit/print
  * @param show 是否显示
  */
 ShellRun(target, arguments?, directory?, operation?, show?) {
@@ -168,9 +168,9 @@ ActivateDesktop() {
  * @param args 参数
  * @param workingDir 工作目录
  */
-RunAsAdmin(target, args, workingDir) {
+RunAsAdmin(target, args, workingDir, options) {
   try {
-    Run("*RunAs " target " " args, workingDir)
+    Run("*RunAs " target " " args, workingDir, options)
   } catch Error as e {
     Tip("使用管理启动失败 " target ", " e.Message)
   }
@@ -184,18 +184,20 @@ RunAsAdmin(target, args, workingDir) {
  * @param {number} admin 是否为管理员启动
  * @returns {void} 
  */
-RunPrograms(target, args := "", workingDir := "", admin := false) {
+RunPrograms(target, args := "", workingDir := "", admin := false, runInBackground := false) {
   ; 记录当前窗口的hwnd，当软件启动失败时还原焦点
   currentHwnd := WinExist("A")
 
-  ActivateDesktop()
+  if !runInBackground {
+    ActivateDesktop()
+  }
 
   try {
     ; 补全程序路径
     programPath := CompleteProgramPath(target)
     if not (programPath) {
       ; 没有找到程序，可能是ms-setting: 或shell:之类的连接
-      Run(args ? target " " args : target, workingDir)
+      Run(args ? target " " args : target, workingDir, runInBackground ? "Hide" : "")
       return
     }
 
@@ -206,9 +208,9 @@ RunPrograms(target, args := "", workingDir := "", admin := false) {
     }
 
     if (admin) {
-      runAsAdmin(programPath, args, workingDir)
+      runAsAdmin(programPath, args, workingDir, runInBackground ? "Hide" : "")
     } else {
-      ShellRun(programPath, args, workingDir)
+      ShellRun(programPath, args, workingDir, , runInBackground ? 0 : unset)
     }
 
   } catch Error as e {

@@ -223,6 +223,7 @@ InitKeymap()
   ; 鼠标右键
   km15 := KeymapManager.NewKeymap("rbutton", "鼠标右键")
   km := km15
+  km.Map("*f", _ => ActivateOrRun("", "D:\project\ahk\zz.ahk", "", "", false, false, true))
   km.Map("singlePress", fast.RButton()), slow.Map("singlePress", slow.RButton())
   km.Map("*LButton", _ => (Send("^!{tab}")))
   km.RemapKey("c", "backspace")
@@ -246,7 +247,7 @@ InitKeymap()
 ExecCapslockAbbr(command) {
   switch command {
     case "bb":
-      ActivateOrRun("Bing 词典", "msedge.exe", "--app=https://www.bing.com/dict/search?q={selected}", "", false)
+      ActivateOrRun("Bing 词典", "msedge.exe", "--app=https://www.bing.com/dict/search?q={selected}", "", false, false, false)
     case "cmd":
       ActivateOrRun("ahk_exe cmd.exe", "cmd.exe")
     case "dd":
@@ -264,9 +265,9 @@ ExecCapslockAbbr(command) {
     case "ly":
       ActivateOrRun("", "ms-settings:bluetooth")
     case "mm":
-      ActivateOrRun("MyKeymap2 - Visual Studio Code", "shortcuts\Visual Studio Code.lnk", "D:\MyFiles\MyKeymap2", "", false)
+      ActivateOrRun("MyKeymap2 - Visual Studio Code", "shortcuts\Visual Studio Code.lnk", "D:\MyFiles\MyKeymap2", "", false, false, false)
     case "ms":
-      ActivateOrRun("my_site - Visual Studio Code", "shortcuts\Visual Studio Code.lnk", "D:\project\my_site", "", false)
+      ActivateOrRun("my_site - Visual Studio Code", "shortcuts\Visual Studio Code.lnk", "D:\project\my_site", "", false, false, false)
     case "no":
       ActivateOrRun("记事本", "notepad.exe")
     case "rb":
@@ -286,7 +287,7 @@ ExecCapslockAbbr(command) {
     case "wf":
       ActivateOrRun("", "ms-availablenetworks:")
     case "wt":
-      ActivateOrRun("", "wt.exe", "-d `"{selected}`"", "", false)
+      ActivateOrRun("", "wt.exe", "-d `"{selected}`"", "", false, false, false)
   }
 }
 

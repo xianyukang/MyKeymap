@@ -15,6 +15,7 @@ export interface Action {
   args?: string
   workingDir?: string
   runAsAdmin?: boolean
+  runInBackground?: boolean
   detectHiddenWindow?: boolean
 
 }

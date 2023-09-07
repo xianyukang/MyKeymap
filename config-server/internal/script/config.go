@@ -39,6 +39,7 @@ type Action struct {
 	Args               string `json:"args,omitempty"`
 	WorkingDir         string `json:"workingDir,omitempty"`
 	RunAsAdmin         bool   `json:"runAsAdmin,omitempty"`
+	RunInBackground    bool   `json:"runInBackground,omitempty"`
 	DetectHiddenWindow bool   `json:"detectHiddenWindow,omitempty"`
 	AHKCode            string `json:"ahkCode,omitempty"`
 

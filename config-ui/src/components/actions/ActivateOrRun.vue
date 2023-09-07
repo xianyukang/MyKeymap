@@ -20,10 +20,11 @@ const label2 = "当窗口不存在时要启动的: 程序 / 文件夹 / URL"
 const label3 = "命令行参数"
 const label4 = "工作目录"
 const label5 = "自定义备注"
-const label6 = "以管理员身份运行"
+const label6 = "以管理员运行"
 const label7 = "检测隐藏窗口"
 const label8 = "🔍 查看窗口标识符"
 const label9 = "📗 查看例子"
+const label10 = "后台运行"
 
 </script>
 
@@ -42,6 +43,7 @@ const label9 = "📗 查看例子"
   <v-text-field color="primary" autocomplete="off" variant="underlined" :label="label5" v-model="action.comment" />
   <v-card-actions class="card-actions">
     <v-checkbox :label="label6" color="secondary" v-model="action.runAsAdmin" />
+    <v-checkbox :label="label10" color="secondary" v-model="action.runInBackground" />
     <v-checkbox :label="label7" color="secondary" v-model="action.detectHiddenWindow" />
     <v-btn class="action-button" color="primary" variant="outlined" @click="server.runWindowSpy">{{ label8 }}</v-btn>
     <v-btn class="action-button" color="primary" variant="outlined" target="_blank" href="/ProgramPathExample.html">{{ label9 }}</v-btn>
