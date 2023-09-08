@@ -1461,7 +1461,8 @@
             "actionTypeID": 1,
             "comment": "位于 PATH 环境变量中的命令可以直接启动，无需设置完整路径",
             "winTitle": "ahk_exe cmd.exe",
-            "target": "cmd.exe"
+            "target": "cmd.exe",
+            "args": "/k cd %userprofile%"
           }
         ],
         "dd": [

@@ -249,7 +249,7 @@ ExecCapslockAbbr(command) {
     case "bb":
       ActivateOrRun("Bing 词典", "msedge.exe", "--app=https://www.bing.com/dict/search?q={selected}", "", false, false, false)
     case "cmd":
-      ActivateOrRun("ahk_exe cmd.exe", "cmd.exe")
+      ActivateOrRun("ahk_exe cmd.exe", "cmd.exe", "/k cd %userprofile%", "", false, false, false)
     case "dd":
       ActivateOrRun("", "shell:downloads")
     case "dm":
