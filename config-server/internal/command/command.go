@@ -12,14 +12,15 @@ import (
 	"text/template"
 )
 
-var Map = map[string]func(){
-	"AlignText":   AlignText,
-	"GenerateAHK": GenerateAHK,
+var Map = map[string]func(args ...string){
+	"AlignText":     AlignText,
+	"GenerateAHK":   GenerateAHK,
+	"ChangeVersion": ChangeVersion,
 }
 
 var logger = log.New(os.Stderr, "", 0)
 
-func GenerateAHK() {
+func GenerateAHK(args ...string) {
 	if len(os.Args) < 5 {
 		logger.Fatal("GenerateAHK requires 3 arguments, for example: GenerateAHK ./config.json ./templates/script.ahk ./output.ahk")
 	}
@@ -37,7 +38,17 @@ func GenerateAHK() {
 	}
 }
 
-func AlignText() {
+func ChangeVersion(args ...string) {
+	config, err := script.ParseConfig("../data/config.json")
+	if err != nil {
+		panic(err)
+	}
+	config.Options.MykeymapVersion = args[0]
+	script.SaveConfigFile(config)
+	script.GenerateScripts(config)
+}
+
+func AlignText(args ...string) {
 	text, err := readStdin()
 	if err != nil {
 		fmt.Println(err)

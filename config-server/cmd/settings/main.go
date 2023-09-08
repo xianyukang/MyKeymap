@@ -1,12 +1,10 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
-	"github.com/goccy/go-json"
 	"io"
 	"log"
 	"net"
@@ -27,7 +25,7 @@ func main() {
 
 	if len(os.Args) >= 2 {
 		if handler, ok := command.Map[os.Args[1]]; ok {
-			handler()
+			handler(os.Args[2:]...)
 			return
 		}
 	}
@@ -216,7 +214,7 @@ func SaveConfigHandler(debug bool) gin.HandlerFunc {
 		// delete(config, "helpPageHtml")
 		// saveHelpPageHtml(helpPageHtml)
 
-		saveConfigFile(config) // 保存配置文件
+		script.SaveConfigFile(&config) // 保存配置文件
 
 		if debug {
 			script.GenerateScripts(&config)                 // 生成脚本文件
@@ -226,21 +224,6 @@ func SaveConfigHandler(debug bool) gin.HandlerFunc {
 		}
 
 		c.JSON(http.StatusOK, gin.H{"message": "ok"})
-	}
-}
-
-func saveConfigFile(config script.Config) {
-	// 先写到缓冲区,  如果直接写文件的话, 当编码过程遇到错误时, 会导致文件损坏
-	buf := new(bytes.Buffer)
-	encoder := json.NewEncoder(buf)
-	encoder.SetIndent("", "  ")
-	encoder.SetEscapeHTML(false)
-	if err := encoder.Encode(config); err != nil {
-		panic(err)
-	}
-
-	if err := os.WriteFile("../data/config.json", buf.Bytes(), 0644); err != nil {
-		panic(err)
 	}
 }
 

@@ -1,6 +1,7 @@
 package script
 
 import (
+	"bytes"
 	"fmt"
 	"github.com/goccy/go-json"
 	"os"
@@ -58,6 +59,21 @@ func ParseConfig(file string) (*Config, error) {
 		return nil, fmt.Errorf("cannot parse config: %v", err)
 	}
 	return &config, nil
+}
+
+func SaveConfigFile(config *Config) {
+	// 先写到缓冲区,  如果直接写文件的话, 当编码过程遇到错误时, 会导致文件损坏
+	buf := new(bytes.Buffer)
+	encoder := json.NewEncoder(buf)
+	encoder.SetIndent("", "  ")
+	encoder.SetEscapeHTML(false)
+	if err := encoder.Encode(config); err != nil {
+		panic(err)
+	}
+
+	if err := os.WriteFile("../data/config.json", buf.Bytes(), 0644); err != nil {
+		panic(err)
+	}
 }
 
 func (c *Config) GetWinTitle(a Action) (winTitle string, conditionType int) {

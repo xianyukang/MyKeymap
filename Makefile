@@ -27,15 +27,20 @@ copyFiles:
 	cp MyKeymap.exe $(folder)/
 
 build: buildServer buildClient copyFiles
-	@echo ------------------------- build ok -------------------------------
-
-checkForAHKUpdate:
-	go run build_tools.go checkForAHKUpdate $(ahkVersion)
-
-upload: build checkForAHKUpdate
+	cd bin; ./settings.exe ChangeVersion $(version)
 	rm -f $(zip)
 	7z.exe a $(zip) $(folder)
-	qshell fput static-x $(zip) $(zip) --overwrite
+	rm -f -r $(folder)
+	@echo ------------------------- build ok -------------------------------
+
+# qshell fput static-x $(zip) $(zip) --overwrite
+upload:
+	go run build_tools.go checkForAHKUpdate $(ahkVersion)
+	python3 lanzou_client.py $(zip) 2> share_link
+	go run build_tools.go updateShareLink $(version)
+	rm -f share_link
+	rm -f readme.md
+	mv readme2.md readme.md
 	@echo ------------------------- upload ok -------------------------------
 
 # 下面是开发时用到的命令:
