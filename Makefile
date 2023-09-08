@@ -28,7 +28,7 @@ copyFiles:
 
 build: buildServer buildClient copyFiles
 	cd bin; ./settings.exe ChangeVersion $(version)
-	rm -f $(zip)
+	rm -f MyKeymap-*.7z
 	7z.exe a $(zip) $(folder)
 	rm -f -r $(folder)
 	@echo ------------------------- build ok -------------------------------
