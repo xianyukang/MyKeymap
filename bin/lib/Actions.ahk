@@ -508,11 +508,13 @@ WrapSelectedText(Format) {
   }
 }
 
-CopySelectedAsPlainText()
-{
+CopySelectedAsPlainText() {
   A_Clipboard := ""
   Send "^c"
-  ClipWait
+  if !ClipWait(1) {
+    Tip("复制失败")
+    return
+  }
   A_Clipboard := A_Clipboard
   Tip("复制成功")
 }
