@@ -1455,11 +1455,20 @@
             "args": "--app=https://www.bing.com/dict/search?q={selected}"
           }
         ],
+        "cc": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "comment": "用 VS Code 打开选中的文件，在新窗口中打开",
+            "target": "shortcuts\\Visual Studio Code.lnk",
+            "args": "-n {selected}"
+          }
+        ],
         "cmd": [
           {
             "windowGroupID": 0,
             "actionTypeID": 1,
-            "comment": "位于 PATH 环境变量中的命令可以直接启动，无需设置完整路径",
+            "comment": "位于 PATH 环境变量中的命令 (比如 cmd.exe) 可以直接启动，无需使用完整路径",
             "winTitle": "ahk_exe cmd.exe",
             "target": "cmd.exe",
             "args": "/k cd %userprofile%"
