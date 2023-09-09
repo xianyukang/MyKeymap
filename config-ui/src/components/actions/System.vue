@@ -11,6 +11,7 @@ const group1 = [
 ]
 const group2 = [
   { actionValueID: 7, label: "重启文件资源管理器" },
+  { actionValueID: 8, label: "复制文件路径或纯文本" },
 ]
 </script>
 

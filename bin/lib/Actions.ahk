@@ -507,3 +507,12 @@ WrapSelectedText(Format) {
     PasteToPrograms(StrReplace(format, "{text}", text))
   }
 }
+
+CopySelectedAsPlainText()
+{
+  A_Clipboard := ""
+  Send "^c"
+  ClipWait
+  A_Clipboard := A_Clipboard
+  Tip("复制成功")
+}
