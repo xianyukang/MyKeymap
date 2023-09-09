@@ -108,7 +108,7 @@ EnterCapslockAbbr(capsHook) {
 
   endReason := StartInputHook(capsHook)
   if (InStr(endReason, "Match")) {
-    char := SubStr(capsHook.Match, StrLen(capsHook.Match) - 1)
+    char := SubStr(capsHook.Match, -1)
     PostCharToCaspAbbr(, char)
     SetTimer(HideCaspAbbr, -1)
   } else {
