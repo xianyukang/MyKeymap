@@ -124,6 +124,7 @@ class Keymap {
     this.Hotkey := hotkey
     this.SinglePressAction := NoOperation
     this.M := Map()
+    this.M.CaseSense := "Off"
     this.ToggleLock := this._lockOrUnlock.Bind(this)
     this.AfterLocked := false
     this.parent := false

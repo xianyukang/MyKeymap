@@ -27,7 +27,7 @@ const keyColor = computed(() => {
 })
 
 const disabled = computed(() => {
-  return store.disabledKeys[store.keymap!.id][props.hotkey]
+  return store.disabledKeys[store.keymap!.id][props.hotkey.toLowerCase()]
 })
 
 function click(hotkey: string) {

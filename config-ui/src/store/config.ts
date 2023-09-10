@@ -9,6 +9,7 @@ import trimStart from "lodash-es/trimStart";
 const defaultKeyboardLayout = "1 2 3 4 5 6 7 8 9 0\nq w e r t y u i o p\na s d f g h j k l ;\nz x c v b n m , . /\nspace enter backspace - [ ' singlePress"
 const keyboardLayout74 = "esc f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12\n` 1 2 3 4 5 6 7 8 9 0 - = backspace\ntab q w e r t y u i o p [ ] \\\ncapslock a s d f g h j k l ; ' enter\nLShift z x c v b n m , . / RShift\nLCtrl LWin LAlt space RAlt RWin RCtrl singlePress"
 const keyboardLayout104 = "esc f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12\n` 1 2 3 4 5 6 7 8 9 0 - = backspace\ntab q w e r t y u i o p [ ] \\\ncapslock a s d f g h j k l ; ' enter\nLShift z x c v b n m , . / RShift\nLCtrl LWin LAlt space RAlt RWin RCtrl singlePress\nPrintScreen ScrollLock Pause insert home pgup delete end pgdn up down left right\nnumpad0 numpad1 numpad2 numpad3 numpad4 numpad5 numpad6 numpad7 numpad8 numpad9\nNumpadDot NumpadEnter NumpadAdd NumpadSub NumpadMult NumpadDiv NumLock"
+const mouseButtons = "LButton RButton MButton XButton1 XButton2 WheelUp WheelDown WheelLeft WheelRight"
 
 export const useConfigStore = defineStore('config', () => {
   // 根据 url 返回对应的 keymap
@@ -137,6 +138,8 @@ export const useConfigStore = defineStore('config', () => {
       options.value.keyboardLayout = keyboardLayout74
     } else if(num == 104) {
       options.value.keyboardLayout = keyboardLayout104
+    } else if (num == 1) {
+      options.value.keyboardLayout += '\n' + mouseButtons
     }
   }
 
@@ -193,11 +196,11 @@ function _saveConfig(config: Config | undefined) {
   if (!config) {
     return
   }
-  const keySet = new Set(parseKeyboardLayout(config.options.keyboardLayout, 'rbutton').flatMap(x => x))
 
   // 克隆一下, 然后删掉空的 action
   config = JSON.parse(JSON.stringify(config))
   for (const km of config!.keymaps) {
+    const keySet = new Set(parseKeyboardLayout(config!.options.keyboardLayout, km.hotkey).flatMap(x => x))
     for (const [hk, actions] of Object.entries(km.hotkeys)) {
       const filterd = actions.filter(x => !x.isEmpty)
       const normalKeymap = km.id > 4
@@ -218,14 +221,14 @@ function _disabledKeys(keymaps: Keymap[]) {
     if (!m[km.id]) {
       m[km.id] = {}
     }
-    m[km.id][km.hotkey] = true
-    m[km.id]['*' + km.hotkey] = true
+    m[km.id][km.hotkey.toLowerCase()] = true
+    m[km.id]['*' + km.hotkey.toLowerCase()] = true
 
     if (!m[km.parentID]) {
       m[km.parentID] = {}
     }
-    m[km.parentID][km.hotkey] = true
-    m[km.parentID]['*' + km.hotkey] = true
+    m[km.parentID][km.hotkey.toLowerCase()] = true
+    m[km.parentID]['*' + km.hotkey.toLowerCase()] = true
   }
   return m
 }
@@ -260,8 +263,17 @@ export const parseKeyboardLayout = (layout: string, keymapHotkey: string) => {
       }
     )
 
-  if (keymapHotkey.toLowerCase().includes("button")) {
-    rows[rows.length - 1].push("*LButton", "*WheelUp", "*WheelDown")
+  if (keymapHotkey.toLowerCase().includes("rbutton")) {
+    const last = rows[rows.length - 1]
+    if (!last.includes("*LButton")) {
+      last.push("*LButton")
+    }
+    if (!last.includes("*WheelUp")) {
+      last.push("*WheelUp")
+    }
+    if (!last.includes("*WheelDown")) {
+      last.push("*WheelDown")
+    }
   }
   return rows
 }
