@@ -7,6 +7,8 @@ import trimStart from "lodash-es/trimStart";
 
 
 const defaultKeyboardLayout = "1 2 3 4 5 6 7 8 9 0\nq w e r t y u i o p\na s d f g h j k l ;\nz x c v b n m , . /\nspace enter backspace - [ ' singlePress"
+const keyboardLayout74 = "esc f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12\n` 1 2 3 4 5 6 7 8 9 0 - = backspace\ntab q w e r t y u i o p [ ] \\\ncapslock a s d f g h j k l ; ' enter\nLShift z x c v b n m , . / RShift\nLCtrl LWin LAlt space RAlt RWin RCtrl singlePress"
+const keyboardLayout104 = "esc f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12\n` 1 2 3 4 5 6 7 8 9 0 - = backspace\ntab q w e r t y u i o p [ ] \\\ncapslock a s d f g h j k l ; ' enter\nLShift z x c v b n m , . / RShift\nLCtrl LWin LAlt space RAlt RWin RCtrl singlePress\nPrintScreen ScrollLock Pause insert home pgup delete end pgdn up down left right\nnumpad0 numpad1 numpad2 numpad3 numpad4 numpad5 numpad6 numpad7 numpad8 numpad9\nNumpadDot NumpadEnter NumpadAdd NumpadSub NumpadMult NumpadDiv NumLock"
 
 export const useConfigStore = defineStore('config', () => {
   // 根据 url 返回对应的 keymap
@@ -128,8 +130,14 @@ export const useConfigStore = defineStore('config', () => {
     keymap.value!.hotkeys[key] = [{ ...emptyAction }]
   }
 
-  function resetKeyboardLayout() {
-    options.value.keyboardLayout = defaultKeyboardLayout
+  function resetKeyboardLayout(num: number) {
+    if (num == 0) {
+      options.value.keyboardLayout = defaultKeyboardLayout
+    } else if (num == 74) {
+      options.value.keyboardLayout = keyboardLayout74
+    } else if(num == 104) {
+      options.value.keyboardLayout = keyboardLayout104
+    }
   }
 
   return {

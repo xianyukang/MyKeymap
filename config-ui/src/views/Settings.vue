@@ -244,7 +244,9 @@ function onStartupChange() {
                     <v-textarea color="primary" variant="underlined" auto-grow rows="4" v-model="options.keyboardLayout"></v-textarea>
                   </v-card-text>
                   <v-card-actions class="d-flex justify-end">
-                    <v-btn variant="outlined" color="green" @click="useConfigStore().resetKeyboardLayout">重置为默认值</v-btn>
+                    <v-btn variant="outlined" color="green" @click="useConfigStore().resetKeyboardLayout(0)">重置为默认值</v-btn>
+                    <v-btn variant="outlined" color="green" @click="useConfigStore().resetKeyboardLayout(74)">重置为 74 键</v-btn>
+                    <v-btn variant="outlined" color="green" @click="useConfigStore().resetKeyboardLayout(104)">重置为 104 键</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-col>

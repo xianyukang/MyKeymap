@@ -177,7 +177,8 @@ class Keymap {
 
   Map(hotkeyName, handler, keymapToLock := false, winTitle := "", conditionType := 0, options := "") {
     wrapper := Keymap._wrapHandler(handler, keymapToLock)
-    if hotkeyName == "singlePress" {
+    ; 用 = 表示忽略大小写进行字符串比较
+    if hotkeyName = "singlePress" {
       this.SinglePressAction := wrapper
       return
     }
