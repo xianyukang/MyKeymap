@@ -66,6 +66,7 @@ export interface Options {
   customShellMenu: string
   startup: boolean
   keyMapping: string
+  keyboardLayout: string
 }
 
 export interface Config {

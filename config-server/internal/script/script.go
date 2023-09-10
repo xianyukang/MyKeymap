@@ -92,7 +92,8 @@ func sortHotkeys(hotkeyMap map[string][]Action) []Action {
 	res := make([]Action, 0, len(hotkeyMap))
 	for hotkey, actions := range hotkeyMap {
 		for _, action := range actions {
-			action.Hotkey = hotkey
+			// 去掉首末的 " 字符, 虽然此处按字节取子切片也行, 但写法不够通用
+			action.Hotkey = substr(toAHKFuncArg(hotkey), 1, -1)
 			res = append(res, action)
 		}
 	}
@@ -111,4 +112,23 @@ func sortHotkeys(hotkeyMap map[string][]Action) []Action {
 	})
 
 	return res
+}
+
+// 取子字符串，并不想看起来那么简单: https://stackoverflow.com/a/56129336
+// NOTE: this isn't multi-Unicode-codepoint aware, like specifying skintone or
+//       gender of an emoji: https://unicode.org/emoji/charts/full-emoji-modifiers.html
+func substr(input string, start int, length int) string {
+	asRunes := []rune(input)
+
+	if start >= len(asRunes) {
+		return ""
+	}
+
+	if start+length > len(asRunes) {
+		length = len(asRunes) - start
+	} else if length < 0 {
+		length = len(asRunes) - start + length
+	}
+
+	return string(asRunes[start : start+length])
 }

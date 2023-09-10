@@ -23,6 +23,7 @@ const { customKeymaps, customParentKeymaps, customSonKeymaps, options, keymaps }
 const currId = ref(0)
 
 const showMouseOption = ref(false)
+const showKeyboardLayout = ref(false)
 
 const checkKeymapData = (keymap: Keymap) => {
   if (keymap.hotkey == "") {
@@ -171,11 +172,12 @@ function onStartupChange() {
                   <window-group-dialog/>
                   <br/>
                   <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showMouseOption = !showMouseOption">修改鼠标移动参数</v-btn>
+                  <br/>
+                  <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showKeyboardLayout = !showKeyboardLayout">修改键盘布局</v-btn>
                 </v-card-text>
               </v-card>
             </v-col>
           </v-row>
-          <v-expand-transition>
             <v-row :dense="true" v-show="showMouseOption">
               <v-col>
                 <v-card title="鼠标移动相关参数" min-width="350">
@@ -235,7 +237,18 @@ function onStartupChange() {
                 </v-card>
               </v-col>
             </v-row>
-          </v-expand-transition>
+            <v-row v-show="showKeyboardLayout">
+              <v-col>
+                <v-card title="键盘布局" elevation="2">
+                  <v-card-text>
+                    <v-textarea color="primary" variant="underlined" auto-grow rows="4" v-model="options.keyboardLayout"></v-textarea>
+                  </v-card-text>
+                  <v-card-actions class="d-flex justify-end">
+                    <v-btn variant="outlined" color="green" @click="useConfigStore().resetKeyboardLayout">重置为默认值</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+            </v-row>
         </div>
       </v-col>
     </v-row>

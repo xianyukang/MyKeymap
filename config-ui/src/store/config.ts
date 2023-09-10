@@ -5,6 +5,9 @@ import { Action, Config, Keymap } from "@/types/config";
 import { useMyFetch } from "./server";
 import trimStart from "lodash-es/trimStart";
 
+
+const defaultKeyboardLayout = "1 2 3 4 5 6 7 8 9 0\nq w e r t y u i o p\na s d f g h j k l ;\nz x c v b n m , . /\nspace enter backspace - [ ' singlePress"
+
 export const useConfigStore = defineStore('config', () => {
   // 根据 url 返回对应的 keymap
   const config = fetchConfig()
@@ -125,9 +128,13 @@ export const useConfigStore = defineStore('config', () => {
     keymap.value!.hotkeys[key] = [{ ...emptyAction }]
   }
 
+  function resetKeyboardLayout() {
+    options.value.keyboardLayout = defaultKeyboardLayout
+  }
+
   return {
     config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps, options, hotkeys,
-    customParentKeymaps, customSonKeymaps, keymaps, changeActionComment, changeAbbrEnable,
+    customParentKeymaps, customSonKeymaps, keymaps, changeActionComment, changeAbbrEnable, resetKeyboardLayout,
     changeHotkey, removeHotkey, addHotKey,
     disabledKeys: computed(() => _disabledKeys(enabledKeymaps.value)),
     getAction: (hotkey: string) => _getAction(keymap.value, hotkey, windowGroupID.value),
@@ -178,12 +185,15 @@ function _saveConfig(config: Config | undefined) {
   if (!config) {
     return
   }
+  const keySet = new Set(parseKeyboardLayout(config.options.keyboardLayout, 'rbutton').flatMap(x => x))
+
   // 克隆一下, 然后删掉空的 action
   config = JSON.parse(JSON.stringify(config))
   for (const km of config!.keymaps) {
     for (const [hk, actions] of Object.entries(km.hotkeys)) {
       const filterd = actions.filter(x => !x.isEmpty)
-      if (filterd.length > 0) {
+      const normalKeymap = km.id > 4
+      if (filterd.length > 0 && (!normalKeymap || (normalKeymap && keySet.has(hk)))) {
         km.hotkeys[hk] = filterd
       } else {
         delete km.hotkeys[hk]
@@ -215,6 +225,35 @@ function _disabledKeys(keymaps: Keymap[]) {
 function fetchConfig() {
   const config = ref<Config>()
   const { data, error } = useMyFetch("/config").json<Config>()
-  watch(data, (newValue) => config.value = newValue!)
+  watch(data, (val) => {
+    val = val!
+    // 这个字段是后加的, 旧的 config.json 肯定没有此字段, 所以要初始化
+    if (!val.options.keyboardLayout) {
+      val.options.keyboardLayout = defaultKeyboardLayout
+    }
+    config.value = val
+  })
   return config
+}
+
+export const parseKeyboardLayout = (layout: string, keymapHotkey: string) => {
+  const rows = layout
+    .split('\n')
+    .filter(x => x.trim())
+    .map(
+      line => {
+        const keys = line.split(/\s+/).filter(x => x.trim())
+        return keys.map(key => {
+          if (key == 'singlePress') {
+            return key
+          }
+          return '*' + key
+        })
+      }
+    )
+
+  if (keymapHotkey.toLowerCase().includes("button")) {
+    rows[rows.length - 1].push("*LButton", "*WheelUp", "*WheelDown")
+  }
+  return rows
 }

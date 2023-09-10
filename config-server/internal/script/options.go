@@ -13,6 +13,7 @@ type Options struct {
 	PathVariables   []PathVariable `json:"pathVariables"`
 	Startup         bool           `json:"startup"`
 	KeyMapping      string         `json:"keyMapping"`
+	KeyboardLayout  string         `json:"keyboardLayout"`
 }
 
 type WindowGroup struct {
