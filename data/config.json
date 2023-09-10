@@ -831,7 +831,7 @@
       "id": 11,
       "name": "Tab 模式",
       "enable": false,
-      "hotkey": "tab",
+      "hotkey": "*tab",
       "parentID": 0,
       "hotkeys": {
         "singlePress": [
@@ -847,7 +847,7 @@
       "id": 12,
       "name": "空格模式",
       "enable": false,
-      "hotkey": "space",
+      "hotkey": "*space",
       "parentID": 0,
       "hotkeys": {
         "*,": [
@@ -1192,7 +1192,7 @@
       "id": 14,
       "name": "句号模式",
       "enable": true,
-      "hotkey": ".",
+      "hotkey": "*.",
       "parentID": 0,
       "hotkeys": {
         "*,": [
@@ -1350,6 +1350,166 @@
     },
     {
       "id": 15,
+      "name": "逗号模式",
+      "enable": false,
+      "hotkey": "*,",
+      "parentID": 0,
+      "hotkeys": {
+        "*.": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "Shift 键",
+            "actionValueID": 19
+          }
+        ],
+        "*2": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "Ctrl+Shift+Tab",
+            "actionValueID": 28
+          }
+        ],
+        "*3": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "Ctrl + Tab",
+            "actionValueID": 26
+          }
+        ],
+        "*a": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "光标 - 跳到行首",
+            "actionValueID": 5
+          }
+        ],
+        "*b": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "删一个单词",
+            "actionValueID": 18
+          }
+        ],
+        "*c": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "Backspace",
+            "actionValueID": 21
+          }
+        ],
+        "*d": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "光标 - 下移",
+            "actionValueID": 2
+          }
+        ],
+        "*e": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "光标 - 上移",
+            "actionValueID": 1
+          }
+        ],
+        "*f": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "光标 - 右移",
+            "actionValueID": 4
+          }
+        ],
+        "*g": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "光标 - 跳到行尾",
+            "actionValueID": 6
+          }
+        ],
+        "*q": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "右键菜单",
+            "actionValueID": 17
+          }
+        ],
+        "*r": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "Tab",
+            "actionValueID": 25
+          }
+        ],
+        "*s": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "光标 - 左移",
+            "actionValueID": 3
+          }
+        ],
+        "*space": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "Enter",
+            "actionValueID": 22
+          }
+        ],
+        "*v": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "光标 - 下一单词",
+            "actionValueID": 8
+          }
+        ],
+        "*w": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "Shift + Tab",
+            "actionValueID": 27
+          }
+        ],
+        "*x": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "Esc",
+            "actionValueID": 20
+          }
+        ],
+        "*z": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "光标 - 上一单词",
+            "actionValueID": 7
+          }
+        ],
+        "singlePress": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "keysToSend": "{blind}{.}"
+          }
+        ]
+      }
+    },
+    {
+      "id": 16,
       "name": "鼠标右键",
       "enable": true,
       "hotkey": "rbutton",
