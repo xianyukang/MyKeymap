@@ -3,6 +3,7 @@ import { computed, ref, watch } from "vue"
 import { useRoute } from "vue-router"
 import { Action, Config, Keymap } from "@/types/config";
 import { useMyFetch } from "./server";
+import trimStart from "lodash-es/trimStart";
 
 export const useConfigStore = defineStore('config', () => {
   // 根据 url 返回对应的 keymap
@@ -150,6 +151,18 @@ function _getAction(keymap: Keymap | undefined, hotkey: string, windowGroupID: n
   if (!actions) {
     actions = []
     keymap.hotkeys[hotkey] = actions
+    // 比如新增了 2 模式, 让它的 singlePress 默认为输入 2 键
+    if (hotkey == 'singlePress') {
+      console.log('singlePress')
+      const key = trimStart(keymap.hotkey, ' #!^+<>*~$')
+      actions.push({
+        windowGroupID: 0,
+        actionTypeID: 6,
+        isEmpty: false,
+        keysToSend: '{blind}{' + key + '}',
+        comment: '输入 ' + key + ' 键'
+      })
+    }
   }
 
   // 选择的 windowGroupID 还没有对应的 action, 那么初始化一下
