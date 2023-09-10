@@ -99,12 +99,14 @@ InitKeymap()
   km.Map("*r", _ => ActivateOrRun("ahk_exe FoxitReader.exe", "D:\install\Foxit Reader\FoxitReader.exe"))
   km.Map("*s", _ => ActivateOrRun("ahk_exe Code.exe", "shortcuts\Visual Studio Code.lnk"))
   km.Map("*w", _ => ActivateOrRun("ahk_exe chrome.exe", "shortcuts\Google Chrome.lnk"))
+  km.Map("singlePress", _ => (Send("{blind}{f}")))
   km.Map("*m", _ => ProcessExistSendKeyOrRun("TIM.exe", "^!z", "shortcuts\TIM.lnk"))
 
   ; Capslock + Space
   km7 := KeymapManager.AddSubKeymap(km5, "*space", "Capslock + Space")
   km := km7
   km.Map("*d", _ => ActivateOrRun("ahk_exe datagrip64.exe", "shortcuts\DataGrip.lnk"))
+  km.Map("singlePress", _ => (Send("{blind}{space}")))
   km.Map("*w", _ => ProcessExistSendKeyOrRun("WeChat.exe", "^!w", "shortcuts\微信.lnk"))
 
   ; J 模式
@@ -135,6 +137,7 @@ InitKeymap()
   km9 := KeymapManager.AddSubKeymap(km8, "*k", "J + K 模式")
   km := km9
   km.Map("*x", _ => (Send("{blind}+{esc}")))
+  km.Map("singlePress", _ => (Send("{blind}{k}")))
   km.Map("*a", _ => (Send("{blind}+{home}")))
   km.RemapKey("c", "backspace")
   km.Map("*d", _ => (Send("{blind}+{down}")))

@@ -360,6 +360,14 @@
             "winTitle": "ahk_exe chrome.exe",
             "target": "shortcuts\\Google Chrome.lnk"
           }
+        ],
+        "singlePress": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "输入 f 键",
+            "keysToSend": "{blind}{f}"
+          }
         ]
       }
     },
@@ -385,6 +393,14 @@
             "actionTypeID": 8,
             "comment": "微信",
             "ahkCode": "ProcessExistSendKeyOrRun(\"WeChat.exe\", \"^!w\", \"shortcuts\\微信.lnk\")"
+          }
+        ],
+        "singlePress": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "输入 space 键",
+            "keysToSend": "{blind}{space}"
           }
         ]
       }
@@ -642,6 +658,14 @@
             "actionTypeID": 7,
             "comment": "选择 - 上一单词",
             "actionValueID": 15
+          }
+        ],
+        "singlePress": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "输入 k 键",
+            "keysToSend": "{blind}{k}"
           }
         ]
       }
