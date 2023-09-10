@@ -404,13 +404,14 @@ StartInputHook(ih) {
  * @param {number} wParam 消息参数
  */
 PostMessageToCpasAbbr(msg, wParam := 0) {
-  static capsAbbrWindowHwnd := false
   temp := A_DetectHiddenWindows
   DetectHiddenWindows(1)
-  if !capsAbbrWindowHwnd {
-    capsAbbrWindowHwnd := WinExist("ahk_class MyKeymap_Command_Input ahk_exe MyKeymap-CommandInput.exe")
+  ; 调用 WinExist 的耗时都不超过 2ms, 没必要做缓存了
+  if WinExist("ahk_class MyKeymap_Command_Input ahk_exe MyKeymap-CommandInput.exe") {
+    PostMessage(msg, wParam, 0)
+  } else {
+    Tip("无法找到命令框, 可能需要重启 MyKeymap", -3000)
   }
-  PostMessage(msg, wParam, 0, , "ahk_id " capsAbbrWindowHwnd)
   DetectHiddenWindows(temp)
 }
 
