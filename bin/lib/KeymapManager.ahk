@@ -215,6 +215,10 @@ class Keymap {
 
   _lockOrUnlock(thiHotkey) {
     KeymapManager.SetLockRequest(this, true, true)
+    ; 这种情况是, 锁住后直接执行热键, 没有按下任何引导键 ( 比如先锁住 Caps 然后直接按 E )
+    if KeymapManager.Stack.Length == 1 {
+      KeymapManager._postHandler()
+    }
   }
 
   ; 启用 keymap
