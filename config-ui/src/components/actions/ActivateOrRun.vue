@@ -46,7 +46,6 @@ const label10 = "后台运行"
     <v-checkbox :label="label10" color="secondary" v-model="action.runInBackground" />
     <v-checkbox :label="label7" color="secondary" v-model="action.detectHiddenWindow" />
     <v-btn class="action-button" color="primary" variant="outlined" @click="server.runWindowSpy">{{ label8 }}</v-btn>
-    <v-btn class="action-button" color="primary" variant="outlined" target="_blank" href="/ProgramPathExample.html">{{ label9 }}</v-btn>
   </v-card-actions>
 </template>
 

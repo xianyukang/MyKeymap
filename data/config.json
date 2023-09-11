@@ -30,6 +30,14 @@
             "actionValueID": 13
           }
         ],
+        "*0": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "删除一行东西，然后输入一串文本，然后等待 1000 毫秒，再依次按下 enter、y、e、s、enter 键",
+            "keysToSend": "{home}+{end}{backspace}\n{text}i love homura and hikari\nsleep 1000\n{enter}yes{enter}"
+          }
+        ],
         "*;": [
           {
             "windowGroupID": 0,
@@ -201,6 +209,14 @@
             "actionValueID": 5
           }
         ],
+        "*z": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 2,
+            "comment": "复制文件路径或纯文本",
+            "actionValueID": 8
+          }
+        ],
         "singlePress": [
           {
             "windowGroupID": 0,
@@ -294,7 +310,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 8,
-            "comment": "TIM 进程存在则输入 Ctrl+Alt+Z 热键激活 TIM，否则启动 TIM",
+            "comment": "如果 TIM.exe 进程存在则输入 Ctrl+Alt+Z 热键激活 TIM，否则启动 TIM",
             "ahkCode": "ProcessExistSendKeyOrRun(\"TIM.exe\", \"^!z\", \"shortcuts\\TIM.lnk\")"
           }
         ],
@@ -1871,6 +1887,14 @@
             "actionTypeID": 6,
             "comment": "没错，缩写中可以包含空格，用del i love nia删掉这个示例",
             "keysToSend": "{text}我爱尼娅! \n{text}( 还 有 大 家 )"
+          }
+        ],
+        "jt": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "输入箭头符号",
+            "keysToSend": "{text}➤ "
           }
         ],
         "sj": [

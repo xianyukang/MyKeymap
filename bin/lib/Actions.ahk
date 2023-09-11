@@ -221,7 +221,13 @@ MinimizeWindow() {
  * 窗口置顶
  */
 ToggleWindowTopMost() {
-  WinSetAlwaysOnTop(!(WinGetExStyle("A") & 0x8), "A")
+  value := !(WinGetExStyle("A") & 0x8)
+  WinSetAlwaysOnTop(value, "A")
+  if value {
+    Tip("已置顶当前窗口")
+  } else {
+    Tip("取消置顶")
+  }
 }
 
 /**

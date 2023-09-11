@@ -35,7 +35,7 @@ InitKeymap()
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
 
-  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", ",,,.,/,dk,gg,i love nia,sj,sk,sz,xk,zk")
+  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", ",,,.,/,dk,gg,i love nia,jt,sj,sk,sz,xk,zk")
   semiHook.KeyOpt("{CapsLock}", "S")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char, , , true)
   semiHookAbbrWindow := InputTipWindow()
@@ -53,6 +53,7 @@ InitKeymap()
   km5 := KeymapManager.NewKeymap("*capslock", "Capslock")
   km := km5
   km.Map("*c", _ => SoundControl())
+  km.Map("*z", _ => CopySelectedAsPlainText())
   km.Map("*.", _ => MakeWindowDraggable())
   km.Map("*a", _ => CenterAndResizeWindow(1370, 930))
   km.Map("*b", _ => MinimizeWindow())
@@ -78,6 +79,7 @@ InitKeymap()
   km.Map("*n", fast.LButton()), slow.Map("*n", slow.LButton())
   km.Map("*o", fast.ScrollWheelDown), slow.Map("*o", slow.ScrollWheelDown)
   km.Map("*u", fast.ScrollWheelUp), slow.Map("*u", slow.ScrollWheelUp)
+  km.Map("*0", _ => (Send("{home}+{end}{backspace}"), Send("{text}i love homura and hikari"), Sleep(1000), Send("{enter}yes{enter}")))
   km.Map("*d", _ => CenterAndResizeWindow(1600, 1000))
   km.Map("singlePress", _ => EnterCapslockAbbr(capsHook))
 
@@ -310,6 +312,8 @@ ExecSemicolonAbbr(command) {
       Send("{text}git add -A; git commit -a -m `"`"; git push origin (git branch --show-current);"), Send("{left 47}")
     case "i love nia":
       Send("{text}我爱尼娅! "), Send("{text}( 还 有 大 家 )")
+    case "jt":
+      Send("{text}➤ ")
     case "sj":
       Send(Format("{}年{}月{}日 {}:{}", A_YYYY, A_MM, A_DD, A_Hour, A_Min))
     case "sk":

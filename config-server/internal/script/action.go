@@ -114,6 +114,10 @@ func sendKeys6(a Action, inAbbrContext bool) string {
 	var res []string
 	lines := strings.Split(a.KeysToSend, "\n")
 	for _, line := range lines {
+		if strings.HasPrefix(line, "sleep ") || strings.HasPrefix(line, "Sleep ") {
+			res = append(res, fmt.Sprintf(`Sleep(%s)`, line[6:]))
+			continue
+		}
 		line = toAHKFuncArg(line)
 		res = append(res, fmt.Sprintf(`Send(%s)`, line))
 	}
