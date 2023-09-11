@@ -693,6 +693,14 @@
       "hotkey": "*3",
       "parentID": 0,
       "hotkeys": {
+        "*/": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 9,
+            "comment": "锁定当前模式 (免去按住触发键)",
+            "actionValueID": 8
+          }
+        ],
         "*0": [
           {
             "windowGroupID": 0,
@@ -1879,6 +1887,14 @@
             "actionTypeID": 6,
             "comment": "一键 Git 提交",
             "keysToSend": "{text}git add -A; git commit -a -m \"\"; git push origin (git branch --show-current);\n{left 47}"
+          }
+        ],
+        "gt": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "狗头",
+            "keysToSend": "🐶"
           }
         ],
         "i love nia": [

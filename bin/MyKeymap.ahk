@@ -2,7 +2,7 @@
 #SingleInstance Force
 #UseHook true
 
-#Include lib/Fcunctions.ahk
+#Include lib/Functions.ahk
 #Include lib/Actions.ahk
 #Include lib/KeymapManager.ahk
 #Include lib/InputTipWindow.ahk
@@ -35,7 +35,7 @@ InitKeymap()
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
 
-  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", ",,,.,/,dk,gg,i love nia,jt,sj,sk,sz,xk,zk")
+  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", ",,,.,/,dk,gg,gt,i love nia,jt,sj,sk,sz,xk,zk")
   semiHook.KeyOpt("{CapsLock}", "S")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char, , , true)
   semiHookAbbrWindow := InputTipWindow()
@@ -174,6 +174,7 @@ InitKeymap()
   km.RemapKey("w", "volume_down")
   km.RemapKey("space", "f1")
   km.Map("singlePress", _ => (Send("{blind}3")))
+  km.Map("*/", km.ToggleLock)
 
   ; 分号模式
   km13 := KeymapManager.NewKeymap(";", "分号模式")
@@ -310,6 +311,8 @@ ExecSemicolonAbbr(command) {
       Send("{text}{}"), Send("{left}")
     case "gg":
       Send("{text}git add -A; git commit -a -m `"`"; git push origin (git branch --show-current);"), Send("{left 47}")
+    case "gt":
+      Send("🐶")
     case "i love nia":
       Send("{text}我爱尼娅! "), Send("{text}( 还 有 大 家 )")
     case "jt":
