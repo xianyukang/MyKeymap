@@ -26,8 +26,8 @@ OnExit(MyExit)
 InitKeymap()
 {
   taskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "x", "space")
-  slow := MouseKeymap("slow mouse", 10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03")
-  fast := MouseKeymap("fast mouse", 110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", slow)
+  slow := MouseKeymap("slow mouse", false, 10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03")
+  fast := MouseKeymap("fast mouse", false, 110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", slow)
   slow.Map("*space", slow.LButtonUp())
 
   capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "bb,cc,cmd,dd,dm,ex,gj,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,tm,we,wf,wt")
@@ -255,7 +255,7 @@ ExecCapslockAbbr(command) {
     case "bb":
       ActivateOrRun("Bing 词典", "msedge.exe", "--app=https://www.bing.com/dict/search?q={selected}", "", false, false, false)
     case "cc":
-      ActivateOrRun("", "shortcuts\Visual Studio Code.lnk", "-n {selected}", "", false, false, false)
+      ActivateOrRun("", "shortcuts\Visual Studio Code.lnk", "-n `"{selected}`"", "", false, false, false)
     case "cmd":
       ActivateOrRun("ahk_exe cmd.exe", "cmd.exe", "/k cd %userprofile%", "", false, false, false)
     case "dd":

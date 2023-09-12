@@ -218,6 +218,9 @@ function onStartupChange() {
                                       label="慢速模式首步长(像素)"></v-text-field>
                       </v-col>
                     </v-row>
+                    <v-row>
+                      <v-checkbox label="点击鼠标后不退出鼠标模式" color="secondary" v-model="options.mouse.keepMouseMode" />
+                    </v-row>
                   </v-card-text>
                 </v-card>
               </v-col>
@@ -273,7 +276,7 @@ table .v-text-field :deep(.v-field--disabled) {
   opacity: 1 !important;
 }
 
-.v-text-field :deep(label),.v-switch :deep(label) {
+.v-text-field :deep(label),.v-switch :deep(label),.v-checkbox :deep(label) {
   color: black;
   opacity: 1;
 }

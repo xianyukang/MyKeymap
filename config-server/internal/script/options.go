@@ -24,12 +24,13 @@ type WindowGroup struct {
 }
 
 type Mouse struct {
-	Delay1     string `json:"delay1"`
-	Delay2     string `json:"delay2"`
-	FastSingle string `json:"fastSingle"`
-	FastRepeat string `json:"fastRepeat"`
-	SlowSingle string `json:"slowSingle"`
-	SlowRepeat string `json:"slowRepeat"`
+	KeepMouseMode bool   `json:"keepMouseMode"`
+	Delay1        string `json:"delay1"`
+	Delay2        string `json:"delay2"`
+	FastSingle    string `json:"fastSingle"`
+	FastRepeat    string `json:"fastRepeat"`
+	SlowSingle    string `json:"slowSingle"`
+	SlowRepeat    string `json:"slowRepeat"`
 }
 type Scroll struct {
 	Delay1        string `json:"delay1"`

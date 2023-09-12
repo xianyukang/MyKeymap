@@ -346,8 +346,9 @@ class Keymap {
 
 class MouseKeymap extends Keymap {
 
-  __New(name, single, repeat, delay1, delay2, scrollOnceLineCount, scrollDelay1, scrollDelay2, slowKeymap := false) {
+  __New(name, keepMouseMode, single, repeat, delay1, delay2, scrollOnceLineCount, scrollDelay1, scrollDelay2, slowKeymap := false) {
     super.__New(name)
+    this.keepMouseMode := keepMouseMode
     this.single := single
     this.repeat := repeat
     this.delay1 := delay1
@@ -422,7 +423,7 @@ class MouseKeymap extends Keymap {
 
   _scrollWheel(direction, thisHotkey) {
     if this.slowKeymap {
-      this.clearOrUnlock()
+      this.clearOrUnlock(false)
     }
     key := ExtractWaitKey(thisHotkey)
     switch (direction) {
@@ -446,16 +447,24 @@ class MouseKeymap extends Keymap {
     }
   }
 
-  clearOrUnlock() {
-    ; 没有 slowKeymap 说明当前是 slow 模式, 要解锁
+  clearOrUnlock(keepMouseMode) {
+    ; 没有 slowKeymap 说明 this 是 slow 模式, 要解锁
     if !this.slowKeymap {
+      ; 用户想点击后不退出鼠标模式
+      if keepMouseMode {
+        return
+      }
       KeymapManager.Unlock()
       return
     }
-    ; 当前是 fast 模式且锁定了 slow 模式, 也要解锁, 否则清空锁定请求
+    ; slowKeymap 不为空说明 this 是 fast 模式, 如果发现已经锁定了 slow 模式, 要解锁
     if KeymapManager.L.locked == this.slowKeymap {
+      if keepMouseMode {
+        return
+      }
       KeymapManager.SetLockRequest(this.slowKeymap, true, false) ; 通过 toggle 锁定状态实现解锁
     } else {
+      ; 清空锁定请求
       KeymapManager.ClearLockRequest()
     }
   }
@@ -463,7 +472,7 @@ class MouseKeymap extends Keymap {
   LButton() {
     handler(thisHotkey) {
       Send("{blind}{LButton}")
-      this.clearOrUnlock()
+      this.clearOrUnlock(this.keepMouseMode)
     }
     return handler
   }
@@ -471,7 +480,7 @@ class MouseKeymap extends Keymap {
   RButton() {
     handler(thisHotkey) {
       SendMouseButton("RButton")
-      this.clearOrUnlock()
+      this.clearOrUnlock(this.keepMouseMode)
     }
     return handler
   }
@@ -479,7 +488,7 @@ class MouseKeymap extends Keymap {
   MButton() {
     handler(thisHotkey) {
       SendMouseButton("MButton")
-      this.clearOrUnlock()
+      this.clearOrUnlock(this.keepMouseMode)
     }
     return handler
   }
@@ -494,14 +503,14 @@ class MouseKeymap extends Keymap {
   LButtonUp() {
     handler(thisHotkey) {
       Send("{blind}{LButton Up}")
-      this.clearOrUnlock()
+      this.clearOrUnlock(false)
     }
     return handler
   }
 
   ExitMouseKeyMap() {
     handler(thisHotkey) {
-      this.clearOrUnlock()
+      this.clearOrUnlock(false)
     }
     return handler
   }

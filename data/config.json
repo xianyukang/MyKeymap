@@ -1985,6 +1985,7 @@
       }
     ],
     "mouse": {
+      "keepMouseMode": false,
       "delay1": "0.13",
       "delay2": "0.01",
       "fastSingle": "110",
