@@ -1669,7 +1669,7 @@
             "actionTypeID": 1,
             "comment": "用 VS Code 打开选中的文件，在新窗口中打开",
             "target": "shortcuts\\Visual Studio Code.lnk",
-            "args": "-n {selected}"
+            "args": "-n \"{selected}\""
           }
         ],
         "cmd": [
