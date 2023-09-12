@@ -97,6 +97,10 @@ func toAHKFuncArg(val string) string {
 }
 
 func remapKey5(a Action, inAbbrContext bool) string {
+	if strings.ToLower(a.Hotkey) == "singlepress" {
+		a.KeysToSend = "{blind}{" + a.RemapToKey + "}"
+		return sendKeys6(a, inAbbrContext)
+	}
 	key := strings.TrimLeft(a.Hotkey, "*")
 	ctx := Cfg.GetHotkeyContext(a)
 	if ctx != "" {
