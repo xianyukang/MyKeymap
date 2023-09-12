@@ -60,11 +60,11 @@
 
     ; 已经锁定了自己
     if this.L.toLock == this.L.locked {
+      this.L.toLock := false ; 别忘了清除状态
       if !this.L.toggle {
         return
       }
       this.ShowToolTip("取消锁定", this.L.show)
-      this.L.toLock := false
       this.Unlock()
       return
     }
