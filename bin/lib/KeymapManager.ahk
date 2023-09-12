@@ -346,7 +346,7 @@ class Keymap {
 
 class MouseKeymap extends Keymap {
 
-  __New(name, keepMouseMode, single, repeat, delay1, delay2, scrollOnceLineCount, scrollDelay1, scrollDelay2, slowKeymap := false) {
+  __New(name, keepMouseMode, mouseTip, single, repeat, delay1, delay2, scrollOnceLineCount, scrollDelay1, scrollDelay2, slowKeymap := false) {
     super.__New(name)
     this.keepMouseMode := keepMouseMode
     this.single := single
@@ -357,6 +357,7 @@ class MouseKeymap extends Keymap {
     this.scrollDelay1 := scrollDelay1
     this.scrollDelay2 := scrollDelay2
     this.slowKeymap := slowKeymap
+    this.mouseTip := mouseTip
 
     this.MoveMouseUp := this._moveMouse.Bind(this, 0, -1)
     this.MoveMouseDown := this._moveMouse.Bind(this, 0, 1)
@@ -411,12 +412,14 @@ class MouseKeymap extends Keymap {
   _moveMouse(directionX, directionY, thisHotkey) {
     key := ExtractWaitKey(thisHotkey)
     MouseMove(directionX * this.single, directionY * this.single, 0, "R")
+    (this.mouseTip && this.mouseTip.Show("", 20, 16))
     release := KeyWait(key, this.delay1)
     if release {
       return
     }
     while !release {
       MouseMove(directionX * this.repeat, directionY * this.repeat, 0, "R")
+      (this.mouseTip && this.mouseTip.Show("", 20, 16))
       release := KeyWait(key, this.delay2)
     }
   }
@@ -455,6 +458,7 @@ class MouseKeymap extends Keymap {
         return
       }
       KeymapManager.Unlock()
+      (this.mouseTip && this.mouseTip.Hide())
       return
     }
     ; slowKeymap 不为空说明 this 是 fast 模式, 如果发现已经锁定了 slow 模式, 要解锁
@@ -463,9 +467,11 @@ class MouseKeymap extends Keymap {
         return
       }
       KeymapManager.SetLockRequest(this.slowKeymap, true, false) ; 通过 toggle 锁定状态实现解锁
+      (this.mouseTip && this.mouseTip.Hide())
     } else {
       ; 清空锁定请求
       KeymapManager.ClearLockRequest()
+      (this.mouseTip && this.mouseTip.Hide())
     }
   }
 

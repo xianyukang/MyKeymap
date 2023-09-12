@@ -26,8 +26,9 @@ OnExit(MyExit)
 InitKeymap()
 {
   taskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "x", "space")
-  slow := MouseKeymap("slow mouse", false, 10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03")
-  fast := MouseKeymap("fast mouse", false, 110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", slow)
+  mouseTip := false
+  slow := MouseKeymap("slow mouse", false, mouseTip, 10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03")
+  fast := MouseKeymap("fast mouse", false, mouseTip, 110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", slow)
   slow.Map("*space", slow.LButtonUp())
 
   capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "bb,cc,cmd,dd,dm,ex,gj,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,tm,we,wf,wt")

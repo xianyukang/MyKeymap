@@ -58,6 +58,11 @@ func ParseConfig(file string) (*Config, error) {
 	if err != nil {
 		return nil, fmt.Errorf("cannot parse config: %v", err)
 	}
+
+	if config.Options.Mouse.TipSymbol == "" {
+		config.Options.Mouse.TipSymbol = "🐶"
+	}
+
 	return &config, nil
 }
 

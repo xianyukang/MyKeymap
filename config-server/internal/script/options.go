@@ -25,6 +25,8 @@ type WindowGroup struct {
 
 type Mouse struct {
 	KeepMouseMode bool   `json:"keepMouseMode"`
+	ShowTip       bool   `json:"showTip"`
+	TipSymbol     string `json:"tipSymbol"`
 	Delay1        string `json:"delay1"`
 	Delay2        string `json:"delay2"`
 	FastSingle    string `json:"fastSingle"`

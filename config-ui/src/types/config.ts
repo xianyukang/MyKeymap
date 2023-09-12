@@ -44,6 +44,8 @@ export interface Mouse {
   slowSingle: string
   slowRepeat: string
   keepMouseMode: boolean
+  showTip: boolean
+  tipSymbol: string
 }
 
 export interface WindowGroup {

@@ -218,8 +218,20 @@ function onStartupChange() {
                                       label="慢速模式首步长(像素)"></v-text-field>
                       </v-col>
                     </v-row>
+                    <v-row class="mouseRow" no-gutters>
+                      <v-col>
+                        <v-text-field v-model="options.mouse.tipSymbol" variant="underlined" color="primary" label="鼠标模式的提示符"></v-text-field>
+                      </v-col>
+                      <v-col>
+                        <br>
+                        <v-label>备选符号: 🖱️🔘</v-label>
+                      </v-col>
+                    </v-row>
                     <v-row>
-                      <v-checkbox label="点击鼠标后不退出鼠标模式" color="secondary" v-model="options.mouse.keepMouseMode" />
+                      <v-col>
+                        <v-checkbox label="提示进入了鼠标模式" color="secondary" hide-details density="compact" v-model="options.mouse.showTip" />
+                        <v-checkbox label="点击鼠标后不退出鼠标模式" color="secondary" hide-details density="compact" v-model="options.mouse.keepMouseMode" />
+                      </v-col>
                     </v-row>
                   </v-card-text>
                 </v-card>
