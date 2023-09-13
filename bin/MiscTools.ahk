@@ -21,7 +21,7 @@ if A_Args[1] = "GenerateShortcuts" {
     if FileExist("shortcuts\" item.Name ".lnk") {
       continue
     }
-    FileCreateShortcut("shell:appsfolder\" item.Path, "shortcuts\" item.Name ".lnk")
+    try FileCreateShortcut("shell:appsfolder\" item.Path, "shortcuts\" item.Name ".lnk")
   }
   ; 删除无用快捷方式
   useless := "i)(uninstall|卸载|help|iSCSI 发起程序|ODBC 数据源|ODBC Data|Windows 内存诊断|恢复驱动器|组件服务|碎片整理和优化驱动器|Office 语言首选项|手册|更新|帮助|Tools Command Prompt for|license|Website)"
