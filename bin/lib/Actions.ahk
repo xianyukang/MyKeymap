@@ -504,8 +504,8 @@ LaunchMultiple(urls*) {
 /**
  * 进程存在时用热键激活、否则启动程序
  */
-ProcessExistSendKeyOrRun(process, key, target) {
-  if (FindHiddenWindows("ahk_exe " process).Length) {
+ProcessExistSendKeyOrRun(pname, key, target) {
+  if ProcessExist(pname) {
     Send(key)
   } else {
     RunPrograms(target)
