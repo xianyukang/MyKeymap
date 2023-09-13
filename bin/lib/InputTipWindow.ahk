@@ -14,13 +14,9 @@ Class InputTipWindow {
     this.typoTip.SetFont("c" FontColor " s" fontSize, "Microsoft YaHei UI")
 
     this.textCon := this.typoTip.Add("text", "Center", text)
-    this.text := text
   }
 
   Show(text := "", offsetX := 9, offsetY := 7, addition := false) {
-    if text == "" {
-      text := this.text
-    }
     ; 注意 ahk 中 "0" == 0 并且 if ("0") 会执行 else 分支
     if (text != "") {
       if (addition) {
