@@ -4,7 +4,8 @@ import Table from "@/components/Table.vue";
 import { storeToRefs } from "pinia";
 import { useConfigStore } from "@/store/config";
 import { ref } from "vue";
-import Action from "@/components/actions/Action.vue";
+import ActionView from "@/components/actions/Action.vue";
+import { Action } from "@/types/config";
 
 const { hotkeys } = storeToRefs(useConfigStore())
 
@@ -14,9 +15,12 @@ const changeCustomHotkey = (hotkey: string, newHotkey: string) => {
   checkRow(newHotkey)
 }
 
-const checkRow = (hotkey: string) => {
+const checkRow = (hotkey: string, windowGroupId?: number) => {
   currHotkey.value = hotkey
   useConfigStore().hotkey = hotkey
+  if (windowGroupId != undefined) {
+    useConfigStore().windowGroupID = windowGroupId
+  }
 }
 
 const removeCustomHotkey = (hotkey: string) => {
@@ -24,6 +28,14 @@ const removeCustomHotkey = (hotkey: string) => {
   if (currHotkey.value == hotkey) {
     checkRow("")
   }
+}
+
+const getActionComment = (action: Array<Action>) => {
+  return action.find(a => !a.isEmpty)?.comment ?? ''
+}
+
+const getActionWindowGroupId = (action: Array<Action>) => {
+  return action.find(a => !a.isEmpty)?.windowGroupID ?? 0
 }
 
 </script>
@@ -34,14 +46,14 @@ const removeCustomHotkey = (hotkey: string) => {
       <v-card width="400">
         <Table class="text-left" :titles="['热键', '备注', '']">
           <tr :class="currHotkey == hotkey ? 'bg-blue-lighten-4' : ''"
-              @click="checkRow(hotkey as string)"
+              @click="checkRow(hotkey as string, getActionWindowGroupId(action))"
               v-for="(action, hotkey, index) in hotkeys" :key="index">
             <td style="width: 20%">
               <v-text-field :model-value="hotkey" placeholder="此处修改"
                             @change="changeCustomHotkey(hotkey as string, $event.target.value)"
                             variant="plain" style="width: 6rem"></v-text-field>
             </td>
-            <td style="width: 60%">{{ action[0].comment }}</td>
+            <td style="width: 60%">{{ getActionComment(action) }}</td>
             <td style="width: 20%">
               <v-btn icon="mdi-delete-outline" variant="text" width="40" height="40"
                      @click.stop="removeCustomHotkey(hotkey as string)"></v-btn>
@@ -96,7 +108,7 @@ const removeCustomHotkey = (hotkey: string) => {
           </v-card>
         </v-col>
       </v-row>
-      <Action/>
+      <ActionView />
     </v-col>
   </v-row>
 </template>

@@ -188,6 +188,7 @@ function _getAction(keymap: Keymap | undefined, hotkey: string, windowGroupID: n
   if (!found) {
     found = { ...emptyAction, windowGroupID }
     actions.push(found)
+    actions.sort((a, b) => a.windowGroupID - b.windowGroupID)
   }
   return found
 }
