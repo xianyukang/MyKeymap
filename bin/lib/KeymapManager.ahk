@@ -30,18 +30,14 @@
       ih.KeyOpt("{All}", "E")
       ih.Start()
       while true {
-        if !GetKeyState(keymap.WaitKey, "P") {
-          ih.Stop()
+        if !ih.InProgress && ih.EndReason == "Timeout" {
           break
         }
-        if !ih.InProgress {
-          if ih.EndReason == "Timeout" {
-            break
-          } else {
-            Send("{blind}{" keymap.WaitKey "}{" ih.EndKey "}")
-            KeyWait(keymap.WaitKey)
-            return true
-          }
+        if !GetKeyState(keymap.WaitKey, "P") || (!ih.InProgress && ih.EndReason != "Timeout") {
+          ih.Stop()
+          Send("{blind}{" keymap.WaitKey "}{" ih.EndKey "}")
+          KeyWait(keymap.WaitKey)
+          return true
         }
       }
     }
@@ -59,7 +55,7 @@
     }
     startTick := A_TickCount
     KeyWait(keymap.WaitKey)
-    if (A_PriorKey = keymap.WaitKey && (A_TickCount - startTick < 300)) {
+    if (A_PriorKey = keymap.WaitKey && (A_TickCount - startTick < 400)) {
       keymap.SinglePressAction()
     }
     if keymap != parent {
