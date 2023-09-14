@@ -55,7 +55,7 @@
     }
     startTick := A_TickCount
     KeyWait(keymap.WaitKey)
-    if (A_PriorKey = keymap.WaitKey && (A_TickCount - startTick < 400)) {
+    if (A_PriorKey = keymap.WaitKey && (A_TickCount - startTick < 450)) {
       keymap.SinglePressAction()
     }
     if keymap != parent {

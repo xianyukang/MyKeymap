@@ -273,8 +273,11 @@ function onStartupChange() {
             </v-row>
             <v-row v-show="showKeymapDelay">
               <v-col>
-                <v-card title="触发延时 (单位: 毫秒)" text="一般推荐设为 0，让热键立刻生效。设置大于零的值，即通过长按触发模式，也许能减少打字误触。" elevation="2">
+                <v-card title="触发延时 (单位: 毫秒)" elevation="2">
                   <v-card-text>
+                    一般推荐设为 0，让模式立刻生效。<br>
+                    如果设置大于零的值，短按会执行按键原有功能，长按则触发模式，也许能减少打字误触。<br>
+                    &nbsp;
                     <v-row>
                       <v-col cols="3" v-for="keymap in customKeymaps" :key="keymap.id">
                         <v-text-field v-model.number="keymap.delay" variant="underlined"
