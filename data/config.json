@@ -6,6 +6,7 @@
       "enable": true,
       "hotkey": "*capslock",
       "parentID": 0,
+      "delay": 0,
       "hotkeys": {
         "*,": [
           {
@@ -241,6 +242,7 @@
       "enable": true,
       "hotkey": "*f",
       "parentID": 5,
+      "delay": 0,
       "hotkeys": {
         "*a": [
           {
@@ -401,6 +403,7 @@
       "enable": true,
       "hotkey": "*space",
       "parentID": 5,
+      "delay": 0,
       "hotkeys": {
         "*d": [
           {
@@ -435,6 +438,7 @@
       "enable": true,
       "hotkey": "*j",
       "parentID": 0,
+      "delay": 70,
       "hotkeys": {
         "*,": [
           {
@@ -603,6 +607,7 @@
       "enable": true,
       "hotkey": "*k",
       "parentID": 8,
+      "delay": 0,
       "hotkeys": {
         "*a": [
           {
@@ -700,6 +705,7 @@
       "enable": true,
       "hotkey": "*3",
       "parentID": 0,
+      "delay": 0,
       "hotkeys": {
         "*/": [
           {
@@ -865,6 +871,7 @@
       "enable": false,
       "hotkey": "*tab",
       "parentID": 0,
+      "delay": 0,
       "hotkeys": {
         "singlePress": [
           {
@@ -878,9 +885,10 @@
     {
       "id": 12,
       "name": "空格模式",
-      "enable": false,
+      "enable": true,
       "hotkey": "*space",
       "parentID": 0,
+      "delay": 70,
       "hotkeys": {
         "*,": [
           {
@@ -1056,6 +1064,7 @@
       "enable": true,
       "hotkey": ";",
       "parentID": 0,
+      "delay": 0,
       "hotkeys": {
         "*a": [
           {
@@ -1226,6 +1235,7 @@
       "enable": true,
       "hotkey": "*.",
       "parentID": 0,
+      "delay": 0,
       "hotkeys": {
         "*,": [
           {
@@ -1386,6 +1396,7 @@
       "enable": false,
       "hotkey": "*,",
       "parentID": 0,
+      "delay": 0,
       "hotkeys": {
         "*.": [
           {
@@ -1546,6 +1557,7 @@
       "enable": true,
       "hotkey": "rbutton",
       "parentID": 0,
+      "delay": 0,
       "hotkeys": {
         "*LButton": [
           {
@@ -1619,6 +1631,7 @@
       "enable": true,
       "hotkey": "customHotkeys",
       "parentID": 0,
+      "delay": 0,
       "hotkeys": {
         "!'": [
           {
@@ -1660,6 +1673,7 @@
       "enable": true,
       "hotkey": "capslockAbbr",
       "parentID": 0,
+      "delay": 0,
       "hotkeys": {
         "bb": [
           {
@@ -1856,6 +1870,7 @@
       "enable": true,
       "hotkey": "semicolonAbbr",
       "parentID": 0,
+      "delay": 0,
       "hotkeys": {
         ",": [
           {
@@ -1969,6 +1984,7 @@
       "enable": true,
       "hotkey": "settings",
       "parentID": 0,
+      "delay": 0,
       "hotkeys": {}
     }
   ],

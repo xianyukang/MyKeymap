@@ -23,6 +23,7 @@ type Keymap struct {
 	Enable   bool                `json:"enable"`
 	Hotkey   string              `json:"hotkey"`
 	ParentID int                 `json:"parentID"`
+	Delay    int                 `json:"delay"`
 	Hotkeys  map[string][]Action `json:"hotkeys"`
 }
 

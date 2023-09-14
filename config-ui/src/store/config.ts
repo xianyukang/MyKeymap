@@ -94,7 +94,7 @@ export const useConfigStore = defineStore('config', () => {
   const customSonKeymaps = computed(() => customKeymaps.value.filter(x => x.parentID != 0))
   const customParentKeymaps = computed(() => {
     const arr = customKeymaps.value.filter(x => x.parentID == 0)
-    arr.unshift({ id: 0, name: "无", hotkey: "", parentID: 0, enable: true, hotkeys: {} })
+    arr.unshift({ id: 0, name: "无", hotkey: "", parentID: 0, enable: true, hotkeys: {}, delay: 0 })
     return arr;
   })
 

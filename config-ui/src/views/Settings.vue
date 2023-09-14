@@ -24,6 +24,7 @@ const currId = ref(0)
 
 const showMouseOption = ref(false)
 const showKeyboardLayout = ref(false)
+const showKeymapDelay = ref(false)
 
 const checkKeymapData = (keymap: Keymap) => {
   if (keymap.hotkey == "") {
@@ -90,6 +91,7 @@ function addKeymap() {
     enable: false,
     hotkey: "",
     parentID: 0,
+    delay: 0,
     hotkeys: {}
   }
 
@@ -174,6 +176,8 @@ function onStartupChange() {
                   <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showMouseOption = !showMouseOption">修改鼠标移动参数</v-btn>
                   <br/>
                   <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showKeyboardLayout = !showKeyboardLayout">修改键盘布局</v-btn>
+                  <br/>
+                  <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showKeymapDelay = !showKeymapDelay">设置触发延时</v-btn>
                 </v-card-text>
               </v-card>
             </v-col>
@@ -264,6 +268,21 @@ function onStartupChange() {
                     <v-btn variant="outlined" color="green" @click="useConfigStore().resetKeyboardLayout(104)">重置为 104 键</v-btn>
                     <v-btn variant="outlined" color="blue" @click="useConfigStore().resetKeyboardLayout(1)">添加鼠标按钮</v-btn>
                   </v-card-actions>
+                </v-card>
+              </v-col>
+            </v-row>
+            <v-row v-show="showKeymapDelay">
+              <v-col>
+                <v-card title="触发延时 (单位: 毫秒)" text="一般推荐设为 0，让热键立刻生效。设置大于零的值，即通过长按触发模式，也许能减少打字误触。" elevation="2">
+                  <v-card-text>
+                    <v-row>
+                      <v-col cols="3" v-for="keymap in customKeymaps" :key="keymap.id">
+                        <v-text-field v-model.number="keymap.delay" variant="underlined"
+                                      type="number" step="1" maxlength="5" min="0" color="primary"
+                                      :label="keymap.name"></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-card-text>
                 </v-card>
               </v-col>
             </v-row>

@@ -3,18 +3,18 @@
   static Stack := Array(this.GlobalKeymap)
   static L := { toLock: false, locked: false, show: false, toggle: false }
 
-  static NewKeymap(globalHotkey, name := "") {
+  static NewKeymap(globalHotkey, name, delay) {
     if globalHotkey == "customHotkeys" {
       return this.GlobalKeymap
     }
 
     ; 分配全局热键激活指定 keymap
-    return this.AddSubKeymap(this.GlobalKeymap, globalHotkey, name)
+    return this.AddSubKeymap(this.GlobalKeymap, globalHotkey, name, delay)
   }
 
-  static AddSubKeymap(parent, hk, name := "") {
+  static AddSubKeymap(parent, hk, name := "", delay := 0) {
     waitKey := ExtractWaitKey(hk)
-    subKeymap := Keymap(name, waitKey, hk)
+    subKeymap := Keymap(name, waitKey, hk, delay)
     handler(thisHotkey) {
       this.Activate(subKeymap)
       this._postHandler()
@@ -23,7 +23,34 @@
     return subKeymap
   }
 
+  static _handleDelay(keymap) {
+    if keymap.delay {
+      ; Tip(keymap.Name " " keymap.delay)
+      ih := InputHook("T" keymap.delay)
+      ih.KeyOpt("{All}", "E")
+      ih.Start()
+      while true {
+        if !GetKeyState(keymap.WaitKey, "P") {
+          ih.Stop()
+          break
+        }
+        if !ih.InProgress {
+          if ih.EndReason == "Timeout" {
+            break
+          } else {
+            Send("{blind}{" keymap.WaitKey "}{" ih.EndKey "}")
+            KeyWait(keymap.WaitKey)
+            return true
+          }
+        }
+      }
+    }
+  }
+
   static Activate(keymap) {
+    if this._handleDelay(keymap) {
+      return
+    }
     parent := this.Stack[-1]
     ; 比如锁住 3 模式再按 3 键触发 3 模式应该没效果
     if keymap != parent {
@@ -118,7 +145,7 @@
 
 
 class Keymap {
-  __New(name := "", waitKey := "", hotkey := "") {
+  __New(name := "", waitKey := "", hotkey := "", delay := 0) {
     this.Name := name
     this.WaitKey := waitKey
     this.Hotkey := hotkey
@@ -129,6 +156,7 @@ class Keymap {
     this.AfterLocked := false
     this.parent := false
     this.toRestore := Array()
+    this.delay := delay
   }
 
   class _Hotkey {

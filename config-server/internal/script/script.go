@@ -1,6 +1,7 @@
 package script
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"sort"
@@ -61,6 +62,15 @@ var TemplateFuncMap = template.FuncMap{
 	"actionToHotkey":  actionToHotkey,
 	"abbrToCode":      abbrToCode,
 	"sortHotkeys":     sortHotkeys,
+	"divide":          divide,
+}
+
+func divide(a, b int) string {
+	res := float64(a) / float64(b)
+	if res <= 0 {
+		return ""
+	}
+	return fmt.Sprintf("%.3f", res)
 }
 
 func join(sep string, elems []interface{}) string {

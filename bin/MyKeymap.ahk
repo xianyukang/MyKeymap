@@ -51,7 +51,7 @@ InitKeymap()
   GroupAdd("MY_WINDOW_GROUP_1", "ahk_exe firefox.exe")
 
   ; Capslock
-  km5 := KeymapManager.NewKeymap("*capslock", "Capslock")
+  km5 := KeymapManager.NewKeymap("*capslock", "Capslock", "")
   km := km5
   km.Map("*c", _ => SoundControl())
   km.Map("*z", _ => CopySelectedAsPlainText())
@@ -114,7 +114,7 @@ InitKeymap()
   km.Map("*w", _ => ProcessExistSendKeyOrRun("WeChat.exe", "^!w", "shortcuts\微信.lnk"))
 
   ; J 模式
-  km8 := KeymapManager.NewKeymap("*j", "J 模式")
+  km8 := KeymapManager.NewKeymap("*j", "J 模式", "0.070")
   km := km8
   km.Map("singlePress", _ => (Send("{blind}{j}")))
   km.RemapKey(",", "delete")
@@ -153,7 +153,7 @@ InitKeymap()
   km.Map("*z", _ => (Send("^+{left}")))
 
   ; 3 模式
-  km10 := KeymapManager.NewKeymap("*3", "3 模式")
+  km10 := KeymapManager.NewKeymap("*3", "3 模式", "")
   km := km10
   km.RemapKey("0", "f10")
   km.RemapKey("2", "f2")
@@ -178,8 +178,33 @@ InitKeymap()
   km.Map("singlePress", _ => (Send("{blind}3")))
   km.Map("*/", km.ToggleLock)
 
+  ; 空格模式
+  km12 := KeymapManager.NewKeymap("*space", "空格模式", "0.070")
+  km := km12
+  km.Map("*space", _ => (Send("{blind}{enter}")))
+  km.Map("singlePress", _ => (Send("{blind}{space}")))
+  km.RemapKey(",", "delete")
+  km.RemapKey(".", "insert")
+  km.Map("*2", _ => (Send("^+{tab}")))
+  km.Map("*3", _ => (Send("^{tab}")))
+  km.RemapKey("a", "home")
+  km.Map("*b", _ => (Send("^{backspace}")))
+  km.RemapKey("c", "backspace")
+  km.RemapKey("d", "down")
+  km.RemapKey("e", "up")
+  km.RemapKey("f", "right")
+  km.RemapKey("g", "end")
+  km.Map("*k", _ => HoldDownLShiftKey())
+  km.RemapKey("q", "appskey")
+  km.RemapKey("r", "tab")
+  km.RemapKey("s", "left")
+  km.Map("*v", _ => (Send("{blind}^{right}")))
+  km.Map("*w", _ => (Send("{blind}+{tab}")))
+  km.RemapKey("x", "esc")
+  km.Map("*z", _ => (Send("{blind}^{left}")))
+
   ; 分号模式
-  km13 := KeymapManager.NewKeymap(";", "分号模式")
+  km13 := KeymapManager.NewKeymap(";", "分号模式", "")
   km := km13
   km.Map("*a", _ => (Send("{blind}*")))
   km.Map("*b", _ => (Send("{blind}%")))
@@ -206,7 +231,7 @@ InitKeymap()
   km.Map("singlePress", _ => EnterSemicolonAbbr(semiHook, semiHookAbbrWindow))
 
   ; 句号模式
-  km14 := KeymapManager.NewKeymap("*.", "句号模式")
+  km14 := KeymapManager.NewKeymap("*.", "句号模式", "")
   km := km14
   km.Map("singlePress", _ => (Send("{blind}{.}")))
   km.Map("*,", _ => HoldDownLShiftKey())
@@ -229,7 +254,7 @@ InitKeymap()
   km.Map("*space", _ => (Send("{blind}{enter}")))
 
   ; 鼠标右键
-  km16 := KeymapManager.NewKeymap("rbutton", "鼠标右键")
+  km16 := KeymapManager.NewKeymap("rbutton", "鼠标右键", "")
   km := km16
   km.Map("*f", _ => ActivateOrRun("", "D:\project\ahk\zz.ahk", "", "", false, false, true))
   km.Map("singlePress", fast.RButton()), slow.Map("singlePress", slow.RButton())
@@ -241,7 +266,7 @@ InitKeymap()
   km.Map("*WheelDown", _ => (Send("^{tab}")))
 
   ; 自定义热键
-  km1 := KeymapManager.NewKeymap("customHotkeys", "自定义热键")
+  km1 := KeymapManager.NewKeymap("customHotkeys", "自定义热键", "")
   km := km1
   km.RemapInHotIf("RAlt", "LCtrl")
   km.Map("!'", _ => MyKeymapReload(), , , , "S")
