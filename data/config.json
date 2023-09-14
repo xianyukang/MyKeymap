@@ -1626,6 +1626,40 @@
       }
     },
     {
+      "id": 17,
+      "name": "鼠标侧键1",
+      "enable": false,
+      "hotkey": "xbutton1",
+      "parentID": 0,
+      "delay": 0,
+      "hotkeys": {
+        "*c": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "Ctrl + C 复制",
+            "keysToSend": "^c"
+          }
+        ],
+        "*v": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "Ctrl + V 粘贴",
+            "keysToSend": "^v"
+          }
+        ],
+        "singlePress": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "输入 xbutton1 键",
+            "keysToSend": "{blind}{xbutton1}"
+          }
+        ]
+      }
+    },
+    {
       "id": 1,
       "name": "自定义热键",
       "enable": true,
