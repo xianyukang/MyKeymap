@@ -1,5 +1,4 @@
 node_modules
-*.pdb
 .pnpm-debug.log
 MyKeymap
 bin/site

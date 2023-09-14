@@ -54,6 +54,7 @@ const save = (dataObj: WindowGroup[]) => {
       </v-col>
     </template>
     <template #otherActions>
+      <v-label style="color: green;">Tip: 使用程序组，可设置热键的生效条件 &nbsp;</v-label>
       <v-btn class="action-button" color="primary" variant="outlined"
              @click="server.runWindowSpy">🔍 查看窗口标识符
       </v-btn>

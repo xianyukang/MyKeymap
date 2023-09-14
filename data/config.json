@@ -1937,20 +1937,20 @@
             "keysToSend": "「  」\n{left 2}"
           }
         ],
-        "sz": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 6,
-            "comment": "搜索时加上这个 site: 选项，能让搜索引擎只搜某网站的内容",
-            "keysToSend": "{text}site:zhihu.com"
-          }
-        ],
         "xk": [
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
             "comment": "输入一对 () 并把光标移到中间",
             "keysToSend": "(){left}"
+          }
+        ],
+        "zh": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "搜索时加上 site: 选项，能让搜索引擎只搜某网站的内容，另外用 inurl: 过滤掉专栏和视频内容",
+            "keysToSend": "{text} site:zhihu.com inurl:question"
           }
         ],
         "zk": [
@@ -1994,7 +1994,7 @@
     ],
     "mouse": {
       "keepMouseMode": false,
-      "showTip": true,
+      "showTip": false,
       "tipSymbol": "🐶",
       "delay1": "0.13",
       "delay2": "0.01",

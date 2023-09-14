@@ -26,7 +26,7 @@ OnExit(MyExit)
 InitKeymap()
 {
   taskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "x", "space")
-  mouseTip := InputTipWindow("🐶")
+  mouseTip := false
   slow := MouseKeymap("slow mouse", false, mouseTip, 10, 13, "T0.13", "T0.01", 1, "T0.2", "T0.03")
   fast := MouseKeymap("fast mouse", false, mouseTip, 110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", slow)
   slow.Map("*space", slow.LButtonUp())
@@ -36,7 +36,7 @@ InitKeymap()
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
 
-  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", ",,,.,/,dk,gg,gt,i love nia,jt,sj,sk,sz,xk,zk")
+  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", ",,,.,/,dk,gg,gt,i love nia,jt,sj,sk,xk,zh,zk")
   semiHook.KeyOpt("{CapsLock}", "S")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char, , , true)
   semiHookAbbrWindow := InputTipWindow()
@@ -323,10 +323,10 @@ ExecSemicolonAbbr(command) {
       Send(Format("{}年{}月{}日 {}:{}", A_YYYY, A_MM, A_DD, A_Hour, A_Min))
     case "sk":
       Send("「  」"), Send("{left 2}")
-    case "sz":
-      Send("{text}site:zhihu.com")
     case "xk":
       Send("(){left}")
+    case "zh":
+      Send("{text} site:zhihu.com inurl:question")
     case "zk":
       Send("[]{left}")
   }
