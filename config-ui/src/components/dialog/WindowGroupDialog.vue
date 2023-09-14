@@ -29,7 +29,7 @@ const save = (dataObj: WindowGroup[]) => {
   <input-key-value-dialog title="编辑程序组" :data-obj="options.windowGroups"
                           @add="addItem" @save="save">
     <template #default="{ props }">
-      <v-btn class="mt-3" width="170" color="blue" v-bind="props" variant="outlined">编辑程序组</v-btn>
+      <v-btn class="mt-3" width="170" color="blue" v-bind="props" variant="outlined">😺 编辑程序分组</v-btn>
     </template>
 
     <template #contentsTitle>

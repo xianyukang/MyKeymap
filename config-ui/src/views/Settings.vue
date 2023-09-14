@@ -25,6 +25,10 @@ const currId = ref(0)
 const showMouseOption = ref(false)
 const showKeyboardLayout = ref(false)
 const showKeymapDelay = ref(false)
+const resetOtherToFalse = (newValue: boolean) => {
+  [showMouseOption, showKeyboardLayout, showKeymapDelay].forEach(x => x.value = false)
+  return newValue
+}
 
 const checkKeymapData = (keymap: Keymap) => {
   if (keymap.hotkey == "") {
@@ -173,11 +177,11 @@ function onStartupChange() {
                   <br/>
                   <window-group-dialog/>
                   <br/>
-                  <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showMouseOption = !showMouseOption">修改鼠标移动参数</v-btn>
+                  <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showMouseOption = resetOtherToFalse(!showMouseOption)">🖱️ 修改鼠标参数</v-btn>
                   <br/>
-                  <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showKeyboardLayout = !showKeyboardLayout">修改键盘布局</v-btn>
+                  <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showKeyboardLayout = resetOtherToFalse(!showKeyboardLayout)">⌨️ 修改键盘布局</v-btn>
                   <br/>
-                  <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showKeymapDelay = !showKeymapDelay">设置触发延时</v-btn>
+                  <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showKeymapDelay = resetOtherToFalse(!showKeymapDelay)">🕗 设置触发延时</v-btn>
                 </v-card-text>
               </v-card>
             </v-col>
