@@ -657,14 +657,6 @@
             "actionValueID": 20
           }
         ],
-        "*f": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 7,
-            "comment": "选择 - 往右",
-            "actionValueID": 12
-          }
-        ],
         "*h": [
           {
             "windowGroupID": 0,
