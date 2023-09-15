@@ -613,7 +613,7 @@
       "id": 9,
       "name": "F 模式",
       "enable": true,
-      "hotkey": "*f",
+      "hotkey": "f",
       "parentID": 0,
       "delay": 100,
       "hotkeys": {
@@ -645,8 +645,8 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 7,
-            "comment": "光标 - 上一单词",
-            "actionValueID": 7
+            "comment": "Backspace",
+            "actionValueID": 21
           }
         ],
         "*e": [
@@ -717,8 +717,8 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 7,
-            "comment": "Backspace",
-            "actionValueID": 21
+            "comment": "光标 - 上一单词",
+            "actionValueID": 7
           }
         ],
         "*o": [
