@@ -2146,6 +2146,26 @@
       "delay2": "0.03",
       "onceLineCount": "1"
     },
+    "commandInputSkin": {
+      "backgroundColor": "#FFFFFF",
+      "backgroundOpacity": "0.9",
+      "borderWidth": "3",
+      "borderColor": "#FFFFFF",
+      "borderOpacity": "1.0",
+      "borderRadius": "10",
+      "cornerColor": "#000000",
+      "cornerOpacity": "0.0",
+      "gridlineColor": "#2843AD",
+      "gridlineOpacity": "0.04",
+      "keyColor": "#000000",
+      "keyOpacity": "1.0",
+      "hideAnimationDuration": "0.34",
+      "windowYPos": "0.25",
+      "windowWidth": "700",
+      "windowShadowColor": "#000000",
+      "windowShadowOpacity": "0.5",
+      "windowShadowSize": "3.0"
+    },
     "pathVariables": [
       {
         "name": "programs",

@@ -13,9 +13,10 @@ import (
 )
 
 var Map = map[string]func(args ...string){
-	"AlignText":     AlignText,
-	"GenerateAHK":   GenerateAHK,
-	"ChangeVersion": ChangeVersion,
+	"AlignText":       AlignText,
+	"GenerateAHK":     GenerateAHK,
+	"ChangeVersion":   ChangeVersion,
+	"GenerateScripts": GenerateScripts,
 }
 
 var logger = log.New(os.Stderr, "", 0)
@@ -45,6 +46,14 @@ func ChangeVersion(args ...string) {
 	}
 	config.Options.MykeymapVersion = args[0]
 	script.SaveConfigFile(config)
+	script.GenerateScripts(config)
+}
+
+func GenerateScripts(args ...string) {
+	config, err := script.ParseConfig("../data/config.json")
+	if err != nil {
+		panic(err)
+	}
 	script.GenerateScripts(config)
 }
 

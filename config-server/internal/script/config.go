@@ -63,6 +63,28 @@ func ParseConfig(file string) (*Config, error) {
 	if config.Options.Mouse.TipSymbol == "" {
 		config.Options.Mouse.TipSymbol = "🐶"
 	}
+	if config.Options.CommandInputSkin == (CommandInputSkin{}) {
+		config.Options.CommandInputSkin = CommandInputSkin{
+			BackgroundColor:       "#FFFFFF",
+			BackgroundOpacity:     "0.9",
+			BorderWidth:           "3",
+			BorderColor:           "#FFFFFF",
+			BorderOpacity:         "1.0",
+			BorderRadius:          "10",
+			CornerColor:           "#000000",
+			CornerOpacity:         "0.0",
+			GridlineColor:         "#2843AD",
+			GridlineOpacity:       "0.04",
+			KeyColor:              "#000000",
+			KeyOpacity:            "1.0",
+			HideAnimationDuration: "0.34",
+			WindowYPos:            "0.25",
+			WindowWidth:           "700",
+			WindowShadowColor:     "#000000",
+			WindowShadowOpacity:   "0.5",
+			WindowShadowSize:      "3.0",
+		}
+	}
 
 	return &config, nil
 }

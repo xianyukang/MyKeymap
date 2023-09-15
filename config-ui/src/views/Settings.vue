@@ -13,22 +13,48 @@ import { server } from "@/store/server";
 
 const { customKeymaps, customParentKeymaps, customSonKeymaps, options, keymaps } = storeToRefs(useConfigStore())
 
-// TODO: 设置页面的加载时间似乎需要 150 - 200 ms
-// const time1 = Date.now()
-// onMounted(() => {
-//   const time2 = Date.now()
-//   console.log(time2 - time1)
-// })
 
 const currId = ref(0)
 
 const showMouseOption = ref(false)
 const showKeyboardLayout = ref(false)
 const showKeymapDelay = ref(false)
+const showSkin = ref(false)
 const resetOtherToFalse = (newValue: boolean) => {
-  [showMouseOption, showKeyboardLayout, showKeymapDelay].forEach(x => x.value = false)
+  [showMouseOption, showKeyboardLayout, showKeymapDelay, showSkin].forEach(x => x.value = false)
   return newValue
 }
+
+const skin = [
+  [
+    { key: "windowWidth", label: "窗口宽度", },
+    { key: "windowYPos", label: "窗口 Y 轴位置 (百分比)", },
+    { key: "borderRadius", label: "窗口圆角大小", },
+    { key: "hideAnimationDuration", label: "窗口动画持续时间", },
+  ],
+  [
+    { key: "backgroundColor", label: "窗口背景色", },
+    { key: "backgroundOpacity", label: "透明度", },
+    { key: "gridlineColor", label: "网格线颜色", },
+    { key: "gridlineOpacity", label: "透明度", },
+  ],
+  [
+    { key: "borderWidth", label: "边框宽度", },
+    { key: "borderColor", label: "边框颜色", },
+    { key: "borderOpacity", label: "透明度", },
+  ],
+  [
+    { key: "keyColor", label: "按键颜色" },
+    { key: "keyOpacity", label: "透明度", },
+    { key: "cornerColor", label: "四角颜色", },
+    { key: "cornerOpacity", label: "透明度", },
+  ],
+  [
+    { key: "windowShadowSize", label: "窗口阴影大小", },
+    { key: "windowShadowColor", label: "窗口阴影颜色", },
+    { key: "windowShadowOpacity", label: "透明度", },
+  ],
+]
 
 const checkKeymapData = (keymap: Keymap) => {
   if (keymap.hotkey == "") {
@@ -181,6 +207,8 @@ function onStartupChange() {
                   <br/>
                   <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showKeyboardLayout = resetOtherToFalse(!showKeyboardLayout)">⌨️ 修改键盘布局</v-btn>
                   <br/>
+                  <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showSkin = resetOtherToFalse(!showSkin)">✨ 命令框皮肤</v-btn>
+                  <br/>
                   <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showKeymapDelay = resetOtherToFalse(!showKeymapDelay)">🕗 设置触发延时</v-btn>
                 </v-card-text>
               </v-card>
@@ -288,6 +316,19 @@ function onStartupChange() {
                         <v-text-field v-model.number="keymap.delay" variant="underlined"
                                       type="number" step="1" maxlength="5" min="0" color="primary"
                                       :label="keymap.name"></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+            <v-row v-show="showSkin">
+              <v-col>
+                <v-card title="命令框皮肤" elevation="2">
+                  <v-card-text>
+                    <v-row v-for="(row, index) in skin" :key="index">
+                      <v-col cols="3" v-for="item in row" :key="item.key">
+                        <v-text-field v-model="options.commandInputSkin[item.key]" variant="underlined" color="primary" :label="item.label"></v-text-field>
                       </v-col>
                     </v-row>
                   </v-card-text>

@@ -71,6 +71,7 @@ export interface Options {
   startup: boolean
   keyMapping: string
   keyboardLayout: string
+  commandInputSkin: any
 }
 
 export interface Config {

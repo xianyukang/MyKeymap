@@ -90,9 +90,13 @@ func server(hasError chan<- struct{}, rainDone <-chan struct{}, debug bool) {
 	}
 }
 
+//goland:noinspection HttpUrlsUsage
 func openBrowser(addr net.Addr) {
 	time.Sleep(600 * time.Millisecond)
-	//goland:noinspection HttpUrlsUsage
+	if addr, ok := addr.(*net.TCPAddr); ok {
+		_ = exec.Command("cmd", "/c", "start", fmt.Sprintf("http://localhost:%d", addr.Port)).Start()
+		return
+	}
 	_ = exec.Command("cmd", "/c", "start", "http://"+addr.String()).Start()
 }
 

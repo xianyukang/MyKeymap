@@ -13,6 +13,9 @@ func GenerateScripts(config *Config) {
 	if err := SaveAHK(config, "./templates/MyKeymap.tmpl", "../bin/MyKeymap.ahk"); err != nil {
 		panic(err)
 	}
+	if err := SaveAHK(config, "./templates/CommandInputSkin.tmpl", "../bin/CommandInputSkin.txt"); err != nil {
+		panic(err)
+	}
 	// if err := SaveAHK(config, "./templates/CustomShellMenu.ahk", "../bin/CustomShellMenu.ahk"); err != nil {
 	// 	panic(err)
 	// }

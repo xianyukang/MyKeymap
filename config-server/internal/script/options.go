@@ -6,14 +6,15 @@ import (
 )
 
 type Options struct {
-	MykeymapVersion string         `json:"mykeymapVersion"`
-	WindowGroups    []WindowGroup  `json:"windowGroups"`
-	Mouse           Mouse          `json:"mouse"`
-	Scroll          Scroll         `json:"scroll"`
-	PathVariables   []PathVariable `json:"pathVariables"`
-	Startup         bool           `json:"startup"`
-	KeyMapping      string         `json:"keyMapping"`
-	KeyboardLayout  string         `json:"keyboardLayout"`
+	MykeymapVersion  string           `json:"mykeymapVersion"`
+	WindowGroups     []WindowGroup    `json:"windowGroups"`
+	Mouse            Mouse            `json:"mouse"`
+	Scroll           Scroll           `json:"scroll"`
+	CommandInputSkin CommandInputSkin `json:"commandInputSkin"`
+	PathVariables    []PathVariable   `json:"pathVariables"`
+	Startup          bool             `json:"startup"`
+	KeyMapping       string           `json:"keyMapping"`
+	KeyboardLayout   string           `json:"keyboardLayout"`
 }
 
 type WindowGroup struct {
@@ -42,6 +43,27 @@ type Scroll struct {
 type PathVariable struct {
 	Name  string `json:"name"`
 	Value string `json:"value"`
+}
+
+type CommandInputSkin struct {
+	BackgroundColor       string `json:"backgroundColor"`
+	BackgroundOpacity     string `json:"backgroundOpacity"`
+	BorderWidth           string `json:"borderWidth"`
+	BorderColor           string `json:"borderColor"`
+	BorderOpacity         string `json:"borderOpacity"`
+	BorderRadius          string `json:"borderRadius"`
+	CornerColor           string `json:"cornerColor"`
+	CornerOpacity         string `json:"cornerOpacity"`
+	GridlineColor         string `json:"gridlineColor"`
+	GridlineOpacity       string `json:"gridlineOpacity"`
+	KeyColor              string `json:"keyColor"`
+	KeyOpacity            string `json:"keyOpacity"`
+	HideAnimationDuration string `json:"hideAnimationDuration"`
+	WindowYPos            string `json:"windowYPos"`
+	WindowWidth           string `json:"windowWidth"`
+	WindowShadowColor     string `json:"windowShadowColor"`
+	WindowShadowOpacity   string `json:"windowShadowOpacity"`
+	WindowShadowSize      string `json:"windowShadowSize"`
 }
 
 func (c *Config) PathVariables() string {
