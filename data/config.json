@@ -1959,6 +1959,14 @@
             "keysToSend": "^+{esc}"
           }
         ],
+        "vm": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "comment": "Volume Mixer 音量合成器",
+            "target": "ms-settings:apps-volume"
+          }
+        ],
         "we": [
           {
             "windowGroupID": 0,

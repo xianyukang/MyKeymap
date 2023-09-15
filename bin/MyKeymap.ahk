@@ -31,7 +31,7 @@ InitKeymap()
   fast := MouseKeymap("fast mouse", false, mouseTip, 110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", slow)
   slow.Map("*space", slow.LButtonUp())
 
-  capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "bb,cc,cmd,dd,dm,ex,gj,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,tm,we,wf,wt")
+  capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "bb,cc,cmd,dd,dm,ex,gj,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,tm,vm,we,wf,wt")
   capsHook.KeyOpt("{CapsLock}", "S")
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
@@ -328,6 +328,8 @@ ExecCapslockAbbr(command) {
       ActivateOrRun("Spotify", "https://open.spotify.com/")
     case "tm":
       Send("^+{esc}")
+    case "vm":
+      ActivateOrRun("", "ms-settings:apps-volume")
     case "we":
       ActivateOrRun("网易云音乐", "shortcuts\网易云音乐.lnk")
     case "wf":

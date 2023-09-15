@@ -4,7 +4,6 @@
 ;@Ahk2Exe-SetMainIcon ./bin/icons/logo3.ico
 ;@Ahk2Exe-ExeName MyKeymap
 SetWorkingDir(A_ScriptDir)
-OnFirstRunAfterInstallation()
 
 ; 不提权直接运行
 if A_Args.Length >= 2 && A_Args[1] == "WithoutAdmin" {
@@ -37,6 +36,10 @@ if (A_Args.Length) {
 } else {
   ; 通过配置文件生成脚本
   RunWait("./bin/settings.exe GenerateScripts", "./bin", "Hide")
+  ; 首次运行则生成快捷方式
+  if !FileExist(A_WorkingDir "\shortcuts\*.*") {
+    Run("MyKeymap.exe /script ./bin/MiscTools.ahk GenerateShortcuts")
+  }
   ; 启动脚本
   Run("MyKeymap.exe /script " mainAhkFilePath)
 }
@@ -49,12 +52,4 @@ Join(sep, params*) {
   for index, param in params
     str .= sep . param
   return SubStr(str, StrLen(sep) + 1)
-}
-
-OnFirstRunAfterInstallation() {
-  isFirstRun := !FileExist(A_WorkingDir "\shortcuts\*.*")
-  if !isFirstRun {
-    return
-  }
-  Run("MyKeymap.exe /script ./bin/MiscTools.ahk GenerateShortcuts" )
 }
