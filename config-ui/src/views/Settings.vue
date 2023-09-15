@@ -281,6 +281,7 @@ function onStartupChange() {
                   <v-card-text>
                     一般推荐设为 0，让模式立刻生效。<br>
                     如果设置大于零的值，短按会执行按键原有功能，长按则触发模式，也许能减少打字误触。<br>
+                    设置长按触发，会有另一种形式的误触，比如想输入热键，但长按时间不够，所以触发热键失败。<br>
                     &nbsp;
                     <v-row>
                       <v-col cols="3" v-for="keymap in customKeymaps" :key="keymap.id">

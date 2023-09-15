@@ -438,7 +438,7 @@
       "enable": true,
       "hotkey": "*j",
       "parentID": 0,
-      "delay": 70,
+      "delay": 0,
       "hotkeys": {
         "*,": [
           {
@@ -528,6 +528,14 @@
             "actionValueID": 6
           }
         ],
+        "*k": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "Shift 键",
+            "actionValueID": 19
+          }
+        ],
         "*q": [
           {
             "windowGroupID": 0,
@@ -603,42 +611,50 @@
     },
     {
       "id": 9,
-      "name": "J + K 模式",
+      "name": "F 模式",
       "enable": true,
-      "hotkey": "*k",
-      "parentID": 8,
-      "delay": 0,
+      "hotkey": "*f",
+      "parentID": 0,
+      "delay": 100,
       "hotkeys": {
-        "*a": [
+        "*,": [
           {
             "windowGroupID": 0,
             "actionTypeID": 7,
-            "comment": "选择 - 选到行首",
-            "actionValueID": 13
+            "comment": "Delete",
+            "actionValueID": 23
           }
         ],
-        "*c": [
+        "*.": [
           {
             "windowGroupID": 0,
             "actionTypeID": 7,
-            "comment": "Backspace",
-            "actionValueID": 21
+            "comment": "Insert",
+            "actionValueID": 24
           }
         ],
-        "*d": [
+        "*;": [
           {
             "windowGroupID": 0,
             "actionTypeID": 7,
-            "comment": "选择 - 往下",
-            "actionValueID": 10
+            "comment": "光标 - 跳到行尾",
+            "actionValueID": 6
+          }
+        ],
+        "*b": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "光标 - 上一单词",
+            "actionValueID": 7
           }
         ],
         "*e": [
           {
             "windowGroupID": 0,
             "actionTypeID": 7,
-            "comment": "选择 - 往上",
-            "actionValueID": 9
+            "comment": "Esc",
+            "actionValueID": 20
           }
         ],
         "*f": [
@@ -649,52 +665,132 @@
             "actionValueID": 12
           }
         ],
-        "*g": [
+        "*h": [
           {
             "windowGroupID": 0,
             "actionTypeID": 7,
-            "comment": "选择 - 选到行尾",
-            "actionValueID": 14
+            "comment": "光标 - 跳到行首",
+            "actionValueID": 5
+          }
+        ],
+        "*i": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "光标 - 上移",
+            "actionValueID": 1
+          }
+        ],
+        "*j": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "光标 - 左移",
+            "actionValueID": 3
+          }
+        ],
+        "*k": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "光标 - 下移",
+            "actionValueID": 2
+          }
+        ],
+        "*l": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "光标 - 右移",
+            "actionValueID": 4
+          }
+        ],
+        "*m": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "光标 - 下一单词",
+            "actionValueID": 8
+          }
+        ],
+        "*n": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "Backspace",
+            "actionValueID": 21
+          }
+        ],
+        "*o": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "Tab",
+            "actionValueID": 25
+          }
+        ],
+        "*p": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "Ctrl + Tab",
+            "actionValueID": 26
+          }
+        ],
+        "*q": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "右键菜单",
+            "actionValueID": 17
           }
         ],
         "*s": [
           {
             "windowGroupID": 0,
             "actionTypeID": 7,
-            "comment": "选择 - 往左",
-            "actionValueID": 11
+            "comment": "Shift 键",
+            "actionValueID": 19
           }
         ],
-        "*v": [
+        "*space": [
           {
             "windowGroupID": 0,
             "actionTypeID": 7,
-            "comment": "选择 - 下一单词",
-            "actionValueID": 16
+            "comment": "Enter",
+            "actionValueID": 22
           }
         ],
-        "*x": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 6,
-            "comment": "输入 Shift + Esc",
-            "keysToSend": "{blind}+{esc}"
-          }
-        ],
-        "*z": [
+        "*u": [
           {
             "windowGroupID": 0,
             "actionTypeID": 7,
-            "comment": "选择 - 上一单词",
-            "actionValueID": 15
+            "comment": "Shift + Tab",
+            "actionValueID": 27
+          }
+        ],
+        "*w": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "删除一个单词",
+            "actionValueID": 18
+          }
+        ],
+        "*y": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "Ctrl+Shift+Tab",
+            "actionValueID": 28
           }
         ],
         "singlePress": [
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
-            "comment": "输入 k 键",
-            "keysToSend": "{blind}{k}"
+            "comment": "输入 f 键",
+            "keysToSend": "{blind}{f}"
           }
         ]
       }
@@ -888,7 +984,7 @@
       "enable": true,
       "hotkey": "*space",
       "parentID": 0,
-      "delay": 70,
+      "delay": 100,
       "hotkeys": {
         "*,": [
           {

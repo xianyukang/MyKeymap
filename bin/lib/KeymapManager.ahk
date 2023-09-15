@@ -29,14 +29,17 @@
       ih := InputHook("T" keymap.delay)
       ih.KeyOpt("{All}", "E")
       ih.Start()
+      Suspend
       while true {
         if !ih.InProgress && ih.EndReason == "Timeout" {
+          Suspend
           break
         }
         if !GetKeyState(keymap.WaitKey, "P") || (!ih.InProgress && ih.EndReason != "Timeout") {
           ih.Stop()
           Send("{blind}{" keymap.WaitKey "}{" ih.EndKey "}")
           KeyWait(keymap.WaitKey)
+          Suspend
           return true
         }
       }
