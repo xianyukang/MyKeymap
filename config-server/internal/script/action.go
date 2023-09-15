@@ -328,6 +328,7 @@ func textFeatures7(a Action, inAbbrContext bool) string {
 
 	callMap := map[int]string{
 		19: `HoldDownLShiftKey()`,
+		29: `addSpaceBetweenEnglishChinese()`,
 	}
 	if call, ok := callMap[a.ValueID]; ok {
 		if inAbbrContext {

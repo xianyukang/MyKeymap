@@ -342,8 +342,8 @@ GetSelectedText() {
   A_Clipboard := ""
 
   Send("^c")
-  if not (ClipWait(0.5)) {
-    Tip("没有获取到文本", -700)
+  if not (ClipWait(0.4)) {
+    Tip("无法获取选中的文本", -700)
     return
   }
   text := A_Clipboard

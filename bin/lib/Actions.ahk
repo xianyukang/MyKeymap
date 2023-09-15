@@ -533,3 +533,23 @@ CopySelectedAsPlainText() {
   A_Clipboard := A_Clipboard
   Tip("复制成功")
 }
+
+addSpaceBetweenEnglishChinese() {
+  str := GetSelectedText()
+  if !str {
+    return
+  }
+  ; 参考 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions/Assertions
+  ; 前面加空格,  使用 look behind,  当英文在非英文之后时匹配
+  regexp := "(?<=[^ -~])([!-~]+)"
+  replacement := " $1"
+  str := RegExReplace(str, regexp, replacement)
+  ; 后面加空格, 使用 look ahead,  当英文在非英文之前时匹配
+  regexp := "([!-~]+)(?=[^ -~])"
+  replacement := "$1 "
+  str := RegExReplace(str, regexp, replacement)
+  ; 去除两端空格
+  ; return Trim(str)
+  A_Clipboard := str
+  Send("+{Insert}")
+}
