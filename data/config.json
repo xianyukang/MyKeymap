@@ -612,7 +612,7 @@
     {
       "id": 9,
       "name": "F 模式",
-      "enable": true,
+      "enable": false,
       "hotkey": "f",
       "parentID": 0,
       "delay": 100,
@@ -973,7 +973,7 @@
     {
       "id": 12,
       "name": "空格模式",
-      "enable": true,
+      "enable": false,
       "hotkey": "*space",
       "parentID": 0,
       "delay": 100,
