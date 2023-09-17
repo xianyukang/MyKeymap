@@ -3,7 +3,7 @@
 #### ➤ 下载 & 文档
 
 - [快速入门](https://xianyukang.com/MyKeymap.html#mykeymap-%E7%AE%80%E4%BB%8B)
-- [MyKeymap 2.0-beta13](https://wwqw.lanzouj.com/i1CtQ18l0qfc) ( 提取码 1234 )
+- [MyKeymap 2.0-beta14](https://wwqw.lanzouj.com/ixCyh18robsf) ( 提取码 1234 )
 
 
 #### ➤ b 站视频介绍

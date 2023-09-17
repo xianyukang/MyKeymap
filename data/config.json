@@ -418,7 +418,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 8,
-            "comment": "微信",
+            "comment": "如果 WeChat.exe 进程存在则输入 Ctrl+Alt+W 热键激活微信，否则启动微信",
             "ahkCode": "ProcessExistSendKeyOrRun(\"WeChat.exe\", \"^!w\", \"shortcuts\\微信.lnk\")"
           }
         ],
@@ -2119,7 +2119,7 @@
     }
   ],
   "options": {
-    "mykeymapVersion": "2.0-beta13",
+    "mykeymapVersion": "2.0-beta14",
     "windowGroups": [
       {
         "id": 0,
