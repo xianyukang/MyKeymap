@@ -221,7 +221,7 @@ ShortcutTargetExist(LnkPath) {
 
     ; 没有获取到目标路径可能是因为是uwp应用的快捷方式
     ; 也有可能是ms-setting: 或shell:之类的连接
-    if !OutTarget || !RegExMatch(OutTarget, "^[a-zA-Z]:\\[^<>:`"/|?*]+")
+    if !OutTarget || SubStr(outTarget, 2, 2) != ":\"
       return 
 
     if !FileExist(OutTarget) 
