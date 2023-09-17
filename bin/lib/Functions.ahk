@@ -194,6 +194,9 @@ RunPrograms(target, args := "", workingDir := "", admin := false, runInBackgroun
       return
     }
 
+  ; 避免在快捷方式无效，导致的程序卡住
+    ShortcutTargetExist(programPath)
+
     if (admin) {
       runAsAdmin(programPath, args, workingDir, runInBackground ? "Hide" : "")
     } else {
@@ -205,6 +208,18 @@ RunPrograms(target, args := "", workingDir := "", admin := false, runInBackgroun
     ; 还原窗口焦点
     try WinActivate(currentHwnd)
     return
+  }
+}
+
+/**
+ * 快捷方式指向目标是否存在，不存在抛出异常
+ * @param LnkPath 快捷方式路径
+ */
+ShortcutTargetExist(LnkPath) {
+  if SubStr(LnkPath, -4) == ".lnk" {
+    FileGetShortcut(LnkPath, &OutTarget)
+    if !FileExist(OutTarget) 
+       throw Error("快捷方式指向的目标不存在`n快捷方式: " LnkPath "`n指向目标: " OutTarget)
   }
 }
 
