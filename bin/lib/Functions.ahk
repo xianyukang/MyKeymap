@@ -7,7 +7,7 @@
 TrayMenuHandler(ItemName, ItemPos, MyMenu) {
   switch ItemName {
     case "退出":
-      ExitApp
+      MyKeymapExit()
     case "暂停":
       MyKeymapToggleSuspend()
     case "重启程序":
@@ -26,8 +26,9 @@ TrayMenuHandler(ItemName, ItemPos, MyMenu) {
  * @param ExitReason 退出原因
  * @param ExitCode 传递给 Exit 或 ExitApp 的退出代码.
  */
-MyExit(ExitReason, ExitCode) {
+MyKeymapExit(ExitReason?, ExitCode?) {
   ProcessClose("MyKeymap-CommandInput.exe")
+  ExitApp
 }
 
 /**
@@ -69,10 +70,6 @@ MyKeymapOpenSettings() {
 MyKeymapReload() {
   Tip("Reload")
   Run("MyKeymap.exe")
-}
-
-MyKeymapExit() {
-  ExitApp
 }
 
 /**
