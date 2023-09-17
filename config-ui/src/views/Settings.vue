@@ -200,16 +200,13 @@ function onStartupChange() {
                             :model-value="options.startup"
                             @change="onStartupChange"></v-switch>
                   <path-dialog/>
-                  <br/>
+                  <span class="mr-2"></span>
                   <window-group-dialog/>
                   <br/>
-                  <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showMouseOption = resetOtherToFalse(!showMouseOption)">🖱️ 修改鼠标参数</v-btn>
-                  <br/>
-                  <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showKeyboardLayout = resetOtherToFalse(!showKeyboardLayout)">⌨️ 修改键盘布局</v-btn>
-                  <br/>
-                  <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showSkin = resetOtherToFalse(!showSkin)">✨ 命令框皮肤</v-btn>
-                  <br/>
-                  <v-btn class="mt-3" width="170" color="blue" variant="outlined" @click="showKeymapDelay = resetOtherToFalse(!showKeymapDelay)">🕗 设置触发延时</v-btn>
+                  <v-btn class="mt-3 mr-2" width="170" color="blue" variant="outlined" @click="showMouseOption = resetOtherToFalse(!showMouseOption)">🖱️ 修改鼠标参数</v-btn>
+                  <v-btn class="mt-3 mr-2" width="170" color="blue" variant="outlined" @click="showKeyboardLayout = resetOtherToFalse(!showKeyboardLayout)">⌨️ 修改键盘布局</v-btn>
+                  <v-btn class="mt-3 mr-2" width="170" color="blue" variant="outlined" @click="showSkin = resetOtherToFalse(!showSkin)">✨ 命令框皮肤</v-btn>
+                  <v-btn class="mt-3 mr-2" width="170" color="blue" variant="outlined" @click="showKeymapDelay = resetOtherToFalse(!showKeymapDelay)">🕗 设置触发延时</v-btn>
                 </v-card-text>
               </v-card>
             </v-col>

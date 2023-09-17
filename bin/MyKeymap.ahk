@@ -20,7 +20,7 @@ ProcessSetPriority "High"
 SetWorkingDir("../")
 InitTrayMenu()
 InitKeymap()
-OnExit(MyExit)
+OnExit(MyKeymapExit)
 #include ../data/custom_functions.ahk
 
 InitKeymap()
