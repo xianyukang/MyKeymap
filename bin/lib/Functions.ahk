@@ -218,6 +218,12 @@ RunPrograms(target, args := "", workingDir := "", admin := false, runInBackgroun
 ShortcutTargetExist(LnkPath) {
   if SubStr(LnkPath, -4) == ".lnk" {
     FileGetShortcut(LnkPath, &OutTarget)
+
+    ; 没有获取到目标路径可能是因为是uwp应用的快捷方式
+    ; 也有可能是ms-setting: 或shell:之类的连接
+    if !OutTarget || !RegExMatch(OutTarget, "^[a-zA-Z]:\\[^<>:`"/|?*]+")
+      return 
+
     if !FileExist(OutTarget) 
        throw Error("快捷方式指向的目标不存在`n快捷方式: " LnkPath "`n指向目标: " OutTarget)
   }
