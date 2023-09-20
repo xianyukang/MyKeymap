@@ -17,3 +17,6 @@ MyKeymap 是一款基于 [AutoHotkey](https://www.autohotkey.com/) 的键盘映�
 
 | ![features](./doc/features.png) | ![夏日大作战](./doc/夏日大作战.gif) |
 | ------------------------------- | ----------------------------------- |
+
+## Screenshots
+![settings](./doc/settings.png)
