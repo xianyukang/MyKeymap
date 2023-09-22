@@ -69,7 +69,7 @@ function onActionTypeChange(action: Action) {
 <template>
   <v-row>
     <v-col>
-      <v-card min-height="550" width="800" elevation="5">
+      <v-card min-height="530" width="800" elevation="5">
         <v-card-title style="padding-bottom: 0">
           <v-row>
             <v-col cols="5">
@@ -93,7 +93,7 @@ function onActionTypeChange(action: Action) {
             </v-col>
           </v-row>
         </v-card-title>
-        <v-card-text>
+        <v-card-text style="padding-bottom: 0;">
           <component :is="components[action.actionTypeID]" />
         </v-card-text>
       </v-card>

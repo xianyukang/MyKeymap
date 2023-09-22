@@ -42,9 +42,9 @@ const label10 = "后台运行"
   <v-text-field color="primary" autocomplete="off" variant="underlined" :label="label4" v-model="action.workingDir" />
   <v-text-field color="primary" autocomplete="off" variant="underlined" :label="label5" v-model="action.comment" />
   <v-card-actions class="card-actions">
-    <v-checkbox :label="label6" color="secondary" v-model="action.runAsAdmin" />
-    <v-checkbox :label="label10" color="secondary" v-model="action.runInBackground" />
-    <v-checkbox :label="label7" color="secondary" v-model="action.detectHiddenWindow" />
+    <v-checkbox hide-details :label="label6" color="secondary" v-model="action.runAsAdmin" />
+    <v-checkbox hide-details :label="label10" color="secondary" v-model="action.runInBackground" />
+    <v-checkbox hide-details :label="label7" color="secondary" v-model="action.detectHiddenWindow" />
     <v-btn class="action-button" color="primary" variant="outlined" @click="server.runWindowSpy">{{ label8 }}</v-btn>
   </v-card-actions>
 </template>
