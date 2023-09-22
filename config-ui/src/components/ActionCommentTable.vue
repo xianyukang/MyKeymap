@@ -30,7 +30,7 @@ const showActionComment = (actions: IAction[]) => {
 
 <template>
   <v-card>
-    <Table class="text-left" :titles="['热键', '备注']">
+    <Table class="text-left">
       <tr v-for="(action, hotkey, index) in store.hotkeys" :key="index">
         <td v-if="showActionComment(action)">
           <slot name="keyText" :hotkey="hotkey"></slot>
@@ -46,6 +46,7 @@ const showActionComment = (actions: IAction[]) => {
 <style scoped>
 
 td {
+  white-space: nowrap;
   height: 2.3rem;
 }
 
