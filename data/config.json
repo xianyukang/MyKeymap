@@ -43,6 +43,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
+            "comment": "滚轮右滑",
             "actionValueID": 8
           }
         ],
@@ -50,6 +51,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
+            "comment": "窗口居中 (1370x930)",
             "actionValueID": 11
           }
         ],
@@ -57,6 +59,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
+            "comment": "窗口最小化",
             "actionValueID": 8
           }
         ],
@@ -80,6 +83,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
+            "comment": "窗口管理 (EDSF切换X关闭、空格选择",
             "actionValueID": 4
           }
         ],
@@ -87,6 +91,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
+            "comment": "切换窗口置顶状态",
             "actionValueID": 12
           }
         ],
@@ -94,6 +99,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
+            "comment": "滚轮左滑",
             "actionValueID": 7
           }
         ],
@@ -101,6 +107,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
+            "comment": "鼠标上移",
             "actionValueID": 1
           }
         ],
@@ -116,6 +123,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
+            "comment": "鼠标下移",
             "actionValueID": 2
           }
         ],
@@ -123,6 +131,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
+            "comment": "鼠标右移",
             "actionValueID": 4
           }
         ],
@@ -130,6 +139,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
+            "comment": "鼠标右键",
             "actionValueID": 10
           }
         ],
@@ -137,6 +147,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
+            "comment": "鼠标左键",
             "actionValueID": 9
           }
         ],
@@ -144,6 +155,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
+            "comment": "滚轮下滑",
             "actionValueID": 6
           }
         ],
@@ -151,6 +163,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
+            "comment": "下一个虚拟桌面",
             "actionValueID": 6
           }
         ],
@@ -158,6 +171,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
+            "comment": "窗口最大化或还原",
             "actionValueID": 9
           }
         ],
@@ -165,6 +179,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
+            "comment": "在当前程序的窗口间轮换",
             "actionValueID": 3
           }
         ],
@@ -172,6 +187,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
+            "comment": "窗口居中 (1200x800)",
             "actionValueID": 10
           }
         ],
@@ -187,6 +203,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
+            "comment": "滚轮上滑",
             "actionValueID": 5
           }
         ],
@@ -194,6 +211,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
+            "comment": "移动窗口到下一个显示器",
             "actionValueID": 7
           }
         ],
@@ -201,6 +219,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
+            "comment": "切换到上一个窗口",
             "actionValueID": 2
           }
         ],
@@ -208,6 +227,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
+            "comment": "关闭窗口",
             "actionValueID": 1
           }
         ],
@@ -215,6 +235,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 3,
+            "comment": "上一个虚拟桌面",
             "actionValueID": 5
           }
         ],
@@ -604,6 +625,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "输入 j 键",
             "keysToSend": "{blind}{j}"
           }
         ]
@@ -807,6 +829,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 f10",
             "remapToKey": "f10"
           }
         ],
@@ -814,6 +837,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 f2",
             "remapToKey": "f2"
           }
         ],
@@ -821,6 +845,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 f4",
             "remapToKey": "f4"
           }
         ],
@@ -828,6 +853,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 f5",
             "remapToKey": "f5"
           }
         ],
@@ -835,6 +861,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 f9",
             "remapToKey": "f9"
           }
         ],
@@ -842,6 +869,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 7",
             "remapToKey": "7"
           }
         ],
@@ -849,6 +877,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 f11",
             "remapToKey": "f11"
           }
         ],
@@ -856,6 +885,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 0",
             "remapToKey": "0"
           }
         ],
@@ -863,6 +893,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 5",
             "remapToKey": "5"
           }
         ],
@@ -870,6 +901,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 1",
             "remapToKey": "1"
           }
         ],
@@ -877,6 +909,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 2",
             "remapToKey": "2"
           }
         ],
@@ -884,6 +917,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 3",
             "remapToKey": "3"
           }
         ],
@@ -891,6 +925,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 9",
             "remapToKey": "9"
           }
         ],
@@ -898,6 +933,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 8",
             "remapToKey": "8"
           }
         ],
@@ -905,6 +941,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 6",
             "remapToKey": "6"
           }
         ],
@@ -912,6 +949,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 f12",
             "remapToKey": "f12"
           }
         ],
@@ -919,6 +957,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 f1",
             "remapToKey": "f1"
           }
         ],
@@ -926,6 +965,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 volume_up",
             "remapToKey": "volume_up"
           }
         ],
@@ -933,6 +973,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 4",
             "remapToKey": "4"
           }
         ],
@@ -940,6 +981,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
+            "comment": "重映射为 volume_down",
             "remapToKey": "volume_down"
           }
         ],
@@ -948,7 +990,7 @@
             "windowGroupID": 0,
             "actionTypeID": 6,
             "comment": "输入 3 键",
-            "keysToSend": "{blind}3"
+            "keysToSend": "{blind}{3}"
           }
         ]
       }
@@ -965,6 +1007,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "输入 tab 键",
             "keysToSend": "{blind}{tab}"
           }
         ]
@@ -1141,6 +1184,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "输入 space 键",
             "keysToSend": "{blind}{space}"
           }
         ]
@@ -1158,6 +1202,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 *",
             "keysToSend": "{blind}*"
           }
         ],
@@ -1165,6 +1210,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 %",
             "keysToSend": "{blind}%"
           }
         ],
@@ -1172,6 +1218,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 .",
             "keysToSend": "{blind}."
           }
         ],
@@ -1179,6 +1226,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 =",
             "keysToSend": "{blind}="
           }
         ],
@@ -1186,6 +1234,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 ^",
             "keysToSend": "{blind}{^}"
           }
         ],
@@ -1193,6 +1242,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 >",
             "keysToSend": "{blind}>"
           }
         ],
@@ -1200,6 +1250,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 !",
             "keysToSend": "{blind}{!}"
           }
         ],
@@ -1207,6 +1258,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 +",
             "keysToSend": "{blind}{+}"
           }
         ],
@@ -1214,6 +1266,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 :",
             "keysToSend": "{blind}:"
           }
         ],
@@ -1221,6 +1274,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 ;",
             "keysToSend": "{blind};"
           }
         ],
@@ -1228,6 +1282,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 `",
             "keysToSend": "{blind}`"
           }
         ],
@@ -1235,6 +1290,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 -",
             "keysToSend": "{blind}-"
           }
         ],
@@ -1242,6 +1298,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 /",
             "keysToSend": "{blind}/"
           }
         ],
@@ -1249,6 +1306,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 &",
             "keysToSend": "{blind}&"
           }
         ],
@@ -1256,6 +1314,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 <",
             "keysToSend": "{blind}<"
           }
         ],
@@ -1263,6 +1322,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 ~",
             "keysToSend": "{blind}~"
           }
         ],
@@ -1270,6 +1330,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 $",
             "keysToSend": "{blind}$"
           }
         ],
@@ -1277,6 +1338,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 |",
             "keysToSend": "{blind}|"
           }
         ],
@@ -1284,6 +1346,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 #",
             "keysToSend": "{blind}{#}"
           }
         ],
@@ -1291,6 +1354,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 _",
             "keysToSend": "{blind}_"
           }
         ],
@@ -1298,6 +1362,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 @",
             "keysToSend": "{blind}@"
           }
         ],
@@ -1305,6 +1370,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "符号 \\",
             "keysToSend": "{blind}\\"
           }
         ],
@@ -1312,6 +1378,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 9,
+            "comment": "触发 缩写功能",
             "actionValueID": 5
           }
         ]
@@ -1473,6 +1540,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
+            "comment": "输入 . 键",
             "keysToSend": "{blind}{.}"
           }
         ]
@@ -1634,7 +1702,8 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
-            "keysToSend": "{blind}{.}"
+            "comment": "输入 , 键",
+            "keysToSend": "{blind}{,}"
           }
         ]
       }
@@ -1906,6 +1975,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 1,
+            "comment": "记事本",
             "winTitle": "记事本",
             "target": "notepad.exe"
           }
@@ -1971,6 +2041,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 1,
+            "comment": "网易云音乐 UWP 版",
             "winTitle": "网易云音乐",
             "target": "shortcuts\\网易云音乐.lnk"
           }
@@ -2046,7 +2117,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 6,
-            "comment": "狗头",
+            "comment": "狗头 🐶",
             "keysToSend": "🐶"
           }
         ],

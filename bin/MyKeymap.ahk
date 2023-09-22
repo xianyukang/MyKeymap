@@ -161,7 +161,7 @@ InitKeymap()
   km.RemapKey("u", "4")
   km.RemapKey("w", "volume_down")
   km.RemapKey("space", "f1")
-  km.Map("singlePress", _ => (Send("{blind}3")))
+  km.Map("singlePress", _ => (Send("{blind}{3}")))
   km.Map("*/", km.ToggleLock)
 
   ; 分号模式
