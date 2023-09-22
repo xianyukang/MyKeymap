@@ -59,7 +59,7 @@ const formatSpace = (hotkey: string) => {
       </v-card>
       <action></action>
     </div>
-    <action-comment-table class="ml-4 mr-4" style="min-width: 200px; flex: 1">
+    <action-comment-table class="ml-14 mr-4" style="min-width: 200px; flex: 1">
       <template #keyText="{hotkey}">
         {{ formatSpace(hotkey as string) }}
       </template>
