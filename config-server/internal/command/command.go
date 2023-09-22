@@ -18,6 +18,7 @@ var Map = map[string]func(args ...string){
 	"GenerateAHK":     GenerateAHK,
 	"ChangeVersion":   ChangeVersion,
 	"GenerateScripts": GenerateScripts,
+	"UseOriginalAHK":  UseOriginalAHK,
 }
 
 var logger = log.New(os.Stderr, "", 0)
@@ -56,6 +57,27 @@ func GenerateScripts(args ...string) {
 		panic(err)
 	}
 	script.GenerateScripts(config)
+}
+
+func UseOriginalAHK(args ...string) {
+	defer func() {
+		fmt.Println()
+	}()
+
+	exe := "bin\\AutoHotkey64.exe"
+	if _, err := os.Stat(exe); errors.Is(err, os.ErrNotExist) {
+		fmt.Println("Error: file", exe, "does not exist")
+		return
+	}
+	if err := execCmd("cmd.exe", "/c", "copy /y "+exe+" MyKeymap.exe"); err != nil {
+		fmt.Println("\nPlease close MyKeymap and retry")
+		return
+	}
+	if err := execCmd("cmd.exe", "/c", "copy /y bin\\Launcher.ahk MyKeymap.ahk"); err != nil {
+		panic(err)
+		return
+	}
+	fmt.Println("\ndone!")
 }
 
 func execCmd(exe string, args ...string) error {
