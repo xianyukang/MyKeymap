@@ -13,7 +13,7 @@ buildClient:
 	rm -f config-ui/tsconfig.tsbuildinfo
 	cd config-ui/dist/assets; rm -f *.woff *.eot *.ttf
 
-copyFiles:
+copyFiles: CopyAHK
 	rm -f -r $(folder)
 	mkdir $(folder)
 	mkdir $(folder)/shortcuts
@@ -25,6 +25,13 @@ copyFiles:
 	cp -r bin $(folder)/
 	cp -r tools $(folder)/
 	cp MyKeymap.exe $(folder)/
+	cp 误报病毒时执行这个.bat $(folder)/
+
+# 如果直接用 wsl 的 cp 命令复制, 复制出的文件会有 read-only 属性, 比较奇怪
+CopyAHK:
+	@echo '@copy /y "C:\\Program Files\\AutoHotkey\\v2\AutoHotkey64.exe" .\\bin\\' > CopyAHK.bat
+	cmd.exe /c CopyAHK.bat
+	rm CopyAHK.bat
 
 build: buildServer buildClient copyFiles
 	cd bin; ./settings.exe ChangeVersion $(version)

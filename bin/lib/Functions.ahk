@@ -17,7 +17,7 @@ TrayMenuHandler(ItemName, ItemPos, MyMenu) {
     case "帮助文档":
       Run("https://xianyukang.com/MyKeymap.html")
     case "查看窗口标识符":
-      run("MyKeymap.exe bin\WindowSpy.ahk")
+      run("MyKeymap.exe /script bin\WindowSpy.ahk")
   }
 }
 

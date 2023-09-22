@@ -41,7 +41,7 @@ func main() {
 		hasError = nil
 	}
 
-	execCmd("./MyKeymap.exe", "WithoutAdmin", "./bin/MiscTools.ahk", "GenerateShortcuts")
+	execCmd("./MyKeymap.exe", "/script", "./bin/MiscTools.ahk", "GenerateShortcuts")
 	server(hasError, rainDone, debug)
 }
 
@@ -168,15 +168,15 @@ func ServerCommandHandler(c *gin.Context) {
 	}{
 		"2": {
 			exe:  "./MyKeymap.exe",
-			args: []string{"bin/WindowSpy.ahk"},
+			args: []string{"/script", "bin/WindowSpy.ahk"},
 		},
 		"3": {
 			exe:  "./MyKeymap.exe",
-			args: []string{"WithoutAdmin", "./bin/MiscTools.ahk", "RunAtStartup", "On"},
+			args: []string{"/script", "./bin/MiscTools.ahk", "RunAtStartup", "On"},
 		},
 		"4": {
 			exe:  "./MyKeymap.exe",
-			args: []string{"WithoutAdmin", "./bin/MiscTools.ahk", "RunAtStartup", "Off"},
+			args: []string{"/script", "./bin/MiscTools.ahk", "RunAtStartup", "Off"},
 		},
 	}
 	if c, ok := m[c.Param("id")]; ok {
@@ -221,8 +221,9 @@ func SaveConfigHandler(debug bool) gin.HandlerFunc {
 		script.SaveConfigFile(&config) // 保存配置文件
 
 		if debug {
-			script.GenerateScripts(&config)                 // 生成脚本文件
-			execCmd("./MyKeymap.exe", "./bin/MyKeymap.ahk") // 重启程序且跳过 ahk 脚本生成
+			script.GenerateScripts(&config) // 生成脚本文件
+			execCmd("./MyKeymap.exe")       // 重启程序, 此时 launcher 会重新生成脚本
+			// execCmd("./MyKeymap.exe", "./bin/MyKeymap.ahk") // 重启程序且跳过 ahk 脚本生成
 		} else {
 			execCmd("./MyKeymap.exe") // 重启程序, 此时 launcher 会重新生成脚本
 		}

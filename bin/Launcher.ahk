@@ -1,16 +1,10 @@
+#Requires AutoHotkey v2.0
 ; 该脚本只能编译成Exe使用，只用做启动MyKeymap.ahk和AHk v2使用
 #SingleInstance Force
 #NoTrayIcon
 ;@Ahk2Exe-SetMainIcon ./bin/icons/logo3.ico
 ;@Ahk2Exe-ExeName MyKeymap
 SetWorkingDir(A_ScriptDir)
-
-; 不提权直接运行
-if A_Args.Length >= 2 && A_Args[1] == "WithoutAdmin" {
-  A_Args.RemoveAt(1)
-  Run("MyKeymap.exe /script " Join(" ", A_Args*))
-  return
-}
 
 ; 以管理员权限运行
 full_command_line := DllCall("GetCommandLine", "str")
@@ -21,7 +15,10 @@ if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)")) {
   }
 
   try {
-    Run("*RunAs " A_ScriptFullPath " " otherArgs " /restart")
+    if A_IsCompiled
+      Run '*RunAs "' A_ScriptFullPath '" ' otherArgs ' /restart'
+    else
+      Run '*RunAs "' A_AhkPath '" /restart "' A_ScriptFullPath '"'
     ExitApp
   } catch Error as e {
     hasTip := true
@@ -46,10 +43,4 @@ if (A_Args.Length) {
 
 if IsSet(hasTip) {
   Sleep 7000
-}
-
-Join(sep, params*) {
-  for index, param in params
-    str .= sep . param
-  return SubStr(str, StrLen(sep) + 1)
 }

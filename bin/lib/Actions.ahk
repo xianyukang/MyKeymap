@@ -424,7 +424,7 @@ SoundControl() {
 }
 
 BrightnessControl() {
-  Run("MyKeymap.exe bin\ChangeBrightness.ahk")
+  Run("MyKeymap.exe /script bin\ChangeBrightness.ahk")
 }
 
 GoToLastWindow() {
