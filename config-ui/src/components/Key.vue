@@ -1,18 +1,13 @@
 <script lang="ts" setup>
 import { computed } from "vue";
-import trimStart from "lodash-es/trimStart";
 import { useConfigStore } from "@/store/config";
 
 const store = useConfigStore()
 const props = defineProps<{
   hotkey: string;
-  laber?: string;
+  label: string;
 }>();
 
-const keyText = computed(() => {
-  const string = trimStart(props.hotkey, '*')
-  return string.charAt(0).toUpperCase() + string.slice(1)
-})
 const keyColor = computed(() => {
   if (store.hotkey === props.hotkey) {
     return 'blue'
@@ -49,12 +44,12 @@ function width(key: string): number {
             height="53"
             style="transition: none; font-size: 1.5rem;"
             :elevation="isHovering ? 13 : 4"
-            :width="width(keyText) + (isHovering ? 1 : 0)"
+            :width="width(label) + (isHovering ? 1 : 0)"
             :color="disabled ? '#AAA' : keyColor"
             :disabled="disabled"
             @click="click(hotkey)"
             :class="['d-flex justify-center align-center']">
-      <div>{{ laber ?? keyText }}</div>
+      <div>{{ label }}</div>
     </v-card>
   </v-hover>
 </template>
