@@ -6,6 +6,7 @@ import Action from "@/components/actions/Action.vue";
 import Key from "@/components/Key.vue";
 import { ref } from "vue";
 import trimEnd from "lodash-es/trimEnd";
+import ActionCommentTable from "@/components/ActionCommentTable.vue";
 
 const { hotkeys } = storeToRefs(useConfigStore())
 const { removeHotkey, changeHotkey} = useConfigStore()
@@ -40,22 +41,30 @@ const formatSpace = (hotkey: string) => {
 </script>
 
 <template>
-  <v-card class="mb-4 bg-transparent" width="800">
-    <v-card-text>
-      <v-row justify="start">
-        <v-col v-for="(action, hotkey) in hotkeys" cols="auto" :key="hotkey">
-          <key :hotkey="hotkey as string" :laber="formatSpace(hotkey as string)"/>
-        </v-col>
-      </v-row>
+  <div class="d-flex flex-wrap mt-4">
+    <div>
+      <v-card class="mb-4 bg-transparent" width="800">
+        <v-card-text>
+          <v-row justify="start">
+            <v-col v-for="(action, hotkey) in hotkeys" cols="auto" :key="hotkey">
+              <key :hotkey="hotkey as string" :label="formatSpace(hotkey as string)"/>
+            </v-col>
+          </v-row>
 
-      <v-text-field v-model="cmd" @keydown.enter="runCmd()"
-                    class="ml-1 mt-5" variant="underlined"
-                    color="primary"
-                    label="输入ab按回车添加/切换到ab, del ab删除ab, rn cd重命名当前为cd">
-      </v-text-field>
-    </v-card-text>
-  </v-card>
-  <action></action>
+          <v-text-field v-model="cmd" @keydown.enter="runCmd()"
+                        class="ml-1 mt-5" variant="underlined" color="primary"
+                        label="输入ab按回车添加/切换到ab, del ab删除ab, rn cd重命名当前为cd">
+          </v-text-field>
+        </v-card-text>
+      </v-card>
+      <action></action>
+    </div>
+    <action-comment-table class="ml-4 mr-4" style="min-width: 200px; flex: 1">
+      <template #keyText="{hotkey}">
+        {{ formatSpace(hotkey as string) }}
+      </template>
+    </action-comment-table>
+  </div>
 
 </template>
 
