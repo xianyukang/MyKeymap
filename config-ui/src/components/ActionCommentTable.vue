@@ -30,7 +30,7 @@ const showActionComment = (actions: IAction[]) => {
 
 <template>
   <v-card>
-    <Table class="text-left">
+    <Table class="text-left" :titles="['热键', '备注']">
       <tr v-for="(action, hotkey, index) in store.hotkeys" :key="index">
         <td v-if="showActionComment(action)">
           <slot name="keyText" :hotkey="hotkey"></slot>
