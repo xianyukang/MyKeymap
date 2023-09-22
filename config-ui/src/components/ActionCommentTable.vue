@@ -46,6 +46,7 @@ const showActionComment = (actions: IAction[]) => {
 <style scoped>
 
 td {
+  white-space: nowrap;
   height: 2.3rem;
 }
 
