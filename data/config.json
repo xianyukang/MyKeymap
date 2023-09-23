@@ -12,6 +12,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
+            "comment": "鼠标左键按下 (之后按空格松开)",
             "actionValueID": 12
           }
         ],
@@ -2190,7 +2191,7 @@
     }
   ],
   "options": {
-    "mykeymapVersion": "2.0-beta15",
+    "mykeymapVersion": "2.0-beta16",
     "windowGroups": [
       {
         "id": 0,

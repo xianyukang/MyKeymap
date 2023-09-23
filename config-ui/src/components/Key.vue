@@ -41,8 +41,9 @@ function click(hotkey: string) {
             :color="disabled ? '#AAA' : keyColor"
             :disabled="disabled"
             @click="click(hotkey)"
-            :class="['d-flex justify-center align-center' + (isHovering ? ' hover' : '')]">
-      <div :class="label.length > 2 ? 'long-key' : 'key'">{{ label }}</div>
+            class="d-flex justify-center align-center"
+            :class="{ 'hover': isHovering, 'key': label.length <= 2, 'long-key': label.length > 2 }">
+      <div>{{ label }}</div>
     </v-card>
   </v-hover>
 </template>
@@ -54,8 +55,7 @@ function click(hotkey: string) {
 }
 
 .key {
-  padding-left: 20px;
-  padding-right: 20px;
+  width: 53px;
 }
 
 .long-key {

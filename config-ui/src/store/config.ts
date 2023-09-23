@@ -136,7 +136,7 @@ export const useConfigStore = defineStore('config', () => {
       options.value.keyboardLayout = defaultKeyboardLayout
     } else if (num == 74) {
       options.value.keyboardLayout = keyboardLayout74
-    } else if(num == 104) {
+    } else if (num == 104) {
       options.value.keyboardLayout = keyboardLayout104
     } else if (num == 1) {
       options.value.keyboardLayout += '\n' + mouseButtons
@@ -265,16 +265,21 @@ export const parseKeyboardLayout = (layout: string, keymapHotkey: string) => {
     )
 
   if (keymapHotkey.toLowerCase().includes("rbutton")) {
-    const last = rows[rows.length - 1]
     const list = rows.flatMap(x => x)
     if (!list.includes("*LButton")) {
-      last.push("*LButton")
+      if (rows.length > 0) {
+        rows[0].push("*LButton")
+      }
     }
     if (!list.includes("*WheelUp")) {
-      last.push("*WheelUp")
+      if (rows.length > 1) {
+        rows[1].push("*WheelUp")
+      }
     }
     if (!list.includes("*WheelDown")) {
-      last.push("*WheelDown")
+      if (rows.length > 2) {
+        rows[2].push("*WheelDown")
+      }
     }
   }
   return rows

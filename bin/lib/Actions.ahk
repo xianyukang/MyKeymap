@@ -141,7 +141,7 @@ EnterSemicolonAbbr(semiHook, semiHookAbbrWindow) {
  */
 SmartCloseWindow() {
   if NotActiveWin() {
-    return 
+    return
   }
 
   class := WinGetClass("A")
@@ -165,7 +165,7 @@ SmartCloseWindow() {
  */
 CenterAndResizeWindow(width, height) {
   if NotActiveWin() {
-    return 
+    return
   }
 
   ; 在 mousemove 时需要 PER_MONITOR_AWARE (-3), 否则当两个显示器有不同的缩放比例时, mousemove 会有诡异的漂移
@@ -197,7 +197,7 @@ CenterAndResizeWindow(width, height) {
  */
 MaximizeWindow() {
   if NotActiveWin() {
-    return 
+    return
   }
 
   if WindowMaxOrMin() {
@@ -252,7 +252,7 @@ SystemShiftAltTab() {
  */
 CloseWindowProcesses() {
   if NotActiveWin() {
-    return 
+    return
   }
 
   name := WinGetProcessName("A")
@@ -378,7 +378,7 @@ BindWindow() {
  */
 CloseSameClassWindows() {
   if NotActiveWin() {
-    return 
+    return
   }
 
   exe := WinGetProcessName("A")
@@ -474,7 +474,7 @@ openHelpHtml() {
  */
 SetWindowPositionAndSize(x, y, width, height) {
   if NotActiveWin() {
-    return 
+    return
   }
 
   hwnd := WinExist("A")
