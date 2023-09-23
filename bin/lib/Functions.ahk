@@ -98,7 +98,6 @@ GetProcessName() {
  * @returns {string|any} 
  */
 CompleteProgramPath(target) {
-
   ; 工作目录下的程序
   PathName := A_WorkingDir "\" target
   if FileExist(PathName)
@@ -191,7 +190,7 @@ RunPrograms(target, args := "", workingDir := "", admin := false, runInBackgroun
       return
     }
 
-  ; 避免在快捷方式无效，导致的程序卡住
+    ; 避免在快捷方式无效，导致的程序卡住
     ShortcutTargetExist(programPath)
 
     if (admin) {
@@ -221,10 +220,10 @@ ShortcutTargetExist(LnkPath) {
     ; 没有获取到目标路径可能是因为是uwp应用的快捷方式
     ; 也有可能是ms-setting: 或shell:之类的连接
     if !OutTarget || SubStr(outTarget, 2, 2) != ":\"
-      return 
+      return
 
-    if !FileExist(OutTarget) 
-       throw Error("快捷方式指向的目标不存在`n快捷方式: " LnkPath "`n指向目标: " OutTarget)
+    if !FileExist(OutTarget)
+      throw Error("快捷方式指向的目标不存在`n快捷方式: " LnkPath "`n指向目标: " OutTarget)
   }
 }
 
@@ -258,7 +257,7 @@ ActivateWindow(winTitle := "", isHide := false) {
     if (WinExist("A") != hwnd || WinGetMinMax(hwnd) = -1) {
       WinActivate(hwnd)
     } else {
-        WinMinimize(hwnd)
+      WinMinimize(hwnd)
     }
   } else {
     ; 如果多个窗口则来回切换
