@@ -124,6 +124,8 @@ CompleteProgramPath(target) {
     if FileExist(PathName)
       return PathName
   }
+
+  return target
 }
 
 /**
@@ -197,7 +199,7 @@ RunPrograms(target, args := "", workingDir := "", admin := false, runInBackgroun
     } else {
       ; 直接 run "https://example.com" 会让 chrome 以管理员启动
       ; ShellRun 也支持 ms-setting: 或 shell: 或 http: 之类的链接
-      ShellRun(programPath ? programPath : target, args, workingDir, , runInBackground ? 0 : unset)
+      ShellRun(programPath, args, workingDir, , runInBackground ? 0 : unset)
     }
 
   } catch Error as e {
