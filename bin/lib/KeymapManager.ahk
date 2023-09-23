@@ -13,8 +13,13 @@
   }
 
   static AddSubKeymap(parent, hk, name := "", delay := 0) {
+    mask := False
+    if InStr(hk, " Mask"){
+      hk := StrReplace(hk," Mask")
+      mask := True
+    }
     waitKey := ExtractWaitKey(hk)
-    subKeymap := Keymap(name, waitKey, hk, delay)
+    subKeymap := Keymap(name, waitKey, hk, delay, mask)
     handler(thisHotkey) {
       this.Activate(subKeymap)
       this._postHandler()
@@ -57,6 +62,10 @@
       keymap.Enable(parent)
     }
     startTick := A_TickCount
+    ; 掩饰(屏蔽) Win 或 Alt 键松开事件
+    if keymap.mask {
+      Send "{Blind}{vkE8}"
+    }
     KeyWait(keymap.WaitKey)
     if (A_PriorKey = keymap.WaitKey && (A_TickCount - startTick < 450)) {
       keymap.SinglePressAction()
@@ -144,7 +153,7 @@
 
 
 class Keymap {
-  __New(name := "", waitKey := "", hotkey := "", delay := 0) {
+  __New(name := "", waitKey := "", hotkey := "", delay := 0, mask := False) {
     this.Name := name
     this.WaitKey := waitKey
     this.Hotkey := hotkey
@@ -156,6 +165,7 @@ class Keymap {
     this.parent := false
     this.toRestore := Array()
     this.delay := delay
+    this.mask := mask
   }
 
   class _Hotkey {
