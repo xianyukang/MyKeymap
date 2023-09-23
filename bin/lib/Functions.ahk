@@ -182,11 +182,6 @@ RunPrograms(target, args := "", workingDir := "", admin := false, runInBackgroun
   try {
     ; 补全程序路径
     programPath := CompleteProgramPath(target)
-    if not (programPath) {
-      ; 没有找到程序，可能是ms-setting: 或shell:之类的连接
-      Run(args ? target " " args : target, workingDir, runInBackground ? "Hide" : "")
-      return
-    }
 
     ; 如果是文件夹直接打开
     if (InStr(FileExist(programPath), "D")) {
@@ -200,7 +195,9 @@ RunPrograms(target, args := "", workingDir := "", admin := false, runInBackgroun
     if (admin) {
       runAsAdmin(programPath, args, workingDir, runInBackground ? "Hide" : "")
     } else {
-      ShellRun(programPath, args, workingDir, , runInBackground ? 0 : unset)
+      ; 直接 run "https://example.com" 会让 chrome 以管理员启动
+      ; ShellRun 也支持 ms-setting: 或 shell: 或 http: 之类的链接
+      ShellRun(programPath ? programPath : target, args, workingDir, , runInBackground ? 0 : unset)
     }
 
   } catch Error as e {
