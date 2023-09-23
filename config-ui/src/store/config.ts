@@ -266,13 +266,14 @@ export const parseKeyboardLayout = (layout: string, keymapHotkey: string) => {
 
   if (keymapHotkey.toLowerCase().includes("rbutton")) {
     const last = rows[rows.length - 1]
-    if (!last.includes("*LButton")) {
+    const list = rows.flatMap(x => x)
+    if (!list.includes("*LButton")) {
       last.push("*LButton")
     }
-    if (!last.includes("*WheelUp")) {
+    if (!list.includes("*WheelUp")) {
       last.push("*WheelUp")
     }
-    if (!last.includes("*WheelDown")) {
+    if (!list.includes("*WheelDown")) {
       last.push("*WheelDown")
     }
   }
