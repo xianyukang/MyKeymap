@@ -53,7 +53,7 @@ const getActionWindowGroupId = (action: Array<Action>) => {
                             @change="changeCustomHotkey(hotkey as string, $event.target.value)"
                             variant="plain" style="width: 6rem"></v-text-field>
             </td>
-            <td style="width: 60%">{{ getActionComment(action) }}</td>
+            <td style="width: 60%; cursor: pointer;" class="text-pre overflow-hidden"><div style="width: 0;">{{ getActionComment(action) }}</div></td>
             <td style="width: 20%">
               <v-btn icon="mdi-delete-outline" variant="text" width="40" height="40"
                      @click.stop="removeCustomHotkey(hotkey as string)"></v-btn>
