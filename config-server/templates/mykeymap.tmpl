@@ -53,7 +53,7 @@ InitKeymap()
   KeymapManager.GlobalKeymap.Enable()
 }
 
-{{- if .CapslockAbbrEnabled -}}
+{{ if .CapslockAbbrEnabled -}}
 ExecCapslockAbbr(command) {
   switch command {
 {{ abbrToCode .CapslockAbbr }}  }

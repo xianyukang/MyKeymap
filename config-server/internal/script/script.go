@@ -26,11 +26,7 @@ func SaveAHK(data *Config, templateFile, outputFile string) error {
 	files := []string{
 		templateFile,
 	}
-	m := template.FuncMap{"renderKeymap": renderKeymap}
-	for k, v := range TemplateFuncMap {
-		m[k] = v
-	}
-	ts, err := template.New(filepath.Base(templateFile)).Funcs(m).ParseFiles(files...)
+	ts, err := template.New(filepath.Base(templateFile)).Funcs(TemplateFuncMap).ParseFiles(files...)
 	if err != nil {
 		return err
 	}
@@ -69,6 +65,7 @@ var TemplateFuncMap = template.FuncMap{
 	"abbrToCode":      abbrToCode,
 	"sortHotkeys":     sortHotkeys,
 	"divide":          divide,
+	"renderKeymap":    renderKeymap,
 }
 
 func divide(a, b int) string {
@@ -150,78 +147,38 @@ func substr(input string, start int, length int) string {
 	return string(asRunes[start : start+length])
 }
 
-func keysCoding(keymap []string) (res string) {
-	// 太难了，八成有问题，但真报错了就是你问题，自己瞎g8设键
-	// 擦，忘了 map无序的，害我debug半天
-	set := [][2]string{{"#", ""}, {"!", ""}, {"^", ""}, {"+", ""}, {"&", ""}, {"*", ""}, {"~", ""}}
-	sett := [][2]string{{"LWin", "#"}, {"RWin", "#"}, {"Win", "#"}, {"LShift", "+"}, {"RShift", "+"}, {"Shift", "+"}, {"LAlt", "!"}, {"RAlt", "!"}, {"Alt", "!"}, {"LCtrl", "^"}, {"RCtrl", "^"}, {"Ctrl", "^"}, {"singlePress", ""}}
-
-	for i := range keymap {
-		for _, v := range sett {
-			keymap[i] = strings.Replace(keymap[i], v[0], v[1], -1)
-		}
-		for j, k := range set {
-			rs := strings.Replace(keymap[i], k[0], "", -1)
-			if rs != keymap[i] && k[1] == "" {
-				set[j][1] = ">_<"
-				res += k[0]
-			}
-			keymap[i] = rs
-		}
-	}
-	for _, v := range keymap {
-		if len(v) > 0 {
-			res += v
-		}
-	}
-	return
-}
-
 // 直接利用模板函数来生成对应的内容，也方便后续扩展
-func renderKeymap(data Keymap) string {
+func renderKeymap(km Keymap) string {
 	// 创建一个字符串构建器
 	var buf strings.Builder
 
 	// 写入注释
-	buf.WriteString(fmt.Sprintf("\n\n  ; %s\n", data.Name))
+	buf.WriteString(fmt.Sprintf("\n  ; %s\n", km.Name))
 
 	// 构建 Keymap 的代码
-	km := fmt.Sprintf("  km%d := KeymapManager.", data.ID)
-	hotkey := data.Hotkey
-	flag := false
-	parentKey := []string{data.Hotkey}
-	if hotkey != "customHotkeys" && strings.HasPrefix(data.Name, "$") {
+	data := fmt.Sprintf("  km%d := KeymapManager.", km.ID)
+	hotkey := km.Hotkey
+	if containsOnlyModifier(km.Hotkey) {
 		hotkey = "customHotkeys"
-		flag = true
-		if data.ParentID != 0 {
-			pid := data.ParentID
-		top:
-			for _, k := range Cfg.Keymaps {
-				if k.ID == pid {
-					parentKey = append(parentKey, k.Hotkey)
-					if k.ParentID != 0 {
-						pid = k.ParentID
-						goto top
-					}
-					break
-				}
-			}
-		}
 	}
-	if data.ParentID == 0 || flag {
-		km += fmt.Sprintf("NewKeymap(\"%s\", %s, \"%s\")\n", hotkey, ahkString(data.Name), divide(data.Delay, 1000))
+	if km.ParentID == 0 {
+		data += fmt.Sprintf("NewKeymap(\"%s\", %s, \"%s\")\n", hotkey, ahkString(km.Name), divide(km.Delay, 1000))
 	} else {
-		km += fmt.Sprintf("AddSubKeymap(km%d, \"%s\", %s)\n", data.ParentID, hotkey, ahkString(data.Name))
+		data += fmt.Sprintf("AddSubKeymap(km%d, \"%s\", %s)\n", km.ParentID, hotkey, ahkString(km.Name))
 	}
-	buf.WriteString(km)
+	buf.WriteString(data)
 
 	// 设置当前的 Keymap
-	buf.WriteString(fmt.Sprintf("  km := km%d \n", data.ID))
+	buf.WriteString(fmt.Sprintf("  km := km%d\n", km.ID))
 
 	// 写入 Hotkeys
-	for _, action := range sortHotkeys(data.Hotkeys) {
-		if flag {
-			action.Hotkey = keysCoding(append(parentKey, action.Hotkey))
+	for _, action := range sortHotkeys(km.Hotkeys) {
+		// 如果仅包含 Hotkey Modifier Symbols
+		if containsOnlyModifier(km.Hotkey) {
+			if action.Hotkey == "singlePress" {
+				continue
+			}
+			action.Hotkey = km.Hotkey + action.Hotkey
 		}
 		buf.WriteString(fmt.Sprintf("  %s\n", actionToHotkey(action)))
 	}
@@ -234,4 +191,8 @@ func renderKeymap(data Keymap) string {
 	res = strings.ReplaceAll(res, "\n", "\r\n")
 
 	return res
+}
+
+func containsOnlyModifier(hotkey string) bool {
+	return strings.Trim(hotkey, "#!^+<>*~$") == ""
 }
