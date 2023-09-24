@@ -129,8 +129,7 @@ func sortHotkeys(hotkeyMap map[string][]Action) []Action {
 
 // 取子字符串，并不想看起来那么简单: https://stackoverflow.com/a/56129336
 // NOTE: this isn't multi-Unicode-codepoint aware, like specifying skintone or
-//
-//	gender of an emoji: https://unicode.org/emoji/charts/full-emoji-modifiers.html
+// gender of an emoji: https://unicode.org/emoji/charts/full-emoji-modifiers.html
 func substr(input string, start int, length int) string {
 	asRunes := []rune(input)
 
@@ -147,49 +146,42 @@ func substr(input string, start int, length int) string {
 	return string(asRunes[start : start+length])
 }
 
-// 直接利用模板函数来生成对应的内容，也方便后续扩展
 func renderKeymap(km Keymap) string {
-	// 创建一个字符串构建器
 	var buf strings.Builder
 
-	// 写入注释
+	// ; Capslock + F
 	buf.WriteString(fmt.Sprintf("\n  ; %s\n", km.Name))
 
-	// 构建 Keymap 的代码
-	data := fmt.Sprintf("  km%d := KeymapManager.", km.ID)
+	// km6 := KeymapManager.AddSubKeymap(km5, "*f", "Capslock + F")
+	line := fmt.Sprintf("  km%d := KeymapManager.", km.ID)
 	hotkey := km.Hotkey
 	if containsOnlyModifier(km.Hotkey) {
 		hotkey = "customHotkeys"
 	}
 	if km.ParentID == 0 {
-		data += fmt.Sprintf("NewKeymap(\"%s\", %s, \"%s\")\n", hotkey, ahkString(km.Name), divide(km.Delay, 1000))
+		line += fmt.Sprintf("NewKeymap(%s, %s, %s)\n", ahkString(hotkey), ahkString(km.Name), ahkString(divide(km.Delay, 1000)))
 	} else {
-		data += fmt.Sprintf("AddSubKeymap(km%d, \"%s\", %s)\n", km.ParentID, hotkey, ahkString(km.Name))
+		line += fmt.Sprintf("AddSubKeymap(km%d, %s, %s)\n", km.ParentID, ahkString(hotkey), ahkString(km.Name))
 	}
-	buf.WriteString(data)
+	buf.WriteString(line)
 
-	// 设置当前的 Keymap
+	// km := km6
 	buf.WriteString(fmt.Sprintf("  km := km%d\n", km.ID))
 
-	// 写入 Hotkeys
 	for _, action := range sortHotkeys(km.Hotkeys) {
-		// 如果仅包含 Hotkey Modifier Symbols
 		if containsOnlyModifier(km.Hotkey) {
 			if action.Hotkey == "singlePress" {
 				continue
 			}
-			action.Hotkey = km.Hotkey + action.Hotkey
+			action.Hotkey = km.Hotkey + action.Hotkey // 把触发键 # 和热键 *q 拼起来
 		}
 		buf.WriteString(fmt.Sprintf("  %s\n", actionToHotkey(action)))
 	}
 
-	// 获取构建的字符串
+	// 替换换行符为 \r\n
 	res := buf.String()
-
-	// 替换换行符为\r\n
 	res = strings.ReplaceAll(res, "\r\n", "\n")
 	res = strings.ReplaceAll(res, "\n", "\r\n")
-
 	return res
 }
 
