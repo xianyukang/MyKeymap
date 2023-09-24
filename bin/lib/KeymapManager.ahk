@@ -160,7 +160,8 @@ class Keymap {
 
   class _Hotkey {
     __New(name, handler, options, winTitle, conditionType) {
-      this.name := name
+      this.name := LTrim(name, "*~") ; 把 j 和 ~j 和 *j 和 ~*j 视为同名热键
+      this.rawName := name
       this.handler := handler
       this.options := options
       this.winTitle := winTitle
@@ -173,7 +174,7 @@ class Keymap {
         MsgBox "bug"
       }
       this.hotifContext(this.winTitle, this.conditionType)
-      Hotkey(this.name, this.handler, "On" this.options)
+      Hotkey(this.rawName, this.handler, "On" this.options)
       this.enabled := true
       HotIf()
     }
@@ -183,7 +184,7 @@ class Keymap {
         MsgBox "bug"
       }
       this.hotifContext(this.winTitle, this.conditionType)
-      Hotkey(this.name, "Off")
+      Hotkey(this.rawName, "Off")
       this.enabled := false
       HotIf()
     }
@@ -216,10 +217,11 @@ class Keymap {
       wrapper := hotkeyName
     }
 
-    if !this.M.Has(hotkeyName) {
-      this.M[hotkeyName] := Array()
+    hk := Keymap._Hotkey(hotkeyName, wrapper, options, winTitle, conditionType)
+    if !this.M.Has(hk.name) {
+      this.M[hk.name] := Array()
     }
-    this.M[hotkeyName].Push(Keymap._Hotkey(hotkeyName, wrapper, options, winTitle, conditionType))
+    this.M[hk.name].Push(hk)
   }
 
 
@@ -291,12 +293,6 @@ class Keymap {
         ; 遍历祖先, 如果首个 km 存在同名热键, 那么禁用掉
         if km.DisableHotkey(name) {
           item := { keymap: km, hotkey: name }
-          this.toRestore.Push(item)
-          break
-        }
-        name2 := LTrim(name, "*")
-        if km.DisableHotkey(name2) {
-          item := { keymap: km, hotkey: name2 }
           this.toRestore.Push(item)
           break
         }
