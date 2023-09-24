@@ -26,8 +26,11 @@ func SaveAHK(data *Config, templateFile, outputFile string) error {
 	files := []string{
 		templateFile,
 	}
-
-	ts, err := template.New(filepath.Base(templateFile)).Funcs(TemplateFuncMap).ParseFiles(files...)
+	m := template.FuncMap{"renderKeymap": renderKeymap}
+	for k, v := range TemplateFuncMap {
+		m[k] = v
+	}
+	ts, err := template.New(filepath.Base(templateFile)).Funcs(m).ParseFiles(files...)
 	if err != nil {
 		return err
 	}
@@ -129,7 +132,8 @@ func sortHotkeys(hotkeyMap map[string][]Action) []Action {
 
 // 取子字符串，并不想看起来那么简单: https://stackoverflow.com/a/56129336
 // NOTE: this isn't multi-Unicode-codepoint aware, like specifying skintone or
-//       gender of an emoji: https://unicode.org/emoji/charts/full-emoji-modifiers.html
+//
+//	gender of an emoji: https://unicode.org/emoji/charts/full-emoji-modifiers.html
 func substr(input string, start int, length int) string {
 	asRunes := []rune(input)
 
@@ -144,4 +148,90 @@ func substr(input string, start int, length int) string {
 	}
 
 	return string(asRunes[start : start+length])
+}
+
+func keysCoding(keymap []string) (res string) {
+	// 太难了，八成有问题，但真报错了就是你问题，自己瞎g8设键
+	// 擦，忘了 map无序的，害我debug半天
+	set := [][2]string{{"#", ""}, {"!", ""}, {"^", ""}, {"+", ""}, {"&", ""}, {"*", ""}, {"~", ""}}
+	sett := [][2]string{{"LWin", "#"}, {"RWin", "#"}, {"Win", "#"}, {"LShift", "+"}, {"RShift", "+"}, {"Shift", "+"}, {"LAlt", "!"}, {"RAlt", "!"}, {"Alt", "!"}, {"LCtrl", "^"}, {"RCtrl", "^"}, {"Ctrl", "^"}, {"singlePress", ""}}
+
+	for i := range keymap {
+		for _, v := range sett {
+			keymap[i] = strings.Replace(keymap[i], v[0], v[1], -1)
+		}
+		for j, k := range set {
+			rs := strings.Replace(keymap[i], k[0], "", -1)
+			if rs != keymap[i] && k[1] == "" {
+				set[j][1] = ">_<"
+				res += k[0]
+			}
+			keymap[i] = rs
+		}
+	}
+	for _, v := range keymap {
+		if len(v) > 0 {
+			res += v
+		}
+	}
+	return
+}
+
+// 直接利用模板函数来生成对应的内容，也方便后续扩展
+func renderKeymap(data Keymap) string {
+	// 创建一个字符串构建器
+	var buf strings.Builder
+
+	// 写入注释
+	buf.WriteString(fmt.Sprintf("\n\n  ; %s\n", data.Name))
+
+	// 构建 Keymap 的代码
+	km := fmt.Sprintf("  km%d := KeymapManager.", data.ID)
+	hotkey := data.Hotkey
+	flag := false
+	parentKey := []string{data.Hotkey}
+	if hotkey != "customHotkeys" && strings.HasPrefix(data.Name, "$") {
+		hotkey = "customHotkeys"
+		flag = true
+		if data.ParentID != 0 {
+			pid := data.ParentID
+		top:
+			for _, k := range Cfg.Keymaps {
+				if k.ID == pid {
+					parentKey = append(parentKey, k.Hotkey)
+					if k.ParentID != 0 {
+						pid = k.ParentID
+						goto top
+					}
+					break
+				}
+			}
+		}
+	}
+	if data.ParentID == 0 || flag {
+		km += fmt.Sprintf("NewKeymap(\"%s\", %s, \"%s\")\n", hotkey, ahkString(data.Name), divide(data.Delay, 1000))
+	} else {
+		km += fmt.Sprintf("AddSubKeymap(km%d, \"%s\", %s)\n", data.ParentID, hotkey, ahkString(data.Name))
+	}
+	buf.WriteString(km)
+
+	// 设置当前的 Keymap
+	buf.WriteString(fmt.Sprintf("  km := km%d \n", data.ID))
+
+	// 写入 Hotkeys
+	for _, action := range sortHotkeys(data.Hotkeys) {
+		if flag {
+			action.Hotkey = keysCoding(append(parentKey, action.Hotkey))
+		}
+		buf.WriteString(fmt.Sprintf("  %s\n", actionToHotkey(action)))
+	}
+
+	// 获取构建的字符串
+	res := buf.String()
+
+	// 替换换行符为\r\n
+	res = strings.ReplaceAll(res, "\r\n", "\n")
+	res = strings.ReplaceAll(res, "\n", "\r\n")
+
+	return res
 }
