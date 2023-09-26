@@ -2022,6 +2022,15 @@
             "target": "https://open.spotify.com/"
           }
         ],
+        "ss": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "comment": "Spotify 应用",
+            "winTitle": "ahk_exe Spotify.exe",
+            "target": "shortcuts\\Spotify.lnk"
+          }
+        ],
         "tm": [
           {
             "windowGroupID": 0,
