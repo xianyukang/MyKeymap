@@ -26,6 +26,7 @@ export interface Keymap {
   hotkey: string
   parentID: number
   delay: number
+  isNew?: boolean
   hotkeys: {
     [key: string]: Array<Action>
   }

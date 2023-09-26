@@ -122,6 +122,7 @@ function addKeymap() {
     hotkey: "",
     parentID: 0,
     delay: 0,
+    isNew: true,
     hotkeys: {}
   }
 

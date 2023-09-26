@@ -170,7 +170,7 @@ function _getAction(keymap: Keymap | undefined, hotkey: string, windowGroupID: n
     actions = []
     keymap.hotkeys[hotkey] = actions
     // 比如新增了 2 模式, 让它的 singlePress 默认为输入 2 键
-    if (hotkey == 'singlePress') {
+    if (keymap.isNew && hotkey == 'singlePress') {
       console.log('singlePress')
       const key = trimStart(keymap.hotkey, ' #!^+<>*~$')
       actions.push({
