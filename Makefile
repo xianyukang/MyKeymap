@@ -46,8 +46,6 @@ upload:
 	python3 lanzou_client.py $(zip) 2> share_link
 	go run build_tools.go updateShareLink $(version)
 	rm -f share_link
-	rm -f readme.md
-	mv readme2.md readme.md
 	@echo ------------------------- upload ok -------------------------------
 
 # 下面是开发时用到的命令:
