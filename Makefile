@@ -43,9 +43,9 @@ build: buildServer buildClient copyFiles
 # qshell fput static-x $(zip) $(zip) --overwrite
 upload:
 	go run build_tools.go checkForAHKUpdate $(ahkVersion)
-	python3 lanzou_client.py $(zip) 2> share_link
+	python3 lanzou_client.py $(zip) 2> share_link.json
 	go run build_tools.go updateShareLink $(version)
-	rm -f share_link
+	rm -f share_link.json
 	@echo ------------------------- upload ok -------------------------------
 
 # 下面是开发时用到的命令:

@@ -1,3 +1,4 @@
+import json
 import sys
 try:
     from lanzou.api import LanZouCloud
@@ -21,7 +22,8 @@ def handler(fid, is_file):
         # lzy.set_desc(fid, '设置文件的描述', is_file=True)
         lzy.set_passwd(fid, '1234', is_file)
         info = lzy.get_share_info(fid, is_file)
-        print(info.url, info.pwd, file=sys.stderr)
+        json.dump({'url': info.url, 'password': info.pwd}, sys.stderr)
+        print('', file=sys.stderr)
 
 def assertSuccess(code):
     if code != LanZouCloud.SUCCESS:

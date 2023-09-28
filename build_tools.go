@@ -3,6 +3,8 @@ package main
 import (
 	"bufio"
 	"context"
+	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"log"
@@ -38,21 +40,21 @@ func checkForAHKUpdate(args []string) {
 }
 
 func updateShareLink(args []string) {
-	data, err := os.ReadFile("./share_link")
+	f, err := os.Open("share_link.json")
 	if err != nil {
 		panic(err)
 	}
+	defer f.Close()
 
-	items := strings.Fields(string(data))
-	version := args[0]
-	url := items[0]
-	pwd := items[1]
-	fmt.Println("url:", url, "password:", pwd)
+	var sl ShareLink
+	if err = Decode(f, &sl); err != nil {
+		panic(err)
+	}
 
 	var format string
 	replacer := func(line string) string {
 		if strings.Index(line, "提取码") != -1 {
-			return fmt.Sprintf(format, version, url, pwd)
+			return fmt.Sprintf(format, args[0], sl.Url, sl.Password)
 		}
 		return line
 	}
@@ -187,4 +189,37 @@ func StartTimer(name string) func() {
 		d := time.Now().Sub(t)
 		log.Println(name, "took", d)
 	}
+}
+
+type Valid interface {
+	OK() error
+}
+
+type ShareLink struct {
+	Url      string `json:"url"`
+	Password string `json:"password"`
+}
+
+// OK 实现了 Valid 接口, 这样在 Decode 时顺便校验数据是否合法
+func (s ShareLink) OK() error {
+	if s.Url == "" {
+		return errors.New("url required")
+	}
+	if s.Password == "" {
+		return errors.New("password required")
+	}
+	return nil
+}
+
+func Decode[T any](r io.Reader, v *T) error {
+	err := json.NewDecoder(r).Decode(v)
+	if err != nil {
+		return err
+	}
+
+	obj, ok := any(v).(Valid) // 注意 *T 是一个具体类型 ( 比如 *int ) 所以不能用 type assertion
+	if !ok {
+		return nil // 类型没有 OK 方法, 所以直接返回, 不执行 OK 方法
+	}
+	return obj.OK()
 }
