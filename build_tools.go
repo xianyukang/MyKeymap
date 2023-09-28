@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"os/exec"
@@ -23,6 +24,8 @@ func main() {
 }
 
 func checkForAHKUpdate(args []string) {
+	stop := StartTimer("check for AHK update:")
+	defer stop()
 	currentVersion := args[0]
 	version, err := getURL("https://www.autohotkey.com/download/2.0/version.txt")
 	if err != nil {
@@ -175,4 +178,13 @@ func ReplaceInFile(filename string, handler func(string) string) (err error) {
 		return err
 	}
 	return os.Rename(wf.Name(), mf.Name())
+}
+
+func StartTimer(name string) func() {
+	t := time.Now()
+	log.Println(name, "started")
+	return func() {
+		d := time.Now().Sub(t)
+		log.Println(name, "took", d)
+	}
 }
