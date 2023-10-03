@@ -19,8 +19,6 @@ import (
 	"time"
 )
 
-var MykeymapVersion string
-
 func main() {
 
 	if len(os.Args) >= 2 {
@@ -115,7 +113,6 @@ func GetConfigHandler(c *gin.Context) {
 	if err != nil {
 		panic(err)
 	}
-	config.Options.MykeymapVersion = MykeymapVersion
 	c.JSON(http.StatusOK, config)
 }
 

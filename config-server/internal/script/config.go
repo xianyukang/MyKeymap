@@ -9,7 +9,9 @@ import (
 	"strings"
 )
 
-// 卧槽刚刚发现 GoLand 可以直接把 JSON 字符串粘贴为「 结构体定义 」 一下省掉了好多工作
+// 刚刚发现 GoLand 可以直接把 JSON 字符串粘贴为「 结构体定义 」 一下省掉了好多工作
+
+var MykeymapVersion string
 
 type Config struct {
 	Keymaps    []Keymap `json:"keymaps,omitempty"`
@@ -60,6 +62,7 @@ func ParseConfig(file string) (*Config, error) {
 		return nil, fmt.Errorf("cannot parse config: %v", err)
 	}
 
+	config.Options.MykeymapVersion = MykeymapVersion
 	if config.Options.Mouse.TipSymbol == "" {
 		config.Options.Mouse.TipSymbol = "🐶"
 	}
