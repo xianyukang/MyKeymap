@@ -409,6 +409,7 @@ SystemLockScreen() {
 SystemShutdown() {
   Run("SlideToShutDown.exe")
   sleep(1300)
+  CoordMode("Mouse", "Screen")
   MouseClick("Left", 100, 100)
 }
 
