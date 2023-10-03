@@ -223,6 +223,8 @@ func windowActions3(a Action, inAbbrContext bool) string {
 		11: `CenterAndResizeWindow(1370, 930)`,
 		12: `ToggleWindowTopMost()`,
 		13: `MakeWindowDraggable()`,
+		15: `CloseWindowProcesses()`,
+		16: `CloseSameClassWindows()`,
 	}
 	if call, ok := callMap[a.ValueID]; ok {
 		if inAbbrContext {

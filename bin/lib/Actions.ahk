@@ -257,8 +257,10 @@ CloseWindowProcesses() {
 
   name := WinGetProcessName("A")
   ; 如果删了explorer会导致桌面白屏
-  if (name == "explorer.exe")
+  if (name == "explorer.exe") {
+    CloseSameClassWindows()
     return
+  }
 
   Run("taskkill /f /im " name, , "Hide")
 }
@@ -382,7 +384,13 @@ CloseSameClassWindows() {
   }
 
   exe := WinGetProcessName("A")
-  for i, hwnd in FindWindows("ahk_exe " exe) {
+  if exe == "explorer.exe" {
+    windows := FindWindows("ahk_class " WinGetClass("A"))
+  } else {
+    windows := FindWindows("ahk_exe " exe)
+  }
+
+  for i, hwnd in windows {
     WinClose(hwnd)
   }
 }

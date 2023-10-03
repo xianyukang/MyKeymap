@@ -9,6 +9,8 @@ const group1 = [
   { actionValueID: 5, label: "上一个虚拟桌面" },
   { actionValueID: 6, label: "下一个虚拟桌面" },
   { actionValueID: 7, label: "移动窗口到下一个显示器" },
+  { actionValueID: 15, label: "关闭窗口 ( 杀进程 )" },
+  { actionValueID: 16, label: "关闭同类窗口" },
 ]
 const group2 = [
   { actionValueID: 8, label: "窗口最小化" },
