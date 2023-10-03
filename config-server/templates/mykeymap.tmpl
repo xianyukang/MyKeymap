@@ -25,7 +25,7 @@ OnExit(MyKeymapExit)
 
 InitKeymap()
 {
-  taskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "x", "space")
+  taskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "c", "space")
   mouseTip := {{ if .Options.Mouse.ShowTip }}InputTipWindow("{{ .Options.Mouse.TipSymbol }}"){{ else }}false{{ end }}
   slow := MouseKeymap("slow mouse", {{ .Options.Mouse.KeepMouseMode }}, mouseTip, {{ .Options.Mouse.SlowSingle }}, {{ .Options.Mouse.SlowRepeat }}, "T{{ .Options.Mouse.Delay1 }}", "T{{ .Options.Mouse.Delay2 }}", {{ .Options.Scroll.OnceLineCount }}, "T{{ .Options.Scroll.Delay1 }}", "T{{ .Options.Scroll.Delay2 }}")
   fast := MouseKeymap("fast mouse", {{ .Options.Mouse.KeepMouseMode }}, mouseTip, {{ .Options.Mouse.FastSingle }}, {{ .Options.Mouse.FastRepeat }}, "T{{ .Options.Mouse.Delay1 }}", "T{{ .Options.Mouse.Delay2 }}", {{ .Options.Scroll.OnceLineCount }}, "T{{ .Options.Scroll.Delay1 }}", "T{{ .Options.Scroll.Delay2 }}", slow)

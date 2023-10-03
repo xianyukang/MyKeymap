@@ -60,7 +60,7 @@ if (props.horizontal) {
 
 :deep(.v-radio-group .active label) {
   color: #d05;
-  font-size: 1.2em;
+  font-size: 1.1em;
   transition: font-size 0.1s ease-out;
 }
 .horizontal :deep(.v-radio-group .active label) {
