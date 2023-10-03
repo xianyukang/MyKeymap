@@ -369,8 +369,8 @@ URIEncode(Uri, encoding := "UTF-8") {
   var := Buffer(StrPut(Uri, encoding), 0)
   StrPut(Uri, var, encoding)
   pos := 1
-  ; 按字节遍历 buffer 中的 utf-8 字符串
-  While pos <= var.Size {
+  ; 按字节遍历 buffer 中的 utf-8 字符串, 注意字符串有  null-terminator
+  While pos < var.Size {
     code := NumGet(var, pos - 1, "UChar")
     if (code >= 0x30 && code <= 0x39) || (code >= 0x41 && code <= 0x5A) || (code >= 0x61 && code <= 0x7A)
       res .= Chr(code)
