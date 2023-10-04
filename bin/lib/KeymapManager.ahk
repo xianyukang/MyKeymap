@@ -551,6 +551,7 @@ class TaskSwitchKeymap extends Keymap {
 
   __New(up, down, left, right, delete, enter) {
     super.__New("Task Switch")
+    this.RemapKey("x", "delete") ; 为了不影响之前习惯了 x 键关闭的用户
     this.RemapKey(up, "up")
     this.RemapKey(down, "down")
     this.RemapKey(left, "left")

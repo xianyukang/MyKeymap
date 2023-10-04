@@ -1928,6 +1928,14 @@
             "actionValueID": 3
           }
         ],
+        "kp": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 3,
+            "comment": "关闭窗口 (杀进程)",
+            "actionValueID": 15
+          }
+        ],
         "ld": [
           {
             "windowGroupID": 0,
