@@ -1,6 +1,6 @@
 # MyKeymap
 
-MyKeymap 是一款基于 [AutoHotkey](https://www.autohotkey.com/) 的键盘映射工具，用于增强 Windows 的键盘输入速度和窗口操作效率。
+MyKeymap 是一款基于 [AutoHotkey](https://www.autohotkey.com/) 的键盘映射工具，用于增强 Windows 的键盘输入体验和窗口操作效率。
 
 ## Features
 
