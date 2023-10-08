@@ -57,10 +57,8 @@
       keymap.Enable(parent)
     }
     startTick := A_TickCount
-    KeyWait(keymap.WaitKey)
-    if (A_PriorKey = keymap.WaitKey && (A_TickCount - startTick < 450)) {
-      keymap.SinglePressAction()
-    }
+    keymap.Wait()
+    keymap.HandleSinglePress(startTick)
     if keymap != parent {
       this.Stack.Pop()
       keymap.Disable()
@@ -158,51 +156,6 @@ class Keymap {
     this.delay := delay
   }
 
-  class _Hotkey {
-    __New(name, handler, options, winTitle, conditionType) {
-      this.name := LTrim(name, "*~") ; 把 j 和 ~j 和 *j 和 ~*j 视为同名热键
-      this.rawName := name
-      this.handler := handler
-      this.options := options
-      this.winTitle := winTitle
-      this.conditionType := conditionType
-      this.enabled := false
-    }
-
-    Enable() {
-      if this.enabled {
-        MsgBox "bug"
-      }
-      this.hotifContext(this.winTitle, this.conditionType)
-      Hotkey(this.rawName, this.handler, "On" this.options)
-      this.enabled := true
-      HotIf()
-    }
-
-    Disable() {
-      if !this.enabled {
-        MsgBox "bug"
-      }
-      this.hotifContext(this.winTitle, this.conditionType)
-      Hotkey(this.rawName, "Off")
-      this.enabled := false
-      HotIf()
-    }
-
-    hotifContext(winTitle, conditionType) {
-      if winTitle == "" {
-        return
-      }
-      switch conditionType {
-        case 0: return
-        case 1: HotIfWinactive(winTitle)
-        case 2: HotIfWinExist(winTitle)
-        case 3: HotIfWinNotactive(winTitle)
-        case 4: HotIfWinNotExist(winTitle)
-        case 5: HotIf(winTitle)
-      }
-    }
-  }
 
   Map(hotkeyName, handler, keymapToLock := false, winTitle := "", conditionType := 0, options := "") {
     wrapper := Keymap._wrapHandler(handler, keymapToLock)
@@ -247,6 +200,44 @@ class Keymap {
     ; 这种情况是, 锁住后直接执行热键, 没有按下任何引导键 ( 比如先锁住 Caps 然后直接按 E )
     if KeymapManager.Stack.Length == 1 {
       KeymapManager._postHandler()
+    }
+  }
+
+  Wait() {
+    ; 先处理一般情况, 不用鼠标按钮作为触发键
+    if !InStr(this.Hotkey, "button") {
+      KeyWait(this.WaitKey)
+      return
+    }
+    CoordMode("Mouse", "Screen")
+    this.mouseMoved := false
+    this.thisHotkey := A_ThisHotkey
+    MouseGetPos(&x1, &y1)
+    while !KeyWait(this.WaitKey, "T0.01") {
+      MouseGetPos(&x2, &y2)
+      if Abs(x2 - x1) > 0 || Abs(y2 - y1) > 0 {
+        this.mouseMoved := true
+        break
+      }
+    }
+  }
+
+  HandleSinglePress(startTick) {
+    ; 先处理一般情况, 不用鼠标按钮作为触发键
+    if !InStr(this.Hotkey, "button") {
+      if (A_PriorKey = this.WaitKey && (A_TickCount - startTick < 450)) {
+        this.SinglePressAction()
+      }
+      return
+    }
+    if (this.thisHotkey = A_ThisHotkey && (A_TickCount - startTick < 450)) {
+      if !this.mouseMoved {
+        this.SinglePressAction()
+      } else {
+        Send("{blind}{" this.WaitKey " Down}")
+        KeyWait(this.WaitKey)
+        Send("{blind}{" this.WaitKey " Up}")
+      }
     }
   }
 
@@ -363,6 +354,52 @@ class Keymap {
     } else {
       this.Map("*" a, h, , winTitle, conditionType)
       this.Map("*" a " up", h, , winTitle, conditionType)
+    }
+  }
+
+  class _Hotkey {
+    __New(name, handler, options, winTitle, conditionType) {
+      this.name := LTrim(name, "*~") ; 把 j 和 ~j 和 *j 和 ~*j 视为同名热键
+      this.rawName := name
+      this.handler := handler
+      this.options := options
+      this.winTitle := winTitle
+      this.conditionType := conditionType
+      this.enabled := false
+    }
+
+    Enable() {
+      if this.enabled {
+        MsgBox "bug"
+      }
+      this.hotifContext(this.winTitle, this.conditionType)
+      Hotkey(this.rawName, this.handler, "On" this.options)
+      this.enabled := true
+      HotIf()
+    }
+
+    Disable() {
+      if !this.enabled {
+        MsgBox "bug"
+      }
+      this.hotifContext(this.winTitle, this.conditionType)
+      Hotkey(this.rawName, "Off")
+      this.enabled := false
+      HotIf()
+    }
+
+    hotifContext(winTitle, conditionType) {
+      if winTitle == "" {
+        return
+      }
+      switch conditionType {
+        case 0: return
+        case 1: HotIfWinactive(winTitle)
+        case 2: HotIfWinExist(winTitle)
+        case 3: HotIfWinNotactive(winTitle)
+        case 4: HotIfWinNotExist(winTitle)
+        case 5: HotIf(winTitle)
+      }
     }
   }
 }
