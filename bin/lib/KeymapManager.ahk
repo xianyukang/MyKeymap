@@ -160,7 +160,7 @@ class Keymap {
 
   class _Hotkey {
     __New(name, handler, options, winTitle, conditionType) {
-      this.name := LTrim(name, "*~") ; 把 j 和 ~j 和 *j 和 ~*j 视为同名热键
+      this.name := ExtractWaitKey(name) ; 把带修饰符的热键视为同名热键
       this.rawName := name
       this.handler := handler
       this.options := options

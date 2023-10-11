@@ -1142,13 +1142,6 @@
             "actionValueID": 3
           }
         ],
-        "*space": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 6,
-            "keysToSend": "{blind}{enter}"
-          }
-        ],
         "*v": [
           {
             "windowGroupID": 0,
