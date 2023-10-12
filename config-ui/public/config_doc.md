@@ -126,3 +126,10 @@
 
 ![image-20230911154509135](img/example04.png) 
 
+#### ➤ 补充
+
+1. 这里有完整的「 [键名列表](https://wyagd001.github.io/v2/docs/lib/Send.htm#keynames) 」
+2. 假设用 Capslock + X 输入 `F4` 键:
+   - 如果想让 Capslock + Alt + X 变成 `Alt + F4`，那么得把 Capslock 模式的 X 键配成 `{blind}{f4}`
+   - 通过 `{blind}` 盲从模式输入的键，会被已经按下的修饰键 ( Ctrl / Shift / Alt ) 影响
+   - 比如已经按下了 Alt 键，那么输入的 `{blind}{f4}` 会变成 `Alt + F4`
