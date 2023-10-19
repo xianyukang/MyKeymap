@@ -390,46 +390,13 @@ class MouseKeymap extends Keymap {
     this.ScrollWheelDown := this._scrollWheel.Bind(this, 2)
     this.ScrollWheelLeft := this._scrollWheel.Bind(this, 3)
     this.ScrollWheelRight := this._scrollWheel.Bind(this, 4)
-  }
 
-  static SetMoveMouseKeys(km, fast, slow, up, down, left, right) {
-
-    km.Map(up, fast.MoveMouseUp, slow)
-    km.Map(down, fast.MoveMouseDown, slow)
-    km.Map(left, fast.MoveMouseLeft, slow)
-    km.Map(right, fast.MoveMouseRight, slow)
-
-    slow.Map(up, slow.MoveMouseUp)
-    slow.Map(down, slow.MoveMouseDown)
-    slow.Map(left, slow.MoveMouseLeft)
-    slow.Map(right, slow.MoveMouseRight)
-  }
-
-  static SetScrollWheelKeys(km, fast, slow, up, down, left, right) {
-
-    km.Map(up, fast.ScrollWheelUp)
-    km.Map(down, fast.ScrollWheelDown)
-    km.Map(left, fast.ScrollWheelLeft)
-    km.Map(right, fast.ScrollWheelRight)
-
-    slow.Map(up, slow.ScrollWheelUp)
-    slow.Map(down, slow.ScrollWheelDown)
-    slow.Map(left, slow.ScrollWheelLeft)
-    slow.Map(right, slow.ScrollWheelRight)
-
-  }
-
-  static SetMouseButtonKeys(km, fast, slow, lbutton, rbutton, lbuttonDown, lbuttonUp) {
-
-    km.Map(lbutton, fast.LButton())
-    km.Map(rbutton, fast.RButton())
-    km.Map(lbuttonDown, fast.LButtonDown())
-
-    slow.Map(lbutton, slow.LButton())
-    slow.Map(rbutton, slow.RButton())
-    slow.Map(lbuttonDown, slow.LButtonDown())
-
-    slow.Map(lbuttonUp, slow.LButtonUp())
+    ; 鼠标模式中按任意键退出, 经常会忘记按 N/Space 键退出
+    keys := "abcdefghijklmnopqrstuvwxyz"
+    h := this.ExitAndSendThisKey()
+    for _, k in StrSplit(keys) {
+      this.Map("*" k, h)
+    }
   }
 
   _moveMouse(directionX, directionY, thisHotkey) {
@@ -544,6 +511,13 @@ class MouseKeymap extends Keymap {
     return handler
   }
 
+  ExitAndSendThisKey() {
+    handler(thisHotkey) {
+      this.clearOrUnlock(false)
+      Send("{blind}{" ExtractWaitKey(thisHotkey) "}")
+    }
+    return handler
+  }
 }
 
 
