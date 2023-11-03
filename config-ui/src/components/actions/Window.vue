@@ -5,7 +5,7 @@ const group1 = [
   { actionValueID: 1, label: "关闭窗口" },
   { actionValueID: 2, label: "切换到上一个窗口" },
   { actionValueID: 3, label: "在当前程序的窗口间轮换" },
-  { actionValueID: 4, label: "窗口管理 (EDSF切换C关闭,空格选择)", hideInAbbr: true },
+  { actionValueID: 4, label: "窗口管理 (EDSF切换X关闭,空格选择)", hideInAbbr: true },
   { actionValueID: 5, label: "上一个虚拟桌面" },
   { actionValueID: 6, label: "下一个虚拟桌面" },
   { actionValueID: 7, label: "移动窗口到下一个显示器" },

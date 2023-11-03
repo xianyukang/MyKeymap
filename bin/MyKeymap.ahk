@@ -217,10 +217,10 @@ InitKeymap()
   ; 鼠标右键
   km16 := KeymapManager.NewKeymap("rbutton", "鼠标右键", "")
   km := km16
-  km.Map("*f", _ => ActivateOrRun("", "D:\project\ahk\zz.ahk", "", "", false, false, true))
   km.Map("singlePress", fast.RButton()), slow.Map("singlePress", slow.RButton())
   km.Map("*LButton", _ => (Send("^!{tab}")))
   km.RemapKey("c", "backspace")
+  km.RemapKey("d", "delete")
   km.RemapKey("x", "esc")
   km.Map("*space", _ => (Send("{blind}{enter}")))
   km.Map("*WheelUp", _ => (Send("^+{tab}")))

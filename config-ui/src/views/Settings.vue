@@ -18,7 +18,7 @@ const currId = ref(0)
 
 const showMouseOption = ref(false)
 const showKeyboardLayout = ref(false)
-const showKeymapDelay = ref(false)
+const showKeymapDelay = ref(true)
 const showSkin = ref(false)
 const resetOtherToFalse = (newValue: boolean) => {
   [showMouseOption, showKeyboardLayout, showKeymapDelay, showSkin].forEach(x => x.value = false)
