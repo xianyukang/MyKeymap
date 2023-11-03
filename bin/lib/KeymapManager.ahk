@@ -51,8 +51,9 @@
       return
     }
     parent := this.Stack[-1]
+    locked := this.Stack[1]
     ; 比如锁住 3 模式再按 3 键触发 3 模式应该没效果
-    if keymap != parent {
+    if keymap != locked {
       this.Stack.Push(keymap)
       keymap.Enable(parent)
     }
@@ -61,7 +62,7 @@
     if (A_PriorKey = keymap.WaitKey && (A_TickCount - startTick < 450)) {
       keymap.SinglePressAction()
     }
-    if keymap != parent {
+    if keymap != locked {
       this.Stack.Pop()
       keymap.Disable()
     }
