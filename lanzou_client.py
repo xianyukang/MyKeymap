@@ -38,6 +38,8 @@ def login():
 
 if __name__ == '__main__':
     lzy = LanZouCloud()
+    # 突然出现的 bug, 似乎换 ua 能解决: https://github.com/zaxtyson/LanZouCloud-API/issues/101
+    lzy._headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
     file = sys.argv[1]
     login()
     code = lzy.upload_file(file, -1, callback=show_progress, uploaded_handler=handler)
