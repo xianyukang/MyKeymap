@@ -262,7 +262,7 @@ CloseWindowProcesses() {
     return
   }
 
-  Run("taskkill /f /im " name, , "Hide")
+  Run('taskkill /f /im "' name '"', , "Hide")
 }
 
 /**
