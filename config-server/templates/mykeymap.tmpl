@@ -55,6 +55,8 @@ InitKeymap()
 
 {{ if .CapslockAbbrEnabled -}}
 ExecCapslockAbbr(command) {
+  ; 路径变量
+{{ .PathVariables }}
   switch command {
 {{ abbrToCode .CapslockAbbr }}  }
 }
@@ -65,6 +67,8 @@ ExecCapslockAbbr(command) {
 
 {{ if .SemicolonAbbrEnabled -}}
 ExecSemicolonAbbr(command) {
+  ; 路径变量
+{{ .PathVariables }}
   switch command {
 {{ abbrToCode .SemicolonAbbr }}  }
 }

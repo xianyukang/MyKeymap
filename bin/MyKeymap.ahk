@@ -239,6 +239,9 @@ InitKeymap()
 }
 
 ExecCapslockAbbr(command) {
+  ; 路径变量
+  programs := "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\"
+
   switch command {
     case "bb":
       ActivateOrRun("Bing 词典", "msedge.exe", "--app=https://www.bing.com/dict/search?q={selected}", "", false, false, false)
@@ -294,6 +297,9 @@ ExecCapslockAbbr(command) {
 }
 
 ExecSemicolonAbbr(command) {
+  ; 路径变量
+  programs := "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\"
+
   switch command {
     case ",":
       Send("，")
