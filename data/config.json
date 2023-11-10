@@ -1000,7 +1000,7 @@
       "id": 11,
       "name": "Tab 模式",
       "enable": false,
-      "hotkey": "*tab",
+      "hotkey": "tab",
       "parentID": 0,
       "delay": 0,
       "hotkeys": {
