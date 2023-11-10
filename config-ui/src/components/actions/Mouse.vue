@@ -10,8 +10,8 @@ const group1 = [
 const group2 = [
   { actionValueID: 5, label: "滚轮上滑" },
   { actionValueID: 6, label: "滚轮下滑" },
-  { actionValueID: 7, label: "滚轮左滑" },
-  { actionValueID: 8, label: "滚轮右滑" },
+  { actionValueID: 7, label: "滚轮左滑(shift+滚轮)" },
+  { actionValueID: 8, label: "滚轮右滑(shift+滚轮)" },
 ]
 const group3 = [
   { actionValueID: 9, label: "鼠标左键" },
