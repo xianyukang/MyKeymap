@@ -239,8 +239,10 @@ func systemActions2(a Action, inAbbrContext bool) string {
 	callMap := map[int]string{
 		1: `SystemLockScreen()`,
 		2: `SystemSleep()`,
+		9: `SystemSleep(true)`,
 		3: `SystemShutdown()`,
 		4: `SystemReboot()`,
+		10: `SystemReboot(true)`,
 		5: `SoundControl()`,
 		6: `BrightnessControl()`,
 		7: `SystemRestartExplorer()`,
