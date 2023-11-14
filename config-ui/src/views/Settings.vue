@@ -313,7 +313,7 @@ function onStartupChange() {
                       <v-col cols="3" v-for="keymap in customKeymaps" :key="keymap.id">
                         <v-text-field v-model.number="keymap.delay" variant="underlined"
                                       type="number" step="1" maxlength="5" min="0" color="primary"
-                                      :label="keymap.name"></v-text-field>
+                                      :label="keymap.name" :class="{'positive-number': keymap.delay > 0}"></v-text-field>
                       </v-col>
                     </v-row>
                   </v-card-text>
@@ -377,5 +377,9 @@ table .v-autocomplete :deep(input) {
 
 .mouseRow .v-col:first-child {
   padding-right: 16px;
+}
+
+.positive-number {
+  color: #d05;
 }
 </style>
