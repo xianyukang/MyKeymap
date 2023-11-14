@@ -326,7 +326,7 @@ FindWindows(winTitle, predicate?) {
 ReplaceSelectedText(&target, &args) {
   text := GetSelectedText()
   if not (text) {
-    return
+    text := ""
   }
 
   if InStr(args, "://") || InStr(target, "://") {
@@ -349,7 +349,7 @@ GetSelectedText() {
 
   Send("^c")
   if not (ClipWait(0.4)) {
-    Tip("无法获取选中的文本", -700)
+    Tip("没有选中的文本或文件", -700)
     return
   }
   text := A_Clipboard

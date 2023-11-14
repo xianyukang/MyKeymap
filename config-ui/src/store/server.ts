@@ -3,10 +3,10 @@ import { createFetch } from "@vueuse/core"
 export const useMyFetch = createFetch({
   baseUrl: import.meta.env.MODE == 'development' ? 'http://localhost:12333' : '',
   options: {
-    timeout: 1500,
+    timeout: 1000,
     onFetchError(ctx) {
       if (ctx.error.code == 20) {
-        alert("请求超时，可能设置程序被关了")
+        alert("保存失败，可能设置程序被关了")
       }
       return ctx
     }
