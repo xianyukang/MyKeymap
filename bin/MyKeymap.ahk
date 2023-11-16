@@ -217,14 +217,26 @@ InitKeymap()
   ; 鼠标右键
   km16 := KeymapManager.NewKeymap("rbutton", "鼠标右键", "")
   km := km16
+  km.Map("*XButton1", _ => GoToNextVirtualDesktop())
+  km.Map("*XButton2", _ => GoToPreviousVirtualDesktop())
   km.Map("singlePress", fast.RButton()), slow.Map("singlePress", slow.RButton())
   km.Map("*LButton", _ => (Send("^!{tab}")))
+  km.Map("*MButton", _ => (Send("#{tab}")))
   km.RemapKey("c", "backspace")
   km.RemapKey("d", "delete")
   km.RemapKey("x", "esc")
   km.Map("*space", _ => (Send("{blind}{enter}")))
   km.Map("*WheelUp", _ => (Send("^+{tab}")))
   km.Map("*WheelDown", _ => (Send("^{tab}")))
+
+  ; 鼠标侧键1
+  km17 := KeymapManager.NewKeymap("xbutton1", "鼠标侧键1", "")
+  km := km17
+  km.RemapKey("LButton", "media_play_pause")
+  km.RemapKey("RButton", "media_next")
+  km.RemapKey("WheelUp", "volume_up")
+  km.RemapKey("WheelDown", "volume_down")
+  km.Map("singlePress", _ => (Send("{blind}{xbutton1}")))
 
   ; 自定义热键
   km1 := KeymapManager.NewKeymap("customHotkeys", "自定义热键", "")

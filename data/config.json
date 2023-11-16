@@ -1556,6 +1556,14 @@
             "keysToSend": "^!{tab}"
           }
         ],
+        "*MButton": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "输入 Win + Tab",
+            "keysToSend": "#{tab}"
+          }
+        ],
         "*WheelDown": [
           {
             "windowGroupID": 0,
@@ -1570,6 +1578,22 @@
             "actionTypeID": 7,
             "comment": "Ctrl+Shift+Tab",
             "actionValueID": 28
+          }
+        ],
+        "*XButton1": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 3,
+            "comment": "下一个虚拟桌面",
+            "actionValueID": 6
+          }
+        ],
+        "*XButton2": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 3,
+            "comment": "上一个虚拟桌面",
+            "actionValueID": 5
           }
         ],
         "*c": [
@@ -1617,41 +1641,41 @@
     {
       "id": 17,
       "name": "鼠标侧键1",
-      "enable": false,
+      "enable": true,
       "hotkey": "xbutton1",
       "parentID": 0,
       "delay": 0,
       "hotkeys": {
-        "*c": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 6,
-            "comment": "Ctrl + C 复制",
-            "keysToSend": "^c"
-          }
-        ],
-        "*q": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 3,
-            "comment": "窗口最大化或还原",
-            "actionValueID": 9
-          }
-        ],
-        "*space": [
+        "*LButton": [
           {
             "windowGroupID": 0,
             "actionTypeID": 5,
-            "comment": "重映射为 enter",
-            "remapToKey": "enter"
+            "comment": "重映射为 media_play_pause",
+            "remapToKey": "media_play_pause"
           }
         ],
-        "*v": [
+        "*RButton": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "comment": "Ctrl + V 粘贴",
-            "keysToSend": "^v"
+            "actionTypeID": 5,
+            "comment": "重映射为 media_next",
+            "remapToKey": "media_next"
+          }
+        ],
+        "*WheelDown": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 5,
+            "comment": "重映射为 volume_down",
+            "remapToKey": "volume_down"
+          }
+        ],
+        "*WheelUp": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 5,
+            "comment": "重映射为 volume_up",
+            "remapToKey": "volume_up"
           }
         ],
         "singlePress": [
