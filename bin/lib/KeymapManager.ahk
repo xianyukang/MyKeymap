@@ -269,6 +269,10 @@ class Keymap {
         mouseMoved := true
         break
       }
+      if thisHotkey != A_ThisHotkey {
+        KeyWait(this.WaitKey)
+        break
+      }
     }
 
     if (thisHotkey = A_ThisHotkey && (A_TickCount - startTick < 450)) {
