@@ -58,10 +58,7 @@
       keymap.Enable(parent)
     }
     startTick := A_TickCount
-    KeyWait(keymap.WaitKey)
-    if (A_PriorKey = keymap.WaitKey && (A_TickCount - startTick < 450)) {
-      keymap.SinglePressAction()
-    }
+    keymap.Wait(startTick)
     if keymap != locked {
       this.Stack.Pop()
       keymap.Disable()
@@ -251,6 +248,39 @@ class Keymap {
     }
   }
 
+  Wait(startTick) {
+    ; 先处理一般情况, 不用鼠标按钮作为触发键
+    if !InStr(this.Hotkey, "button") {
+      KeyWait(this.WaitKey)
+      if (A_PriorKey = this.WaitKey && (A_TickCount - startTick < 450)) {
+        this.SinglePressAction()
+      }
+      return
+    }
+    ; 使用鼠标按钮作为触发键, 尝试兼容其他鼠标手势软件
+    mouseMoved := false
+    thisHotkey := A_ThisHotkey
+    CoordMode("Mouse", "Screen")
+
+    MouseGetPos(&x1, &y1)
+    while !KeyWait(this.WaitKey, "T0.01") {
+      MouseGetPos(&x2, &y2)
+      if Abs(x2 - x1) > 10 || Abs(y2 - y1) > 10 {
+        mouseMoved := true
+        break
+      }
+    }
+
+    if (thisHotkey = A_ThisHotkey && (A_TickCount - startTick < 450)) {
+      if !mouseMoved {
+        this.SinglePressAction()
+      } else {
+        Send("{blind}{" this.WaitKey " Down}")
+        KeyWait(this.WaitKey)
+        Send("{blind}{" this.WaitKey " Up}")
+      }
+    }
+  }
   ; 启用 keymap
   Enable(parent := false) {
     if this.parent && parent {
