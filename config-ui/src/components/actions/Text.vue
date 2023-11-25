@@ -26,6 +26,9 @@ const group3 = [
   { hideInAbbr: true, actionValueID: 17, label: "右键菜单" },
   { hideInAbbr: true, actionValueID: 18, label: "删除一个单词" },
   { hideInAbbr: true, actionValueID: 19, label: "Shift 键" },
+  { hideInAbbr: true, actionValueID: 30, label: "Ctrl 键" },
+  { hideInAbbr: true, actionValueID: 31, label: "Alt 键" },
+  { hideInAbbr: true, actionValueID: 32, label: "Win 键" },
   { hideInAbbr: false, actionValueID: 29, label: "中英文之间加空格" },
 ]
 

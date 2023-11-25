@@ -329,8 +329,11 @@ func textFeatures7(a Action, inAbbrContext bool) string {
 	}
 
 	callMap := map[int]string{
-		19: `HoldDownLShiftKey()`,
+		19: `HoldDownModifierKey("LShift")`,
 		29: `InsertSpaceBetweenZHAndEn()`,
+		30: `HoldDownModifierKey("LCtrl")`,
+		31: `HoldDownModifierKey("LAlt")`,
+		32: `HoldDownModifierKey("LWin")`,
 	}
 	if call, ok := callMap[a.ValueID]; ok {
 		if inAbbrContext {

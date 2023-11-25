@@ -322,6 +322,14 @@ HoldDownLShiftKey() {
   send("{LShift up}")
 }
 
+
+HoldDownModifierKey(modifier) {
+  send("{" modifier " down}")
+  key := ExtractWaitKey(A_ThisHotkey)
+  keywait(key)
+  send("{" modifier " up}")
+}
+
 /**
  * 按住右Shift
  */
