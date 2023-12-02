@@ -24,7 +24,7 @@ const group2 = [
 
 const group3 = [
   { hideInAbbr: true, actionValueID: 17, label: "右键菜单" },
-  { hideInAbbr: true, actionValueID: 33, label: "删除一行" },
+  { hideInAbbr: true, actionValueID: 33, label: "删除一行文本" },
   { hideInAbbr: true, actionValueID: 18, label: "删除一个单词" },
   { hideInAbbr: true, actionValueID: 19, label: "Shift 键" },
   { hideInAbbr: true, actionValueID: 30, label: "Ctrl 键" },

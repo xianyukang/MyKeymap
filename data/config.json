@@ -594,7 +594,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 7,
-            "comment": "删除一行",
+            "comment": "删除一行文本",
             "actionValueID": 33
           }
         ],
