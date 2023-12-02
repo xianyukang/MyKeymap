@@ -311,6 +311,7 @@ func textFeatures7(a Action, inAbbrContext bool) string {
 		15: {"send", "^+{left}"},
 		16: {"send", "^+{right}"},
 		18: {"send", "^{backspace}"},
+		33: {"send", "{home}+{end}{backspace}"},
 		22: {"send", "{blind}{enter}"},
 		26: {"send", "^{tab}"},
 		27: {"send", "{blind}+{tab}"},

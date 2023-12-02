@@ -590,6 +590,14 @@
             "actionValueID": 22
           }
         ],
+        "*t": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "删除一行",
+            "actionValueID": 33
+          }
+        ],
         "*v": [
           {
             "windowGroupID": 0,
