@@ -1772,7 +1772,7 @@
             "comment": "位于 PATH 环境变量中的命令 (比如 cmd.exe) 可以直接启动，无需使用完整路径",
             "winTitle": "ahk_exe cmd.exe",
             "target": "cmd.exe",
-            "args": "/k cd %userprofile%"
+            "args": "/k cd /d %userprofile%"
           }
         ],
         "dd": [
@@ -2000,6 +2000,16 @@
             "actionTypeID": 6,
             "comment": "输入一对 {} 并把光标移动中间",
             "keysToSend": "{text}{}\n{left}"
+          }
+        ],
+        "dq": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "comment": "对齐代码注释",
+            "target": "bin\\AutoHotkey64.exe",
+            "args": "bin\\AlignComment.ahk",
+            "runInBackground": true
           }
         ],
         "gg": [

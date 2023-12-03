@@ -43,6 +43,7 @@ ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin 
     return
 
   ; 程序没有运行，运行程序
+  workingDir := workingDir ? workingDir : A_WorkingDir
   RunPrograms(target, args, workingDir, admin, runInBackground)
 }
 

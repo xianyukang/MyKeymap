@@ -36,7 +36,7 @@ InitKeymap()
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
 
-  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", ",,,.,/,dk,gg,gt,i love nia,jt,sj,sk,xk,zh,zk")
+  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", ",,,.,/,dk,dq,gg,gt,i love nia,jt,sj,sk,xk,zh,zk")
   semiHook.KeyOpt("{CapsLock}", "S")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char, , , true)
   semiHookAbbrWindow := InputTipWindow()
@@ -261,7 +261,7 @@ ExecCapslockAbbr(command) {
     case "cc":
       ActivateOrRun("", "shortcuts\Visual Studio Code.lnk", "-n `"{selected}`"", "", false, false, false)
     case "cmd":
-      ActivateOrRun("ahk_exe cmd.exe", "cmd.exe", "/k cd %userprofile%", "", false, false, false)
+      ActivateOrRun("ahk_exe cmd.exe", "cmd.exe", "/k cd /d %userprofile%", "", false, false, false)
     case "dd":
       ActivateOrRun("", "shell:downloads")
     case "dm":
@@ -322,6 +322,8 @@ ExecSemicolonAbbr(command) {
       Send("、")
     case "dk":
       Send("{text}{}"), Send("{left}")
+    case "dq":
+      ActivateOrRun("", "bin\AutoHotkey64.exe", "bin\AlignComment.ahk", "", false, false, true)
     case "gg":
       Send("{text}git add -A; git commit -a -m `"`"; git push origin (git branch --show-current);"), Send("{left 47}")
     case "gt":

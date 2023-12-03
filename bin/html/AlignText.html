@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>对齐代码注释</title>
+  <link rel="icon" href="logo.ico" />
+  <link rel="stylesheet" href="tailwind.css" />
+  <script type="importmap">
+    {
+        "imports": {
+            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js"
+        }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Iosevka', 'Consolas', monospace;
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" class="w-full h-screen bg-gradient-to-r from-cyan-500 to-blue-500 text-center">
+    <div class="grid grid-cols-2 h-5/6">
+      <div class="flex items-center">
+        <div class="w-full h-96 m-6 relative">
+          <h1 class="absolute left-1/2 -translate-x-1/2 bottom-full text-4xl font-extrabold mb-1 text-yellow-300">
+            Before
+          </h1>
+          <textarea v-model="textBefore" @input="handleInput" class="w-full h-full p-4" wrap="off"
+            spellcheck="false"></textarea>
+        </div>
+      </div>
+      <div class="flex items-center">
+        <div class="w-full h-96 m-6 relative">
+          <h1 class="absolute left-1/2 -translate-x-1/2 bottom-full text-4xl font-extrabold mb-1 text-yellow-300">
+            After
+          </h1>
+          <textarea ref="textAfterInput" :value="textAfter" class="w-full h-full p-4" wrap="off"
+            @focus="$event.target.select()" @mouseup.stop="" spellcheck="false"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center h-24">
+      <div class="relative bg-green-200">
+        <h1 class="absolute left-1/2 -translate-x-1/2 bottom-full text-3xl font-extrabold mb-1 text-yellow-300">
+          分隔符
+        </h1>
+        <div class="w-72 h-full">
+          <input ref="delimiterInput" type="text" class="w-full h-full px-4 text-2xl" @input="handleInput"
+            spellcheck="false" v-model="delimiter" placeholder="推荐装 Iosevka 字体">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createApp } from "vue"
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const text = urlParams.get('text') || "echo hello # 打印信息\nmkdir -p i/need/more/power # 创建文件夹";
+    const delimiter = text.indexOf('#') !== -1 ? '#' : '//'
+
+    function split2(str, delim) {
+      var p = str.indexOf(delim);
+      if (p !== -1) {
+        return [str.substring(0, p), str.substring(p + 1)];
+      } else {
+        return [str];
+      }
+    }
+
+
+    function stringWidth(str) {
+      let width = 0
+      for (let i = 0; i < str.length; i++) {
+        width += str.charCodeAt(i) > 127 ? 2 : 1
+      }
+      return width
+    }
+
+    function handleInput() {
+      const deli = this.delimiter
+      if (deli.length === 0) {
+        return
+      }
+
+      const lines = this.textBefore.split("\n")
+      // 确定分隔符左边的字符串应该有多长
+      const maxLength = lines.reduce((acc, val) => {
+        const i = val.indexOf(deli)
+        if (i === -1) {
+          return acc
+        }
+        const str = val.substring(0, i).trimRight()
+        const length = stringWidth(str)
+        return acc > length ? acc : length
+      }, -1)
+
+      const linesAfter = lines.map(line => {
+        const i = line.indexOf(deli)
+        if (i !== -1) {
+          const left = line.substring(0, i).trimRight()
+          const right = line.substring(i + deli.length)
+          if (left.length <= maxLength) {
+            return left + ' '.repeat(maxLength - stringWidth(left) + 3) + deli + right
+          }
+        }
+        return line
+      })
+      this.textAfter = linesAfter.join('\n')
+    }
+
+    createApp({
+      data() {
+        return {
+          textBefore: text,
+          textAfter: '',
+          delimiter: delimiter,
+        }
+      },
+      methods: {
+        handleInput,
+      },
+      mounted() {
+        this.handleInput()
+        window.resizeTo(1800, 720) // 仅在一些情况中能调整窗口大小
+        // 需要在 $nextTick 调用下面的代码,  因为现在 DOM 还没有被更新,  等到 $nextTick 输入框中才有文本
+        this.$nextTick(() => {
+          this.$refs.textAfterInput.focus()
+          this.$refs.textAfterInput.select()
+        });
+      },
+    }).mount("#app")
+  </script>
+</body>
+
+</html>
