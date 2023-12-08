@@ -560,13 +560,13 @@ class TaskSwitchKeymap extends Keymap {
 
   __New(up, down, left, right, delete, enter) {
     super.__New("Task Switch")
-    this.RemapKey("x", "delete") ; 为了不影响之前习惯了 x 键关闭的用户
-    this.RemapKey(up, "up")
-    this.RemapKey(down, "down")
-    this.RemapKey(left, "left")
-    this.RemapKey(right, "right")
-    this.RemapKey(delete, "delete")
-    this.RemapKey(enter, "enter")
+    this.SendKeys("x", "{delete}") ; 为了不影响之前习惯了 x 键关闭的用户
+    this.SendKeys(up, "{up}")
+    this.SendKeys(down, "{down}")
+    this.SendKeys(left, "{left}")
+    this.SendKeys(right, "{right}")
+    this.SendKeys(delete, "{delete}")
+    this.SendKeys(enter, "{enter}")
     this.AfterLocked := this.DeactivateTaskSwitch.Bind(this)
     GroupAdd("TASK_SWITCH_GROUP", "ahk_class MultitaskingViewFrame")
     GroupAdd("TASK_SWITCH_GROUP", "ahk_class XamlExplorerHostIslandWindow")
