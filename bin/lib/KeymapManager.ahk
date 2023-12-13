@@ -392,8 +392,12 @@ class Keymap {
 
   RemapInHotIf(a, b, winTitle := "", conditionType := 0) {
     h := "handled_in_hot_if"
+    ; 跳过这两个特殊玩意, 因为无法引用他们的 handler
+    if b = "AltTab" || b = "ShiftAltTab" {
+      return
+    }
     ; 如果 b 的名字不是键名, 那么不构成重映射
-    if GetKeyName(b) == "" {
+    if GetKeyName(ExtractWaitKey(b)) == "" {
       this.Map(a, h, , winTitle, conditionType)
     } else {
       this.Map("*" a, h, , winTitle, conditionType)
