@@ -371,16 +371,21 @@ class Keymap {
   }
 
   RemapKey(a, b, winTitle := "", conditionType := 0) {
-    downHandler(thisHotkey) {
-      SetKeyDelay -1
-      Send "{Blind}{" b " DownR}"
-    }
-    upHandler(thisHotkey) {
-      SetKeyDelay -1
-      Send "{Blind}{" b " Up}"
-    }
-    this.Map("*" a, downHandler, , winTitle, conditionType)
-    this.Map("*" a " up", upHandler, , winTitle, conditionType)
+    ; Remap 容易让按键卡在按下状态, 改成 Send 好一点
+    hk := "*" a
+    keys := "{blind}{" b "}"
+    this.SendKeys(hk, keys, winTitle, conditionType)
+
+    ; downHandler(thisHotkey) {
+    ;   SetKeyDelay -1
+    ;   Send "{Blind}{" b " DownR}"
+    ; }
+    ; upHandler(thisHotkey) {
+    ;   SetKeyDelay -1
+    ;   Send "{Blind}{" b " Up}"
+    ; }
+    ; this.Map("*" a, downHandler, , winTitle, conditionType)
+    ; this.Map("*" a " up", upHandler, , winTitle, conditionType)
   }
 
   SendKeys(hk, keys, winTitle := "", conditionType := 0) {
