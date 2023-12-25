@@ -60,7 +60,7 @@ LoopRelatedWindows(winTitle?, hwnds?) {
     if (GetProcessName() == "explorer.exe") {
       predicate := (hwnd) => WinGetClass(hwnd) = "CabinetWClass"
     }
-    hwnds := FindWindows("ahk_pid " WinGetPID("A"), predicate)
+    hwnds := FindWindows("ahk_exe " WinGetProcessName("A"), predicate)
   }
 
   ; 只有一个窗口显示出来就行
