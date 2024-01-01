@@ -313,6 +313,7 @@ func textFeatures7(a Action, inAbbrContext bool) string {
 		15: {"send", "^+{left}"},
 		16: {"send", "^+{right}"},
 		18: {"send", "^{backspace}"},
+		33: {"send", "{home}+{end}{backspace}"},
 		22: {"send", "{blind}{enter}"},
 		26: {"send", "^{tab}"},
 		27: {"send", "{blind}+{tab}"},
@@ -331,8 +332,11 @@ func textFeatures7(a Action, inAbbrContext bool) string {
 	}
 
 	callMap := map[int]string{
-		19: `HoldDownLShiftKey()`,
+		19: `HoldDownModifierKey("LShift")`,
 		29: `InsertSpaceBetweenZHAndEn()`,
+		30: `HoldDownModifierKey("LCtrl")`,
+		31: `HoldDownModifierKey("LAlt")`,
+		32: `HoldDownModifierKey("LWin")`,
 	}
 	if call, ok := callMap[a.ValueID]; ok {
 		if inAbbrContext {

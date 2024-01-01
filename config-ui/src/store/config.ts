@@ -264,22 +264,19 @@ export const parseKeyboardLayout = (layout: string, keymapHotkey: string) => {
       }
     )
 
-  if (keymapHotkey.toLowerCase().includes("rbutton")) {
+  if (keymapHotkey.toLowerCase().includes("button")) {
     const list = rows.flatMap(x => x)
-    if (!list.includes("*LButton")) {
-      if (rows.length > 0) {
-        rows[0].push("*LButton")
-      }
-    }
-    if (!list.includes("*WheelUp")) {
-      if (rows.length > 1) {
-        rows[1].push("*WheelUp")
-      }
-    }
-    if (!list.includes("*WheelDown")) {
-      if (rows.length > 2) {
-        rows[2].push("*WheelDown")
-      }
+    const res = []
+    if (!list.includes("*LButton")) { res.push("*LButton") }
+    if (!list.includes("*MButton")) { res.push("*MButton") }
+    if (!list.includes("*RButton")) { res.push("*RButton") }
+    if (!list.includes("*WheelUp")) { res.push("*WheelUp") }
+    if (!list.includes("*WheelDown")) { res.push("*WheelDown") }
+    if (!list.includes("*XButton1")) { res.push("*XButton1") }
+    if (!list.includes("*XButton2")) { res.push("*XButton2") }
+
+    if (res.length > 0) {
+      rows.push(res)
     }
   }
   return rows

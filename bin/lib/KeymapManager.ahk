@@ -58,10 +58,7 @@
       keymap.Enable(parent)
     }
     startTick := A_TickCount
-    KeyWait(keymap.WaitKey)
-    if (A_PriorKey = keymap.WaitKey && (A_TickCount - startTick < 450)) {
-      keymap.SinglePressAction()
-    }
+    keymap.Wait(startTick)
     if keymap != locked {
       this.Stack.Pop()
       keymap.Disable()
@@ -251,6 +248,43 @@ class Keymap {
     }
   }
 
+  Wait(startTick) {
+    ; 先处理一般情况, 不用鼠标按钮作为触发键
+    if !InStr(this.Hotkey, "button") {
+      KeyWait(this.WaitKey)
+      if (A_PriorKey = this.WaitKey && (A_TickCount - startTick < 450)) {
+        this.SinglePressAction()
+      }
+      return
+    }
+    ; 使用鼠标按钮作为触发键, 尝试兼容其他鼠标手势软件
+    mouseMoved := false
+    thisHotkey := A_ThisHotkey
+    CoordMode("Mouse", "Screen")
+
+    MouseGetPos(&x1, &y1)
+    while !KeyWait(this.WaitKey, "T0.01") {
+      MouseGetPos(&x2, &y2)
+      if Abs(x2 - x1) > 10 || Abs(y2 - y1) > 10 {
+        mouseMoved := true
+        break
+      }
+      if thisHotkey != A_ThisHotkey {
+        KeyWait(this.WaitKey)
+        break
+      }
+    }
+
+    if (thisHotkey = A_ThisHotkey && (A_TickCount - startTick < 450)) {
+      if !mouseMoved {
+        this.SinglePressAction()
+      } else {
+        Send("{blind}{" this.WaitKey " Down}")
+        KeyWait(this.WaitKey)
+        Send("{blind}{" this.WaitKey " Up}")
+      }
+    }
+  }
   ; 启用 keymap
   Enable(parent := false) {
     if this.parent && parent {
@@ -337,16 +371,21 @@ class Keymap {
   }
 
   RemapKey(a, b, winTitle := "", conditionType := 0) {
-    downHandler(thisHotkey) {
-      SetKeyDelay -1
-      Send "{Blind}{" b " DownR}"
-    }
-    upHandler(thisHotkey) {
-      SetKeyDelay -1
-      Send "{Blind}{" b " Up}"
-    }
-    this.Map("*" a, downHandler, , winTitle, conditionType)
-    this.Map("*" a " up", upHandler, , winTitle, conditionType)
+    ; Remap 容易让按键卡在按下状态, 改成 Send 好一点
+    hk := "*" a
+    keys := "{blind}{" b "}"
+    this.SendKeys(hk, keys, winTitle, conditionType)
+
+    ; downHandler(thisHotkey) {
+    ;   SetKeyDelay -1
+    ;   Send "{Blind}{" b " DownR}"
+    ; }
+    ; upHandler(thisHotkey) {
+    ;   SetKeyDelay -1
+    ;   Send "{Blind}{" b " Up}"
+    ; }
+    ; this.Map("*" a, downHandler, , winTitle, conditionType)
+    ; this.Map("*" a " up", upHandler, , winTitle, conditionType)
   }
 
   SendKeys(hk, keys, winTitle := "", conditionType := 0) {
@@ -358,8 +397,12 @@ class Keymap {
 
   RemapInHotIf(a, b, winTitle := "", conditionType := 0) {
     h := "handled_in_hot_if"
+    ; 跳过这两个特殊玩意, 因为无法引用他们的 handler
+    if b = "AltTab" || b = "ShiftAltTab" {
+      return
+    }
     ; 如果 b 的名字不是键名, 那么不构成重映射
-    if GetKeyName(b) == "" {
+    if GetKeyName(ExtractWaitKey(b)) == "" {
       this.Map(a, h, , winTitle, conditionType)
     } else {
       this.Map("*" a, h, , winTitle, conditionType)
@@ -526,13 +569,13 @@ class TaskSwitchKeymap extends Keymap {
 
   __New(up, down, left, right, delete, enter) {
     super.__New("Task Switch")
-    this.RemapKey("x", "delete") ; 为了不影响之前习惯了 x 键关闭的用户
-    this.RemapKey(up, "up")
-    this.RemapKey(down, "down")
-    this.RemapKey(left, "left")
-    this.RemapKey(right, "right")
-    this.RemapKey(delete, "delete")
-    this.RemapKey(enter, "enter")
+    this.SendKeys("x", "{delete}") ; 为了不影响之前习惯了 x 键关闭的用户
+    this.SendKeys(up, "{up}")
+    this.SendKeys(down, "{down}")
+    this.SendKeys(left, "{left}")
+    this.SendKeys(right, "{right}")
+    this.SendKeys(delete, "{delete}")
+    this.SendKeys(enter, "{enter}")
     this.AfterLocked := this.DeactivateTaskSwitch.Bind(this)
     GroupAdd("TASK_SWITCH_GROUP", "ahk_class MultitaskingViewFrame")
     GroupAdd("TASK_SWITCH_GROUP", "ahk_class XamlExplorerHostIslandWindow")

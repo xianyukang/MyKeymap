@@ -7,7 +7,7 @@ import { ref } from "vue";
 import ActionView from "@/components/actions/Action.vue";
 import { Action } from "@/types/config";
 
-const { hotkeys } = storeToRefs(useConfigStore())
+const { hotkeys, windowGroupID } = storeToRefs(useConfigStore())
 
 const currHotkey = ref<string>("")
 const changeCustomHotkey = (hotkey: string, newHotkey: string) => {
@@ -31,11 +31,11 @@ const removeCustomHotkey = (hotkey: string) => {
 }
 
 const getActionComment = (action: Array<Action>) => {
-  return action.find(a => !a.isEmpty)?.comment ?? ''
+  return action.find(a => !a.isEmpty && a.windowGroupID == windowGroupID.value)?.comment ?? ''
 }
 
 const getActionWindowGroupId = (action: Array<Action>) => {
-  return action.find(a => !a.isEmpty)?.windowGroupID ?? 0
+  return windowGroupID.value
 }
 
 </script>

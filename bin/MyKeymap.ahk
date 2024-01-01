@@ -36,7 +36,7 @@ InitKeymap()
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
 
-  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", ",,,.,/,dk,gg,gt,i love nia,jt,sj,sk,xk,zh,zk")
+  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", ",,,.,/,dk,dq,gg,gt,i love nia,jt,sj,sk,xk,zh,zk")
   semiHook.KeyOpt("{CapsLock}", "S")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char, , , true)
   semiHookAbbrWindow := InputTipWindow()
@@ -128,10 +128,11 @@ InitKeymap()
   km.RemapKey("e", "up")
   km.RemapKey("f", "right")
   km.RemapKey("g", "end")
-  km.Map("*k", _ => HoldDownLShiftKey())
+  km.Map("*k", _ => HoldDownModifierKey("LShift"))
   km.RemapKey("q", "appskey")
   km.RemapKey("r", "tab")
   km.RemapKey("s", "left")
+  km.Map("*t", _ => (Send("{home}+{end}{backspace}")))
   km.Map("*v", _ => (Send("{blind}^{right}")))
   km.Map("*w", _ => (Send("{blind}+{tab}")))
   km.RemapKey("x", "esc")
@@ -195,7 +196,7 @@ InitKeymap()
   km14 := KeymapManager.NewKeymap("*.", "句号模式", "")
   km := km14
   km.Map("singlePress", _ => (Send("{blind}{.}")))
-  km.Map("*,", _ => HoldDownLShiftKey())
+  km.Map("*,", _ => HoldDownModifierKey("LShift"))
   km.Map("*2", _ => (Send("^+{tab}")))
   km.Map("*3", _ => (Send("^{tab}")))
   km.RemapKey("a", "home")
@@ -217,14 +218,26 @@ InitKeymap()
   ; 鼠标右键
   km16 := KeymapManager.NewKeymap("rbutton", "鼠标右键", "")
   km := km16
+  km.Map("*XButton1", _ => GoToNextVirtualDesktop())
+  km.Map("*XButton2", _ => GoToPreviousVirtualDesktop())
   km.Map("singlePress", fast.RButton()), slow.Map("singlePress", slow.RButton())
   km.Map("*LButton", _ => (Send("^!{tab}")))
+  km.Map("*MButton", _ => (Send("#{tab}")))
   km.RemapKey("c", "backspace")
   km.RemapKey("d", "delete")
   km.RemapKey("x", "esc")
   km.Map("*space", _ => (Send("{blind}{enter}")))
   km.Map("*WheelUp", _ => (Send("^+{tab}")))
   km.Map("*WheelDown", _ => (Send("^{tab}")))
+
+  ; 鼠标侧键1
+  km17 := KeymapManager.NewKeymap("xbutton1", "鼠标侧键1", "")
+  km := km17
+  km.RemapKey("LButton", "media_play_pause")
+  km.RemapKey("RButton", "media_next")
+  km.RemapKey("WheelUp", "volume_up")
+  km.RemapKey("WheelDown", "volume_down")
+  km.Map("singlePress", _ => (Send("{blind}{xbutton1}")))
 
   ; 自定义热键
   km1 := KeymapManager.NewKeymap("customHotkeys", "自定义热键", "")
@@ -248,7 +261,7 @@ ExecCapslockAbbr(command) {
     case "cc":
       ActivateOrRun("", "shortcuts\Visual Studio Code.lnk", "-n `"{selected}`"", "", false, false, false)
     case "cmd":
-      ActivateOrRun("ahk_exe cmd.exe", "cmd.exe", "/k cd %userprofile%", "", false, false, false)
+      ActivateOrRun("ahk_exe cmd.exe", "cmd.exe", "/k cd /d %userprofile%", "", false, false, false)
     case "dd":
       ActivateOrRun("", "shell:downloads")
     case "dm":
@@ -309,6 +322,8 @@ ExecSemicolonAbbr(command) {
       Send("、")
     case "dk":
       Send("{text}{}"), Send("{left}")
+    case "dq":
+      ActivateOrRun("", "bin\AutoHotkey64.exe", "bin\AlignComment.ahk", "", false, false, true)
     case "gg":
       Send("{text}git add -A; git commit -a -m `"`"; git push origin (git branch --show-current);"), Send("{left 47}")
     case "gt":
@@ -341,7 +356,7 @@ InitTrayMenu() {
   A_TrayMenu.Default := "暂停"
   A_TrayMenu.ClickCount := 1
 
-  A_IconTip := "MyKeymap 2.0-beta20 created by 咸鱼阿康"
+  A_IconTip := "MyKeymap 2.0-beta25 created by 咸鱼阿康"
   TraySetIcon("./bin/icons/logo.ico", , true)
 }
 

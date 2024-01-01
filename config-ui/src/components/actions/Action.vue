@@ -79,7 +79,7 @@ function onActionTypeChange(action: Action) {
                         v-model="windowGroupID"
                         variant="outlined"
                         :menu-props="{ maxHeight: 900 }"
-                        :disabled="!hotkey"></v-select>
+                        ></v-select>
             </v-col>
             <v-col cols="7">
               <v-select :items="filter(actionTypes, keymap)"

@@ -22,13 +22,13 @@ function getKeyText(hotkey: string) {
 
 <template>
   <div class="d-flex flex-wrap mt-4">
-    <div class="mr-4" v-if="store.keymap" style="min-width: 500px; max-width: 1160px;">
-    <v-row justify="start" v-for="(row, index) in keyboardRows" :key="index">
-      <v-col v-for="(hotkey, index) in row" :key="hotkey + index" cols="auto">
-        <Key :hotkey="hotkey" :label="getKeyText(hotkey)"/>
-      </v-col>
-    </v-row>
-      <Action style="margin-top: 18px;"/>
+    <div class="mr-4" v-if="store.keymap" style="min-width: 500px; max-width: 1240px;">
+      <v-row justify="start" v-for="(row, index) in keyboardRows" :key="index" :class="{ 'small': keyboardRows[0].length > 10 }">
+        <v-col v-for="(hotkey, index) in row" :key="hotkey + index" cols="auto">
+          <Key :hotkey="hotkey" :label="getKeyText(hotkey)" />
+        </v-col>
+      </v-row>
+      <Action style="margin-top: 18px;" />
     </div>
     <div v-else>Error: keymap not found</div>
     <action-comment-table class="ml-10 mr-4" style="min-width: 200px; flex: 1">
@@ -42,5 +42,9 @@ function getKeyText(hotkey: string) {
 <style scoped>
 .v-row+.v-row {
   margin-top: 0;
+}
+
+.small :deep(*) {
+  font-size: 1.23rem;
 }
 </style>

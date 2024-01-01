@@ -43,6 +43,7 @@ ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin 
     return
 
   ; 程序没有运行，运行程序
+  workingDir := workingDir ? workingDir : A_WorkingDir
   RunPrograms(target, args, workingDir, admin, runInBackground)
 }
 
@@ -59,7 +60,7 @@ LoopRelatedWindows(winTitle?, hwnds?) {
     if (GetProcessName() == "explorer.exe") {
       predicate := (hwnd) => WinGetClass(hwnd) = "CabinetWClass"
     }
-    hwnds := FindWindows("ahk_pid " WinGetPID("A"), predicate)
+    hwnds := FindWindows("ahk_exe " WinGetProcessName("A"), predicate)
   }
 
   ; 只有一个窗口显示出来就行
@@ -320,6 +321,14 @@ HoldDownLShiftKey() {
   key := ExtractWaitKey(A_ThisHotkey)
   keywait(key)
   send("{LShift up}")
+}
+
+
+HoldDownModifierKey(modifier) {
+  send("{" modifier " down}")
+  key := ExtractWaitKey(A_ThisHotkey)
+  keywait(key)
+  send("{" modifier " up}")
 }
 
 /**
