@@ -351,12 +351,12 @@ BindWindow() {
   windowTitle := false
   handler(thisHotKey) {
     waitkey := ExtractWaitKey(thisHotKey)
-    if not (KeyWait(waitkey, "T0.3")) {
+    if not (KeyWait(waitkey, "T0.6")) {
       ; 绑定窗口
       windowID := WinGetID("A")
       windowTitle := WinGetTitle("A")
       Tip("已绑定当前窗口")
-      KeyWait(waitkey, "T2") ; 避免按住时每隔 0.3 秒重复执行这个动作
+      KeyWait(waitkey, "T2") ; 避免按住时每隔 0.6 秒重复执行这个动作
       return
     }
 
