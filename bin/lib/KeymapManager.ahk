@@ -98,6 +98,10 @@
       this.ShowToolTip("从 " this.L.locked.Name "`n切换到 " this.L.toLock.Name, this.L.show)
       this.Unlock()
       this._lock()
+      ; 锁定时注册个函数, 用于自动关闭锁定, TaskSwitch 模式会用到这个
+      if this.L.locked.AfterLocked {
+        SetTimer(this.L.locked.AfterLocked, -1)
+      }
       return
     }
 
