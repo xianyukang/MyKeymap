@@ -629,10 +629,12 @@ matchWinTitleCondition(winTitle, conditionType) {
 SendMouseButton(btn) {
   ; MyKeymap 输入的 RButton 被鼠标手势拦截, 鼠标手势认为用户想单击右键, 所以也发送 RButton
   ; 然而这个 RButton 又会触发 MyKeymap 的右键功能, 造成死循环, 所以在发送 RButton 前把右键暂停一下
-  try Hotkey("*" btn, "Off")
-  try Hotkey(btn, "Off")
+  ; try Hotkey("*" btn, "Off")
+  ; try Hotkey(btn, "Off")
+  Suspend
   Send("{blind}{" btn "}")
   Sleep 50
-  try Hotkey("*" btn, "On")
-  try Hotkey(btn, "On")
+  Suspend
+  ; try Hotkey("*" btn, "On")
+  ; try Hotkey(btn, "On")
 }
