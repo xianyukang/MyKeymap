@@ -69,6 +69,9 @@ type CommandInputSkin struct {
 func (c *Config) PathVariables() string {
 	var s strings.Builder
 	for _, v := range c.Options.PathVariables {
+		if strings.TrimSpace(v.Name) == "" {
+			continue
+		}
 		s.WriteString("  ")
 		s.WriteString(v.Name)
 		s.WriteString(" := ")
@@ -84,7 +87,10 @@ func (c *Config) WindowGroups() string {
 		if trimmed := strings.TrimSpace(g.Value); strings.Index(trimmed, "\n") > 0 {
 			values := strings.Split(trimmed, "\n")
 			for _, v := range values {
-				s.WriteString(fmt.Sprintf("  GroupAdd(\"MY_WINDOW_GROUP_%d\", %s)\n", g.ID, toAHKFuncArg(v)))
+				arg := toAHKFuncArg(v)
+				if arg != `""` {
+					s.WriteString(fmt.Sprintf("  GroupAdd(\"MY_WINDOW_GROUP_%d\", %s)\n", g.ID, arg))
+				}
 			}
 
 		}
