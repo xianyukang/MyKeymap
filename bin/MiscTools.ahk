@@ -39,7 +39,9 @@ if A_Args[1] = "RunAtStartup" {
   if A_Args[2] = "On" {
     FileCreateShortcut(A_WorkingDir "\MyKeymap.exe", linkFile, A_WorkingDir)
   } else if (A_Args[2] = "Off") {
-    FileDelete(linkFile)
+    if FileExist(linkFile) {
+      FileDelete(linkFile)
+    }
   }
   return
 }

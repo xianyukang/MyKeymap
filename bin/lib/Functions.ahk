@@ -366,6 +366,7 @@ GetSelectedText() {
  * @returns {string} 
  */
 URIEncode(Uri, encoding := "UTF-8") {
+  res := ""
   var := Buffer(StrPut(Uri, encoding), 0)
   StrPut(Uri, var, encoding)
   pos := 1
