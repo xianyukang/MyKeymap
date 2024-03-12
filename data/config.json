@@ -44,7 +44,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
-            "comment": "滚轮右滑",
+            "comment": "滚轮右滑(shift+滚轮)",
             "actionValueID": 8
           }
         ],
@@ -100,7 +100,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 4,
-            "comment": "滚轮左滑",
+            "comment": "滚轮左滑(shift+滚轮)",
             "actionValueID": 7
           }
         ],

@@ -4,8 +4,10 @@ import RadioGroup from './RadioGroup.vue';
 const group1 = [
   { actionValueID: 1, label: "锁屏" },
   { actionValueID: 2, label: "睡眠" },
+  { actionValueID: 9, label: "睡眠(带确认)" },
   { actionValueID: 3, label: "关机" },
   { actionValueID: 4, label: "重启" },
+  { actionValueID: 10, label: "重启(带确认)" },
   { actionValueID: 5, label: "音量调节" },
   { actionValueID: 6, label: "显示器亮度调节" },
 ]
