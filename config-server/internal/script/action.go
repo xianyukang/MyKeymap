@@ -118,6 +118,10 @@ func sendKeys6(a Action, inAbbrContext bool) string {
 	var res []string
 	lines := strings.Split(a.KeysToSend, "\n")
 	for _, line := range lines {
+		if strings.HasPrefix(line, "ahk:") {
+			res = append(res, strings.TrimSpace(line[4:]))
+			continue
+		}
 		if strings.HasPrefix(line, "sleep ") || strings.HasPrefix(line, "Sleep ") {
 			res = append(res, fmt.Sprintf(`Sleep(%s)`, line[6:]))
 			continue
