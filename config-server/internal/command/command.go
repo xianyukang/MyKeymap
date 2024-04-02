@@ -47,6 +47,7 @@ func ChangeVersion(args ...string) {
 		panic(err)
 	}
 	config.Options.MykeymapVersion = args[0]
+	config.Options.Language = "" // 重置语言
 	script.SaveConfigFile(config)
 	script.GenerateScripts(config)
 }

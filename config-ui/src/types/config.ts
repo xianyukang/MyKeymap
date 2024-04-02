@@ -70,6 +70,7 @@ export interface Options {
   pathVariables: Array<PathVariable>
   customShellMenu: string
   startup: boolean
+  language: string
   keyMapping: string
   keyboardLayout: string
   commandInputSkin: any

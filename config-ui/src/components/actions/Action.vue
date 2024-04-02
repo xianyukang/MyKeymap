@@ -14,21 +14,23 @@ import { Action, Keymap } from "@/types/config";
 
 
 const { config, keymap, action, windowGroupID, hotkey } = storeToRefs(useConfigStore())
+const { translate } = useConfigStore()
 
 const actionTypes = [
-  { id: 0, name: "⛔ 未配置" },
-  { id: 1, name: "🚀 启动程序或激活窗口" },
-  { id: 2, name: "🖥️ 系统控制" },
-  { id: 3, name: "🏠 窗口操作" },
-  { id: 4, name: "🖱️  鼠标操作", hideInAbbr: true },
-  { id: 5, name: "🅰️ 重映射按键", hideInAbbr: true },
-  { id: 6, name: "🅰️ 输入文本或按键" },
-  { id: 7, name: "📚 文字编辑相关" },
-  { id: 8, name: "⚛️ 一些内置函数" },
-  { id: 9, name: "⚙️ MyKeymap 相关" },
+  { id: 0, label: "label:200" },
+  { id: 1, label: "label:201" },
+  { id: 2, label: "label:202" },
+  { id: 3, label: "label:203" },
+  { id: 4, label: "label:204", hideInAbbr: true },
+  { id: 5, label: "label:205", hideInAbbr: true },
+  { id: 6, label: "label:206" },
+  { id: 7, label: "label:207" },
+  { id: 8, label: "label:208" },
+  { id: 9, label: "label:209" },
 ]
 
 function filter(items: typeof actionTypes, keymap: Keymap | undefined): typeof actionTypes {
+  items = items.map(x => ({...x, name: translate(x.label)}))
   if (keymap && keymap.hotkey.includes("Abbr")) {
     return items.filter(x => !x.hideInAbbr)
   }

@@ -2,25 +2,25 @@
 import RadioGroup from './RadioGroup.vue';
 
 const group1 = [
-  { actionValueID: 1, label: "鼠标上移" },
-  { actionValueID: 2, label: "鼠标下移" },
-  { actionValueID: 3, label: "鼠标左移" },
-  { actionValueID: 4, label: "鼠标右移" },
+  { actionValueID: 1, label: "label:25" },
+  { actionValueID: 2, label: "label:26" },
+  { actionValueID: 3, label: "label:27" },
+  { actionValueID: 4, label: "label:28" },
 ]
 const group2 = [
-  { actionValueID: 5, label: "滚轮上滑" },
-  { actionValueID: 6, label: "滚轮下滑" },
-  { actionValueID: 7, label: "滚轮左滑" },
-  { actionValueID: 8, label: "滚轮右滑" },
+  { actionValueID: 5, label: "label:29" },
+  { actionValueID: 6, label: "label:30" },
+  { actionValueID: 7, label: "label:31" },
+  { actionValueID: 8, label: "label:32" },
 ]
 const group3 = [
-  { actionValueID: 9, label: "鼠标左键" },
-  { actionValueID: 10, label: "鼠标右键" },
-  { actionValueID: 11, label: "鼠标中键" },
-  { actionValueID: 12, label: "鼠标左键按下 (之后按空格松开)" },
+  { actionValueID: 9, label:  "label:33" },
+  { actionValueID: 10, label: "label:34" },
+  { actionValueID: 11, label: "label:35" },
+  { actionValueID: 12, label: "label:36" },
 ]
 const group4 = [
-  { actionValueID: 13, label: "移动鼠标到活动窗口" },
+  { actionValueID: 13, label: "label:37" },
 ]
 
 

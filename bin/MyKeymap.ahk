@@ -16,6 +16,7 @@
 DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr") ; 多显示器不同缩放比例会导致问题: https://www.autohotkey.com/boards/viewtopic.php?f=14&t=13810
 SetMouseDelay 0                                           ; SendInput 可能会降级为 SendEvent, 此时会有 10ms 的默认 delay
 SetWinDelay 0                                             ; 默认会在 activate, maximize, move 等窗口操作后睡眠 100ms
+A_MaxHotkeysPerInterval := 256                            ; 默认 70 可能有点低, 即使没有热键死循环也触发警告
 ProcessSetPriority "High"
 SetWorkingDir("../")
 InitTrayMenu()
@@ -50,8 +51,8 @@ InitKeymap()
   GroupAdd("MY_WINDOW_GROUP_1", "ahk_exe msedge.exe")
   GroupAdd("MY_WINDOW_GROUP_1", "ahk_exe firefox.exe")
 
-  ; Capslock
-  km5 := KeymapManager.NewKeymap("*capslock", "Capslock", "")
+  ; CapsLock
+  km5 := KeymapManager.NewKeymap("*CapsLock", "CapsLock", "")
   km := km5
   km.Map("*c", _ => SoundControl())
   km.Map("*z", _ => CopySelectedAsPlainText())
@@ -85,8 +86,8 @@ InitKeymap()
   km.Map("*d", _ => CenterAndResizeWindow(1600, 1000))
   km.Map("singlePress", _ => EnterCapslockAbbr(capsHook))
 
-  ; Capslock + F
-  km6 := KeymapManager.AddSubKeymap(km5, "*f", "Capslock + F")
+  ; CapsLock + F
+  km6 := KeymapManager.AddSubKeymap(km5, "*f", "CapsLock + F")
   km := km6
   km.Map("*a", _ => ActivateOrRun("ahk_exe WindowsTerminal.exe", "shortcuts\终端预览.lnk"))
   km.Map("*d", _ => ActivateOrRun("ahk_exe msedge.exe", "shortcuts\Microsoft Edge.lnk"))
@@ -106,8 +107,8 @@ InitKeymap()
   km.Map("singlePress", _ => (Send("{blind}{f}")))
   km.Map("*m", _ => ProcessExistSendKeyOrRun("TIM.exe", "^!z", "shortcuts\TIM.lnk"))
 
-  ; Capslock + Space
-  km7 := KeymapManager.AddSubKeymap(km5, "*space", "Capslock + Space")
+  ; CapsLock + Space
+  km7 := KeymapManager.AddSubKeymap(km5, "*Space", "CapsLock + Space")
   km := km7
   km.Map("*d", _ => ActivateOrRun("ahk_exe datagrip64.exe", "shortcuts\DataGrip.lnk"))
   km.Map("singlePress", _ => (Send("{blind}{space}")))
@@ -142,13 +143,13 @@ InitKeymap()
   ; 3 模式
   km10 := KeymapManager.NewKeymap("*3", "3 模式", "")
   km := km10
-  km.RemapKey("0", "f10")
-  km.RemapKey("2", "f2")
-  km.RemapKey("4", "f4")
-  km.RemapKey("5", "f5")
-  km.RemapKey("9", "f9")
+  km.RemapKey("0", "F10")
+  km.RemapKey("2", "F2")
+  km.RemapKey("4", "F4")
+  km.RemapKey("5", "F5")
+  km.RemapKey("9", "F9")
   km.RemapKey("b", "7")
-  km.RemapKey("e", "f11")
+  km.RemapKey("e", "F11")
   km.RemapKey("h", "0")
   km.RemapKey("i", "5")
   km.RemapKey("j", "1")
@@ -157,16 +158,16 @@ InitKeymap()
   km.RemapKey("m", "9")
   km.RemapKey("n", "8")
   km.RemapKey("o", "6")
-  km.RemapKey("r", "f12")
-  km.RemapKey("t", "volume_up")
+  km.RemapKey("r", "F12")
+  km.RemapKey("t", "Volume_Up")
   km.RemapKey("u", "4")
-  km.RemapKey("w", "volume_down")
-  km.RemapKey("space", "f1")
+  km.RemapKey("w", "Volume_Down")
+  km.RemapKey("space", "F1")
   km.Map("singlePress", _ => (Send("{blind}{3}")))
   km.Map("*/", km.ToggleLock)
 
   ; 分号模式
-  km13 := KeymapManager.NewKeymap(";", "分号模式", "")
+  km13 := KeymapManager.NewKeymap("*;", "分号模式", "")
   km := km13
   km.Map("*a", _ => (Send("{blind}*")))
   km.Map("*b", _ => (Send("{blind}%")))
@@ -216,7 +217,7 @@ InitKeymap()
   km.Map("*space", _ => (Send("{blind}{enter}")))
 
   ; 鼠标右键
-  km16 := KeymapManager.NewKeymap("rbutton", "鼠标右键", "")
+  km16 := KeymapManager.NewKeymap("RButton", "鼠标右键", "")
   km := km16
   km.Map("*XButton1", _ => GoToNextVirtualDesktop())
   km.Map("*XButton2", _ => GoToPreviousVirtualDesktop())
@@ -230,22 +231,13 @@ InitKeymap()
   km.Map("*WheelUp", _ => (Send("^+{tab}")))
   km.Map("*WheelDown", _ => (Send("^{tab}")))
 
-  ; 鼠标侧键1
-  km17 := KeymapManager.NewKeymap("xbutton1", "鼠标侧键1", "")
-  km := km17
-  km.RemapKey("LButton", "media_play_pause")
-  km.RemapKey("RButton", "media_next")
-  km.RemapKey("WheelUp", "volume_up")
-  km.RemapKey("WheelDown", "volume_down")
-  km.Map("singlePress", _ => (Send("{blind}{xbutton1}")))
-
-  ; 自定义热键
-  km1 := KeymapManager.NewKeymap("customHotkeys", "自定义热键", "")
+  ; Custom Hotkeys
+  km1 := KeymapManager.NewKeymap("customHotkeys", "Custom Hotkeys", "")
   km := km1
-  km.RemapInHotIf("RAlt", "LCtrl")
+  km.RemapInHotIf("RAlt", "LControl")
   km.Map("!'", _ => MyKeymapReload(), , , , "S")
   km.Map("!+'", _ => MyKeymapToggleSuspend(), , , , "S")
-  km.Map("!capslock", _ => ToggleCapslock())
+  km.Map("!CapsLock", _ => ToggleCapslock())
 
 
   KeymapManager.GlobalKeymap.Enable()
@@ -362,6 +354,6 @@ InitTrayMenu() {
 
 
 #HotIf
-RAlt::LCtrl
+RAlt::LControl
 
 #HotIf

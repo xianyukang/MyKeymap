@@ -1,6 +1,8 @@
 <script setup lang="ts" generic="T extends { [key: string]: any }">
+import { useConfigStore } from "@/store/config";
 import { ref } from "vue";
 
+const { translate } = useConfigStore()
 const props = defineProps<{
   title?: string
   dataObj: Array<T>
@@ -28,7 +30,7 @@ const save = () => {
 
 <template>
   <v-dialog v-model="dialog" @update:modelValue="resetDataList" max-width="1400px">
-    <template v-slot:activator=" { props } ">
+    <template v-slot:activator="{ props }">
       <slot :props="props"></slot>
     </template>
 
@@ -49,11 +51,9 @@ const save = () => {
       </v-card-text>
       <v-card-actions class="justify-end">
         <slot name="otherActions"></slot>
-        <v-btn color="green" variant="flat" density="default" @click="emit('add', dataList)">
-          添加一行
-        </v-btn>
-        <v-btn color="blue" variant="flat" density="default" @click="save">保存</v-btn>
-        <v-btn color="grey" variant="flat" density="default" @click="closeDialog">取消</v-btn>
+        <v-btn class="text-none" color="green" variant="flat" density="default" @click="emit('add', dataList)">{{ translate('label:609') }}</v-btn>
+        <v-btn class="text-none" color="blue" variant="flat" density="default" @click="save">{{ translate('label:610') }}</v-btn>
+        <v-btn class="text-none" color="grey" variant="flat" density="default" @click="closeDialog">{{ translate('label:611') }}</v-btn>
       </v-card-actions>
     </v-card>
 

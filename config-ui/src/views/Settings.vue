@@ -6,55 +6,61 @@ import { storeToRefs } from "pinia";
 import { ref } from "vue";
 import { useConfigStore } from "@/store/config";
 import { Keymap } from "@/types/config";
-import PathDialog from "@/components/dialog/PathDialog.vue";
+// import PathDialog from "@/components/dialog/PathDialog.vue";
 import WindowGroupDialog from "@/components/dialog/WindowGroupDialog.vue";
 import findLastIndex from "lodash-es/findLastIndex";
 import { server } from "@/store/server";
+import { computed } from "@vue/reactivity";
+import { languageList } from "@/store/language-map";
 
 const { customKeymaps, customParentKeymaps, customSonKeymaps, options, keymaps } = storeToRefs(useConfigStore())
+const { translate } = useConfigStore()
 
 
 const currId = ref(0)
 
 const showMouseOption = ref(false)
+const showLanguageOption = ref(false)
 const showKeyboardLayout = ref(false)
 const showKeymapDelay = ref(true)
 const showSkin = ref(false)
 const resetOtherToFalse = (newValue: boolean) => {
-  [showMouseOption, showKeyboardLayout, showKeymapDelay, showSkin].forEach(x => x.value = false)
+  [showMouseOption, showLanguageOption, showKeyboardLayout, showKeymapDelay, showSkin].forEach(x => x.value = false)
   return newValue
 }
 
-const skin = [
-  [
-    { key: "windowWidth", label: "窗口宽度", },
-    { key: "windowYPos", label: "窗口 Y 轴位置 (百分比)", },
-    { key: "borderRadius", label: "窗口圆角大小", },
-    { key: "hideAnimationDuration", label: "窗口动画持续时间", },
-  ],
-  [
-    { key: "backgroundColor", label: "窗口背景色", },
-    { key: "backgroundOpacity", label: "透明度", },
-    { key: "gridlineColor", label: "网格线颜色", },
-    { key: "gridlineOpacity", label: "透明度", },
-  ],
-  [
-    { key: "borderWidth", label: "边框宽度", },
-    { key: "borderColor", label: "边框颜色", },
-    { key: "borderOpacity", label: "透明度", },
-  ],
-  [
-    { key: "keyColor", label: "按键颜色" },
-    { key: "keyOpacity", label: "透明度", },
-    { key: "cornerColor", label: "四角颜色", },
-    { key: "cornerOpacity", label: "透明度", },
-  ],
-  [
-    { key: "windowShadowSize", label: "窗口阴影大小", },
-    { key: "windowShadowColor", label: "窗口阴影颜色", },
-    { key: "windowShadowOpacity", label: "透明度", },
-  ],
+const skin = computed(() => {
+  return [
+    [
+      { key: "windowWidth", label: translate('label:743'), },
+      { key: "windowYPos", label: translate('label:744'), },
+      { key: "borderRadius", label: translate('label:745'), },
+      { key: "hideAnimationDuration", label: translate('label:746'), },
+    ],
+    [
+      { key: "backgroundColor", label: translate('label:747'), },
+      { key: "backgroundOpacity", label: translate('label:748'), },
+      { key: "gridlineColor", label: translate('label:749'), },
+      { key: "gridlineOpacity", label: translate('label:748'), },
+    ],
+    [
+      { key: "borderWidth", label: translate('label:750'), },
+      { key: "borderColor", label: translate('label:751'), },
+      { key: "borderOpacity", label: translate('label:748'), },
+    ],
+    [
+      { key: "keyColor", label: translate('label:752') },
+      { key: "keyOpacity", label: translate('label:748'), },
+      { key: "cornerColor", label: translate('label:753'), },
+      { key: "cornerOpacity", label: translate('label:748'), },
+    ],
+    [
+      { key: "windowShadowSize", label: translate('label:754'), },
+      { key: "windowShadowColor", label: translate('label:755'), },
+      { key: "windowShadowOpacity", label: translate('label:748'), },
+    ],
 ]
+})
 
 const checkKeymapData = (keymap: Keymap) => {
   if (keymap.hotkey == "") {
@@ -152,7 +158,7 @@ function onStartupChange() {
     <v-row>
       <v-col xl="6">
         <v-card width="640" elevation="3">
-          <Table class="text-left" :titles="['名称', '触发键', '上层', '开关']">
+          <Table class="text-left" :titles="[translate('label:501'), translate('label:502'), translate('label:503'), translate('label:504')]">
             <tr :class="currId == keymap.id ? '' : ''"
                 @click="currId = keymap.id"
                 v-for="keymap in customKeymaps" :key="keymap.id">
@@ -187,7 +193,7 @@ function onStartupChange() {
           </Table>
 
           <div class="d-flex justify-end">
-            <v-btn class="ma-3" color="green" @click="addKeymap()">新增一个</v-btn>
+            <v-btn class="ma-3 text-none" color="green" @click="addKeymap()">{{ translate('label:405') }}</v-btn>
           </div>
         </v-card>
       </v-col>
@@ -195,119 +201,129 @@ function onStartupChange() {
         <div class="otherSetting">
           <v-row :dense="true">
             <v-col>
-              <v-card title="其他设置" min-width="180">
+              <v-card :title="translate('label:505')" min-width="180">
                 <v-card-text>
-                  <v-switch label="开机自启" messages="可能需要关掉再开启才生效" color="primary"
+                  <v-switch :label="translate('label:506')" color="primary"
                             :model-value="options.startup"
                             @change="onStartupChange"></v-switch>
-                  <path-dialog/>
-                  <span class="mr-2"></span>
+                  <!-- <path-dialog/> -->
+                  <v-btn class="mt-3 mr-2 text-none" width="170" color="blue" variant="outlined" @click="showLanguageOption = resetOtherToFalse(!showLanguageOption)">{{ translate('label:781') }}</v-btn>
+                  <!-- <span class="mr-2"></span> -->
                   <window-group-dialog/>
                   <br/>
-                  <v-btn class="mt-3 mr-2" width="170" color="blue" variant="outlined" @click="showMouseOption = resetOtherToFalse(!showMouseOption)">🖱️ 修改鼠标参数</v-btn>
-                  <v-btn class="mt-3 mr-2" width="170" color="blue" variant="outlined" @click="showKeyboardLayout = resetOtherToFalse(!showKeyboardLayout)">⌨️ 修改键盘布局</v-btn>
-                  <v-btn class="mt-3 mr-2" width="170" color="blue" variant="outlined" @click="showSkin = resetOtherToFalse(!showSkin)">✨ 命令框皮肤</v-btn>
-                  <v-btn class="mt-3 mr-2" width="170" color="blue" variant="outlined" @click="showKeymapDelay = resetOtherToFalse(!showKeymapDelay)">🕗 设置触发延时</v-btn>
+                  <v-btn class="mt-3 mr-2 text-none" width="170" color="blue" variant="outlined" @click="showMouseOption = resetOtherToFalse(!showMouseOption)">{{ translate('label:701') }}</v-btn>
+                  <v-btn class="mt-3 mr-2 text-none" width="170" color="blue" variant="outlined" @click="showKeyboardLayout = resetOtherToFalse(!showKeyboardLayout)">{{ translate('label:721') }}</v-btn>
+                  <v-btn class="mt-3 mr-2 text-none" width="170" color="blue" variant="outlined" @click="showSkin = resetOtherToFalse(!showSkin)">{{ translate('label:741') }}</v-btn>
+                  <v-btn class="mt-3 mr-2 text-none" width="170" color="blue" variant="outlined" @click="showKeymapDelay = resetOtherToFalse(!showKeymapDelay)">{{ translate('label:761') }}</v-btn>
                 </v-card-text>
               </v-card>
             </v-col>
           </v-row>
             <v-row :dense="true" v-show="showMouseOption">
               <v-col>
-                <v-card title="鼠标移动相关参数" min-width="350">
+                <v-card :title="translate('label:702')" min-width="350">
                   <v-card-text>
                     <v-row class="mouseRow" no-gutters>
                       <v-col>
                         <v-text-field v-model="options.mouse.delay1" variant="underlined"
                                       type="number" step=".01" maxlength="5" color="primary"
-                                      label="进入连续移动前的延时(秒)"></v-text-field>
+                                      :label="translate('label:703')"></v-text-field>
                       </v-col>
                       <v-col>
                         <v-text-field v-model="options.mouse.delay2" variant="underlined"
                                       type="number" step=".01" maxlength="5" color="primary"
-                                      label="两次移动的间隔时间(秒)"></v-text-field>
+                                      :label="translate('label:704')"></v-text-field>
                       </v-col>
                     </v-row>
                     <v-row class="mouseRow" no-gutters>
                       <v-col>
                         <v-text-field v-model="options.mouse.fastRepeat" variant="underlined"
                                       type="number" step="1" maxlength="5" color="primary"
-                                      label="快速模式步长(像素)"></v-text-field>
+                                      :label="translate('label:705')"></v-text-field>
                       </v-col>
                       <v-col>
                         <v-text-field v-model="options.mouse.fastSingle" variant="underlined"
                                       type="number" step="1" maxlength="5" color="primary"
-                                      label="快速模式首步长(像素)"></v-text-field>
+                                      :label="translate('label:706')"></v-text-field>
                       </v-col>
                     </v-row>
                     <v-row class="mouseRow" no-gutters>
                       <v-col>
                         <v-text-field v-model="options.mouse.slowRepeat" variant="underlined"
                                       type="number" step="1" maxlength="5" color="primary"
-                                      label="慢速模式步长(像素)"></v-text-field>
+                                      :label="translate('label:707')"></v-text-field>
                       </v-col>
                       <v-col>
                         <v-text-field v-model="options.mouse.slowSingle" variant="underlined"
                                       type="number" step="1" maxlength="5" color="primary"
-                                      label="慢速模式首步长(像素)"></v-text-field>
+                                      :label="translate('label:708')"></v-text-field>
                       </v-col>
                     </v-row>
                     <v-row class="mouseRow" no-gutters>
                       <v-col>
-                        <v-text-field v-model="options.mouse.tipSymbol" variant="underlined" color="primary" label="鼠标模式的提示符"></v-text-field>
+                        <v-text-field v-model="options.mouse.tipSymbol" variant="underlined" color="primary" :label="translate('label:709')"></v-text-field>
                       </v-col>
                       <v-col>
                         <br>
-                        <v-label>备选符号: 🖱️🔘</v-label>
+                        <!-- <v-label>备选符号: 🖱️🔘</v-label> -->
                       </v-col>
                     </v-row>
                     <v-row>
                       <v-col>
-                        <v-checkbox label="提示进入了鼠标模式" color="secondary" hide-details density="compact" v-model="options.mouse.showTip" />
-                        <v-checkbox label="点击鼠标后不退出鼠标模式" color="secondary" hide-details density="compact" v-model="options.mouse.keepMouseMode" />
+                        <v-checkbox :label="translate('label:710')" color="secondary" hide-details density="compact" v-model="options.mouse.showTip" />
+                        <v-checkbox :label="translate('label:711')" color="secondary" hide-details density="compact" v-model="options.mouse.keepMouseMode" />
                       </v-col>
                     </v-row>
                   </v-card-text>
                 </v-card>
               </v-col>
               <v-col>
-                <v-card title="滚轮相关参数" min-width="180">
+                <v-card :title="translate('label:712')" min-width="180">
                   <v-card-text>
                     <v-text-field v-model="options.scroll.delay1" variant="underlined"
                                   type="number" step=".01" maxlength="5" color="primary"
-                                  label="进入连续滚动前的延时 (秒)"></v-text-field>
+                                  :label="translate('label:713')"></v-text-field>
                     <v-text-field v-model="options.scroll.delay2" variant="underlined"
                                   type="number" step=".01" maxlength="5" color="primary"
-                                  label="两次滚动的间隔时间 (越小滚动速度越快)"></v-text-field>
+                                  :label="translate('label:714')"></v-text-field>
                     <v-text-field v-model="options.scroll.onceLineCount" variant="underlined"
                                   type="number" step="1" maxlength="5" color="primary"
-                                  label="一次滚动的行数"></v-text-field>
+                                  :label="translate('label:715')"></v-text-field>
                   </v-card-text>
                 </v-card>
               </v-col>
             </v-row>
             <v-row v-show="showKeyboardLayout">
               <v-col>
-                <v-card title="键盘布局" elevation="2">
+                <v-card :title="translate('label:722')" elevation="2">
                   <v-card-text>
                     <v-textarea color="primary" variant="underlined" auto-grow rows="4" v-model="options.keyboardLayout"></v-textarea>
                   </v-card-text>
                   <v-card-actions class="d-flex justify-end">
-                    <v-btn variant="outlined" color="green" @click="useConfigStore().resetKeyboardLayout(0)">重置为默认值</v-btn>
-                    <v-btn variant="outlined" color="green" @click="useConfigStore().resetKeyboardLayout(74)">重置为 74 键</v-btn>
-                    <v-btn variant="outlined" color="green" @click="useConfigStore().resetKeyboardLayout(104)">重置为 104 键</v-btn>
-                    <v-btn variant="outlined" color="blue" @click="useConfigStore().resetKeyboardLayout(1)">添加鼠标按钮</v-btn>
+                    <v-btn class="text-none" variant="outlined" color="green" @click="useConfigStore().resetKeyboardLayout(0)">{{ translate('label:723') }}</v-btn>
+                    <v-btn class="text-none" variant="outlined" color="green" @click="useConfigStore().resetKeyboardLayout(74)">{{ translate('label:724') }}</v-btn>
+                    <v-btn class="text-none" variant="outlined" color="green" @click="useConfigStore().resetKeyboardLayout(104)">{{ translate('label:725') }}</v-btn>
+                    <v-btn class="text-none" variant="outlined" color="blue" @click="useConfigStore().resetKeyboardLayout(1)">{{ translate('label:726') }}</v-btn>
                   </v-card-actions>
+                </v-card>
+              </v-col>
+            </v-row>
+            <v-row v-show="showLanguageOption">
+              <v-col>
+                <v-card elevation="2">
+                  <v-card-text>
+                    <v-select :items="languageList" v-model="options.language" variant="outlined"></v-select>
+                  </v-card-text>
                 </v-card>
               </v-col>
             </v-row>
             <v-row v-show="showKeymapDelay">
               <v-col>
-                <v-card title="触发延时 (单位: 毫秒)" elevation="2">
+                <v-card :title="translate('label:762')" elevation="2">
                   <v-card-text>
-                    一般推荐设为 0，让模式立刻生效。<br>
-                    如果设置大于零的值，即通过长按触发模式，也许能减少打字误触。<br>
-                    但会有另一种形式的误触，比如想输入热键，但长按时间不够，所以触发热键失败。<br>
+                    {{ translate('label:763') }}<br>
+                    {{ translate('label:764') }}<br>
+                    {{ translate('label:765') }}<br>
                     &nbsp;
                     <v-row>
                       <v-col cols="3" v-for="keymap in customKeymaps" :key="keymap.id">
@@ -322,7 +338,7 @@ function onStartupChange() {
             </v-row>
             <v-row v-show="showSkin">
               <v-col>
-                <v-card title="命令框皮肤" elevation="2">
+                <v-card :title="translate('label:742')" elevation="2">
                   <v-card-text>
                     <v-row v-for="(row, index) in skin" :key="index">
                       <v-col cols="3" v-for="item in row" :key="item.key">

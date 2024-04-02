@@ -4,6 +4,7 @@ import { useRoute } from "vue-router"
 import { Action, Config, Keymap } from "@/types/config";
 import { useMyFetch } from "./server";
 import trimStart from "lodash-es/trimStart";
+import { languageMap } from "./language-map";
 
 
 const defaultKeyboardLayout = "1 2 3 4 5 6 7 8 9 0\nq w e r t y u i o p\na s d f g h j k l ;\nz x c v b n m , . /\nspace enter backspace - [ ' singlePress"
@@ -94,7 +95,7 @@ export const useConfigStore = defineStore('config', () => {
   const customSonKeymaps = computed(() => customKeymaps.value.filter(x => x.parentID != 0))
   const customParentKeymaps = computed(() => {
     const arr = customKeymaps.value.filter(x => x.parentID == 0)
-    arr.unshift({ id: 0, name: "无", hotkey: "", parentID: 0, enable: true, hotkeys: {}, delay: 0 })
+    arr.unshift({ id: 0, name: "-", hotkey: "", parentID: 0, enable: true, hotkeys: {}, delay: 0 })
     return arr;
   })
 
@@ -143,10 +144,21 @@ export const useConfigStore = defineStore('config', () => {
     }
   }
 
+  function translate(comment: string) {
+    const m = languageMap as any
+    if (comment && comment.startsWith('label:')) {
+      const id = comment.substring(6)
+      if (m[id]) {
+        return m[id][config.value!.options.language] ?? m[id]['en']
+      }
+    }
+    return comment
+  }
+
   return {
     config, keymap, hotkey, windowGroupID, action, enabledKeymaps, customKeymaps, options, hotkeys,
     customParentKeymaps, customSonKeymaps, keymaps, changeActionComment, changeAbbrEnable, resetKeyboardLayout,
-    changeHotkey, removeHotkey, addHotKey,
+    changeHotkey, removeHotkey, addHotKey, translate,
     disabledKeys: computed(() => _disabledKeys(enabledKeymaps.value)),
     getAction: (hotkey: string) => _getAction(keymap.value, hotkey, windowGroupID.value),
     saveConfig: () => _saveConfig(config.value),
@@ -242,6 +254,14 @@ function fetchConfig() {
     // 这个字段是后加的, 旧的 config.json 肯定没有此字段, 所以要初始化
     if (!val.options.keyboardLayout) {
       val.options.keyboardLayout = defaultKeyboardLayout
+    }
+    // 初始化语言
+    if (!val.options.language) {
+      if (navigator.language.includes('zh-')) {
+        val.options.language = 'zh'
+      } else {
+        val.options.language = 'en'
+      }
     }
     config.value = val
   })

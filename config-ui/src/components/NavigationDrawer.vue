@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia';
 import { Keymap } from "@/types/config";
 
 const { enabledKeymaps, customParentKeymaps, options } = storeToRefs(useConfigStore())
-const { saveConfig } = useConfigStore()
+const { saveConfig, translate } = useConfigStore()
 
 
 // 初始颜色列表
@@ -90,7 +90,7 @@ const getIcon = (keymap: Keymap) => {
       </template>
 
       <v-list-item-title class="text-h5 font-500 h-1.2em">MyKeymap</v-list-item-title>
-      <v-list-item-subtitle>version: {{ options.mykeymapVersion }}</v-list-item-subtitle>
+      <v-list-item-subtitle>{{ options.mykeymapVersion }}</v-list-item-subtitle>
     </v-list-item>
 
     <v-divider class="border-opacity-25"></v-divider>
@@ -111,7 +111,7 @@ const getIcon = (keymap: Keymap) => {
 
     <v-divider class="border-opacity-25"></v-divider>
     <v-btn class="ma-3" width="90%" color="blue" prepend-icon="mdi-content-save-outline" variant="outlined" @click="saveConfig">
-      保存配置（CTRL+S）
+      {{ translate('label:507') }}
     </v-btn>
   </v-navigation-drawer>
 </template>

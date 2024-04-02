@@ -13,6 +13,7 @@ type Options struct {
 	CommandInputSkin CommandInputSkin `json:"commandInputSkin"`
 	PathVariables    []PathVariable   `json:"pathVariables"`
 	Startup          bool             `json:"startup"`
+	Language         string           `json:"language"`
 	KeyMapping       string           `json:"keyMapping"`
 	KeyboardLayout   string           `json:"keyboardLayout"`
 }

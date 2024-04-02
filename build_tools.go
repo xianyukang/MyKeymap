@@ -53,7 +53,7 @@ func updateShareLink(args []string) {
 
 	var format string
 	replacer := func(line string) string {
-		if strings.Index(line, "提取码") != -1 {
+		if strings.Index(line, "- [MyKeymap ") != -1 {
 			return fmt.Sprintf(format, args[0], sl.Url, sl.Password)
 		}
 		return line
@@ -61,6 +61,10 @@ func updateShareLink(args []string) {
 
 	format = "- [MyKeymap %s](%s) ( 提取码 %s )"
 	if err = ReplaceInFile("./readme.md", replacer); err != nil {
+		panic(err)
+	}
+	format = "- [MyKeymap %s](%s) ( code %s )"
+	if err = ReplaceInFile("./readme.en.md", replacer); err != nil {
 		panic(err)
 	}
 

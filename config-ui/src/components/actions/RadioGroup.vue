@@ -4,6 +4,7 @@ import { Keymap } from '@/types/config';
 import { storeToRefs } from 'pinia';
 import { watchEffect } from 'vue';
 const { action, keymap } = storeToRefs(useConfigStore())
+const { translate } = useConfigStore()
 
 interface Item {
   actionValueID: number
@@ -44,7 +45,7 @@ if (props.horizontal) {
         <v-radio v-for="item in filter(items, keymap)"
                  :key="item.actionValueID"
                  :class="{ active: item.actionValueID == action.actionValueID }"
-                 :label="item.label"
+                 :label="translate(item.label)"
                  :value="item.actionValueID"
                  @click="useConfigStore().changeActionComment(item.label)"></v-radio>
       </v-radio-group>

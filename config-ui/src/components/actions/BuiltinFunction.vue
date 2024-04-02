@@ -4,8 +4,7 @@ import { storeToRefs } from 'pinia';
 import { watchEffect } from 'vue';
 
 const { action } = storeToRefs(useConfigStore())
-const label1 = "代码"
-const label2 = "自定义备注"
+const { translate } = useConfigStore()
 
 watchEffect(() => {
   action.value.isEmpty = !action.value.ahkCode
@@ -18,8 +17,8 @@ const items = [
 </script>
 
 <template>
-  <v-combobox class="input" color="primary" :label="label1" :items="items" hide-no-data v-model="action.ahkCode" variant="underlined" />
-  <v-text-field color="primary" variant="underlined" autocomplete="off" :label="label2" v-model="action.comment"></v-text-field>
+  <v-combobox class="input" color="primary" :label="translate('label:403')" :items="items" hide-no-data v-model="action.ahkCode" variant="underlined" />
+  <v-text-field color="primary" variant="underlined" autocomplete="off" :label="translate('label:305')" v-model="action.comment"></v-text-field>
   <br>
   <br>
   <p>Tips:</p>

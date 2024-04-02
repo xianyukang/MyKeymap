@@ -6,11 +6,12 @@ import trimEnd from "lodash-es/trimEnd";
 import { useConfigStore } from "@/store/config";
 
 const store = useConfigStore();
+const { translate } = useConfigStore();
 const getActionAllComment = (actions: IAction[]) => {
   let comment = actions.reduce((pre, current) => {
     if (current.comment) {
       let groupName = current.windowGroupID == 0 ? "" : store.options.windowGroups.find(w => w.id == current.windowGroupID)?.name + ": "
-      return pre + groupName + current.comment + "\r\n"
+      return pre + groupName + translate(current.comment) + "\r\n"
     }
     return pre
   }, "")
@@ -30,7 +31,7 @@ const showActionComment = (actions: IAction[]) => {
 
 <template>
   <v-card style="zoom: 0.9;">
-    <Table class="text-left" :titles="['热键', '备注']">
+    <Table class="text-left" :titles="[translate('label:404'), translate('label:305')]">
       <tr v-for="(action, hotkey, index) in store.hotkeys" :key="index">
         <td v-if="showActionComment(action)">
           <slot name="keyText" :hotkey="hotkey"></slot>

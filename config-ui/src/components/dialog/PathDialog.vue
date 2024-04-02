@@ -8,6 +8,7 @@ import { storeToRefs } from "pinia";
 import { PathVariable } from "@/types/config";
 
 const { options } = storeToRefs(useConfigStore())
+const { translate } = useConfigStore()
 
 const addItem = (dataObj: PathVariable[]) => {
   dataObj.push({ name: "", value: "" })
