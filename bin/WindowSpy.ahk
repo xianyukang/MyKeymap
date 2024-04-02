@@ -44,7 +44,7 @@ WinSpyGui() {
     oGui.Add("Checkbox", "yp+20 xp+400 h15 w240 Left vCtrl_FollowMouse", "跟随鼠标 (可按 Ctrl 暂停刷新)")
 
     oGui.Show("NoActivate")
-    WinGetClientPos(&x_temp, &y_temp2, , , "ahk_id " oGui.hwnd)
+    ;WinGetClientPos(&x_temp, &y_temp2, , , "ahk_id " oGui.hwnd)
 
     ; oGui.horzMargin := x_temp*96//A_ScreenDPI - 320 ; now using oGui.MarginX
 

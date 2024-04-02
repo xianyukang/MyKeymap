@@ -587,7 +587,7 @@ class TaskSwitchKeymap extends Keymap {
 
   DeactivateTaskSwitch() {
     ; 先等 AltTab 窗口出现, 再等它消失, 然后解锁
-    notTimedOut := WinWaitActive("ahk_group TASK_SWITCH_GROUP", , 1)
+    notTimedOut := WinWaitActive("ahk_group TASK_SWITCH_GROUP", , 0.5)
     if (notTimedOut) {
       WinWaitNotActive("ahk_group TASK_SWITCH_GROUP")
     }

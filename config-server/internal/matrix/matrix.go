@@ -4,6 +4,7 @@ import (
 	"github.com/gdamore/tcell/v2"
 	"math/rand"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -25,6 +26,7 @@ func DigitalRain(hasError <-chan struct{}, rainDone chan<- struct{}) {
 	nodes := make([]node, 0, 100)
 	width, height := s.Size()
 	columns := initColumns(width, height)
+	startTime := time.Now()
 
 outer:
 	for {
@@ -60,12 +62,21 @@ outer:
 		banner := []string{
 			" ------------------------------------------------------------------ ",
 			"                                                                    ",
-			"               MyKeymap config server is running...                 ",
+			"               MyKeymap config server is running...            ",
 			"                                                                    ",
 			" ------------------------------------------------------------------ ",
 		}
 		style := defStyle.Foreground(tcell.ColorWhite)
 		for index, line := range banner {
+			// 按一定速度打印第三行文字
+			if index == 2 {
+				text := strings.TrimLeft(line, " ")
+				prefix := line[:len(line)-len(text)]
+				distance := time.Since(startTime).Milliseconds() / 50
+				text2 := text[:distance%int64(len(text))]
+				suffix := strings.Repeat(" ", len(line)-len(prefix)-len(text2))
+				line = prefix + text2 + suffix
+			}
 			drawText(s, 24, 5+index, 100, 100, style, line)
 		}
 
@@ -79,9 +90,9 @@ outer:
 			// Process event
 			switch ev := ev.(type) {
 			case *tcell.EventResize:
-				// s.Sync()
-				// width, height := s.Size()
-				// columns = initColumns(width, height)
+				s.Sync()
+				width, height = s.Size()
+				columns = initColumns(width, height)
 			case *tcell.EventKey:
 				if ev.Key() == tcell.KeyEscape || ev.Key() == tcell.KeyCtrlC {
 					quit()
@@ -159,7 +170,7 @@ func getChar() rune {
 
 func initColumns(width, height int) []*column {
 	columns := make([]*column, 0, 100)
-	for i := 0; i < width; i += 2 {
+	for i := 0; i < width; i += 5 {
 		col := column{
 			Timer: 1 + rand.Intn(height-1),
 			X:     i,
