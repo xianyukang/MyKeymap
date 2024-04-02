@@ -1,4 +1,4 @@
-version = 2.0-beta25
+version = 2.0-beta26
 ahkVersion = 2.0.12
 folder = MyKeymap-$(version)
 zip = $(folder).7z
@@ -40,12 +40,32 @@ build: buildServer buildClient copyFiles
 	rm -f -r $(folder)
 	@echo ------------------------- build ok -------------------------------
 
-# qshell fput static-x $(zip) $(zip) --overwrite
-upload:
+createRelease:
+	curl -L \
+		-X POST \
+		-H "Accept: application/vnd.github+json" \
+		-H "Authorization: Bearer $$(cat ~/gh_token)" \
+		-H "X-GitHub-Api-Version: 2022-11-28" \
+		https://api.github.com/repos/xianyukang/MyKeymap/releases \
+		-d '{"tag_name":"v$(version)","target_commitish":"main","name":"v$(version)","body":"Description of the release"}' 2>/dev/null | jq -r '.id' > release_id
+	curl -L \
+		-X POST \
+		-H "Accept: application/vnd.github+json" \
+		-H "Authorization: Bearer $$(cat ~/gh_token)" \
+		-H "X-GitHub-Api-Version: 2022-11-28" \
+		-H "Content-Type: application/octet-stream" \
+		"https://uploads.github.com/repos/xianyukang/MyKeymap/releases/$$(cat release_id)/assets?name=$(zip)" \
+		--data-binary "@$(zip)" | jq
+	rm release_id
+
+
+uploadLanZou:
 	go run build_tools.go checkForAHKUpdate $(ahkVersion)
 	python3 lanzou_client.py $(zip) 2> share_link.json
 	go run build_tools.go updateShareLink $(version)
 	rm -f share_link.json
+
+upload: uploadLanZou createRelease
 	@echo ------------------------- upload ok -------------------------------
 
 # 下面是开发时用到的命令:
