@@ -94,20 +94,22 @@ class CLayout extends Gui {
   IncBrightness(mon) {
     m := this.monitors.Get(this.currentIndex)
     val := m["brightness"].Value + mon
-    if (val <= 100) {
-      this.SetBrightness(val, this.currentIndex)
-      m["brightness"].Value := val
+    if val > 100 {
+      val := 100
     }
+    this.SetBrightness(val, this.currentIndex)
+    m["brightness"].Value := val
   }
 
   ; 减亮度
   DecBrightness(mon) {
     m := this.monitors.Get(this.currentIndex)
     val := m["brightness"].Value - mon
-    if (val >= 0) {
-      this.SetBrightness(val, this.currentIndex)
-      m["brightness"].Value := val
+    if val < 0 {
+      val := 0
     }
+    this.SetBrightness(val, this.currentIndex)
+    m["brightness"].Value := val
   }
 
   ; 显示GUI
