@@ -97,13 +97,20 @@ LoopRelatedWindows(winTitle?, hwnds?) {
 }
 
 /**
- * CapsLock缩写框
+ * CapsLock 命令框
  */
 EnterCapslockAbbr(capsHook) {
   static WM_USER := 0x0400
   static SHOW_COMMAND_INPUT := WM_USER + 0x0001
   static HIDE_COMMAND_INPUT := WM_USER + 0x0002
   static CANCEL_COMMAND_INPUT := WM_USER + 0x0003
+
+  ; 高级键盘设置 > 输入语言热键, 用户勾选了用 Shift 键关闭大写
+  if GetKeyState("Shift", "P") {
+    Tip("bug: Shift key is pressed down")
+    return
+  }
+
   ; 显示命令框窗口
   PostMessageToCpasAbbr(SHOW_COMMAND_INPUT)
 
