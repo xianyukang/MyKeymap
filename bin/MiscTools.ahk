@@ -37,7 +37,7 @@ if A_Args[1] = "GenerateShortcuts" {
   oFolder := ComObject("Shell.Application").NameSpace("shell:AppsFolder")
   if Type(oFolder) != 'String' {
     for item in oFolder.Items {
-      if item.Name ~= useless || FileExist("shortcuts\" item.Name ".lnk") {
+      if item.Name . ".lnk" ~= useless || FileExist("shortcuts\" item.Name ".lnk") {
         continue
       }
       try FileCreateShortcut("shell:appsfolder\" item.Path, "shortcuts\" item.Name ".lnk")
