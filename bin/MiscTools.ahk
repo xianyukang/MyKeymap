@@ -9,7 +9,11 @@ if !A_Args.Length {
 }
 
 if A_Args[1] = "GenerateShortcuts" {
+  ; 由于 windows 系统不允许存在同名文件和文件夹，故预先删除之
+  try FileDelete("shortcuts")
   try DirDelete("shortcuts", true)
+  ; 休息 0.05 s，防止 delete 操作未完成引起的 shortcuts 目录被占用问题
+  Sleep(50)
   try DirCreate("shortcuts")
 
   ; 把开始菜单中的快捷方式都拷贝到 shortcuts 目录
