@@ -16,7 +16,7 @@ if A_Args[1] = "GenerateShortcuts" {
   Sleep(50)
   try DirCreate("shortcuts")
 
-  ; 排除特定的快捷方式  
+  ; 排除特定的快捷方式
   useless := "i)(?:uninstall|卸载|help|iSCSI 发起程序|ODBC 数据源|Data Sources \(ODBC\)"
     . "|ODBC Data|Windows 内存诊断|恢复驱动器|组件服务|碎片整理和优化驱动器|Office 语言首选项"
     . "|手册|更新|帮助|Tools Command Prompt for|license|Website|设置向导|More Games from Microsoft"
@@ -36,12 +36,12 @@ if A_Args[1] = "GenerateShortcuts" {
   ; 然后再生成 UWP 相关的快捷方式
   oFolder := ComObject("Shell.Application").NameSpace("shell:AppsFolder")
   if Type(oFolder) != 'String' {
-      for item in oFolder.Items {
-          if FileExist("shortcuts\" item.Name ".lnk") {
-              continue
-          }
-          try FileCreateShortcut("shell:appsfolder\" item.Path, "shortcuts\" item.Name ".lnk")
+    for item in oFolder.Items {
+      if item.Name ~= useless || FileExist("shortcuts\" item.Name ".lnk") {
+        continue
       }
+      try FileCreateShortcut("shell:appsfolder\" item.Path, "shortcuts\" item.Name ".lnk")
+    }
   }
   return
 }
