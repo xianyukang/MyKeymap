@@ -17,11 +17,13 @@ if A_Args[1] = "GenerateShortcuts" {
   copyFiles(A_Programs "\*.lnk", "shortcuts\", A_Startup)
   ; 然后再生成 UWP 相关的快捷方式
   oFolder := ComObject("Shell.Application").NameSpace("shell:AppsFolder")
-  for item in oFolder.Items {
-    if FileExist("shortcuts\" item.Name ".lnk") {
-      continue
-    }
-    try FileCreateShortcut("shell:appsfolder\" item.Path, "shortcuts\" item.Name ".lnk")
+  if Type(oFolder) != 'String' {
+      for item in oFolder.Items {
+          if FileExist("shortcuts\" item.Name ".lnk") {
+              continue
+          }
+          try FileCreateShortcut("shell:appsfolder\" item.Path, "shortcuts\" item.Name ".lnk")
+      }
   }
   ; 删除无用快捷方式
   useless := "i)(uninstall|卸载|help|iSCSI 发起程序|ODBC 数据源|ODBC Data|Windows 内存诊断|恢复驱动器|组件服务|碎片整理和优化驱动器|Office 语言首选项|手册|更新|帮助|Tools Command Prompt for|license|Website)"
