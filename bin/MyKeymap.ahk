@@ -34,7 +34,7 @@ InitKeymap()
   fast := MouseKeymap("fast mouse", false, mouseTip, 110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", slow)
   slow.Map("*space", slow.LButtonUp())
 
-  capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "bb,cc,cmd,dd,dm,ex,gj,kp,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,ss,tm,vm,we,wf,wt")
+  capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "bb,ca,cc,cmd,dd,dm,ex,gj,kp,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,ss,tm,vm,we,wf,wt")
   capsHook.KeyOpt("{CapsLock}", "S")
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
@@ -252,6 +252,8 @@ ExecCapslockAbbr(command) {
   switch command {
     case "bb":
       ActivateOrRun("Bing 词典", "msedge.exe", "--app=https://www.bing.com/dict/search?q={selected}", "", false, false, false)
+    case "ca":
+      ActivateOrRun("计算器", "calc.exe")
     case "cc":
       ActivateOrRun("", "shortcuts\Visual Studio Code.lnk", "-n `"{selected}`"", "", false, false, false)
     case "cmd":

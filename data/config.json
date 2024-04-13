@@ -1756,6 +1756,15 @@
             "args": "--app=https://www.bing.com/dict/search?q={selected}"
           }
         ],
+        "ca": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "comment": "Calculator ( 计算器 )",
+            "winTitle": "计算器",
+            "target": "calc.exe"
+          }
+        ],
         "cc": [
           {
             "windowGroupID": 0,
@@ -2168,7 +2177,7 @@
       }
     ],
     "startup": false,
-    "language": "zh",
+    "language": "",
     "keyMapping": "",
     "keyboardLayout": "1 2 3 4 5 6 7 8 9 0\nq w e r t y u i o p\na s d f g h j k l ;\nz x c v b n m , . /\nspace enter backspace - [ ' singlePress"
   }
