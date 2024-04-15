@@ -232,9 +232,9 @@ ToggleWindowTopMost() {
   value := !(WinGetExStyle("A") & 0x8)
   WinSetAlwaysOnTop(value, "A")
   if value {
-    Tip("已置顶当前窗口")
+    Tip("Always-on-top: on")
   } else {
-    Tip("取消置顶")
+    Tip("Always-on-top: off")
   }
 }
 
@@ -557,4 +557,14 @@ CopySelectedAsPlainText() {
   }
   A_Clipboard := A_Clipboard
   Tip("复制成功")
+}
+
+MuteActiveApp() {
+  pid := GetActiveProcess("id")
+  code := RunWait("bin\SoundControl.exe ToggleMute " pid)
+  switch code {
+    case 1: Tip("Mute: on")
+    case 2: Tip("Mute: off")
+    default: Tip("Cannot mute this app")
+  }
 }

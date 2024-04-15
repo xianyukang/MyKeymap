@@ -249,6 +249,7 @@ func systemActions2(a Action, inAbbrContext bool) string {
 		6: `BrightnessControl()`,
 		7: `SystemRestartExplorer()`,
 		8: `CopySelectedAsPlainText()`,
+		9: `MuteActiveApp()`,
 	}
 	if call, ok := callMap[a.ValueID]; ok {
 		if inAbbrContext {

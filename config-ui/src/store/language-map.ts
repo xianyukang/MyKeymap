@@ -31,6 +31,7 @@ export const languageMap = {
   22: { zh: "显示器亮度调节", en: "Monitor brightness control", },
   23: { zh: "重启文件资源管理器", en: "Restart explorer.exe", },
   24: { zh: "复制文件路径或纯文本", en: "Copy full path of a file ", },
+  2401: { zh: "静音当前应用", en: "Mute active app", },
 
   // mouse
   25: { zh: "鼠标上移", en: "Mouse up" },

@@ -34,12 +34,12 @@ InitKeymap()
   fast := MouseKeymap("fast mouse", false, mouseTip, 110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", slow)
   slow.Map("*space", slow.LButtonUp())
 
-  capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "bb,ca,cc,cmd,dd,dm,ex,gj,kp,ld,lj,ly,mm,ms,no,rb,rex,se,sl,sp,ss,tm,vm,we,wf,wt")
+  capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "bb,ca,cc,cmd,dd,dm,ex,gj,kp,ld,lj,ly,mm,ms,mu,no,rb,rex,se,sl,sp,ss,tm,vm,we,wf,wt")
   capsHook.KeyOpt("{CapsLock}", "S")
   capsHook.OnChar := PostCharToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
 
-  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", ",,,.,/,dk,dq,fz,gg,gt,i love nia,jt,sj,sk,xk,zh,zk")
+  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", ",,,.,/,dk,dq,fz,gg,gt,i love nia,jt,sj,sk,xf,xk,zh,zk")
   semiHook.KeyOpt("{CapsLock}", "S")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char, , , true)
   semiHookAbbrWindow := InputTipWindow()
@@ -278,6 +278,8 @@ ExecCapslockAbbr(command) {
       ActivateOrRun("MyKeymap2 - Visual Studio Code", "shortcuts\Visual Studio Code.lnk", "D:\MyFiles\MyKeymap2", "", false, false, false)
     case "ms":
       ActivateOrRun("my_site - Visual Studio Code", "shortcuts\Visual Studio Code.lnk", "D:\project\my_site", "", false, false, false)
+    case "mu":
+      MuteActiveApp()
     case "no":
       ActivateOrRun("记事本", "notepad.exe")
     case "rb":
@@ -334,6 +336,8 @@ ExecSemicolonAbbr(command) {
       Send(Format("{}年{}月{}日 {}:{}", A_YYYY, A_MM, A_DD, A_Hour, A_Min))
     case "sk":
       Send("「  」"), Send("{left 2}")
+    case "xf":
+      Send("();{left 2}")
     case "xk":
       Send("(){left}")
     case "zh":

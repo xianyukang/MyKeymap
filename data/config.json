@@ -1868,6 +1868,14 @@
             "args": "D:\\project\\my_site"
           }
         ],
+        "mu": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 2,
+            "comment": "label:2401",
+            "actionValueID": 9
+          }
+        ],
         "no": [
           {
             "windowGroupID": 0,
@@ -2078,6 +2086,14 @@
             "keysToSend": "「  」\n{left 2}"
           }
         ],
+        "xf": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "输入小括号和分号",
+            "keysToSend": "();{left 2}"
+          }
+        ],
         "xk": [
           {
             "windowGroupID": 0,
@@ -2177,7 +2193,7 @@
       }
     ],
     "startup": false,
-    "language": "",
+    "language": "zh",
     "keyMapping": "",
     "keyboardLayout": "1 2 3 4 5 6 7 8 9 0\nq w e r t y u i o p\na s d f g h j k l ;\nz x c v b n m , . /\nspace enter backspace - [ ' singlePress"
   }

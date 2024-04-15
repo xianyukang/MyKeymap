@@ -79,6 +79,10 @@ MyKeymapReload() {
  * @returns {string} 
  */
 GetProcessName() {
+  return GetActiveProcess("name")
+}
+
+GetActiveProcess(type) {
   fn := (winTitle) => (WinGetProcessName(winTitle) == 'ApplicationFrameHost.exe')
 
   winTitle := "A"
@@ -88,7 +92,12 @@ GetProcessName() {
     until !bool && winTitle := hCtrl
   }
 
-  return WinGetProcessName(winTitle)
+  if type == "name" {
+    return WinGetProcessName(winTitle)
+  }
+  if type == "id" {
+    return WinGetPID(winTitle)
+  }
 }
 
 /**
