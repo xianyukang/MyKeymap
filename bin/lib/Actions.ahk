@@ -560,8 +560,7 @@ CopySelectedAsPlainText() {
 }
 
 MuteActiveApp() {
-  pid := GetActiveProcess("id")
-  code := RunWait("bin\SoundControl.exe ToggleMute " pid)
+  code := RunWait("bin\SoundControl.exe ToggleMute " GetActiveProcess("name"))
   switch code {
     case 1: Tip("Mute: on")
     case 2: Tip("Mute: off")
