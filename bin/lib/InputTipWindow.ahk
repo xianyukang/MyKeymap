@@ -6,14 +6,14 @@ Class InputTipWindow {
     ; 背景颜色
     BackColor := "ffffe0"
 
-    this.typoTip := Gui("+Owner +ToolWindow +Disabled -SysMenu -Caption +E0x1E +AlwaysOnTop +Border")
-    this.typotip.BackColor := BackColor
+    this.gui := Gui("+Owner +ToolWindow +Disabled -SysMenu -Caption +E0x1E +AlwaysOnTop +Border")
+    this.gui.BackColor := BackColor
 
-    this.typoTip.MarginX := marginX
-    this.typoTip.MarginY := marginY
-    this.typoTip.SetFont("c" FontColor " s" fontSize, "Microsoft YaHei UI")
+    this.gui.MarginX := marginX
+    this.gui.MarginY := marginY
+    this.gui.SetFont("c" FontColor " s" fontSize, "Microsoft YaHei UI")
 
-    this.textCon := this.typoTip.Add("text", "Center", text)
+    this.textCon := this.gui.Add("text", "Center", text)
   }
 
   Show(text := "", offsetX := 9, offsetY := 7, addition := false) {
@@ -29,10 +29,11 @@ Class InputTipWindow {
     GetPosRelativeScreen(&xpos, &ypos, "Mouse")
     xpos += offsetX
     ypos += offsetY
-    this.typoTip.Show("AutoSize Center NoActivate x" xpos " y" ypos)
+    this.gui.Show("AutoSize Center NoActivate x" xpos " y" ypos)
+    WinSetAlwaysOnTop(true, "ahk_id " this.gui.Hwnd)
   }
 
   Hide() {
-    this.typoTip.Hide()
+    this.gui.Hide()
   }
 }
