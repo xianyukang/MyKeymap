@@ -65,8 +65,10 @@ func abbrToCode(abbrMap map[string][]Action) string {
 				s.WriteString(fmt.Sprintf("      %s\n", call))
 				continue
 			}
-			s.WriteString(fmt.Sprintf("      if matchWinTitleCondition(%s, %d)\n", winTitle, conditionType))
+			s.WriteString(fmt.Sprintf("      if matchWinTitleCondition(%s, %d) {\n", winTitle, conditionType))
 			s.WriteString(fmt.Sprintf("        %s\n", call))
+			s.WriteString(fmt.Sprintf("        return\n"))
+			s.WriteString(fmt.Sprintf("      }\n"))
 		}
 	}
 	return s.String()
