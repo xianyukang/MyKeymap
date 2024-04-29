@@ -120,6 +120,9 @@ func sendKeys6(a Action, inAbbrContext bool) string {
 	var res []string
 	lines := strings.Split(a.KeysToSend, "\n")
 	for _, line := range lines {
+		if len(strings.TrimSpace(line)) == 0 {
+			continue
+		}
 		if strings.HasPrefix(line, "ahk:") {
 			res = append(res, strings.TrimSpace(line[4:]))
 			continue
