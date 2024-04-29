@@ -34,14 +34,18 @@ InitKeymap()
   fast := MouseKeymap("fast mouse", false, mouseTip, 110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", slow)
   slow.Map("*space", slow.LButtonUp())
 
-  capsHook := InputHook("", "{CapsLock}{BackSpace}{Esc}", "bb,ca,cc,cmd,dd,dm,ex,gj,kp,ld,lj,ly,mm,ms,mu,no,rb,rex,se,sl,sp,ss,tm,vm,we,wf,wt")
+  capsHook := InputHook("", "{CapsLock}{Esc}", "bb,ca,cc,cmd,dd,dm,ex,ga,gj,kp,ld,lj,ly,mm,ms,mu,no,rb,rex,se,sl,sp,ss,tm,vm,we,wf,wt")
   capsHook.KeyOpt("{CapsLock}", "S")
+  capsHook.KeyOpt("{Backspace}", "N")
   capsHook.OnChar := PostCharToCaspAbbr
+  capsHook.OnKeyDown := PostBackspaceToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
 
-  semiHook := InputHook("", "{CapsLock}{BackSpace}{Esc}{;}", ",,,.,/,dk,dq,fz,gg,gt,i love nia,jt,sj,sk,xf,xk,zh,zk")
+  semiHook := InputHook("", "{CapsLock}{Esc}{;}", ",,,.,/,dk,dq,fz,gg,gt,i love nia,jt,sj,sk,xf,xk,zh,zk")
   semiHook.KeyOpt("{CapsLock}", "S")
-  semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char, , , true)
+  semiHook.KeyOpt("{Backspace}", "N")
+  semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char, true)
+  semiHook.OnKeyDown := (ih, vk, sc) => semiHookAbbrWindow.Backspace()
   semiHookAbbrWindow := InputTipWindow()
 
 
@@ -264,6 +268,8 @@ ExecCapslockAbbr(command) {
       ActivateOrRun("", A_WorkingDir)
     case "ex":
       MyKeymapExit()
+    case "ga":
+      ActivateOrRun("Game ahk_exe explorer.exe", A_Desktop "\Game")
     case "gj":
       SystemShutdown()
     case "kp":

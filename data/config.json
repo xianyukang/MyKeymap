@@ -1808,6 +1808,15 @@
             "actionValueID": 3
           }
         ],
+        "ga": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "comment": "打开桌面的 Game 文件夹",
+            "winTitle": "Game ahk_exe explorer.exe",
+            "target": "ahk-expression: A_Desktop \"\\Game\""
+          }
+        ],
         "gj": [
           {
             "windowGroupID": 0,

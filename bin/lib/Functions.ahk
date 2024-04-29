@@ -436,8 +436,7 @@ PostMessageToCpasAbbr(msg, wParam := 0) {
  * 关闭顶部命令提示框
  */
 HideCaspAbbr() {
-  HIDE_COMMAND_INPUT := 0x0400 + 0x0002
-  PostMessageToCpasAbbr(HIDE_COMMAND_INPUT)
+  PostMessageToCpasAbbr(0x0400 + 0x0002)
 }
 
 /**
@@ -446,8 +445,11 @@ HideCaspAbbr() {
  * @param char 发送的字符
  */
 PostCharToCaspAbbr(ih?, char?) {
-  static SEND_CHAR := 0x0102
-  PostMessageToCpasAbbr(SEND_CHAR, Ord(SubStr(char, -1)))
+  PostMessageToCpasAbbr(0x0102, Ord(SubStr(char, -1)))
+}
+
+PostBackspaceToCaspAbbr(ih, vk, sc) {
+  PostMessageToCpasAbbr(0x0102, 0x8)
 }
 
 /**

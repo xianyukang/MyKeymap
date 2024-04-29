@@ -450,14 +450,14 @@ class MouseKeymap extends Keymap {
   _moveMouse(directionX, directionY, thisHotkey) {
     key := ExtractWaitKey(thisHotkey)
     MouseMove(directionX * this.single, directionY * this.single, 0, "R")
-    (this.mouseTip && this.mouseTip.Show("", 20, 16))
+    (this.mouseTip && this.mouseTip.Show())
     release := KeyWait(key, this.delay1)
     if release {
       return
     }
     while !release {
       MouseMove(directionX * this.repeat, directionY * this.repeat, 0, "R")
-      (this.mouseTip && this.mouseTip.Show("", 20, 16))
+      (this.mouseTip && this.mouseTip.Show())
       release := KeyWait(key, this.delay2)
     }
   }
