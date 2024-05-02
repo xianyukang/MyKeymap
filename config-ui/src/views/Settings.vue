@@ -72,6 +72,8 @@ const checkKeymapData = (keymap: Keymap) => {
     removeKeymap(keymap.id)
   }
   currId.value = f.id
+  // 把 bs, esc 这样的非标准键名替换成 Backspace, Escape
+  keymap.hotkey = normalizeKeyName(keymap.hotkey)
 }
 
 const disabledKeymapOption = (keymap: Keymap) => {
@@ -150,6 +152,24 @@ function onStartupChange() {
   } else {
     server.disableRunAtStartup()
   }
+}
+
+function normalizeKeyName(hotkey: string) : string {
+  const m = {
+    'esc': 'Escape',
+    'bs': 'Backspace',
+    'del': 'Delete',
+    'ins': 'Insert',
+    'lctrl': 'LControl',
+    'rctrl': 'RControl',
+  } as any
+
+  for (const [k,v] of Object.entries(m)) {
+    m[ '*' + k] = '*' + v
+  }
+
+  const v = m[hotkey.toLowerCase()]
+  return v ? v : hotkey
 }
 </script>
 
