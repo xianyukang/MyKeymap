@@ -126,6 +126,7 @@ export const languageMap = {
   403: { zh: "代码", en: "Code" },
   404: { zh: "热键", en: "Hotkey" },
   405: { zh: "新增一个", en: "Add" },
+  406: { zh: "输入ab按回车添加/切换到ab, del ab删除ab, rn cd重命名当前为cd", en: "Input 'ab' and Enter to add a new item. Delete => del ab. Rename => rn cd."},
 
   // Settings
   501: { zh: "名称", en: "Name" },

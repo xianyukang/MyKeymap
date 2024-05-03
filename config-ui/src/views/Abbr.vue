@@ -9,7 +9,7 @@ import trimEnd from "lodash-es/trimEnd";
 import ActionCommentTable from "@/components/ActionCommentTable.vue";
 
 const { hotkeys } = storeToRefs(useConfigStore())
-const { removeHotkey, changeHotkey} = useConfigStore()
+const { removeHotkey, changeHotkey, translate } = useConfigStore()
 
 const cmd = ref("")
 
@@ -53,7 +53,7 @@ const formatSpace = (hotkey: string) => {
 
           <v-text-field v-model="cmd" @keydown.enter="runCmd()"
                         class="ml-1 mt-5" variant="underlined" color="primary"
-                        label="输入ab按回车添加/切换到ab, del ab删除ab, rn cd重命名当前为cd">
+                        :label="translate('label:406')">
           </v-text-field>
         </v-card-text>
       </v-card>
