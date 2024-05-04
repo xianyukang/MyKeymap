@@ -364,7 +364,7 @@ InitTrayMenu() {
   A_TrayMenu.Default := "暂停"
   A_TrayMenu.ClickCount := 1
 
-  A_IconTip := "MyKeymap 2.0-beta27 created by 咸鱼阿康"
+  A_IconTip := "MyKeymap 2.0-beta28 created by 咸鱼阿康"
   TraySetIcon("./bin/icons/logo.ico", , true)
 }
 
