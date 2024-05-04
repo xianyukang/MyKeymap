@@ -1,5 +1,5 @@
 version = 2.0-beta27
-ahkVersion = 2.0.12
+ahkVersion = 2.0.13
 folder = MyKeymap-$(version)
 zip = $(folder).7z
 
