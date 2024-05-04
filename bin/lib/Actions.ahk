@@ -445,7 +445,7 @@ SystemRestartExplorer() {
 }
 
 SoundControl() {
-  ActivateOrRun(, "bin\SoundControl.exe")
+  Run("bin\SoundControl.exe")
 }
 
 BrightnessControl() {
