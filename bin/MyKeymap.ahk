@@ -172,8 +172,8 @@ InitKeymap()
   km.Map("singlePress", _ => (Send("{blind}{3}")))
   km.Map("*/", km.ToggleLock)
 
-  ; 分号模式
-  km13 := KeymapManager.NewKeymap("*;", "分号模式", "")
+  ; 分号模式( ; )
+  km13 := KeymapManager.NewKeymap("*;", "分号模式( `; )", "")
   km := km13
   km.Map("*a", _ => (Send("{blind}*")))
   km.Map("*b", _ => (Send("{blind}%")))
@@ -199,8 +199,8 @@ InitKeymap()
   km.Map("*z", _ => (Send("{blind}\")))
   km.Map("singlePress", _ => EnterSemicolonAbbr(semiHook, semiHookAbbrWindow))
 
-  ; 句号模式
-  km14 := KeymapManager.NewKeymap("*.", "句号模式", "")
+  ; 句号模式( . )
+  km14 := KeymapManager.NewKeymap("*.", "句号模式( . )", "")
   km := km14
   km.Map("singlePress", _ => (Send("{blind}{.}")))
   km.Map("*,", _ => HoldDownModifierKey("LShift"))
@@ -354,14 +354,14 @@ ExecSemicolonAbbr(command) {
 }
 
 InitTrayMenu() {
+  m := GetMenuName()
   A_TrayMenu.Delete()
-  A_TrayMenu.Add("暂停", TrayMenuHandler)
-  A_TrayMenu.Add("退出", TrayMenuHandler)
-  A_TrayMenu.Add("重启程序", TrayMenuHandler)
-  A_TrayMenu.Add("打开设置", TrayMenuHandler)
-  A_TrayMenu.Add("帮助文档", TrayMenuHandler)
-  A_TrayMenu.Add("查看窗口标识符", TrayMenuHandler)
-  A_TrayMenu.Default := "暂停"
+  A_TrayMenu.Add(m.Pause, TrayMenuHandler)
+  A_TrayMenu.Add(m.Exit, TrayMenuHandler)
+  A_TrayMenu.Add(m.Reload, TrayMenuHandler)
+  A_TrayMenu.Add(m.Settings, TrayMenuHandler)
+  A_TrayMenu.Add(m.Spy, TrayMenuHandler)
+  A_TrayMenu.Default := m.Pause
   A_TrayMenu.ClickCount := 1
 
   A_IconTip := "MyKeymap 2.0-beta28 created by 咸鱼阿康"

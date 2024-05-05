@@ -90,6 +90,10 @@ func ahkString(s string) string {
 	return `"` + s + `"`
 }
 
+func escapeSemicolon(s string) string {
+	return strings.ReplaceAll(s, ";", "`;")
+}
+
 func escapeAhkHotkey(key string) string {
 	if key == ";" {
 		return "`;"
@@ -159,7 +163,7 @@ func renderKeymap(km Keymap) string {
 		hotkey = "customHotkeys"
 	}
 	if km.ParentID == 0 {
-		line += fmt.Sprintf("NewKeymap(%s, %s, %s)\n", ahkString(hotkey), ahkString(km.Name), ahkString(divide(km.Delay, 1000)))
+		line += fmt.Sprintf("NewKeymap(%s, %s, %s)\n", ahkString(hotkey), escapeSemicolon(ahkString(km.Name)), ahkString(divide(km.Delay, 1000)))
 	} else {
 		line += fmt.Sprintf("AddSubKeymap(km%d, %s, %s)\n", km.ParentID, ahkString(hotkey), ahkString(km.Name))
 	}

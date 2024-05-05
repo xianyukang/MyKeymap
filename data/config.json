@@ -1194,7 +1194,7 @@
     },
     {
       "id": 13,
-      "name": "分号模式",
+      "name": "分号模式( ; )",
       "enable": true,
       "hotkey": "*;",
       "parentID": 0,
@@ -1388,7 +1388,7 @@
     },
     {
       "id": 14,
-      "name": "句号模式",
+      "name": "句号模式( . )",
       "enable": true,
       "hotkey": "*.",
       "parentID": 0,
@@ -1648,7 +1648,7 @@
     },
     {
       "id": 17,
-      "name": "鼠标侧键(后退)",
+      "name": "鼠标侧键( Back )",
       "enable": false,
       "hotkey": "XButton1",
       "parentID": 0,

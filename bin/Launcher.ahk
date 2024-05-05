@@ -22,7 +22,7 @@ if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)")) {
     ExitApp
   } catch Error as e {
     hasTip := true
-    ToolTip("`n    MyKeymap 当前以普通权限运行`n    在一些高权限窗口中会完全失效 ( 比如任务管理器 )    `n ")
+    ToolTip("`n    MyKeymap is running with normal privileges.`n    MyKeymap will not work in a window with admin rights  ( e.g., Taskmgr.exe )    `n ")
   }
 }
 

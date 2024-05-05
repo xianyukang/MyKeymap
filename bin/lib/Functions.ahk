@@ -5,18 +5,17 @@
  * @param MyMenu 
  */
 TrayMenuHandler(ItemName, ItemPos, MyMenu) {
+  m := GetMenuName()
   switch ItemName {
-    case "退出":
+    case m.Exit:
       MyKeymapExit()
-    case "暂停":
+    case m.Pause:
       MyKeymapToggleSuspend()
-    case "重启程序":
+    case m.Reload:
       MyKeymapReload()
-    case "打开设置":
+    case m.Settings:
       MyKeymapOpenSettings()
-    case "帮助文档":
-      Run("https://xianyukang.com/MyKeymap.html")
-    case "查看窗口标识符":
+    case m.Spy:
       run("MyKeymap.exe /script bin\WindowSpy.ahk")
   }
 }
@@ -35,16 +34,25 @@ MyKeymapExit(ExitReason?, ExitCode?) {
  * 暂停
  */
 MyKeymapToggleSuspend() {
-  Suspend(!A_IsSuspended)
-  if (A_IsSuspended) {
-    TraySetIcon("./bin/icons/logo2.ico")
-    A_TrayMenu.Check("暂停")
-    Tip("  暂停 MyKeymap  ", -500)
-  } else {
-    TraySetIcon("./bin/icons/logo.ico")
-    A_TrayMenu.UnCheck("暂停")
-    Tip("  恢复 MyKeymap  ", -500)
+  fn() {
+    m := GetMenuName()
+    Suspend(!A_IsSuspended)
+    if (A_IsSuspended) {
+      TraySetIcon("./bin/icons/logo2.ico")
+      A_TrayMenu.Check(m.Pause)
+      Tip("  MyKeymap: Off  ", -500)
+    } else {
+      TraySetIcon("./bin/icons/logo.ico")
+      A_TrayMenu.UnCheck(m.Pause)
+      Tip("  MyKeymap: On ", -500)
+    }
   }
+
+  if A_PriorKey == "RButton" {
+    SetTimer(fn, -200)
+    return
+  }
+  fn()
 }
 
 /**
@@ -358,7 +366,7 @@ GetSelectedText() {
 
   Send("^c")
   if not (ClipWait(0.4)) {
-    Tip("没有选中的文本或文件", -700)
+    Tip("no items selected", -700)
     return
   }
   text := A_Clipboard
@@ -578,4 +586,14 @@ PasteToPrograms(text) {
  */
 NotActiveWin() {
   return IsDesktop() || not WinExist("A")
+}
+
+GetMenuName() {
+  return {
+    Pause: "暂停        |  Pause ",
+    Exit: "退出        |  Exit ",
+    Reload: "重启程序  |  Reload ",
+    Settings: "打开设置  |  Settings ",
+    Spy: "窗口标识  |  Window Spy ",
+  }
 }

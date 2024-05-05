@@ -24,7 +24,7 @@ WinSpyGui() {
     oGui.OnEvent("Size", WinSpySize)
 
     oGui.BackColor := "FFFFFF"
-    oGui.SetFont("s11")
+    oGui.SetFont("s11", "Segoe UI")
     oGui.Add("Text", , "程序的窗口标识符有下面三种:")
     oGui.Add("Text", , "▷ 窗口名:      无标题 - 记事本")
     oGui.Add("Text", , "▷ 进程名:      ahk_exe notepad.exe")
@@ -34,7 +34,7 @@ WinSpyGui() {
     oGui.Add("Text", , "➤ 也可以组合两个标识符: 记事 ahk_exe notepad.exe (更精确")
     oGui.Add("Text", , "")
 
-    oGui.Add("Text", , "当前窗口的三种标识符:")
+    oGui.Add("Text", , "Window Title, Class and Process:")
     oGui.Add("Edit", "xm w640 r4 ReadOnly -Wrap vCtrl_Title")
     ; oGui.Add("Text",,"当前鼠标位置:")
     ; oGui.Add("Edit","w640 r4 ReadOnly vCtrl_MousePos")

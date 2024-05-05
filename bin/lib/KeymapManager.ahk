@@ -73,7 +73,7 @@
 
     ; 未锁定
     if !this.L.locked {
-      this.ShowToolTip("已锁定 " this.L.toLock.Name, this.L.show)
+      this.ShowToolTip("Lock " this.L.toLock.Name, this.L.show)
       this._lock()
       ; 锁定时注册个函数, 用于自动关闭锁定, TaskSwitch 模式会用到这个
       if this.L.locked.AfterLocked {
@@ -88,7 +88,7 @@
       if !this.L.toggle {
         return
       }
-      this.ShowToolTip("取消锁定", this.L.show)
+      this.ShowToolTip("Lock: Off", this.L.show)
       this.Unlock()
       return
     }
