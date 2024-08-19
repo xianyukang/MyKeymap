@@ -165,7 +165,7 @@ func renderKeymap(km Keymap) string {
 	if km.ParentID == 0 {
 		line += fmt.Sprintf("NewKeymap(%s, %s, %s)\n", ahkString(hotkey), escapeSemicolon(ahkString(km.Name)), ahkString(divide(km.Delay, 1000)))
 	} else {
-		line += fmt.Sprintf("AddSubKeymap(km%d, %s, %s)\n", km.ParentID, ahkString(hotkey), ahkString(km.Name))
+		line += fmt.Sprintf("AddSubKeymap(km%d, %s, %s, %s)\n", km.ParentID, ahkString(hotkey), ahkString(km.Name), ahkString(divide(km.Delay, 1000)))
 	}
 	buf.WriteString(line)
 

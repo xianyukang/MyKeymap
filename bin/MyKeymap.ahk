@@ -93,7 +93,7 @@ InitKeymap()
   km.Map("singlePress", _ => EnterCapslockAbbr(capsHook))
 
   ; CapsLock + F
-  km6 := KeymapManager.AddSubKeymap(km5, "*f", "CapsLock + F")
+  km6 := KeymapManager.AddSubKeymap(km5, "*f", "CapsLock + F", "")
   km := km6
   km.Map("*a", _ => ActivateOrRun("ahk_exe WindowsTerminal.exe", "shortcuts\终端预览.lnk"))
   km.Map("*d", _ => ActivateOrRun("ahk_exe msedge.exe", "shortcuts\Microsoft Edge.lnk"))
@@ -114,7 +114,7 @@ InitKeymap()
   km.Map("*m", _ => ProcessExistSendKeyOrRun("TIM.exe", "^!z", "shortcuts\TIM.lnk"))
 
   ; CapsLock + Space
-  km7 := KeymapManager.AddSubKeymap(km5, "*Space", "CapsLock + Space")
+  km7 := KeymapManager.AddSubKeymap(km5, "*Space", "CapsLock + Space", "")
   km := km7
   km.Map("*d", _ => ActivateOrRun("ahk_exe datagrip64.exe", "shortcuts\DataGrip.lnk"))
   km.Map("singlePress", _ => (Send("{blind}{space}")))
