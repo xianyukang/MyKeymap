@@ -43,6 +43,9 @@ ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin 
     return
 
   ; 程序没有运行，运行程序
+  if not target {
+    return
+  }
   workingDir := workingDir ? workingDir : A_WorkingDir
   RunPrograms(target, args, workingDir, admin, runInBackground)
 }
@@ -106,10 +109,10 @@ EnterCapslockAbbr(capsHook) {
   static CANCEL_COMMAND_INPUT := WM_USER + 0x0003
 
   ; 高级键盘设置 > 输入语言热键, 用户勾选了用 Shift 键关闭大写
-  if GetKeyState("Shift", "P") {
-    Tip("bug: Shift key is pressed down")
-    return
-  }
+  ; if GetKeyState("Shift", "P") {
+  ;   Tip("bug: Shift key is pressed down")
+  ;   return
+  ; }
 
   ; 显示命令框窗口
   PostMessageToCpasAbbr(SHOW_COMMAND_INPUT)

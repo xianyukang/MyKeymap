@@ -597,3 +597,12 @@ GetMenuName() {
     Spy: "窗口标识  |  Window Spy ",
   }
 }
+
+; 依次激活窗口(params*) {
+;   for index, param in params {
+;     if !WinActive(param) && WinExist(param) {
+;       WinActivate
+;       return
+;     }
+;   }
+; }

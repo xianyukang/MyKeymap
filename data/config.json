@@ -76,8 +76,8 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 8,
-            "comment": "窗口居中并设置大小为 1600x1000",
-            "ahkCode": "CenterAndResizeWindow(1600, 1000)"
+            "comment": "窗口居中并设置大小为 1740x1000",
+            "ahkCode": "CenterAndResizeWindow(1740, 1000)"
           }
         ],
         "*e": [
