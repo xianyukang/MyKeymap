@@ -448,7 +448,8 @@ SystemRestartExplorer() {
 }
 
 SoundControl() {
-  Run("bin\SoundControl.exe")
+  wnd := WinGetID("A")
+  ActivateOrRun(, "bin\SoundControl.exe", "PreviousWindow " wnd)
 }
 
 BrightnessControl() {
