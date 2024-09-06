@@ -290,7 +290,7 @@
             "actionTypeID": 1,
             "comment": "File Explorer",
             "winTitle": "ahk_class CabinetWClass ahk_exe Explorer.EXE",
-            "target": "D:\\"
+            "target": "shortcuts\\File Explorer.lnk"
           }
         ],
         "*h": [
@@ -2077,6 +2077,14 @@
             "actionTypeID": 6,
             "comment": "输入箭头符号",
             "keysToSend": "{text}➤ "
+          }
+        ],
+        "rq": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "输入当前日期",
+            "keysToSend": "ahk-expression: Format(\"{}-{}-{}\", A_YYYY, A_MM, A_DD)"
           }
         ],
         "sj": [

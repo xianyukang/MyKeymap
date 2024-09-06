@@ -41,7 +41,7 @@ InitKeymap()
   capsHook.OnKeyDown := PostBackspaceToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
 
-  semiHook := InputHook("", "{CapsLock}{Esc}{;}", ",,,.,/,dk,dq,fz,gg,gt,i love nia,jt,sj,sk,xf,xk,zh,zk")
+  semiHook := InputHook("", "{CapsLock}{Esc}{;}", ",,,.,/,dk,dq,fz,gg,gt,i love nia,jt,rq,sj,sk,xf,xk,zh,zk")
   semiHook.KeyOpt("{CapsLock}", "S")
   semiHook.KeyOpt("{Backspace}", "N")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char, true)
@@ -97,7 +97,7 @@ InitKeymap()
   km := km6
   km.Map("*a", _ => ActivateOrRun("ahk_exe WindowsTerminal.exe", "shortcuts\终端预览.lnk"))
   km.Map("*d", _ => ActivateOrRun("ahk_exe msedge.exe", "shortcuts\Microsoft Edge.lnk"))
-  km.Map("*e", _ => ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "D:\"))
+  km.Map("*e", _ => ActivateOrRun("ahk_class CabinetWClass ahk_exe Explorer.EXE", "shortcuts\File Explorer.lnk"))
   km.Map("*h", _ => ActivateOrRun("- Microsoft Visual Studio", "shortcuts\Visual Studio 2019.lnk"))
   km.Map("*i", _ => ActivateOrRun("ahk_exe Typora.exe", "shortcuts\Typora.lnk"))
   km.Map("*j", _ => ActivateOrRun("ahk_exe idea64.exe", "shortcuts\IntelliJ IDEA Ultimate.lnk"))
@@ -338,6 +338,8 @@ ExecSemicolonAbbr(command) {
       Send("{text}我爱尼娅! "), Send("{text}( 还 有 大 家 )")
     case "jt":
       Send("{text}➤ ")
+    case "rq":
+      Send(Format("{}-{}-{}", A_YYYY, A_MM, A_DD))
     case "sj":
       Send(Format("{}年{}月{}日 {}:{}", A_YYYY, A_MM, A_DD, A_Hour, A_Min))
     case "sk":
