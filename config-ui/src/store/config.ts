@@ -224,7 +224,13 @@ function _saveConfig(config: Config | undefined) {
       }
     }
   }
-  const { error } = useMyFetch("/config").put(config)
+  useMyFetch("/config", { timeout: 1500, })
+    .put(config)
+    .onFetchError(err => { 
+      console.error(err)
+      alert(`保存失败，可能设置程序被关了, ${err.name}:${err.code}`)
+    }
+  )
 }
 
 function _disabledKeys(keymaps: Keymap[]) {
