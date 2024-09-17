@@ -123,6 +123,7 @@ InitKeymap()
   ; J 模式
   km8 := KeymapManager.NewKeymap("*j", "J 模式", "")
   km := km8
+  km.Map("*i", _ => (Send("{blind}ji")))
   km.Map("singlePress", _ => (Send("{blind}{j}")))
   km.RemapKey(",", "delete")
   km.RemapKey(".", "insert")

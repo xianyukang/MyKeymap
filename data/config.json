@@ -550,6 +550,14 @@
             "actionValueID": 6
           }
         ],
+        "*i": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 6,
+            "comment": "防全拼打字误触",
+            "keysToSend": "{blind}ji"
+          }
+        ],
         "*k": [
           {
             "windowGroupID": 0,
