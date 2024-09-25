@@ -495,6 +495,10 @@ class MouseKeymap extends Keymap {
       if keepMouseMode {
         return
       }
+      ; 进行解锁的前提是没有按下其他模式, 否则会两次禁用同一热键
+      if KeymapManager.Stack.Length > 1 {
+        return
+      }
       KeymapManager.Unlock()
       (this.mouseTip && this.mouseTip.Hide())
       return
