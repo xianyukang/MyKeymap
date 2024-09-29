@@ -2,6 +2,7 @@
 #SingleInstance Force
 #UseHook true
 
+#include lib/translation.ahk
 #Include lib/Functions.ahk
 #Include lib/Actions.ahk
 #Include lib/KeymapManager.ahk
@@ -85,14 +86,13 @@ ExecSemicolonAbbr(command) {
 {{- end }}
 
 InitTrayMenu() {
-  m := GetMenuName()
   A_TrayMenu.Delete()
-  A_TrayMenu.Add(m.Pause, TrayMenuHandler)
-  A_TrayMenu.Add(m.Exit, TrayMenuHandler)
-  A_TrayMenu.Add(m.Reload, TrayMenuHandler)
-  A_TrayMenu.Add(m.Settings, TrayMenuHandler)
-  A_TrayMenu.Add(m.Spy, TrayMenuHandler)
-  A_TrayMenu.Default := m.Pause
+  A_TrayMenu.Add(Translation().menu_pause, TrayMenuHandler)
+  A_TrayMenu.Add(Translation().menu_exit, TrayMenuHandler)
+  A_TrayMenu.Add(Translation().menu_reload, TrayMenuHandler)
+  A_TrayMenu.Add(Translation().menu_settings, TrayMenuHandler)
+  A_TrayMenu.Add(Translation().menu_window_spy, TrayMenuHandler)
+  A_TrayMenu.Default := Translation().menu_pause
   A_TrayMenu.ClickCount := 1
 
   A_IconTip := "MyKeymap {{ .Options.MykeymapVersion }} created by 咸鱼阿康"

@@ -235,9 +235,9 @@ ToggleWindowTopMost() {
   value := !(WinGetExStyle("A") & 0x8)
   WinSetAlwaysOnTop(value, "A")
   if value {
-    Tip("Always-on-top: On")
+    Tip(Translation().always_on_top_on)
   } else {
-    Tip("Always-on-top: Off")
+    Tip(Translation().always_on_top_off)
   }
 }
 
@@ -560,18 +560,18 @@ CopySelectedAsPlainText() {
   A_Clipboard := ""
   Send "^c"
   if !ClipWait(1) {
-    Tip(" Copy: fail ")
+    Tip(Translation().copy_failed)
     return
   }
   A_Clipboard := A_Clipboard
-  Tip(" Copy: ok ")
+  Tip(Translation().copy_ok)
 }
 
 MuteActiveApp() {
   code := RunWait("bin\SoundControl.exe ToggleMute " GetActiveProcess("name"))
   switch code {
-    case 1: Tip("Mute: On")
-    case 2: Tip("Mute: Off")
-    default: Tip("Cannot mute this app")
+    case 1: Tip(Translation().mute_on)
+    case 2: Tip(Translation().mute_off)
+    default: Tip(Translation().mute_falied)
   }
 }

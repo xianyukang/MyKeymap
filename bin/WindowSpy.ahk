@@ -19,7 +19,7 @@ WinSpyGui() {
     try TraySetIcon "./icons/logo.ico"
     DllCall("shell32\SetCurrentProcessExplicitAppUserModelID", "wstr", "AutoHotkey.WindowSpy")
 
-    oGui := Gui("AlwaysOnTop Resize MinSize +DPIScale", "")
+    oGui := Gui("AlwaysOnTop Resize MinSize +DPIScale", "当前窗口的标识符")
     oGui.OnEvent("Close", WinSpyClose)
     oGui.OnEvent("Size", WinSpySize)
 

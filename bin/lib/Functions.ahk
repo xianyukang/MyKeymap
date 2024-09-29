@@ -5,17 +5,16 @@
  * @param MyMenu 
  */
 TrayMenuHandler(ItemName, ItemPos, MyMenu) {
-  m := GetMenuName()
   switch ItemName {
-    case m.Exit:
+    case Translation().menu_exit:
       MyKeymapExit()
-    case m.Pause:
+    case Translation().menu_pause:
       MyKeymapToggleSuspend()
-    case m.Reload:
+    case Translation().menu_reload:
       MyKeymapReload()
-    case m.Settings:
+    case Translation().menu_settings:
       MyKeymapOpenSettings()
-    case m.Spy:
+    case Translation().menu_window_spy:
       run("MyKeymap.exe /script bin\WindowSpy.ahk")
   }
 }
@@ -35,16 +34,15 @@ MyKeymapExit(ExitReason?, ExitCode?) {
  */
 MyKeymapToggleSuspend() {
   fn() {
-    m := GetMenuName()
     Suspend(!A_IsSuspended)
     if (A_IsSuspended) {
       TraySetIcon("./bin/icons/logo2.ico")
-      A_TrayMenu.Check(m.Pause)
-      Tip("  MyKeymap: Off  ", -500)
+      A_TrayMenu.Check(Translation().menu_pause)
+      Tip(Translation().mykeymap_off, -500)
     } else {
       TraySetIcon("./bin/icons/logo.ico")
-      A_TrayMenu.UnCheck(m.Pause)
-      Tip("  MyKeymap: On ", -500)
+      A_TrayMenu.UnCheck(Translation().menu_pause)
+      Tip(Translation().mykeymap_on, -500)
     }
   }
 
@@ -366,7 +364,7 @@ GetSelectedText() {
 
   Send("^c")
   if not (ClipWait(0.4)) {
-    Tip("no items selected", -700)
+    Tip(Translation().no_items_selected, -700)
     return
   }
   text := A_Clipboard
@@ -586,16 +584,6 @@ PasteToPrograms(text) {
  */
 NotActiveWin() {
   return IsDesktop() || not WinExist("A")
-}
-
-GetMenuName() {
-  return {
-    Pause: "暂停        |  Pause ",
-    Exit: "退出        |  Exit ",
-    Reload: "重启程序  |  Reload ",
-    Settings: "打开设置  |  Settings ",
-    Spy: "窗口标识  |  Window Spy ",
-  }
 }
 
 ; 依次激活窗口(params*) {
