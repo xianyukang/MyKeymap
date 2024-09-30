@@ -150,6 +150,7 @@ export const languageMap = {
   609: { zh: "添加一行", en: "Add" },
   610: { zh: "保存", en: "Save" },
   611: { zh: "取消", en: "Cancel" },
+  612: { zh: "注意: MyKeyamp 的所有热键在 Exclude 组中会被禁用", en: "Note: MyKeymap will be disabled in the \"Exclude\" group." },
 
   // Mouse Options
   701: { zh: "🖱️ 修改鼠标参数", en: "🖱️ Mouse Options" },

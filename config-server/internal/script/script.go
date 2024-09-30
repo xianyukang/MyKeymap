@@ -66,6 +66,7 @@ var TemplateFuncMap = template.FuncMap{
 	"sortHotkeys":     sortHotkeys,
 	"divide":          divide,
 	"renderKeymap":    renderKeymap,
+	"disabledAt":      disabledAt,
 }
 
 func divide(a, b int) string {
@@ -191,4 +192,13 @@ func renderKeymap(km Keymap) string {
 
 func containsOnlyModifier(hotkey string) bool {
 	return strings.Trim(hotkey, "#!^+<>*~$") == ""
+}
+
+func disabledAt(groups []WindowGroup) string {
+	for _, g := range groups {
+		if g.ID == -1 {
+			return groupToWinTile(g)
+		}
+	}
+	return ahkString("")
 }

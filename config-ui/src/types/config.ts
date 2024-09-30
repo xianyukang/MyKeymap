@@ -54,7 +54,7 @@ export interface WindowGroup {
   id: number
   name: string
   value: string
-  conditionType: number
+  conditionType?: number
 }
 
 export type PathVariable = {

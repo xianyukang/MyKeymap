@@ -2159,6 +2159,11 @@
     "mykeymapVersion": "2.0-beta30",
     "windowGroups": [
       {
+        "id": -1,
+        "name": "🚫 Exclude",
+        "value": "Stardew Valley ahk_class SDL_app\nahk_exe Rune Factory 3 Special.exe"
+      },
+      {
         "id": 0,
         "name": "🌎 Global"
       },

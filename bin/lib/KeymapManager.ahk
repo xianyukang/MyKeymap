@@ -8,18 +8,21 @@
       return this.GlobalKeymap
     }
 
-    ; 分配全局热键激活指定 keymap
-    return this.AddSubKeymap(this.GlobalKeymap, globalHotkey, name, delay)
+    ; 在全局 keymap 中添加一个 globalHotkey, 用来激活指定的 keymap, 例如 CapsLock 模式
+    ; 让这些 globalHotkey 在特定程序中被禁用, 也就实现了 MyKeymap 在特定程序中被禁用
+    winTitle := this.GlobalKeymap.DisabledAt
+    conditionType := winTitle ? 3 : 0
+    return this.AddSubKeymap(this.GlobalKeymap, globalHotkey, name, delay, winTitle, conditionType)
   }
 
-  static AddSubKeymap(parent, hk, name := "", delay := 0) {
+  static AddSubKeymap(parent, hk, name := "", delay := 0, winTitle := "", conditionType := 0) {
     waitKey := ExtractWaitKey(hk)
     subKeymap := Keymap(name, waitKey, hk, delay)
     handler(thisHotkey) {
       this.Activate(subKeymap)
       this._postHandler()
     }
-    parent.Map(hk, handler)
+    parent.Map(hk, handler, , winTitle, conditionType)
     return subKeymap
   }
 
@@ -175,33 +178,32 @@ class Keymap {
       if this.enabled {
         MsgBox "bug"
       }
-      this.hotifContext(this.winTitle, this.conditionType)
+      this.hotifContext(this.winTitle, this.conditionType, true)
       Hotkey(this.rawName, this.handler, "On" this.options)
       this.enabled := true
-      HotIf()
+      this.hotifContext(this.winTitle, this.conditionType, false)
     }
 
     Disable() {
       if !this.enabled {
         MsgBox "bug"
       }
-      this.hotifContext(this.winTitle, this.conditionType)
+      this.hotifContext(this.winTitle, this.conditionType, true)
       Hotkey(this.rawName, "Off")
       this.enabled := false
-      HotIf()
+      this.hotifContext(this.winTitle, this.conditionType, false)
     }
 
-    hotifContext(winTitle, conditionType) {
-      if winTitle == "" {
-        return
+    hotifContext(winTitle, conditionType, begin) {
+      if winTitle == "" || conditionType == 0 {
+        HotIf()
       }
       switch conditionType {
-        case 0: return
-        case 1: HotIfWinactive(winTitle)
-        case 2: HotIfWinExist(winTitle)
-        case 3: HotIfWinNotactive(winTitle)
-        case 4: HotIfWinNotExist(winTitle)
-        case 5: HotIf(winTitle)
+        case 1: begin ? HotIfWinactive(winTitle) : HotIfWinactive()
+        case 2: begin ? HotIfWinExist(winTitle) : HotIfWinExist()
+        case 3: begin ? HotIfWinNotactive(winTitle) : HotIfWinNotactive()
+        case 4: begin ? HotIfWinNotExist(winTitle) : HotIfWinNotExist()
+        case 5: begin ? HotIf(winTitle) : HotIf()
       }
     }
   }

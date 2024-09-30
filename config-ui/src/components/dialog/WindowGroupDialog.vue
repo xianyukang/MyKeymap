@@ -36,6 +36,8 @@ const save = (dataObj: WindowGroup[]) => {
       <v-btn class="mt-3 text-none" width="170" color="blue" v-bind="props" variant="outlined">{{ translate('label:601') }}</v-btn>
     </template>
 
+    <template #tips>{{ translate('label:612') }}</template>
+
     <template #contentsTitle>
       <v-col cols="3">{{ translate('label:602') }}</v-col>
       <v-col cols="6">{{ translate('label:603') }}</v-col>
@@ -44,7 +46,7 @@ const save = (dataObj: WindowGroup[]) => {
     <template #contents="{ data }">
       <v-col cols="3">
         <v-text-field v-model="data.name" variant="outlined"
-                      :dense="true" :disabled="data.id == 0"></v-text-field>
+                      :dense="true" :disabled="data.id <= 0"></v-text-field>
       </v-col>
       <v-col cols="6">
         <v-textarea v-model="data.value" auto-grow rows="1"
@@ -53,7 +55,7 @@ const save = (dataObj: WindowGroup[]) => {
       <v-col cols="3">
         <v-select v-model="data.conditionType" :items="windowGroupConditionTypes"
                   :item-title="item => item.name" :item-value="item => item.index"
-                  :disabled="data.id == 0" variant="outlined">
+                  :disabled="data.id <= 0" variant="outlined">
         </v-select>
       </v-col>
     </template>

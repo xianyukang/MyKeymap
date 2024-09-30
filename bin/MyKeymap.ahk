@@ -54,9 +54,13 @@ InitKeymap()
   programs := "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\"
 
   ; 窗口组
+  GroupAdd("MY_WINDOW_GROUP__1", "Stardew Valley ahk_class SDL_app")
+  GroupAdd("MY_WINDOW_GROUP__1", "ahk_exe Rune Factory 3 Special.exe")
   GroupAdd("MY_WINDOW_GROUP_1", "ahk_exe chrome.exe")
   GroupAdd("MY_WINDOW_GROUP_1", "ahk_exe msedge.exe")
   GroupAdd("MY_WINDOW_GROUP_1", "ahk_exe firefox.exe")
+
+  KeymapManager.GlobalKeymap.DisabledAt := "ahk_group MY_WINDOW_GROUP__1"
 
   ; CapsLock
   km5 := KeymapManager.NewKeymap("*CapsLock", "CapsLock", "")

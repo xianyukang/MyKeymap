@@ -75,7 +75,7 @@ function onActionTypeChange(action: Action) {
         <v-card-title style="padding-bottom: 0">
           <v-row>
             <v-col cols="5">
-              <v-select :items="config!.options.windowGroups"
+              <v-select :items="config!.options.windowGroups.filter(x => x.id >= 0)"
                         item-title="name"
                         item-value="id"
                         v-model="windowGroupID"

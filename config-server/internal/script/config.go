@@ -107,6 +107,21 @@ func SaveConfigFile(config *Config) {
 	}
 }
 
+func groupName(id int) string {
+	if id < 0 {
+		return fmt.Sprintf("MY_WINDOW_GROUP__%d", -id)
+	}
+	return fmt.Sprintf("MY_WINDOW_GROUP_%d", id)
+}
+
+func groupToWinTile(g WindowGroup) string {
+	if lines := notBlankLines(g.Value); len(lines) > 1 {
+		return fmt.Sprintf(`"ahk_group %s"`, groupName(g.ID))
+	} else {
+		return fmt.Sprintf(`"%s"`, strings.TrimSpace(g.Value))
+	}
+}
+
 func (c *Config) GetWinTitle(a Action) (winTitle string, conditionType int) {
 	if a.WindowGroupID == 0 {
 		return `""`, 0
@@ -114,15 +129,12 @@ func (c *Config) GetWinTitle(a Action) (winTitle string, conditionType int) {
 
 	for _, g := range c.Options.WindowGroups {
 		if g.ID == a.WindowGroupID {
+			// 5 表示自定义的 HotIf 表达式
 			if g.ConditionType == 5 {
 				return fmt.Sprintf(`'%s'`, g.Value), 5
 			}
 
-			v := strings.TrimSpace(g.Value)
-			if strings.Index(v, "\n") >= 0 {
-				return fmt.Sprintf(`"ahk_group MY_WINDOW_GROUP_%d"`, g.ID), g.ConditionType
-			}
-			return fmt.Sprintf(`"%s"`, v), g.ConditionType
+			return groupToWinTile(g), g.ConditionType
 		}
 	}
 	return `""`, 0

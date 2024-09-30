@@ -269,6 +269,14 @@ function fetchConfig() {
         val.options.language = 'en'
       }
     }
+    // 初始化排除列表
+    if (val.options.windowGroups[0].id != -1) {
+      val.options.windowGroups.unshift({
+        id: -1,
+        name: "🚫 Exclude",
+        value: "",
+      })
+    }
     config.value = val
   })
   return config
