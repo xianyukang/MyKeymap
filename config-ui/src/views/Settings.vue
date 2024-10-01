@@ -68,7 +68,7 @@ const checkKeymapData = (keymap: Keymap) => {
   }
   // 判断当前热键是否已存在，已存在删除当前模式
   const f = keymaps.value.find(k => k.hotkey == keymap.hotkey && k.parentID == keymap.parentID)!
-  if (f.id != keymap.id) {
+  if (f.id != keymap.id && keymap.hotkey) {
     removeKeymap(keymap.id)
   }
   currId.value = f.id

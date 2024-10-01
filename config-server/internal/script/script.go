@@ -152,6 +152,9 @@ func substr(input string, start int, length int) string {
 }
 
 func renderKeymap(km Keymap) string {
+	if "" == strings.TrimSpace(km.Hotkey) {
+		return ""
+	}
 	var buf strings.Builder
 
 	// ; Capslock + F
@@ -191,7 +194,8 @@ func renderKeymap(km Keymap) string {
 }
 
 func containsOnlyModifier(hotkey string) bool {
-	return strings.Trim(hotkey, "#!^+<>*~$") == ""
+	hotkey = strings.TrimSpace(hotkey)
+	return hotkey != "" && strings.Trim(hotkey, "#!^+<>*~$") == ""
 }
 
 func disabledAt(groups []WindowGroup) string {
