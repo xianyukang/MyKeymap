@@ -134,6 +134,10 @@ func sendKeys6(a Action, inAbbrContext bool) string {
 		line = toAHKFuncArg(line)
 		res = append(res, fmt.Sprintf(`Send(%s)`, line))
 	}
+	if len(res) == 0 {
+		return ""
+	}
+
 	call := strings.Join(res, ", ")
 
 	if inAbbrContext {
