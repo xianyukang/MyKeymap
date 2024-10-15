@@ -4,6 +4,7 @@ import Table from "@/components/Table.vue";
 import { Action as IAction } from "@/types/config";
 import trimEnd from "lodash-es/trimEnd";
 import { useConfigStore } from "@/store/config";
+import { computed } from "vue";
 
 const store = useConfigStore();
 const { translate } = useConfigStore();
@@ -27,17 +28,30 @@ const showActionComment = (actions: IAction[]) => {
   }
 }
 
+const sortedHotkeys = computed(() => {
+  if (!store.hotkeys) {
+    return []
+  }
+  return Object.entries(store.hotkeys)
+    // .filter(([_, actions]) => showActionComment(actions))
+    .map(([hotkey, actions]) => ({
+      hotkey,
+      comment: getActionAllComment(actions)
+    }))
+    .sort((a, b) => a.comment.localeCompare(b.comment))
+})
+
 </script>
 
 <template>
   <v-card style="zoom: 0.9;">
     <Table class="text-left" :titles="[translate('label:404'), translate('label:305')]">
-      <tr v-for="(action, hotkey, index) in store.hotkeys" :key="index">
-        <td v-if="showActionComment(action)">
-          <slot name="keyText" :hotkey="hotkey"></slot>
+      <tr v-for="(item, index) in sortedHotkeys" :key="index">
+        <td v-if="item.comment">
+          <slot name="keyText" :hotkey="item.hotkey"></slot>
         </td>
-        <td v-if="showActionComment(action)" class="text-pre overflow-hidden">
-          {{ getActionAllComment(action) }}
+        <td v-if="item.comment" class="text-pre overflow-hidden">
+          {{ item.comment }}
         </td>
       </tr>
     </Table>
@@ -45,7 +59,6 @@ const showActionComment = (actions: IAction[]) => {
 </template>
 
 <style scoped>
-
 td {
   white-space: nowrap;
   height: 2.3rem;
@@ -54,5 +67,4 @@ td {
 :deep(td) {
   border-bottom-color: #e4e4e4aa;
 }
-
 </style>
