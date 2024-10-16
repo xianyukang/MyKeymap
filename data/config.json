@@ -2087,6 +2087,14 @@
             "keysToSend": "{text}➤ "
           }
         ],
+        "kg": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 7,
+            "comment": "label:61",
+            "actionValueID": 29
+          }
+        ],
         "rq": [
           {
             "windowGroupID": 0,

@@ -319,7 +319,7 @@ changeTextStyle(color := "#000000", fontFamily := "Iosevka") {
  */
 InsertSpaceBetweenZHAndEn() {
   text := GetSelectedText()
-  text := RegExReplace(text, "([\x{4e00}-\x{9fa5}])(?=[a-zA-Z])|([a-zA-Z])(?=[\x{4e00}-\x{9fa5}])", "$0 ")
+  text := RegExReplace(text, "([\x{4e00}-\x{9fa5}])(?=[a-zA-Z0-9])|([a-zA-Z0-9])(?=[\x{4e00}-\x{9fa5}])", "$0 ")
   PasteToPrograms(text)
 }
 

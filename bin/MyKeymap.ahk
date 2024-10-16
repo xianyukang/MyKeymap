@@ -42,7 +42,7 @@ InitKeymap()
   capsHook.OnKeyDown := PostBackspaceToCaspAbbr
   Run("bin\MyKeymap-CommandInput.exe")
 
-  semiHook := InputHook("", "{CapsLock}{Esc}{;}", ",,,.,/,dk,dq,fz,gg,gt,i love nia,jt,rq,sj,sk,xf,xk,zh,zk")
+  semiHook := InputHook("", "{CapsLock}{Esc}{;}", ",,,.,/,dk,dq,fz,gg,gt,i love nia,jt,kg,rq,sj,sk,xf,xk,zh,zk")
   semiHook.KeyOpt("{CapsLock}", "S")
   semiHook.KeyOpt("{Backspace}", "N")
   semiHook.OnChar := (ih, char) => semiHookAbbrWindow.Show(char, true)
@@ -344,6 +344,8 @@ ExecSemicolonAbbr(command) {
       Send("{text}我爱尼娅! "), Send("{text}( 还 有 大 家 )")
     case "jt":
       Send("{text}➤ ")
+    case "kg":
+      InsertSpaceBetweenZHAndEn()
     case "rq":
       Send(Format("{}-{}-{}", A_YYYY, A_MM, A_DD))
     case "sj":
