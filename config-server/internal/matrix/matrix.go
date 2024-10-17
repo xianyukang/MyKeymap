@@ -36,7 +36,7 @@ outer:
 			break outer
 		default:
 			// 刷新率
-			time.Sleep(24 * time.Millisecond)
+			time.Sleep(34 * time.Millisecond)
 		}
 
 		for _, col := range columns {
@@ -191,7 +191,7 @@ func (c *column) spawnNode(x, rowCount int) node {
 		if rand.Intn(2) == 0 {
 			colored = true
 		}
-		c.Timer = 3 + rand.Intn(rowCount-6)
+		c.Timer = 4 + rand.Intn(rowCount-7)
 		c.NextNodeType = eraser
 	} else {
 		c.NextNodeType = writer

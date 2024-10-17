@@ -4,7 +4,7 @@ folder = MyKeymap-$(version)
 zip = $(folder).7z
 
 buildServer:
-	go.exe build -C ./config-server -ldflags "-s -w -X settings/internal/script.MykeymapVersion=$(version)" -o ../bin/settings.exe ./cmd/settings
+	go.exe build -C ./config-server -tags=nomsgpack -ldflags "-s -w -X settings/internal/script.MykeymapVersion=$(version)" -o ../bin/settings.exe ./cmd/settings
 	rm -f -r bin/templates
 	cp -r config-server/templates bin/templates
 

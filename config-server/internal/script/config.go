@@ -2,8 +2,8 @@ package script
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
-	"github.com/goccy/go-json"
 	"os"
 	"sort"
 	"strings"
