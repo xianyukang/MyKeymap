@@ -57,5 +57,5 @@ SysLangIsChinese()
     "1404", "Chinese (Traditional, Macao SAR)",  ; zh-MO
     "0404", "Chinese (Traditional, Taiwan)",  ; zh-TW
   )
-  return !!m[A_Language]
+  return m.Get(A_Language, false)
 }
