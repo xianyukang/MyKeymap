@@ -335,7 +335,7 @@ ExecSemicolonAbbr(command) {
     case "dq":
       ActivateOrRun("", "bin\AutoHotkey64.exe", "bin\AlignComment.ahk", "", false, false, true)
     case "fz":
-      ActivateOrRun("", "bin\AutoHotkey64.exe", "bin\CollectText.ahk", "", false, false, false)
+      ActivateOrRun("连续复制后 ahk_class AutoHotkeyGUI", "bin\AutoHotkey64.exe", "bin\CollectText.ahk", "", false, false, false)
     case "gg":
       Send("{text}git add -A; git commit -a -m `"`"; git push origin (git branch --show-current);"), Send("{left 47}")
     case "gt":

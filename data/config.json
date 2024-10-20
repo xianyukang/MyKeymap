@@ -2051,6 +2051,7 @@
             "windowGroupID": 0,
             "actionTypeID": 1,
             "comment": "用剪切板收集文本 (连续复制然后合并粘贴)",
+            "winTitle": "连续复制后 ahk_class AutoHotkeyGUI",
             "target": "bin\\AutoHotkey64.exe",
             "args": "bin\\CollectText.ahk"
           }
