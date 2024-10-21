@@ -35,7 +35,7 @@ InitKeymap()
   fast := MouseKeymap("fast mouse", false, mouseTip, 110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", slow)
   slow.Map("*space", slow.LButtonUp())
 
-  capsHook := InputHook("", "{CapsLock}{Esc}", "bb,ca,cc,cmd,dd,dm,ex,ga,gj,kp,ld,lj,ly,mm,ms,mu,no,rb,rex,se,sl,sp,ss,tm,vm,we,wf,wt")
+  capsHook := InputHook("", "{CapsLock}{Esc}", "bb,ca,cc,cmd,dd,dm,ex,ga,gj,kp,ld,lj,ly,mm,ms,mu,no,pd,rb,rex,se,sl,sp,ss,tm,vm,we,wf,wt")
   capsHook.KeyOpt("{CapsLock}", "S")
   capsHook.KeyOpt("{Backspace}", "N")
   capsHook.OnChar := PostCharToCaspAbbr
@@ -294,6 +294,8 @@ ExecCapslockAbbr(command) {
       MuteActiveApp()
     case "no":
       ActivateOrRun("记事本", "notepad.exe")
+    case "pd":
+      ShowActiveProcessInFolder()
     case "rb":
       SystemReboot()
     case "rex":

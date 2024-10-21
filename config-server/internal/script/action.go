@@ -250,15 +250,16 @@ func windowActions3(a Action, inAbbrContext bool) string {
 
 func systemActions2(a Action, inAbbrContext bool) string {
 	callMap := map[int]string{
-		1: `SystemLockScreen()`,
-		2: `SystemSleep()`,
-		3: `SystemShutdown()`,
-		4: `SystemReboot()`,
-		5: `SoundControl()`,
-		6: `BrightnessControl()`,
-		7: `SystemRestartExplorer()`,
-		8: `CopySelectedAsPlainText()`,
-		9: `MuteActiveApp()`,
+		1:  `SystemLockScreen()`,
+		2:  `SystemSleep()`,
+		3:  `SystemShutdown()`,
+		4:  `SystemReboot()`,
+		5:  `SoundControl()`,
+		6:  `BrightnessControl()`,
+		7:  `SystemRestartExplorer()`,
+		8:  `CopySelectedAsPlainText()`,
+		9:  `MuteActiveApp()`,
+		10: `ShowActiveProcessInFolder()`,
 	}
 	if call, ok := callMap[a.ValueID]; ok {
 		if inAbbrContext {

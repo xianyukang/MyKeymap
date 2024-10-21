@@ -104,6 +104,9 @@ GetActiveProcess(type) {
   if type == "id" {
     return WinGetPID(winTitle)
   }
+  if type == "path" {
+    return WinGetProcessPath(winTitle)
+  }
 }
 
 /**
@@ -153,7 +156,7 @@ CompleteProgramPath(target) {
 ShellRun(target, arguments?, directory?, operation?, show?) {
   static VT_UI4 := 0x13, SWC_DESKTOP := ComValue(VT_UI4, 0x8)
   ComObject("Shell.Application").Windows.Item(SWC_DESKTOP).Document.Application
-    .ShellExecute(target, arguments?, directory?, operation?, show?)
+  .ShellExecute(target, arguments?, directory?, operation?, show?)
 }
 
 ActivateDesktop() {
@@ -594,3 +597,10 @@ NotActiveWin() {
 ;     }
 ;   }
 ; }
+
+ShowFileInFoler(filepath) {
+  ; Run Format('explorer.exe /select,"{1}"', filepath)
+  DllCall("shell32\SHParseDisplayName", "Str", filepath, "Ptr", 0, "Ptr*", &pidl := 0, "UInt", 0, "Ptr", 0, "HRESULT")
+  DllCall("shell32\SHOpenFolderAndSelectItems", "Ptr", pidl, "UInt", 0, "Ptr", 0, "UInt", 0, "HRESULT")
+  DllCall("ole32\CoTaskMemFree", "Ptr", pidl)
+}

@@ -1902,6 +1902,14 @@
             "target": "notepad.exe"
           }
         ],
+        "pd": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 2,
+            "comment": "label:2402",
+            "actionValueID": 10
+          }
+        ],
         "rb": [
           {
             "windowGroupID": 0,

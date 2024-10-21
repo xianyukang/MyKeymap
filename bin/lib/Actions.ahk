@@ -575,3 +575,12 @@ MuteActiveApp() {
     default: Tip(Translation().mute_falied)
   }
 }
+
+ShowActiveProcessInFolder() {
+  try path := GetActiveProcess("path")
+  catch as e {
+    Tip(e.Message)
+    return
+  }
+  ShowFileInFoler(path)
+}
