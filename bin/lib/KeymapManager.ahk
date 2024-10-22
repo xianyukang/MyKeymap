@@ -145,6 +145,43 @@
     }
     Tip(msg)
   }
+
+  class ActionList {
+    actions := []
+    static conditionMap := Map(
+      0, _ => true,
+      1, winTitle => WinActive(winTitle),
+      2, winTitle => WinExist(winTitle),
+      3, winTitle => !WinActive(winTitle),
+      4, winTitle => !WinExist(winTitle),
+    )
+
+    Run() {
+      m := KeymapManager.ActionList.conditionMap
+      for a in this.actions {
+        if !m.Has(a.conditionType) {
+          continue
+        }
+        if a.conditionType == 0 && !IsSet(fn) {
+          fn := a.fn
+          continue
+        }
+        if m.Get(a.conditionType)(a.winTitle) {
+          fn := a.fn
+          break
+        }
+      }
+      fn()
+    }
+
+    Add(conditionType, winTitle, fn) {
+      this.actions.Push({
+        conditionType: conditionType,
+        winTitle: winTitle,
+        fn: fn,
+      })
+    }
+  }
 }
 
 
@@ -212,7 +249,10 @@ class Keymap {
     wrapper := Keymap._wrapHandler(handler, keymapToLock)
     ; 用 = 表示忽略大小写进行字符串比较
     if hotkeyName = "singlePress" {
-      this.SinglePressAction := wrapper
+      if this.SinglePressAction == NoOperation {
+        this.SinglePressAction := KeymapManager.ActionList()
+      }
+      this.SinglePressAction.Add(conditionType, winTitle, wrapper.Bind("singlePress"))
       return
     }
     ; If Action is a hotkey name, its original function is used;
@@ -259,7 +299,7 @@ class Keymap {
     if !InStr(this.Hotkey, "button") {
       KeyWait(this.WaitKey)
       if (A_PriorKey = this.WaitKey && (A_TickCount - startTick < 450)) {
-        this.SinglePressAction()
+        this.SinglePressAction.Run()
       }
       return
     }
@@ -283,7 +323,7 @@ class Keymap {
 
     if (thisHotkey = A_ThisHotkey && (A_TickCount - startTick < 450)) {
       if !mouseMoved {
-        this.SinglePressAction()
+        this.SinglePressAction.Run()
       } else {
         Send("{blind}{" this.WaitKey " Down}")
         KeyWait(this.WaitKey)
