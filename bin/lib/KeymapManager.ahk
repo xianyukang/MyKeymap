@@ -171,7 +171,9 @@
           break
         }
       }
-      fn()
+      if IsSet(fn) {
+        fn()
+      }
     }
 
     Add(conditionType, winTitle, fn) {
