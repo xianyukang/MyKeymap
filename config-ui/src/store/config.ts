@@ -5,6 +5,7 @@ import { Action, Config, Keymap } from "@/types/config";
 import { useMyFetch } from "./server";
 import trimStart from "lodash-es/trimStart";
 import { languageMap } from "./language-map";
+import { useThrottleFn } from "@vueuse/core";
 
 
 const defaultKeyboardLayout = "1 2 3 4 5 6 7 8 9 0\nq w e r t y u i o p\na s d f g h j k l ;\nz x c v b n m , . /\nspace enter backspace - [ ' singlePress"
@@ -161,7 +162,7 @@ export const useConfigStore = defineStore('config', () => {
     changeHotkey, removeHotkey, addHotKey, translate,
     disabledKeys: computed(() => _disabledKeys(enabledKeymaps.value)),
     getAction: (hotkey: string) => _getAction(keymap.value, hotkey, windowGroupID.value),
-    saveConfig: () => _saveConfig(config.value),
+    saveConfig: useThrottleFn(() => _saveConfig(config.value), 1000),
   }
 })
 
