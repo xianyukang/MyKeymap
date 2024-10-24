@@ -192,7 +192,7 @@ class Keymap {
     this.Name := name
     this.WaitKey := waitKey
     this.Hotkey := hotkey
-    this.SinglePressAction := NoOperation
+    this.SinglePressAction := KeymapManager.ActionList()
     this.M := Map()
     this.M.CaseSense := "Off"
     this.ToggleLock := this._lockOrUnlock.Bind(this)
@@ -251,9 +251,6 @@ class Keymap {
     wrapper := Keymap._wrapHandler(handler, keymapToLock)
     ; 用 = 表示忽略大小写进行字符串比较
     if hotkeyName = "singlePress" {
-      if this.SinglePressAction == NoOperation {
-        this.SinglePressAction := KeymapManager.ActionList()
-      }
       this.SinglePressAction.Add(conditionType, winTitle, wrapper.Bind("singlePress"))
       return
     }
