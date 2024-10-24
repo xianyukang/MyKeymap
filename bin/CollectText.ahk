@@ -6,6 +6,12 @@ SetWorkingDir(A_ScriptDir)
 TraySetIcon("./icons/logo.ico")
 SendMode("Input")
 
+
+last := ""
+layout := CLayout()
+layout.showGui()
+OnClipboardChange(ClipboardChangeCallbakc)
+
 class CLayout {
   X := 10
   Y := 10
@@ -41,8 +47,6 @@ class CLayout {
 
 }
 
-layout := CLayout()
-layout.showGui()
 
 join(sep, params*) {
   str := ""
@@ -67,12 +71,17 @@ WM_KEYDOWN(wParam, lParam, msg, hwnd) {
   return 0
 }
 
-OnClipboardChange(ClipboardChangeCallbakc)
 ClipboardChangeCallbakc(type) {
+  global last
   if (type != 1)
     return
 
-  layout.AddItem(RTrim(A_Clipboard, " `t`r`n"))
+  text := RTrim(A_Clipboard, " `t`r`n")
+  if text == last {
+    return
+  }
+  last := text
+  layout.AddItem(text)
   layout.ShowGui()
 }
 
