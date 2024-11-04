@@ -13,18 +13,20 @@ Class InputTipWindow {
     this.gui.MarginY := marginY
     this.gui.SetFont("c" FontColor " s" fontSize, "Microsoft YaHei UI")
 
-    this.textCon := this.gui.Add("text", "Center", text)
+    this.data := text
+    this.textCon := this.gui.Add("text", "Center", this.data)
     this.offsetX := offsetX
     this.offsetY := offsetY
+    FrameShadow(this.gui.Hwnd)
   }
 
   Show(text := "", addition := false) {
     ; 注意 ahk 中 "0" == 0 所以 if ("0") 比较危险, 推荐和空字符串 "" 作比较
     if (text != "") {
       if (addition) {
-        this.textCon.Value := this.textCon.Value text
+        this.data := this.data text
       } else {
-        this.textCon.Value := text
+        this.data := text
       }
     }
 
@@ -32,6 +34,7 @@ Class InputTipWindow {
   }
 
   ShowWindow() {
+    this.textCon.Value := this.data
     GetPosRelativeScreen(&xpos, &ypos, "Mouse")
     xpos += this.offsetX
     ypos += this.offsetY
@@ -41,11 +44,27 @@ Class InputTipWindow {
 
   Backspace() {
     ; 空字符串也不会报错, SubStr 很强
-    this.textCon.Value := SubStr(this.textCon.Value, 1, -1)
+    this.data := SubStr(this.textCon.Value, 1, -1)
     this.ShowWindow()
   }
 
   Hide() {
     this.gui.Hide()
   }
+}
+
+; https://www.autohotkey.com/boards/viewtopic.php?t=29117
+FrameShadow(handle) {
+  DllCall("dwmapi\DwmIsCompositionEnabled", "Int*", &enabled := false) ; Get if DWM Manager is Enabled
+  if !enabled {
+    return
+  }
+  margin := Buffer(16)
+  NumPut("UInt", 1
+    , "UInt", 1
+    , "UInt", 1
+    , "UInt", 1
+    , margin)
+  DllCall("dwmapi\DwmSetWindowAttribute", "Ptr", handle, "UInt", 2, "Int*", 2, "UInt", 4)
+  DllCall("dwmapi\DwmExtendFrameIntoClientArea", "Ptr", handle, "Ptr", margin)
 }

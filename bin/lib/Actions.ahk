@@ -141,7 +141,13 @@ EnterCapslockAbbr(capsHook) {
 EnterSemicolonAbbr(semiHook, semiHookAbbrWindow) {
   semiHookAbbrWindow.Show(" ")
   endReason := StartInputHook(semiHook)
-  semiHookAbbrWindow.Hide
+  if (InStr(endReason, "Match")) {
+    char := SubStr(semiHook.Match, -1)
+    semiHookAbbrWindow.Show(char, true)
+    SetTimer(() => semiHookAbbrWindow.Hide(), -100)
+  } else {
+    semiHookAbbrWindow.Hide()
+  }
 
   if (semiHook.Match)
     ExecSemicolonAbbr(semiHook.Match)

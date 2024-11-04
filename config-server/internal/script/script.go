@@ -88,11 +88,8 @@ func join(sep string, elems []interface{}) string {
 func ahkString(s string) string {
 	s = strings.ReplaceAll(s, "`", "``")
 	s = strings.ReplaceAll(s, "\"", "`\"")
+	s = strings.ReplaceAll(s, " ;", " `;") // 空格后的分号会被 ahk 解释为注释
 	return `"` + s + `"`
-}
-
-func escapeSemicolon(s string) string {
-	return strings.ReplaceAll(s, ";", "`;")
 }
 
 func escapeAhkHotkey(key string) string {
@@ -167,7 +164,7 @@ func renderKeymap(km Keymap) string {
 		hotkey = "customHotkeys"
 	}
 	if km.ParentID == 0 {
-		line += fmt.Sprintf("NewKeymap(%s, %s, %s)\n", ahkString(hotkey), escapeSemicolon(ahkString(km.Name)), ahkString(divide(km.Delay, 1000)))
+		line += fmt.Sprintf("NewKeymap(%s, %s, %s)\n", ahkString(hotkey), ahkString(km.Name), ahkString(divide(km.Delay, 1000)))
 	} else {
 		line += fmt.Sprintf("AddSubKeymap(km%d, %s, %s, %s)\n", km.ParentID, ahkString(hotkey), ahkString(km.Name), ahkString(divide(km.Delay, 1000)))
 	}
