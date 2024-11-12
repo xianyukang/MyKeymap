@@ -107,7 +107,7 @@ export const languageMap = {
   205: { zh: "🅰️ 重映射按键", en: "🅰️ Remap Keys" },
   206: { zh: "🅰️ 输入按键或文本", en: "🅰️ Send Keys" },
   207: { zh: "📚 文字编辑相关", en: "📚 Edit" },
-  208: { zh: "⚛️ 一些内置函数", en: "⚛️ Built-in Functions" },
+  208: { zh: "⚛️ 自定义函数", en: "⚛️ Custom Functions" },
   209: { zh: "⚙️ MyKeymap 相关", en: "⚙️ MyKeymap" },
 
   // App Launcher
