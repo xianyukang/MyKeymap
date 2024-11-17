@@ -347,15 +347,6 @@ ReplaceSelectedText(&target, &args) {
     text := ""
   }
 
-  ; 如果是划词搜索且选中了 http 链接那么跳转链接
-  if InStr(args, "https://") == 1 || InStr(target, "https://") == 1 {
-    if InStr(text, "https://") || InStr(text, "http://") {
-      args := InStr(args, "{selected}") ? Trim(text) : args
-      target := InStr(target, "{selected}") ? Trim(text) : target
-      return 1
-    }
-  }
-
   if InStr(args, "://") || InStr(target, "://") {
     text := URIEncode(text)
   }

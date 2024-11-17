@@ -35,7 +35,7 @@ InitKeymap()
   fast := MouseKeymap("fast mouse", false, mouseTip, 110, 70, "T0.13", "T0.01", 1, "T0.2", "T0.03", slow)
   slow.Map("*space", slow.LButtonUp())
 
-  capsHook := InputHook("", "{CapsLock}{Esc}", "bb,ca,cc,cmd,dd,dm,ex,ga,gg,gj,kp,ld,lj,ly,mm,ms,mu,no,pd,rb,rex,se,sl,sp,ss,tm,vm,we,wf,wt")
+  capsHook := InputHook("", "{CapsLock}{Esc}", "bb,ca,cc,cmd,dd,dm,ex,ga,gj,kp,ld,lj,ly,mm,ms,mu,no,pd,rb,rex,se,sl,sp,ss,tm,vm,we,wf,wt")
   capsHook.KeyOpt("{CapsLock}", "S")
   capsHook.KeyOpt("{Backspace}", "N")
   capsHook.OnChar := PostCharToCaspAbbr
@@ -276,8 +276,6 @@ ExecCapslockAbbr(command) {
       MyKeymapExit()
     case "ga":
       ActivateOrRun("Game ahk_exe explorer.exe", A_Desktop "\Game")
-    case "gg":
-      ActivateOrRun("", "https://www.google.com/search?q={selected}")
     case "gj":
       SystemShutdown()
     case "kp":
