@@ -1786,7 +1786,7 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 1,
-            "comment": "位于 PATH 环境变量中的命令 (比如 cmd.exe) 可以直接启动，无需使用完整路径",
+            "comment": "位于 PATH 环境变量中的命令 (比如 cmd.exe) 无需使用绝对路径",
             "winTitle": "ahk_exe cmd.exe",
             "target": "cmd.exe",
             "args": "/k cd /d %userprofile%"
