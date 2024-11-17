@@ -1825,6 +1825,14 @@
             "target": "ahk-expression: A_Desktop \"\\Game\""
           }
         ],
+        "gg": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "comment": "用 Google 搜索选中的内容",
+            "target": "https://www.google.com/search?q={selected}"
+          }
+        ],
         "gj": [
           {
             "windowGroupID": 0,
