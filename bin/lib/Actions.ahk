@@ -590,3 +590,26 @@ ShowActiveProcessInFolder() {
   }
   ShowFileInFoler(path)
 }
+
+chromeInstance() {
+  static m := Map()
+  key := A_ThisHotkey
+
+  if !m.Has(key) || (m.Has(key) && !WinExist(m.Get(key))) {
+    oldWindow := WinActive("A")
+    Run("C:\Program Files\Google\Chrome\Application\chrome.exe")
+    if !WinWaitNotActive(oldWindow, , 0.2) || !WinWaitActive("ahk_exe chrome.exe", , 0.2) {
+      Tip("启动 chrome 失败")
+      return
+    }
+    m.Set(key, WinActive("A"))
+    return
+  }
+
+  id := WinExist(m.Get(key))
+  if WinActive(id) {
+    WinMinimize(id)
+  } else {
+    WinActivate(id)
+  }
+}

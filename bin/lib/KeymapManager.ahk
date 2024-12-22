@@ -416,9 +416,20 @@ class Keymap {
   }
 
   RemapKey(a, b, winTitle := "", conditionType := 0) {
+    if b ~= "i)control|ctrl|shift|alt|win" {
+      downHandler(thisHotkey) {
+        HoldDownModifierKey(b)
+      }
+      this.Map("*" a, downHandler, , winTitle, conditionType)
+      return
+    }
+
     ; Remap 容易让按键卡在按下状态, 改成 Send 好一点
     hk := "*" a
-    keys := "{blind}{" b "}"
+    keys := b
+    if keys ~= "^\w+$" {
+      keys := "{blind}{" b "}"
+    }
     this.SendKeys(hk, keys, winTitle, conditionType)
 
     ; downHandler(thisHotkey) {

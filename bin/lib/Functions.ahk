@@ -613,3 +613,12 @@ ShowFileInFoler(filepath) {
   DllCall("shell32\SHOpenFolderAndSelectItems", "Ptr", pidl, "UInt", 0, "Ptr", 0, "UInt", 0, "HRESULT")
   DllCall("ole32\CoTaskMemFree", "Ptr", pidl)
 }
+
+Join(sep, params*) {
+  str := ""
+
+  for index, param in params
+    str .= sep . param
+
+  return SubStr(str, StrLen(sep) + 1)
+}
