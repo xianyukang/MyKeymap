@@ -525,6 +525,9 @@ class MouseKeymap extends Keymap {
       case 3: MouseClick("WheelLeft", , , this.scrollOnceLineCount)
       case 4: MouseClick("WheelRight", , , this.scrollOnceLineCount)
     }
+    if InStr(key, "Wheel") {
+      return ; 滚轮按钮没有 up 事件所以不能 KeyWait
+    }
     release := KeyWait(key, this.scrollDelay1)
     if release {
       return
