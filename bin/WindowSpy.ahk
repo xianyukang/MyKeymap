@@ -24,7 +24,7 @@ WinSpyGui() {
     oGui.OnEvent("Size", WinSpySize)
 
     oGui.BackColor := "FFFFFF"
-    oGui.SetFont("s11", "Segoe UI")
+    oGui.SetFont("s11", "Microsoft YaHei")
     oGui.Add("Text", , "程序的窗口标识符有下面三种:")
     oGui.Add("Text", , "▷ 窗口名:      无标题 - 记事本")
     oGui.Add("Text", , "▷ 进程名:      ahk_exe notepad.exe")
