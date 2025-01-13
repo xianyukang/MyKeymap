@@ -56,17 +56,17 @@ func SaveAHK(data *Config, templateFile, outputFile string) error {
 }
 
 var TemplateFuncMap = template.FuncMap{
-	"contains":        strings.Contains,
-	"concat":          concat,
-	"join":            join,
-	"ahkString":       ahkString,
-	"escapeAhkHotkey": escapeAhkHotkey,
-	"actionToHotkey":  actionToHotkey,
-	"abbrToCode":      abbrToCode,
-	"sortHotkeys":     sortHotkeys,
-	"divide":          divide,
-	"renderKeymap":    renderKeymap,
-	"disabledAt":      disabledAt,
+	"contains":             strings.Contains,
+	"concat":               concat,
+	"join":                 join,
+	"ahkString":            ahkString,
+	"escapeAhkHotkey":      escapeAhkHotkey,
+	"actionToHotkey":       actionToHotkey,
+	"abbrToCode":           abbrToCode,
+	"sortHotkeys":          sortHotkeys,
+	"divide":               divide,
+	"renderKeymap":         renderKeymap,
+	"GroupDisableMyKeymap": GroupDisableMyKeymap,
 }
 
 func divide(a, b int) string {
@@ -163,10 +163,11 @@ func renderKeymap(km Keymap) string {
 	if containsOnlyModifier(km.Hotkey) {
 		hotkey = "customHotkeys"
 	}
+	s := ahkString
 	if km.ParentID == 0 {
-		line += fmt.Sprintf("NewKeymap(%s, %s, %s)\n", ahkString(hotkey), ahkString(km.Name), ahkString(divide(km.Delay, 1000)))
+		line += fmt.Sprintf("NewKeymap(%s, %s, %s, %s)\n", s(hotkey), s(km.Name), s(divide(km.Delay, 1000)), s(Cfg.getKeymapDisableAt(km.ID)))
 	} else {
-		line += fmt.Sprintf("AddSubKeymap(km%d, %s, %s, %s)\n", km.ParentID, ahkString(hotkey), ahkString(km.Name), ahkString(divide(km.Delay, 1000)))
+		line += fmt.Sprintf("AddSubKeymap(km%d, %s, %s, %s)\n", km.ParentID, s(hotkey), s(km.Name), s(divide(km.Delay, 1000)))
 	}
 	buf.WriteString(line)
 
@@ -195,7 +196,7 @@ func containsOnlyModifier(hotkey string) bool {
 	return hotkey != "" && strings.Trim(hotkey, "#!^+<>*~$") == ""
 }
 
-func disabledAt(groups []WindowGroup) string {
+func GroupDisableMyKeymap(groups []WindowGroup) string {
 	for _, g := range groups {
 		if g.ID == -1 {
 			return groupToWinTile(g)

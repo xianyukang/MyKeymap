@@ -63,7 +63,7 @@ InitKeymap()
   KeymapManager.GlobalKeymap.DisabledAt := "ahk_group MY_WINDOW_GROUP__1"
 
   ; CapsLock
-  km5 := KeymapManager.NewKeymap("*CapsLock", "CapsLock", "")
+  km5 := KeymapManager.NewKeymap("*CapsLock", "CapsLock", "", "")
   km := km5
   km.Map("*c", _ => SoundControl())
   km.Map("*z", _ => CopySelectedAsPlainText())
@@ -126,7 +126,7 @@ InitKeymap()
   km.Map("*w", _ => ProcessExistSendKeyOrRun("WeChat.exe", "^!w", "shortcuts\微信.lnk"))
 
   ; J 模式
-  km8 := KeymapManager.NewKeymap("*j", "J 模式", "")
+  km8 := KeymapManager.NewKeymap("*j", "J 模式", "", "")
   km := km8
   km.Map("*i", _ => (Send("{blind}ji")))
   km.Map("singlePress", _ => (Send("{blind}{j}")))
@@ -153,7 +153,7 @@ InitKeymap()
   km.Map("*space", _ => (Send("{blind}{enter}")))
 
   ; 3 模式
-  km10 := KeymapManager.NewKeymap("*3", "3 模式", "")
+  km10 := KeymapManager.NewKeymap("*3", "3 模式", "", "")
   km := km10
   km.RemapKey("0", "F10")
   km.RemapKey("2", "F2")
@@ -179,7 +179,7 @@ InitKeymap()
   km.Map("*/", km.ToggleLock)
 
   ; 分号模式( ; )
-  km13 := KeymapManager.NewKeymap("*;", "分号模式( `; )", "")
+  km13 := KeymapManager.NewKeymap("*;", "分号模式( `; )", "", "")
   km := km13
   km.Map("*a", _ => (Send("{blind}*")))
   km.Map("*b", _ => (Send("{blind}%")))
@@ -206,7 +206,7 @@ InitKeymap()
   km.Map("singlePress", _ => EnterSemicolonAbbr(semiHook, semiHookAbbrWindow))
 
   ; 句号模式( . )
-  km14 := KeymapManager.NewKeymap("*.", "句号模式( . )", "")
+  km14 := KeymapManager.NewKeymap("*.", "句号模式( . )", "", "")
   km := km14
   km.Map("singlePress", _ => (Send("{blind}{.}")))
   km.Map("*,", _ => HoldDownModifierKey("LShift"))
@@ -229,7 +229,7 @@ InitKeymap()
   km.Map("*space", _ => (Send("{blind}{enter}")))
 
   ; 鼠标右键
-  km16 := KeymapManager.NewKeymap("RButton", "鼠标右键", "")
+  km16 := KeymapManager.NewKeymap("RButton", "鼠标右键", "", "")
   km := km16
   km.Map("*XButton1", _ => GoToNextVirtualDesktop())
   km.Map("*XButton2", _ => GoToPreviousVirtualDesktop())
@@ -244,7 +244,7 @@ InitKeymap()
   km.Map("*WheelDown", _ => (Send("^{tab}")))
 
   ; Custom Hotkeys
-  km1 := KeymapManager.NewKeymap("customHotkeys", "Custom Hotkeys", "")
+  km1 := KeymapManager.NewKeymap("customHotkeys", "Custom Hotkeys", "", "")
   km := km1
   km.RemapInHotIf("RAlt", "LControl")
   km.Map("!'", _ => MyKeymapReload(), , , , "S")

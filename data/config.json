@@ -7,6 +7,7 @@
       "hotkey": "*CapsLock",
       "parentID": 0,
       "delay": 0,
+      "disableAt": "",
       "hotkeys": {
         "*,": [
           {
@@ -265,6 +266,7 @@
       "hotkey": "*f",
       "parentID": 5,
       "delay": 0,
+      "disableAt": "",
       "hotkeys": {
         "*a": [
           {
@@ -426,6 +428,7 @@
       "hotkey": "*Space",
       "parentID": 5,
       "delay": 0,
+      "disableAt": "",
       "hotkeys": {
         "*d": [
           {
@@ -461,6 +464,7 @@
       "hotkey": "*j",
       "parentID": 0,
       "delay": 0,
+      "disableAt": "",
       "hotkeys": {
         "*,": [
           {
@@ -655,6 +659,7 @@
       "hotkey": "f",
       "parentID": 0,
       "delay": 100,
+      "disableAt": "",
       "hotkeys": {
         "*,": [
           {
@@ -833,6 +838,7 @@
       "hotkey": "*3",
       "parentID": 0,
       "delay": 0,
+      "disableAt": "",
       "hotkeys": {
         "*/": [
           {
@@ -1019,6 +1025,7 @@
       "hotkey": "Tab",
       "parentID": 0,
       "delay": 0,
+      "disableAt": "",
       "hotkeys": {
         "singlePress": [
           {
@@ -1037,6 +1044,7 @@
       "hotkey": "*Space",
       "parentID": 0,
       "delay": 100,
+      "disableAt": "",
       "hotkeys": {
         "*,": [
           {
@@ -1207,6 +1215,7 @@
       "hotkey": "*;",
       "parentID": 0,
       "delay": 0,
+      "disableAt": "",
       "hotkeys": {
         "*a": [
           {
@@ -1401,6 +1410,7 @@
       "hotkey": "*.",
       "parentID": 0,
       "delay": 0,
+      "disableAt": "",
       "hotkeys": {
         "*,": [
           {
@@ -1563,6 +1573,7 @@
       "hotkey": "RButton",
       "parentID": 0,
       "delay": 0,
+      "disableAt": "",
       "hotkeys": {
         "*LButton": [
           {
@@ -1661,6 +1672,7 @@
       "hotkey": "XButton1",
       "parentID": 0,
       "delay": 0,
+      "disableAt": "",
       "hotkeys": {
         "*LButton": [
           {
@@ -1711,6 +1723,7 @@
       "hotkey": "customHotkeys",
       "parentID": 0,
       "delay": 0,
+      "disableAt": "",
       "hotkeys": {
         "!'": [
           {
@@ -1753,6 +1766,7 @@
       "hotkey": "capslockAbbr",
       "parentID": 0,
       "delay": 0,
+      "disableAt": "",
       "hotkeys": {
         "bb": [
           {
@@ -2019,6 +2033,7 @@
       "hotkey": "semicolonAbbr",
       "parentID": 0,
       "delay": 0,
+      "disableAt": "",
       "hotkeys": {
         ",": [
           {
@@ -2177,6 +2192,7 @@
       "hotkey": "settings",
       "parentID": 0,
       "delay": 0,
+      "disableAt": "",
       "hotkeys": {}
     }
   ],

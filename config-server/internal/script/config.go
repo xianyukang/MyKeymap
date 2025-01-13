@@ -20,13 +20,14 @@ type Config struct {
 }
 
 type Keymap struct {
-	ID       int                 `json:"id"`
-	Name     string              `json:"name"`
-	Enable   bool                `json:"enable"`
-	Hotkey   string              `json:"hotkey"`
-	ParentID int                 `json:"parentID"`
-	Delay    int                 `json:"delay"`
-	Hotkeys  map[string][]Action `json:"hotkeys"`
+	ID        int                 `json:"id"`
+	Name      string              `json:"name"`
+	Enable    bool                `json:"enable"`
+	Hotkey    string              `json:"hotkey"`
+	ParentID  int                 `json:"parentID"`
+	Delay     int                 `json:"delay"`
+	DisableAt string              `json:"disableAt"`
+	Hotkeys   map[string][]Action `json:"hotkeys"`
 }
 
 type Action struct {
@@ -107,11 +108,15 @@ func SaveConfigFile(config *Config) {
 	}
 }
 
-func groupName(id int) string {
-	if id < 0 {
-		return fmt.Sprintf("MY_WINDOW_GROUP__%d", -id)
+func groupName(id int, prefix ...string) string {
+	p := "MY_WINDOW_GROUP_"
+	if len(prefix) > 0 {
+		p = prefix[0]
 	}
-	return fmt.Sprintf("MY_WINDOW_GROUP_%d", id)
+	if id < 0 {
+		return fmt.Sprintf(p+"_%d", -id)
+	}
+	return fmt.Sprintf(p+"%d", id)
 }
 
 func groupToWinTile(g WindowGroup) string {

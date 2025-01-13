@@ -3,7 +3,7 @@
   static Stack := Array(this.GlobalKeymap)
   static L := { toLock: false, locked: false, show: false, toggle: false }
 
-  static NewKeymap(globalHotkey, name, delay) {
+  static NewKeymap(globalHotkey, name, delay, disableAt) {
     if globalHotkey == "customHotkeys" {
       return this.GlobalKeymap
     }
@@ -11,6 +11,9 @@
     ; 在全局 keymap 中添加一个 globalHotkey, 用来激活指定的 keymap, 例如 CapsLock 模式
     ; 让这些 globalHotkey 在特定程序中被禁用, 也就实现了 MyKeymap 在特定程序中被禁用
     winTitle := this.GlobalKeymap.DisabledAt
+    if disableAt {
+      winTitle := disableAt
+    }
     conditionType := winTitle ? 3 : 0
     return this.AddSubKeymap(this.GlobalKeymap, globalHotkey, name, delay, winTitle, conditionType)
   }

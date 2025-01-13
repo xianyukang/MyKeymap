@@ -55,7 +55,7 @@ InitKeymap()
 {{ .PathVariables }}
   ; 窗口组
 {{ .WindowGroups }}
-  KeymapManager.GlobalKeymap.DisabledAt := {{ disabledAt .Options.WindowGroups }}
+  KeymapManager.GlobalKeymap.DisabledAt := {{ GroupDisableMyKeymap .Options.WindowGroups }}
 {{range .EnabledKeymaps}}{{renderKeymap .}}{{end}}
 
   KeymapManager.GlobalKeymap.Enable()
