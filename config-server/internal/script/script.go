@@ -10,6 +10,8 @@ import (
 )
 
 func GenerateScripts(config *Config) {
+	preprocess(config)
+
 	if err := SaveAHK(config, "./templates/MyKeymap.tmpl", "../bin/MyKeymap.ahk"); err != nil {
 		panic(err)
 	}
@@ -19,6 +21,16 @@ func GenerateScripts(config *Config) {
 	// if err := SaveAHK(config, "./templates/CustomShellMenu.ahk", "../bin/CustomShellMenu.ahk"); err != nil {
 	// 	panic(err)
 	// }
+}
+
+func preprocess(cfg *Config) {
+	// 添加一个隐藏的全局热键, 且免疫 suspend, 否则 ahk 的 suspend 会把键盘钩子临时移除
+	for _, km := range cfg.Keymaps {
+		if km.ID == 1 {
+			km.Hotkeys["!f17"] = []Action{{TypeID: 9, ValueID: 2}}
+			return
+		}
+	}
 }
 
 func SaveAHK(data *Config, templateFile, outputFile string) error {

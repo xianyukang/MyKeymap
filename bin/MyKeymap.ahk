@@ -249,6 +249,7 @@ InitKeymap()
   km.RemapInHotIf("RAlt", "LControl")
   km.Map("!'", _ => MyKeymapReload(), , , , "S")
   km.Map("!+'", _ => MyKeymapToggleSuspend(), , , , "S")
+  km.Map("f17", _ => MyKeymapReload(), , , , "S")
   km.Map("!CapsLock", _ => ToggleCapslock())
 
 
