@@ -116,7 +116,7 @@ InitKeymap()
   km.Map("*s", _ => ActivateOrRun("ahk_exe Code.exe", "shortcuts\Visual Studio Code.lnk"))
   km.Map("*w", _ => ActivateOrRun("ahk_exe chrome.exe", "shortcuts\Google Chrome.lnk"))
   km.Map("singlePress", _ => (Send("{blind}{f}")))
-  km.Map("*m", _ => ProcessExistSendKeyOrRun("TIM.exe", "^!z", "shortcuts\TIM.lnk"))
+  km.Map("*m", _ => ProcessExistSendKeyOrRun("QQ.exe", "^!z", "shortcuts\QQ.lnk"))
 
   ; CapsLock + Space
   km7 := KeymapManager.AddSubKeymap(km5, "*Space", "CapsLock + Space", "")

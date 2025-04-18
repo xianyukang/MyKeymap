@@ -344,8 +344,8 @@
           {
             "windowGroupID": 0,
             "actionTypeID": 8,
-            "comment": "如果 TIM.exe 进程存在则输入 Ctrl+Alt+Z 热键激活 TIM，否则启动 TIM",
-            "ahkCode": "ProcessExistSendKeyOrRun(\"TIM.exe\", \"^!z\", \"shortcuts\\TIM.lnk\")"
+            "comment": "如果 QQ.exe 进程存在则输入 Ctrl+Alt+Z 热键激活 QQ，否则启动 QQ",
+            "ahkCode": "ProcessExistSendKeyOrRun(\"QQ.exe\", \"^!z\", \"shortcuts\\QQ.lnk\")"
           }
         ],
         "*n": [
