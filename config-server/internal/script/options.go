@@ -6,6 +6,7 @@ import (
 )
 
 type Options struct {
+	HideMatrix       bool             `json:"hideMatrix"`
 	MykeymapVersion  string           `json:"mykeymapVersion"`
 	WindowGroups     []WindowGroup    `json:"windowGroups"`
 	Mouse            Mouse            `json:"mouse"`

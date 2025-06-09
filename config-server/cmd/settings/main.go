@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/gin-contrib/cors"
@@ -34,7 +35,12 @@ func main() {
 	debug := len(os.Args) == 2 && os.Args[1] == "debug"
 
 	if !debug {
-		go matrix.DigitalRain(hasError, rainDone)
+		if hideMatrix() {
+			close(rainDone)
+			fmt.Println("MyKeymap config server is running...")
+		} else {
+			go matrix.DigitalRain(hasError, rainDone)
+		}
 	}
 	if debug {
 		hasError = nil
@@ -259,4 +265,24 @@ func saveHelpPageHtml(html string) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func hideMatrix() bool {
+	var config struct {
+		Options struct {
+			HideMatrix bool `json:"hideMatrix"`
+		} `json:"options"`
+	}
+
+	data, err := os.ReadFile("../data/config.json")
+	if err != nil {
+		return false
+	}
+
+	err = json.Unmarshal(data, &config)
+	if err != nil {
+		return false
+	}
+
+	return config.Options.HideMatrix
 }
