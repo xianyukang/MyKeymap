@@ -8,6 +8,7 @@
 #Include lib/KeymapManager.ahk
 #Include lib/InputTipWindow.ahk
 #Include lib/Utils.ahk
+#Include lib/Midi.ahk
 
 ; #WinActivateForce   ; 先关了遇到相关问题再打开试试
 ; InstallKeybdHook    ; 这个可以重装 keyboard hook, 提高自己的 hook 优先级, 以后可能会用到
@@ -29,6 +30,10 @@ OnExit(MyKeymapExit)
 
 InitKeymap()
 {
+  ; 端口不存在时 MIDI 动作不生效, 提示用户去 loopMIDI 创建 (不自动创建/不回退)
+  if !MidiInit({{ ahkString .Options.Midi.PortName }}) {
+    MidiShowNotReadyTip()
+  }
   taskSwitch := TaskSwitchKeymap("e", "d", "s", "f", "c", "space")
   mouseTip := {{ if .Options.Mouse.ShowTip }}InputTipWindow("{{ .Options.Mouse.TipSymbol }}",,,, 20, 16){{ else }}false{{ end }}
   slow := MouseKeymap("slow mouse", {{ .Options.Mouse.KeepMouseMode }}, mouseTip, {{ .Options.Mouse.SlowSingle }}, {{ .Options.Mouse.SlowRepeat }}, "T{{ .Options.Mouse.Delay1 }}", "T{{ .Options.Mouse.Delay2 }}", {{ .Options.Scroll.OnceLineCount }}, "T{{ .Options.Scroll.Delay1 }}", "T{{ .Options.Scroll.Delay2 }}")

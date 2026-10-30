@@ -16,6 +16,7 @@ MyKeymap 是一款基于 [AutoHotkey](https://www.autohotkey.com/) 的键盘映�
 
 - [快速入门](https://xianyukang.com/MyKeymap.html#mykeymap-%E7%AE%80%E4%BB%8B) & [视频介绍](https://www.bilibili.com/video/BV1Sf4y1c7p8)
 - [MyKeymap 2.0-beta33](https://wwqw.lanzouu.com/irujX2nesore) ( 提取码 1234 )
+- [MIDI 音符动作使用说明](./doc/midi.md)
 
 | ![features](./doc/features.png) | ![夏日大作战](./doc/夏日大作战.gif) |
 | ------------------------------- | ----------------------------------- |

@@ -47,6 +47,9 @@ type Action struct {
 	RunInBackground    bool   `json:"runInBackground,omitempty"`
 	DetectHiddenWindow bool   `json:"detectHiddenWindow,omitempty"`
 	AHKCode            string `json:"ahkCode,omitempty"`
+	MidiNote           int    `json:"midiNote,omitempty"`
+	MidiChannel        int    `json:"midiChannel,omitempty"`
+	MidiVelocity       int    `json:"midiVelocity,omitempty"`
 
 	RemapInHotIf bool `json:"-"`
 }
@@ -88,6 +91,9 @@ func ParseConfig(file string) (*Config, error) {
 			WindowShadowOpacity:   "0.5",
 			WindowShadowSize:      "3.0",
 		}
+	}
+	if config.Options.Midi.PortName == "" {
+		config.Options.Midi.PortName = "loopMIDI Port"
 	}
 
 	return &config, nil

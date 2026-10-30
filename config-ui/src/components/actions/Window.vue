@@ -20,6 +20,8 @@ const group2 = [
   { actionValueID: 12, label: "label:14" },
   { actionValueID: 13, label: "label:15" },
   { actionValueID: 14, label: "label:16", hideInAbbr: true },
+  { actionValueID: 17, label: "label:1701", hideInAbbr: true },  // 拖拽移动窗口
+  { actionValueID: 18, label: "label:1702", hideInAbbr: true },  // 拖拽缩放窗口
 ]
 
 

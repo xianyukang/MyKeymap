@@ -6,3 +6,7 @@
 sendSomeChinese() {
   Send("{text}你好中文!")
 }
+
+sendCurrentDateTime() {
+  Send("{text}" FormatTime(A_Now, "yyyy-MM-dd HH:mm:ss"))
+}

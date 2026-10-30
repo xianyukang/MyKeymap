@@ -21,6 +21,8 @@ export const languageMap = {
   14: { zh: "切换窗口置顶状态", en: "Always on top", },
   15: { zh: "让窗口随鼠标拖动", en: "Drag window", },
   16: { zh: "绑定当前窗口 (长按绑定,短按激活)", en: "Bind window by long press", },
+  1701: { zh: "拖拽移动窗口", en: "Drag to move window" },
+  1702: { zh: "拖拽缩放窗口", en: "Drag to resize window" },
 
   // system
   17: { zh: "锁屏", en: "Lock the screen", },
@@ -109,6 +111,7 @@ export const languageMap = {
   207: { zh: "📚 文字编辑相关", en: "📚 Edit" },
   208: { zh: "⚛️ 自定义函数", en: "⚛️ Custom Functions" },
   209: { zh: "⚙️ MyKeymap 相关", en: "⚙️ MyKeymap" },
+  210: { zh: "🎹 MIDI 音符", en: "🎹 MIDI Note" },
 
   // App Launcher
   301: { zh: "要激活的窗口 (窗口标识符)", en: "The window to activate" },
@@ -128,6 +131,13 @@ export const languageMap = {
   404: { zh: "热键", en: "Hotkey" },
   405: { zh: "新增一个", en: "Add" },
   406: { zh: "输入ab按回车添加/切换到ab, del ab删除ab, rn cd重命名当前为cd", en: "Input 'ab' and Enter to add a new item. Delete => del ab. Rename => rn cd."},
+  411: { zh: "音符号", en: "Note" },
+  412: { zh: "MIDI 通道", en: "MIDI Channel" },
+  413: { zh: "力度", en: "Velocity" },
+  414: { zh: "MIDI 端口名", en: "MIDI Port Name" },
+  415: { zh: "未检测到 MIDI 端口，请手动输入端口名，或确认设备已连接", en: "No MIDI ports detected. Enter the port name manually or check the device connection." },
+  416: { zh: "端口名可留空，默认使用 loopMIDI Port。需安装并保持 loopMIDI 运行，并在其中创建名为 loopMIDI Port 的端口，否则 MIDI 动作不会生效", en: "Leave empty to use the default port name loopMIDI Port. loopMIDI must be installed and running, with a port named loopMIDI Port created in it, otherwise MIDI actions will not work." },
+  417: { zh: "⚠️ 需安装并运行 loopMIDI，并在其中创建名为 loopMIDI Port 的端口；未创建时 MIDI 动作不会生效", en: "⚠️ loopMIDI must be installed and running, with a port named loopMIDI Port created in it; MIDI actions will not work without it." },
 
   // Settings
   501: { zh: "名称", en: "Name" },

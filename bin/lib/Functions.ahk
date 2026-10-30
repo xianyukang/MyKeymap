@@ -26,6 +26,19 @@ TrayMenuHandler(ItemName, ItemPos, MyMenu) {
  */
 MyKeymapExit(ExitReason?, ExitCode?) {
   ProcessClose("MyKeymap-CommandInput.exe")
+  ; B-9: 退出前必须停掉窗口拖拽轮询定时器并清掉拖拽状态, 否则定时器会带着
+  ; 未结束的会话继续跑.
+  ; Actions.ahk 可能未加载, 用 try 做存在性保护; StopDragWindow 内部已负责
+  ; SetTimer(PollDragMoveWindow/0) + SetTimer(PollDragResizeWindow/0) + 清状态.
+  ; (不涉及 ReleaseCapture: 实测本进程拖拽全程无鼠标捕获, 见 lib_test.ahk T13)
+  try StopDragWindow()
+  ; 退出前释放所有"由本程序按住"的修饰键, 防止 Win/Alt 卡住(#3).
+  ; Actions.ahk 可能未加载, 用 try 做存在性保护.
+  try ReleaseAllHeldModifiers()
+  ; 退出前释放 MIDI: 先发 All Notes Off, 再关闭端口, 防止按键未松导致卡音.
+  ; Midi.ahk 可能未加载 (如精简构建), 用 try 做存在性保护, 避免报错中断退出.
+  try MidiAllNotesOff()
+  try MidiClose()
   ExitApp
 }
 
@@ -34,6 +47,13 @@ MyKeymapExit(ExitReason?, ExitCode?) {
  */
 MyKeymapToggleSuspend() {
   fn() {
+    ; 暂停时释放可能卡住的修饰键(#3): 暂停后热键不再处理, 若不释放会永久卡住
+    if !A_IsSuspended
+      try ReleaseAllHeldModifiers()
+    ; B-9: 暂停后拖拽轮询定时器仍在跑, 会继续移动/缩放窗口并改写鼠标捕获,
+    ; 而热键已被暂停、up 再也收不到, 会话无法正常结束。暂停时先收尾拖拽会话。
+    if !A_IsSuspended
+      try StopDragWindow()
     Suspend(!A_IsSuspended)
     if (A_IsSuspended) {
       TraySetIcon("./bin/icons/logo2.ico")
@@ -75,6 +95,10 @@ MyKeymapOpenSettings() {
  */
 MyKeymapReload() {
   Tip("Reload")
+  ; B-9: 同 MyKeymapExit, 重载前先收尾拖拽会话(停定时器 + 释放捕获 + 清状态)
+  try StopDragWindow()
+  ; 重载会终止当前进程, 先释放卡住的修饰键(#3), 否则新进程启动后仍被系统认为按下
+  try ReleaseAllHeldModifiers()
   Run("MyKeymap.exe")
 }
 
@@ -412,25 +436,153 @@ URIEncode(Uri, encoding := "UTF-8") {
 /**
  * 启动InputHook，并返回EndReason
  * @param ih InputHook对象
- * @returns {void} 
+ * @returns {void}
+ *
+ * ── 为什么不能用 Suspend(true)(实测, 这是"卡死别的窗口"的真因) ──────────
+ * Suspend(true) 是**全局**停用所有热键, 其中包含 `*XButton1` / `*XButton2`
+ * 这两个"吞键"热键。热键一停, 钩子就不再拦截侧键 down, 它直接落到前台窗口。
+ * 若前台恰好是 VB6 控件(实测 bin/freeze_log.txt:
+ * class=ThunderRT6PictureBoxDC), 控件收到 down 就 SetCapture, 只在收到对应
+ * 的 up 时才 ReleaseCapture。而 up 往往落在 Suspend 结束**之后**, 那时本进程
+ * 钩子已恢复, up 被重新吞掉 —— 前台永远等不到 up, 捕获永久滞留,
+ * 其它窗口全部点不动, 必须 Win+L 解锁。
+ *
+ * 实测数据(tools/probe_xbleak, 独立进程受害者窗口 + 自身 GetCapture 采样):
+ *   Suspend(true) 期间注入侧键      -> AHK 接住 0/3, 泄漏 3/3, 出现捕获滞留
+ *   逐键禁用(保留侧键) 同期注入      -> AHK 接住 3/3, 泄漏 0/3
+ *   两者 InputHook 都成功收到字符   -> input=[a], 功能等价
+ *   纯阻塞 Sleep 3000 / 紧循环 3000 -> 泄漏 0 (顺带排除"钩子回调超时放行"假设)
+ *
+ * ── 现在的做法: 精确禁用除鼠标按钮之外的热键 ──────────────────────────
+ * InputHook 需要"输入不被热键吞掉", 所以必须让字符类热键失效; 但完全没必要
+ * 连鼠标按钮一起停。策略:
+ *   1) 记录当前所有已启用热键的 rawName;
+ *   2) 逐个 Hotkey(name, "Off"), 跳过鼠标按钮(IsMouseHotkeyName: 左右中键 + 侧键);
+ *   3) finally 里只把**本次确实关掉**的重新 "On", 保证异常路径也能复原。
+ *
+ * 注意 2) 的范围: 旧实现只跳侧键, 把 `*LButton` 也关掉了, 由此产生
+ * "down 落在关窗内 / up 落在开窗后" 的不对称窗口 -> VB6 控件捕获永久滞留。
+ * 完整证据链见 IsMouseHotkeyName 的注释。
+ * 最坏情况: 某键在会话期间被上层重新启用/禁用, 恢复时会按"本次关过的集合"
+ * 复原, 与 Suspend 的"整体开关"语义相比不会更差(旧实现更是把整个进程的
+ * 热键状态推平)。
+ *
+ * B-9 保留: ih.Wait() 必须有超时(30s), 否则匹配/结束条件都不触发时本函数
+ * 永不返回。
  */
 StartInputHook(ih) {
-  ; 禁用所有热键
-  Suspend(true)
+  ; 关掉除拖拽触发键(侧键)之外的所有热键
+  turnedOff := TurnOffHotkeysExceptDragTriggers()
 
-  ; RAlt 映射到 LCtrl 后,  按下 RAlt 再触发 Capslock 命令会导致 LCtrl 键一直处于按下状态
-  if GetKeyState("LCtrl") {
-    Send("{LCtrl Up}")
+  try {
+    ; RAlt 映射到 LCtrl 后,  按下 RAlt 再触发 Capslock 命令会导致 LCtrl 键一直处于按下状态
+    if GetKeyState("LCtrl") {
+      Send("{LCtrl Up}")
+    }
+
+    ; 启动监听等待输入匹配后关闭监听
+    ih.Start()
+    ; B-8: 给 Wait 加上限(秒)。v2 的 InputHook.Wait 只接受 Number,
+    ; 超时后 EndReason 不一定为 "Timeout", 所以用 InProgress 复核。
+    ih.Wait(30)
+    if ih.InProgress {
+      OutputDebug("[MyKeymap] InputHook 等待超时, 强制停止")
+    }
+  } finally {
+    ; B-8/B-9: 任何异常或提前返回都走到这里, 保证钩子停止 + 热键恢复
+    try ih.Stop()
+    RestoreHotkeys(turnedOff)
   }
 
-  ; 启动监听等待输入匹配后关闭监听
-  ih.Start()
-  endReason := ih.Wait()
-  ih.Stop()
-  ; 恢复所有热键
-  Suspend(false)
+  return ih.EndReason
+}
 
-  return endReason
+/**
+ * 该热键名是否是"鼠标按钮热键"(LButton/RButton/MButton/XButton1/XButton2)。
+ * 这类热键在 InputHook 会话期间必须**全程保持拦截**。
+ *
+ * ── 为什么必须包含 LButton/RButton/MButton(实测根因, 别再改回只认侧键) ──
+ * 旧实现只认 XButton1/XButton2, 于是 TurnOffHotkeysExceptDragTriggers() 会把
+ * 用户配置里的 `*LButton` 一并 Hotkey(...,"Off") (data/config.json 里鼠标右键模式、
+ * 侧键后退、侧键前进共 3 处映射都用 *LButton)。后果是一条**不可自愈的不对称窗口**:
+ *   1) InputHook 会话开始 -> `*LButton` 被关闭, 钩子不再拦截左键;
+ *   2) 此刻用户点一下 -> 左键 down 直接落到前台窗口。若前台是 VB6 控件
+ *      (实测证据 bin/freeze_log.txt: capture=0x20BA2 class=ThunderRT6PictureBoxDC),
+ *      控件收到 down 就 SetCapture, 只在收到对应 up 时才 ReleaseCapture;
+ *   3) 会话结束 -> RestoreHotkeys() 把 `*LButton` 重新打开;
+ *   4) 用户松手 -> up 被**已恢复的钩子吞掉** -> 控件永远等不到 up
+ *      -> 捕获永久滞留 -> 只有那一个窗口能响应, 其它窗口完全点不动也打不了字
+ *      -> 必须 Win+L 让系统清理捕获才恢复。
+ * 日志侧对上了: tools/diag 抓到 cap=<VB6类名> 而 keys=- (键态正常, 没有任何键卡住),
+ * 所以任何"检测键卡住再补 up"的方案都不会触发 —— 判据从来不是键态。
+ *
+ * 收益对比: InputHook 需要的是"字符输入不被吞", 鼠标按钮完全不参与字符输入,
+ * 关掉它们对 InputHook 零收益, 却会制造上述不可恢复状态。因此一律保留。
+ */
+IsMouseHotkeyName(name) {
+  k := LTrim(name, "*~$#!^+<>")
+  if InStr(k, " ") {
+    k := SubStr(k, 1, InStr(k, " ") - 1)
+  }
+  return (k = "LButton" || k = "RButton" || k = "MButton"
+    || k = "XButton1" || k = "XButton2"
+    || k = "lbutton" || k = "rbutton" || k = "mbutton"
+    || k = "xbutton1" || k = "xbutton2")
+}
+
+/**
+ * 兼容别名: 拖拽触发键(侧键)是鼠标按钮的子集。
+ * 保留该名字供已有调用点与 harness 继续使用, 语义由 IsMouseHotkeyName 统一决定。
+ */
+IsDragTriggerHotkeyName(name) {
+  return IsMouseHotkeyName(name)
+}
+
+/**
+ * 关掉除侧键之外所有已启用的热键, 返回**实际关掉**的名字数组。
+ *
+ * 只读本进程的注册表(KeymapManager.Stack), 不做任何键态查询 ——
+ * 后者的可靠性正是被质疑的对象(吞键时恒 0)。
+ */
+TurnOffHotkeysExceptDragTriggers() {
+  turnedOff := []
+  seen := Map()
+  try {
+    for km in KeymapManager.Stack {
+      if !IsObject(km) || !HasProp(km, "M")
+        continue
+      for name, arr in km.M {
+        for hk in arr {
+          if !hk.enabled || InStr(hk.rawName, " up")
+            continue
+          if IsDragTriggerHotkeyName(hk.rawName)
+            continue
+          if seen.Has(hk.rawName)
+            continue
+          seen[hk.rawName] := true
+          try {
+            Hotkey(hk.rawName, "Off")
+            turnedOff.Push(hk.rawName)
+          } catch {
+            ; 注册失败的鬼键: 本来就不存在, 忽略
+          }
+        }
+      }
+    }
+  } catch {
+    ; KeymapManager 不可用(单测宿主等): 退化为什么都不关
+  }
+  return turnedOff
+}
+
+/**
+ * 把 TurnOffHotkeysExceptDragTriggers 关掉的热键逐个恢复。
+ * 只恢复传入集合里的名字, 不碰其它任何热键。
+ */
+RestoreHotkeys(names) {
+  for name in names {
+    try Hotkey(name, "On")
+  }
 }
 
 /**

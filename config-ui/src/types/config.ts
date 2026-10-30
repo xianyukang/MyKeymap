@@ -18,6 +18,10 @@ export interface Action {
   runInBackground?: boolean
   detectHiddenWindow?: boolean
 
+  midiNote?: number
+  midiChannel?: number
+  midiVelocity?: number
+
 }
 export interface Keymap {
   id: number
@@ -50,6 +54,14 @@ export interface Mouse {
   tipSymbol: string
 }
 
+export interface Midi {
+  portName: string
+}
+
+export interface MidiPorts {
+  ports: string[]
+}
+
 export interface WindowGroup {
   id: number
   name: string
@@ -66,6 +78,7 @@ export interface Options {
   mykeymapVersion: string
   scroll: Scroll
   mouse: Mouse
+  midi: Midi
   windowGroups: Array<WindowGroup>
   pathVariables: Array<PathVariable>
   customShellMenu: string

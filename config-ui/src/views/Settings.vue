@@ -3,7 +3,7 @@ import Table from "@/components/Table.vue";
 import Tip from "@/components/Tip.vue";
 
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useConfigStore } from "@/store/config";
 import { Keymap } from "@/types/config";
 // import PathDialog from "@/components/dialog/PathDialog.vue";
@@ -60,6 +60,28 @@ const skin = computed(() => {
       { key: "windowShadowOpacity", label: translate('label:748'), },
     ],
 ]
+})
+
+// 旧配置可能没有 midi 字段, 用 get/set 兜底初始化, 避免 undefined 报错
+const midiPortName = computed({
+  get: () => options.value.midi?.portName ?? "",
+  set: (value: string) => {
+    if (!options.value.midi) {
+      options.value.midi = { portName: "" }
+    }
+    options.value.midi.portName = value
+  },
+})
+
+// 本机 MIDI 输出端口列表, 用于下拉选择
+const midiPorts = ref<string[]>([])
+// 请求失败或返回空列表时为 false, 此时降级为纯文本输入
+const midiPortsAvailable = computed(() => midiPorts.value.length > 0)
+
+// 从后端获取 MIDI 端口, 失败时静默降级为空列表
+const { data: midiPortsData } = server.getMidiPorts()
+watch(midiPortsData, (val) => {
+  midiPorts.value = val?.ports ?? []
 })
 
 const checkKeymapData = (keymap: Keymap) => {
@@ -365,6 +387,28 @@ function normalizeKeyName(hotkey: string) : string {
                         <v-text-field v-model="options.commandInputSkin[item.key]" variant="underlined" color="primary" :label="item.label"></v-text-field>
                       </v-col>
                     </v-row>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+            <v-row :dense="true">
+              <v-col>
+                <v-card title="MIDI" min-width="180">
+                  <v-card-text>
+                    <v-alert type="warning" variant="tonal" density="compact" class="mb-2 text-body-2">
+                      {{ translate('label:417') }}
+                    </v-alert>
+                    <v-combobox v-if="midiPortsAvailable" v-model="midiPortName" :items="midiPorts"
+                                 variant="underlined" color="primary"
+                                 autocomplete="off" placeholder="loopMIDI Port" :label="translate('label:414')"></v-combobox>
+                    <v-text-field v-else v-model="midiPortName" variant="underlined" color="primary"
+                                  autocomplete="off" placeholder="loopMIDI Port" :label="translate('label:414')"></v-text-field>
+                    <v-label class="text-medium-emphasis mt-1">
+                      {{ translate('label:416') }}
+                    </v-label>
+                    <v-label v-if="!midiPortsAvailable" class="text-medium-emphasis">
+                      {{ translate('label:415') }}
+                    </v-label>
                   </v-card-text>
                 </v-card>
               </v-col>

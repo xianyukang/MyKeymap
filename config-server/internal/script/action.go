@@ -21,6 +21,7 @@ var actionMap = map[int]func(Action, bool) string{
 	7:        textFeatures7,
 	8:        builtinFunctions8,
 	9:        mykeymapActions9,
+	10:       midiNote10,
 }
 
 func actionToHotkey(action Action) string {
@@ -181,6 +182,22 @@ func mykeymapActions9(a Action, inAbbrContext bool) string {
 	return fmt.Sprintf(`km.Map("%[1]s", _ => %s%s)`, a.Hotkey, call, ctx)
 }
 
+func midiNote10(a Action, inAbbrContext bool) string {
+	if inAbbrContext {
+		return ""
+	}
+	channel := a.MidiChannel
+	if channel == 0 {
+		channel = 1
+	}
+	velocity := a.MidiVelocity
+	if velocity == 0 {
+		velocity = 100
+	}
+	return fmt.Sprintf(`km.MapMidi("%[1]s", %[2]d, %[3]d, %[4]d%[5]s)`,
+		a.Hotkey, a.MidiNote, channel, velocity, Cfg.GetHotkeyContext(a))
+}
+
 func mouseActions4(a Action, inAbbrContext bool) string {
 	winTitle, conditionType := Cfg.GetWinTitle(a)
 	ctx := Cfg.GetHotkeyContext(a)
@@ -222,6 +239,21 @@ func windowActions3(a Action, inAbbrContext bool) string {
 	}
 	if a.ValueID == 14 {
 		return fmt.Sprintf(`km.Map("%[1]s", BindWindow()%s)`, a.Hotkey, Cfg.GetHotkeyContext(a))
+	}
+	// 拖拽移动窗口 / 拖拽缩放窗口, 需要 down/up 成对注册:
+	// down 进入拖拽并记录基准, up 结束拖拽 (松开即停)
+	if a.ValueID == 17 || a.ValueID == 18 {
+		// 缩写命令框不支持 down/up 成对注册, 直接返回空串 (UI 已 hideInAbbr)
+		if inAbbrContext {
+			return ""
+		}
+		start, stop := `StartDragMoveWindow()`, `StopDragWindow()`
+		if a.ValueID == 18 {
+			start = `StartDragResizeWindow("axis")`
+		}
+		// ctx 同时作用于 down 与 up, 保证窗口过滤条件一致
+		ctx := Cfg.GetHotkeyContext(a)
+		return fmt.Sprintf(`km.Map("%[1]s", _ => %[2]s%[3]s), km.Map("%[1]s up", _ => %[4]s%[3]s)`, a.Hotkey, start, ctx, stop)
 	}
 	callMap := map[int]string{
 		1:  `SmartCloseWindow()`,

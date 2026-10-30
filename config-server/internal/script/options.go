@@ -17,6 +17,11 @@ type Options struct {
 	Language         string           `json:"language"`
 	KeyMapping       string           `json:"keyMapping"`
 	KeyboardLayout   string           `json:"keyboardLayout"`
+	Midi             Midi             `json:"midi"`
+}
+
+type Midi struct {
+	PortName string `json:"portName"`
 }
 
 type WindowGroup struct {

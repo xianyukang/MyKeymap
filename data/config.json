@@ -573,9 +573,10 @@
         "*q": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 7,
-            "comment": "label:54",
-            "actionValueID": 17
+            "actionTypeID": 10,
+            "midiNote": 3,
+            "midiChannel": 1,
+            "midiVelocity": 100
           }
         ],
         "*r": [
@@ -968,6 +969,15 @@
             "remapToKey": "6"
           }
         ],
+        "*q": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 10,
+            "midiNote": 28,
+            "midiChannel": 1,
+            "midiVelocity": 100
+          }
+        ],
         "*r": [
           {
             "windowGroupID": 0,
@@ -1003,9 +1013,10 @@
         "*w": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 5,
-            "comment": "Remap to Volume_Down",
-            "remapToKey": "Volume_Down"
+            "actionTypeID": 10,
+            "midiNote": 3,
+            "midiChannel": 1,
+            "midiVelocity": 100
           }
         ],
         "singlePress": [
@@ -1319,6 +1330,15 @@
             "actionTypeID": 6,
             "comment": "符号 /",
             "keysToSend": "{blind}/"
+          }
+        ],
+        "*q": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 10,
+            "midiNote": 23,
+            "midiChannel": 1,
+            "midiVelocity": 100
           }
         ],
         "*r": [
@@ -2265,8 +2285,11 @@
       }
     ],
     "startup": false,
-    "language": "",
+    "language": "zh",
     "keyMapping": "",
-    "keyboardLayout": "1 2 3 4 5 6 7 8 9 0\nq w e r t y u i o p\na s d f g h j k l ;\nz x c v b n m , . /\nspace enter backspace - [ ' singlePress"
+    "keyboardLayout": "1 2 3 4 5 6 7 8 9 0\nq w e r t y u i o p\na s d f g h j k l ;\nz x c v b n m , . /\nspace enter backspace - [ ' singlePress",
+    "midi": {
+      "portName": "loopMIDI Port"
+    }
   }
 }

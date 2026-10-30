@@ -10,6 +10,7 @@ import SendKey from '@/components/actions/SendKey.vue'
 import Text from '@/components/actions/Text.vue'
 import BuiltinFunction from '@/components/actions/BuiltinFunction.vue'
 import MyKeymap from '@/components/actions/MyKeymap.vue'
+import Midi from '@/components/actions/Midi.vue'
 import { Action, Keymap } from "@/types/config";
 
 
@@ -27,6 +28,7 @@ const actionTypes = [
   { id: 7, label: "label:207" },
   { id: 8, label: "label:208" },
   { id: 9, label: "label:209" },
+  { id: 10, label: "label:210", hideInAbbr: true },
 ]
 
 function filter(items: typeof actionTypes, keymap: Keymap | undefined): typeof actionTypes {
@@ -47,6 +49,7 @@ const components: any = {
   7: Text,
   8: BuiltinFunction,
   9: MyKeymap,
+  10: Midi,
 }
 
 

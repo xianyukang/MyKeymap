@@ -16,3 +16,77 @@ config-server/settings.exe
 shortcuts/
 lanzou_cookie.txt
 CommandInputSkin.txt
+tools/loopMIDI.exe
+tmp_ahk_out.txt
+*.txt
+bin/MyKeymap.ahk
+.opencode
+
+# ── AI agent 引导知识（不进 PR / 不进仓库）────────────────────────
+# .roo/ 是 Roo Code 的私有规则目录, AGENTS.md 是通用 agent 引导文件。
+# 它们属于个人开发环境, 不应该随项目提交给全体协作者。
+.roo/
+.roo
+AGENTS.md
+**/AGENTS.md
+.multica/
+.clinerules
+.cursorrules
+.cursor/
+.github/copilot-instructions.md
+
+# ── 构建产物（补漏）──────────────────────────────────────────────
+config-server/cmd/settings/settings.exe
+config-server/tmp_settings.exe
+
+# ── 备份 / 一次性快照（本轮清理过程产生）──────────────────────────
+*.baseline
+*.bak
+*.bak2
+*-副本.json
+baseline_*.ahk
+baseline_*.json
+head_config.json
+parse_config*.py
+_harness_run.log
+*.log
+
+# ── 测试过程产物 ────────────────────────────────────────────────
+_e2e_variants/
+__pycache__/
+*.pyc
+tools/test/e2e/out/
+
+# ── 一次性调查/取证脚本（开发缓存, 留在本地, 不入库也不删除）────────
+# 这些是排查"捕获滞留"时逐个写出来的最小探针, 只对当时的机器环境有意义,
+# 换一台机器结论就可能不同, 因此属过程缓存而非项目资产。
+# 用 ignore 而不是 rm: 文件仍需留在本地以便随时复跑。
+tools/test/e2e/action_probe.ahk
+tools/test/e2e/action_probe2.ahk
+tools/test/e2e/analyze_hotkeys.py
+tools/test/e2e/capture_matrix.ps1
+tools/test/e2e/check_cursor.ahk
+tools/test/e2e/check_cursor2.ahk
+tools/test/e2e/check_mousebtn.ahk
+tools/test/e2e/check_rects.ps1
+tools/test/e2e/check_xbutton.ahk
+tools/test/e2e/sanity_victim.ps1
+tools/test/e2e/victim_capture.ahk
+tools/test/e2e/err.txt
+tools/test/harness/_mutate_t21.py
+
+# ── AI 过程性报告（保留在本地, 不随 PR 提交）──────────────────────
+BUG_ROOT_CAUSES.md
+ROOT_CAUSE_ANALYSIS.md
+MAINTENANCE_METHODOLOGY.md
+verification_summary.md
+guardian_*.md
+docs/
+tools/legacy/
+config-server/cmd/test_parse_config/
+*副本*.json
+
+# ── 卡死监视器 / 自愈看门狗（未通过验收, 留在本地不入库）──────────────
+# 没有通过用户验收, 不应进入仓库或云端; 但文件本身是排查过程产物,
+# 需要留在本地随时复跑, 因此只 ignore、不删除。
+tools/diag/
